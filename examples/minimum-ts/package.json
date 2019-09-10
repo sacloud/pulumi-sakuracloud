@@ -1,0 +1,10 @@
+{
+    "name": "typescript",
+    "devDependencies": {
+        "@types/node": "latest"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^1.0.0",
+        "@pulumi/sakuracloud": "^0.0.1"
+    }
+}
