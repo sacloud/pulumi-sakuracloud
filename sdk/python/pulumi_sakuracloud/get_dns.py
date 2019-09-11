@@ -92,7 +92,7 @@ def get_dns(filters=None,name_selectors=None,tag_selectors=None,opts=None):
       * `name` (`str`)
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/dns.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/dns.html.markdown.
     """
     __args__ = dict()
 

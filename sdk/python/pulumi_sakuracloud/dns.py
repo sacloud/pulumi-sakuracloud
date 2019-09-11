@@ -66,7 +66,7 @@ class DNS(pulumi.CustomResource):
           * `value` (`pulumi.Input[str]`) - The value of the Record. 
           * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -126,7 +126,7 @@ class DNS(pulumi.CustomResource):
           * `value` (`pulumi.Input[str]`) - The value of the Record. 
           * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

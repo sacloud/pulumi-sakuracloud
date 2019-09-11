@@ -127,7 +127,7 @@ class LoadBalancer(pulumi.CustomResource):
           * `sorry_server` (`pulumi.Input[str]`) - The hostname or IP address of sorry server.
           * `vip` (`pulumi.Input[str]`) - The virtual IP address.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -219,7 +219,7 @@ class LoadBalancer(pulumi.CustomResource):
           * `sorry_server` (`pulumi.Input[str]`) - The hostname or IP address of sorry server.
           * `vip` (`pulumi.Input[str]`) - The virtual IP address.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

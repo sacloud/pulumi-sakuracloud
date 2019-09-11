@@ -56,7 +56,7 @@ class Switch(pulumi.CustomResource):
         :param pulumi.Input[list] tags: The tag list of the resources.
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/switch.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/switch.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -107,7 +107,7 @@ class Switch(pulumi.CustomResource):
         :param pulumi.Input[list] tags: The tag list of the resources.
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/switch.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/switch.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

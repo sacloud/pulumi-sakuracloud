@@ -59,6 +59,9 @@ build:: tfgen provider
 			echo "warning: pandoc not found, not generating README.rst"; \
 			echo "" > README.rst; \
 		fi && \
+		sed -i.bak -e "s/terraform-providers/sacloud/g" pulumi_sakuracloud/*.py pulumi_sakuracloud/*.md pulumi_sakuracloud/config/*.md \pulumi_sakuracloud/config/*.py && \
+		rm pulumi_sakuracloud/*.bak && \
+		rm pulumi_sakuracloud/config/*.bak && \
 		$(PYTHON) setup.py clean --all 2>/dev/null && \
 		rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
 		sed -i.bak -e "s/\$${VERSION}/$(PYPI_VERSION)/g" -e "s/\$${PLUGIN_VERSION}/$(VERSION)/g" ./bin/setup.py && \

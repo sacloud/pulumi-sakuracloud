@@ -174,7 +174,7 @@ class ProxyLB(pulumi.CustomResource):
           * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
           * `port` (`pulumi.Input[float]`) - Port number.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -290,7 +290,7 @@ class ProxyLB(pulumi.CustomResource):
           * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
           * `port` (`pulumi.Input[float]`) - Port number.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

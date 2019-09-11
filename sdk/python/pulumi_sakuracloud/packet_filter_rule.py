@@ -88,7 +88,7 @@ class PacketFilterRule(pulumi.CustomResource):
                * Range: `"xx-yy"`
                * Range (hex): `"0xPPPP/0xMMMM"`
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -157,7 +157,7 @@ class PacketFilterRule(pulumi.CustomResource):
                * Range: `"xx-yy"`
                * Range (hex): `"0xPPPP/0xMMMM"`
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

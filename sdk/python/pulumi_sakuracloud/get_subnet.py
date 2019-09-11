@@ -99,7 +99,7 @@ def get_subnet(index=None,internet_id=None,zone=None,opts=None):
     :param float index: The index of the target subnet.
     :param str internet_id: The ID of the Internet resource.
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
     """
     __args__ = dict()
 

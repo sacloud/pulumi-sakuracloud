@@ -103,7 +103,7 @@ def get_switch(filters=None,name_selectors=None,tag_selectors=None,zone=None,opt
       * `name` (`str`) - The name of the resource.
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/switch.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/switch.html.markdown.
     """
     __args__ = dict()
 

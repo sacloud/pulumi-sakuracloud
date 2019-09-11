@@ -103,7 +103,7 @@ class SimpleMonitor(pulumi.CustomResource):
           * `status` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
           * `username` (`pulumi.Input[str]`) - The Basic Auth Username used in http/https health check access.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -181,7 +181,7 @@ class SimpleMonitor(pulumi.CustomResource):
           * `status` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
           * `username` (`pulumi.Input[str]`) - The Basic Auth Username used in http/https health check access.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

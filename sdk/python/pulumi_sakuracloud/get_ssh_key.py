@@ -73,7 +73,7 @@ def get_ssh_key(filters=None,name_selectors=None,opts=None):
       * `name` (`str`) - The name of the resource.
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
     """
     __args__ = dict()
 

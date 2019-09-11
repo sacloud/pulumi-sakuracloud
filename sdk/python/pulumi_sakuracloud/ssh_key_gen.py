@@ -46,7 +46,7 @@ class SSHKeyGen(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the resource.
         :param pulumi.Input[str] pass_phrase: The path phrase of keys. 
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -92,7 +92,7 @@ class SSHKeyGen(pulumi.CustomResource):
         :param pulumi.Input[str] private_key: The body of the generated private key. 
         :param pulumi.Input[str] public_key: The body of the generated public key. 
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

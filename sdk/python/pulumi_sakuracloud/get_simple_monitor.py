@@ -123,7 +123,7 @@ def get_simple_monitor(filters=None,name_selectors=None,tag_selectors=None,opts=
       * `name` (`str`)
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/simple_monitor.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/simple_monitor.html.markdown.
     """
     __args__ = dict()
 

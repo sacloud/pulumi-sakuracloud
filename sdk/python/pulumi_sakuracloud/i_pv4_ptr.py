@@ -42,7 +42,7 @@ class IPv4Ptr(pulumi.CustomResource):
         :param pulumi.Input[float] retry_max: Max count of API call retry (default:`30`).
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -91,7 +91,7 @@ class IPv4Ptr(pulumi.CustomResource):
         :param pulumi.Input[float] retry_max: Max count of API call retry (default:`30`).
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

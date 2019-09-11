@@ -45,7 +45,7 @@ class Icon(pulumi.CustomResource):
         :param pulumi.Input[str] source: The path of source content file.
         :param pulumi.Input[list] tags: The tag list of the resources.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -92,7 +92,7 @@ class Icon(pulumi.CustomResource):
         :param pulumi.Input[list] tags: The tag list of the resources.
         :param pulumi.Input[str] url: URL to access this resource.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

@@ -76,7 +76,7 @@ def get_zone(name=None,opts=None):
     
     :param str name: The name of zone(default: use provider settings).
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/zone.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/zone.html.markdown.
     """
     __args__ = dict()
 

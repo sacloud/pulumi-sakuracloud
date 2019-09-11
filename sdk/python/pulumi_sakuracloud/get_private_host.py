@@ -103,7 +103,7 @@ def get_private_host(filters=None,name_selectors=None,tag_selectors=None,zone=No
       * `name` (`str`) - The name of the resource.
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/private_host.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/private_host.html.markdown.
     """
     __args__ = dict()
 

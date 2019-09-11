@@ -93,7 +93,7 @@ class BucketObject(pulumi.CustomResource):
         :param pulumi.Input[str] secret_key: The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
         :param pulumi.Input[str] source: Source file path of value of the bucket object.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -167,7 +167,7 @@ class BucketObject(pulumi.CustomResource):
         :param pulumi.Input[float] size: Size of the resource (unit:`byte`).
         :param pulumi.Input[str] source: Source file path of value of the bucket object.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

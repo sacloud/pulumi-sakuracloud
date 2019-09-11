@@ -116,7 +116,7 @@ class MobileGateway(pulumi.CustomResource):
           * `quota` (`pulumi.Input[float]`) - Traffic quota size (unit:`MB`).  
           * `slackWebhook` (`pulumi.Input[str]`) - The webhook URL of destination of slack notification.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -198,7 +198,7 @@ class MobileGateway(pulumi.CustomResource):
           * `quota` (`pulumi.Input[float]`) - Traffic quota size (unit:`MB`).  
           * `slackWebhook` (`pulumi.Input[str]`) - The webhook URL of destination of slack notification.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

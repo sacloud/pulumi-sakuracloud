@@ -89,7 +89,7 @@ class GSLB(pulumi.CustomResource):
           * `ipaddress` (`pulumi.Input[str]`) - The IP address of the GSLB Server.
           * `weight` (`pulumi.Input[float]`) - The weight of GSLB server used when weighting is enabled in the GSLB.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -160,7 +160,7 @@ class GSLB(pulumi.CustomResource):
           * `ipaddress` (`pulumi.Input[str]`) - The IP address of the GSLB Server.
           * `weight` (`pulumi.Input[float]`) - The weight of GSLB server used when weighting is enabled in the GSLB.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

@@ -115,7 +115,7 @@ class Database(pulumi.CustomResource):
         :param pulumi.Input[str] user_password: The password to access database.
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -203,7 +203,7 @@ class Database(pulumi.CustomResource):
         :param pulumi.Input[str] user_password: The password to access database.
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

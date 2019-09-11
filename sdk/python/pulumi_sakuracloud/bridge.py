@@ -36,7 +36,7 @@ class Bridge(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the resource.
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.  
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -79,7 +79,7 @@ class Bridge(pulumi.CustomResource):
         :param pulumi.Input[list] switch_ids: The ID list of the Switches connected to the Bridge. 
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.  
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

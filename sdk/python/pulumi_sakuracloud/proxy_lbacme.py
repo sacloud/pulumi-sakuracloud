@@ -51,7 +51,7 @@ class ProxyLBACME(pulumi.CustomResource):
         :param pulumi.Input[str] proxylb_id: The ID of target ProxyLB resource.  
         :param pulumi.Input[float] update_delay_sec: The wait time for update settings.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -114,7 +114,7 @@ class ProxyLBACME(pulumi.CustomResource):
           * `private_key` (`pulumi.Input[str]`) - The private key.
           * `serverCert` (`pulumi.Input[str]`) - The server certificate.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

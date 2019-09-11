@@ -86,7 +86,7 @@ def get_packet_filter(expressions=None,filters=None,name_selectors=None,zone=Non
       * `name` (`str`) - The name of the resource.
       * `values` (`list`)
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/packet_filter.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/packet_filter.html.markdown.
     """
     __args__ = dict()
 

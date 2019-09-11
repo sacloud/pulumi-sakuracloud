@@ -56,7 +56,7 @@ class Subnet(pulumi.CustomResource):
                Valid value is one of the following: [ 28 (default) / 27 / 26 ]
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -113,7 +113,7 @@ class Subnet(pulumi.CustomResource):
                Valid value is one of the following: [ 28 (default) / 27 / 26 ]
         :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

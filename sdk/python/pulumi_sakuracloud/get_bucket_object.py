@@ -127,7 +127,7 @@ def get_bucket_object(access_key=None,bucket=None,key=None,secret_key=None,opts=
     :param str key: The key of the bucket object.
     :param str secret_key: The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
 
-    > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/bucket_object.html.markdown.
+    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/bucket_object.html.markdown.
     """
     __args__ = dict()
 

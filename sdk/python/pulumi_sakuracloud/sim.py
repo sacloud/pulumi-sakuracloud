@@ -74,7 +74,7 @@ class SIM(pulumi.CustomResource):
         :param pulumi.Input[str] passcode: The Passcode of the SIM.  
         :param pulumi.Input[list] tags: The tag list of the resources.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -138,7 +138,7 @@ class SIM(pulumi.CustomResource):
         :param pulumi.Input[str] passcode: The Passcode of the SIM.  
         :param pulumi.Input[list] tags: The tag list of the resources.
 
-        > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
+        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
