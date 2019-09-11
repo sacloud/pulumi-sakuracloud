@@ -2,6 +2,12 @@
 
 ## Installing
 
+### pulumi plugin
+
+    $ pulumi plugin install resource sakuracloud 0.0.1 --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/0.0.1
+
+### SDK
+
 This package is available in many languages in the standard packaging formats.
 
 ### Node.js (Java/TypeScript)

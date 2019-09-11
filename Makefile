@@ -102,7 +102,7 @@ build_tgz:
 .PHONY: publish_npm
 publish_npm:
 	cd ${PACKDIR}/nodejs/bin && \
-	npm publish
+	npm publish --access public
 
 .PHONY: publish_pypi
 publish_pypi:
