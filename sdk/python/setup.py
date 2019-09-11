@@ -10,7 +10,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '${PLUGIN_VERSION}'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/sacloud/pulumi-sakuracloud/releases/download/${PLUGIN_VERSION}'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print("""
@@ -18,7 +18,7 @@ class InstallPluginCommand(install):
                 It looks like `pulumi` is not installed on your system.
                 Please visit https://pulumi.com/ to install the Pulumi CLI.
                 You may try manually installing the plugin by running
-                `pulumi plugin install resource sakuracloud ${PLUGIN_VERSION}`
+                `pulumi plugin install resource sakuracloud ${PLUGIN_VERSION} --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/${PLUGIN_VERSION}`
                 """)
             else:
                 raise

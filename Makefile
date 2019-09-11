@@ -62,6 +62,8 @@ build:: tfgen provider
 		sed -i.bak -e "s/terraform-providers/sacloud/g" pulumi_sakuracloud/*.py pulumi_sakuracloud/*.md pulumi_sakuracloud/config/*.md \pulumi_sakuracloud/config/*.py && \
 		rm pulumi_sakuracloud/*.bak && \
 		rm pulumi_sakuracloud/config/*.bak && \
+		perl -pe "s;check_call\(\['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '\x24\{PLUGIN_VERSION\}'\]\);check_call\(\['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '\x24\{PLUGIN_VERSION\}', '--server', 'https://github.com/sacloud/pulumi-sakuracloud/releases/download/\x24\{PLUGIN_VERSION\}'\]\);g" -i setup.py && \
+		perl -pe "s;pulumi plugin install resource sakuracloud \x24\{PLUGIN_VERSION\};pulumi plugin install resource sakuracloud \x24\{PLUGIN_VERSION\} --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/\x24\{PLUGIN_VERSION\};g" -i setup.py && \
 		$(PYTHON) setup.py clean --all 2>/dev/null && \
 		rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
 		sed -i.bak -e "s/\$${VERSION}/$(PYPI_VERSION)/g" -e "s/\$${PLUGIN_VERSION}/$(VERSION)/g" ./bin/setup.py && \
