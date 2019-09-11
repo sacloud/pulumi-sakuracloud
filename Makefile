@@ -95,23 +95,16 @@ test_all::
 	PATH=$(PULUMI_BIN):$(PATH) go test -v -count=1 -cover -timeout 1h -parallel ${TESTPARALLELISM} ./examples
 	PATH=$(PULUMI_BIN):$(PATH) go test -v -count=1 -cover -timeout 1h -parallel ${TESTPARALLELISM} ./tests/...
 
-.PHONY: publish_tgz
-publish_tgz:
-	$(call STEP_MESSAGE)
-	./scripts/publish_tgz.sh
+.PHONY: build_tgz
+build_tgz:
+	./scripts/build-release-tgz.sh
 
-.PHONY: publish_packages
-publish_packages:
-	$(call STEP_MESSAGE)
-	$$(go env GOPATH)/src/github.com/sacloud/scripts/ci/publish-tfgen-package .
+.PHONY: publish_npm
+publish_npm:
+	cd ${PACKDIR}/nodejs/bin && \
+	npm publish
 
-.PHONY: check_clean_worktree
-check_clean_worktree:
-	$$(go env GOPATH)/src/github.com/sacloud/scripts/ci/check-worktree-is-clean.sh
-
-# The travis_* targets are entrypoints for CI.
-.PHONY: travis_cron travis_push travis_pull_request travis_api
-travis_cron: all
-travis_push: only_build check_clean_worktree publish_tgz only_test publish_packages
-travis_pull_request: all check_clean_worktree
-travis_api: all
+.PHONY: publish_pypi
+publish_pypi:
+	cd ${PACKDIR}/python/bin && \
+	twine upload --repository pypi dist/*
