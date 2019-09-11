@@ -13,14 +13,14 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const foobar = sakuracloud.getNote({
  *     nameSelectors: ["foobar"],
  * });
  * ```
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/note.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/note.html.markdown.
  */
 export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promise<GetNoteResult> & GetNoteResult {
     args = args || {};

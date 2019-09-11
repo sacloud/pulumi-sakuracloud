@@ -7,7 +7,7 @@ import * as utilities from "./utilities";
 /**
  * Provides a SakuraCloud Disk resource. This can be used to create, update, and delete Disks.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/disk.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/disk.html.markdown.
  */
 export class Disk extends pulumi.CustomResource {
     /**

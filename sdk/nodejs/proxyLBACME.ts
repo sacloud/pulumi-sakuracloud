@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
 /**
  * Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
  */
 export class ProxyLBACME extends pulumi.CustomResource {
     /**

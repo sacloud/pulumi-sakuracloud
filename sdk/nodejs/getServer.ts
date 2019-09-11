@@ -13,14 +13,14 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const foobar = sakuracloud.getServer({
  *     nameSelectors: ["foobar"],
  * });
  * ```
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/server.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/server.html.markdown.
  */
 export function getServer(args?: GetServerArgs, opts?: pulumi.InvokeOptions): Promise<GetServerResult> & GetServerResult {
     args = args || {};

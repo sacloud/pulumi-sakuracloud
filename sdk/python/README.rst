@@ -15,13 +15,13 @@ To use from JavaScript or TypeScript in Node.js, install using either
 
 ::
 
-   $ npm install @sacloud/pulumi-sakuracloud
+   $ npm install @sacloud/pulumi_sakuracloud
 
 or ``yarn``:
 
 ::
 
-   $ yarn add @sacloud/pulumi-sakuracloud
+   $ yarn add @sacloud/pulumi_sakuracloud
 
 Python
 ~~~~~~

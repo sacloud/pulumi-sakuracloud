@@ -15,7 +15,7 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const centos = sakuracloud.getArchive({
  *     osType: "centos",
@@ -26,7 +26,7 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const ubuntu = sakuracloud.getArchive({
  *     nameSelectors: [
@@ -62,7 +62,7 @@ import * as utilities from "./utilities";
  * * `windows2016-sql2017-standard-all` - Windows 2016 SQLServer 2017 (Standard, RDS + Office)
  * * `windows2019` - Windows 2019
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/archive.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/archive.html.markdown.
  */
 export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): Promise<GetArchiveResult> & GetArchiveResult {
     args = args || {};

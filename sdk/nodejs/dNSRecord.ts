@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * 
  * Import of DNS Record is not supported.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
  */
 export class DNSRecord extends pulumi.CustomResource {
     /**

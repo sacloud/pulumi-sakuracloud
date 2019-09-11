@@ -45,7 +45,9 @@ build:: tfgen provider
 	done
 	cd ${PACKDIR}/nodejs/ && \
 		sed -i.bak -e "s/@pulumi\/sakuracloud/@sacloud\/pulumi_sakuracloud/g" ./package.json && \
-		rm ./package.json.bak && \
+		sed -i.bak -e "s/@pulumi\/sakuracloud/@sacloud\/pulumi_sakuracloud/g" ./*.ts && \
+		sed -i.bak -e "s/terraform-providers/sacloud/g" ./*.ts && \
+		rm *.bak && \
 		yarn install && \
 		yarn run tsc && \
 		cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \

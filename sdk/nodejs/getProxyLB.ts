@@ -13,14 +13,14 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const foobar = sakuracloud.getProxyLB({
  *     nameSelectors: ["foobar"],
  * });
  * ```
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/proxylb.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/proxylb.html.markdown.
  */
 export function getProxyLB(args?: GetProxyLBArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyLBResult> & GetProxyLBResult {
     args = args || {};

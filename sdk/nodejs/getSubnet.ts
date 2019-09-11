@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
 /**
  * Use this data source to retrieve information about a SakuraCloud Subnet.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
  */
 export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Promise<GetSubnetResult> & GetSubnetResult {
     if (!opts) {

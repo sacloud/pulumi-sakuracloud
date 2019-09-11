@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * 
  * Import of Packet Filter Rule is not supported.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
  */
 export class PacketFilterRule extends pulumi.CustomResource {
     /**

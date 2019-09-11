@@ -13,14 +13,14 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * const foobar = sakuracloud.getVPCRouter({
  *     nameSelectors: ["foobar"],
  * });
  * ```
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/vpc_router.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/vpc_router.html.markdown.
  */
 export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetVPCRouterResult> & GetVPCRouterResult {
     args = args || {};

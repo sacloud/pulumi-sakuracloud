@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
 /**
  * Provides a SakuraCloud SSH Key resource. This can be used to create, update, and delete SSH Keys.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key.html.markdown.
  */
 export class SSHKey extends pulumi.CustomResource {
     /**

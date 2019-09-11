@@ -14,7 +14,7 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * // Create a new Bucket Object
  * const foobar = new sakuracloud.BucketObject("foobar", {
@@ -30,7 +30,7 @@ import * as utilities from "./utilities";
  * 
  * Import of Bucket Object is not supported.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
  */
 export class BucketObject extends pulumi.CustomResource {
     /**

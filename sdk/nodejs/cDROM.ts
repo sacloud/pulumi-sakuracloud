@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  * 
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
  * 
  * // Create a new CDROM(ISO-Image)
  * const foobar = new sakuracloud.CDROM("foobar", {
@@ -29,7 +29,7 @@ import * as utilities from "./utilities";
  * });
  * ```
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
  */
 export class CDROM extends pulumi.CustomResource {
     /**

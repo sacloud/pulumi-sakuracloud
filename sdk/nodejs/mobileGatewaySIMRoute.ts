@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * 
  * Import of Mobile Gateway SIM Route is not supported.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway_sim_route.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway_sim_route.html.markdown.
  */
 export class MobileGatewaySIMRoute extends pulumi.CustomResource {
     /**

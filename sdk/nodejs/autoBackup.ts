@@ -7,7 +7,7 @@ import * as utilities from "./utilities";
 /**
  * Provides a SakuraCloud Auto Backup resource. This can be used to create, update, and delete Auto Backups.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/auto_backup.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/auto_backup.html.markdown.
  */
 export class AutoBackup extends pulumi.CustomResource {
     /**

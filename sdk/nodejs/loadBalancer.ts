@@ -9,7 +9,7 @@ import * as utilities from "./utilities";
 /**
  * Provides a SakuraCloud LoadBalancer resource. This can be used to create, update, and delete LoadBalancers.
  *
- * > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
+ * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
  */
 export class LoadBalancer extends pulumi.CustomResource {
     /**
