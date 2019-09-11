@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/sakuracloud",
+    "name": "@sacloud/pulumi_sakuracloud",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing SakuraCloud resources.",
     "keywords": [

@@ -1,4 +1,4 @@
-import * as sakuracloud from "@pulumi/sakuracloud";
+import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
 
 const sw = new sakuracloud.Switch("from-pulumi-ts", {
    name: "from-pulumi-ts",
