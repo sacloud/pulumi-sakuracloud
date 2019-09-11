@@ -108,3 +108,11 @@ publish_npm:
 publish_pypi:
 	cd ${PACKDIR}/python/bin && \
 	twine upload --repository pypi dist/*
+
+.PHONY: prepare_docker_build
+prepare_docker_build:
+	docker build -t pulumi-sakuracloud-builder .
+
+.PHONY: build_docker
+build_docker:
+	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) -e GOPROXY=https://proxy.golang.org pulumi-sakuracloud-builder make build_tgz
