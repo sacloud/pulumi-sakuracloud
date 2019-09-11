@@ -6,7 +6,7 @@ PROVIDER_NAME="sakuracloud"
 ROOT=$(dirname $0)/..
 WORK_PATH=$(mktemp -d)
 VERSION=$(jq -r '.version' < "${ROOT}/sdk/nodejs/bin/package.json")
-PLUGIN_PACKAGE_NAME="pulumi-resource-${PROVIDER_NAME}-${VERSION}-$(go env GOOS)-$(go env GOARCH).tar.gz"
+PLUGIN_PACKAGE_NAME="pulumi-resource-${PROVIDER_NAME}-v${VERSION}-$(go env GOOS)-$(go env GOARCH).tar.gz"
 PLUGIN_PACKAGE_DIR="$ROOT/bin"
 PLUGIN_PACKAGE_PATH="${PLUGIN_PACKAGE_DIR}/${PLUGIN_PACKAGE_NAME}"
 
