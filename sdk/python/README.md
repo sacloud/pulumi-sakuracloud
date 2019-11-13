@@ -31,6 +31,12 @@ To use from Python, install using `pip`:
 To use from Go, use `go get` to grab the latest version of the library
 
     $ go get github.com/sacloud/pulumi-sakuracloud/sdk/go/...
+    
+### .NET core(C#, VB.NET, and F#) **Preview**
+
+To use from .NET core, use `dotnet` to grab the latest version of the library
+
+    $ dotnet add package Pulumi.Sakuracloud
 
 ## Configuration
 
