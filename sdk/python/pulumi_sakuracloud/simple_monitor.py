@@ -51,6 +51,10 @@ class SimpleMonitor(pulumi.CustomResource):
     """
     The flag of enable/disable HTML format for E-mail.
     """
+    notify_interval: pulumi.Output[float]
+    """
+    The intervals of notify (unit:`second`).  
+    """
     notify_slack_enabled: pulumi.Output[bool]
     """
     The flag of enable/disable notification by slack.
@@ -67,7 +71,7 @@ class SimpleMonitor(pulumi.CustomResource):
     """
     The HostName or IP address of monitoring target.
     """
-    def __init__(__self__, resource_name, opts=None, description=None, enabled=None, health_check=None, icon_id=None, notify_email_enabled=None, notify_email_html=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, description=None, enabled=None, health_check=None, icon_id=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None, __props__=None, __name__=None, __opts__=None):
         """
         Provides a SakuraCloud Simple Monitor resource. This can be used to create, update, and delete Simple Monitors.
         
@@ -79,6 +83,7 @@ class SimpleMonitor(pulumi.CustomResource):
         :param pulumi.Input[str] icon_id: The ID of the icon of the resource.
         :param pulumi.Input[bool] notify_email_enabled: The flag of enable/disable notification by E-mail.
         :param pulumi.Input[bool] notify_email_html: The flag of enable/disable HTML format for E-mail.
+        :param pulumi.Input[float] notify_interval: The intervals of notify (unit:`second`).  
         :param pulumi.Input[bool] notify_slack_enabled: The flag of enable/disable notification by slack.
         :param pulumi.Input[str] notify_slack_webhook: The webhook URL of destination of slack notification.
         :param pulumi.Input[list] tags: The tag list of the resources.
@@ -130,6 +135,7 @@ class SimpleMonitor(pulumi.CustomResource):
             __props__['icon_id'] = icon_id
             __props__['notify_email_enabled'] = notify_email_enabled
             __props__['notify_email_html'] = notify_email_html
+            __props__['notify_interval'] = notify_interval
             __props__['notify_slack_enabled'] = notify_slack_enabled
             __props__['notify_slack_webhook'] = notify_slack_webhook
             __props__['tags'] = tags
@@ -143,7 +149,7 @@ class SimpleMonitor(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, description=None, enabled=None, health_check=None, icon_id=None, notify_email_enabled=None, notify_email_html=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None):
+    def get(resource_name, id, opts=None, description=None, enabled=None, health_check=None, icon_id=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None):
         """
         Get an existing SimpleMonitor resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -157,6 +163,7 @@ class SimpleMonitor(pulumi.CustomResource):
         :param pulumi.Input[str] icon_id: The ID of the icon of the resource.
         :param pulumi.Input[bool] notify_email_enabled: The flag of enable/disable notification by E-mail.
         :param pulumi.Input[bool] notify_email_html: The flag of enable/disable HTML format for E-mail.
+        :param pulumi.Input[float] notify_interval: The intervals of notify (unit:`second`).  
         :param pulumi.Input[bool] notify_slack_enabled: The flag of enable/disable notification by slack.
         :param pulumi.Input[str] notify_slack_webhook: The webhook URL of destination of slack notification.
         :param pulumi.Input[list] tags: The tag list of the resources.
@@ -192,6 +199,7 @@ class SimpleMonitor(pulumi.CustomResource):
         __props__["icon_id"] = icon_id
         __props__["notify_email_enabled"] = notify_email_enabled
         __props__["notify_email_html"] = notify_email_html
+        __props__["notify_interval"] = notify_interval
         __props__["notify_slack_enabled"] = notify_slack_enabled
         __props__["notify_slack_webhook"] = notify_slack_webhook
         __props__["tags"] = tags

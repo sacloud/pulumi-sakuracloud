@@ -31,7 +31,7 @@ class DNS(pulumi.CustomResource):
       * `priority` (`float`) - The priority used when `type` is `MX` or `SRV`.
       * `ttl` (`float`) - The ttl value of the Record (unit:`second`). 
       * `type` (`str`) - The Record type.  
-        Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
+        Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
       * `value` (`str`) - The value of the Record. 
       * `weight` (`float`) - The weight used when `type` is `SRV`.
     """
@@ -62,7 +62,7 @@ class DNS(pulumi.CustomResource):
           * `priority` (`pulumi.Input[float]`) - The priority used when `type` is `MX` or `SRV`.
           * `ttl` (`pulumi.Input[float]`) - The ttl value of the Record (unit:`second`). 
           * `type` (`pulumi.Input[str]`) - The Record type.  
-            Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
+            Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
           * `value` (`pulumi.Input[str]`) - The value of the Record. 
           * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
 
@@ -122,7 +122,7 @@ class DNS(pulumi.CustomResource):
           * `priority` (`pulumi.Input[float]`) - The priority used when `type` is `MX` or `SRV`.
           * `ttl` (`pulumi.Input[float]`) - The ttl value of the Record (unit:`second`). 
           * `type` (`pulumi.Input[str]`) - The Record type.  
-            Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
+            Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
           * `value` (`pulumi.Input[str]`) - The value of the Record. 
           * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
 

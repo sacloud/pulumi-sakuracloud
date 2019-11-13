@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Private Host.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/private_host.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/private_host.html.markdown.
 func LookupPrivateHost(ctx *pulumi.Context, args *GetPrivateHostArgs) (*GetPrivateHostResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

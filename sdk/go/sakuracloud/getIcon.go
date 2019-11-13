@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Icon.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/icon.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/icon.html.markdown.
 func LookupIcon(ctx *pulumi.Context, args *GetIconArgs) (*GetIconResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

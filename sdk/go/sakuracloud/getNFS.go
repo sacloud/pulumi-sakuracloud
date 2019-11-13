@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud NFS.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/nfs.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/nfs.html.markdown.
 func LookupNFS(ctx *pulumi.Context, args *GetNFSArgs) (*GetNFSResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

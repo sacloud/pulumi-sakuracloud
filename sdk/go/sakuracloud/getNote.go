@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Note.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/note.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/note.html.markdown.
 func LookupNote(ctx *pulumi.Context, args *GetNoteArgs) (*GetNoteResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

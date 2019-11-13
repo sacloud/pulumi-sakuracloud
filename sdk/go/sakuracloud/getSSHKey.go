@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud SSH Key.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
 func LookupSSHKey(ctx *pulumi.Context, args *GetSSHKeyArgs) (*GetSSHKeyResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

@@ -6,28 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Provides a SakuraCloud Archive resource. This can be used to create, update, and delete Archives.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Archive
- * const foobar = new sakuracloud.Archive("foobar", {
- *     archiveFile: "your/archive/file.raw",
- *     description: "description",
- *     file: [{}],
- *     hash: "",
- *     md5: [{}],
- *     size: 20,
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- *     "your/archive/file.raw": [{}],
- * });
- * ```
  *
  * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/archive.html.markdown.
  */

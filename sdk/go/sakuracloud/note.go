@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud Note (Startup-Script) resource. This can be used to create, update, and delete Notes.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/note.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/note.html.markdown.
 type Note struct {
 	s *pulumi.ResourceState
 }

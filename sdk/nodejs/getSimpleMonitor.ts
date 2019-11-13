@@ -89,6 +89,10 @@ export interface GetSimpleMonitorResult {
      */
     readonly notifyEmailHtml: boolean;
     /**
+     * The intervals of notify (unit:`second`).  
+     */
+    readonly notifyInterval: number;
+    /**
      * The flag of enable/disable notification by slack.
      */
     readonly notifySlackEnabled: boolean;

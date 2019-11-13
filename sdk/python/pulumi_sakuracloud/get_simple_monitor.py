@@ -13,7 +13,7 @@ class GetSimpleMonitorResult:
     """
     A collection of values returned by getSimpleMonitor.
     """
-    def __init__(__self__, description=None, enabled=None, filters=None, health_checks=None, icon_id=None, name_selectors=None, notify_email_enabled=None, notify_email_html=None, notify_slack_enabled=None, notify_slack_webhook=None, tag_selectors=None, tags=None, target=None, id=None):
+    def __init__(__self__, description=None, enabled=None, filters=None, health_checks=None, icon_id=None, name_selectors=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tag_selectors=None, tags=None, target=None, id=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
@@ -55,6 +55,12 @@ class GetSimpleMonitorResult:
         __self__.notify_email_html = notify_email_html
         """
         The flag of enable/disable HTML format for E-mail.
+        """
+        if notify_interval and not isinstance(notify_interval, float):
+            raise TypeError("Expected argument 'notify_interval' to be a float")
+        __self__.notify_interval = notify_interval
+        """
+        The intervals of notify (unit:`second`).  
         """
         if notify_slack_enabled and not isinstance(notify_slack_enabled, bool):
             raise TypeError("Expected argument 'notify_slack_enabled' to be a bool")
@@ -103,6 +109,7 @@ class AwaitableGetSimpleMonitorResult(GetSimpleMonitorResult):
             name_selectors=self.name_selectors,
             notify_email_enabled=self.notify_email_enabled,
             notify_email_html=self.notify_email_html,
+            notify_interval=self.notify_interval,
             notify_slack_enabled=self.notify_slack_enabled,
             notify_slack_webhook=self.notify_slack_webhook,
             tag_selectors=self.tag_selectors,
@@ -145,6 +152,7 @@ def get_simple_monitor(filters=None,name_selectors=None,tag_selectors=None,opts=
         name_selectors=__ret__.get('nameSelectors'),
         notify_email_enabled=__ret__.get('notifyEmailEnabled'),
         notify_email_html=__ret__.get('notifyEmailHtml'),
+        notify_interval=__ret__.get('notifyInterval'),
         notify_slack_enabled=__ret__.get('notifySlackEnabled'),
         notify_slack_webhook=__ret__.get('notifySlackWebhook'),
         tag_selectors=__ret__.get('tagSelectors'),

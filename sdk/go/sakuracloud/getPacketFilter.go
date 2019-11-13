@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Packet Filter.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/packet_filter.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/packet_filter.html.markdown.
 func LookupPacketFilter(ctx *pulumi.Context, args *GetPacketFilterArgs) (*GetPacketFilterResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

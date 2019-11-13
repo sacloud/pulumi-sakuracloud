@@ -15,7 +15,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform/pkg/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfbridge"
 
 	sakuracloud "github.com/sacloud/pulumi-sakuracloud"
 	"github.com/sacloud/pulumi-sakuracloud/pkg/version"

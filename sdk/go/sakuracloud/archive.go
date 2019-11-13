@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud Archive resource. This can be used to create, update, and delete Archives.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/archive.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/archive.html.markdown.
 type Archive struct {
 	s *pulumi.ResourceState
 }

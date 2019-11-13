@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud Packet Filter resource. This can be used to create, update, and delete Packet Filters.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter.html.markdown.
 type PacketFilter struct {
 	s *pulumi.ResourceState
 }

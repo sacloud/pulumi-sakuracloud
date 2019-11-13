@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud IPv4 PTR Record resource. This can be used to create, update, and delete IPv4 PTR records.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
 type IPv4Ptr struct {
 	s *pulumi.ResourceState
 }

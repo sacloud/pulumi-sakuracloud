@@ -33,7 +33,7 @@ class DNSRecord(pulumi.CustomResource):
     type: pulumi.Output[str]
     """
     The Record type.  
-    Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+    Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
     """
     value: pulumi.Output[str]
     """
@@ -59,7 +59,7 @@ class DNSRecord(pulumi.CustomResource):
         :param pulumi.Input[float] priority: The priority used when `type` is `MX` or `SRV`.
         :param pulumi.Input[float] ttl: The ttl value of the Record (unit:`second`). 
         :param pulumi.Input[str] type: The Record type.  
-               Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+               Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
         :param pulumi.Input[str] value: The value of the Record. 
         :param pulumi.Input[float] weight: The weight used when `type` is `SRV`.
 
@@ -117,7 +117,7 @@ class DNSRecord(pulumi.CustomResource):
         :param pulumi.Input[float] priority: The priority used when `type` is `MX` or `SRV`.
         :param pulumi.Input[float] ttl: The ttl value of the Record (unit:`second`). 
         :param pulumi.Input[str] type: The Record type.  
-               Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+               Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
         :param pulumi.Input[str] value: The value of the Record. 
         :param pulumi.Input[float] weight: The weight used when `type` is `SRV`.
 

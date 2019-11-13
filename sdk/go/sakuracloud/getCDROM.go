@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud CD-ROM.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/cdrom.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/cdrom.html.markdown.
 func LookupCDROM(ctx *pulumi.Context, args *GetCDROMArgs) (*GetCDROMResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

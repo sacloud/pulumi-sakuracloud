@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud VPC Router.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/vpc_router.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/vpc_router.html.markdown.
 func LookupVPCRouter(ctx *pulumi.Context, args *GetVPCRouterArgs) (*GetVPCRouterResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

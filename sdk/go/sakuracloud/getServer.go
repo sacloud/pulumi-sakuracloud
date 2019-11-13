@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Server.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/server.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/server.html.markdown.
 func LookupServer(ctx *pulumi.Context, args *GetServerArgs) (*GetServerResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

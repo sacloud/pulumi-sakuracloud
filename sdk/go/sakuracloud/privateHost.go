@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud Private Host resource. This can be used to create, update, and delete Private Hosts.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/private_host.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/private_host.html.markdown.
 type PrivateHost struct {
 	s *pulumi.ResourceState
 }

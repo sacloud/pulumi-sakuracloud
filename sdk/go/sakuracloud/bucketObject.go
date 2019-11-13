@@ -17,7 +17,7 @@ import (
 // 
 // Import of Bucket Object is not supported.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
 type BucketObject struct {
 	s *pulumi.ResourceState
 }

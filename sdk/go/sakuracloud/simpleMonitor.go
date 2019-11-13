@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud Simple Monitor resource. This can be used to create, update, and delete Simple Monitors.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
 type SimpleMonitor struct {
 	s *pulumi.ResourceState
 }
@@ -32,6 +32,7 @@ func NewSimpleMonitor(ctx *pulumi.Context,
 		inputs["iconId"] = nil
 		inputs["notifyEmailEnabled"] = nil
 		inputs["notifyEmailHtml"] = nil
+		inputs["notifyInterval"] = nil
 		inputs["notifySlackEnabled"] = nil
 		inputs["notifySlackWebhook"] = nil
 		inputs["tags"] = nil
@@ -43,6 +44,7 @@ func NewSimpleMonitor(ctx *pulumi.Context,
 		inputs["iconId"] = args.IconId
 		inputs["notifyEmailEnabled"] = args.NotifyEmailEnabled
 		inputs["notifyEmailHtml"] = args.NotifyEmailHtml
+		inputs["notifyInterval"] = args.NotifyInterval
 		inputs["notifySlackEnabled"] = args.NotifySlackEnabled
 		inputs["notifySlackWebhook"] = args.NotifySlackWebhook
 		inputs["tags"] = args.Tags
@@ -67,6 +69,7 @@ func GetSimpleMonitor(ctx *pulumi.Context,
 		inputs["iconId"] = state.IconId
 		inputs["notifyEmailEnabled"] = state.NotifyEmailEnabled
 		inputs["notifyEmailHtml"] = state.NotifyEmailHtml
+		inputs["notifyInterval"] = state.NotifyInterval
 		inputs["notifySlackEnabled"] = state.NotifySlackEnabled
 		inputs["notifySlackWebhook"] = state.NotifySlackWebhook
 		inputs["tags"] = state.Tags
@@ -119,6 +122,11 @@ func (r *SimpleMonitor) NotifyEmailHtml() *pulumi.BoolOutput {
 	return (*pulumi.BoolOutput)(r.s.State["notifyEmailHtml"])
 }
 
+// The intervals of notify (unit:`second`).  
+func (r *SimpleMonitor) NotifyInterval() *pulumi.IntOutput {
+	return (*pulumi.IntOutput)(r.s.State["notifyInterval"])
+}
+
 // The flag of enable/disable notification by slack.
 func (r *SimpleMonitor) NotifySlackEnabled() *pulumi.BoolOutput {
 	return (*pulumi.BoolOutput)(r.s.State["notifySlackEnabled"])
@@ -153,6 +161,8 @@ type SimpleMonitorState struct {
 	NotifyEmailEnabled interface{}
 	// The flag of enable/disable HTML format for E-mail.
 	NotifyEmailHtml interface{}
+	// The intervals of notify (unit:`second`).  
+	NotifyInterval interface{}
 	// The flag of enable/disable notification by slack.
 	NotifySlackEnabled interface{}
 	// The webhook URL of destination of slack notification.
@@ -177,6 +187,8 @@ type SimpleMonitorArgs struct {
 	NotifyEmailEnabled interface{}
 	// The flag of enable/disable HTML format for E-mail.
 	NotifyEmailHtml interface{}
+	// The intervals of notify (unit:`second`).  
+	NotifyInterval interface{}
 	// The flag of enable/disable notification by slack.
 	NotifySlackEnabled interface{}
 	// The webhook URL of destination of slack notification.

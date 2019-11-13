@@ -6,28 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Provides a SakuraCloud CDROM (ISO-Image) resource. This can be used to create, update, and delete CDROMs.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new CDROM(ISO-Image)
- * const foobar = new sakuracloud.CDROM("foobar", {
- *     description: "description",
- *     file: [{}],
- *     hash: "",
- *     isoImageFile: "your/cdrom/file.iso",
- *     md5: [{}],
- *     size: 5,
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- *     "your/cdrom/file.iso": [{}], // or
- * });
- * ```
  *
  * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
  */

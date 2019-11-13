@@ -31,7 +31,7 @@ import (
 // * `windows2016-sql2017-standard-all` - Windows 2016 SQLServer 2017 (Standard, RDS + Office)
 // * `windows2019` - Windows 2019
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/archive.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/archive.html.markdown.
 func LookupArchive(ctx *pulumi.Context, args *GetArchiveArgs) (*GetArchiveResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

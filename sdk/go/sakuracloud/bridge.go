@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud Bridge resource. This can be used to create, update, and delete Bridges.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
 type Bridge struct {
 	s *pulumi.ResourceState
 }

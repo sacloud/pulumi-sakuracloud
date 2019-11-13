@@ -47,7 +47,9 @@ func TestExamples(t *testing.T) {
 	examples := []integration.ProgramTestOptions{
 		// List each test
 		jsBase.With(integration.ProgramTestOptions{Dir: path.Join(cwd, "minimum-ts")}),
+		jsBase.With(integration.ProgramTestOptions{Dir: path.Join(cwd, "server")}),
 		pythonBase.With(integration.ProgramTestOptions{Dir: path.Join(cwd, "minimum-py")}),
+		base.With(integration.ProgramTestOptions{Dir: path.Join(cwd, "minimum-go")}),
 	}
 
 	if !testing.Short() {

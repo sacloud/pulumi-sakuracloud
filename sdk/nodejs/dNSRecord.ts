@@ -64,7 +64,7 @@ export class DNSRecord extends pulumi.CustomResource {
     public readonly ttl!: pulumi.Output<number | undefined>;
     /**
      * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
      */
     public readonly type!: pulumi.Output<string>;
     /**
@@ -153,7 +153,7 @@ export interface DNSRecordState {
     readonly ttl?: pulumi.Input<number>;
     /**
      * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
      */
     readonly type?: pulumi.Input<string>;
     /**
@@ -192,7 +192,7 @@ export interface DNSRecordArgs {
     readonly ttl?: pulumi.Input<number>;
     /**
      * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
      */
     readonly type: pulumi.Input<string>;
     /**

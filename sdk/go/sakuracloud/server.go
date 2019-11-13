@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud Server resource. This can be used to create, update, and delete Servers.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/server.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/server.html.markdown.
 type Server struct {
 	s *pulumi.ResourceState
 }

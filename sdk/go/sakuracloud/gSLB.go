@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud GSLB resource. This can be used to create, update, and delete GSLBs.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
 type GSLB struct {
 	s *pulumi.ResourceState
 }

@@ -36,6 +36,7 @@ import * as utilities from "./utilities";
  *     },
  *     notifyEmailEnabled: true,
  *     notifyEmailHtml: true,
+ *     notifyInterval: 7200,
  *     notifySlackEnabled: true,
  *     notifySlackWebhook: "https://hooks.slack.com/services/XXX/XXX/XXXXXX",
  *     tags: [
@@ -100,6 +101,10 @@ export class SimpleMonitor extends pulumi.CustomResource {
      */
     public readonly notifyEmailHtml!: pulumi.Output<boolean | undefined>;
     /**
+     * The intervals of notify (unit:`second`).  
+     */
+    public readonly notifyInterval!: pulumi.Output<number | undefined>;
+    /**
      * The flag of enable/disable notification by slack.
      */
     public readonly notifySlackEnabled!: pulumi.Output<boolean | undefined>;
@@ -134,6 +139,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["notifyEmailEnabled"] = state ? state.notifyEmailEnabled : undefined;
             inputs["notifyEmailHtml"] = state ? state.notifyEmailHtml : undefined;
+            inputs["notifyInterval"] = state ? state.notifyInterval : undefined;
             inputs["notifySlackEnabled"] = state ? state.notifySlackEnabled : undefined;
             inputs["notifySlackWebhook"] = state ? state.notifySlackWebhook : undefined;
             inputs["tags"] = state ? state.tags : undefined;
@@ -152,6 +158,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["notifyEmailEnabled"] = args ? args.notifyEmailEnabled : undefined;
             inputs["notifyEmailHtml"] = args ? args.notifyEmailHtml : undefined;
+            inputs["notifyInterval"] = args ? args.notifyInterval : undefined;
             inputs["notifySlackEnabled"] = args ? args.notifySlackEnabled : undefined;
             inputs["notifySlackWebhook"] = args ? args.notifySlackWebhook : undefined;
             inputs["tags"] = args ? args.tags : undefined;
@@ -196,6 +203,10 @@ export interface SimpleMonitorState {
      * The flag of enable/disable HTML format for E-mail.
      */
     readonly notifyEmailHtml?: pulumi.Input<boolean>;
+    /**
+     * The intervals of notify (unit:`second`).  
+     */
+    readonly notifyInterval?: pulumi.Input<number>;
     /**
      * The flag of enable/disable notification by slack.
      */
@@ -242,6 +253,10 @@ export interface SimpleMonitorArgs {
      * The flag of enable/disable HTML format for E-mail.
      */
     readonly notifyEmailHtml?: pulumi.Input<boolean>;
+    /**
+     * The intervals of notify (unit:`second`).  
+     */
+    readonly notifyInterval?: pulumi.Input<number>;
     /**
      * The flag of enable/disable notification by slack.
      */

@@ -14,7 +14,7 @@ import (
 // 
 // Import of SSH Key Gen is not supported.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
 type SSHKeyGen struct {
 	s *pulumi.ResourceState
 }
