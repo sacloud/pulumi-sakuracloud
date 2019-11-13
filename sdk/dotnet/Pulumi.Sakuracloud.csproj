@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Pulumi Corp.</Authors>
-    <Company>Pulumi Corp.</Company>
+    <Authors>pulumi-sakuracloud authors</Authors>
+    <Company>sacloud</Company>
     <Description>A Pulumi package for creating and managing SakuraCloud resources.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/sacloud/pulumi-sakuracloud</PackageProjectUrl>
