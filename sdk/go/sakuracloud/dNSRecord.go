@@ -14,7 +14,7 @@ import (
 // 
 // Import of DNS Record is not supported.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
 type DNSRecord struct {
 	s *pulumi.ResourceState
 }
@@ -116,7 +116,7 @@ func (r *DNSRecord) Ttl() *pulumi.IntOutput {
 }
 
 // The Record type.  
-// Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+// Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
 func (r *DNSRecord) Type() *pulumi.StringOutput {
 	return (*pulumi.StringOutput)(r.s.State["type"])
 }
@@ -144,7 +144,7 @@ type DNSRecordState struct {
 	// The ttl value of the Record (unit:`second`). 
 	Ttl interface{}
 	// The Record type.  
-	// Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+	// Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
 	Type interface{}
 	// The value of the Record. 
 	Value interface{}
@@ -165,7 +165,7 @@ type DNSRecordArgs struct {
 	// The ttl value of the Record (unit:`second`). 
 	Ttl interface{}
 	// The Record type.  
-	// Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+	// Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
 	Type interface{}
 	// The value of the Record. 
 	Value interface{}

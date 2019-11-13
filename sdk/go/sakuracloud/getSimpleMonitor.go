@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Simple Monitor.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/simple_monitor.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/simple_monitor.html.markdown.
 func LookupSimpleMonitor(ctx *pulumi.Context, args *GetSimpleMonitorArgs) (*GetSimpleMonitorResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {
@@ -30,6 +30,7 @@ func LookupSimpleMonitor(ctx *pulumi.Context, args *GetSimpleMonitorArgs) (*GetS
 		NameSelectors: outputs["nameSelectors"],
 		NotifyEmailEnabled: outputs["notifyEmailEnabled"],
 		NotifyEmailHtml: outputs["notifyEmailHtml"],
+		NotifyInterval: outputs["notifyInterval"],
 		NotifySlackEnabled: outputs["notifySlackEnabled"],
 		NotifySlackWebhook: outputs["notifySlackWebhook"],
 		TagSelectors: outputs["tagSelectors"],
@@ -65,6 +66,8 @@ type GetSimpleMonitorResult struct {
 	NotifyEmailEnabled interface{}
 	// The flag of enable/disable HTML format for E-mail.
 	NotifyEmailHtml interface{}
+	// The intervals of notify (unit:`second`).  
+	NotifyInterval interface{}
 	// The flag of enable/disable notification by slack.
 	NotifySlackEnabled interface{}
 	// The webhook URL of destination of slack notification.

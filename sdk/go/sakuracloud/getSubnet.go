@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Subnet.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
 func LookupSubnet(ctx *pulumi.Context, args *GetSubnetArgs) (*GetSubnetResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

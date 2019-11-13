@@ -14,7 +14,7 @@ import (
 // 
 // Import of GSLB Server is not supported.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb_server.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb_server.html.markdown.
 type GSLBServer struct {
 	s *pulumi.ResourceState
 }

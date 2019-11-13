@@ -8,66 +8,6 @@ import * as utilities from "./utilities";
 
 /**
  * Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = new sakuracloud.ProxyLB("foobar", {
- *     bindPorts: [{
- *         port: 443,
- *         proxyMode: "https",
- *         supportHttp2: true,
- *     }],
- *     certificate: {
- *         additionalCertificates: [{
- *             file: [
- *                 {},
- *                 {},
- *             ],
- *             privateKey: "",
- *             "server2.crt": [{}],
- *             "server2.key": [{}], // intermediateCert = file("intermediate2.crt")
- *             serverCert: "",
- *         }],
- *         file: [
- *             {},
- *             {},
- *         ],
- *         privateKey: "",
- *         "server.crt": [{}],
- *         "server.key": [{}], // intermediateCert = file("intermediate.crt")
- *         serverCert: "",
- *     },
- *     healthCheck: {
- *         delayLoop: 10,
- *         hostHeader: "example.com",
- *         path: "/",
- *         protocol: "http",
- *     },
- *     plan: 1000,
- *     servers: [
- *         {
- *             ipaddress: "133.242.0.3",
- *             port: 80,
- *         },
- *         {
- *             ipaddress: "133.242.0.4",
- *             port: 80,
- *         },
- *     ],
- *     sorryServer: {
- *         ipaddress: "192.2.0.1",
- *         port: 80,
- *         redirectToHttps: true,
- *     },
- *     stickySession: false,
- *     timeout: 10,
- *     vipFailover: false,
- * });
- * ```
  *
  * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
  */

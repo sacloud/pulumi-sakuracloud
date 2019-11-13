@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Disk.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/disk.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/disk.html.markdown.
 func LookupDisk(ctx *pulumi.Context, args *GetDiskArgs) (*GetDiskResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

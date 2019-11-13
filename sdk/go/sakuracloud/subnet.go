@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud Subnet resource. This can be used to create, update, and delete Subnets.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
 type Subnet struct {
 	s *pulumi.ResourceState
 }

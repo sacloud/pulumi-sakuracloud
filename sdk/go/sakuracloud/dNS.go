@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud DNS zones resource. This can be used to create, update, and delete DNS zones.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
 type DNS struct {
 	s *pulumi.ResourceState
 }

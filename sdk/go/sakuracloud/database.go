@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud Database resource. This can be used to create, update, and delete Databases.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
 type Database struct {
 	s *pulumi.ResourceState
 }

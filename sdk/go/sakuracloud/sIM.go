@@ -10,7 +10,7 @@ import (
 
 // Provides a SakuraCloud SIM resource. This can be used to create, update, and delete SIMs.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
 type SIM struct {
 	s *pulumi.ResourceState
 }

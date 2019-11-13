@@ -14,7 +14,7 @@ import (
 // 
 // Import of Mobile Gateway Static Route is not supported.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway_static_route.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway_static_route.html.markdown.
 type MobileGatewayStaticRoute struct {
 	s *pulumi.ResourceState
 }

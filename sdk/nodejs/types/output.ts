@@ -23,7 +23,7 @@ export interface DNSRecord {
     ttl?: number;
     /**
      * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
+     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
      */
     type: string;
     /**

@@ -8,27 +8,6 @@ import * as utilities from "./utilities";
 
 /**
  * Provides a SakuraCloud Private Host resource. This can be used to create, update, and delete Private Hosts.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Private Host
- * const foobarPrivateHost = new sakuracloud.PrivateHost("foobar", {
- *     description: "description",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * // Add server on Private Host
- * const foobarServer = new sakuracloud.Server("foobar", {
- *     privateHostId: "",
- *     "sakuracloud_private_host.foobar.id": [{}],
- * });
- * ```
  *
  * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/private_host.html.markdown.
  */

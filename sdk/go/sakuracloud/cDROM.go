@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud CDROM (ISO-Image) resource. This can be used to create, update, and delete CDROMs.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
 type CDROM struct {
 	s *pulumi.ResourceState
 }

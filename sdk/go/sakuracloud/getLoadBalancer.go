@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud Load Balancer.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/load_balancer.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/load_balancer.html.markdown.
 func LookupLoadBalancer(ctx *pulumi.Context, args *GetLoadBalancerArgs) (*GetLoadBalancerResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

@@ -9,7 +9,7 @@ import (
 
 // Use this data source to retrieve information about a SakuraCloud DNS.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/d/dns.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/dns.html.markdown.
 func LookupDNS(ctx *pulumi.Context, args *GetDNSArgs) (*GetDNSResult, error) {
 	inputs := make(map[string]interface{})
 	if args != nil {

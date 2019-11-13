@@ -9,7 +9,7 @@ import (
 
 // Provides a SakuraCloud Mobile Gateway resource. This can be used to create, update, and delete Mobile Gateways.
 //
-// > This content is derived from https://github.com/terraform-providers/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
+// > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
 type MobileGateway struct {
 	s *pulumi.ResourceState
 }
