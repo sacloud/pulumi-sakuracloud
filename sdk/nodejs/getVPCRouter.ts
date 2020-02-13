@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud VPC Router.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getVPCRouter({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/vpc_router.html.markdown.
- */
 export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetVPCRouterResult> & GetVPCRouterResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOption
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetVPCRouterResult> = pulumi.runtime.invoke("sakuracloud:index/getVPCRouter:getVPCRouter", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOption
  * A collection of arguments for invoking getVPCRouter.
  */
 export interface GetVPCRouterArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetVPCRouterFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetVPCRouterFilter;
     readonly zone?: string;
 }
 
@@ -67,82 +35,31 @@ export interface GetVPCRouterArgs {
  * A collection of values returned by getVPCRouter.
  */
 export interface GetVPCRouterResult {
-    /**
-     * The IP address aliase list. Used when plan is in `premium` or `highspec`.
-     */
-    readonly aliases: string[];
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
     readonly dhcpServers: outputs.GetVPCRouterDhcpServer[];
     readonly dhcpStaticMappings: outputs.GetVPCRouterDhcpStaticMapping[];
-    readonly filters?: outputs.GetVPCRouterFilter[];
+    readonly filter?: outputs.GetVPCRouterFilter;
     readonly firewalls: outputs.GetVPCRouterFirewall[];
-    /**
-     * Global IP address of the VPC Router.
-     */
-    readonly globalAddress: string;
-    /**
-     * The ID of the icon of the resource.
-     */
     readonly iconId: string;
-    readonly interfaces: outputs.GetVPCRouterInterface[];
-    /**
-     * The flag of enable/disable connection from the VPC Router to the Internet.
-     */
-    readonly internetConnection: boolean;
-    /**
-     * The primary IP address of the VPC Router.
-     */
-    readonly ipaddress1: string;
-    /**
-     * The secondly IP address of the VPC Router. Used when plan is in `premium` or `highspec`.
-     */
-    readonly ipaddress2: string;
-    readonly l2tps: outputs.GetVPCRouterL2tp[];
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The name of the resource plan. 
-     */
-    readonly plan: string;
-    readonly portForwardings: outputs.GetVPCRouterPortForwarding[];
-    readonly pptps: outputs.GetVPCRouterPptp[];
-    readonly siteToSiteVpns: outputs.GetVPCRouterSiteToSiteVpn[];
-    readonly staticNats: outputs.GetVPCRouterStaticNat[];
-    readonly staticRoutes: outputs.GetVPCRouterStaticRoute[];
-    /**
-     * The ID of the Switch connected to the VPC Router (eth0).
-     */
-    readonly switchId: string;
-    /**
-     * The destination HostName/IP address to send log.	
-     */
-    readonly syslogHost: string;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    readonly users: outputs.GetVPCRouterUser[];
-    /**
-     * Virtual IP address of the VPC Router. Used when plan is in `premium` or `highspec`.
-     */
-    readonly vip: string;
-    /**
-     * VRID used when plan is in `premium` or `highspec`.
-     */
-    readonly vrid: number;
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly internetConnection: boolean;
+    readonly l2tps: outputs.GetVPCRouterL2tp[];
+    readonly name: string;
+    readonly plan: string;
+    readonly portForwardings: outputs.GetVPCRouterPortForwarding[];
+    readonly pptps: outputs.GetVPCRouterPptp[];
+    readonly privateNetworkInterfaces: outputs.GetVPCRouterPrivateNetworkInterface[];
+    readonly publicIp: string;
+    readonly publicNetmask: number;
+    readonly publicNetworkInterfaces: outputs.GetVPCRouterPublicNetworkInterface[];
+    readonly siteToSiteVpns: outputs.GetVPCRouterSiteToSiteVpn[];
+    readonly staticNats: outputs.GetVPCRouterStaticNat[];
+    readonly staticRoutes: outputs.GetVPCRouterStaticRoute[];
+    readonly syslogHost: string;
+    readonly tags: string[];
+    readonly users: outputs.GetVPCRouterUser[];
+    readonly zone: string;
 }

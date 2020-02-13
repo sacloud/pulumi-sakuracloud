@@ -11,170 +11,121 @@ from . import utilities, tables
 
 class ProxyLB(pulumi.CustomResource):
     bind_ports: pulumi.Output[list]
-    """
-    The external listen ports. It contains some attributes to Bind Ports.
-    
-      * `port` (`float`) - Port number.
-      * `proxyMode` (`str`) - Proxy protocol.  
-        Valid value is one of the following: [ "http" / "https"]
-      * `redirectToHttps` (`bool`) - The flag for enable to redirect to https.
-      * `responseHeaders` (`list`) - Additional response headers. It contains some attributes to Response Header.  
-    
-        * `header` (`str`) - The key of additional header.  
-        * `value` (`str`) - The value of additional header.  
-    
-      * `supportHttp2` (`bool`) - The flag for enable to support HTTP/2.
-    """
     certificate: pulumi.Output[dict]
-    """
-    Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-    
-      * `additionalCertificates` (`list`) - Additional certificates.
-    
-        * `intermediateCert` (`str`) - The intermediate certificate.
-        * `private_key` (`str`) - The private key.
-        * `serverCert` (`str`) - The server certificate.
-    
-      * `intermediateCert` (`str`) - The intermediate certificate.
-      * `private_key` (`str`) - The private key.
-      * `serverCert` (`str`) - The server certificate.
-    """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
     """
     fqdn: pulumi.Output[str]
     """
-    The FQDN that was assigned. This attribute only valid when `vip_failover` is set to `true`.  
+    The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
     """
     health_check: pulumi.Output[dict]
-    """
-    The health check rules. It contains some attributes to Health Check.
-    
-      * `delayLoop` (`float`) - Health check access interval (unit:`second`, default:`10`).
-      * `hostHeader` (`str`) - The value of `Host` header used in http/https health check access.
-      * `path` (`str`) - The request path used in http health check access.
-      * `protocol` (`str`) - Protocol used in health check.  
-        Valid value is one of the following: [ "http" / "tcp" ]
-    """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the ProxyLB
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.  
+    The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
     """
     plan: pulumi.Output[float]
     """
-    The plan of the resource.
-    Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
+    The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
     """
     proxy_networks: pulumi.Output[list]
     """
-    ProxyLB network address.   
+    A list of CIDR block used by the ProxyLB to access the server
     """
+    region: pulumi.Output[str]
+    """
+    The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+    """
+    rules: pulumi.Output[list]
     servers: pulumi.Output[list]
-    """
-    Real servers. It contains some attributes to Servers.
-    
-      * `enabled` (`bool`) - The flag for enable/disable the Real-Server (default:`true`).
-      * `ipaddress` (`str`) - The IP address of the Real-Server.
-      * `port` (`float`) - Port number.
-    """
     sorry_server: pulumi.Output[dict]
-    """
-    The pair of IPAddress and port number of sorry-server.
-    
-      * `ipaddress` (`str`) - The IP address of the Real-Server.
-      * `port` (`float`) - Port number.
-    """
     sticky_session: pulumi.Output[bool]
     """
-    The flag of enable Sticky-Session.  
+    The flag to enable sticky session
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the ProxyLB
     """
     timeout: pulumi.Output[float]
     """
-    Timeout seconds.  
+    The timeout duration in seconds
     """
     vip: pulumi.Output[str]
     """
-    The VirtualIPAddress that was assigned. This attribute only valid when `vip_failover` is set to `false`.  
+    The virtual IP address assigned to the ProxyLB
     """
     vip_failover: pulumi.Output[bool]
     """
-    The flag of enable VIP Fail-Over.  
+    The flag to enable VIP fail-over
     """
-    def __init__(__self__, resource_name, opts=None, bind_ports=None, certificate=None, description=None, health_check=None, icon_id=None, name=None, plan=None, servers=None, sorry_server=None, sticky_session=None, tags=None, timeout=None, vip_failover=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, bind_ports=None, certificate=None, description=None, health_check=None, icon_id=None, name=None, plan=None, region=None, rules=None, servers=None, sorry_server=None, sticky_session=None, tags=None, timeout=None, vip_failover=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
-        
+        Create a ProxyLB resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] bind_ports: The external listen ports. It contains some attributes to Bind Ports.
-        :param pulumi.Input[dict] certificate: Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[dict] health_check: The health check rules. It contains some attributes to Health Check.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.  
-        :param pulumi.Input[float] plan: The plan of the resource.
-               Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
-        :param pulumi.Input[list] servers: Real servers. It contains some attributes to Servers.
-        :param pulumi.Input[dict] sorry_server: The pair of IPAddress and port number of sorry-server.
-        :param pulumi.Input[bool] sticky_session: The flag of enable Sticky-Session.  
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[float] timeout: Timeout seconds.  
-        :param pulumi.Input[bool] vip_failover: The flag of enable VIP Fail-Over.  
-        
-        The **bind_ports** object supports the following:
-        
-          * `port` (`pulumi.Input[float]`) - Port number.
-          * `proxyMode` (`pulumi.Input[str]`) - Proxy protocol.  
-            Valid value is one of the following: [ "http" / "https"]
-          * `redirectToHttps` (`pulumi.Input[bool]`) - The flag for enable to redirect to https.
-          * `responseHeaders` (`pulumi.Input[list]`) - Additional response headers. It contains some attributes to Response Header.  
-        
-            * `header` (`pulumi.Input[str]`) - The key of additional header.  
-            * `value` (`pulumi.Input[str]`) - The value of additional header.  
-        
-          * `supportHttp2` (`pulumi.Input[bool]`) - The flag for enable to support HTTP/2.
-        
-        The **certificate** object supports the following:
-        
-          * `additionalCertificates` (`pulumi.Input[list]`) - Additional certificates.
-        
-            * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-            * `private_key` (`pulumi.Input[str]`) - The private key.
-            * `serverCert` (`pulumi.Input[str]`) - The server certificate.
-        
-          * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-          * `private_key` (`pulumi.Input[str]`) - The private key.
-          * `serverCert` (`pulumi.Input[str]`) - The server certificate.
-        
-        The **health_check** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - Health check access interval (unit:`second`, default:`10`).
-          * `hostHeader` (`pulumi.Input[str]`) - The value of `Host` header used in http/https health check access.
-          * `path` (`pulumi.Input[str]`) - The request path used in http health check access.
-          * `protocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-            Valid value is one of the following: [ "http" / "tcp" ]
-        
-        The **servers** object supports the following:
-        
-          * `enabled` (`pulumi.Input[bool]`) - The flag for enable/disable the Real-Server (default:`true`).
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
-          * `port` (`pulumi.Input[float]`) - Port number.
-        
-        The **sorry_server** object supports the following:
-        
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
-          * `port` (`pulumi.Input[float]`) - Port number.
+        :param pulumi.Input[str] description: The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the ProxyLB
+        :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
+        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        :param pulumi.Input[bool] sticky_session: The flag to enable sticky session
+        :param pulumi.Input[list] tags: Any tags to assign to the ProxyLB
+        :param pulumi.Input[float] timeout: The timeout duration in seconds
+        :param pulumi.Input[bool] vip_failover: The flag to enable VIP fail-over
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
+        The **bind_ports** object supports the following:
+
+          * `port` (`pulumi.Input[float]`)
+          * `proxyMode` (`pulumi.Input[str]`)
+          * `redirectToHttps` (`pulumi.Input[bool]`)
+          * `responseHeaders` (`pulumi.Input[list]`)
+            * `header` (`pulumi.Input[str]`)
+            * `value` (`pulumi.Input[str]`)
+
+          * `supportHttp2` (`pulumi.Input[bool]`)
+
+        The **certificate** object supports the following:
+
+          * `additionalCertificates` (`pulumi.Input[list]`)
+            * `intermediateCert` (`pulumi.Input[str]`)
+            * `private_key` (`pulumi.Input[str]`)
+            * `serverCert` (`pulumi.Input[str]`)
+
+          * `intermediateCert` (`pulumi.Input[str]`)
+          * `private_key` (`pulumi.Input[str]`)
+          * `serverCert` (`pulumi.Input[str]`)
+
+        The **health_check** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `hostHeader` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `protocol` (`pulumi.Input[str]`)
+
+        The **rules** object supports the following:
+
+          * `group` (`pulumi.Input[str]`)
+          * `host` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+
+        The **servers** object supports the following:
+
+          * `enabled` (`pulumi.Input[bool]`)
+          * `group` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+
+        The **sorry_server** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -204,6 +155,8 @@ class ProxyLB(pulumi.CustomResource):
             __props__['icon_id'] = icon_id
             __props__['name'] = name
             __props__['plan'] = plan
+            __props__['region'] = region
+            __props__['rules'] = rules
             __props__['servers'] = servers
             __props__['sorry_server'] = sorry_server
             __props__['sticky_session'] = sticky_session
@@ -220,81 +173,79 @@ class ProxyLB(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, bind_ports=None, certificate=None, description=None, fqdn=None, health_check=None, icon_id=None, name=None, plan=None, proxy_networks=None, servers=None, sorry_server=None, sticky_session=None, tags=None, timeout=None, vip=None, vip_failover=None):
+    def get(resource_name, id, opts=None, bind_ports=None, certificate=None, description=None, fqdn=None, health_check=None, icon_id=None, name=None, plan=None, proxy_networks=None, region=None, rules=None, servers=None, sorry_server=None, sticky_session=None, tags=None, timeout=None, vip=None, vip_failover=None):
         """
         Get an existing ProxyLB resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] bind_ports: The external listen ports. It contains some attributes to Bind Ports.
-        :param pulumi.Input[dict] certificate: Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] fqdn: The FQDN that was assigned. This attribute only valid when `vip_failover` is set to `true`.  
-        :param pulumi.Input[dict] health_check: The health check rules. It contains some attributes to Health Check.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.  
-        :param pulumi.Input[float] plan: The plan of the resource.
-               Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
-        :param pulumi.Input[list] proxy_networks: ProxyLB network address.   
-        :param pulumi.Input[list] servers: Real servers. It contains some attributes to Servers.
-        :param pulumi.Input[dict] sorry_server: The pair of IPAddress and port number of sorry-server.
-        :param pulumi.Input[bool] sticky_session: The flag of enable Sticky-Session.  
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[float] timeout: Timeout seconds.  
-        :param pulumi.Input[str] vip: The VirtualIPAddress that was assigned. This attribute only valid when `vip_failover` is set to `false`.  
-        :param pulumi.Input[bool] vip_failover: The flag of enable VIP Fail-Over.  
-        
-        The **bind_ports** object supports the following:
-        
-          * `port` (`pulumi.Input[float]`) - Port number.
-          * `proxyMode` (`pulumi.Input[str]`) - Proxy protocol.  
-            Valid value is one of the following: [ "http" / "https"]
-          * `redirectToHttps` (`pulumi.Input[bool]`) - The flag for enable to redirect to https.
-          * `responseHeaders` (`pulumi.Input[list]`) - Additional response headers. It contains some attributes to Response Header.  
-        
-            * `header` (`pulumi.Input[str]`) - The key of additional header.  
-            * `value` (`pulumi.Input[str]`) - The value of additional header.  
-        
-          * `supportHttp2` (`pulumi.Input[bool]`) - The flag for enable to support HTTP/2.
-        
-        The **certificate** object supports the following:
-        
-          * `additionalCertificates` (`pulumi.Input[list]`) - Additional certificates.
-        
-            * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-            * `private_key` (`pulumi.Input[str]`) - The private key.
-            * `serverCert` (`pulumi.Input[str]`) - The server certificate.
-        
-          * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-          * `private_key` (`pulumi.Input[str]`) - The private key.
-          * `serverCert` (`pulumi.Input[str]`) - The server certificate.
-        
-        The **health_check** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - Health check access interval (unit:`second`, default:`10`).
-          * `hostHeader` (`pulumi.Input[str]`) - The value of `Host` header used in http/https health check access.
-          * `path` (`pulumi.Input[str]`) - The request path used in http health check access.
-          * `protocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-            Valid value is one of the following: [ "http" / "tcp" ]
-        
-        The **servers** object supports the following:
-        
-          * `enabled` (`pulumi.Input[bool]`) - The flag for enable/disable the Real-Server (default:`true`).
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
-          * `port` (`pulumi.Input[float]`) - Port number.
-        
-        The **sorry_server** object supports the following:
-        
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Real-Server.
-          * `port` (`pulumi.Input[float]`) - Port number.
+        :param pulumi.Input[str] description: The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] fqdn: The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
+        :param pulumi.Input[str] icon_id: The icon id to attach to the ProxyLB
+        :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
+        :param pulumi.Input[list] proxy_networks: A list of CIDR block used by the ProxyLB to access the server
+        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        :param pulumi.Input[bool] sticky_session: The flag to enable sticky session
+        :param pulumi.Input[list] tags: Any tags to assign to the ProxyLB
+        :param pulumi.Input[float] timeout: The timeout duration in seconds
+        :param pulumi.Input[str] vip: The virtual IP address assigned to the ProxyLB
+        :param pulumi.Input[bool] vip_failover: The flag to enable VIP fail-over
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
+        The **bind_ports** object supports the following:
+
+          * `port` (`pulumi.Input[float]`)
+          * `proxyMode` (`pulumi.Input[str]`)
+          * `redirectToHttps` (`pulumi.Input[bool]`)
+          * `responseHeaders` (`pulumi.Input[list]`)
+            * `header` (`pulumi.Input[str]`)
+            * `value` (`pulumi.Input[str]`)
+
+          * `supportHttp2` (`pulumi.Input[bool]`)
+
+        The **certificate** object supports the following:
+
+          * `additionalCertificates` (`pulumi.Input[list]`)
+            * `intermediateCert` (`pulumi.Input[str]`)
+            * `private_key` (`pulumi.Input[str]`)
+            * `serverCert` (`pulumi.Input[str]`)
+
+          * `intermediateCert` (`pulumi.Input[str]`)
+          * `private_key` (`pulumi.Input[str]`)
+          * `serverCert` (`pulumi.Input[str]`)
+
+        The **health_check** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `hostHeader` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `protocol` (`pulumi.Input[str]`)
+
+        The **rules** object supports the following:
+
+          * `group` (`pulumi.Input[str]`)
+          * `host` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+
+        The **servers** object supports the following:
+
+          * `enabled` (`pulumi.Input[bool]`)
+          * `group` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+
+        The **sorry_server** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["bind_ports"] = bind_ports
         __props__["certificate"] = certificate
         __props__["description"] = description
@@ -304,6 +255,8 @@ class ProxyLB(pulumi.CustomResource):
         __props__["name"] = name
         __props__["plan"] = plan
         __props__["proxy_networks"] = proxy_networks
+        __props__["region"] = region
+        __props__["rules"] = rules
         __props__["servers"] = servers
         __props__["sorry_server"] = sorry_server
         __props__["sticky_session"] = sticky_session

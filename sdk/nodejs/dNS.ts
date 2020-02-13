@@ -6,28 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud DNS zones resource. This can be used to create, update, and delete DNS zones.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new DNS zone
- * const foobar = new sakuracloud.DNS("foobar", {
- *     description: "description",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- *     zone: "example.com",
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
- */
 export class DNS extends pulumi.CustomResource {
     /**
      * Get an existing DNS resource's state with the given name, ID, and optional extra
@@ -56,27 +34,24 @@ export class DNS extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The description of the DNS. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * List of host names of DNS servers.
+     * A list of IP address of DNS server that manage this zone
      */
     public /*out*/ readonly dnsServers!: pulumi.Output<string[]>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the DNS
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
-    /**
-     * Records. It contains some attributes to Records.
-     */
     public readonly records!: pulumi.Output<outputs.DNSRecord[]>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the DNS
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of the zone.
+     * The target zone. (e.g. `example.com`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -126,27 +101,24 @@ export class DNS extends pulumi.CustomResource {
  */
 export interface DNSState {
     /**
-     * The description of the resource.
+     * The description of the DNS. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * List of host names of DNS servers.
+     * A list of IP address of DNS server that manage this zone
      */
     readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the DNS
      */
     readonly iconId?: pulumi.Input<string>;
-    /**
-     * Records. It contains some attributes to Records.
-     */
     readonly records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the DNS
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the zone.
+     * The target zone. (e.g. `example.com`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -156,23 +128,20 @@ export interface DNSState {
  */
 export interface DNSArgs {
     /**
-     * The description of the resource.
+     * The description of the DNS. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the DNS
      */
     readonly iconId?: pulumi.Input<string>;
-    /**
-     * Records. It contains some attributes to Records.
-     */
     readonly records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the DNS
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the zone.
+     * The target zone. (e.g. `example.com`)
      */
     readonly zone: pulumi.Input<string>;
 }

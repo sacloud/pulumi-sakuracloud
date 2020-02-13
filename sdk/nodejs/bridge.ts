@@ -4,11 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Bridge resource. This can be used to create, update, and delete Bridges.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
- */
 export class Bridge extends pulumi.CustomResource {
     /**
      * Get an existing Bridge resource's state with the given name, ID, and optional extra
@@ -37,19 +32,15 @@ export class Bridge extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The ID list of the Switches connected to the Bridge. 
-     */
-    public /*out*/ readonly switchIds!: pulumi.Output<string[]>;
-    /**
-     * The ID of the zone to which the resource belongs.  
+     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -67,14 +58,12 @@ export class Bridge extends pulumi.CustomResource {
             const state = argsOrState as BridgeState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["switchIds"] = state ? state.switchIds : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as BridgeArgs | undefined;
             inputs["description"] = args ? args.description : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["zone"] = args ? args.zone : undefined;
-            inputs["switchIds"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -92,19 +81,15 @@ export class Bridge extends pulumi.CustomResource {
  */
 export interface BridgeState {
     /**
-     * The description of the resource.
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The ID list of the Switches connected to the Bridge. 
-     */
-    readonly switchIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The ID of the zone to which the resource belongs.  
+     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -114,15 +99,15 @@ export interface BridgeState {
  */
 export interface BridgeArgs {
     /**
-     * The description of the resource.
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The ID of the zone to which the resource belongs.  
+     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

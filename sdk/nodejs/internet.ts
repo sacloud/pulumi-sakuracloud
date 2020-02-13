@@ -2,34 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Internet resource. This can be used to create, update, and delete Internet.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Internet
- * const foobar = new sakuracloud.Internet("foobar", {
- *     bandWidth: 100,
- *     description: "description",
- *     enableIpv6: true,
- *     nwMaskKen: 28,
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/internet.html.markdown.
- */
 export class Internet extends pulumi.CustomResource {
     /**
      * Get an existing Internet resource's state with the given name, ID, and optional extra
@@ -58,81 +32,76 @@ export class Internet extends pulumi.CustomResource {
     }
 
     /**
-     * Bandwidth of outbound traffic (unit:`Mbps`).  
-     * Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
+     * The bandwidth of the network connected to the Internet in Mbps.
+     * `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
      */
     public readonly bandWidth!: pulumi.Output<number | undefined>;
     /**
-     * The description of the resource.
+     * The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The ipv6 enabled flag.
+     * The flag to enable IPv6
      */
-    public readonly enableIpv6!: pulumi.Output<boolean>;
+    public readonly enableIpv6!: pulumi.Output<boolean | undefined>;
     /**
-     * The network gateway address of the switch.
+     * The IP address of the gateway used by the Switch+Router
      */
     public /*out*/ readonly gateway!: pulumi.Output<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch+Router
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * Global IP address list.
+     * A list of assigned global address to the Switch+Router
      */
-    public /*out*/ readonly ipaddresses!: pulumi.Output<string[]>;
+    public /*out*/ readonly ipAddresses!: pulumi.Output<string[]>;
     /**
-     * The ipv6 network address.
+     * The IPv6 network address assigned to the Switch+Router
      */
-    public /*out*/ readonly ipv6NwAddress!: pulumi.Output<string>;
+    public /*out*/ readonly ipv6NetworkAddress!: pulumi.Output<string>;
     /**
-     * Address prefix of ipv6 network.
+     * The network prefix of assigned IPv6 addresses to the Switch+Router
      */
     public /*out*/ readonly ipv6Prefix!: pulumi.Output<string>;
     /**
-     * Address prefix length of ipv6 network.
+     * The bit length of IPv6 network prefix
      */
     public /*out*/ readonly ipv6PrefixLen!: pulumi.Output<number>;
     /**
-     * Max global IP address.
+     * Maximum IP address in assigned global addresses to the Switch+Router
      */
-    public /*out*/ readonly maxIpaddress!: pulumi.Output<string>;
+    public /*out*/ readonly maxIpAddress!: pulumi.Output<string>;
     /**
-     * Min global IP address.
+     * Minimum IP address in assigned global addresses to the Switch+Router
      */
-    public /*out*/ readonly minIpaddress!: pulumi.Output<string>;
+    public /*out*/ readonly minIpAddress!: pulumi.Output<string>;
     /**
-     * The name of the resource.
+     * The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The network address.
+     * The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
      */
-    public /*out*/ readonly nwAddress!: pulumi.Output<string>;
+    public readonly netmask!: pulumi.Output<number | undefined>;
     /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
+     * The IPv4 network address assigned to the Switch+Router
      */
-    public readonly nwMaskLen!: pulumi.Output<number | undefined>;
+    public /*out*/ readonly networkAddress!: pulumi.Output<string>;
     /**
-     * The ID list of the servers connected to the switch.
+     * A list of the ID of Servers connected to the Switch+Router
      */
     public /*out*/ readonly serverIds!: pulumi.Output<string[]>;
     /**
-     * The ID of the switch.
+     * The id of the switch
      */
     public /*out*/ readonly switchId!: pulumi.Output<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch+Router
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -152,17 +121,16 @@ export class Internet extends pulumi.CustomResource {
             inputs["description"] = state ? state.description : undefined;
             inputs["enableIpv6"] = state ? state.enableIpv6 : undefined;
             inputs["gateway"] = state ? state.gateway : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
-            inputs["ipaddresses"] = state ? state.ipaddresses : undefined;
-            inputs["ipv6NwAddress"] = state ? state.ipv6NwAddress : undefined;
+            inputs["ipAddresses"] = state ? state.ipAddresses : undefined;
+            inputs["ipv6NetworkAddress"] = state ? state.ipv6NetworkAddress : undefined;
             inputs["ipv6Prefix"] = state ? state.ipv6Prefix : undefined;
             inputs["ipv6PrefixLen"] = state ? state.ipv6PrefixLen : undefined;
-            inputs["maxIpaddress"] = state ? state.maxIpaddress : undefined;
-            inputs["minIpaddress"] = state ? state.minIpaddress : undefined;
+            inputs["maxIpAddress"] = state ? state.maxIpAddress : undefined;
+            inputs["minIpAddress"] = state ? state.minIpAddress : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nwAddress"] = state ? state.nwAddress : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
+            inputs["netmask"] = state ? state.netmask : undefined;
+            inputs["networkAddress"] = state ? state.networkAddress : undefined;
             inputs["serverIds"] = state ? state.serverIds : undefined;
             inputs["switchId"] = state ? state.switchId : undefined;
             inputs["tags"] = state ? state.tags : undefined;
@@ -172,20 +140,19 @@ export class Internet extends pulumi.CustomResource {
             inputs["bandWidth"] = args ? args.bandWidth : undefined;
             inputs["description"] = args ? args.description : undefined;
             inputs["enableIpv6"] = args ? args.enableIpv6 : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
+            inputs["netmask"] = args ? args.netmask : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
             inputs["gateway"] = undefined /*out*/;
-            inputs["ipaddresses"] = undefined /*out*/;
-            inputs["ipv6NwAddress"] = undefined /*out*/;
+            inputs["ipAddresses"] = undefined /*out*/;
+            inputs["ipv6NetworkAddress"] = undefined /*out*/;
             inputs["ipv6Prefix"] = undefined /*out*/;
             inputs["ipv6PrefixLen"] = undefined /*out*/;
-            inputs["maxIpaddress"] = undefined /*out*/;
-            inputs["minIpaddress"] = undefined /*out*/;
-            inputs["nwAddress"] = undefined /*out*/;
+            inputs["maxIpAddress"] = undefined /*out*/;
+            inputs["minIpAddress"] = undefined /*out*/;
+            inputs["networkAddress"] = undefined /*out*/;
             inputs["serverIds"] = undefined /*out*/;
             inputs["switchId"] = undefined /*out*/;
         }
@@ -205,81 +172,76 @@ export class Internet extends pulumi.CustomResource {
  */
 export interface InternetState {
     /**
-     * Bandwidth of outbound traffic (unit:`Mbps`).  
-     * Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
+     * The bandwidth of the network connected to the Internet in Mbps.
+     * `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
      */
     readonly bandWidth?: pulumi.Input<number>;
     /**
-     * The description of the resource.
+     * The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ipv6 enabled flag.
+     * The flag to enable IPv6
      */
     readonly enableIpv6?: pulumi.Input<boolean>;
     /**
-     * The network gateway address of the switch.
+     * The IP address of the gateway used by the Switch+Router
      */
     readonly gateway?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch+Router
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * Global IP address list.
+     * A list of assigned global address to the Switch+Router
      */
-    readonly ipaddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ipv6 network address.
+     * The IPv6 network address assigned to the Switch+Router
      */
-    readonly ipv6NwAddress?: pulumi.Input<string>;
+    readonly ipv6NetworkAddress?: pulumi.Input<string>;
     /**
-     * Address prefix of ipv6 network.
+     * The network prefix of assigned IPv6 addresses to the Switch+Router
      */
     readonly ipv6Prefix?: pulumi.Input<string>;
     /**
-     * Address prefix length of ipv6 network.
+     * The bit length of IPv6 network prefix
      */
     readonly ipv6PrefixLen?: pulumi.Input<number>;
     /**
-     * Max global IP address.
+     * Maximum IP address in assigned global addresses to the Switch+Router
      */
-    readonly maxIpaddress?: pulumi.Input<string>;
+    readonly maxIpAddress?: pulumi.Input<string>;
     /**
-     * Min global IP address.
+     * Minimum IP address in assigned global addresses to the Switch+Router
      */
-    readonly minIpaddress?: pulumi.Input<string>;
+    readonly minIpAddress?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The network address.
+     * The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
      */
-    readonly nwAddress?: pulumi.Input<string>;
+    readonly netmask?: pulumi.Input<number>;
     /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
+     * The IPv4 network address assigned to the Switch+Router
      */
-    readonly nwMaskLen?: pulumi.Input<number>;
+    readonly networkAddress?: pulumi.Input<string>;
     /**
-     * The ID list of the servers connected to the switch.
+     * A list of the ID of Servers connected to the Switch+Router
      */
     readonly serverIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the switch.
+     * The id of the switch
      */
     readonly switchId?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch+Router
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -289,41 +251,36 @@ export interface InternetState {
  */
 export interface InternetArgs {
     /**
-     * Bandwidth of outbound traffic (unit:`Mbps`).  
-     * Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
+     * The bandwidth of the network connected to the Internet in Mbps.
+     * `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
      */
     readonly bandWidth?: pulumi.Input<number>;
     /**
-     * The description of the resource.
+     * The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ipv6 enabled flag.
+     * The flag to enable IPv6
      */
     readonly enableIpv6?: pulumi.Input<boolean>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch+Router
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
+     * The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
      */
-    readonly nwMaskLen?: pulumi.Input<number>;
+    readonly netmask?: pulumi.Input<number>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch+Router
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

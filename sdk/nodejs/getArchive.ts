@@ -6,64 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Archive.
- * 
- * ## Example Usage
- * 
- * ### Using `osType` parameter
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const centos = sakuracloud.getArchive({
- *     osType: "centos",
- * });
- * ```
- * 
- * ### Using filter parameters
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const ubuntu = sakuracloud.getArchive({
- *     nameSelectors: [
- *         "Ubuntu",
- *         "LTS",
- *     ],
- *     tagSelectors: [
- *         "current-stable",
- *         "os-linux",
- *     ],
- * });
- * ```
- * 
- * ## `osType` Parameter Reference
- * 
- * * `centos` - CentOS 7
- * * `centos6` - CentOS 6
- * * `ubuntu` - Ubuntu 
- * * `debian` - Debian 
- * * `coreos` - CoreOS
- * * `rancheros` - RancherOS
- * * `k3os` - k3OS
- * * `kusanagi` - Kusanagi (CentOS7)
- * * `sophos-utm` - Sophos-UTM
- * * `freebsd` - FreeBSD
- * * `windows2016` - Windows 2016
- * * `windows2016-rds` - Windows 2016 (RDS)
- * * `windows2016-rds-office` - Windows 2016 (RDS + Office)
- * * `windows2016-sql-web` - Windows 2016 SQLServer (Web)
- * * `windows2016-sql-standard` - Windows 2016 SQLServer (Standard)
- * * `windows2016-sql2017-standard` - Windows 2016 SQLServer 2017 (Standard)
- * * `windows2016-sql-standard-all` - Windows 2016 SQLServer (Standard, RDS + Office)
- * * `windows2016-sql2017-standard-all` - Windows 2016 SQLServer 2017 (Standard, RDS + Office)
- * * `windows2019` - Windows 2019
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/archive.html.markdown.
- */
 export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): Promise<GetArchiveResult> & GetArchiveResult {
     args = args || {};
     if (!opts) {
@@ -74,10 +16,8 @@ export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): 
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetArchiveResult> = pulumi.runtime.invoke("sakuracloud:index/getArchive:getArchive", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
+        "filter": args.filter,
         "osType": args.osType,
-        "tagSelectors": args.tagSelectors,
         "zone": args.zone,
     }, opts);
 
@@ -88,25 +28,8 @@ export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): 
  * A collection of arguments for invoking getArchive.
  */
 export interface GetArchiveArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetArchiveFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The slug of target public archive. Valid values are in `osType` section.
-     */
+    readonly filter?: inputs.GetArchiveFilter;
     readonly osType?: string;
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
     readonly zone?: string;
 }
 
@@ -114,36 +37,16 @@ export interface GetArchiveArgs {
  * A collection of values returned by getArchive.
  */
 export interface GetArchiveResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetArchiveFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetArchiveFilter;
     readonly iconId: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    readonly osType?: string;
-    /**
-     * The size of the resource (unit:`GB`).
-     */
-    readonly size: number;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly osType?: string;
+    readonly size: number;
+    readonly tags: string[];
+    readonly zone: string;
 }

@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Mobile Gateway resource. This can be used to create, update, and delete Mobile Gateways.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
- */
 export class MobileGateway extends pulumi.CustomResource {
     /**
      * Get an existing MobileGateway resource's state with the given name, ID, and optional extra
@@ -39,68 +34,48 @@ export class MobileGateway extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The primary DNS server IP address.
+     * A list of IP address used by each connected devices
      */
-    public readonly dnsServer1!: pulumi.Output<string>;
+    public readonly dnsServers!: pulumi.Output<string[]>;
     /**
-     * The secondly DNS server IP address.
-     */
-    public readonly dnsServer2!: pulumi.Output<string>;
-    /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the MobileGateway
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The flag of enable/disable connecting from MobileGateway to the Internet.
+     * The flag to allow communication between each connected devices
+     */
+    public readonly interDeviceCommunication!: pulumi.Output<boolean | undefined>;
+    /**
+     * The flag to enable connect to the Internet
      */
     public readonly internetConnection!: pulumi.Output<boolean | undefined>;
     /**
-     * The name of the resource.
+     * The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly privateNetworkInterface!: pulumi.Output<outputs.MobileGatewayPrivateNetworkInterface | undefined>;
     /**
-     * The IP address on private NIC of the Mobile Gateway.
+     * The public IP address assigned to the MobileGateway
      */
-    public readonly privateIpaddress!: pulumi.Output<string | undefined>;
+    public /*out*/ readonly publicIp!: pulumi.Output<string>;
     /**
-     * The network mask length on private NIC of the Mobile Gateway.
+     * The bit length of the subnet assigned to the MobileGateway
      */
-    public readonly privateNwMaskLen!: pulumi.Output<number | undefined>;
+    public /*out*/ readonly publicNetmask!: pulumi.Output<number>;
+    public readonly simRoutes!: pulumi.Output<outputs.MobileGatewaySimRoute[] | undefined>;
+    public readonly sims!: pulumi.Output<outputs.MobileGatewaySim[] | undefined>;
+    public readonly staticRoutes!: pulumi.Output<outputs.MobileGatewayStaticRoute[] | undefined>;
     /**
-     * The IP address on public NIC of the Mobile Gateway.
+     * Any tags to assign to the MobileGateway
      */
-    public /*out*/ readonly publicIpaddress!: pulumi.Output<string>;
-    /**
-     * The network mask length on public NIC of the Mobile Gateway.
-     */
-    public /*out*/ readonly publicNwMaskLen!: pulumi.Output<number>;
-    /**
-     * The ID list of the SIMs connected to the Mobile Gateway.
-     */
-    public /*out*/ readonly simIds!: pulumi.Output<string[]>;
-    public readonly staticRoutes!: pulumi.Output<outputs.MobileGatewayStaticRoute[]>;
-    /**
-     * The ID of the switch connected to the Mobile Gateway.
-     */
-    public readonly switchId!: pulumi.Output<string | undefined>;
-    /**
-     * The tag list of the resources.
-     */
-    public readonly tags!: pulumi.Output<string[]>;
-    /**
-     * Traffic control rules. It contains some attributes to Traffic Control.
-     */
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     public readonly trafficControl!: pulumi.Output<outputs.MobileGatewayTrafficControl | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -111,47 +86,46 @@ export class MobileGateway extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: MobileGatewayArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args: MobileGatewayArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: MobileGatewayArgs | MobileGatewayState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as MobileGatewayState | undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["dnsServer1"] = state ? state.dnsServer1 : undefined;
-            inputs["dnsServer2"] = state ? state.dnsServer2 : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
+            inputs["dnsServers"] = state ? state.dnsServers : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
+            inputs["interDeviceCommunication"] = state ? state.interDeviceCommunication : undefined;
             inputs["internetConnection"] = state ? state.internetConnection : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["privateIpaddress"] = state ? state.privateIpaddress : undefined;
-            inputs["privateNwMaskLen"] = state ? state.privateNwMaskLen : undefined;
-            inputs["publicIpaddress"] = state ? state.publicIpaddress : undefined;
-            inputs["publicNwMaskLen"] = state ? state.publicNwMaskLen : undefined;
-            inputs["simIds"] = state ? state.simIds : undefined;
+            inputs["privateNetworkInterface"] = state ? state.privateNetworkInterface : undefined;
+            inputs["publicIp"] = state ? state.publicIp : undefined;
+            inputs["publicNetmask"] = state ? state.publicNetmask : undefined;
+            inputs["simRoutes"] = state ? state.simRoutes : undefined;
+            inputs["sims"] = state ? state.sims : undefined;
             inputs["staticRoutes"] = state ? state.staticRoutes : undefined;
-            inputs["switchId"] = state ? state.switchId : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["trafficControl"] = state ? state.trafficControl : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as MobileGatewayArgs | undefined;
+            if (!args || args.dnsServers === undefined) {
+                throw new Error("Missing required property 'dnsServers'");
+            }
             inputs["description"] = args ? args.description : undefined;
-            inputs["dnsServer1"] = args ? args.dnsServer1 : undefined;
-            inputs["dnsServer2"] = args ? args.dnsServer2 : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
+            inputs["dnsServers"] = args ? args.dnsServers : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
+            inputs["interDeviceCommunication"] = args ? args.interDeviceCommunication : undefined;
             inputs["internetConnection"] = args ? args.internetConnection : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["privateIpaddress"] = args ? args.privateIpaddress : undefined;
-            inputs["privateNwMaskLen"] = args ? args.privateNwMaskLen : undefined;
+            inputs["privateNetworkInterface"] = args ? args.privateNetworkInterface : undefined;
+            inputs["simRoutes"] = args ? args.simRoutes : undefined;
+            inputs["sims"] = args ? args.sims : undefined;
             inputs["staticRoutes"] = args ? args.staticRoutes : undefined;
-            inputs["switchId"] = args ? args.switchId : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["trafficControl"] = args ? args.trafficControl : undefined;
             inputs["zone"] = args ? args.zone : undefined;
-            inputs["publicIpaddress"] = undefined /*out*/;
-            inputs["publicNwMaskLen"] = undefined /*out*/;
-            inputs["simIds"] = undefined /*out*/;
+            inputs["publicIp"] = undefined /*out*/;
+            inputs["publicNetmask"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -169,68 +143,48 @@ export class MobileGateway extends pulumi.CustomResource {
  */
 export interface MobileGatewayState {
     /**
-     * The description of the resource.
+     * The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The primary DNS server IP address.
+     * A list of IP address used by each connected devices
      */
-    readonly dnsServer1?: pulumi.Input<string>;
+    readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The secondly DNS server IP address.
-     */
-    readonly dnsServer2?: pulumi.Input<string>;
-    /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the MobileGateway
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable connecting from MobileGateway to the Internet.
+     * The flag to allow communication between each connected devices
+     */
+    readonly interDeviceCommunication?: pulumi.Input<boolean>;
+    /**
+     * The flag to enable connect to the Internet
      */
     readonly internetConnection?: pulumi.Input<boolean>;
     /**
-     * The name of the resource.
+     * The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
     /**
-     * The IP address on private NIC of the Mobile Gateway.
+     * The public IP address assigned to the MobileGateway
      */
-    readonly privateIpaddress?: pulumi.Input<string>;
+    readonly publicIp?: pulumi.Input<string>;
     /**
-     * The network mask length on private NIC of the Mobile Gateway.
+     * The bit length of the subnet assigned to the MobileGateway
      */
-    readonly privateNwMaskLen?: pulumi.Input<number>;
-    /**
-     * The IP address on public NIC of the Mobile Gateway.
-     */
-    readonly publicIpaddress?: pulumi.Input<string>;
-    /**
-     * The network mask length on public NIC of the Mobile Gateway.
-     */
-    readonly publicNwMaskLen?: pulumi.Input<number>;
-    /**
-     * The ID list of the SIMs connected to the Mobile Gateway.
-     */
-    readonly simIds?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly publicNetmask?: pulumi.Input<number>;
+    readonly simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
+    readonly sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
     /**
-     * The ID of the switch connected to the Mobile Gateway.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the MobileGateway
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Traffic control rules. It contains some attributes to Traffic Control.
-     */
     readonly trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -240,56 +194,40 @@ export interface MobileGatewayState {
  */
 export interface MobileGatewayArgs {
     /**
-     * The description of the resource.
+     * The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The primary DNS server IP address.
+     * A list of IP address used by each connected devices
      */
-    readonly dnsServer1?: pulumi.Input<string>;
+    readonly dnsServers: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The secondly DNS server IP address.
-     */
-    readonly dnsServer2?: pulumi.Input<string>;
-    /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the MobileGateway
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable connecting from MobileGateway to the Internet.
+     * The flag to allow communication between each connected devices
+     */
+    readonly interDeviceCommunication?: pulumi.Input<boolean>;
+    /**
+     * The flag to enable connect to the Internet
      */
     readonly internetConnection?: pulumi.Input<boolean>;
     /**
-     * The name of the resource.
+     * The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
-    /**
-     * The IP address on private NIC of the Mobile Gateway.
-     */
-    readonly privateIpaddress?: pulumi.Input<string>;
-    /**
-     * The network mask length on private NIC of the Mobile Gateway.
-     */
-    readonly privateNwMaskLen?: pulumi.Input<number>;
+    readonly privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
+    readonly simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
+    readonly sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
     /**
-     * The ID of the switch connected to the Mobile Gateway.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the MobileGateway
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Traffic control rules. It contains some attributes to Traffic Control.
-     */
     readonly trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

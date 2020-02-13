@@ -12,58 +12,49 @@ from . import utilities, tables
 class DNSRecord(pulumi.CustomResource):
     dns_id: pulumi.Output[str]
     """
-    The ID of DNS zones to which the Record belongs.
+    The id of the DNS resource
     """
     name: pulumi.Output[str]
     """
-    The hostname of target Record. If "@" is specified, it indicates own zone.
+    The name of the DNS Record resource
     """
     port: pulumi.Output[float]
     """
-    The port number used when `type` is `SRV`. 
+    The number of port. This must be in the range [`1`-`65535`]
     """
     priority: pulumi.Output[float]
     """
-    The priority used when `type` is `MX` or `SRV`.
+    The priority of target DNS Record. This must be in the range [`0`-`65535`]
     """
     ttl: pulumi.Output[float]
     """
-    The ttl value of the Record (unit:`second`). 
+    The number of the TTL
     """
     type: pulumi.Output[str]
     """
-    The Record type.  
-    Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+    The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
     """
     value: pulumi.Output[str]
     """
-    The value of the Record. 
+    The value of the DNS Record
     """
     weight: pulumi.Output[float]
     """
-    The weight used when `type` is `SRV`.
+    The weight of target DNS Record. This must be in the range [`0`-`65535`]
     """
     def __init__(__self__, resource_name, opts=None, dns_id=None, name=None, port=None, priority=None, ttl=None, type=None, value=None, weight=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud DNS Record resource. This can be used to create and delete DNS Records.
-        
-        ## Import (not supported)
-        
-        Import of DNS Record is not supported.
-        
+        Create a DNSRecord resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_id: The ID of DNS zones to which the Record belongs.
-        :param pulumi.Input[str] name: The hostname of target Record. If "@" is specified, it indicates own zone.
-        :param pulumi.Input[float] port: The port number used when `type` is `SRV`. 
-        :param pulumi.Input[float] priority: The priority used when `type` is `MX` or `SRV`.
-        :param pulumi.Input[float] ttl: The ttl value of the Record (unit:`second`). 
-        :param pulumi.Input[str] type: The Record type.  
-               Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
-        :param pulumi.Input[str] value: The value of the Record. 
-        :param pulumi.Input[float] weight: The weight used when `type` is `SRV`.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
+        :param pulumi.Input[str] dns_id: The id of the DNS resource
+        :param pulumi.Input[str] name: The name of the DNS Record resource
+        :param pulumi.Input[float] port: The number of port. This must be in the range [`1`-`65535`]
+        :param pulumi.Input[float] priority: The priority of target DNS Record. This must be in the range [`0`-`65535`]
+        :param pulumi.Input[float] ttl: The number of the TTL
+        :param pulumi.Input[str] type: The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
+        :param pulumi.Input[str] value: The value of the DNS Record
+        :param pulumi.Input[float] weight: The weight of target DNS Record. This must be in the range [`0`-`65535`]
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -107,25 +98,23 @@ class DNSRecord(pulumi.CustomResource):
         """
         Get an existing DNSRecord resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dns_id: The ID of DNS zones to which the Record belongs.
-        :param pulumi.Input[str] name: The hostname of target Record. If "@" is specified, it indicates own zone.
-        :param pulumi.Input[float] port: The port number used when `type` is `SRV`. 
-        :param pulumi.Input[float] priority: The priority used when `type` is `MX` or `SRV`.
-        :param pulumi.Input[float] ttl: The ttl value of the Record (unit:`second`). 
-        :param pulumi.Input[str] type: The Record type.  
-               Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
-        :param pulumi.Input[str] value: The value of the Record. 
-        :param pulumi.Input[float] weight: The weight used when `type` is `SRV`.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
+        :param pulumi.Input[str] dns_id: The id of the DNS resource
+        :param pulumi.Input[str] name: The name of the DNS Record resource
+        :param pulumi.Input[float] port: The number of port. This must be in the range [`1`-`65535`]
+        :param pulumi.Input[float] priority: The priority of target DNS Record. This must be in the range [`0`-`65535`]
+        :param pulumi.Input[float] ttl: The number of the TTL
+        :param pulumi.Input[str] type: The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
+        :param pulumi.Input[str] value: The value of the DNS Record
+        :param pulumi.Input[float] weight: The weight of target DNS Record. This must be in the range [`0`-`65535`]
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["dns_id"] = dns_id
         __props__["name"] = name
         __props__["port"] = port

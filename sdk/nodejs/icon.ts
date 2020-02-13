@@ -2,31 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Icon resource. This can be used to create, update, and delete Icons.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Icon
- * const foobar = new sakuracloud.Icon("foobar", {
- *     source: "path/to/your/file",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
- */
 export class Icon extends pulumi.CustomResource {
     /**
      * Get an existing Icon resource's state with the given name, ID, and optional extra
@@ -55,27 +32,23 @@ export class Icon extends pulumi.CustomResource {
     }
 
     /**
-     * The base64 encoded body of source content.
+     * The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
      */
     public readonly base64content!: pulumi.Output<string | undefined>;
     /**
-     * Base64 encoded icon data (size:`small`).
-     */
-    public /*out*/ readonly body!: pulumi.Output<string>;
-    /**
-     * The name of the resource.
+     * The name of the Icon. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The path of source content file.
+     * The file path to upload to as the Icon. This conflicts with [`base64content`]
      */
     public readonly source!: pulumi.Output<string | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Icon
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * URL to access this resource.
+     * The URL for getting the icon's raw data
      */
     public /*out*/ readonly url!: pulumi.Output<string>;
 
@@ -92,7 +65,6 @@ export class Icon extends pulumi.CustomResource {
         if (opts && opts.id) {
             const state = argsOrState as IconState | undefined;
             inputs["base64content"] = state ? state.base64content : undefined;
-            inputs["body"] = state ? state.body : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["source"] = state ? state.source : undefined;
             inputs["tags"] = state ? state.tags : undefined;
@@ -103,7 +75,6 @@ export class Icon extends pulumi.CustomResource {
             inputs["name"] = args ? args.name : undefined;
             inputs["source"] = args ? args.source : undefined;
             inputs["tags"] = args ? args.tags : undefined;
-            inputs["body"] = undefined /*out*/;
             inputs["url"] = undefined /*out*/;
         }
         if (!opts) {
@@ -122,27 +93,23 @@ export class Icon extends pulumi.CustomResource {
  */
 export interface IconState {
     /**
-     * The base64 encoded body of source content.
+     * The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
      */
     readonly base64content?: pulumi.Input<string>;
     /**
-     * Base64 encoded icon data (size:`small`).
-     */
-    readonly body?: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the Icon. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The path of source content file.
+     * The file path to upload to as the Icon. This conflicts with [`base64content`]
      */
     readonly source?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Icon
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * URL to access this resource.
+     * The URL for getting the icon's raw data
      */
     readonly url?: pulumi.Input<string>;
 }
@@ -152,19 +119,19 @@ export interface IconState {
  */
 export interface IconArgs {
     /**
-     * The base64 encoded body of source content.
+     * The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
      */
     readonly base64content?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Icon. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The path of source content file.
+     * The file path to upload to as the Icon. This conflicts with [`base64content`]
      */
     readonly source?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Icon
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

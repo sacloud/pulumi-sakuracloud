@@ -12,61 +12,44 @@ from . import utilities, tables
 class DNS(pulumi.CustomResource):
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the DNS. The length of this value must be in the range [`1`-`512`]
     """
     dns_servers: pulumi.Output[list]
     """
-    List of host names of DNS servers.
+    A list of IP address of DNS server that manage this zone
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the DNS
     """
     records: pulumi.Output[list]
-    """
-    Records. It contains some attributes to Records.
-    
-      * `name` (`str`) - The hostname of target Record. If "@" is specified, it indicates own zone.
-      * `port` (`float`) - The port number used when `type` is `SRV`. 
-      * `priority` (`float`) - The priority used when `type` is `MX` or `SRV`.
-      * `ttl` (`float`) - The ttl value of the Record (unit:`second`). 
-      * `type` (`str`) - The Record type.  
-        Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
-      * `value` (`str`) - The value of the Record. 
-      * `weight` (`float`) - The weight used when `type` is `SRV`.
-    """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the DNS
     """
     zone: pulumi.Output[str]
     """
-    The name of the zone.
+    The target zone. (e.g. `example.com`)
     """
     def __init__(__self__, resource_name, opts=None, description=None, icon_id=None, records=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud DNS zones resource. This can be used to create, update, and delete DNS zones.
-        
+        Create a DNS resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[list] records: Records. It contains some attributes to Records.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The name of the zone.
-        
-        The **records** object supports the following:
-        
-          * `name` (`pulumi.Input[str]`) - The hostname of target Record. If "@" is specified, it indicates own zone.
-          * `port` (`pulumi.Input[float]`) - The port number used when `type` is `SRV`. 
-          * `priority` (`pulumi.Input[float]`) - The priority used when `type` is `MX` or `SRV`.
-          * `ttl` (`pulumi.Input[float]`) - The ttl value of the Record (unit:`second`). 
-          * `type` (`pulumi.Input[str]`) - The Record type.  
-            Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
-          * `value` (`pulumi.Input[str]`) - The value of the Record. 
-          * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
+        :param pulumi.Input[str] description: The description of the DNS. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the DNS
+        :param pulumi.Input[list] tags: Any tags to assign to the DNS
+        :param pulumi.Input[str] zone: The target zone. (e.g. `example.com`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
+        The **records** object supports the following:
+
+          * `name` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `priority` (`pulumi.Input[float]`)
+          * `ttl` (`pulumi.Input[float]`)
+          * `type` (`pulumi.Input[str]`)
+          * `value` (`pulumi.Input[str]`)
+          * `weight` (`pulumi.Input[float]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -104,33 +87,30 @@ class DNS(pulumi.CustomResource):
         """
         Get an existing DNS resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[list] dns_servers: List of host names of DNS servers.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[list] records: Records. It contains some attributes to Records.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The name of the zone.
-        
-        The **records** object supports the following:
-        
-          * `name` (`pulumi.Input[str]`) - The hostname of target Record. If "@" is specified, it indicates own zone.
-          * `port` (`pulumi.Input[float]`) - The port number used when `type` is `SRV`. 
-          * `priority` (`pulumi.Input[float]`) - The priority used when `type` is `MX` or `SRV`.
-          * `ttl` (`pulumi.Input[float]`) - The ttl value of the Record (unit:`second`). 
-          * `type` (`pulumi.Input[str]`) - The Record type.  
-            Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
-          * `value` (`pulumi.Input[str]`) - The value of the Record. 
-          * `weight` (`pulumi.Input[float]`) - The weight used when `type` is `SRV`.
+        :param pulumi.Input[str] description: The description of the DNS. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[list] dns_servers: A list of IP address of DNS server that manage this zone
+        :param pulumi.Input[str] icon_id: The icon id to attach to the DNS
+        :param pulumi.Input[list] tags: Any tags to assign to the DNS
+        :param pulumi.Input[str] zone: The target zone. (e.g. `example.com`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns.html.markdown.
+        The **records** object supports the following:
+
+          * `name` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `priority` (`pulumi.Input[float]`)
+          * `ttl` (`pulumi.Input[float]`)
+          * `type` (`pulumi.Input[str]`)
+          * `value` (`pulumi.Input[str]`)
+          * `weight` (`pulumi.Input[float]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["description"] = description
         __props__["dns_servers"] = dns_servers
         __props__["icon_id"] = icon_id

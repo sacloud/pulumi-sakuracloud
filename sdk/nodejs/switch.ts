@@ -2,31 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Switch resource. This can be used to create, update, and delete Switches.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Switch
- * const foobar = new sakuracloud.Switch("foobar", {
- *     description: "description",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/switch.html.markdown.
- */
 export class Switch extends pulumi.CustomResource {
     /**
      * Get an existing Switch resource's state with the given name, ID, and optional extra
@@ -55,35 +32,31 @@ export class Switch extends pulumi.CustomResource {
     }
 
     /**
-     * The ID of the Bridge to connect to the Switch.
+     * The bridge id attached to the Switch
      */
     public readonly bridgeId!: pulumi.Output<string | undefined>;
     /**
-     * The description of the resource.
+     * The description of the Switch. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the Switch. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The ID list of the servers connected to the switch.
+     * A list of server id connected to the switch
      */
     public /*out*/ readonly serverIds!: pulumi.Output<string[]>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -101,7 +74,6 @@ export class Switch extends pulumi.CustomResource {
             const state = argsOrState as SwitchState | undefined;
             inputs["bridgeId"] = state ? state.bridgeId : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["serverIds"] = state ? state.serverIds : undefined;
@@ -111,7 +83,6 @@ export class Switch extends pulumi.CustomResource {
             const args = argsOrState as SwitchArgs | undefined;
             inputs["bridgeId"] = args ? args.bridgeId : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["tags"] = args ? args.tags : undefined;
@@ -134,35 +105,31 @@ export class Switch extends pulumi.CustomResource {
  */
 export interface SwitchState {
     /**
-     * The ID of the Bridge to connect to the Switch.
+     * The bridge id attached to the Switch
      */
     readonly bridgeId?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the Switch. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Switch. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The ID list of the servers connected to the switch.
+     * A list of server id connected to the switch
      */
     readonly serverIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -172,31 +139,27 @@ export interface SwitchState {
  */
 export interface SwitchArgs {
     /**
-     * The ID of the Bridge to connect to the Switch.
+     * The bridge id attached to the Switch
      */
     readonly bridgeId?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the Switch. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Switch
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Switch. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Switch
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

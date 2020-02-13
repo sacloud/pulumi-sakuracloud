@@ -10,7 +10,14 @@ const disk = new sakuracloud.Disk("pulumi-example", {
 const server = new sakuracloud.Server("pulumi-example", {
     name: "pulumi-example",
     disks: [disk.id],
-    password: "YourPassword01",
+
+    networkInterfaces: [{
+        upstream: "shared",
+    }],
+
+    diskEditParameter: {
+        password: "YourPassword01",
+    },
 });
 
 // Export the created resource' IDs

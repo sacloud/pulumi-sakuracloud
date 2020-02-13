@@ -6,43 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud GSLB resource. This can be used to create, update, and delete GSLBs.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new GSLB
- * const foobar = new sakuracloud.GSLB("foobar", {
- *     description: "description",
- *     healthCheck: {
- *         delayLoop: 20,
- *         hostHeader: "example.com",
- *         path: "/",
- *         protocol: "https",
- *         status: "200",
- *     },
- *     servers: [
- *         {
- *             ipaddress: "192.0.2.1",
- *         },
- *         {
- *             ipaddress: "192.0.2.2",
- *         },
- *     ],
- *     sorryServer: "192.2.0.1",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
- */
 export class GSLB extends pulumi.CustomResource {
     /**
      * Get an existing GSLB resource's state with the given name, ID, and optional extra
@@ -71,39 +34,33 @@ export class GSLB extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * FQDN to access this resource.
+     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
      */
     public /*out*/ readonly fqdn!: pulumi.Output<string>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     public readonly healthCheck!: pulumi.Output<outputs.GSLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the GSLB
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly servers!: pulumi.Output<outputs.GSLBServer[] | undefined>;
     /**
-     * Real servers. It contains some attributes to Servers.
-     */
-    public readonly servers!: pulumi.Output<outputs.GSLBServer[]>;
-    /**
-     * The hostname or IP address of sorry server.
+     * The IP address of the SorryServer. This will be used when all servers are down
      */
     public readonly sorryServer!: pulumi.Output<string | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the GSLB
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The flag for enable/disable weighting (default:`true`).
+     * The flag to enable weighted load-balancing
      */
     public readonly weighted!: pulumi.Output<boolean | undefined>;
 
@@ -159,39 +116,33 @@ export class GSLB extends pulumi.CustomResource {
  */
 export interface GSLBState {
     /**
-     * The description of the resource.
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * FQDN to access this resource.
+     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
      */
     readonly fqdn?: pulumi.Input<string>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck?: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the GSLB
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
-    /**
-     * Real servers. It contains some attributes to Servers.
-     */
     readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
-     * The hostname or IP address of sorry server.
+     * The IP address of the SorryServer. This will be used when all servers are down
      */
     readonly sorryServer?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the GSLB
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The flag for enable/disable weighting (default:`true`).
+     * The flag to enable weighted load-balancing
      */
     readonly weighted?: pulumi.Input<boolean>;
 }
@@ -201,35 +152,29 @@ export interface GSLBState {
  */
 export interface GSLBArgs {
     /**
-     * The description of the resource.
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the GSLB
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
-    /**
-     * Real servers. It contains some attributes to Servers.
-     */
     readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
-     * The hostname or IP address of sorry server.
+     * The IP address of the SorryServer. This will be used when all servers are down
      */
     readonly sorryServer?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the GSLB
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The flag for enable/disable weighting (default:`true`).
+     * The flag to enable weighted load-balancing
      */
     readonly weighted?: pulumi.Input<boolean>;
 }

@@ -12,31 +12,24 @@ from . import utilities, tables
 class Bridge(pulumi.CustomResource):
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the Bridge. The length of this value must be in the range [`1`-`512`]
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
-    """
-    switch_ids: pulumi.Output[list]
-    """
-    The ID list of the Switches connected to the Bridge. 
+    The name of the Bridge. The length of this value must be in the range [`1`-`64`]
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.  
+    The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
     """
     def __init__(__self__, resource_name, opts=None, description=None, name=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Bridge resource. This can be used to create, update, and delete Bridges.
-        
+        Create a Bridge resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.  
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
+        :param pulumi.Input[str] description: The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] name: The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] zone: The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -58,7 +51,6 @@ class Bridge(pulumi.CustomResource):
             __props__['description'] = description
             __props__['name'] = name
             __props__['zone'] = zone
-            __props__['switch_ids'] = None
         super(Bridge, __self__).__init__(
             'sakuracloud:index/bridge:Bridge',
             resource_name,
@@ -66,27 +58,24 @@ class Bridge(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, description=None, name=None, switch_ids=None, zone=None):
+    def get(resource_name, id, opts=None, description=None, name=None, zone=None):
         """
         Get an existing Bridge resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[list] switch_ids: The ID list of the Switches connected to the Bridge. 
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.  
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bridge.html.markdown.
+        :param pulumi.Input[str] description: The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] name: The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] zone: The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["description"] = description
         __props__["name"] = name
-        __props__["switch_ids"] = switch_ids
         __props__["zone"] = zone
         return Bridge(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):

@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud NFS.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getNFS({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/nfs.html.markdown.
- */
 export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<GetNFSResult> & GetNFSResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetNFSResult> = pulumi.runtime.invoke("sakuracloud:index/getNFS:getNFS", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<
  * A collection of arguments for invoking getNFS.
  */
 export interface GetNFSArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetNFSFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetNFSFilter;
     readonly zone?: string;
 }
 
@@ -67,55 +35,17 @@ export interface GetNFSArgs {
  * A collection of values returned by getNFS.
  */
 export interface GetNFSResult {
-    /**
-     * Default gateway address of the NFS.	 
-     */
-    readonly defaultRoute: string;
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetNFSFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetNFSFilter;
     readonly iconId: string;
-    /**
-     * The IP address of the NFS.
-     */
-    readonly ipaddress: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * Network mask length.
-     */
-    readonly nwMaskLen: number;
-    /**
-     * The name of the resource plan.
-     */
-    readonly plan: string;
-    /**
-     * The size of the NFS.
-     */
-    readonly size: number;
-    /**
-     * The ID of the Switch connected to the NFS.
-     */
-    readonly switchId: string;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly networkInterfaces: outputs.GetNFSNetworkInterface[];
+    readonly plan: string;
+    readonly size: number;
+    readonly tags: string[];
+    readonly zone: string;
 }

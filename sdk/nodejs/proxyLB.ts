@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb.html.markdown.
- */
 export class ProxyLB extends pulumi.CustomResource {
     /**
      * Get an existing ProxyLB resource's state with the given name, ID, and optional extra
@@ -38,69 +33,58 @@ export class ProxyLB extends pulumi.CustomResource {
         return obj['__pulumiType'] === ProxyLB.__pulumiType;
     }
 
-    /**
-     * The external listen ports. It contains some attributes to Bind Ports.
-     */
     public readonly bindPorts!: pulumi.Output<outputs.ProxyLBBindPort[]>;
-    /**
-     * Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-     */
     public readonly certificate!: pulumi.Output<outputs.ProxyLBCertificate>;
     /**
-     * The description of the resource.
+     * The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The FQDN that was assigned. This attribute only valid when `vipFailover` is set to `true`.  
+     * The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
      */
     public /*out*/ readonly fqdn!: pulumi.Output<string>;
-    /**
-     * The health check rules. It contains some attributes to Health Check.
-     */
     public readonly healthCheck!: pulumi.Output<outputs.ProxyLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the ProxyLB
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.  
+     * The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The plan of the resource.
-     * Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
+     * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
      */
     public readonly plan!: pulumi.Output<number | undefined>;
     /**
-     * ProxyLB network address.   
+     * A list of CIDR block used by the ProxyLB to access the server
      */
     public /*out*/ readonly proxyNetworks!: pulumi.Output<string[]>;
     /**
-     * Real servers. It contains some attributes to Servers.
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
      */
+    public readonly region!: pulumi.Output<string | undefined>;
+    public readonly rules!: pulumi.Output<outputs.ProxyLBRule[] | undefined>;
     public readonly servers!: pulumi.Output<outputs.ProxyLBServer[] | undefined>;
-    /**
-     * The pair of IPAddress and port number of sorry-server.
-     */
     public readonly sorryServer!: pulumi.Output<outputs.ProxyLBSorryServer | undefined>;
     /**
-     * The flag of enable Sticky-Session.  
+     * The flag to enable sticky session
      */
     public readonly stickySession!: pulumi.Output<boolean | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the ProxyLB
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * Timeout seconds.  
+     * The timeout duration in seconds
      */
     public readonly timeout!: pulumi.Output<number | undefined>;
     /**
-     * The VirtualIPAddress that was assigned. This attribute only valid when `vipFailover` is set to `false`.  
+     * The virtual IP address assigned to the ProxyLB
      */
     public /*out*/ readonly vip!: pulumi.Output<string>;
     /**
-     * The flag of enable VIP Fail-Over.  
+     * The flag to enable VIP fail-over
      */
     public readonly vipFailover!: pulumi.Output<boolean | undefined>;
 
@@ -125,6 +109,8 @@ export class ProxyLB extends pulumi.CustomResource {
             inputs["name"] = state ? state.name : undefined;
             inputs["plan"] = state ? state.plan : undefined;
             inputs["proxyNetworks"] = state ? state.proxyNetworks : undefined;
+            inputs["region"] = state ? state.region : undefined;
+            inputs["rules"] = state ? state.rules : undefined;
             inputs["servers"] = state ? state.servers : undefined;
             inputs["sorryServer"] = state ? state.sorryServer : undefined;
             inputs["stickySession"] = state ? state.stickySession : undefined;
@@ -147,6 +133,8 @@ export class ProxyLB extends pulumi.CustomResource {
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["plan"] = args ? args.plan : undefined;
+            inputs["region"] = args ? args.region : undefined;
+            inputs["rules"] = args ? args.rules : undefined;
             inputs["servers"] = args ? args.servers : undefined;
             inputs["sorryServer"] = args ? args.sorryServer : undefined;
             inputs["stickySession"] = args ? args.stickySession : undefined;
@@ -172,69 +160,58 @@ export class ProxyLB extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProxyLB resources.
  */
 export interface ProxyLBState {
-    /**
-     * The external listen ports. It contains some attributes to Bind Ports.
-     */
     readonly bindPorts?: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
-    /**
-     * Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-     */
     readonly certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
     /**
-     * The description of the resource.
+     * The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The FQDN that was assigned. This attribute only valid when `vipFailover` is set to `true`.  
+     * The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
      */
     readonly fqdn?: pulumi.Input<string>;
-    /**
-     * The health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck?: pulumi.Input<inputs.ProxyLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the ProxyLB
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.  
+     * The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan of the resource.
-     * Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
+     * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
      */
     readonly plan?: pulumi.Input<number>;
     /**
-     * ProxyLB network address.   
+     * A list of CIDR block used by the ProxyLB to access the server
      */
     readonly proxyNetworks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Real servers. It contains some attributes to Servers.
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
      */
+    readonly region?: pulumi.Input<string>;
+    readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
     readonly servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
-    /**
-     * The pair of IPAddress and port number of sorry-server.
-     */
     readonly sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
     /**
-     * The flag of enable Sticky-Session.  
+     * The flag to enable sticky session
      */
     readonly stickySession?: pulumi.Input<boolean>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the ProxyLB
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Timeout seconds.  
+     * The timeout duration in seconds
      */
     readonly timeout?: pulumi.Input<number>;
     /**
-     * The VirtualIPAddress that was assigned. This attribute only valid when `vipFailover` is set to `false`.  
+     * The virtual IP address assigned to the ProxyLB
      */
     readonly vip?: pulumi.Input<string>;
     /**
-     * The flag of enable VIP Fail-Over.  
+     * The flag to enable VIP fail-over
      */
     readonly vipFailover?: pulumi.Input<boolean>;
 }
@@ -243,57 +220,46 @@ export interface ProxyLBState {
  * The set of arguments for constructing a ProxyLB resource.
  */
 export interface ProxyLBArgs {
-    /**
-     * The external listen ports. It contains some attributes to Bind Ports.
-     */
     readonly bindPorts: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
-    /**
-     * Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-     */
     readonly certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
     /**
-     * The description of the resource.
+     * The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
-    /**
-     * The health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck: pulumi.Input<inputs.ProxyLBHealthCheck>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the ProxyLB
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.  
+     * The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan of the resource.
-     * Valid value is one of the following: [ 1000 (default) / 5000 / 10000 / 50000 / 100000 / 400000]
+     * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
      */
     readonly plan?: pulumi.Input<number>;
     /**
-     * Real servers. It contains some attributes to Servers.
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
      */
+    readonly region?: pulumi.Input<string>;
+    readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
     readonly servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
-    /**
-     * The pair of IPAddress and port number of sorry-server.
-     */
     readonly sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
     /**
-     * The flag of enable Sticky-Session.  
+     * The flag to enable sticky session
      */
     readonly stickySession?: pulumi.Input<boolean>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the ProxyLB
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Timeout seconds.  
+     * The timeout duration in seconds
      */
     readonly timeout?: pulumi.Input<number>;
     /**
-     * The flag of enable VIP Fail-Over.  
+     * The flag to enable VIP fail-over
      */
     readonly vipFailover?: pulumi.Input<boolean>;
 }

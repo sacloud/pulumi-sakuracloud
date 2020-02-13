@@ -12,60 +12,61 @@ from . import utilities, tables
 class CDROM(pulumi.CustomResource):
     content: pulumi.Output[str]
     """
-    String of the value of the CDROM. 
+    The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
     """
     content_file_name: pulumi.Output[str]
+    """
+    The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+    [`iso_image_file`]
+    """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
     """
     hash: pulumi.Output[str]
     """
-    MD5 hash value of the CDROM file.
+    The md5 checksum calculated from the base64 encoded file body
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the CD-ROM
     """
     iso_image_file: pulumi.Output[str]
     """
-    CDROM file to upload (format:`raw`).
+    The file path to upload to as the CD-ROM. This conflicts with [`content`]
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
     """
     size: pulumi.Output[float]
     """
-    The size of the resource (unit:`GB`).   
-    Valid value is one of the following: [ 5 (default) / 10 ]
+    The size of CD-ROM in GiB. This must be one of [`5`/`10`]
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the CD-ROM
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
     """
     def __init__(__self__, resource_name, opts=None, content=None, content_file_name=None, description=None, hash=None, icon_id=None, iso_image_file=None, name=None, size=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud CDROM (ISO-Image) resource. This can be used to create, update, and delete CDROMs.
-        
+        Create a CDROM resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] content: String of the value of the CDROM. 
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] hash: MD5 hash value of the CDROM file.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] iso_image_file: CDROM file to upload (format:`raw`).
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] size: The size of the resource (unit:`GB`).   
-               Valid value is one of the following: [ 5 (default) / 10 ]
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
+        :param pulumi.Input[str] content: The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
+        :param pulumi.Input[str] content_file_name: The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+               [`iso_image_file`]
+        :param pulumi.Input[str] description: The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body
+        :param pulumi.Input[str] icon_id: The icon id to attach to the CD-ROM
+        :param pulumi.Input[str] iso_image_file: The file path to upload to as the CD-ROM. This conflicts with [`content`]
+        :param pulumi.Input[str] name: The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] size: The size of CD-ROM in GiB. This must be one of [`5`/`10`]
+        :param pulumi.Input[list] tags: Any tags to assign to the CD-ROM
+        :param pulumi.Input[str] zone: The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -105,26 +106,26 @@ class CDROM(pulumi.CustomResource):
         """
         Get an existing CDROM resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] content: String of the value of the CDROM. 
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] hash: MD5 hash value of the CDROM file.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] iso_image_file: CDROM file to upload (format:`raw`).
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] size: The size of the resource (unit:`GB`).   
-               Valid value is one of the following: [ 5 (default) / 10 ]
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
+        :param pulumi.Input[str] content: The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
+        :param pulumi.Input[str] content_file_name: The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+               [`iso_image_file`]
+        :param pulumi.Input[str] description: The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body
+        :param pulumi.Input[str] icon_id: The icon id to attach to the CD-ROM
+        :param pulumi.Input[str] iso_image_file: The file path to upload to as the CD-ROM. This conflicts with [`content`]
+        :param pulumi.Input[str] name: The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] size: The size of CD-ROM in GiB. This must be one of [`5`/`10`]
+        :param pulumi.Input[list] tags: Any tags to assign to the CD-ROM
+        :param pulumi.Input[str] zone: The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["content"] = content
         __props__["content_file_name"] = content_file_name
         __props__["description"] = description

@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud LoadBalancer resource. This can be used to create, update, and delete LoadBalancers.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
- */
 export class LoadBalancer extends pulumi.CustomResource {
     /**
      * Get an existing LoadBalancer resource's state with the given name, ID, and optional extra
@@ -39,65 +34,29 @@ export class LoadBalancer extends pulumi.CustomResource {
     }
 
     /**
-     * Default gateway address of the Load Balancer.	 
-     */
-    public readonly defaultRoute!: pulumi.Output<string | undefined>;
-    /**
-     * The description of the VIP.
+     * The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The flag of enable/disable high-availability mode.
-     */
-    public readonly highAvailability!: pulumi.Output<boolean | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the LoadBalancer
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The primary IP address of the Load Balancer.
-     */
-    public readonly ipaddress1!: pulumi.Output<string>;
-    /**
-     * The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
-     */
-    public readonly ipaddress2!: pulumi.Output<string | undefined>;
-    /**
-     * The name of the resource.
+     * The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly networkInterface!: pulumi.Output<outputs.LoadBalancerNetworkInterface>;
     /**
-     * Network mask length.
-     */
-    public readonly nwMaskLen!: pulumi.Output<number>;
-    /**
-     * The name of the resource plan.  
-     * Valid value is one of the following: [ "standard" (default) / "highspec"]
+     * The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The ID of the Switch connected to the Load Balancer.
+     * Any tags to assign to the LoadBalancer
      */
-    public readonly switchId!: pulumi.Output<string>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
+    public readonly vips!: pulumi.Output<outputs.LoadBalancerVip[] | undefined>;
     /**
-     * The tag list of the resources.
-     */
-    public readonly tags!: pulumi.Output<string[]>;
-    public /*out*/ readonly vipIds!: pulumi.Output<string[]>;
-    /**
-     * VIPs. It contains some attributes to VIPs.
-     */
-    public readonly vips!: pulumi.Output<outputs.LoadBalancerVip[]>;
-    /**
-     * VRID used when high-availability mode enabled.
-     */
-    public readonly vrid!: pulumi.Output<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -113,52 +72,27 @@ export class LoadBalancer extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as LoadBalancerState | undefined;
-            inputs["defaultRoute"] = state ? state.defaultRoute : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
-            inputs["highAvailability"] = state ? state.highAvailability : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
-            inputs["ipaddress1"] = state ? state.ipaddress1 : undefined;
-            inputs["ipaddress2"] = state ? state.ipaddress2 : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
+            inputs["networkInterface"] = state ? state.networkInterface : undefined;
             inputs["plan"] = state ? state.plan : undefined;
-            inputs["switchId"] = state ? state.switchId : undefined;
             inputs["tags"] = state ? state.tags : undefined;
-            inputs["vipIds"] = state ? state.vipIds : undefined;
             inputs["vips"] = state ? state.vips : undefined;
-            inputs["vrid"] = state ? state.vrid : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as LoadBalancerArgs | undefined;
-            if (!args || args.ipaddress1 === undefined) {
-                throw new Error("Missing required property 'ipaddress1'");
+            if (!args || args.networkInterface === undefined) {
+                throw new Error("Missing required property 'networkInterface'");
             }
-            if (!args || args.nwMaskLen === undefined) {
-                throw new Error("Missing required property 'nwMaskLen'");
-            }
-            if (!args || args.switchId === undefined) {
-                throw new Error("Missing required property 'switchId'");
-            }
-            if (!args || args.vrid === undefined) {
-                throw new Error("Missing required property 'vrid'");
-            }
-            inputs["defaultRoute"] = args ? args.defaultRoute : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
-            inputs["highAvailability"] = args ? args.highAvailability : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
-            inputs["ipaddress1"] = args ? args.ipaddress1 : undefined;
-            inputs["ipaddress2"] = args ? args.ipaddress2 : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
+            inputs["networkInterface"] = args ? args.networkInterface : undefined;
             inputs["plan"] = args ? args.plan : undefined;
-            inputs["switchId"] = args ? args.switchId : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["vips"] = args ? args.vips : undefined;
-            inputs["vrid"] = args ? args.vrid : undefined;
             inputs["zone"] = args ? args.zone : undefined;
-            inputs["vipIds"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -176,65 +110,29 @@ export class LoadBalancer extends pulumi.CustomResource {
  */
 export interface LoadBalancerState {
     /**
-     * Default gateway address of the Load Balancer.	 
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the VIP.
+     * The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The flag of enable/disable high-availability mode.
-     */
-    readonly highAvailability?: pulumi.Input<boolean>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the LoadBalancer
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The primary IP address of the Load Balancer.
-     */
-    readonly ipaddress1?: pulumi.Input<string>;
-    /**
-     * The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
-     */
-    readonly ipaddress2?: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface?: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
     /**
-     * Network mask length.
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
-    /**
-     * The name of the resource plan.  
-     * Valid value is one of the following: [ "standard" (default) / "highspec"]
+     * The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The ID of the Switch connected to the Load Balancer.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the LoadBalancer
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    readonly vipIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * VIPs. It contains some attributes to VIPs.
-     */
     readonly vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
     /**
-     * VRID used when high-availability mode enabled.
-     */
-    readonly vrid?: pulumi.Input<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -244,64 +142,29 @@ export interface LoadBalancerState {
  */
 export interface LoadBalancerArgs {
     /**
-     * Default gateway address of the Load Balancer.	 
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the VIP.
+     * The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The flag of enable/disable high-availability mode.
-     */
-    readonly highAvailability?: pulumi.Input<boolean>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the LoadBalancer
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The primary IP address of the Load Balancer.
-     */
-    readonly ipaddress1: pulumi.Input<string>;
-    /**
-     * The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
-     */
-    readonly ipaddress2?: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
     /**
-     * Network mask length.
-     */
-    readonly nwMaskLen: pulumi.Input<number>;
-    /**
-     * The name of the resource plan.  
-     * Valid value is one of the following: [ "standard" (default) / "highspec"]
+     * The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The ID of the Switch connected to the Load Balancer.
-     */
-    readonly switchId: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the LoadBalancer
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * VIPs. It contains some attributes to VIPs.
-     */
     readonly vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
     /**
-     * VRID used when high-availability mode enabled.
-     */
-    readonly vrid: pulumi.Input<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

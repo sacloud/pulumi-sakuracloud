@@ -12,54 +12,49 @@ from . import utilities, tables
 class Archive(pulumi.CustomResource):
     archive_file: pulumi.Output[str]
     """
-    Archive file to upload (format:`raw`).
+    The file path to upload to the SakuraCloud
     """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the archive. The length of this value must be in the range [`1`-`512`]
     """
     hash: pulumi.Output[str]
     """
-    MD5 hash value of the archive file.
+    The md5 checksum calculated from the base64 encoded file body
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the archive
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the archive. The length of this value must be in the range [`1`-`64`]
     """
     size: pulumi.Output[float]
     """
-    The size of the resource (unit:`GB`).   
-    Valid value is one of the following: [ 20 (default) / 40 / 60 / 80 / 100 / 250 / 500 / 750 / 1024 ]
+    The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the archive
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
     """
     def __init__(__self__, resource_name, opts=None, archive_file=None, description=None, hash=None, icon_id=None, name=None, size=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Archive resource. This can be used to create, update, and delete Archives.
-        
+        Create a Archive resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] archive_file: Archive file to upload (format:`raw`).
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] hash: MD5 hash value of the archive file.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] size: The size of the resource (unit:`GB`).   
-               Valid value is one of the following: [ 20 (default) / 40 / 60 / 80 / 100 / 250 / 500 / 750 / 1024 ]
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/archive.html.markdown.
+        :param pulumi.Input[str] archive_file: The file path to upload to the SakuraCloud
+        :param pulumi.Input[str] description: The description of the archive. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body
+        :param pulumi.Input[str] icon_id: The icon id to attach to the archive
+        :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        :param pulumi.Input[list] tags: Any tags to assign to the archive
+        :param pulumi.Input[str] zone: The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -99,25 +94,23 @@ class Archive(pulumi.CustomResource):
         """
         Get an existing Archive resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] archive_file: Archive file to upload (format:`raw`).
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] hash: MD5 hash value of the archive file.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] size: The size of the resource (unit:`GB`).   
-               Valid value is one of the following: [ 20 (default) / 40 / 60 / 80 / 100 / 250 / 500 / 750 / 1024 ]
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/archive.html.markdown.
+        :param pulumi.Input[str] archive_file: The file path to upload to the SakuraCloud
+        :param pulumi.Input[str] description: The description of the archive. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body
+        :param pulumi.Input[str] icon_id: The icon id to attach to the archive
+        :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        :param pulumi.Input[list] tags: Any tags to assign to the archive
+        :param pulumi.Input[str] zone: The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["archive_file"] = archive_file
         __props__["description"] = description
         __props__["hash"] = hash

@@ -2,15 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Private Host resource. This can be used to create, update, and delete Private Hosts.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/private_host.html.markdown.
- */
 export class PrivateHost extends pulumi.CustomResource {
     /**
      * Get an existing PrivateHost resource's state with the given name, ID, and optional extra
@@ -39,40 +32,39 @@ export class PrivateHost extends pulumi.CustomResource {
     }
 
     /**
-     * The number of cores assigned to the Server.
+     * The total number of CPUs assigned to servers on the private host
      */
     public /*out*/ readonly assignedCore!: pulumi.Output<number>;
     /**
-     * The size of memory allocated to the Server (unit:`GB`).
+     * The total size of memory assigned to servers on the private host
      */
     public /*out*/ readonly assignedMemory!: pulumi.Output<number>;
     /**
-     * The description of the resource.
+     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     */
+    public readonly class!: pulumi.Output<string | undefined>;
+    /**
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The HostName of the resource.
+     * The hostname of the private host
      */
     public /*out*/ readonly hostname!: pulumi.Output<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the PrivateHost
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the PrivateHost
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.  
-     * Valid value is one of the following: ["is1a" / "is1b" / "tk1a"]
+     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -90,8 +82,8 @@ export class PrivateHost extends pulumi.CustomResource {
             const state = argsOrState as PrivateHostState | undefined;
             inputs["assignedCore"] = state ? state.assignedCore : undefined;
             inputs["assignedMemory"] = state ? state.assignedMemory : undefined;
+            inputs["class"] = state ? state.class : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["hostname"] = state ? state.hostname : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["name"] = state ? state.name : undefined;
@@ -99,8 +91,8 @@ export class PrivateHost extends pulumi.CustomResource {
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as PrivateHostArgs | undefined;
+            inputs["class"] = args ? args.class : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["tags"] = args ? args.tags : undefined;
@@ -125,40 +117,39 @@ export class PrivateHost extends pulumi.CustomResource {
  */
 export interface PrivateHostState {
     /**
-     * The number of cores assigned to the Server.
+     * The total number of CPUs assigned to servers on the private host
      */
     readonly assignedCore?: pulumi.Input<number>;
     /**
-     * The size of memory allocated to the Server (unit:`GB`).
+     * The total size of memory assigned to servers on the private host
      */
     readonly assignedMemory?: pulumi.Input<number>;
     /**
-     * The description of the resource.
+     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     */
+    readonly class?: pulumi.Input<string>;
+    /**
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The HostName of the resource.
+     * The hostname of the private host
      */
     readonly hostname?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the PrivateHost
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the PrivateHost
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.  
-     * Valid value is one of the following: ["is1a" / "is1b" / "tk1a"]
+     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -168,28 +159,27 @@ export interface PrivateHostState {
  */
 export interface PrivateHostArgs {
     /**
-     * The description of the resource.
+     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     */
+    readonly class?: pulumi.Input<string>;
+    /**
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the PrivateHost
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the PrivateHost
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.  
-     * Valid value is one of the following: ["is1a" / "is1b" / "tk1a"]
+     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

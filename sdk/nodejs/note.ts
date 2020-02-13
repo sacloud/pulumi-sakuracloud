@@ -2,35 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Note (Startup-Script) resource. This can be used to create, update, and delete Notes.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Note
- * const foobar = new sakuracloud.Note("foobar", {
- *     class: "shell",
- *     content: `  #!/bin/sh
- * 
- *   : your-script-here
- * `,
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/note.html.markdown.
- */
 export class Note extends pulumi.CustomResource {
     /**
      * Get an existing Note resource's state with the given name, ID, and optional extra
@@ -59,30 +32,29 @@ export class Note extends pulumi.CustomResource {
     }
 
     /**
-     * The content body of the Note.  
-     * Valid value is one of the following: [ "shell" (default) / "yamlCloudConfig" ]
+     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
      */
     public readonly class!: pulumi.Output<string | undefined>;
     /**
-     * The content body of the Note.
+     * The content of the Note. This must be specified as a shell script or as a cloud-config
      */
     public readonly content!: pulumi.Output<string>;
     /**
-     * The description of the resource.
+     * The description of the Note. This will be computed from special tags within body of `content`
      */
     public /*out*/ readonly description!: pulumi.Output<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the Note
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the Note. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Note
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Note resource with the given unique name, arguments, and options.
@@ -130,28 +102,27 @@ export class Note extends pulumi.CustomResource {
  */
 export interface NoteState {
     /**
-     * The content body of the Note.  
-     * Valid value is one of the following: [ "shell" (default) / "yamlCloudConfig" ]
+     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The content body of the Note.
+     * The content of the Note. This must be specified as a shell script or as a cloud-config
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the Note. This will be computed from special tags within body of `content`
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the Note
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Note. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Note
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -161,24 +132,23 @@ export interface NoteState {
  */
 export interface NoteArgs {
     /**
-     * The content body of the Note.  
-     * Valid value is one of the following: [ "shell" (default) / "yamlCloudConfig" ]
+     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The content body of the Note.
+     * The content of the Note. This must be specified as a shell script or as a cloud-config
      */
     readonly content: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the Note
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the Note. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Note
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

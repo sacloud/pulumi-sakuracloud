@@ -2,19 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud DNS Record resource. This can be used to create and delete DNS Records.
- * 
- * ## Import (not supported)
- * 
- * Import of DNS Record is not supported.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/dns_record.html.markdown.
- */
 export class DNSRecord extends pulumi.CustomResource {
     /**
      * Get an existing DNSRecord resource's state with the given name, ID, and optional extra
@@ -43,36 +32,35 @@ export class DNSRecord extends pulumi.CustomResource {
     }
 
     /**
-     * The ID of DNS zones to which the Record belongs.
+     * The id of the DNS resource
      */
     public readonly dnsId!: pulumi.Output<string>;
     /**
-     * The hostname of target Record. If "@" is specified, it indicates own zone.
+     * The name of the DNS Record resource
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The port number used when `type` is `SRV`. 
+     * The number of port. This must be in the range [`1`-`65535`]
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
-     * The priority used when `type` is `MX` or `SRV`.
+     * The priority of target DNS Record. This must be in the range [`0`-`65535`]
      */
     public readonly priority!: pulumi.Output<number | undefined>;
     /**
-     * The ttl value of the Record (unit:`second`). 
+     * The number of the TTL
      */
     public readonly ttl!: pulumi.Output<number | undefined>;
     /**
-     * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
      */
     public readonly type!: pulumi.Output<string>;
     /**
-     * The value of the Record. 
+     * The value of the DNS Record
      */
     public readonly value!: pulumi.Output<string>;
     /**
-     * The weight used when `type` is `SRV`.
+     * The weight of target DNS Record. This must be in the range [`0`-`65535`]
      */
     public readonly weight!: pulumi.Output<number | undefined>;
 
@@ -132,36 +120,35 @@ export class DNSRecord extends pulumi.CustomResource {
  */
 export interface DNSRecordState {
     /**
-     * The ID of DNS zones to which the Record belongs.
+     * The id of the DNS resource
      */
     readonly dnsId?: pulumi.Input<string>;
     /**
-     * The hostname of target Record. If "@" is specified, it indicates own zone.
+     * The name of the DNS Record resource
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The port number used when `type` is `SRV`. 
+     * The number of port. This must be in the range [`1`-`65535`]
      */
     readonly port?: pulumi.Input<number>;
     /**
-     * The priority used when `type` is `MX` or `SRV`.
+     * The priority of target DNS Record. This must be in the range [`0`-`65535`]
      */
     readonly priority?: pulumi.Input<number>;
     /**
-     * The ttl value of the Record (unit:`second`). 
+     * The number of the TTL
      */
     readonly ttl?: pulumi.Input<number>;
     /**
-     * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
      */
     readonly type?: pulumi.Input<string>;
     /**
-     * The value of the Record. 
+     * The value of the DNS Record
      */
     readonly value?: pulumi.Input<string>;
     /**
-     * The weight used when `type` is `SRV`.
+     * The weight of target DNS Record. This must be in the range [`0`-`65535`]
      */
     readonly weight?: pulumi.Input<number>;
 }
@@ -171,36 +158,35 @@ export interface DNSRecordState {
  */
 export interface DNSRecordArgs {
     /**
-     * The ID of DNS zones to which the Record belongs.
+     * The id of the DNS resource
      */
     readonly dnsId: pulumi.Input<string>;
     /**
-     * The hostname of target Record. If "@" is specified, it indicates own zone.
+     * The name of the DNS Record resource
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The port number used when `type` is `SRV`. 
+     * The number of port. This must be in the range [`1`-`65535`]
      */
     readonly port?: pulumi.Input<number>;
     /**
-     * The priority used when `type` is `MX` or `SRV`.
+     * The priority of target DNS Record. This must be in the range [`0`-`65535`]
      */
     readonly priority?: pulumi.Input<number>;
     /**
-     * The ttl value of the Record (unit:`second`). 
+     * The number of the TTL
      */
     readonly ttl?: pulumi.Input<number>;
     /**
-     * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA"]
+     * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
      */
     readonly type: pulumi.Input<string>;
     /**
-     * The value of the Record. 
+     * The value of the DNS Record
      */
     readonly value: pulumi.Input<string>;
     /**
-     * The weight used when `type` is `SRV`.
+     * The weight of target DNS Record. This must be in the range [`0`-`65535`]
      */
     readonly weight?: pulumi.Input<number>;
 }

@@ -10,85 +10,31 @@ from typing import Union
 from . import utilities, tables
 
 class PacketFilterRule(pulumi.CustomResource):
-    allow: pulumi.Output[bool]
-    """
-    The flag for allow/deny packets (default:`true`).
-    """
-    description: pulumi.Output[str]
-    """
-    The description of the expression.
-    """
-    dest_port: pulumi.Output[str]
-    """
-    Target destination port.
-    Valid format is one of the following:
-    * Number: `"0"` - `"65535"`
-    * Range: `"xx-yy"`
-    * Range (hex): `"0xPPPP/0xMMMM"`
-    """
-    order: pulumi.Output[float]
-    """
-    The order of the expression (default:`1000`).
-    """
+    expressions: pulumi.Output[list]
     packet_filter_id: pulumi.Output[str]
     """
-    The ID of the Packet Filter to which the resource belongs.
-    """
-    protocol: pulumi.Output[str]
-    """
-    Protocol used in health check.  
-    Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-    """
-    source_nw: pulumi.Output[str]
-    """
-    Target source network IP address or CIDR or range.  
-    Valid format is one of the following:
-    * IP address: `"xxx.xxx.xxx.xxx"`
-    * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-    * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-    """
-    source_port: pulumi.Output[str]
-    """
-    Target source port.
-    Valid format is one of the following:
-    * Number: `"0"` - `"65535"`
-    * Range: `"xx-yy"`
-    * Range (hex): `"0xPPPP/0xMMMM"`
+    The id of the packet filter that set expressions to
     """
     zone: pulumi.Output[str]
-    def __init__(__self__, resource_name, opts=None, allow=None, description=None, dest_port=None, order=None, packet_filter_id=None, protocol=None, source_nw=None, source_port=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    """
+    The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
+    """
+    def __init__(__self__, resource_name, opts=None, expressions=None, packet_filter_id=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Packet Filter Rule resource. This can be used to create, update, and delete Packet Filter Rules.
-        
-        ## Import (not supported)
-        
-        Import of Packet Filter Rule is not supported.
-        
+        Create a PacketFilterRule resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] allow: The flag for allow/deny packets (default:`true`).
-        :param pulumi.Input[str] description: The description of the expression.
-        :param pulumi.Input[str] dest_port: Target destination port.
-               Valid format is one of the following:
-               * Number: `"0"` - `"65535"`
-               * Range: `"xx-yy"`
-               * Range (hex): `"0xPPPP/0xMMMM"`
-        :param pulumi.Input[float] order: The order of the expression (default:`1000`).
-        :param pulumi.Input[str] packet_filter_id: The ID of the Packet Filter to which the resource belongs.
-        :param pulumi.Input[str] protocol: Protocol used in health check.  
-               Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-        :param pulumi.Input[str] source_nw: Target source network IP address or CIDR or range.  
-               Valid format is one of the following:
-               * IP address: `"xxx.xxx.xxx.xxx"`
-               * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-               * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-        :param pulumi.Input[str] source_port: Target source port.
-               Valid format is one of the following:
-               * Number: `"0"` - `"65535"`
-               * Range: `"xx-yy"`
-               * Range (hex): `"0xPPPP/0xMMMM"`
+        :param pulumi.Input[str] packet_filter_id: The id of the packet filter that set expressions to
+        :param pulumi.Input[str] zone: The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
+        The **expressions** object supports the following:
+
+          * `allow` (`pulumi.Input[bool]`)
+          * `description` (`pulumi.Input[str]`)
+          * `destinationPort` (`pulumi.Input[str]`)
+          * `protocol` (`pulumi.Input[str]`)
+          * `sourceNetwork` (`pulumi.Input[str]`)
+          * `sourcePort` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -107,18 +53,10 @@ class PacketFilterRule(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            __props__['allow'] = allow
-            __props__['description'] = description
-            __props__['dest_port'] = dest_port
-            __props__['order'] = order
+            __props__['expressions'] = expressions
             if packet_filter_id is None:
                 raise TypeError("Missing required property 'packet_filter_id'")
             __props__['packet_filter_id'] = packet_filter_id
-            if protocol is None:
-                raise TypeError("Missing required property 'protocol'")
-            __props__['protocol'] = protocol
-            __props__['source_nw'] = source_nw
-            __props__['source_port'] = source_port
             __props__['zone'] = zone
         super(PacketFilterRule, __self__).__init__(
             'sakuracloud:index/packetFilterRule:PacketFilterRule',
@@ -127,49 +65,32 @@ class PacketFilterRule(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, allow=None, description=None, dest_port=None, order=None, packet_filter_id=None, protocol=None, source_nw=None, source_port=None, zone=None):
+    def get(resource_name, id, opts=None, expressions=None, packet_filter_id=None, zone=None):
         """
         Get an existing PacketFilterRule resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] allow: The flag for allow/deny packets (default:`true`).
-        :param pulumi.Input[str] description: The description of the expression.
-        :param pulumi.Input[str] dest_port: Target destination port.
-               Valid format is one of the following:
-               * Number: `"0"` - `"65535"`
-               * Range: `"xx-yy"`
-               * Range (hex): `"0xPPPP/0xMMMM"`
-        :param pulumi.Input[float] order: The order of the expression (default:`1000`).
-        :param pulumi.Input[str] packet_filter_id: The ID of the Packet Filter to which the resource belongs.
-        :param pulumi.Input[str] protocol: Protocol used in health check.  
-               Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-        :param pulumi.Input[str] source_nw: Target source network IP address or CIDR or range.  
-               Valid format is one of the following:
-               * IP address: `"xxx.xxx.xxx.xxx"`
-               * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-               * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-        :param pulumi.Input[str] source_port: Target source port.
-               Valid format is one of the following:
-               * Number: `"0"` - `"65535"`
-               * Range: `"xx-yy"`
-               * Range (hex): `"0xPPPP/0xMMMM"`
+        :param pulumi.Input[str] packet_filter_id: The id of the packet filter that set expressions to
+        :param pulumi.Input[str] zone: The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
+        The **expressions** object supports the following:
+
+          * `allow` (`pulumi.Input[bool]`)
+          * `description` (`pulumi.Input[str]`)
+          * `destinationPort` (`pulumi.Input[str]`)
+          * `protocol` (`pulumi.Input[str]`)
+          * `sourceNetwork` (`pulumi.Input[str]`)
+          * `sourcePort` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-        __props__["allow"] = allow
-        __props__["description"] = description
-        __props__["dest_port"] = dest_port
-        __props__["order"] = order
+
+        __props__["expressions"] = expressions
         __props__["packet_filter_id"] = packet_filter_id
-        __props__["protocol"] = protocol
-        __props__["source_nw"] = source_nw
-        __props__["source_port"] = source_port
         __props__["zone"] = zone
         return PacketFilterRule(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):

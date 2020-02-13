@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud DNS.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getDNS({
- *     nameSelectors: ["example.com"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/dns.html.markdown.
- */
 export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<GetDNSResult> & GetDNSResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetDNSResult> = pulumi.runtime.invoke("sakuracloud:index/getDNS:getDNS", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
     }, opts);
 
     return pulumi.utils.liftProperties(promise, opts);
@@ -44,50 +26,22 @@ export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<
  * A collection of arguments for invoking getDNS.
  */
 export interface GetDNSArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetDNSFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
+    readonly filter?: inputs.GetDNSFilter;
 }
 
 /**
  * A collection of values returned by getDNS.
  */
 export interface GetDNSResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    /**
-     * List of host names of DNS servers.
-     */
     readonly dnsServers: string[];
-    readonly filters?: outputs.GetDNSFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetDNSFilter;
     readonly iconId: string;
-    readonly nameSelectors?: string[];
-    readonly records: outputs.GetDNSRecord[];
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The name of the zone.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly records: outputs.GetDNSRecord[];
+    readonly tags: string[];
+    readonly zone: string;
 }

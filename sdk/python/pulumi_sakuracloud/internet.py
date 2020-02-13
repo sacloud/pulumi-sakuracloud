@@ -12,101 +12,91 @@ from . import utilities, tables
 class Internet(pulumi.CustomResource):
     band_width: pulumi.Output[float]
     """
-    Bandwidth of outbound traffic (unit:`Mbps`).  
-    Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
+    The bandwidth of the network connected to the Internet in Mbps.
+    `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
     """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
     """
     enable_ipv6: pulumi.Output[bool]
     """
-    The ipv6 enabled flag.
+    The flag to enable IPv6
     """
     gateway: pulumi.Output[str]
     """
-    The network gateway address of the switch.
-    """
-    graceful_shutdown_timeout: pulumi.Output[float]
-    """
-    The wait time (seconds) to do graceful shutdown the server connected to the resource.
+    The IP address of the gateway used by the Switch+Router
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the Switch+Router
     """
-    ipaddresses: pulumi.Output[list]
+    ip_addresses: pulumi.Output[list]
     """
-    Global IP address list.
+    A list of assigned global address to the Switch+Router
     """
-    ipv6_nw_address: pulumi.Output[str]
+    ipv6_network_address: pulumi.Output[str]
     """
-    The ipv6 network address.
+    The IPv6 network address assigned to the Switch+Router
     """
     ipv6_prefix: pulumi.Output[str]
     """
-    Address prefix of ipv6 network.
+    The network prefix of assigned IPv6 addresses to the Switch+Router
     """
     ipv6_prefix_len: pulumi.Output[float]
     """
-    Address prefix length of ipv6 network.
+    The bit length of IPv6 network prefix
     """
-    max_ipaddress: pulumi.Output[str]
+    max_ip_address: pulumi.Output[str]
     """
-    Max global IP address.
+    Maximum IP address in assigned global addresses to the Switch+Router
     """
-    min_ipaddress: pulumi.Output[str]
+    min_ip_address: pulumi.Output[str]
     """
-    Min global IP address.
+    Minimum IP address in assigned global addresses to the Switch+Router
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
     """
-    nw_address: pulumi.Output[str]
+    netmask: pulumi.Output[float]
     """
-    The network address.
+    The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
     """
-    nw_mask_len: pulumi.Output[float]
+    network_address: pulumi.Output[str]
     """
-    Network mask length.  
-    Valid value is one of the following: [ 28 (default) / 27 / 26 ]
+    The IPv4 network address assigned to the Switch+Router
     """
     server_ids: pulumi.Output[list]
     """
-    The ID list of the servers connected to the switch.
+    A list of the ID of Servers connected to the Switch+Router
     """
     switch_id: pulumi.Output[str]
     """
-    The ID of the switch.
+    The id of the switch
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the Switch+Router
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, band_width=None, description=None, enable_ipv6=None, graceful_shutdown_timeout=None, icon_id=None, name=None, nw_mask_len=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, band_width=None, description=None, enable_ipv6=None, icon_id=None, name=None, netmask=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Internet resource. This can be used to create, update, and delete Internet.
-        
+        Create a Internet resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[float] band_width: Bandwidth of outbound traffic (unit:`Mbps`).  
-               Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] enable_ipv6: The ipv6 enabled flag.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.  
-               Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/internet.html.markdown.
+        :param pulumi.Input[float] band_width: The bandwidth of the network connected to the Internet in Mbps.
+               `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
+        :param pulumi.Input[str] description: The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[bool] enable_ipv6: The flag to enable IPv6
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Switch+Router
+        :param pulumi.Input[str] name: The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] netmask: The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
+        :param pulumi.Input[list] tags: Any tags to assign to the Switch+Router
+        :param pulumi.Input[str] zone: The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -128,20 +118,19 @@ class Internet(pulumi.CustomResource):
             __props__['band_width'] = band_width
             __props__['description'] = description
             __props__['enable_ipv6'] = enable_ipv6
-            __props__['graceful_shutdown_timeout'] = graceful_shutdown_timeout
             __props__['icon_id'] = icon_id
             __props__['name'] = name
-            __props__['nw_mask_len'] = nw_mask_len
+            __props__['netmask'] = netmask
             __props__['tags'] = tags
             __props__['zone'] = zone
             __props__['gateway'] = None
-            __props__['ipaddresses'] = None
-            __props__['ipv6_nw_address'] = None
+            __props__['ip_addresses'] = None
+            __props__['ipv6_network_address'] = None
             __props__['ipv6_prefix'] = None
             __props__['ipv6_prefix_len'] = None
-            __props__['max_ipaddress'] = None
-            __props__['min_ipaddress'] = None
-            __props__['nw_address'] = None
+            __props__['max_ip_address'] = None
+            __props__['min_ip_address'] = None
+            __props__['network_address'] = None
             __props__['server_ids'] = None
             __props__['switch_id'] = None
         super(Internet, __self__).__init__(
@@ -151,56 +140,52 @@ class Internet(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, band_width=None, description=None, enable_ipv6=None, gateway=None, graceful_shutdown_timeout=None, icon_id=None, ipaddresses=None, ipv6_nw_address=None, ipv6_prefix=None, ipv6_prefix_len=None, max_ipaddress=None, min_ipaddress=None, name=None, nw_address=None, nw_mask_len=None, server_ids=None, switch_id=None, tags=None, zone=None):
+    def get(resource_name, id, opts=None, band_width=None, description=None, enable_ipv6=None, gateway=None, icon_id=None, ip_addresses=None, ipv6_network_address=None, ipv6_prefix=None, ipv6_prefix_len=None, max_ip_address=None, min_ip_address=None, name=None, netmask=None, network_address=None, server_ids=None, switch_id=None, tags=None, zone=None):
         """
         Get an existing Internet resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[float] band_width: Bandwidth of outbound traffic (unit:`Mbps`).  
-               Valid value is one of the following: [ 100 (default) / 250 / 500 / 1000 / 1500 / 2000 / 2500 / 3000 / 5000 ]
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] enable_ipv6: The ipv6 enabled flag.
-        :param pulumi.Input[str] gateway: The network gateway address of the switch.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[list] ipaddresses: Global IP address list.
-        :param pulumi.Input[str] ipv6_nw_address: The ipv6 network address.
-        :param pulumi.Input[str] ipv6_prefix: Address prefix of ipv6 network.
-        :param pulumi.Input[float] ipv6_prefix_len: Address prefix length of ipv6 network.
-        :param pulumi.Input[str] max_ipaddress: Max global IP address.
-        :param pulumi.Input[str] min_ipaddress: Min global IP address.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] nw_address: The network address.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.  
-               Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-        :param pulumi.Input[list] server_ids: The ID list of the servers connected to the switch.
-        :param pulumi.Input[str] switch_id: The ID of the switch.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/internet.html.markdown.
+        :param pulumi.Input[float] band_width: The bandwidth of the network connected to the Internet in Mbps.
+               `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
+        :param pulumi.Input[str] description: The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[bool] enable_ipv6: The flag to enable IPv6
+        :param pulumi.Input[str] gateway: The IP address of the gateway used by the Switch+Router
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Switch+Router
+        :param pulumi.Input[list] ip_addresses: A list of assigned global address to the Switch+Router
+        :param pulumi.Input[str] ipv6_network_address: The IPv6 network address assigned to the Switch+Router
+        :param pulumi.Input[str] ipv6_prefix: The network prefix of assigned IPv6 addresses to the Switch+Router
+        :param pulumi.Input[float] ipv6_prefix_len: The bit length of IPv6 network prefix
+        :param pulumi.Input[str] max_ip_address: Maximum IP address in assigned global addresses to the Switch+Router
+        :param pulumi.Input[str] min_ip_address: Minimum IP address in assigned global addresses to the Switch+Router
+        :param pulumi.Input[str] name: The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] netmask: The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
+        :param pulumi.Input[str] network_address: The IPv4 network address assigned to the Switch+Router
+        :param pulumi.Input[list] server_ids: A list of the ID of Servers connected to the Switch+Router
+        :param pulumi.Input[str] switch_id: The id of the switch
+        :param pulumi.Input[list] tags: Any tags to assign to the Switch+Router
+        :param pulumi.Input[str] zone: The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["band_width"] = band_width
         __props__["description"] = description
         __props__["enable_ipv6"] = enable_ipv6
         __props__["gateway"] = gateway
-        __props__["graceful_shutdown_timeout"] = graceful_shutdown_timeout
         __props__["icon_id"] = icon_id
-        __props__["ipaddresses"] = ipaddresses
-        __props__["ipv6_nw_address"] = ipv6_nw_address
+        __props__["ip_addresses"] = ip_addresses
+        __props__["ipv6_network_address"] = ipv6_network_address
         __props__["ipv6_prefix"] = ipv6_prefix
         __props__["ipv6_prefix_len"] = ipv6_prefix_len
-        __props__["max_ipaddress"] = max_ipaddress
-        __props__["min_ipaddress"] = min_ipaddress
+        __props__["max_ip_address"] = max_ip_address
+        __props__["min_ip_address"] = min_ip_address
         __props__["name"] = name
-        __props__["nw_address"] = nw_address
-        __props__["nw_mask_len"] = nw_mask_len
+        __props__["netmask"] = netmask
+        __props__["network_address"] = network_address
         __props__["server_ids"] = server_ids
         __props__["switch_id"] = switch_id
         __props__["tags"] = tags

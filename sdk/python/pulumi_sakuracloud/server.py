@@ -10,180 +10,126 @@ from typing import Union
 from . import utilities, tables
 
 class Server(pulumi.CustomResource):
-    additional_display_ipaddresses: pulumi.Output[list]
-    """
-    The display IP address list of the NICs (excluding primary NIC) of Server.  
-    """
-    additional_nics: pulumi.Output[list]
-    """
-    The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-    Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-    """
     cdrom_id: pulumi.Output[str]
     """
-    The ID of the CD-ROM inserted to Server.
+    The id of the CD-ROM to attach to the Server
     """
     commitment: pulumi.Output[str]
     """
-    The plan of assignment of CPU to VM(default:`standard`).  
-    Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
+    The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
     """
     core: pulumi.Output[float]
     """
-    The number of cores (default:`1`).
+    The number of virtual CPUs
     """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the Server. The length of this value must be in the range [`1`-`512`]
     """
-    disable_pw_auth: pulumi.Output[bool]
-    """
-    The flag of disable password auth via SSH.
-    """
+    disk_edit_parameter: pulumi.Output[dict]
     disks: pulumi.Output[list]
     """
-    The ID list of the Disks connected to Server.
-    """
-    display_ipaddress: pulumi.Output[str]
-    """
-    The IP address of NIC for display. Valid only when connected to switch.  
+    A list of disk id connected to the server
     """
     dns_servers: pulumi.Output[list]
     """
-    List of default DNS servers for the zone to which the Server belongs.
+    A list of IP address of DNS server in the zone
+    """
+    force_shutdown: pulumi.Output[bool]
+    """
+    The flag to use force shutdown when need to reboot/shutdown while applying
     """
     gateway: pulumi.Output[str]
     """
-    Default gateway address of the Server to set with `"Modify Disk"` API.	 
-    """
-    graceful_shutdown_timeout: pulumi.Output[float]
-    """
-    The wait time (seconds) to do graceful shutdown the Server.
+    The IP address of the gateway used by Server
     """
     hostname: pulumi.Output[str]
     """
-    The hostname to set with `"Modify Disk"` API.
+    The hostname of the Server
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the Server
     """
     interface_driver: pulumi.Output[str]
     """
-    The name of network interface driver.  
-    Valid value is one of the following: [ "virtio" (default) / "e1000"]
+    The driver name of network interface. This must be one of [`virtio`/`e1000`]
     """
-    ipaddress: pulumi.Output[str]
+    ip_address: pulumi.Output[str]
     """
-    The IP address of primary NIC to set with `"Modify Disk"` API.
-    """
-    macaddresses: pulumi.Output[list]
-    """
-    The MAC address list of NICs connected to Server.
+    The IP address assigned to the Server
     """
     memory: pulumi.Output[float]
     """
-    The size of memory (unit:`GB`, default:`1`).
+    The size of memory in GiB
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the Server. The length of this value must be in the range [`1`-`64`]
     """
-    nic: pulumi.Output[str]
+    netmask: pulumi.Output[float]
     """
-    The primary NIC's connection destination.  
-    Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
+    The bit length of the subnet assigned to the Server
     """
-    note_ids: pulumi.Output[list]
+    network_address: pulumi.Output[str]
     """
-    The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
+    The network address which the `ip_address` belongs
     """
-    nw_address: pulumi.Output[str]
-    """
-    The network address of the Server.
-    """
-    nw_mask_len: pulumi.Output[str]
-    """
-    Network mask length of the Server to set with `"Modify Disk"` API.
-    """
-    packet_filter_ids: pulumi.Output[list]
-    """
-    The ID list of the Packet Filters connected to Server.
-    """
-    password: pulumi.Output[str]
-    """
-    The password of OS's administrator to set with `"Modify Disk"` API.
-    """
+    network_interfaces: pulumi.Output[list]
     private_host_id: pulumi.Output[str]
     """
-    The ID of the Private Host to which the Server belongs.
+    The id of the PrivateHost which the Server is assigned
     """
     private_host_name: pulumi.Output[str]
     """
-    The name of the Private Host to which the Server belongs.
-    """
-    ssh_key_ids: pulumi.Output[list]
-    """
-    The ID list of SSH Keys to set with `"Modify Disk"` API.
+    The id of the PrivateHost which the Server is assigned
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
-    """
-    vnc_host: pulumi.Output[str]
-    """
-    The hostname of VNC server.
-    """
-    vnc_password: pulumi.Output[str]
-    """
-    The password of VNC server.
-    """
-    vnc_port: pulumi.Output[float]
-    """
-    The port number of VNC server.
+    Any tags to assign to the Server
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, additional_display_ipaddresses=None, additional_nics=None, cdrom_id=None, commitment=None, core=None, description=None, disable_pw_auth=None, disks=None, display_ipaddress=None, gateway=None, graceful_shutdown_timeout=None, hostname=None, icon_id=None, interface_driver=None, ipaddress=None, memory=None, name=None, nic=None, note_ids=None, nw_mask_len=None, packet_filter_ids=None, password=None, private_host_id=None, ssh_key_ids=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, cdrom_id=None, commitment=None, core=None, description=None, disk_edit_parameter=None, disks=None, force_shutdown=None, icon_id=None, interface_driver=None, memory=None, name=None, network_interfaces=None, private_host_id=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Server resource. This can be used to create, update, and delete Servers.
-        
+        Create a Server resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] additional_display_ipaddresses: The display IP address list of the NICs (excluding primary NIC) of Server.  
-        :param pulumi.Input[list] additional_nics: The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-               Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-        :param pulumi.Input[str] cdrom_id: The ID of the CD-ROM inserted to Server.
-        :param pulumi.Input[str] commitment: The plan of assignment of CPU to VM(default:`standard`).  
-               Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
-        :param pulumi.Input[float] core: The number of cores (default:`1`).
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] disable_pw_auth: The flag of disable password auth via SSH.
-        :param pulumi.Input[list] disks: The ID list of the Disks connected to Server.
-        :param pulumi.Input[str] display_ipaddress: The IP address of NIC for display. Valid only when connected to switch.  
-        :param pulumi.Input[str] gateway: Default gateway address of the Server to set with `"Modify Disk"` API.	 
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the Server.
-        :param pulumi.Input[str] hostname: The hostname to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] interface_driver: The name of network interface driver.  
-               Valid value is one of the following: [ "virtio" (default) / "e1000"]
-        :param pulumi.Input[str] ipaddress: The IP address of primary NIC to set with `"Modify Disk"` API.
-        :param pulumi.Input[float] memory: The size of memory (unit:`GB`, default:`1`).
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] nic: The primary NIC's connection destination.  
-               Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
-        :param pulumi.Input[list] note_ids: The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] nw_mask_len: Network mask length of the Server to set with `"Modify Disk"` API.
-        :param pulumi.Input[list] packet_filter_ids: The ID list of the Packet Filters connected to Server.
-        :param pulumi.Input[str] password: The password of OS's administrator to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] private_host_id: The ID of the Private Host to which the Server belongs.
-        :param pulumi.Input[list] ssh_key_ids: The ID list of SSH Keys to set with `"Modify Disk"` API.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
+        :param pulumi.Input[str] cdrom_id: The id of the CD-ROM to attach to the Server
+        :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
+        :param pulumi.Input[float] core: The number of virtual CPUs
+        :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[list] disks: A list of disk id connected to the server
+        :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Server
+        :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]
+        :param pulumi.Input[float] memory: The size of memory in GiB
+        :param pulumi.Input[str] name: The name of the Server. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned
+        :param pulumi.Input[list] tags: Any tags to assign to the Server
+        :param pulumi.Input[str] zone: The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/server.html.markdown.
+        The **disk_edit_parameter** object supports the following:
+
+          * `changePartitionUuid` (`pulumi.Input[bool]`)
+          * `disablePwAuth` (`pulumi.Input[bool]`)
+          * `enableDhcp` (`pulumi.Input[bool]`)
+          * `gateway` (`pulumi.Input[str]`)
+          * `hostname` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `noteIds` (`pulumi.Input[list]`)
+          * `password` (`pulumi.Input[str]`)
+          * `sshKeyIds` (`pulumi.Input[list]`)
+
+        The **network_interfaces** object supports the following:
+
+          * `macAddress` (`pulumi.Input[str]`)
+          * `packet_filter_id` (`pulumi.Input[str]`)
+          * `upstream` (`pulumi.Input[str]`)
+          * `userIpAddress` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -202,39 +148,28 @@ class Server(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            __props__['additional_display_ipaddresses'] = additional_display_ipaddresses
-            __props__['additional_nics'] = additional_nics
             __props__['cdrom_id'] = cdrom_id
             __props__['commitment'] = commitment
             __props__['core'] = core
             __props__['description'] = description
-            __props__['disable_pw_auth'] = disable_pw_auth
+            __props__['disk_edit_parameter'] = disk_edit_parameter
             __props__['disks'] = disks
-            __props__['display_ipaddress'] = display_ipaddress
-            __props__['gateway'] = gateway
-            __props__['graceful_shutdown_timeout'] = graceful_shutdown_timeout
-            __props__['hostname'] = hostname
+            __props__['force_shutdown'] = force_shutdown
             __props__['icon_id'] = icon_id
             __props__['interface_driver'] = interface_driver
-            __props__['ipaddress'] = ipaddress
             __props__['memory'] = memory
             __props__['name'] = name
-            __props__['nic'] = nic
-            __props__['note_ids'] = note_ids
-            __props__['nw_mask_len'] = nw_mask_len
-            __props__['packet_filter_ids'] = packet_filter_ids
-            __props__['password'] = password
+            __props__['network_interfaces'] = network_interfaces
             __props__['private_host_id'] = private_host_id
-            __props__['ssh_key_ids'] = ssh_key_ids
             __props__['tags'] = tags
             __props__['zone'] = zone
             __props__['dns_servers'] = None
-            __props__['macaddresses'] = None
-            __props__['nw_address'] = None
+            __props__['gateway'] = None
+            __props__['hostname'] = None
+            __props__['ip_address'] = None
+            __props__['netmask'] = None
+            __props__['network_address'] = None
             __props__['private_host_name'] = None
-            __props__['vnc_host'] = None
-            __props__['vnc_password'] = None
-            __props__['vnc_port'] = None
         super(Server, __self__).__init__(
             'sakuracloud:index/server:Server',
             resource_name,
@@ -242,89 +177,80 @@ class Server(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, additional_display_ipaddresses=None, additional_nics=None, cdrom_id=None, commitment=None, core=None, description=None, disable_pw_auth=None, disks=None, display_ipaddress=None, dns_servers=None, gateway=None, graceful_shutdown_timeout=None, hostname=None, icon_id=None, interface_driver=None, ipaddress=None, macaddresses=None, memory=None, name=None, nic=None, note_ids=None, nw_address=None, nw_mask_len=None, packet_filter_ids=None, password=None, private_host_id=None, private_host_name=None, ssh_key_ids=None, tags=None, vnc_host=None, vnc_password=None, vnc_port=None, zone=None):
+    def get(resource_name, id, opts=None, cdrom_id=None, commitment=None, core=None, description=None, disk_edit_parameter=None, disks=None, dns_servers=None, force_shutdown=None, gateway=None, hostname=None, icon_id=None, interface_driver=None, ip_address=None, memory=None, name=None, netmask=None, network_address=None, network_interfaces=None, private_host_id=None, private_host_name=None, tags=None, zone=None):
         """
         Get an existing Server resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] additional_display_ipaddresses: The display IP address list of the NICs (excluding primary NIC) of Server.  
-        :param pulumi.Input[list] additional_nics: The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-               Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-        :param pulumi.Input[str] cdrom_id: The ID of the CD-ROM inserted to Server.
-        :param pulumi.Input[str] commitment: The plan of assignment of CPU to VM(default:`standard`).  
-               Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
-        :param pulumi.Input[float] core: The number of cores (default:`1`).
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] disable_pw_auth: The flag of disable password auth via SSH.
-        :param pulumi.Input[list] disks: The ID list of the Disks connected to Server.
-        :param pulumi.Input[str] display_ipaddress: The IP address of NIC for display. Valid only when connected to switch.  
-        :param pulumi.Input[list] dns_servers: List of default DNS servers for the zone to which the Server belongs.
-        :param pulumi.Input[str] gateway: Default gateway address of the Server to set with `"Modify Disk"` API.	 
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the Server.
-        :param pulumi.Input[str] hostname: The hostname to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] interface_driver: The name of network interface driver.  
-               Valid value is one of the following: [ "virtio" (default) / "e1000"]
-        :param pulumi.Input[str] ipaddress: The IP address of primary NIC to set with `"Modify Disk"` API.
-        :param pulumi.Input[list] macaddresses: The MAC address list of NICs connected to Server.
-        :param pulumi.Input[float] memory: The size of memory (unit:`GB`, default:`1`).
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] nic: The primary NIC's connection destination.  
-               Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
-        :param pulumi.Input[list] note_ids: The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] nw_address: The network address of the Server.
-        :param pulumi.Input[str] nw_mask_len: Network mask length of the Server to set with `"Modify Disk"` API.
-        :param pulumi.Input[list] packet_filter_ids: The ID list of the Packet Filters connected to Server.
-        :param pulumi.Input[str] password: The password of OS's administrator to set with `"Modify Disk"` API.
-        :param pulumi.Input[str] private_host_id: The ID of the Private Host to which the Server belongs.
-        :param pulumi.Input[str] private_host_name: The name of the Private Host to which the Server belongs.
-        :param pulumi.Input[list] ssh_key_ids: The ID list of SSH Keys to set with `"Modify Disk"` API.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] vnc_host: The hostname of VNC server.
-        :param pulumi.Input[str] vnc_password: The password of VNC server.
-        :param pulumi.Input[float] vnc_port: The port number of VNC server.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
+        :param pulumi.Input[str] cdrom_id: The id of the CD-ROM to attach to the Server
+        :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
+        :param pulumi.Input[float] core: The number of virtual CPUs
+        :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[list] disks: A list of disk id connected to the server
+        :param pulumi.Input[list] dns_servers: A list of IP address of DNS server in the zone
+        :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying
+        :param pulumi.Input[str] gateway: The IP address of the gateway used by Server
+        :param pulumi.Input[str] hostname: The hostname of the Server
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Server
+        :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]
+        :param pulumi.Input[str] ip_address: The IP address assigned to the Server
+        :param pulumi.Input[float] memory: The size of memory in GiB
+        :param pulumi.Input[str] name: The name of the Server. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[float] netmask: The bit length of the subnet assigned to the Server
+        :param pulumi.Input[str] network_address: The network address which the `ip_address` belongs
+        :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned
+        :param pulumi.Input[str] private_host_name: The id of the PrivateHost which the Server is assigned
+        :param pulumi.Input[list] tags: Any tags to assign to the Server
+        :param pulumi.Input[str] zone: The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/server.html.markdown.
+        The **disk_edit_parameter** object supports the following:
+
+          * `changePartitionUuid` (`pulumi.Input[bool]`)
+          * `disablePwAuth` (`pulumi.Input[bool]`)
+          * `enableDhcp` (`pulumi.Input[bool]`)
+          * `gateway` (`pulumi.Input[str]`)
+          * `hostname` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `noteIds` (`pulumi.Input[list]`)
+          * `password` (`pulumi.Input[str]`)
+          * `sshKeyIds` (`pulumi.Input[list]`)
+
+        The **network_interfaces** object supports the following:
+
+          * `macAddress` (`pulumi.Input[str]`)
+          * `packet_filter_id` (`pulumi.Input[str]`)
+          * `upstream` (`pulumi.Input[str]`)
+          * `userIpAddress` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-        __props__["additional_display_ipaddresses"] = additional_display_ipaddresses
-        __props__["additional_nics"] = additional_nics
+
         __props__["cdrom_id"] = cdrom_id
         __props__["commitment"] = commitment
         __props__["core"] = core
         __props__["description"] = description
-        __props__["disable_pw_auth"] = disable_pw_auth
+        __props__["disk_edit_parameter"] = disk_edit_parameter
         __props__["disks"] = disks
-        __props__["display_ipaddress"] = display_ipaddress
         __props__["dns_servers"] = dns_servers
+        __props__["force_shutdown"] = force_shutdown
         __props__["gateway"] = gateway
-        __props__["graceful_shutdown_timeout"] = graceful_shutdown_timeout
         __props__["hostname"] = hostname
         __props__["icon_id"] = icon_id
         __props__["interface_driver"] = interface_driver
-        __props__["ipaddress"] = ipaddress
-        __props__["macaddresses"] = macaddresses
+        __props__["ip_address"] = ip_address
         __props__["memory"] = memory
         __props__["name"] = name
-        __props__["nic"] = nic
-        __props__["note_ids"] = note_ids
-        __props__["nw_address"] = nw_address
-        __props__["nw_mask_len"] = nw_mask_len
-        __props__["packet_filter_ids"] = packet_filter_ids
-        __props__["password"] = password
+        __props__["netmask"] = netmask
+        __props__["network_address"] = network_address
+        __props__["network_interfaces"] = network_interfaces
         __props__["private_host_id"] = private_host_id
         __props__["private_host_name"] = private_host_name
-        __props__["ssh_key_ids"] = ssh_key_ids
         __props__["tags"] = tags
-        __props__["vnc_host"] = vnc_host
-        __props__["vnc_password"] = vnc_password
-        __props__["vnc_port"] = vnc_port
         __props__["zone"] = zone
         return Server(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):

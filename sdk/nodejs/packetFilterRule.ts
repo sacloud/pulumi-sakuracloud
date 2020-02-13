@@ -6,15 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Packet Filter Rule resource. This can be used to create, update, and delete Packet Filter Rules.
- * 
- * ## Import (not supported)
- * 
- * Import of Packet Filter Rule is not supported.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter_rule.html.markdown.
- */
 export class PacketFilterRule extends pulumi.CustomResource {
     /**
      * Get an existing PacketFilterRule resource's state with the given name, ID, and optional extra
@@ -42,53 +33,13 @@ export class PacketFilterRule extends pulumi.CustomResource {
         return obj['__pulumiType'] === PacketFilterRule.__pulumiType;
     }
 
+    public readonly expressions!: pulumi.Output<outputs.PacketFilterRuleExpression[] | undefined>;
     /**
-     * The flag for allow/deny packets (default:`true`).
-     */
-    public readonly allow!: pulumi.Output<boolean | undefined>;
-    /**
-     * The description of the expression.
-     */
-    public readonly description!: pulumi.Output<string | undefined>;
-    /**
-     * Target destination port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    public readonly destPort!: pulumi.Output<string | undefined>;
-    /**
-     * The order of the expression (default:`1000`).
-     */
-    public readonly order!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the Packet Filter to which the resource belongs.
+     * The id of the packet filter that set expressions to
      */
     public readonly packetFilterId!: pulumi.Output<string>;
     /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-     */
-    public readonly protocol!: pulumi.Output<string>;
-    /**
-     * Target source network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    public readonly sourceNw!: pulumi.Output<string | undefined>;
-    /**
-     * Target source port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    public readonly sourcePort!: pulumi.Output<string | undefined>;
-    /**
-     * target SakuraCloud zone
+     * The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -104,31 +55,16 @@ export class PacketFilterRule extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as PacketFilterRuleState | undefined;
-            inputs["allow"] = state ? state.allow : undefined;
-            inputs["description"] = state ? state.description : undefined;
-            inputs["destPort"] = state ? state.destPort : undefined;
-            inputs["order"] = state ? state.order : undefined;
+            inputs["expressions"] = state ? state.expressions : undefined;
             inputs["packetFilterId"] = state ? state.packetFilterId : undefined;
-            inputs["protocol"] = state ? state.protocol : undefined;
-            inputs["sourceNw"] = state ? state.sourceNw : undefined;
-            inputs["sourcePort"] = state ? state.sourcePort : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as PacketFilterRuleArgs | undefined;
             if (!args || args.packetFilterId === undefined) {
                 throw new Error("Missing required property 'packetFilterId'");
             }
-            if (!args || args.protocol === undefined) {
-                throw new Error("Missing required property 'protocol'");
-            }
-            inputs["allow"] = args ? args.allow : undefined;
-            inputs["description"] = args ? args.description : undefined;
-            inputs["destPort"] = args ? args.destPort : undefined;
-            inputs["order"] = args ? args.order : undefined;
+            inputs["expressions"] = args ? args.expressions : undefined;
             inputs["packetFilterId"] = args ? args.packetFilterId : undefined;
-            inputs["protocol"] = args ? args.protocol : undefined;
-            inputs["sourceNw"] = args ? args.sourceNw : undefined;
-            inputs["sourcePort"] = args ? args.sourcePort : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
         if (!opts) {
@@ -146,53 +82,13 @@ export class PacketFilterRule extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PacketFilterRule resources.
  */
 export interface PacketFilterRuleState {
+    readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterRuleExpression>[]>;
     /**
-     * The flag for allow/deny packets (default:`true`).
-     */
-    readonly allow?: pulumi.Input<boolean>;
-    /**
-     * The description of the expression.
-     */
-    readonly description?: pulumi.Input<string>;
-    /**
-     * Target destination port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    readonly destPort?: pulumi.Input<string>;
-    /**
-     * The order of the expression (default:`1000`).
-     */
-    readonly order?: pulumi.Input<number>;
-    /**
-     * The ID of the Packet Filter to which the resource belongs.
+     * The id of the packet filter that set expressions to
      */
     readonly packetFilterId?: pulumi.Input<string>;
     /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-     */
-    readonly protocol?: pulumi.Input<string>;
-    /**
-     * Target source network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    readonly sourceNw?: pulumi.Input<string>;
-    /**
-     * Target source port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    readonly sourcePort?: pulumi.Input<string>;
-    /**
-     * target SakuraCloud zone
+     * The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -201,53 +97,13 @@ export interface PacketFilterRuleState {
  * The set of arguments for constructing a PacketFilterRule resource.
  */
 export interface PacketFilterRuleArgs {
+    readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterRuleExpression>[]>;
     /**
-     * The flag for allow/deny packets (default:`true`).
-     */
-    readonly allow?: pulumi.Input<boolean>;
-    /**
-     * The description of the expression.
-     */
-    readonly description?: pulumi.Input<string>;
-    /**
-     * Target destination port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    readonly destPort?: pulumi.Input<string>;
-    /**
-     * The order of the expression (default:`1000`).
-     */
-    readonly order?: pulumi.Input<number>;
-    /**
-     * The ID of the Packet Filter to which the resource belongs.
+     * The id of the packet filter that set expressions to
      */
     readonly packetFilterId: pulumi.Input<string>;
     /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-     */
-    readonly protocol: pulumi.Input<string>;
-    /**
-     * Target source network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    readonly sourceNw?: pulumi.Input<string>;
-    /**
-     * Target source port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    readonly sourcePort?: pulumi.Input<string>;
-    /**
-     * target SakuraCloud zone
+     * The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

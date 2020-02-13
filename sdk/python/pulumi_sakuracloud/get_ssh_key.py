@@ -13,40 +13,28 @@ class GetSSHKeyResult:
     """
     A collection of values returned by getSSHKey.
     """
-    def __init__(__self__, description=None, filters=None, fingerprint=None, name=None, name_selectors=None, public_key=None, id=None):
+    def __init__(__self__, description=None, filter=None, fingerprint=None, id=None, name=None, public_key=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if fingerprint and not isinstance(fingerprint, str):
             raise TypeError("Expected argument 'fingerprint' to be a str")
         __self__.fingerprint = fingerprint
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if public_key and not isinstance(public_key, str):
-            raise TypeError("Expected argument 'public_key' to be a str")
-        __self__.public_key = public_key
-        """
-        The body of the public key. 
-        """
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if public_key and not isinstance(public_key, str):
+            raise TypeError("Expected argument 'public_key' to be a str")
+        __self__.public_key = public_key
 class AwaitableGetSSHKeyResult(GetSSHKeyResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -54,31 +42,30 @@ class AwaitableGetSSHKeyResult(GetSSHKeyResult):
             yield self
         return GetSSHKeyResult(
             description=self.description,
-            filters=self.filters,
+            filter=self.filter,
             fingerprint=self.fingerprint,
+            id=self.id,
             name=self.name,
-            name_selectors=self.name_selectors,
-            public_key=self.public_key,
-            id=self.id)
+            public_key=self.public_key)
 
-def get_ssh_key(filters=None,name_selectors=None,opts=None):
+def get_ssh_key(filter=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud SSH Key.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`) - The name of the resource.
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
+
+    __args__['filter'] = filter
     if opts is None:
         opts = pulumi.InvokeOptions()
     if opts.version is None:
@@ -87,9 +74,8 @@ def get_ssh_key(filters=None,name_selectors=None,opts=None):
 
     return AwaitableGetSSHKeyResult(
         description=__ret__.get('description'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
         fingerprint=__ret__.get('fingerprint'),
+        id=__ret__.get('id'),
         name=__ret__.get('name'),
-        name_selectors=__ret__.get('nameSelectors'),
-        public_key=__ret__.get('publicKey'),
-        id=__ret__.get('id'))
+        public_key=__ret__.get('publicKey'))

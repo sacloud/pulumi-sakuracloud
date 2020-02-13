@@ -13,73 +13,49 @@ class GetDiskResult:
     """
     A collection of values returned by getDisk.
     """
-    def __init__(__self__, connector=None, description=None, filters=None, icon_id=None, name=None, name_selectors=None, plan=None, server_id=None, size=None, tag_selectors=None, tags=None, zone=None, id=None):
+    def __init__(__self__, connector=None, description=None, filter=None, icon_id=None, id=None, name=None, plan=None, server_id=None, size=None, source_archive_id=None, source_disk_id=None, tags=None, zone=None):
         if connector and not isinstance(connector, str):
             raise TypeError("Expected argument 'connector' to be a str")
         __self__.connector = connector
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if icon_id and not isinstance(icon_id, str):
             raise TypeError("Expected argument 'icon_id' to be a str")
         __self__.icon_id = icon_id
-        """
-        The ID of the icon of the resource.
-        """
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if plan and not isinstance(plan, str):
-            raise TypeError("Expected argument 'plan' to be a str")
-        __self__.plan = plan
-        """
-        The plan of the resource (`ssd`/`hdd`).
-        """
-        if server_id and not isinstance(server_id, str):
-            raise TypeError("Expected argument 'server_id' to be a str")
-        __self__.server_id = server_id
-        """
-        The ID of the server connected to the disk.
-        """
-        if size and not isinstance(size, float):
-            raise TypeError("Expected argument 'size' to be a float")
-        __self__.size = size
-        """
-        Size of the resource (unit:`GB`).
-        """
-        if tag_selectors and not isinstance(tag_selectors, list):
-            raise TypeError("Expected argument 'tag_selectors' to be a list")
-        __self__.tag_selectors = tag_selectors
-        if tags and not isinstance(tags, list):
-            raise TypeError("Expected argument 'tags' to be a list")
-        __self__.tags = tags
-        """
-        The tag list of the resources.
-        """
-        if zone and not isinstance(zone, str):
-            raise TypeError("Expected argument 'zone' to be a str")
-        __self__.zone = zone
-        """
-        The ID of the zone to which the resource belongs.
-        """
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if plan and not isinstance(plan, str):
+            raise TypeError("Expected argument 'plan' to be a str")
+        __self__.plan = plan
+        if server_id and not isinstance(server_id, str):
+            raise TypeError("Expected argument 'server_id' to be a str")
+        __self__.server_id = server_id
+        if size and not isinstance(size, float):
+            raise TypeError("Expected argument 'size' to be a float")
+        __self__.size = size
+        if source_archive_id and not isinstance(source_archive_id, str):
+            raise TypeError("Expected argument 'source_archive_id' to be a str")
+        __self__.source_archive_id = source_archive_id
+        if source_disk_id and not isinstance(source_disk_id, str):
+            raise TypeError("Expected argument 'source_disk_id' to be a str")
+        __self__.source_disk_id = source_disk_id
+        if tags and not isinstance(tags, list):
+            raise TypeError("Expected argument 'tags' to be a list")
+        __self__.tags = tags
+        if zone and not isinstance(zone, str):
+            raise TypeError("Expected argument 'zone' to be a str")
+        __self__.zone = zone
 class AwaitableGetDiskResult(GetDiskResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -88,39 +64,37 @@ class AwaitableGetDiskResult(GetDiskResult):
         return GetDiskResult(
             connector=self.connector,
             description=self.description,
-            filters=self.filters,
+            filter=self.filter,
             icon_id=self.icon_id,
+            id=self.id,
             name=self.name,
-            name_selectors=self.name_selectors,
             plan=self.plan,
             server_id=self.server_id,
             size=self.size,
-            tag_selectors=self.tag_selectors,
+            source_archive_id=self.source_archive_id,
+            source_disk_id=self.source_disk_id,
             tags=self.tags,
-            zone=self.zone,
-            id=self.id)
+            zone=self.zone)
 
-def get_disk(filters=None,name_selectors=None,tag_selectors=None,zone=None,opts=None):
+def get_disk(filter=None,zone=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Disk.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    :param list tag_selectors: The list of tags to filtering.
-    :param str zone: The ID of the zone.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`) - The name of the resource.
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/disk.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
+      * `tags` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
-    __args__['tagSelectors'] = tag_selectors
+
+    __args__['filter'] = filter
     __args__['zone'] = zone
     if opts is None:
         opts = pulumi.InvokeOptions()
@@ -131,14 +105,14 @@ def get_disk(filters=None,name_selectors=None,tag_selectors=None,zone=None,opts=
     return AwaitableGetDiskResult(
         connector=__ret__.get('connector'),
         description=__ret__.get('description'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
         icon_id=__ret__.get('iconId'),
+        id=__ret__.get('id'),
         name=__ret__.get('name'),
-        name_selectors=__ret__.get('nameSelectors'),
         plan=__ret__.get('plan'),
         server_id=__ret__.get('serverId'),
         size=__ret__.get('size'),
-        tag_selectors=__ret__.get('tagSelectors'),
+        source_archive_id=__ret__.get('sourceArchiveId'),
+        source_disk_id=__ret__.get('sourceDiskId'),
         tags=__ret__.get('tags'),
-        zone=__ret__.get('zone'),
-        id=__ret__.get('id'))
+        zone=__ret__.get('zone'))

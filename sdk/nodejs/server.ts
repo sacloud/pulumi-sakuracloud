@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Server resource. This can be used to create, update, and delete Servers.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/server.html.markdown.
- */
 export class Server extends pulumi.CustomResource {
     /**
      * Get an existing Server resource's state with the given name, ID, and optional extra
@@ -39,139 +34,85 @@ export class Server extends pulumi.CustomResource {
     }
 
     /**
-     * The display IP address list of the NICs (excluding primary NIC) of Server.  
+     * The id of the CD-ROM to attach to the Server
      */
-    public readonly additionalDisplayIpaddresses!: pulumi.Output<string[]>;
+    public readonly cdromId!: pulumi.Output<string | undefined>;
     /**
-     * The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-     * Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-     */
-    public readonly additionalNics!: pulumi.Output<string[] | undefined>;
-    /**
-     * The ID of the CD-ROM inserted to Server.
-     */
-    public readonly cdromId!: pulumi.Output<string>;
-    /**
-     * The plan of assignment of CPU to VM(default:`standard`).  
-     * Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
+     * The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
      */
     public readonly commitment!: pulumi.Output<string | undefined>;
     /**
-     * The number of cores (default:`1`).
+     * The number of virtual CPUs
      */
     public readonly core!: pulumi.Output<number | undefined>;
     /**
-     * The description of the resource.
+     * The description of the Server. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    public readonly diskEditParameter!: pulumi.Output<outputs.ServerDiskEditParameter | undefined>;
     /**
-     * The flag of disable password auth via SSH.
+     * A list of disk id connected to the server
      */
-    public readonly disablePwAuth!: pulumi.Output<boolean | undefined>;
+    public readonly disks!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID list of the Disks connected to Server.
-     */
-    public readonly disks!: pulumi.Output<string[]>;
-    /**
-     * The IP address of NIC for display. Valid only when connected to switch.  
-     */
-    public readonly displayIpaddress!: pulumi.Output<string>;
-    /**
-     * List of default DNS servers for the zone to which the Server belongs.
+     * A list of IP address of DNS server in the zone
      */
     public /*out*/ readonly dnsServers!: pulumi.Output<string[]>;
     /**
-     * Default gateway address of the Server to set with `"Modify Disk"` API.	 
+     * The flag to use force shutdown when need to reboot/shutdown while applying
      */
-    public readonly gateway!: pulumi.Output<string>;
+    public readonly forceShutdown!: pulumi.Output<boolean | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Server.
+     * The IP address of the gateway used by Server
      */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
+    public /*out*/ readonly gateway!: pulumi.Output<string>;
     /**
-     * The hostname to set with `"Modify Disk"` API.
+     * The hostname of the Server
      */
-    public readonly hostname!: pulumi.Output<string | undefined>;
+    public /*out*/ readonly hostname!: pulumi.Output<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the Server
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of network interface driver.  
-     * Valid value is one of the following: [ "virtio" (default) / "e1000"]
+     * The driver name of network interface. This must be one of [`virtio`/`e1000`]
      */
     public readonly interfaceDriver!: pulumi.Output<string | undefined>;
     /**
-     * The IP address of primary NIC to set with `"Modify Disk"` API.
+     * The IP address assigned to the Server
      */
-    public readonly ipaddress!: pulumi.Output<string>;
+    public /*out*/ readonly ipAddress!: pulumi.Output<string>;
     /**
-     * The MAC address list of NICs connected to Server.
-     */
-    public /*out*/ readonly macaddresses!: pulumi.Output<string[]>;
-    /**
-     * The size of memory (unit:`GB`, default:`1`).
+     * The size of memory in GiB
      */
     public readonly memory!: pulumi.Output<number | undefined>;
     /**
-     * The name of the resource.
+     * The name of the Server. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The primary NIC's connection destination.  
-     * Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
+     * The bit length of the subnet assigned to the Server
      */
-    public readonly nic!: pulumi.Output<string | undefined>;
+    public /*out*/ readonly netmask!: pulumi.Output<number>;
     /**
-     * The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
+     * The network address which the `ip_address` belongs
      */
-    public readonly noteIds!: pulumi.Output<string[] | undefined>;
+    public /*out*/ readonly networkAddress!: pulumi.Output<string>;
+    public readonly networkInterfaces!: pulumi.Output<outputs.ServerNetworkInterface[] | undefined>;
     /**
-     * The network address of the Server.
-     */
-    public /*out*/ readonly nwAddress!: pulumi.Output<string>;
-    /**
-     * Network mask length of the Server to set with `"Modify Disk"` API.
-     */
-    public readonly nwMaskLen!: pulumi.Output<string>;
-    /**
-     * The ID list of the Packet Filters connected to Server.
-     */
-    public readonly packetFilterIds!: pulumi.Output<string[]>;
-    /**
-     * The password of OS's administrator to set with `"Modify Disk"` API.
-     */
-    public readonly password!: pulumi.Output<string | undefined>;
-    /**
-     * The ID of the Private Host to which the Server belongs.
+     * The id of the PrivateHost which the Server is assigned
      */
     public readonly privateHostId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the Private Host to which the Server belongs.
+     * The id of the PrivateHost which the Server is assigned
      */
     public /*out*/ readonly privateHostName!: pulumi.Output<string>;
     /**
-     * The ID list of SSH Keys to set with `"Modify Disk"` API.
+     * Any tags to assign to the Server
      */
-    public readonly sshKeyIds!: pulumi.Output<string[] | undefined>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The tag list of the resources.
-     */
-    public readonly tags!: pulumi.Output<string[]>;
-    /**
-     * The hostname of VNC server.
-     */
-    public /*out*/ readonly vncHost!: pulumi.Output<string>;
-    /**
-     * The password of VNC server.
-     */
-    public /*out*/ readonly vncPassword!: pulumi.Output<string>;
-    /**
-     * The port number of VNC server.
-     */
-    public /*out*/ readonly vncPort!: pulumi.Output<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -187,74 +128,52 @@ export class Server extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as ServerState | undefined;
-            inputs["additionalDisplayIpaddresses"] = state ? state.additionalDisplayIpaddresses : undefined;
-            inputs["additionalNics"] = state ? state.additionalNics : undefined;
             inputs["cdromId"] = state ? state.cdromId : undefined;
             inputs["commitment"] = state ? state.commitment : undefined;
             inputs["core"] = state ? state.core : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["disablePwAuth"] = state ? state.disablePwAuth : undefined;
+            inputs["diskEditParameter"] = state ? state.diskEditParameter : undefined;
             inputs["disks"] = state ? state.disks : undefined;
-            inputs["displayIpaddress"] = state ? state.displayIpaddress : undefined;
             inputs["dnsServers"] = state ? state.dnsServers : undefined;
+            inputs["forceShutdown"] = state ? state.forceShutdown : undefined;
             inputs["gateway"] = state ? state.gateway : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["hostname"] = state ? state.hostname : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["interfaceDriver"] = state ? state.interfaceDriver : undefined;
-            inputs["ipaddress"] = state ? state.ipaddress : undefined;
-            inputs["macaddresses"] = state ? state.macaddresses : undefined;
+            inputs["ipAddress"] = state ? state.ipAddress : undefined;
             inputs["memory"] = state ? state.memory : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nic"] = state ? state.nic : undefined;
-            inputs["noteIds"] = state ? state.noteIds : undefined;
-            inputs["nwAddress"] = state ? state.nwAddress : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
-            inputs["packetFilterIds"] = state ? state.packetFilterIds : undefined;
-            inputs["password"] = state ? state.password : undefined;
+            inputs["netmask"] = state ? state.netmask : undefined;
+            inputs["networkAddress"] = state ? state.networkAddress : undefined;
+            inputs["networkInterfaces"] = state ? state.networkInterfaces : undefined;
             inputs["privateHostId"] = state ? state.privateHostId : undefined;
             inputs["privateHostName"] = state ? state.privateHostName : undefined;
-            inputs["sshKeyIds"] = state ? state.sshKeyIds : undefined;
             inputs["tags"] = state ? state.tags : undefined;
-            inputs["vncHost"] = state ? state.vncHost : undefined;
-            inputs["vncPassword"] = state ? state.vncPassword : undefined;
-            inputs["vncPort"] = state ? state.vncPort : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as ServerArgs | undefined;
-            inputs["additionalDisplayIpaddresses"] = args ? args.additionalDisplayIpaddresses : undefined;
-            inputs["additionalNics"] = args ? args.additionalNics : undefined;
             inputs["cdromId"] = args ? args.cdromId : undefined;
             inputs["commitment"] = args ? args.commitment : undefined;
             inputs["core"] = args ? args.core : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["disablePwAuth"] = args ? args.disablePwAuth : undefined;
+            inputs["diskEditParameter"] = args ? args.diskEditParameter : undefined;
             inputs["disks"] = args ? args.disks : undefined;
-            inputs["displayIpaddress"] = args ? args.displayIpaddress : undefined;
-            inputs["gateway"] = args ? args.gateway : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
-            inputs["hostname"] = args ? args.hostname : undefined;
+            inputs["forceShutdown"] = args ? args.forceShutdown : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["interfaceDriver"] = args ? args.interfaceDriver : undefined;
-            inputs["ipaddress"] = args ? args.ipaddress : undefined;
             inputs["memory"] = args ? args.memory : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nic"] = args ? args.nic : undefined;
-            inputs["noteIds"] = args ? args.noteIds : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
-            inputs["packetFilterIds"] = args ? args.packetFilterIds : undefined;
-            inputs["password"] = args ? args.password : undefined;
+            inputs["networkInterfaces"] = args ? args.networkInterfaces : undefined;
             inputs["privateHostId"] = args ? args.privateHostId : undefined;
-            inputs["sshKeyIds"] = args ? args.sshKeyIds : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
             inputs["dnsServers"] = undefined /*out*/;
-            inputs["macaddresses"] = undefined /*out*/;
-            inputs["nwAddress"] = undefined /*out*/;
+            inputs["gateway"] = undefined /*out*/;
+            inputs["hostname"] = undefined /*out*/;
+            inputs["ipAddress"] = undefined /*out*/;
+            inputs["netmask"] = undefined /*out*/;
+            inputs["networkAddress"] = undefined /*out*/;
             inputs["privateHostName"] = undefined /*out*/;
-            inputs["vncHost"] = undefined /*out*/;
-            inputs["vncPassword"] = undefined /*out*/;
-            inputs["vncPort"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -272,139 +191,85 @@ export class Server extends pulumi.CustomResource {
  */
 export interface ServerState {
     /**
-     * The display IP address list of the NICs (excluding primary NIC) of Server.  
-     */
-    readonly additionalDisplayIpaddresses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-     * Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-     */
-    readonly additionalNics?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The ID of the CD-ROM inserted to Server.
+     * The id of the CD-ROM to attach to the Server
      */
     readonly cdromId?: pulumi.Input<string>;
     /**
-     * The plan of assignment of CPU to VM(default:`standard`).  
-     * Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
+     * The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
      */
     readonly commitment?: pulumi.Input<string>;
     /**
-     * The number of cores (default:`1`).
+     * The number of virtual CPUs
      */
     readonly core?: pulumi.Input<number>;
     /**
-     * The description of the resource.
+     * The description of the Server. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
+    readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
-     * The flag of disable password auth via SSH.
-     */
-    readonly disablePwAuth?: pulumi.Input<boolean>;
-    /**
-     * The ID list of the Disks connected to Server.
+     * A list of disk id connected to the server
      */
     readonly disks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The IP address of NIC for display. Valid only when connected to switch.  
-     */
-    readonly displayIpaddress?: pulumi.Input<string>;
-    /**
-     * List of default DNS servers for the zone to which the Server belongs.
+     * A list of IP address of DNS server in the zone
      */
     readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Default gateway address of the Server to set with `"Modify Disk"` API.	 
+     * The flag to use force shutdown when need to reboot/shutdown while applying
+     */
+    readonly forceShutdown?: pulumi.Input<boolean>;
+    /**
+     * The IP address of the gateway used by Server
      */
     readonly gateway?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Server.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The hostname to set with `"Modify Disk"` API.
+     * The hostname of the Server
      */
     readonly hostname?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the Server
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of network interface driver.  
-     * Valid value is one of the following: [ "virtio" (default) / "e1000"]
+     * The driver name of network interface. This must be one of [`virtio`/`e1000`]
      */
     readonly interfaceDriver?: pulumi.Input<string>;
     /**
-     * The IP address of primary NIC to set with `"Modify Disk"` API.
+     * The IP address assigned to the Server
      */
-    readonly ipaddress?: pulumi.Input<string>;
+    readonly ipAddress?: pulumi.Input<string>;
     /**
-     * The MAC address list of NICs connected to Server.
-     */
-    readonly macaddresses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The size of memory (unit:`GB`, default:`1`).
+     * The size of memory in GiB
      */
     readonly memory?: pulumi.Input<number>;
     /**
-     * The name of the resource.
+     * The name of the Server. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The primary NIC's connection destination.  
-     * Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
+     * The bit length of the subnet assigned to the Server
      */
-    readonly nic?: pulumi.Input<string>;
+    readonly netmask?: pulumi.Input<number>;
     /**
-     * The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
+     * The network address which the `ip_address` belongs
      */
-    readonly noteIds?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly networkAddress?: pulumi.Input<string>;
+    readonly networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
     /**
-     * The network address of the Server.
-     */
-    readonly nwAddress?: pulumi.Input<string>;
-    /**
-     * Network mask length of the Server to set with `"Modify Disk"` API.
-     */
-    readonly nwMaskLen?: pulumi.Input<string>;
-    /**
-     * The ID list of the Packet Filters connected to Server.
-     */
-    readonly packetFilterIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The password of OS's administrator to set with `"Modify Disk"` API.
-     */
-    readonly password?: pulumi.Input<string>;
-    /**
-     * The ID of the Private Host to which the Server belongs.
+     * The id of the PrivateHost which the Server is assigned
      */
     readonly privateHostId?: pulumi.Input<string>;
     /**
-     * The name of the Private Host to which the Server belongs.
+     * The id of the PrivateHost which the Server is assigned
      */
     readonly privateHostName?: pulumi.Input<string>;
     /**
-     * The ID list of SSH Keys to set with `"Modify Disk"` API.
-     */
-    readonly sshKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the Server
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The hostname of VNC server.
-     */
-    readonly vncHost?: pulumi.Input<string>;
-    /**
-     * The password of VNC server.
-     */
-    readonly vncPassword?: pulumi.Input<string>;
-    /**
-     * The port number of VNC server.
-     */
-    readonly vncPort?: pulumi.Input<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -414,111 +279,57 @@ export interface ServerState {
  */
 export interface ServerArgs {
     /**
-     * The display IP address list of the NICs (excluding primary NIC) of Server.  
-     */
-    readonly additionalDisplayIpaddresses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The ID list of the Switches connected to NICs (excluding primary NIC) of Server.  
-     * Valid values are one of the following: [ <Switch ID> / "" (disconnected) ]
-     */
-    readonly additionalNics?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The ID of the CD-ROM inserted to Server.
+     * The id of the CD-ROM to attach to the Server
      */
     readonly cdromId?: pulumi.Input<string>;
     /**
-     * The plan of assignment of CPU to VM(default:`standard`).  
-     * Valid value is one of the following: [ "standard" (default) / "dedicatedcpu"]
+     * The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
      */
     readonly commitment?: pulumi.Input<string>;
     /**
-     * The number of cores (default:`1`).
+     * The number of virtual CPUs
      */
     readonly core?: pulumi.Input<number>;
     /**
-     * The description of the resource.
+     * The description of the Server. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
+    readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
-     * The flag of disable password auth via SSH.
-     */
-    readonly disablePwAuth?: pulumi.Input<boolean>;
-    /**
-     * The ID list of the Disks connected to Server.
+     * A list of disk id connected to the server
      */
     readonly disks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The IP address of NIC for display. Valid only when connected to switch.  
+     * The flag to use force shutdown when need to reboot/shutdown while applying
      */
-    readonly displayIpaddress?: pulumi.Input<string>;
+    readonly forceShutdown?: pulumi.Input<boolean>;
     /**
-     * Default gateway address of the Server to set with `"Modify Disk"` API.	 
-     */
-    readonly gateway?: pulumi.Input<string>;
-    /**
-     * The wait time (seconds) to do graceful shutdown the Server.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The hostname to set with `"Modify Disk"` API.
-     */
-    readonly hostname?: pulumi.Input<string>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Server
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of network interface driver.  
-     * Valid value is one of the following: [ "virtio" (default) / "e1000"]
+     * The driver name of network interface. This must be one of [`virtio`/`e1000`]
      */
     readonly interfaceDriver?: pulumi.Input<string>;
     /**
-     * The IP address of primary NIC to set with `"Modify Disk"` API.
-     */
-    readonly ipaddress?: pulumi.Input<string>;
-    /**
-     * The size of memory (unit:`GB`, default:`1`).
+     * The size of memory in GiB
      */
     readonly memory?: pulumi.Input<number>;
     /**
-     * The name of the resource.
+     * The name of the Server. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
     /**
-     * The primary NIC's connection destination.  
-     * Valid value is one of the following: [ "shared" (default) / <Switch ID> / "" (disconnected) ]
-     */
-    readonly nic?: pulumi.Input<string>;
-    /**
-     * The ID list of Notes (Startup-Scripts) to set with `"Modify Disk"` API.
-     */
-    readonly noteIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Network mask length of the Server to set with `"Modify Disk"` API.
-     */
-    readonly nwMaskLen?: pulumi.Input<string>;
-    /**
-     * The ID list of the Packet Filters connected to Server.
-     */
-    readonly packetFilterIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The password of OS's administrator to set with `"Modify Disk"` API.
-     */
-    readonly password?: pulumi.Input<string>;
-    /**
-     * The ID of the Private Host to which the Server belongs.
+     * The id of the PrivateHost which the Server is assigned
      */
     readonly privateHostId?: pulumi.Input<string>;
     /**
-     * The ID list of SSH Keys to set with `"Modify Disk"` API.
-     */
-    readonly sshKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the Server
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

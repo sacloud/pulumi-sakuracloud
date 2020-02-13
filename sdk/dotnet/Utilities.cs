@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using Pulumi;
 
-namespace Pulumi.Sakuracloud
+namespace Pulumi.SakuraCloud
 {
     static class Utilities
     {
@@ -66,11 +66,9 @@ namespace Pulumi.Sakuracloud
         static Utilities()
         {
             var assembly = typeof(Utilities).GetTypeInfo().Assembly;
-            using (var stream = assembly.GetManifestResourceStream("Pulumi.Sakuracloud.version.txt"))
-            using (var reader = new StreamReader(stream))
-            {
-                version = reader.ReadToEnd().Trim();
-            }
+            using var stream = assembly.GetManifestResourceStream("Pulumi.SakuraCloud.version.txt");
+            using var reader = new StreamReader(stream ?? throw new NotSupportedException("Missing embedded version.txt file"));
+            version = reader.ReadToEnd().Trim();
         }
     }
 }

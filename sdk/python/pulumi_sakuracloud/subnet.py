@@ -12,51 +12,49 @@ from . import utilities, tables
 class Subnet(pulumi.CustomResource):
     internet_id: pulumi.Output[str]
     """
-    The ID of the Internet resource.
+    The id of the switch+router resource that the subnet belongs
     """
-    ipaddresses: pulumi.Output[list]
+    ip_addresses: pulumi.Output[list]
     """
-    Global IP address list.
+    A list of assigned global address to the subnet
     """
-    max_ipaddress: pulumi.Output[str]
+    max_ip_address: pulumi.Output[str]
     """
-    Max global IP address.
+    Maximum IP address in assigned global addresses to the subnet
     """
-    min_ipaddress: pulumi.Output[str]
+    min_ip_address: pulumi.Output[str]
     """
-    Min global IP address.
+    Minimum IP address in assigned global addresses to the subnet
+    """
+    netmask: pulumi.Output[float]
+    """
+    The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+    """
+    network_address: pulumi.Output[str]
+    """
+    The IPv4 network address assigned to the Subnet
     """
     next_hop: pulumi.Output[str]
     """
-    The next hop IP address.
-    """
-    nw_address: pulumi.Output[str]
-    """
-    The network address.
-    """
-    nw_mask_len: pulumi.Output[float]
-    """
-    Network mask length.  
-    Valid value is one of the following: [ 28 (default) / 27 / 26 ]
+    The ip address of the next-hop at the subnet
     """
     switch_id: pulumi.Output[str]
+    """
+    The id of the switch connected from the Subnet
+    """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, internet_id=None, next_hop=None, nw_mask_len=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, internet_id=None, netmask=None, next_hop=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Subnet resource. This can be used to create, update, and delete Subnets.
-        
+        Create a Subnet resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] internet_id: The ID of the Internet resource.
-        :param pulumi.Input[str] next_hop: The next hop IP address.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.  
-               Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
+        :param pulumi.Input[str] internet_id: The id of the switch+router resource that the subnet belongs
+        :param pulumi.Input[float] netmask: The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+        :param pulumi.Input[str] next_hop: The ip address of the next-hop at the subnet
+        :param pulumi.Input[str] zone: The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -78,15 +76,15 @@ class Subnet(pulumi.CustomResource):
             if internet_id is None:
                 raise TypeError("Missing required property 'internet_id'")
             __props__['internet_id'] = internet_id
+            __props__['netmask'] = netmask
             if next_hop is None:
                 raise TypeError("Missing required property 'next_hop'")
             __props__['next_hop'] = next_hop
-            __props__['nw_mask_len'] = nw_mask_len
             __props__['zone'] = zone
-            __props__['ipaddresses'] = None
-            __props__['max_ipaddress'] = None
-            __props__['min_ipaddress'] = None
-            __props__['nw_address'] = None
+            __props__['ip_addresses'] = None
+            __props__['max_ip_address'] = None
+            __props__['min_ip_address'] = None
+            __props__['network_address'] = None
             __props__['switch_id'] = None
         super(Subnet, __self__).__init__(
             'sakuracloud:index/subnet:Subnet',
@@ -95,36 +93,35 @@ class Subnet(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, internet_id=None, ipaddresses=None, max_ipaddress=None, min_ipaddress=None, next_hop=None, nw_address=None, nw_mask_len=None, switch_id=None, zone=None):
+    def get(resource_name, id, opts=None, internet_id=None, ip_addresses=None, max_ip_address=None, min_ip_address=None, netmask=None, network_address=None, next_hop=None, switch_id=None, zone=None):
         """
         Get an existing Subnet resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] internet_id: The ID of the Internet resource.
-        :param pulumi.Input[list] ipaddresses: Global IP address list.
-        :param pulumi.Input[str] max_ipaddress: Max global IP address.
-        :param pulumi.Input[str] min_ipaddress: Min global IP address.
-        :param pulumi.Input[str] next_hop: The next hop IP address.
-        :param pulumi.Input[str] nw_address: The network address.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.  
-               Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
+        :param pulumi.Input[str] internet_id: The id of the switch+router resource that the subnet belongs
+        :param pulumi.Input[list] ip_addresses: A list of assigned global address to the subnet
+        :param pulumi.Input[str] max_ip_address: Maximum IP address in assigned global addresses to the subnet
+        :param pulumi.Input[str] min_ip_address: Minimum IP address in assigned global addresses to the subnet
+        :param pulumi.Input[float] netmask: The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+        :param pulumi.Input[str] network_address: The IPv4 network address assigned to the Subnet
+        :param pulumi.Input[str] next_hop: The ip address of the next-hop at the subnet
+        :param pulumi.Input[str] switch_id: The id of the switch connected from the Subnet
+        :param pulumi.Input[str] zone: The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["internet_id"] = internet_id
-        __props__["ipaddresses"] = ipaddresses
-        __props__["max_ipaddress"] = max_ipaddress
-        __props__["min_ipaddress"] = min_ipaddress
+        __props__["ip_addresses"] = ip_addresses
+        __props__["max_ip_address"] = max_ip_address
+        __props__["min_ip_address"] = min_ip_address
+        __props__["netmask"] = netmask
+        __props__["network_address"] = network_address
         __props__["next_hop"] = next_hop
-        __props__["nw_address"] = nw_address
-        __props__["nw_mask_len"] = nw_mask_len
         __props__["switch_id"] = switch_id
         __props__["zone"] = zone
         return Subnet(resource_name, opts=opts, __props__=__props__)

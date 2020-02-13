@@ -2,8 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -41,16 +39,26 @@ export class Provider extends pulumi.ProviderResource {
         let inputs: pulumi.Inputs = {};
         {
             inputs["acceptLanguage"] = args ? args.acceptLanguage : undefined;
-            inputs["apiRequestRateLimit"] = pulumi.output(args ? args.apiRequestRateLimit : undefined).apply(JSON.stringify);
-            inputs["apiRequestTimeout"] = pulumi.output(args ? args.apiRequestTimeout : undefined).apply(JSON.stringify);
+            inputs["apiRequestRateLimit"] = pulumi.output(args ? args.apiRequestRateLimit : undefined).apply(JSON.stringify)
+;
+            inputs["apiRequestTimeout"] = pulumi.output(args ? args.apiRequestTimeout : undefined).apply(JSON.stringify)
+;
             inputs["apiRootUrl"] = args ? args.apiRootUrl : undefined;
-            inputs["retryInterval"] = pulumi.output(args ? args.retryInterval : undefined).apply(JSON.stringify);
-            inputs["retryMax"] = pulumi.output(args ? args.retryMax : undefined).apply(JSON.stringify);
+            inputs["fakeMode"] = args ? args.fakeMode : undefined;
+            inputs["fakeStorePath"] = args ? args.fakeStorePath : undefined;
+            inputs["profile"] = (args ? args.profile : undefined) || (utilities.getEnv("SAKURACLOUD_PROFILE") || "default");
+            inputs["retryMax"] = pulumi.output(args ? args.retryMax : undefined).apply(JSON.stringify)
+;
+            inputs["retryWaitMax"] = pulumi.output(args ? args.retryWaitMax : undefined).apply(JSON.stringify)
+;
+            inputs["retryWaitMin"] = pulumi.output(args ? args.retryWaitMin : undefined).apply(JSON.stringify)
+;
             inputs["secret"] = (args ? args.secret : undefined) || (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN_SECRET") || "");
-            inputs["timeout"] = pulumi.output(args ? args.timeout : undefined).apply(JSON.stringify);
             inputs["token"] = (args ? args.token : undefined) || (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN") || "");
-            inputs["trace"] = pulumi.output(args ? args.trace : undefined).apply(JSON.stringify);
+            inputs["trace"] = args ? args.trace : undefined;
             inputs["zone"] = (args ? args.zone : undefined) || (utilities.getEnv("SAKURACLOUD_ZONE") || "is1b");
+            inputs["zones"] = pulumi.output(args ? args.zones : undefined).apply(JSON.stringify)
+;
         }
         if (!opts) {
             opts = {}
@@ -67,24 +75,82 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+     * `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+     */
     readonly acceptLanguage?: pulumi.Input<string>;
+    /**
+     * The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+     * environment variables, or via a shared credentials file if `profile` is specified. Default:`%!s(int=10)`
+     */
     readonly apiRequestRateLimit?: pulumi.Input<number>;
+    /**
+     * The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+     * environment variables, or via a shared credentials file if `profile` is specified. Default:`%!s(int=300)`
+     */
     readonly apiRequestTimeout?: pulumi.Input<number>;
+    /**
+     * The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+     * via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+     */
     readonly apiRootUrl?: pulumi.Input<string>;
-    readonly retryInterval?: pulumi.Input<number>;
+    /**
+     * The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+     * from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+     */
+    readonly fakeMode?: pulumi.Input<string>;
+    /**
+     * The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+     * provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+     * `profile` is specified
+     */
+    readonly fakeStorePath?: pulumi.Input<string>;
+    /**
+     * The profile name of your SakuraCloud account. Default:`default`
+     */
+    readonly profile?: pulumi.Input<string>;
+    /**
+     * The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+     * sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+     * specified. Default:`100`
+     */
     readonly retryMax?: pulumi.Input<number>;
     /**
-     * Your SakuraCloud APIKey(secret)
+     * The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+     * `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+     * file if `profile` is specified
+     */
+    readonly retryWaitMax?: pulumi.Input<number>;
+    /**
+     * The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+     * `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+     * file if `profile` is specified
+     */
+    readonly retryWaitMin?: pulumi.Input<number>;
+    /**
+     * The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+     * `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
      */
     readonly secret?: pulumi.Input<string>;
-    readonly timeout?: pulumi.Input<number>;
     /**
-     * Your SakuraCloud APIKey(token)
+     * The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+     * `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
      */
     readonly token?: pulumi.Input<string>;
-    readonly trace?: pulumi.Input<boolean>;
     /**
-     * Target SakuraCloud Zone(is1a | is1b | tk1a | tk1v)
+     * The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+     * shared credentials file if `profile` is specified
+     */
+    readonly trace?: pulumi.Input<string>;
+    /**
+     * The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+     * environment variables, or via a shared credentials file if `profile` is specified
      */
     readonly zone?: pulumi.Input<string>;
+    /**
+     * A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+     * specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
+     */
+    readonly zones?: pulumi.Input<pulumi.Input<string>[]>;
 }

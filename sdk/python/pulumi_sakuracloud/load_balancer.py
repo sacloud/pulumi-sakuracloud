@@ -10,124 +10,66 @@ from typing import Union
 from . import utilities, tables
 
 class LoadBalancer(pulumi.CustomResource):
-    default_route: pulumi.Output[str]
-    """
-    Default gateway address of the Load Balancer.	 
-    """
     description: pulumi.Output[str]
     """
-    The description of the VIP.
-    """
-    graceful_shutdown_timeout: pulumi.Output[float]
-    """
-    The wait time (seconds) to do graceful shutdown the server connected to the resource.
-    """
-    high_availability: pulumi.Output[bool]
-    """
-    The flag of enable/disable high-availability mode.
+    The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
-    """
-    ipaddress1: pulumi.Output[str]
-    """
-    The primary IP address of the Load Balancer.
-    """
-    ipaddress2: pulumi.Output[str]
-    """
-    The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
+    The icon id to attach to the LoadBalancer
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
     """
-    nw_mask_len: pulumi.Output[float]
-    """
-    Network mask length.
-    """
+    network_interface: pulumi.Output[dict]
     plan: pulumi.Output[str]
     """
-    The name of the resource plan.  
-    Valid value is one of the following: [ "standard" (default) / "highspec"]
-    """
-    switch_id: pulumi.Output[str]
-    """
-    The ID of the Switch connected to the Load Balancer.
+    The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the LoadBalancer
     """
-    vip_ids: pulumi.Output[list]
     vips: pulumi.Output[list]
-    """
-    VIPs. It contains some attributes to VIPs.
-    
-      * `delayLoop` (`float`) - The interval seconds for health check access.
-      * `description` (`str`) - The description of the VIP.
-      * `port` (`float`) - The port number on which Load Balancer listens.
-      * `servers` (`list`) - Real servers. It contains some attributes to Servers.
-    
-        * `checkPath` (`str`) - The request path used in http/https health check access.
-        * `checkProtocol` (`str`) - Protocol used in health check.  
-          Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-        * `checkStatus` (`str`) - HTTP status code expected by health check access.
-        * `enabled` (`bool`) - The flag of enable/disable the Server.
-        * `ipaddress` (`str`) - The IP address of the Server.
-    
-      * `sorry_server` (`str`) - The hostname or IP address of sorry server.
-      * `vip` (`str`) - The virtual IP address.
-    """
-    vrid: pulumi.Output[float]
-    """
-    VRID used when high-availability mode enabled.
-    """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, default_route=None, description=None, graceful_shutdown_timeout=None, high_availability=None, icon_id=None, ipaddress1=None, ipaddress2=None, name=None, nw_mask_len=None, plan=None, switch_id=None, tags=None, vips=None, vrid=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, description=None, icon_id=None, name=None, network_interface=None, plan=None, tags=None, vips=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud LoadBalancer resource. This can be used to create, update, and delete LoadBalancers.
-        
+        Create a LoadBalancer resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_route: Default gateway address of the Load Balancer.	 
-        :param pulumi.Input[str] description: The description of the VIP.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[bool] high_availability: The flag of enable/disable high-availability mode.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] ipaddress1: The primary IP address of the Load Balancer.
-        :param pulumi.Input[str] ipaddress2: The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.
-        :param pulumi.Input[str] plan: The name of the resource plan.  
-               Valid value is one of the following: [ "standard" (default) / "highspec"]
-        :param pulumi.Input[str] switch_id: The ID of the Switch connected to the Load Balancer.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[list] vips: VIPs. It contains some attributes to VIPs.
-        :param pulumi.Input[float] vrid: VRID used when high-availability mode enabled.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-        
-        The **vips** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - The interval seconds for health check access.
-          * `description` (`pulumi.Input[str]`) - The description of the VIP.
-          * `port` (`pulumi.Input[float]`) - The port number on which Load Balancer listens.
-          * `servers` (`pulumi.Input[list]`) - Real servers. It contains some attributes to Servers.
-        
-            * `checkPath` (`pulumi.Input[str]`) - The request path used in http/https health check access.
-            * `checkProtocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-              Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-            * `checkStatus` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
-            * `enabled` (`pulumi.Input[bool]`) - The flag of enable/disable the Server.
-            * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Server.
-        
-          * `sorry_server` (`pulumi.Input[str]`) - The hostname or IP address of sorry server.
-          * `vip` (`pulumi.Input[str]`) - The virtual IP address.
+        :param pulumi.Input[str] description: The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the LoadBalancer
+        :param pulumi.Input[str] name: The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] plan: The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
+        :param pulumi.Input[list] tags: Any tags to assign to the LoadBalancer
+        :param pulumi.Input[str] zone: The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
+        The **network_interface** object supports the following:
+
+          * `gateway` (`pulumi.Input[str]`)
+          * `ip_addresses` (`pulumi.Input[list]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `switch_id` (`pulumi.Input[str]`)
+          * `vrid` (`pulumi.Input[float]`)
+
+        The **vips** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `description` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `servers` (`pulumi.Input[list]`)
+            * `enabled` (`pulumi.Input[bool]`)
+            * `ip_address` (`pulumi.Input[str]`)
+            * `path` (`pulumi.Input[str]`)
+            * `protocol` (`pulumi.Input[str]`)
+            * `status` (`pulumi.Input[str]`)
+
+          * `sorry_server` (`pulumi.Input[str]`)
+          * `vip` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -146,30 +88,16 @@ class LoadBalancer(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            __props__['default_route'] = default_route
             __props__['description'] = description
-            __props__['graceful_shutdown_timeout'] = graceful_shutdown_timeout
-            __props__['high_availability'] = high_availability
             __props__['icon_id'] = icon_id
-            if ipaddress1 is None:
-                raise TypeError("Missing required property 'ipaddress1'")
-            __props__['ipaddress1'] = ipaddress1
-            __props__['ipaddress2'] = ipaddress2
             __props__['name'] = name
-            if nw_mask_len is None:
-                raise TypeError("Missing required property 'nw_mask_len'")
-            __props__['nw_mask_len'] = nw_mask_len
+            if network_interface is None:
+                raise TypeError("Missing required property 'network_interface'")
+            __props__['network_interface'] = network_interface
             __props__['plan'] = plan
-            if switch_id is None:
-                raise TypeError("Missing required property 'switch_id'")
-            __props__['switch_id'] = switch_id
             __props__['tags'] = tags
             __props__['vips'] = vips
-            if vrid is None:
-                raise TypeError("Missing required property 'vrid'")
-            __props__['vrid'] = vrid
             __props__['zone'] = zone
-            __props__['vip_ids'] = None
         super(LoadBalancer, __self__).__init__(
             'sakuracloud:index/loadBalancer:LoadBalancer',
             resource_name,
@@ -177,68 +105,55 @@ class LoadBalancer(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, default_route=None, description=None, graceful_shutdown_timeout=None, high_availability=None, icon_id=None, ipaddress1=None, ipaddress2=None, name=None, nw_mask_len=None, plan=None, switch_id=None, tags=None, vip_ids=None, vips=None, vrid=None, zone=None):
+    def get(resource_name, id, opts=None, description=None, icon_id=None, name=None, network_interface=None, plan=None, tags=None, vips=None, zone=None):
         """
         Get an existing LoadBalancer resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_route: Default gateway address of the Load Balancer.	 
-        :param pulumi.Input[str] description: The description of the VIP.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[bool] high_availability: The flag of enable/disable high-availability mode.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] ipaddress1: The primary IP address of the Load Balancer.
-        :param pulumi.Input[str] ipaddress2: The secondly IP address of the Load Balancer. Used when high-availability mode enabled.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] nw_mask_len: Network mask length.
-        :param pulumi.Input[str] plan: The name of the resource plan.  
-               Valid value is one of the following: [ "standard" (default) / "highspec"]
-        :param pulumi.Input[str] switch_id: The ID of the Switch connected to the Load Balancer.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[list] vips: VIPs. It contains some attributes to VIPs.
-        :param pulumi.Input[float] vrid: VRID used when high-availability mode enabled.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-        
-        The **vips** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - The interval seconds for health check access.
-          * `description` (`pulumi.Input[str]`) - The description of the VIP.
-          * `port` (`pulumi.Input[float]`) - The port number on which Load Balancer listens.
-          * `servers` (`pulumi.Input[list]`) - Real servers. It contains some attributes to Servers.
-        
-            * `checkPath` (`pulumi.Input[str]`) - The request path used in http/https health check access.
-            * `checkProtocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-              Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-            * `checkStatus` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
-            * `enabled` (`pulumi.Input[bool]`) - The flag of enable/disable the Server.
-            * `ipaddress` (`pulumi.Input[str]`) - The IP address of the Server.
-        
-          * `sorry_server` (`pulumi.Input[str]`) - The hostname or IP address of sorry server.
-          * `vip` (`pulumi.Input[str]`) - The virtual IP address.
+        :param pulumi.Input[str] description: The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the LoadBalancer
+        :param pulumi.Input[str] name: The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] plan: The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
+        :param pulumi.Input[list] tags: Any tags to assign to the LoadBalancer
+        :param pulumi.Input[str] zone: The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/load_balancer.html.markdown.
+        The **network_interface** object supports the following:
+
+          * `gateway` (`pulumi.Input[str]`)
+          * `ip_addresses` (`pulumi.Input[list]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `switch_id` (`pulumi.Input[str]`)
+          * `vrid` (`pulumi.Input[float]`)
+
+        The **vips** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `description` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `servers` (`pulumi.Input[list]`)
+            * `enabled` (`pulumi.Input[bool]`)
+            * `ip_address` (`pulumi.Input[str]`)
+            * `path` (`pulumi.Input[str]`)
+            * `protocol` (`pulumi.Input[str]`)
+            * `status` (`pulumi.Input[str]`)
+
+          * `sorry_server` (`pulumi.Input[str]`)
+          * `vip` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-        __props__["default_route"] = default_route
+
         __props__["description"] = description
-        __props__["graceful_shutdown_timeout"] = graceful_shutdown_timeout
-        __props__["high_availability"] = high_availability
         __props__["icon_id"] = icon_id
-        __props__["ipaddress1"] = ipaddress1
-        __props__["ipaddress2"] = ipaddress2
         __props__["name"] = name
-        __props__["nw_mask_len"] = nw_mask_len
+        __props__["network_interface"] = network_interface
         __props__["plan"] = plan
-        __props__["switch_id"] = switch_id
         __props__["tags"] = tags
-        __props__["vip_ids"] = vip_ids
         __props__["vips"] = vips
-        __props__["vrid"] = vrid
         __props__["zone"] = zone
         return LoadBalancer(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):

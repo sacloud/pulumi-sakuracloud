@@ -6,9 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/pulumi/pulumi/pkg/testing/integration"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestExamples(t *testing.T) {
@@ -27,7 +26,7 @@ func TestExamples(t *testing.T) {
 
 	// base options shared amongst all tests.
 	base := integration.ProgramTestOptions{
-		Config: map[string]string{
+		Secrets: map[string]string{
 			"sakuracloud:token":  token,
 			"sakuracloud:secret": secret,
 		},

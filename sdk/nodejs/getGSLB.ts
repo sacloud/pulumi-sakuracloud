@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud GSLB.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getGSLB({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/gslb.html.markdown.
- */
 export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promise<GetGSLBResult> & GetGSLBResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promis
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetGSLBResult> = pulumi.runtime.invoke("sakuracloud:index/getGSLB:getGSLB", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
     }, opts);
 
     return pulumi.utils.liftProperties(promise, opts);
@@ -44,61 +26,25 @@ export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getGSLB.
  */
 export interface GetGSLBArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetGSLBFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
+    readonly filter?: inputs.GetGSLBFilter;
 }
 
 /**
  * A collection of values returned by getGSLB.
  */
 export interface GetGSLBResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetGSLBFilter[];
-    /**
-     * FQDN to access this resource.
-     */
+    readonly filter?: outputs.GetGSLBFilter;
     readonly fqdn: string;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     readonly healthChecks: outputs.GetGSLBHealthCheck[];
-    /**
-     * The ID of the icon of the resource.
-     */
     readonly iconId: string;
-    /**
-     * Name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The hostname or IP address of sorry server.
-     */
-    readonly sorryServer: string;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The flag for enable/disable weighting.
-     */
-    readonly weighted: boolean;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly servers: outputs.GetGSLBServer[];
+    readonly sorryServer: string;
+    readonly tags: string[];
+    readonly weighted: boolean;
 }

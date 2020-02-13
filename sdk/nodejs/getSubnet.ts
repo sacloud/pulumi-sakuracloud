@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Subnet.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
- */
 export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Promise<GetSubnetResult> & GetSubnetResult {
     if (!opts) {
         opts = {}
@@ -32,13 +27,7 @@ export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Pro
  * A collection of arguments for invoking getSubnet.
  */
 export interface GetSubnetArgs {
-    /**
-     * The index of the target subnet.
-     */
     readonly index: number;
-    /**
-     * The ID of the Internet resource.
-     */
     readonly internetId: string;
     readonly zone?: string;
 }
@@ -47,42 +36,18 @@ export interface GetSubnetArgs {
  * A collection of values returned by getSubnet.
  */
 export interface GetSubnetResult {
-    readonly index: number;
-    readonly internetId: string;
-    /**
-     * Global IP address list.
-     */
-    readonly ipaddresses: string[];
-    /**
-     * Max global IP address.
-     */
-    readonly maxIpaddress: string;
-    /**
-     * Min global IP address.
-     */
-    readonly minIpaddress: string;
-    /**
-     * Next hop address.
-     */
-    readonly nextHop: string;
-    /**
-     * The network address.
-     */
-    readonly nwAddress: string;
-    /**
-     * Network mask length of the Subnet.
-     */
-    readonly nwMaskLen: number;
-    /**
-     * The ID of the switch connected to the Subnet.
-     */
-    readonly switchId: string;
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly index: number;
+    readonly internetId: string;
+    readonly ipAddresses: string[];
+    readonly maxIpAddress: string;
+    readonly minIpAddress: string;
+    readonly netmask: number;
+    readonly networkAddress: string;
+    readonly nextHop: string;
+    readonly switchId: string;
+    readonly zone: string;
 }

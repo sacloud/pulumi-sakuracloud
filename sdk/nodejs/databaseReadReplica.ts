@@ -2,13 +2,10 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Database(ReadReplica) resource. This can be used to create, update, and delete Databases.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database_read_replica.html.markdown.
- */
 export class DatabaseReadReplica extends pulumi.CustomResource {
     /**
      * Get an existing DatabaseReadReplica resource's state with the given name, ID, and optional extra
@@ -37,47 +34,28 @@ export class DatabaseReadReplica extends pulumi.CustomResource {
     }
 
     /**
-     * The default route IP address of the database.
-     */
-    public readonly defaultRoute!: pulumi.Output<string>;
-    /**
-     * The description of the resource.
+     * The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the read-replica database
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The IP address of the database.
-     */
-    public readonly ipaddress1!: pulumi.Output<string>;
-    /**
-     * The ID of the master Database Appliance.
+     * The id of the replication master database
      */
     public readonly masterId!: pulumi.Output<string>;
     /**
-     * The name of the resource.
+     * The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly networkInterface!: pulumi.Output<outputs.DatabaseReadReplicaNetworkInterface>;
     /**
-     * The network mask length of the database.
+     * Any tags to assign to the read-replica database
      */
-    public readonly nwMaskLen!: pulumi.Output<number>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the switch connected to the database.
-     */
-    public readonly switchId!: pulumi.Output<string>;
-    /**
-     * The tag list of the resources.
-     */
-    public readonly tags!: pulumi.Output<string[]>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -93,34 +71,26 @@ export class DatabaseReadReplica extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as DatabaseReadReplicaState | undefined;
-            inputs["defaultRoute"] = state ? state.defaultRoute : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
-            inputs["ipaddress1"] = state ? state.ipaddress1 : undefined;
             inputs["masterId"] = state ? state.masterId : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
-            inputs["switchId"] = state ? state.switchId : undefined;
+            inputs["networkInterface"] = state ? state.networkInterface : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as DatabaseReadReplicaArgs | undefined;
-            if (!args || args.ipaddress1 === undefined) {
-                throw new Error("Missing required property 'ipaddress1'");
-            }
             if (!args || args.masterId === undefined) {
                 throw new Error("Missing required property 'masterId'");
             }
-            inputs["defaultRoute"] = args ? args.defaultRoute : undefined;
+            if (!args || args.networkInterface === undefined) {
+                throw new Error("Missing required property 'networkInterface'");
+            }
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
-            inputs["ipaddress1"] = args ? args.ipaddress1 : undefined;
             inputs["masterId"] = args ? args.masterId : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
-            inputs["switchId"] = args ? args.switchId : undefined;
+            inputs["networkInterface"] = args ? args.networkInterface : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
@@ -140,47 +110,28 @@ export class DatabaseReadReplica extends pulumi.CustomResource {
  */
 export interface DatabaseReadReplicaState {
     /**
-     * The default route IP address of the database.
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the read-replica database
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the database.
-     */
-    readonly ipaddress1?: pulumi.Input<string>;
-    /**
-     * The ID of the master Database Appliance.
+     * The id of the replication master database
      */
     readonly masterId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface?: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
     /**
-     * The network mask length of the database.
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
-    /**
-     * The ID of the switch connected to the database.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the read-replica database
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -190,47 +141,28 @@ export interface DatabaseReadReplicaState {
  */
 export interface DatabaseReadReplicaArgs {
     /**
-     * The default route IP address of the database.
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the read-replica database
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the database.
-     */
-    readonly ipaddress1: pulumi.Input<string>;
-    /**
-     * The ID of the master Database Appliance.
+     * The id of the replication master database
      */
     readonly masterId: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
     /**
-     * The network mask length of the database.
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
-    /**
-     * The ID of the switch connected to the database.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the read-replica database
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
