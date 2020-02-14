@@ -36,6 +36,8 @@ namespace Pulumi.SakuraCloud
         public readonly string Name;
         public readonly string SubdomainLabel;
         public readonly ImmutableArray<string> Tags;
+        public readonly ImmutableArray<Outputs.GetContainerRegistryUsersResult> Users;
+        public readonly string VirtualDomain;
         /// <summary>
         /// id is the provider-assigned unique ID for this managed resource.
         /// </summary>
@@ -51,6 +53,8 @@ namespace Pulumi.SakuraCloud
             string name,
             string subdomainLabel,
             ImmutableArray<string> tags,
+            ImmutableArray<Outputs.GetContainerRegistryUsersResult> users,
+            string virtualDomain,
             string id)
         {
             AccessLevel = accessLevel;
@@ -61,6 +65,8 @@ namespace Pulumi.SakuraCloud
             Name = name;
             SubdomainLabel = subdomainLabel;
             Tags = tags;
+            Users = users;
+            VirtualDomain = virtualDomain;
             Id = id;
         }
     }
@@ -159,6 +165,22 @@ namespace Pulumi.SakuraCloud
             Id = id;
             Names = names;
             Tags = tags;
+        }
+    }
+
+    [OutputType]
+    public sealed class GetContainerRegistryUsersResult
+    {
+        public readonly string Name;
+        public readonly string Permission;
+
+        [OutputConstructor]
+        private GetContainerRegistryUsersResult(
+            string name,
+            string permission)
+        {
+            Name = name;
+            Permission = permission;
         }
     }
     }

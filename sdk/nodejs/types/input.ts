@@ -8,6 +8,7 @@ import * as outputs from "../types/output";
 export interface ContainerRegistryUser {
     name: pulumi.Input<string>;
     password: pulumi.Input<string>;
+    permission: pulumi.Input<string>;
 }
 
 export interface DNSRecord {

@@ -45,4 +45,6 @@ export interface GetContainerRegistryResult {
     readonly name: string;
     readonly subdomainLabel: string;
     readonly tags: string[];
+    readonly users: outputs.GetContainerRegistryUser[];
+    readonly virtualDomain: string;
 }

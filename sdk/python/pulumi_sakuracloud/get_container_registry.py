@@ -13,7 +13,7 @@ class GetContainerRegistryResult:
     """
     A collection of values returned by getContainerRegistry.
     """
-    def __init__(__self__, access_level=None, description=None, filter=None, fqdn=None, icon_id=None, id=None, name=None, subdomain_label=None, tags=None):
+    def __init__(__self__, access_level=None, description=None, filter=None, fqdn=None, icon_id=None, id=None, name=None, subdomain_label=None, tags=None, users=None, virtual_domain=None):
         if access_level and not isinstance(access_level, str):
             raise TypeError("Expected argument 'access_level' to be a str")
         __self__.access_level = access_level
@@ -44,6 +44,12 @@ class GetContainerRegistryResult:
         if tags and not isinstance(tags, list):
             raise TypeError("Expected argument 'tags' to be a list")
         __self__.tags = tags
+        if users and not isinstance(users, list):
+            raise TypeError("Expected argument 'users' to be a list")
+        __self__.users = users
+        if virtual_domain and not isinstance(virtual_domain, str):
+            raise TypeError("Expected argument 'virtual_domain' to be a str")
+        __self__.virtual_domain = virtual_domain
 class AwaitableGetContainerRegistryResult(GetContainerRegistryResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -58,7 +64,9 @@ class AwaitableGetContainerRegistryResult(GetContainerRegistryResult):
             id=self.id,
             name=self.name,
             subdomain_label=self.subdomain_label,
-            tags=self.tags)
+            tags=self.tags,
+            users=self.users,
+            virtual_domain=self.virtual_domain)
 
 def get_container_registry(filter=None,opts=None):
     """
@@ -94,4 +102,6 @@ def get_container_registry(filter=None,opts=None):
         id=__ret__.get('id'),
         name=__ret__.get('name'),
         subdomain_label=__ret__.get('subdomainLabel'),
-        tags=__ret__.get('tags'))
+        tags=__ret__.get('tags'),
+        users=__ret__.get('users'),
+        virtual_domain=__ret__.get('virtualDomain'))

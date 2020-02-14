@@ -105,6 +105,7 @@ _SNAKE_TO_CAMEL_CASE_TABLE = {
     "traffic_control": "trafficControl",
     "update_delay_sec": "updateDelaySec",
     "vip_failover": "vipFailover",
+    "virtual_domain": "virtualDomain",
 }
 
 _CAMEL_TO_SNAKE_CASE_TABLE = {
@@ -210,4 +211,5 @@ _CAMEL_TO_SNAKE_CASE_TABLE = {
     "trafficControl": "traffic_control",
     "updateDelaySec": "update_delay_sec",
     "vipFailover": "vip_failover",
+    "virtualDomain": "virtual_domain",
 }

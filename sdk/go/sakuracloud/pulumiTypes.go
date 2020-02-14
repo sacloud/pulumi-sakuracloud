@@ -14,6 +14,7 @@ import (
 type ContainerRegistryUser struct {
 	Name string `pulumi:"name"`
 	Password string `pulumi:"password"`
+	Permission string `pulumi:"permission"`
 }
 
 type ContainerRegistryUserInput interface {
@@ -26,6 +27,7 @@ type ContainerRegistryUserInput interface {
 type ContainerRegistryUserArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	Password pulumi.StringInput `pulumi:"password"`
+	Permission pulumi.StringInput `pulumi:"permission"`
 }
 
 func (ContainerRegistryUserArgs) ElementType() reflect.Type {
@@ -81,6 +83,10 @@ func (o ContainerRegistryUserOutput) Name() pulumi.StringOutput {
 
 func (o ContainerRegistryUserOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func (v ContainerRegistryUser) string { return v.Password }).(pulumi.StringOutput)
+}
+
+func (o ContainerRegistryUserOutput) Permission() pulumi.StringOutput {
+	return o.ApplyT(func (v ContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
 }
 
 type ContainerRegistryUserArrayOutput struct { *pulumi.OutputState}
@@ -6361,6 +6367,98 @@ func (o GetContainerRegistryFilterConditionArrayOutput) Index(i pulumi.IntInput)
 	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetContainerRegistryFilterCondition {
 		return vs[0].([]GetContainerRegistryFilterCondition)[vs[1].(int)]
 	}).(GetContainerRegistryFilterConditionOutput)
+}
+
+type GetContainerRegistryUser struct {
+	Name string `pulumi:"name"`
+	Permission string `pulumi:"permission"`
+}
+
+type GetContainerRegistryUserInput interface {
+	pulumi.Input
+
+	ToGetContainerRegistryUserOutput() GetContainerRegistryUserOutput
+	ToGetContainerRegistryUserOutputWithContext(context.Context) GetContainerRegistryUserOutput
+}
+
+type GetContainerRegistryUserArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+	Permission pulumi.StringInput `pulumi:"permission"`
+}
+
+func (GetContainerRegistryUserArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerRegistryUser)(nil)).Elem()
+}
+
+func (i GetContainerRegistryUserArgs) ToGetContainerRegistryUserOutput() GetContainerRegistryUserOutput {
+	return i.ToGetContainerRegistryUserOutputWithContext(context.Background())
+}
+
+func (i GetContainerRegistryUserArgs) ToGetContainerRegistryUserOutputWithContext(ctx context.Context) GetContainerRegistryUserOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryUserOutput)
+}
+
+type GetContainerRegistryUserArrayInput interface {
+	pulumi.Input
+
+	ToGetContainerRegistryUserArrayOutput() GetContainerRegistryUserArrayOutput
+	ToGetContainerRegistryUserArrayOutputWithContext(context.Context) GetContainerRegistryUserArrayOutput
+}
+
+type GetContainerRegistryUserArray []GetContainerRegistryUserInput
+
+func (GetContainerRegistryUserArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerRegistryUser)(nil)).Elem()
+}
+
+func (i GetContainerRegistryUserArray) ToGetContainerRegistryUserArrayOutput() GetContainerRegistryUserArrayOutput {
+	return i.ToGetContainerRegistryUserArrayOutputWithContext(context.Background())
+}
+
+func (i GetContainerRegistryUserArray) ToGetContainerRegistryUserArrayOutputWithContext(ctx context.Context) GetContainerRegistryUserArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryUserArrayOutput)
+}
+
+type GetContainerRegistryUserOutput struct { *pulumi.OutputState }
+
+func (GetContainerRegistryUserOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetContainerRegistryUser)(nil)).Elem()
+}
+
+func (o GetContainerRegistryUserOutput) ToGetContainerRegistryUserOutput() GetContainerRegistryUserOutput {
+	return o
+}
+
+func (o GetContainerRegistryUserOutput) ToGetContainerRegistryUserOutputWithContext(ctx context.Context) GetContainerRegistryUserOutput {
+	return o
+}
+
+func (o GetContainerRegistryUserOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func (v GetContainerRegistryUser) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetContainerRegistryUserOutput) Permission() pulumi.StringOutput {
+	return o.ApplyT(func (v GetContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
+}
+
+type GetContainerRegistryUserArrayOutput struct { *pulumi.OutputState}
+
+func (GetContainerRegistryUserArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetContainerRegistryUser)(nil)).Elem()
+}
+
+func (o GetContainerRegistryUserArrayOutput) ToGetContainerRegistryUserArrayOutput() GetContainerRegistryUserArrayOutput {
+	return o
+}
+
+func (o GetContainerRegistryUserArrayOutput) ToGetContainerRegistryUserArrayOutputWithContext(ctx context.Context) GetContainerRegistryUserArrayOutput {
+	return o
+}
+
+func (o GetContainerRegistryUserArrayOutput) Index(i pulumi.IntInput) GetContainerRegistryUserOutput {
+	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetContainerRegistryUser {
+		return vs[0].([]GetContainerRegistryUser)[vs[1].(int)]
+	}).(GetContainerRegistryUserOutput)
 }
 
 type GetDNSFilter struct {
@@ -13158,6 +13256,8 @@ func init() {
 	pulumi.RegisterOutputType(GetContainerRegistryFilterOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetContainerRegistryUserOutput{})
+	pulumi.RegisterOutputType(GetContainerRegistryUserArrayOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterConditionArrayOutput{})

@@ -35,5 +35,7 @@ type LookupContainerRegistryResult struct {
 	Name string `pulumi:"name"`
 	SubdomainLabel string `pulumi:"subdomainLabel"`
 	Tags []string `pulumi:"tags"`
+	Users []GetContainerRegistryUser `pulumi:"users"`
+	VirtualDomain string `pulumi:"virtualDomain"`
 }
 

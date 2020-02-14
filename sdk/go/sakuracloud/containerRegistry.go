@@ -30,6 +30,8 @@ type ContainerRegistry struct {
 	// Any tags to assign to the Container Registry
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	Users ContainerRegistryUserArrayOutput `pulumi:"users"`
+	// The alias for accessing the container registry
+	VirtualDomain pulumi.StringPtrOutput `pulumi:"virtualDomain"`
 }
 
 // NewContainerRegistry registers a new resource with the given unique name, arguments, and options.
@@ -82,6 +84,8 @@ type containerRegistryState struct {
 	// Any tags to assign to the Container Registry
 	Tags []string `pulumi:"tags"`
 	Users []ContainerRegistryUser `pulumi:"users"`
+	// The alias for accessing the container registry
+	VirtualDomain *string `pulumi:"virtualDomain"`
 }
 
 type ContainerRegistryState struct {
@@ -101,6 +105,8 @@ type ContainerRegistryState struct {
 	// Any tags to assign to the Container Registry
 	Tags pulumi.StringArrayInput
 	Users ContainerRegistryUserArrayInput
+	// The alias for accessing the container registry
+	VirtualDomain pulumi.StringPtrInput
 }
 
 func (ContainerRegistryState) ElementType() reflect.Type {
@@ -122,6 +128,8 @@ type containerRegistryArgs struct {
 	// Any tags to assign to the Container Registry
 	Tags []string `pulumi:"tags"`
 	Users []ContainerRegistryUser `pulumi:"users"`
+	// The alias for accessing the container registry
+	VirtualDomain *string `pulumi:"virtualDomain"`
 }
 
 // The set of arguments for constructing a ContainerRegistry resource.
@@ -140,6 +148,8 @@ type ContainerRegistryArgs struct {
 	// Any tags to assign to the Container Registry
 	Tags pulumi.StringArrayInput
 	Users ContainerRegistryUserArrayInput
+	// The alias for accessing the container registry
+	VirtualDomain pulumi.StringPtrInput
 }
 
 func (ContainerRegistryArgs) ElementType() reflect.Type {

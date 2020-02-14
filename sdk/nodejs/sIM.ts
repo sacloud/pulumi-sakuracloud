@@ -32,7 +32,7 @@ export class SIM extends pulumi.CustomResource {
     }
 
     /**
-     * A list of a communication company. Each element must be one of `docomo`/`softbank`/`kddi`
+     * A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
      */
     public readonly carriers!: pulumi.Output<string[]>;
     /**
@@ -138,7 +138,7 @@ export class SIM extends pulumi.CustomResource {
  */
 export interface SIMState {
     /**
-     * A list of a communication company. Each element must be one of `docomo`/`softbank`/`kddi`
+     * A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
      */
     readonly carriers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -188,7 +188,7 @@ export interface SIMState {
  */
 export interface SIMArgs {
     /**
-     * A list of a communication company. Each element must be one of `docomo`/`softbank`/`kddi`
+     * A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
      */
     readonly carriers: pulumi.Input<pulumi.Input<string>[]>;
     /**

@@ -57,6 +57,12 @@ namespace Pulumi.SakuraCloud
         [Output("users")]
         public Output<ImmutableArray<Outputs.ContainerRegistryUsers>> Users { get; private set; } = null!;
 
+        /// <summary>
+        /// The alias for accessing the container registry
+        /// </summary>
+        [Output("virtualDomain")]
+        public Output<string?> VirtualDomain { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a ContainerRegistry resource with the given unique name, arguments, and options.
@@ -154,6 +160,12 @@ namespace Pulumi.SakuraCloud
             set => _users = value;
         }
 
+        /// <summary>
+        /// The alias for accessing the container registry
+        /// </summary>
+        [Input("virtualDomain")]
+        public Input<string>? VirtualDomain { get; set; }
+
         public ContainerRegistryArgs()
         {
         }
@@ -218,6 +230,12 @@ namespace Pulumi.SakuraCloud
             set => _users = value;
         }
 
+        /// <summary>
+        /// The alias for accessing the container registry
+        /// </summary>
+        [Input("virtualDomain")]
+        public Input<string>? VirtualDomain { get; set; }
+
         public ContainerRegistryState()
         {
         }
@@ -234,6 +252,9 @@ namespace Pulumi.SakuraCloud
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
 
+        [Input("permission", required: true)]
+        public Input<string> Permission { get; set; } = null!;
+
         public ContainerRegistryUsersArgs()
         {
         }
@@ -246,6 +267,9 @@ namespace Pulumi.SakuraCloud
 
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
+
+        [Input("permission", required: true)]
+        public Input<string> Permission { get; set; } = null!;
 
         public ContainerRegistryUsersGetArgs()
         {
@@ -261,14 +285,17 @@ namespace Pulumi.SakuraCloud
     {
         public readonly string Name;
         public readonly string Password;
+        public readonly string Permission;
 
         [OutputConstructor]
         private ContainerRegistryUsers(
             string name,
-            string password)
+            string password,
+            string permission)
         {
             Name = name;
             Password = password;
+            Permission = permission;
         }
     }
     }

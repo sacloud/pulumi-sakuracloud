@@ -63,6 +63,10 @@ export class ContainerRegistry extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     public readonly users!: pulumi.Output<outputs.ContainerRegistryUser[] | undefined>;
+    /**
+     * The alias for accessing the container registry
+     */
+    public readonly virtualDomain!: pulumi.Output<string | undefined>;
 
     /**
      * Create a ContainerRegistry resource with the given unique name, arguments, and options.
@@ -84,6 +88,7 @@ export class ContainerRegistry extends pulumi.CustomResource {
             inputs["subdomainLabel"] = state ? state.subdomainLabel : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["users"] = state ? state.users : undefined;
+            inputs["virtualDomain"] = state ? state.virtualDomain : undefined;
         } else {
             const args = argsOrState as ContainerRegistryArgs | undefined;
             if (!args || args.accessLevel === undefined) {
@@ -99,6 +104,7 @@ export class ContainerRegistry extends pulumi.CustomResource {
             inputs["subdomainLabel"] = args ? args.subdomainLabel : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["users"] = args ? args.users : undefined;
+            inputs["virtualDomain"] = args ? args.virtualDomain : undefined;
             inputs["fqdn"] = undefined /*out*/;
         }
         if (!opts) {
@@ -146,6 +152,10 @@ export interface ContainerRegistryState {
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
+    /**
+     * The alias for accessing the container registry
+     */
+    readonly virtualDomain?: pulumi.Input<string>;
 }
 
 /**
@@ -178,4 +188,8 @@ export interface ContainerRegistryArgs {
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
+    /**
+     * The alias for accessing the container registry
+     */
+    readonly virtualDomain?: pulumi.Input<string>;
 }

@@ -40,7 +40,11 @@ class ContainerRegistry(pulumi.CustomResource):
     Any tags to assign to the Container Registry
     """
     users: pulumi.Output[list]
-    def __init__(__self__, resource_name, opts=None, access_level=None, description=None, icon_id=None, name=None, subdomain_label=None, tags=None, users=None, __props__=None, __name__=None, __opts__=None):
+    virtual_domain: pulumi.Output[str]
+    """
+    The alias for accessing the container registry
+    """
+    def __init__(__self__, resource_name, opts=None, access_level=None, description=None, icon_id=None, name=None, subdomain_label=None, tags=None, users=None, virtual_domain=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a ContainerRegistry resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -52,11 +56,13 @@ class ContainerRegistry(pulumi.CustomResource):
         :param pulumi.Input[str] subdomain_label: The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range
                [`1`-`64`]
         :param pulumi.Input[list] tags: Any tags to assign to the Container Registry
+        :param pulumi.Input[str] virtual_domain: The alias for accessing the container registry
 
         The **users** object supports the following:
 
           * `name` (`pulumi.Input[str]`)
           * `password` (`pulumi.Input[str]`)
+          * `permission` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -86,6 +92,7 @@ class ContainerRegistry(pulumi.CustomResource):
             __props__['subdomain_label'] = subdomain_label
             __props__['tags'] = tags
             __props__['users'] = users
+            __props__['virtual_domain'] = virtual_domain
             __props__['fqdn'] = None
         super(ContainerRegistry, __self__).__init__(
             'sakuracloud:index/containerRegistry:ContainerRegistry',
@@ -94,7 +101,7 @@ class ContainerRegistry(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, access_level=None, description=None, fqdn=None, icon_id=None, name=None, subdomain_label=None, tags=None, users=None):
+    def get(resource_name, id, opts=None, access_level=None, description=None, fqdn=None, icon_id=None, name=None, subdomain_label=None, tags=None, users=None, virtual_domain=None):
         """
         Get an existing ContainerRegistry resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -110,11 +117,13 @@ class ContainerRegistry(pulumi.CustomResource):
         :param pulumi.Input[str] subdomain_label: The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range
                [`1`-`64`]
         :param pulumi.Input[list] tags: Any tags to assign to the Container Registry
+        :param pulumi.Input[str] virtual_domain: The alias for accessing the container registry
 
         The **users** object supports the following:
 
           * `name` (`pulumi.Input[str]`)
           * `password` (`pulumi.Input[str]`)
+          * `permission` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -128,6 +137,7 @@ class ContainerRegistry(pulumi.CustomResource):
         __props__["subdomain_label"] = subdomain_label
         __props__["tags"] = tags
         __props__["users"] = users
+        __props__["virtual_domain"] = virtual_domain
         return ContainerRegistry(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):
         return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
