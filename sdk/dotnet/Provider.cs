@@ -57,7 +57,7 @@ namespace Pulumi.SakuraCloud
         /// <summary>
         /// The maximum number of SakuraCloud API calls per second. It can also be sourced from the
         /// `SAKURACLOUD_RATE_LIMIT` environment variables, or via a shared credentials file if `profile` is specified.
-        /// Default:`%!s(int=10)`
+        /// Default:`10`
         /// </summary>
         [Input("apiRequestRateLimit", json: true)]
         public Input<int>? ApiRequestRateLimit { get; set; }
@@ -65,7 +65,7 @@ namespace Pulumi.SakuraCloud
         /// <summary>
         /// The timeout seconds for each SakuraCloud API call. It can also be sourced from the
         /// `SAKURACLOUD_API_REQUEST_TIMEOUT` environment variables, or via a shared credentials file if `profile` is
-        /// specified. Default:`%!s(int=300)`
+        /// specified. Default:`300`
         /// </summary>
         [Input("apiRequestTimeout", json: true)]
         public Input<int>? ApiRequestTimeout { get; set; }

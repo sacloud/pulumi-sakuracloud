@@ -20,13 +20,13 @@ The value of AcceptLanguage header used when calling SakuraCloud API. It can als
 api_request_rate_limit = __config__.get('apiRequestRateLimit')
 """
 The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
-environment variables, or via a shared credentials file if `profile` is specified. Default:`%!s(int=10)`
+environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
 """
 
 api_request_timeout = __config__.get('apiRequestTimeout')
 """
 The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
-environment variables, or via a shared credentials file if `profile` is specified. Default:`%!s(int=300)`
+environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
 """
 
 api_root_url = __config__.get('apiRootUrl')
