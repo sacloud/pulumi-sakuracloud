@@ -6,23 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Zone.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const current = sakuracloud.getZone({});
- * const is1a = sakuracloud.getZone({
- *     name: "is1a",
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/zone.html.markdown.
- */
 export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> & GetZoneResult {
     args = args || {};
     if (!opts) {
@@ -43,9 +26,6 @@ export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getZone.
  */
 export interface GetZoneArgs {
-    /**
-     * The name of zone(default: use provider settings).
-     */
     readonly name?: string;
 }
 
@@ -53,32 +33,14 @@ export interface GetZoneArgs {
  * A collection of values returned by getZone.
  */
 export interface GetZoneResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    /**
-     * The IP Address list of the region.
-     */
     readonly dnsServers: string[];
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    /**
-     * The ID of the region.
-     */
-    readonly regionId: string;
-    /**
-     * The Name of the region.
-     */
-    readonly regionName: string;
-    /**
-     * The Id of the resource.
-     */
-    readonly zoneId: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly regionId: string;
+    readonly regionName: string;
+    readonly zoneId: string;
 }

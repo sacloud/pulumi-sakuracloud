@@ -2,108 +2,122 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ContainerRegistryUser {
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permission: pulumi.Input<string>;
+}
+
 export interface DNSRecord {
-    /**
-     * The hostname of target Record. If "@" is specified, it indicates own zone.
-     */
-    name: string;
-    /**
-     * The port number used when `type` is `SRV`. 
-     */
-    port?: number;
-    /**
-     * The priority used when `type` is `MX` or `SRV`.
-     */
-    priority?: number;
-    /**
-     * The ttl value of the Record (unit:`second`). 
-     */
-    ttl?: number;
-    /**
-     * The Record type.  
-     * Valid value is one of the following: [ "A" / "AAAA" / "ALIAS" / "CNAME" / "NS" / "MX" / "TXT" / "SRV" / "CAA" ]
-     */
-    type: string;
-    /**
-     * The value of the Record. 
-     */
-    value: string;
-    /**
-     * The weight used when `type` is `SRV`.
-     */
-    weight?: number;
+    name: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    priority?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number>;
+    type: pulumi.Input<string>;
+    value: pulumi.Input<string>;
+    weight?: pulumi.Input<number>;
+}
+
+export interface DatabaseBackup {
+    time?: pulumi.Input<string>;
+    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatabaseNetworkInterface {
+    gateway: pulumi.Input<string>;
+    ipAddress: pulumi.Input<string>;
+    netmask: pulumi.Input<number>;
+    port?: pulumi.Input<number>;
+    sourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    switchId: pulumi.Input<string>;
+}
+
+export interface DatabaseReadReplicaNetworkInterface {
+    gateway?: pulumi.Input<string>;
+    ipAddress: pulumi.Input<string>;
+    netmask?: pulumi.Input<number>;
+    sourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    switchId?: pulumi.Input<string>;
 }
 
 export interface GSLBHealthCheck {
-    /**
-     * Health check access interval (unit:`second`, default:`10`).
-     */
-    delayLoop?: number;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
-    hostHeader?: string;
-    /**
-     * The request path used in http/https health check access.
-     */
-    path?: string;
-    /**
-     * Port number used in tcp health check access.
-     */
-    port?: number;
-    /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-     */
-    protocol: string;
-    /**
-     * HTTP status code expected by health check access.
-     */
-    status?: string;
+    delayLoop?: pulumi.Input<number>;
+    hostHeader?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+    status?: pulumi.Input<string>;
 }
 
 export interface GSLBServer {
-    /**
-     * The flag for enable/disable the GSLB Server (default:`true`).
-     */
-    enabled?: boolean;
-    /**
-     * The IP address of the GSLB Server.
-     */
-    ipaddress: string;
-    /**
-     * The weight of GSLB server used when weighting is enabled in the GSLB.
-     */
-    weight?: number;
+    enabled?: pulumi.Input<boolean>;
+    ipAddress: pulumi.Input<string>;
+    weight?: pulumi.Input<number>;
 }
 
 export interface GetArchiveFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetArchiveFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetArchiveFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetBridgeFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetBridgeFilterCondition[];
+    id?: string;
+    names?: string[];
+}
+
+export interface GetBridgeFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetCDROMFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetCDROMFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetCDROMFilterCondition {
     name: string;
     values: string[];
 }
 
+export interface GetContainerRegistryFilter {
+    conditions?: outputs.GetContainerRegistryFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetContainerRegistryFilterCondition {
+    name: string;
+    values: string[];
+}
+
+export interface GetContainerRegistryUser {
+    name: string;
+    permission: string;
+}
+
 export interface GetDNSFilter {
+    conditions?: outputs.GetDNSFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetDNSFilterCondition {
     name: string;
     values: string[];
 }
@@ -118,373 +132,387 @@ export interface GetDNSRecord {
     weight: number;
 }
 
+export interface GetDatabaseBackup {
+    time: string;
+    weekdays: string[];
+}
+
 export interface GetDatabaseFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetDatabaseFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetDatabaseFilterCondition {
     name: string;
     values: string[];
 }
 
+export interface GetDatabaseNetworkInterface {
+    gateway: string;
+    ipAddress: string;
+    netmask: number;
+    port: number;
+    sourceRanges: string[];
+    switchId: string;
+}
+
 export interface GetDiskFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetDiskFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetDiskFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetGSLBFilter {
-    /**
-     * Name of the resource.
-     */
+    conditions?: outputs.GetGSLBFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetGSLBFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetGSLBHealthCheck {
-    /**
-     * Health check access interval (unit:`second`).
-     */
     delayLoop: number;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
     hostHeader: string;
-    /**
-     * The request path used in http/https health check access.
-     */
     path: string;
-    /**
-     * Port number used in tcp health check access.
-     */
     port: number;
-    /**
-     * Protocol used in health check.
-     */
     protocol: string;
-    /**
-     * HTTP status code expected by health check access.
-     */
     status: string;
 }
 
+export interface GetGSLBServer {
+    enabled: boolean;
+    ipAddress: string;
+    weight: number;
+}
+
 export interface GetIconFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetIconFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetIconFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetInternetFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetInternetFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetInternetFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetLoadBalancerFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetLoadBalancerFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetLoadBalancerFilterCondition {
     name: string;
     values: string[];
+}
+
+export interface GetLoadBalancerNetworkInterface {
+    gateway: string;
+    ipAddresses: string[];
+    netmask: number;
+    switchId: string;
+    vrid: number;
+}
+
+export interface GetLoadBalancerVip {
+    delayLoop: number;
+    description: string;
+    port: number;
+    servers: outputs.GetLoadBalancerVipServer[];
+    sorryServer: string;
+    vip: string;
+}
+
+export interface GetLoadBalancerVipServer {
+    enabled: boolean;
+    ipAddress: string;
+    path: string;
+    protocol: string;
+    status: string;
+}
+
+export interface GetLocalRouterFilter {
+    conditions?: outputs.GetLocalRouterFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetLocalRouterFilterCondition {
+    name: string;
+    values: string[];
+}
+
+export interface GetLocalRouterNetworkInterface {
+    ipAddresses: string[];
+    netmask: number;
+    vip: string;
+    vrid: number;
+}
+
+export interface GetLocalRouterPeer {
+    description: string;
+    enabled: boolean;
+    peerId: string;
+    secretKey: string;
+}
+
+export interface GetLocalRouterStaticRoute {
+    nextHop: string;
+    prefix: string;
+}
+
+export interface GetLocalRouterSwitch {
+    category: string;
+    code: string;
+    zoneId: string;
 }
 
 export interface GetNFSFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetNFSFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetNFSFilterCondition {
     name: string;
     values: string[];
 }
 
+export interface GetNFSNetworkInterface {
+    gateway: string;
+    ipAddress: string;
+    netmask: number;
+    switchId: string;
+}
+
 export interface GetNoteFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetNoteFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetNoteFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetPacketFilterExpression {
-    /**
-     * The flag to allow packets. Default value is `true`. 
-     */
     allow: boolean;
-    /**
-     * The description of the expression.
-     */
     description: string;
-    /**
-     * The destination port (range).
-     */
-    destPort: string;
-    /**
-     * The target protocol.
-     */
+    destinationPort: string;
     protocol: string;
-    /**
-     * The source network address (range).
-     */
-    sourceNw: string;
-    /**
-     * The source port (range).
-     */
+    sourceNetwork: string;
     sourcePort: string;
 }
 
 export interface GetPacketFilterFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetPacketFilterFilterCondition[];
+    id?: string;
+    names?: string[];
+}
+
+export interface GetPacketFilterFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetPrivateHostFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetPrivateHostFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetPrivateHostFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetProxyLBBindPort {
-    /**
-     * Port number.
-     */
     port: number;
-    /**
-     * Proxy protocol.  
-     */
     proxyMode: string;
-    /**
-     * The flag for enable to redirect to https.
-     */
     redirectToHttps: boolean;
-    /**
-     * Additional response headers. It contains some attributes to Response Header.  
-     */
     responseHeaders: outputs.GetProxyLBBindPortResponseHeader[];
-    /**
-     * The flag for enable to support HTTP/2.
-     */
     supportHttp2: boolean;
 }
 
 export interface GetProxyLBBindPortResponseHeader {
-    /**
-     * The key of additional header.  
-     */
     header: string;
-    /**
-     * The value of additional header.  
-     */
     value: string;
 }
 
 export interface GetProxyLBCertificate {
-    /**
-     * The additional certificates.
-     */
-    additionalCertificates?: outputs.GetProxyLBCertificateAdditionalCertificate[];
-    /**
-     * The intermediate certificate.
-     */
+    additionalCertificates: outputs.GetProxyLBCertificateAdditionalCertificate[];
     intermediateCert: string;
-    /**
-     * The private key.
-     */
     privateKey: string;
-    /**
-     * The server certificate.
-     */
     serverCert: string;
 }
 
 export interface GetProxyLBCertificateAdditionalCertificate {
-    /**
-     * The intermediate certificate.
-     */
     intermediateCert: string;
-    /**
-     * The private key.
-     */
     privateKey: string;
-    /**
-     * The server certificate.
-     */
     serverCert: string;
 }
 
 export interface GetProxyLBFilter {
-    /**
-     * Name of the resource.
-     */
+    conditions?: outputs.GetProxyLBFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetProxyLBFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetProxyLBHealthCheck {
-    /**
-     * Health check access interval (unit:`second`, default:`10`).
-     */
     delayLoop: number;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
     hostHeader: string;
-    /**
-     * The request path used in http health check access.
-     */
     path: string;
-    /**
-     * Port number.
-     */
     port: number;
-    /**
-     * Protocol used in health check.  
-     */
     protocol: string;
 }
 
+export interface GetProxyLBRule {
+    group: string;
+    host: string;
+    path: string;
+}
+
 export interface GetProxyLBServer {
-    /**
-     * The flag for enable/disable the Real-Server (default:`true`).
-     */
     enabled: boolean;
-    /**
-     * The IP address of the Real-Server.
-     */
-    ipaddress: string;
-    /**
-     * Port number.
-     */
+    group: string;
+    ipAddress: string;
     port: number;
 }
 
 export interface GetProxyLBSorryServer {
-    /**
-     * The IP address of the Real-Server.
-     */
-    ipaddress: string;
-    /**
-     * Port number.
-     */
+    ipAddress: string;
     port: number;
 }
 
 export interface GetSSHKeyFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetSSHKeyFilterCondition[];
+    id?: string;
+    names?: string[];
+}
+
+export interface GetSSHKeyFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetServerFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetServerFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetServerFilterCondition {
     name: string;
     values: string[];
 }
 
+export interface GetServerNetworkInterface {
+    macAddress: string;
+    packetFilterId: string;
+    upstream: string;
+    userIpAddress: string;
+}
+
 export interface GetSimpleMonitorFilter {
+    conditions?: outputs.GetSimpleMonitorFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetSimpleMonitorFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetSimpleMonitorHealthCheck {
-    /**
-     * The community name used in snmp health check.
-     */
     community: string;
-    /**
-     * Health check access interval (unit:`second`). 
-     */
-    delayLoop: number;
-    /**
-     * The expect value used in dns/snmp health check.
-     */
     excepctedData: string;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
     hostHeader: string;
-    /**
-     * The OID used in snmp health check.
-     */
     oid: string;
-    /**
-     * The Basic Auth Password request path used in http/https health check access.
-     */
-    password?: string;
-    /**
-     * The request path used in http/https health check access.
-     */
+    password: string;
     path: string;
-    /**
-     * Port number used in health check access.
-     */
     port: number;
-    /**
-     * Protocol used in health check.
-     */
     protocol: string;
-    /**
-     * The QName value used in dns health check access.
-     */
     qname: string;
-    /**
-     * The number of remaining days used in ssh-certificate check.
-     */
     remainingDays: number;
-    /**
-     * The flag of enable/disable SNI.
-     */
     sni: boolean;
-    /**
-     * SNMP cersion used in snmp health check.
-     */
     snmpVersion: string;
-    /**
-     * HTTP status code expected by health check access.
-     */
-    status: string;
-    /**
-     * The Basic Auth Username used in http/https health check access.
-     */
-    username?: string;
+    status: number;
+    username: string;
 }
 
 export interface GetSwitchFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetSwitchFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetSwitchFilterCondition {
     name: string;
     values: string[];
 }
 
 export interface GetVPCRouterDhcpServer {
     dnsServers: string[];
+    interfaceIndex: number;
     rangeStart: string;
     rangeStop: string;
-    vpcRouterInterfaceIndex: number;
 }
 
 export interface GetVPCRouterDhcpStaticMapping {
-    ipaddress: string;
-    macaddress: string;
+    ipAddress: string;
+    macAddress: string;
 }
 
 export interface GetVPCRouterFilter {
-    /**
-     * The name of the resource.
-     */
+    conditions?: outputs.GetVPCRouterFilterCondition[];
+    id?: string;
+    names?: string[];
+    tags?: string[];
+}
+
+export interface GetVPCRouterFilterCondition {
     name: string;
     values: string[];
 }
@@ -492,34 +520,18 @@ export interface GetVPCRouterFilter {
 export interface GetVPCRouterFirewall {
     direction: string;
     expressions: outputs.GetVPCRouterFirewallExpression[];
-    vpcRouterInterfaceIndex: number;
+    interfaceIndex: number;
 }
 
 export interface GetVPCRouterFirewallExpression {
     allow: boolean;
-    /**
-     * The description of the resource.
-     */
     description: string;
-    destNw: string;
-    destPort: string;
+    destinationNetwork: string;
+    destinationPort: string;
     logging: boolean;
     protocol: string;
-    sourceNw: string;
+    sourceNetwork: string;
     sourcePort: string;
-}
-
-export interface GetVPCRouterInterface {
-    ipaddresses: string[];
-    nwMaskLen: number;
-    /**
-     * The ID of the Switch connected to the VPC Router (eth0).
-     */
-    switchId: string;
-    /**
-     * Virtual IP address of the VPC Router. Used when plan is in `premium` or `highspec`.
-     */
-    vip: string;
 }
 
 export interface GetVPCRouterL2tp {
@@ -529,14 +541,11 @@ export interface GetVPCRouterL2tp {
 }
 
 export interface GetVPCRouterPortForwarding {
-    /**
-     * The description of the resource.
-     */
     description: string;
-    globalPort: number;
-    privateAddress: string;
+    privateIp: string;
     privatePort: number;
     protocol: string;
+    publicPort: number;
 }
 
 export interface GetVPCRouterPptp {
@@ -544,41 +553,34 @@ export interface GetVPCRouterPptp {
     rangeStop: string;
 }
 
+export interface GetVPCRouterPrivateNetworkInterface {
+    index: number;
+    ipAddresses: string[];
+    netmask: number;
+    switchId: string;
+    vip: string;
+}
+
+export interface GetVPCRouterPublicNetworkInterface {
+    aliases: string[];
+    ipAddresses: string[];
+    switchId: string;
+    vip: string;
+    vrid: number;
+}
+
 export interface GetVPCRouterSiteToSiteVpn {
-    espAuthenticationProtocol: string;
-    espDhGroup: string;
-    espEncryptionProtocol: string;
-    espLifetime: string;
-    espMode: string;
-    espPerfectForwardSecrecy: string;
-    ikeAuthenticationProtocol: string;
-    ikeEncryptionProtocol: string;
-    ikeLifetime: string;
-    ikeMode: string;
-    ikePerfectForwardSecrecy: string;
-    ikePreSharedSecret: string;
     localPrefixes: string[];
     peer: string;
-    peerId: string;
-    peerInsideNetworks: string[];
-    peerOutsideIpaddress: string;
     preSharedSecret: string;
     remoteId: string;
     routes: string[];
-    vpcRouterInsideNetworks: string[];
-    vpcRouterOutsideIpaddress: string;
 }
 
 export interface GetVPCRouterStaticNat {
-    /**
-     * The description of the resource.
-     */
     description: string;
-    /**
-     * Global IP address of the VPC Router.
-     */
-    globalAddress: string;
-    privateAddress: string;
+    privateIp: string;
+    publicIp: string;
 }
 
 export interface GetVPCRouterStaticRoute {
@@ -587,640 +589,301 @@ export interface GetVPCRouterStaticRoute {
 }
 
 export interface GetVPCRouterUser {
-    /**
-     * The name of the resource.
-     */
     name: string;
     password: string;
+}
+
+export interface LoadBalancerNetworkInterface {
+    gateway?: pulumi.Input<string>;
+    ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    netmask: pulumi.Input<number>;
+    switchId: pulumi.Input<string>;
+    vrid: pulumi.Input<number>;
 }
 
 export interface LoadBalancerVip {
-    /**
-     * The interval seconds for health check access.
-     */
-    delayLoop?: number;
-    /**
-     * The description of the VIP.
-     */
-    description?: string;
-    /**
-     * The port number on which Load Balancer listens.
-     */
-    port: number;
-    /**
-     * Real servers. It contains some attributes to Servers.
-     */
-    servers: outputs.LoadBalancerVipServer[];
-    /**
-     * The hostname or IP address of sorry server.
-     */
-    sorryServer?: string;
-    /**
-     * The virtual IP address.
-     */
-    vip: string;
+    delayLoop?: pulumi.Input<number>;
+    description?: pulumi.Input<string>;
+    port: pulumi.Input<number>;
+    servers?: pulumi.Input<pulumi.Input<outputs.LoadBalancerVipServer>[]>;
+    sorryServer?: pulumi.Input<string>;
+    vip: pulumi.Input<string>;
 }
 
 export interface LoadBalancerVipServer {
-    /**
-     * The request path used in http/https health check access.
-     */
-    checkPath?: string;
-    /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-     */
-    checkProtocol: string;
-    /**
-     * HTTP status code expected by health check access.
-     */
-    checkStatus?: string;
-    /**
-     * The flag of enable/disable the Server.
-     */
-    enabled?: boolean;
-    /**
-     * The IP address of the Server.
-     */
-    ipaddress: string;
+    enabled?: pulumi.Input<boolean>;
+    ipAddress: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    protocol: pulumi.Input<string>;
+    status?: pulumi.Input<string>;
+}
+
+export interface LocalRouterNetworkInterface {
+    ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    netmask: pulumi.Input<number>;
+    vip: pulumi.Input<string>;
+    vrid: pulumi.Input<number>;
+}
+
+export interface LocalRouterPeer {
+    description?: pulumi.Input<string>;
+    enabled?: pulumi.Input<boolean>;
+    peerId: pulumi.Input<string>;
+    secretKey: pulumi.Input<string>;
+}
+
+export interface LocalRouterStaticRoute {
+    nextHop: pulumi.Input<string>;
+    prefix: pulumi.Input<string>;
+}
+
+export interface LocalRouterSwitch {
+    category?: pulumi.Input<string>;
+    code: pulumi.Input<string>;
+    zoneId: pulumi.Input<string>;
+}
+
+export interface MobileGatewayPrivateNetworkInterface {
+    ipAddress: pulumi.Input<string>;
+    netmask: pulumi.Input<number>;
+    switchId: pulumi.Input<string>;
+}
+
+export interface MobileGatewaySim {
+    ipAddress: pulumi.Input<string>;
+    simId: pulumi.Input<string>;
+}
+
+export interface MobileGatewaySimRoute {
+    prefix: pulumi.Input<string>;
+    simId: pulumi.Input<string>;
 }
 
 export interface MobileGatewayStaticRoute {
-    nextHop: string;
-    prefix: string;
+    nextHop: pulumi.Input<string>;
+    prefix: pulumi.Input<string>;
 }
 
 export interface MobileGatewayTrafficControl {
-    /**
-     * The flag of enable/disable Auto Traffic Shaping.
-     */
-    autoTrafficShaping?: boolean;
-    /**
-     * Traffic bandwidth limit(unit:`Kbps`). 
-     */
-    bandWidthLimit?: number;
-    /**
-     * The flag of enable/disable e-mail notification.
-     */
-    enableEmail?: boolean;
-    /**
-     * The flag of enable/disable slack notification.
-     */
-    enableSlack?: boolean;
-    /**
-     * Traffic quota size (unit:`MB`).  
-     */
-    quota: number;
-    /**
-     * The webhook URL of destination of slack notification.
-     */
-    slackWebhook?: string;
+    autoTrafficShaping?: pulumi.Input<boolean>;
+    bandWidthLimit?: pulumi.Input<number>;
+    enableEmail?: pulumi.Input<boolean>;
+    enableSlack?: pulumi.Input<boolean>;
+    quota: pulumi.Input<number>;
+    slackWebhook?: pulumi.Input<string>;
+}
+
+export interface NFSNetworkInterface {
+    gateway?: pulumi.Input<string>;
+    ipAddress: pulumi.Input<string>;
+    netmask: pulumi.Input<number>;
+    switchId: pulumi.Input<string>;
 }
 
 export interface PacketFilterExpression {
-    /**
-     * The flag for allow/deny packets (default:`true`).
-     */
-    allow?: boolean;
-    /**
-     * The description of the expression.
-     */
-    description?: string;
-    /**
-     * Target destination port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    destPort?: string;
-    /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "fragment" / "ip" ]
-     */
-    protocol: string;
-    /**
-     * Target source network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    sourceNw?: string;
-    /**
-     * Target source port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    sourcePort?: string;
+    allow?: pulumi.Input<boolean>;
+    description?: pulumi.Input<string>;
+    destinationPort?: pulumi.Input<string>;
+    protocol: pulumi.Input<string>;
+    sourceNetwork?: pulumi.Input<string>;
+    sourcePort?: pulumi.Input<string>;
+}
+
+export interface PacketFilterRuleExpression {
+    allow?: pulumi.Input<boolean>;
+    description?: pulumi.Input<string>;
+    destinationPort?: pulumi.Input<string>;
+    protocol: pulumi.Input<string>;
+    sourceNetwork?: pulumi.Input<string>;
+    sourcePort?: pulumi.Input<string>;
 }
 
 export interface ProxyLBACMECertificate {
-    /**
-     * Additional certificates.
-     */
-    additionalCertificates: outputs.ProxyLBACMECertificateAdditionalCertificate[];
-    /**
-     * The intermediate certificate.
-     */
-    intermediateCert: string;
-    /**
-     * The private key.
-     */
-    privateKey: string;
-    /**
-     * The server certificate.
-     */
-    serverCert: string;
+    additionalCertificates?: pulumi.Input<pulumi.Input<outputs.ProxyLBACMECertificateAdditionalCertificate>[]>;
+    intermediateCert?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string>;
+    serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBACMECertificateAdditionalCertificate {
-    /**
-     * The intermediate certificate.
-     */
-    intermediateCert: string;
-    /**
-     * The private key.
-     */
-    privateKey: string;
-    /**
-     * The server certificate.
-     */
-    serverCert: string;
+    intermediateCert?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string>;
+    serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBBindPort {
-    /**
-     * Port number.
-     */
-    port?: number;
-    /**
-     * Proxy protocol.  
-     * Valid value is one of the following: [ "http" / "https"]
-     */
-    proxyMode: string;
-    /**
-     * The flag for enable to redirect to https.
-     */
-    redirectToHttps?: boolean;
-    /**
-     * Additional response headers. It contains some attributes to Response Header.  
-     */
-    responseHeaders?: outputs.ProxyLBBindPortResponseHeader[];
-    /**
-     * The flag for enable to support HTTP/2.
-     */
-    supportHttp2?: boolean;
+    port?: pulumi.Input<number>;
+    proxyMode: pulumi.Input<string>;
+    redirectToHttps?: pulumi.Input<boolean>;
+    responseHeaders?: pulumi.Input<pulumi.Input<outputs.ProxyLBBindPortResponseHeader>[]>;
+    supportHttp2?: pulumi.Input<boolean>;
 }
 
 export interface ProxyLBBindPortResponseHeader {
-    /**
-     * The key of additional header.  
-     */
-    header: string;
-    /**
-     * The value of additional header.  
-     */
-    value: string;
+    header: pulumi.Input<string>;
+    value: pulumi.Input<string>;
 }
 
 export interface ProxyLBCertificate {
-    /**
-     * Additional certificates.
-     */
-    additionalCertificates: outputs.ProxyLBCertificateAdditionalCertificate[];
-    /**
-     * The intermediate certificate.
-     */
-    intermediateCert: string;
-    /**
-     * The private key.
-     */
-    privateKey: string;
-    /**
-     * The server certificate.
-     */
-    serverCert: string;
+    additionalCertificates?: pulumi.Input<pulumi.Input<outputs.ProxyLBCertificateAdditionalCertificate>[]>;
+    intermediateCert?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string>;
+    serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBCertificateAdditionalCertificate {
-    /**
-     * The intermediate certificate.
-     */
-    intermediateCert?: string;
-    /**
-     * The private key.
-     */
-    privateKey: string;
-    /**
-     * The server certificate.
-     */
-    serverCert: string;
+    intermediateCert?: pulumi.Input<string>;
+    privateKey: pulumi.Input<string>;
+    serverCert: pulumi.Input<string>;
 }
 
 export interface ProxyLBHealthCheck {
-    /**
-     * Health check access interval (unit:`second`, default:`10`).
-     */
-    delayLoop?: number;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
-    hostHeader?: string;
-    /**
-     * The request path used in http health check access.
-     */
-    path?: string;
-    /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "http" / "tcp" ]
-     */
-    protocol: string;
+    delayLoop?: pulumi.Input<number>;
+    hostHeader?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+}
+
+export interface ProxyLBRule {
+    group?: pulumi.Input<string>;
+    host?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
 }
 
 export interface ProxyLBServer {
-    /**
-     * The flag for enable/disable the Real-Server (default:`true`).
-     */
-    enabled?: boolean;
-    /**
-     * The IP address of the Real-Server.
-     */
-    ipaddress: string;
-    /**
-     * Port number.
-     */
-    port: number;
+    enabled?: pulumi.Input<boolean>;
+    group?: pulumi.Input<string>;
+    ipAddress: pulumi.Input<string>;
+    port: pulumi.Input<number>;
 }
 
 export interface ProxyLBSorryServer {
-    /**
-     * The IP address of the Real-Server.
-     */
-    ipaddress: string;
-    /**
-     * Port number.
-     */
-    port?: number;
+    ipAddress: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+}
+
+export interface ServerDiskEditParameter {
+    changePartitionUuid?: pulumi.Input<boolean>;
+    disablePwAuth?: pulumi.Input<boolean>;
+    enableDhcp?: pulumi.Input<boolean>;
+    gateway?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string>;
+    netmask?: pulumi.Input<number>;
+    noteIds?: pulumi.Input<pulumi.Input<string>[]>;
+    password?: pulumi.Input<string>;
+    sshKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ServerNetworkInterface {
+    macAddress?: pulumi.Input<string>;
+    packetFilterId?: pulumi.Input<string>;
+    upstream: pulumi.Input<string>;
+    userIpAddress?: pulumi.Input<string>;
 }
 
 export interface SimpleMonitorHealthCheck {
-    /**
-     * The community name used in snmp health check.
-     */
-    community?: string;
-    /**
-     * Health check access interval (unit:`second`). 
-     */
-    delayLoop?: number;
-    /**
-     * The expect value used in dns/snmp health check.
-     */
-    excepctedData?: string;
-    /**
-     * The value of `Host` header used in http/https health check access.
-     */
-    hostHeader?: string;
-    /**
-     * The OID used in snmp health check.
-     */
-    oid?: string;
-    /**
-     * The Basic Auth Password request path used in http/https health check access.
-     */
-    password?: string;
-    /**
-     * The request path used in http/https health check access.
-     */
-    path?: string;
-    /**
-     * Port number used in health check access.
-     */
-    port: number;
-    /**
-     * Protocol used in health check.  
-     * Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" / "dns" / "ssh" / "smtp" / "pop3" / "snmp" / "sslcertificate" ]
-     */
-    protocol: string;
-    /**
-     * The QName value used in dns health check access.
-     */
-    qname?: string;
-    /**
-     * The number of remaining days used in ssh-certificate check.
-     */
-    remainingDays?: number;
-    /**
-     * The flag of enable/disable SNI.
-     */
-    sni?: boolean;
-    /**
-     * SNMP cersion used in snmp health check.
-     */
-    snmpVersion?: string;
-    /**
-     * HTTP status code expected by health check access.
-     */
-    status?: string;
-    /**
-     * The Basic Auth Username used in http/https health check access.
-     */
-    username?: string;
+    community?: pulumi.Input<string>;
+    excepctedData?: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string>;
+    oid?: pulumi.Input<string>;
+    password?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+    qname?: pulumi.Input<string>;
+    remainingDays?: pulumi.Input<number>;
+    sni?: pulumi.Input<boolean>;
+    snmpVersion?: pulumi.Input<string>;
+    status?: pulumi.Input<number>;
+    username?: pulumi.Input<string>;
 }
 
 export interface VPCRouterDhcpServer {
-    /**
-     * (Required) DNS server list to be assigned by DHCP.  
-     */
-    dnsServers?: string[];
-    /**
-     * (Required) Start IP address of address range to be assigned by PPTP.
-     */
-    rangeStart: string;
-    /**
-     * (Required) End IP address of address range to be assigned by PPTP.
-     */
-    rangeStop: string;
-    /**
-     * (Required) The NIC index of VPC Router running DHCP Server.
-     */
-    vpcRouterInterfaceIndex: number;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    interfaceIndex: pulumi.Input<number>;
+    rangeStart: pulumi.Input<string>;
+    rangeStop: pulumi.Input<string>;
 }
 
 export interface VPCRouterDhcpStaticMapping {
-    /**
-     * (Required) The MAC address to be the key of the mapping. 
-     */
-    ipaddress: string;
-    /**
-     * (Required) The IP address mapped by MAC address.
-     */
-    macaddress: string;
+    ipAddress: pulumi.Input<string>;
+    macAddress: pulumi.Input<string>;
 }
 
 export interface VPCRouterFirewall {
-    /**
-     * (Required) Direction of filtering packets.  
-     * Valid value is one of the following: [ "send" / "receive" ]
-     */
-    direction: string;
-    /**
-     * (Required) Filtering rules. It contains some attributes to Expressions.
-     */
-    expressions: outputs.VPCRouterFirewallExpression[];
-    /**
-     * (Required) The NIC index of VPC Router running DHCP Server.
-     */
-    vpcRouterInterfaceIndex?: number;
+    direction: pulumi.Input<string>;
+    expressions: pulumi.Input<pulumi.Input<outputs.VPCRouterFirewallExpression>[]>;
+    interfaceIndex?: pulumi.Input<number>;
 }
 
 export interface VPCRouterFirewallExpression {
-    /**
-     * (Required) The flag for allow/deny packets.
-     */
-    allow: boolean;
-    /**
-     * The description of the resource.
-     */
-    description?: string;
-    /**
-     * (Required) Target destination network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    destNw: string;
-    /**
-     * (Required) Target destination port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    destPort: string;
-    /**
-     * (Required) The flag for enable/disable logging.
-     */
-    logging?: boolean;
-    /**
-     * (Required) Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "ip" ]
-     */
-    protocol: string;
-    /**
-     * (Required) Target source network IP address or CIDR or range.  
-     * Valid format is one of the following:
-     * * IP address: `"xxx.xxx.xxx.xxx"`
-     * * CIDR: `"xxx.xxx.xxx.xxx/nn"`
-     * * Range: `"xxx.xxx.xxx.xxx/yyy.yyy.yyy.yyy"`
-     */
-    sourceNw: string;
-    /**
-     * (Required) Target source port.
-     * Valid format is one of the following:
-     * * Number: `"0"` - `"65535"`
-     * * Range: `"xx-yy"`
-     * * Range (hex): `"0xPPPP/0xMMMM"`
-     */
-    sourcePort: string;
-}
-
-export interface VPCRouterInterface {
-    /**
-     * (Required) The MAC address to be the key of the mapping. 
-     */
-    ipaddresses: string[];
-    /**
-     * (Optional) Network mask length of the VPC Router Interface.
-     */
-    nwMaskLen: number;
-    /**
-     * The ID of the switch connected to the VPC Router. Used when plan is `premium` or `highspec`.
-     */
-    switchId: string;
-    /**
-     * The Virtual IP address of the VPC Router. Used when plan is `premium` or `highspec`.
-     */
-    vip?: string;
+    allow: pulumi.Input<boolean>;
+    description?: pulumi.Input<string>;
+    destinationNetwork?: pulumi.Input<string>;
+    destinationPort?: pulumi.Input<string>;
+    logging?: pulumi.Input<boolean>;
+    protocol: pulumi.Input<string>;
+    sourceNetwork?: pulumi.Input<string>;
+    sourcePort?: pulumi.Input<string>;
 }
 
 export interface VPCRouterL2tp {
-    /**
-     * The pre shared secret for IPSec.
-     */
-    preSharedSecret: string;
-    /**
-     * (Required) Start IP address of address range to be assigned by PPTP.
-     */
-    rangeStart: string;
-    /**
-     * (Required) End IP address of address range to be assigned by PPTP.
-     */
-    rangeStop: string;
+    preSharedSecret: pulumi.Input<string>;
+    rangeStart: pulumi.Input<string>;
+    rangeStop: pulumi.Input<string>;
 }
 
 export interface VPCRouterPortForwarding {
-    /**
-     * The description of the resource.
-     */
-    description?: string;
-    /**
-     * (Required) The global port of the Port Forwarding.
-     */
-    globalPort: number;
-    /**
-     * (Required) The private IP address of the Static NAT.
-     */
-    privateAddress: string;
-    /**
-     * (Required) The destination port number of the Port Forwarding.
-     */
-    privatePort: number;
-    /**
-     * (Required) Protocol used in health check.  
-     * Valid value is one of the following: [ "tcp" / "udp" / "icmp" / "ip" ]
-     */
-    protocol: string;
+    description?: pulumi.Input<string>;
+    privateIp: pulumi.Input<string>;
+    privatePort: pulumi.Input<number>;
+    protocol: pulumi.Input<string>;
+    publicPort: pulumi.Input<number>;
 }
 
 export interface VPCRouterPptp {
-    /**
-     * (Required) Start IP address of address range to be assigned by PPTP.
-     */
-    rangeStart: string;
-    /**
-     * (Required) End IP address of address range to be assigned by PPTP.
-     */
-    rangeStop: string;
+    rangeStart: pulumi.Input<string>;
+    rangeStop: pulumi.Input<string>;
+}
+
+export interface VPCRouterPrivateNetworkInterface {
+    index: pulumi.Input<number>;
+    ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    netmask: pulumi.Input<number>;
+    switchId: pulumi.Input<string>;
+    vip?: pulumi.Input<string>;
+}
+
+export interface VPCRouterPublicNetworkInterface {
+    aliases?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    switchId?: pulumi.Input<string>;
+    vip?: pulumi.Input<string>;
+    vrid?: pulumi.Input<number>;
 }
 
 export interface VPCRouterSiteToSiteVpn {
-    /**
-     * ESP authentication protocol.
-     */
-    espAuthenticationProtocol: string;
-    /**
-     * ESP DH group.
-     */
-    espDhGroup: string;
-    /**
-     * ESP encryption protocol.
-     */
-    espEncryptionProtocol: string;
-    /**
-     * ESP lifetime.
-     */
-    espLifetime: string;
-    /**
-     * ESP mode.
-     */
-    espMode: string;
-    /**
-     * ESP perfect forward secrecy.
-     */
-    espPerfectForwardSecrecy: string;
-    /**
-     * IKE authentication protocol.
-     */
-    ikeAuthenticationProtocol: string;
-    /**
-     * IKE encryption protocol.
-     */
-    ikeEncryptionProtocol: string;
-    /**
-     * IKE lifetime.
-     */
-    ikeLifetime: string;
-    /**
-     * IKE mode.
-     */
-    ikeMode: string;
-    /**
-     * IKE perfect forward secrecy.
-     */
-    ikePerfectForwardSecrecy: string;
-    /**
-     * IKE pre shared secret.
-     */
-    ikePreSharedSecret: string;
-    /**
-     * The local prefix.
-     */
-    localPrefixes: string[];
-    /**
-     * The peer IP address.
-     */
-    peer: string;
-    /**
-     * Peer ID.
-     */
-    peerId: string;
-    /**
-     * Peer inside networks.
-     */
-    peerInsideNetworks: string[];
-    /**
-     * Peer outsite ipaddress.
-     */
-    peerOutsideIpaddress: string;
-    /**
-     * The pre shared secret for IPSec.
-     */
-    preSharedSecret: string;
-    /**
-     * The IPSec ID of target.
-     */
-    remoteId: string;
-    /**
-     * The routing prefix.
-     */
-    routes: string[];
-    /**
-     * VPC Router inside networks.
-     */
-    vpcRouterInsideNetworks: string[];
-    /**
-     * VPC Router outside IP address.
-     */
-    vpcRouterOutsideIpaddress: string;
+    localPrefixes: pulumi.Input<pulumi.Input<string>[]>;
+    peer: pulumi.Input<string>;
+    preSharedSecret: pulumi.Input<string>;
+    remoteId: pulumi.Input<string>;
+    routes: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface VPCRouterStaticNat {
-    /**
-     * The description of the resource.
-     */
-    description?: string;
-    /**
-     * (Required) The global IP address of the Static NAT.
-     */
-    globalAddress: string;
-    /**
-     * (Required) The private IP address of the Static NAT.
-     */
-    privateAddress: string;
+    description?: pulumi.Input<string>;
+    privateIp: pulumi.Input<string>;
+    publicIp: pulumi.Input<string>;
 }
 
 export interface VPCRouterStaticRoute {
-    /**
-     * (Required) The next hop IP address of the Static Route.
-     */
-    nextHop: string;
-    /**
-     * (Required) The prefix of the Static Route.
-     */
-    prefix: string;
+    nextHop: pulumi.Input<string>;
+    prefix: pulumi.Input<string>;
 }
 
 export interface VPCRouterUser {
-    /**
-     * The name of the resource.
-     */
-    name: string;
-    /**
-     * (Required) The password.
-     */
-    password: string;
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
 }

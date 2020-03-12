@@ -12,111 +12,92 @@ from . import utilities, tables
 class MobileGateway(pulumi.CustomResource):
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
     """
-    dns_server1: pulumi.Output[str]
+    dns_servers: pulumi.Output[list]
     """
-    The primary DNS server IP address.
-    """
-    dns_server2: pulumi.Output[str]
-    """
-    The secondly DNS server IP address.
-    """
-    graceful_shutdown_timeout: pulumi.Output[float]
-    """
-    The wait time (seconds) to do graceful shutdown the server connected to the resource.
+    A list of IP address used by each connected devices
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the MobileGateway
+    """
+    inter_device_communication: pulumi.Output[bool]
+    """
+    The flag to allow communication between each connected devices
     """
     internet_connection: pulumi.Output[bool]
     """
-    The flag of enable/disable connecting from MobileGateway to the Internet.
+    The flag to enable connect to the Internet
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
     """
-    private_ipaddress: pulumi.Output[str]
+    private_network_interface: pulumi.Output[dict]
+    public_ip: pulumi.Output[str]
     """
-    The IP address on private NIC of the Mobile Gateway.
+    The public IP address assigned to the MobileGateway
     """
-    private_nw_mask_len: pulumi.Output[float]
+    public_netmask: pulumi.Output[float]
     """
-    The network mask length on private NIC of the Mobile Gateway.
+    The bit length of the subnet assigned to the MobileGateway
     """
-    public_ipaddress: pulumi.Output[str]
-    """
-    The IP address on public NIC of the Mobile Gateway.
-    """
-    public_nw_mask_len: pulumi.Output[float]
-    """
-    The network mask length on public NIC of the Mobile Gateway.
-    """
-    sim_ids: pulumi.Output[list]
-    """
-    The ID list of the SIMs connected to the Mobile Gateway.
-    """
+    sim_routes: pulumi.Output[list]
+    sims: pulumi.Output[list]
     static_routes: pulumi.Output[list]
-    switch_id: pulumi.Output[str]
-    """
-    The ID of the switch connected to the Mobile Gateway.
-    """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the MobileGateway
     """
     traffic_control: pulumi.Output[dict]
-    """
-    Traffic control rules. It contains some attributes to Traffic Control.
-    
-      * `autoTrafficShaping` (`bool`) - The flag of enable/disable Auto Traffic Shaping.
-      * `bandWidthLimit` (`float`) - Traffic bandwidth limit(unit:`Kbps`). 
-      * `enableEmail` (`bool`) - The flag of enable/disable e-mail notification.
-      * `enableSlack` (`bool`) - The flag of enable/disable slack notification.
-      * `quota` (`float`) - Traffic quota size (unit:`MB`).  
-      * `slackWebhook` (`str`) - The webhook URL of destination of slack notification.
-    """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, description=None, dns_server1=None, dns_server2=None, graceful_shutdown_timeout=None, icon_id=None, internet_connection=None, name=None, private_ipaddress=None, private_nw_mask_len=None, static_routes=None, switch_id=None, tags=None, traffic_control=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, description=None, dns_servers=None, icon_id=None, inter_device_communication=None, internet_connection=None, name=None, private_network_interface=None, sim_routes=None, sims=None, static_routes=None, tags=None, traffic_control=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Mobile Gateway resource. This can be used to create, update, and delete Mobile Gateways.
-        
+        Create a MobileGateway resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] dns_server1: The primary DNS server IP address.
-        :param pulumi.Input[str] dns_server2: The secondly DNS server IP address.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[bool] internet_connection: The flag of enable/disable connecting from MobileGateway to the Internet.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] private_ipaddress: The IP address on private NIC of the Mobile Gateway.
-        :param pulumi.Input[float] private_nw_mask_len: The network mask length on private NIC of the Mobile Gateway.
-        :param pulumi.Input[str] switch_id: The ID of the switch connected to the Mobile Gateway.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[dict] traffic_control: Traffic control rules. It contains some attributes to Traffic Control.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-        
+        :param pulumi.Input[str] description: The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[list] dns_servers: A list of IP address used by each connected devices
+        :param pulumi.Input[str] icon_id: The icon id to attach to the MobileGateway
+        :param pulumi.Input[bool] inter_device_communication: The flag to allow communication between each connected devices
+        :param pulumi.Input[bool] internet_connection: The flag to enable connect to the Internet
+        :param pulumi.Input[str] name: The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[list] tags: Any tags to assign to the MobileGateway
+        :param pulumi.Input[str] zone: The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
+
+        The **private_network_interface** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `switch_id` (`pulumi.Input[str]`)
+
+        The **sim_routes** object supports the following:
+
+          * `prefix` (`pulumi.Input[str]`)
+          * `simId` (`pulumi.Input[str]`)
+
+        The **sims** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `simId` (`pulumi.Input[str]`)
+
         The **static_routes** object supports the following:
-        
+
           * `next_hop` (`pulumi.Input[str]`)
           * `prefix` (`pulumi.Input[str]`)
-        
-        The **traffic_control** object supports the following:
-        
-          * `autoTrafficShaping` (`pulumi.Input[bool]`) - The flag of enable/disable Auto Traffic Shaping.
-          * `bandWidthLimit` (`pulumi.Input[float]`) - Traffic bandwidth limit(unit:`Kbps`). 
-          * `enableEmail` (`pulumi.Input[bool]`) - The flag of enable/disable e-mail notification.
-          * `enableSlack` (`pulumi.Input[bool]`) - The flag of enable/disable slack notification.
-          * `quota` (`pulumi.Input[float]`) - Traffic quota size (unit:`MB`).  
-          * `slackWebhook` (`pulumi.Input[str]`) - The webhook URL of destination of slack notification.
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
+        The **traffic_control** object supports the following:
+
+          * `autoTrafficShaping` (`pulumi.Input[bool]`)
+          * `bandWidthLimit` (`pulumi.Input[float]`)
+          * `enableEmail` (`pulumi.Input[bool]`)
+          * `enableSlack` (`pulumi.Input[bool]`)
+          * `quota` (`pulumi.Input[float]`)
+          * `slackWebhook` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -136,22 +117,22 @@ class MobileGateway(pulumi.CustomResource):
             __props__ = dict()
 
             __props__['description'] = description
-            __props__['dns_server1'] = dns_server1
-            __props__['dns_server2'] = dns_server2
-            __props__['graceful_shutdown_timeout'] = graceful_shutdown_timeout
+            if dns_servers is None:
+                raise TypeError("Missing required property 'dns_servers'")
+            __props__['dns_servers'] = dns_servers
             __props__['icon_id'] = icon_id
+            __props__['inter_device_communication'] = inter_device_communication
             __props__['internet_connection'] = internet_connection
             __props__['name'] = name
-            __props__['private_ipaddress'] = private_ipaddress
-            __props__['private_nw_mask_len'] = private_nw_mask_len
+            __props__['private_network_interface'] = private_network_interface
+            __props__['sim_routes'] = sim_routes
+            __props__['sims'] = sims
             __props__['static_routes'] = static_routes
-            __props__['switch_id'] = switch_id
             __props__['tags'] = tags
             __props__['traffic_control'] = traffic_control
             __props__['zone'] = zone
-            __props__['public_ipaddress'] = None
-            __props__['public_nw_mask_len'] = None
-            __props__['sim_ids'] = None
+            __props__['public_ip'] = None
+            __props__['public_netmask'] = None
         super(MobileGateway, __self__).__init__(
             'sakuracloud:index/mobileGateway:MobileGateway',
             resource_name,
@@ -159,64 +140,71 @@ class MobileGateway(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, description=None, dns_server1=None, dns_server2=None, graceful_shutdown_timeout=None, icon_id=None, internet_connection=None, name=None, private_ipaddress=None, private_nw_mask_len=None, public_ipaddress=None, public_nw_mask_len=None, sim_ids=None, static_routes=None, switch_id=None, tags=None, traffic_control=None, zone=None):
+    def get(resource_name, id, opts=None, description=None, dns_servers=None, icon_id=None, inter_device_communication=None, internet_connection=None, name=None, private_network_interface=None, public_ip=None, public_netmask=None, sim_routes=None, sims=None, static_routes=None, tags=None, traffic_control=None, zone=None):
         """
         Get an existing MobileGateway resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] dns_server1: The primary DNS server IP address.
-        :param pulumi.Input[str] dns_server2: The secondly DNS server IP address.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the server connected to the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[bool] internet_connection: The flag of enable/disable connecting from MobileGateway to the Internet.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] private_ipaddress: The IP address on private NIC of the Mobile Gateway.
-        :param pulumi.Input[float] private_nw_mask_len: The network mask length on private NIC of the Mobile Gateway.
-        :param pulumi.Input[str] public_ipaddress: The IP address on public NIC of the Mobile Gateway.
-        :param pulumi.Input[float] public_nw_mask_len: The network mask length on public NIC of the Mobile Gateway.
-        :param pulumi.Input[list] sim_ids: The ID list of the SIMs connected to the Mobile Gateway.
-        :param pulumi.Input[str] switch_id: The ID of the switch connected to the Mobile Gateway.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[dict] traffic_control: Traffic control rules. It contains some attributes to Traffic Control.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-        
+        :param pulumi.Input[str] description: The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[list] dns_servers: A list of IP address used by each connected devices
+        :param pulumi.Input[str] icon_id: The icon id to attach to the MobileGateway
+        :param pulumi.Input[bool] inter_device_communication: The flag to allow communication between each connected devices
+        :param pulumi.Input[bool] internet_connection: The flag to enable connect to the Internet
+        :param pulumi.Input[str] name: The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] public_ip: The public IP address assigned to the MobileGateway
+        :param pulumi.Input[float] public_netmask: The bit length of the subnet assigned to the MobileGateway
+        :param pulumi.Input[list] tags: Any tags to assign to the MobileGateway
+        :param pulumi.Input[str] zone: The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
+
+        The **private_network_interface** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `switch_id` (`pulumi.Input[str]`)
+
+        The **sim_routes** object supports the following:
+
+          * `prefix` (`pulumi.Input[str]`)
+          * `simId` (`pulumi.Input[str]`)
+
+        The **sims** object supports the following:
+
+          * `ip_address` (`pulumi.Input[str]`)
+          * `simId` (`pulumi.Input[str]`)
+
         The **static_routes** object supports the following:
-        
+
           * `next_hop` (`pulumi.Input[str]`)
           * `prefix` (`pulumi.Input[str]`)
-        
-        The **traffic_control** object supports the following:
-        
-          * `autoTrafficShaping` (`pulumi.Input[bool]`) - The flag of enable/disable Auto Traffic Shaping.
-          * `bandWidthLimit` (`pulumi.Input[float]`) - Traffic bandwidth limit(unit:`Kbps`). 
-          * `enableEmail` (`pulumi.Input[bool]`) - The flag of enable/disable e-mail notification.
-          * `enableSlack` (`pulumi.Input[bool]`) - The flag of enable/disable slack notification.
-          * `quota` (`pulumi.Input[float]`) - Traffic quota size (unit:`MB`).  
-          * `slackWebhook` (`pulumi.Input[str]`) - The webhook URL of destination of slack notification.
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/mobile_gateway.html.markdown.
+        The **traffic_control** object supports the following:
+
+          * `autoTrafficShaping` (`pulumi.Input[bool]`)
+          * `bandWidthLimit` (`pulumi.Input[float]`)
+          * `enableEmail` (`pulumi.Input[bool]`)
+          * `enableSlack` (`pulumi.Input[bool]`)
+          * `quota` (`pulumi.Input[float]`)
+          * `slackWebhook` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["description"] = description
-        __props__["dns_server1"] = dns_server1
-        __props__["dns_server2"] = dns_server2
-        __props__["graceful_shutdown_timeout"] = graceful_shutdown_timeout
+        __props__["dns_servers"] = dns_servers
         __props__["icon_id"] = icon_id
+        __props__["inter_device_communication"] = inter_device_communication
         __props__["internet_connection"] = internet_connection
         __props__["name"] = name
-        __props__["private_ipaddress"] = private_ipaddress
-        __props__["private_nw_mask_len"] = private_nw_mask_len
-        __props__["public_ipaddress"] = public_ipaddress
-        __props__["public_nw_mask_len"] = public_nw_mask_len
-        __props__["sim_ids"] = sim_ids
+        __props__["private_network_interface"] = private_network_interface
+        __props__["public_ip"] = public_ip
+        __props__["public_netmask"] = public_netmask
+        __props__["sim_routes"] = sim_routes
+        __props__["sims"] = sims
         __props__["static_routes"] = static_routes
-        __props__["switch_id"] = switch_id
         __props__["tags"] = tags
         __props__["traffic_control"] = traffic_control
         __props__["zone"] = zone

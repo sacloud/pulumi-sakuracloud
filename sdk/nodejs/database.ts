@@ -2,13 +2,10 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Database resource. This can be used to create, update, and delete Databases.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database.html.markdown.
- */
 export class Database extends pulumi.CustomResource {
     /**
      * Get an existing Database resource's state with the given name, ID, and optional extra
@@ -36,81 +33,50 @@ export class Database extends pulumi.CustomResource {
         return obj['__pulumiType'] === Database.__pulumiType;
     }
 
+    public readonly backup!: pulumi.Output<outputs.DatabaseBackup | undefined>;
     /**
-     * The network address list that allowed connections to the database.
-     */
-    public readonly allowNetworks!: pulumi.Output<string[] | undefined>;
-    /**
-     * The time to perform backup (format:`HH:mm`).
-     */
-    public readonly backupTime!: pulumi.Output<string | undefined>;
-    /**
-     * Day of the week to get backup.  
-     * Valid values are the following: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-     */
-    public readonly backupWeekdays!: pulumi.Output<string[] | undefined>;
-    /**
-     * The Database type.  
-     * Valid value is one of the following: [ "postgresql" (default) / "mariadb"]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]
      */
     public readonly databaseType!: pulumi.Output<string | undefined>;
     /**
-     * The default route IP address of the database.
-     */
-    public readonly defaultRoute!: pulumi.Output<string>;
-    /**
-     * The description of the resource.
+     * The description of the Database. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Database
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The IP address of the database.
-     */
-    public readonly ipaddress1!: pulumi.Output<string>;
-    /**
-     * The name of the resource.
+     * The name of the Database. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly networkInterface!: pulumi.Output<outputs.DatabaseNetworkInterface>;
     /**
-     * The network mask length of the database.
+     * The password of default user on the database
      */
-    public readonly nwMaskLen!: pulumi.Output<number>;
+    public readonly password!: pulumi.Output<string>;
     /**
-     * The plan (size) of the Database.   
-     * Valid value is one of the following: [ "10g" (default) / "30g" / "90g" / "240g" / "500g" / "1t" ]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The number of the port on which the database is listening (default:`5432`).
+     * The password of user that processing a replication
      */
-    public readonly port!: pulumi.Output<number | undefined>;
     public readonly replicaPassword!: pulumi.Output<string | undefined>;
-    public /*out*/ readonly replicaUser!: pulumi.Output<string>;
     /**
-     * The ID of the switch connected to the database.
+     * The name of user that processing a replication
      */
-    public readonly switchId!: pulumi.Output<string>;
+    public readonly replicaUser!: pulumi.Output<string | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Database
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The username to access database.
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
      */
-    public readonly userName!: pulumi.Output<string>;
+    public readonly username!: pulumi.Output<string>;
     /**
-     * The password to access database.
-     */
-    public readonly userPassword!: pulumi.Output<string>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -126,66 +92,43 @@ export class Database extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as DatabaseState | undefined;
-            inputs["allowNetworks"] = state ? state.allowNetworks : undefined;
-            inputs["backupTime"] = state ? state.backupTime : undefined;
-            inputs["backupWeekdays"] = state ? state.backupWeekdays : undefined;
+            inputs["backup"] = state ? state.backup : undefined;
             inputs["databaseType"] = state ? state.databaseType : undefined;
-            inputs["defaultRoute"] = state ? state.defaultRoute : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
-            inputs["ipaddress1"] = state ? state.ipaddress1 : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
+            inputs["networkInterface"] = state ? state.networkInterface : undefined;
+            inputs["password"] = state ? state.password : undefined;
             inputs["plan"] = state ? state.plan : undefined;
-            inputs["port"] = state ? state.port : undefined;
             inputs["replicaPassword"] = state ? state.replicaPassword : undefined;
             inputs["replicaUser"] = state ? state.replicaUser : undefined;
-            inputs["switchId"] = state ? state.switchId : undefined;
             inputs["tags"] = state ? state.tags : undefined;
-            inputs["userName"] = state ? state.userName : undefined;
-            inputs["userPassword"] = state ? state.userPassword : undefined;
+            inputs["username"] = state ? state.username : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as DatabaseArgs | undefined;
-            if (!args || args.defaultRoute === undefined) {
-                throw new Error("Missing required property 'defaultRoute'");
+            if (!args || args.networkInterface === undefined) {
+                throw new Error("Missing required property 'networkInterface'");
             }
-            if (!args || args.ipaddress1 === undefined) {
-                throw new Error("Missing required property 'ipaddress1'");
+            if (!args || args.password === undefined) {
+                throw new Error("Missing required property 'password'");
             }
-            if (!args || args.nwMaskLen === undefined) {
-                throw new Error("Missing required property 'nwMaskLen'");
+            if (!args || args.username === undefined) {
+                throw new Error("Missing required property 'username'");
             }
-            if (!args || args.switchId === undefined) {
-                throw new Error("Missing required property 'switchId'");
-            }
-            if (!args || args.userName === undefined) {
-                throw new Error("Missing required property 'userName'");
-            }
-            if (!args || args.userPassword === undefined) {
-                throw new Error("Missing required property 'userPassword'");
-            }
-            inputs["allowNetworks"] = args ? args.allowNetworks : undefined;
-            inputs["backupTime"] = args ? args.backupTime : undefined;
-            inputs["backupWeekdays"] = args ? args.backupWeekdays : undefined;
+            inputs["backup"] = args ? args.backup : undefined;
             inputs["databaseType"] = args ? args.databaseType : undefined;
-            inputs["defaultRoute"] = args ? args.defaultRoute : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
-            inputs["ipaddress1"] = args ? args.ipaddress1 : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
+            inputs["networkInterface"] = args ? args.networkInterface : undefined;
+            inputs["password"] = args ? args.password : undefined;
             inputs["plan"] = args ? args.plan : undefined;
-            inputs["port"] = args ? args.port : undefined;
             inputs["replicaPassword"] = args ? args.replicaPassword : undefined;
-            inputs["switchId"] = args ? args.switchId : undefined;
+            inputs["replicaUser"] = args ? args.replicaUser : undefined;
             inputs["tags"] = args ? args.tags : undefined;
-            inputs["userName"] = args ? args.userName : undefined;
-            inputs["userPassword"] = args ? args.userPassword : undefined;
+            inputs["username"] = args ? args.username : undefined;
             inputs["zone"] = args ? args.zone : undefined;
-            inputs["replicaUser"] = undefined /*out*/;
         }
         if (!opts) {
             opts = {}
@@ -202,81 +145,50 @@ export class Database extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Database resources.
  */
 export interface DatabaseState {
+    readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
-     * The network address list that allowed connections to the database.
-     */
-    readonly allowNetworks?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The time to perform backup (format:`HH:mm`).
-     */
-    readonly backupTime?: pulumi.Input<string>;
-    /**
-     * Day of the week to get backup.  
-     * Valid values are the following: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-     */
-    readonly backupWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The Database type.  
-     * Valid value is one of the following: [ "postgresql" (default) / "mariadb"]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]
      */
     readonly databaseType?: pulumi.Input<string>;
     /**
-     * The default route IP address of the database.
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the Database. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Database
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the database.
-     */
-    readonly ipaddress1?: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the Database. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface?: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
-     * The network mask length of the database.
+     * The password of default user on the database
      */
-    readonly nwMaskLen?: pulumi.Input<number>;
+    readonly password?: pulumi.Input<string>;
     /**
-     * The plan (size) of the Database.   
-     * Valid value is one of the following: [ "10g" (default) / "30g" / "90g" / "240g" / "500g" / "1t" ]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The number of the port on which the database is listening (default:`5432`).
+     * The password of user that processing a replication
      */
-    readonly port?: pulumi.Input<number>;
     readonly replicaPassword?: pulumi.Input<string>;
+    /**
+     * The name of user that processing a replication
+     */
     readonly replicaUser?: pulumi.Input<string>;
     /**
-     * The ID of the switch connected to the database.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the Database
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The username to access database.
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
      */
-    readonly userName?: pulumi.Input<string>;
+    readonly username?: pulumi.Input<string>;
     /**
-     * The password to access database.
-     */
-    readonly userPassword?: pulumi.Input<string>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -285,80 +197,50 @@ export interface DatabaseState {
  * The set of arguments for constructing a Database resource.
  */
 export interface DatabaseArgs {
+    readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
-     * The network address list that allowed connections to the database.
-     */
-    readonly allowNetworks?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The time to perform backup (format:`HH:mm`).
-     */
-    readonly backupTime?: pulumi.Input<string>;
-    /**
-     * Day of the week to get backup.  
-     * Valid values are the following: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-     */
-    readonly backupWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * The Database type.  
-     * Valid value is one of the following: [ "postgresql" (default) / "mariadb"]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]
      */
     readonly databaseType?: pulumi.Input<string>;
     /**
-     * The default route IP address of the database.
-     */
-    readonly defaultRoute: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the Database. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the Database.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the Database
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the database.
-     */
-    readonly ipaddress1: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the Database. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
-     * The network mask length of the database.
+     * The password of default user on the database
      */
-    readonly nwMaskLen: pulumi.Input<number>;
+    readonly password: pulumi.Input<string>;
     /**
-     * The plan (size) of the Database.   
-     * Valid value is one of the following: [ "10g" (default) / "30g" / "90g" / "240g" / "500g" / "1t" ]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The number of the port on which the database is listening (default:`5432`).
+     * The password of user that processing a replication
      */
-    readonly port?: pulumi.Input<number>;
     readonly replicaPassword?: pulumi.Input<string>;
     /**
-     * The ID of the switch connected to the database.
+     * The name of user that processing a replication
      */
-    readonly switchId: pulumi.Input<string>;
+    readonly replicaUser?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the Database
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The username to access database.
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
      */
-    readonly userName: pulumi.Input<string>;
+    readonly username: pulumi.Input<string>;
     /**
-     * The password to access database.
-     */
-    readonly userPassword: pulumi.Input<string>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

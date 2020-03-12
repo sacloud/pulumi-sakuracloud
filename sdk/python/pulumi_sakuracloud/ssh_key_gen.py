@@ -12,41 +12,36 @@ from . import utilities, tables
 class SSHKeyGen(pulumi.CustomResource):
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
     """
     fingerprint: pulumi.Output[str]
+    """
+    The fingerprint of the public key
+    """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
     """
     pass_phrase: pulumi.Output[str]
     """
-    The path phrase of keys. 
+    The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
     """
     private_key: pulumi.Output[str]
     """
-    The body of the generated private key. 
+    The body of the private key
     """
     public_key: pulumi.Output[str]
     """
-    The body of the generated public key. 
+    The body of the public key
     """
     def __init__(__self__, resource_name, opts=None, description=None, name=None, pass_phrase=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud SSH Key resource. This can be used to create and delete SSH Keys.
-        The private and public keys is generated on the Sakura Cloud platform.
-        
-        ## Import (not supported)
-        
-        Import of SSH Key Gen is not supported.
-        
+        Create a SSHKeyGen resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] pass_phrase: The path phrase of keys. 
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] pass_phrase: The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -82,21 +77,21 @@ class SSHKeyGen(pulumi.CustomResource):
         """
         Get an existing SSHKeyGen resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] pass_phrase: The path phrase of keys. 
-        :param pulumi.Input[str] private_key: The body of the generated private key. 
-        :param pulumi.Input[str] public_key: The body of the generated public key. 
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key_gen.html.markdown.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] fingerprint: The fingerprint of the public key
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] pass_phrase: The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
+        :param pulumi.Input[str] private_key: The body of the private key
+        :param pulumi.Input[str] public_key: The body of the public key
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["description"] = description
         __props__["fingerprint"] = fingerprint
         __props__["name"] = name

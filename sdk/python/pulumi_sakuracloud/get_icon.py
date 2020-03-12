@@ -13,81 +13,56 @@ class GetIconResult:
     """
     A collection of values returned by getIcon.
     """
-    def __init__(__self__, body=None, filters=None, name=None, name_selectors=None, tag_selectors=None, tags=None, url=None, id=None):
-        if body and not isinstance(body, str):
-            raise TypeError("Expected argument 'body' to be a str")
-        __self__.body = body
-        """
-        Base64 encoded icon data (size:`small`).
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if tag_selectors and not isinstance(tag_selectors, list):
-            raise TypeError("Expected argument 'tag_selectors' to be a list")
-        __self__.tag_selectors = tag_selectors
-        if tags and not isinstance(tags, list):
-            raise TypeError("Expected argument 'tags' to be a list")
-        __self__.tags = tags
-        """
-        The tag list of the resources.
-        """
-        if url and not isinstance(url, str):
-            raise TypeError("Expected argument 'url' to be a str")
-        __self__.url = url
-        """
-        URL to access this resource.
-        """
+    def __init__(__self__, filter=None, id=None, name=None, tags=None, url=None):
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if tags and not isinstance(tags, list):
+            raise TypeError("Expected argument 'tags' to be a list")
+        __self__.tags = tags
+        if url and not isinstance(url, str):
+            raise TypeError("Expected argument 'url' to be a str")
+        __self__.url = url
 class AwaitableGetIconResult(GetIconResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
         return GetIconResult(
-            body=self.body,
-            filters=self.filters,
+            filter=self.filter,
+            id=self.id,
             name=self.name,
-            name_selectors=self.name_selectors,
-            tag_selectors=self.tag_selectors,
             tags=self.tags,
-            url=self.url,
-            id=self.id)
+            url=self.url)
 
-def get_icon(filters=None,name_selectors=None,tag_selectors=None,opts=None):
+def get_icon(filter=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Icon.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    :param list tag_selectors: The list of tags to filtering.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`) - The name of the resource.
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/icon.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
+      * `tags` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
-    __args__['tagSelectors'] = tag_selectors
+
+    __args__['filter'] = filter
     if opts is None:
         opts = pulumi.InvokeOptions()
     if opts.version is None:
@@ -95,11 +70,8 @@ def get_icon(filters=None,name_selectors=None,tag_selectors=None,opts=None):
     __ret__ = pulumi.runtime.invoke('sakuracloud:index/getIcon:getIcon', __args__, opts=opts).value
 
     return AwaitableGetIconResult(
-        body=__ret__.get('body'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
+        id=__ret__.get('id'),
         name=__ret__.get('name'),
-        name_selectors=__ret__.get('nameSelectors'),
-        tag_selectors=__ret__.get('tagSelectors'),
         tags=__ret__.get('tags'),
-        url=__ret__.get('url'),
-        id=__ret__.get('id'))
+        url=__ret__.get('url'))

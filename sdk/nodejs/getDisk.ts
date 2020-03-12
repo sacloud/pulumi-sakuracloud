@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Disk.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getDisk({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/disk.html.markdown.
- */
 export function getDisk(args?: GetDiskArgs, opts?: pulumi.InvokeOptions): Promise<GetDiskResult> & GetDiskResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getDisk(args?: GetDiskArgs, opts?: pulumi.InvokeOptions): Promis
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetDiskResult> = pulumi.runtime.invoke("sakuracloud:index/getDisk:getDisk", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getDisk(args?: GetDiskArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getDisk.
  */
 export interface GetDiskArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetDiskFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetDiskFilter;
     readonly zone?: string;
 }
 
@@ -68,43 +36,19 @@ export interface GetDiskArgs {
  */
 export interface GetDiskResult {
     readonly connector: string;
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetDiskFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetDiskFilter;
     readonly iconId: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The plan of the resource (`ssd`/`hdd`).
-     */
-    readonly plan: string;
-    /**
-     * The ID of the server connected to the disk.
-     */
-    readonly serverId: string;
-    /**
-     * Size of the resource (unit:`GB`).
-     */
-    readonly size: number;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly plan: string;
+    readonly serverId: string;
+    readonly size: number;
+    readonly sourceArchiveId: string;
+    readonly sourceDiskId: string;
+    readonly tags: string[];
+    readonly zone: string;
 }

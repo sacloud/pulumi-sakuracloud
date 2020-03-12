@@ -12,88 +12,81 @@ from . import utilities, tables
 class BucketObject(pulumi.CustomResource):
     access_key: pulumi.Output[str]
     """
-    The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
+    The access key for using SakuraCloud Object Storage API
     """
     bucket: pulumi.Output[str]
     """
-    The name of bucket.
+    The name of the bucket
     """
     content: pulumi.Output[str]
     """
-    String of the value of the bucket object. 
+    The content to upload to as the bucket object. This conflicts with [`source`]
     """
     content_type: pulumi.Output[str]
     """
-    Content-Type header value of the bucket object.
+    The content-type of the bucket object
     """
     etag: pulumi.Output[str]
     """
-    ETag of the resource.
+    The etag of the bucket object
     """
     http_cache_url: pulumi.Output[str]
     """
-    URL for accessing the object via HTTP (type:`cache`).
+    The URL for cached access to the bucket object via HTTP
     """
     http_path_url: pulumi.Output[str]
     """
-    URL for accessing the object via HTTP (type:`path`).
+    The URL with path-format for accessing the bucket object via HTTP
     """
     http_url: pulumi.Output[str]
     """
-    URL for accessing the object via HTTP (type:`subdomain`).
+    The URL for accessing the bucket object via HTTP
     """
     https_cache_url: pulumi.Output[str]
     """
-    URL for accessing the object via HTTPS (type:`cache`)..
+    The URL for cached access to the bucket object via HTTPS
     """
     https_path_url: pulumi.Output[str]
+    """
+    The URL with path-format for accessing the bucket object via HTTPS
+    """
     https_url: pulumi.Output[str]
     """
-    URL for accessing the object via HTTPS (type:`subdomain`).
+    The URL for accessing the bucket object via HTTPS
     """
     key: pulumi.Output[str]
     """
-    The key of the bucket object.
+    The name of the bucket object
     """
     last_modified: pulumi.Output[str]
     """
-    Update date of the resource.
+    The time when the bucket object last modified
     """
     secret_key: pulumi.Output[str]
     """
-    The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
+    The secret key for using SakuraCloud Object Storage API
     """
     size: pulumi.Output[float]
     """
-    Size of the resource (unit:`byte`).
+    The size of the bucket object in bytes
     """
     source: pulumi.Output[str]
     """
-    Source file path of value of the bucket object.
+    The file path to upload to as the bucket object. This conflicts with [`content`]
     """
     def __init__(__self__, resource_name, opts=None, access_key=None, bucket=None, content=None, content_type=None, etag=None, key=None, secret_key=None, source=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Bucket Object resource. This can be used to create, update, and delete Bucket Objects.
-        
-        > **NOTE on Bucket:**  Sakura Cloud does not support bucket creation by API.
-        Buckets should be created on the control panel.
-        
-        ## Import (not supported)
-        
-        Import of Bucket Object is not supported.
-        
+        Create a BucketObject resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_key: The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
-        :param pulumi.Input[str] bucket: The name of bucket.
-        :param pulumi.Input[str] content: String of the value of the bucket object. 
-        :param pulumi.Input[str] content_type: Content-Type header value of the bucket object.
-        :param pulumi.Input[str] etag: ETag of the resource.
-        :param pulumi.Input[str] key: The key of the bucket object.
-        :param pulumi.Input[str] secret_key: The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
-        :param pulumi.Input[str] source: Source file path of value of the bucket object.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+        :param pulumi.Input[str] access_key: The access key for using SakuraCloud Object Storage API
+        :param pulumi.Input[str] bucket: The name of the bucket
+        :param pulumi.Input[str] content: The content to upload to as the bucket object. This conflicts with [`source`]
+        :param pulumi.Input[str] content_type: The content-type of the bucket object
+        :param pulumi.Input[str] etag: The etag of the bucket object
+        :param pulumi.Input[str] key: The name of the bucket object
+        :param pulumi.Input[str] secret_key: The secret key for using SakuraCloud Object Storage API
+        :param pulumi.Input[str] source: The file path to upload to as the bucket object. This conflicts with [`content`]
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -147,31 +140,31 @@ class BucketObject(pulumi.CustomResource):
         """
         Get an existing BucketObject resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] access_key: The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
-        :param pulumi.Input[str] bucket: The name of bucket.
-        :param pulumi.Input[str] content: String of the value of the bucket object. 
-        :param pulumi.Input[str] content_type: Content-Type header value of the bucket object.
-        :param pulumi.Input[str] etag: ETag of the resource.
-        :param pulumi.Input[str] http_cache_url: URL for accessing the object via HTTP (type:`cache`).
-        :param pulumi.Input[str] http_path_url: URL for accessing the object via HTTP (type:`path`).
-        :param pulumi.Input[str] http_url: URL for accessing the object via HTTP (type:`subdomain`).
-        :param pulumi.Input[str] https_cache_url: URL for accessing the object via HTTPS (type:`cache`)..
-        :param pulumi.Input[str] https_url: URL for accessing the object via HTTPS (type:`subdomain`).
-        :param pulumi.Input[str] key: The key of the bucket object.
-        :param pulumi.Input[str] last_modified: Update date of the resource.
-        :param pulumi.Input[str] secret_key: The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
-        :param pulumi.Input[float] size: Size of the resource (unit:`byte`).
-        :param pulumi.Input[str] source: Source file path of value of the bucket object.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
+        :param pulumi.Input[str] access_key: The access key for using SakuraCloud Object Storage API
+        :param pulumi.Input[str] bucket: The name of the bucket
+        :param pulumi.Input[str] content: The content to upload to as the bucket object. This conflicts with [`source`]
+        :param pulumi.Input[str] content_type: The content-type of the bucket object
+        :param pulumi.Input[str] etag: The etag of the bucket object
+        :param pulumi.Input[str] http_cache_url: The URL for cached access to the bucket object via HTTP
+        :param pulumi.Input[str] http_path_url: The URL with path-format for accessing the bucket object via HTTP
+        :param pulumi.Input[str] http_url: The URL for accessing the bucket object via HTTP
+        :param pulumi.Input[str] https_cache_url: The URL for cached access to the bucket object via HTTPS
+        :param pulumi.Input[str] https_path_url: The URL with path-format for accessing the bucket object via HTTPS
+        :param pulumi.Input[str] https_url: The URL for accessing the bucket object via HTTPS
+        :param pulumi.Input[str] key: The name of the bucket object
+        :param pulumi.Input[str] last_modified: The time when the bucket object last modified
+        :param pulumi.Input[str] secret_key: The secret key for using SakuraCloud Object Storage API
+        :param pulumi.Input[float] size: The size of the bucket object in bytes
+        :param pulumi.Input[str] source: The file path to upload to as the bucket object. This conflicts with [`content`]
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["access_key"] = access_key
         __props__["bucket"] = bucket
         __props__["content"] = content

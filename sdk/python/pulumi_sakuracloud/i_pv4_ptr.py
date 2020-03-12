@@ -12,37 +12,34 @@ from . import utilities, tables
 class IPv4Ptr(pulumi.CustomResource):
     hostname: pulumi.Output[str]
     """
-    The hostname of target.
+    The value of the PTR record. This must be FQDN
     """
-    ipaddress: pulumi.Output[str]
+    ip_address: pulumi.Output[str]
     """
-    The target IP address.
+    The IP address to which the PTR record is set
     """
     retry_interval: pulumi.Output[float]
     """
-    Interval of API call retry (unit:`second`, default:`10`).
+    The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
     """
     retry_max: pulumi.Output[float]
     """
-    Max count of API call retry (default:`30`).
+    The maximum number of API call retries used when SakuraCloud API returns any errors
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, hostname=None, ipaddress=None, retry_interval=None, retry_max=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, hostname=None, ip_address=None, retry_interval=None, retry_max=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud IPv4 PTR Record resource. This can be used to create, update, and delete IPv4 PTR records.
-        
+        Create a IPv4Ptr resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] hostname: The hostname of target.
-        :param pulumi.Input[str] ipaddress: The target IP address.
-        :param pulumi.Input[float] retry_interval: Interval of API call retry (unit:`second`, default:`10`).
-        :param pulumi.Input[float] retry_max: Max count of API call retry (default:`30`).
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
+        :param pulumi.Input[str] hostname: The value of the PTR record. This must be FQDN
+        :param pulumi.Input[str] ip_address: The IP address to which the PTR record is set
+        :param pulumi.Input[float] retry_interval: The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+        :param pulumi.Input[float] retry_max: The maximum number of API call retries used when SakuraCloud API returns any errors
+        :param pulumi.Input[str] zone: The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -64,9 +61,9 @@ class IPv4Ptr(pulumi.CustomResource):
             if hostname is None:
                 raise TypeError("Missing required property 'hostname'")
             __props__['hostname'] = hostname
-            if ipaddress is None:
-                raise TypeError("Missing required property 'ipaddress'")
-            __props__['ipaddress'] = ipaddress
+            if ip_address is None:
+                raise TypeError("Missing required property 'ip_address'")
+            __props__['ip_address'] = ip_address
             __props__['retry_interval'] = retry_interval
             __props__['retry_max'] = retry_max
             __props__['zone'] = zone
@@ -77,27 +74,26 @@ class IPv4Ptr(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, hostname=None, ipaddress=None, retry_interval=None, retry_max=None, zone=None):
+    def get(resource_name, id, opts=None, hostname=None, ip_address=None, retry_interval=None, retry_max=None, zone=None):
         """
         Get an existing IPv4Ptr resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] hostname: The hostname of target.
-        :param pulumi.Input[str] ipaddress: The target IP address.
-        :param pulumi.Input[float] retry_interval: Interval of API call retry (unit:`second`, default:`10`).
-        :param pulumi.Input[float] retry_max: Max count of API call retry (default:`30`).
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ipv4_ptr.html.markdown.
+        :param pulumi.Input[str] hostname: The value of the PTR record. This must be FQDN
+        :param pulumi.Input[str] ip_address: The IP address to which the PTR record is set
+        :param pulumi.Input[float] retry_interval: The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+        :param pulumi.Input[float] retry_max: The maximum number of API call retries used when SakuraCloud API returns any errors
+        :param pulumi.Input[str] zone: The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["hostname"] = hostname
-        __props__["ipaddress"] = ipaddress
+        __props__["ip_address"] = ip_address
         __props__["retry_interval"] = retry_interval
         __props__["retry_max"] = retry_max
         __props__["zone"] = zone

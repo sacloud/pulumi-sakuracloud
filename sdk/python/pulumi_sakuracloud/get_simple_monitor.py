@@ -13,130 +13,92 @@ class GetSimpleMonitorResult:
     """
     A collection of values returned by getSimpleMonitor.
     """
-    def __init__(__self__, description=None, enabled=None, filters=None, health_checks=None, icon_id=None, name_selectors=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tag_selectors=None, tags=None, target=None, id=None):
+    def __init__(__self__, delay_loop=None, description=None, enabled=None, filter=None, health_checks=None, icon_id=None, id=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None):
+        if delay_loop and not isinstance(delay_loop, float):
+            raise TypeError("Expected argument 'delay_loop' to be a float")
+        __self__.delay_loop = delay_loop
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
         if enabled and not isinstance(enabled, bool):
             raise TypeError("Expected argument 'enabled' to be a bool")
         __self__.enabled = enabled
-        """
-        The flag of enable/disable monitoring.
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if health_checks and not isinstance(health_checks, list):
             raise TypeError("Expected argument 'health_checks' to be a list")
         __self__.health_checks = health_checks
-        """
-        Health check rules. It contains some attributes to Health Check.
-        """
         if icon_id and not isinstance(icon_id, str):
             raise TypeError("Expected argument 'icon_id' to be a str")
         __self__.icon_id = icon_id
-        """
-        The ID of the icon of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if notify_email_enabled and not isinstance(notify_email_enabled, bool):
-            raise TypeError("Expected argument 'notify_email_enabled' to be a bool")
-        __self__.notify_email_enabled = notify_email_enabled
-        """
-        The flag of enable/disable notification by E-mail.
-        """
-        if notify_email_html and not isinstance(notify_email_html, bool):
-            raise TypeError("Expected argument 'notify_email_html' to be a bool")
-        __self__.notify_email_html = notify_email_html
-        """
-        The flag of enable/disable HTML format for E-mail.
-        """
-        if notify_interval and not isinstance(notify_interval, float):
-            raise TypeError("Expected argument 'notify_interval' to be a float")
-        __self__.notify_interval = notify_interval
-        """
-        The intervals of notify (unit:`second`).  
-        """
-        if notify_slack_enabled and not isinstance(notify_slack_enabled, bool):
-            raise TypeError("Expected argument 'notify_slack_enabled' to be a bool")
-        __self__.notify_slack_enabled = notify_slack_enabled
-        """
-        The flag of enable/disable notification by slack.
-        """
-        if notify_slack_webhook and not isinstance(notify_slack_webhook, str):
-            raise TypeError("Expected argument 'notify_slack_webhook' to be a str")
-        __self__.notify_slack_webhook = notify_slack_webhook
-        """
-        The webhook URL of destination of slack notification.
-        """
-        if tag_selectors and not isinstance(tag_selectors, list):
-            raise TypeError("Expected argument 'tag_selectors' to be a list")
-        __self__.tag_selectors = tag_selectors
-        if tags and not isinstance(tags, list):
-            raise TypeError("Expected argument 'tags' to be a list")
-        __self__.tags = tags
-        """
-        The tag list of the resources.
-        """
-        if target and not isinstance(target, str):
-            raise TypeError("Expected argument 'target' to be a str")
-        __self__.target = target
-        """
-        The HostName or IP address of monitoring target.
-        """
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if notify_email_enabled and not isinstance(notify_email_enabled, bool):
+            raise TypeError("Expected argument 'notify_email_enabled' to be a bool")
+        __self__.notify_email_enabled = notify_email_enabled
+        if notify_email_html and not isinstance(notify_email_html, bool):
+            raise TypeError("Expected argument 'notify_email_html' to be a bool")
+        __self__.notify_email_html = notify_email_html
+        if notify_interval and not isinstance(notify_interval, float):
+            raise TypeError("Expected argument 'notify_interval' to be a float")
+        __self__.notify_interval = notify_interval
+        if notify_slack_enabled and not isinstance(notify_slack_enabled, bool):
+            raise TypeError("Expected argument 'notify_slack_enabled' to be a bool")
+        __self__.notify_slack_enabled = notify_slack_enabled
+        if notify_slack_webhook and not isinstance(notify_slack_webhook, str):
+            raise TypeError("Expected argument 'notify_slack_webhook' to be a str")
+        __self__.notify_slack_webhook = notify_slack_webhook
+        if tags and not isinstance(tags, list):
+            raise TypeError("Expected argument 'tags' to be a list")
+        __self__.tags = tags
+        if target and not isinstance(target, str):
+            raise TypeError("Expected argument 'target' to be a str")
+        __self__.target = target
 class AwaitableGetSimpleMonitorResult(GetSimpleMonitorResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
         return GetSimpleMonitorResult(
+            delay_loop=self.delay_loop,
             description=self.description,
             enabled=self.enabled,
-            filters=self.filters,
+            filter=self.filter,
             health_checks=self.health_checks,
             icon_id=self.icon_id,
-            name_selectors=self.name_selectors,
+            id=self.id,
             notify_email_enabled=self.notify_email_enabled,
             notify_email_html=self.notify_email_html,
             notify_interval=self.notify_interval,
             notify_slack_enabled=self.notify_slack_enabled,
             notify_slack_webhook=self.notify_slack_webhook,
-            tag_selectors=self.tag_selectors,
             tags=self.tags,
-            target=self.target,
-            id=self.id)
+            target=self.target)
 
-def get_simple_monitor(filters=None,name_selectors=None,tag_selectors=None,opts=None):
+def get_simple_monitor(filter=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Simple Monitor.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    :param list tag_selectors: The list of tags to filtering.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`)
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/simple_monitor.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
+      * `tags` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
-    __args__['tagSelectors'] = tag_selectors
+
+    __args__['filter'] = filter
     if opts is None:
         opts = pulumi.InvokeOptions()
     if opts.version is None:
@@ -144,18 +106,17 @@ def get_simple_monitor(filters=None,name_selectors=None,tag_selectors=None,opts=
     __ret__ = pulumi.runtime.invoke('sakuracloud:index/getSimpleMonitor:getSimpleMonitor', __args__, opts=opts).value
 
     return AwaitableGetSimpleMonitorResult(
+        delay_loop=__ret__.get('delayLoop'),
         description=__ret__.get('description'),
         enabled=__ret__.get('enabled'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
         health_checks=__ret__.get('healthChecks'),
         icon_id=__ret__.get('iconId'),
-        name_selectors=__ret__.get('nameSelectors'),
+        id=__ret__.get('id'),
         notify_email_enabled=__ret__.get('notifyEmailEnabled'),
         notify_email_html=__ret__.get('notifyEmailHtml'),
         notify_interval=__ret__.get('notifyInterval'),
         notify_slack_enabled=__ret__.get('notifySlackEnabled'),
         notify_slack_webhook=__ret__.get('notifySlackWebhook'),
-        tag_selectors=__ret__.get('tagSelectors'),
         tags=__ret__.get('tags'),
-        target=__ret__.get('target'),
-        id=__ret__.get('id'))
+        target=__ret__.get('target'))

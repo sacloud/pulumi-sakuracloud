@@ -12,69 +12,62 @@ from . import utilities, tables
 class SIM(pulumi.CustomResource):
     carriers: pulumi.Output[list]
     """
-    The list of Carrier name.  
-    Valid values are in followings: [ "docomo" / "kddi" / "softbank"]
+    A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
     """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the SIM. The length of this value must be in the range [`1`-`512`]
     """
     enabled: pulumi.Output[bool]
     """
-    The flag of enable/disable the Server.
+    The flag to enable the SIM
     """
     iccid: pulumi.Output[str]
     """
-    The ICCID of the SIM.  
+    ICCID(Integrated Circuit Card ID) assigned to the SIM
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the SIM
     """
     imei: pulumi.Output[str]
     """
-    The IMEI of the device that allows communication.
+    The id of the device to restrict devices that can use the SIM
     """
-    ipaddress: pulumi.Output[str]
+    ip_address: pulumi.Output[str]
     """
-    The IP address of the SIM. Used when connect to mobile gateway.
+    The IP address assigned to the SIM
     """
     mobile_gateway_id: pulumi.Output[str]
     """
-    The ID of the Mobile Gateway to which the SIM belongs.
+    The id of the MobileGateway which the SIM is assigned
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the SIM. The length of this value must be in the range [`1`-`64`]
     """
     passcode: pulumi.Output[str]
     """
-    The Passcode of the SIM.  
+    The passcord to authenticate the SIM
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the SIM
     """
-    def __init__(__self__, resource_name, opts=None, carriers=None, description=None, enabled=None, iccid=None, icon_id=None, imei=None, ipaddress=None, mobile_gateway_id=None, name=None, passcode=None, tags=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, carriers=None, description=None, enabled=None, iccid=None, icon_id=None, imei=None, name=None, passcode=None, tags=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud SIM resource. This can be used to create, update, and delete SIMs.
-        
+        Create a SIM resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] carriers: The list of Carrier name.  
-               Valid values are in followings: [ "docomo" / "kddi" / "softbank"]
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] enabled: The flag of enable/disable the Server.
-        :param pulumi.Input[str] iccid: The ICCID of the SIM.  
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] imei: The IMEI of the device that allows communication.
-        :param pulumi.Input[str] ipaddress: The IP address of the SIM. Used when connect to mobile gateway.
-        :param pulumi.Input[str] mobile_gateway_id: The ID of the Mobile Gateway to which the SIM belongs.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] passcode: The Passcode of the SIM.  
-        :param pulumi.Input[list] tags: The tag list of the resources.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
+        :param pulumi.Input[list] carriers: A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
+        :param pulumi.Input[str] description: The description of the SIM. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[bool] enabled: The flag to enable the SIM
+        :param pulumi.Input[str] iccid: ICCID(Integrated Circuit Card ID) assigned to the SIM
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SIM
+        :param pulumi.Input[str] imei: The id of the device to restrict devices that can use the SIM
+        :param pulumi.Input[str] name: The name of the SIM. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] passcode: The passcord to authenticate the SIM
+        :param pulumi.Input[list] tags: Any tags to assign to the SIM
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -103,13 +96,13 @@ class SIM(pulumi.CustomResource):
             __props__['iccid'] = iccid
             __props__['icon_id'] = icon_id
             __props__['imei'] = imei
-            __props__['ipaddress'] = ipaddress
-            __props__['mobile_gateway_id'] = mobile_gateway_id
             __props__['name'] = name
             if passcode is None:
                 raise TypeError("Missing required property 'passcode'")
             __props__['passcode'] = passcode
             __props__['tags'] = tags
+            __props__['ip_address'] = None
+            __props__['mobile_gateway_id'] = None
         super(SIM, __self__).__init__(
             'sakuracloud:index/sIM:SIM',
             resource_name,
@@ -117,39 +110,37 @@ class SIM(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, carriers=None, description=None, enabled=None, iccid=None, icon_id=None, imei=None, ipaddress=None, mobile_gateway_id=None, name=None, passcode=None, tags=None):
+    def get(resource_name, id, opts=None, carriers=None, description=None, enabled=None, iccid=None, icon_id=None, imei=None, ip_address=None, mobile_gateway_id=None, name=None, passcode=None, tags=None):
         """
         Get an existing SIM resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[list] carriers: The list of Carrier name.  
-               Valid values are in followings: [ "docomo" / "kddi" / "softbank"]
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[bool] enabled: The flag of enable/disable the Server.
-        :param pulumi.Input[str] iccid: The ICCID of the SIM.  
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] imei: The IMEI of the device that allows communication.
-        :param pulumi.Input[str] ipaddress: The IP address of the SIM. Used when connect to mobile gateway.
-        :param pulumi.Input[str] mobile_gateway_id: The ID of the Mobile Gateway to which the SIM belongs.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] passcode: The Passcode of the SIM.  
-        :param pulumi.Input[list] tags: The tag list of the resources.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/sim.html.markdown.
+        :param pulumi.Input[list] carriers: A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
+        :param pulumi.Input[str] description: The description of the SIM. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[bool] enabled: The flag to enable the SIM
+        :param pulumi.Input[str] iccid: ICCID(Integrated Circuit Card ID) assigned to the SIM
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SIM
+        :param pulumi.Input[str] imei: The id of the device to restrict devices that can use the SIM
+        :param pulumi.Input[str] ip_address: The IP address assigned to the SIM
+        :param pulumi.Input[str] mobile_gateway_id: The id of the MobileGateway which the SIM is assigned
+        :param pulumi.Input[str] name: The name of the SIM. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] passcode: The passcord to authenticate the SIM
+        :param pulumi.Input[list] tags: Any tags to assign to the SIM
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["carriers"] = carriers
         __props__["description"] = description
         __props__["enabled"] = enabled
         __props__["iccid"] = iccid
         __props__["icon_id"] = icon_id
         __props__["imei"] = imei
-        __props__["ipaddress"] = ipaddress
+        __props__["ip_address"] = ip_address
         __props__["mobile_gateway_id"] = mobile_gateway_id
         __props__["name"] = name
         __props__["passcode"] = passcode

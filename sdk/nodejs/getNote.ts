@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Note.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getNote({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/note.html.markdown.
- */
 export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promise<GetNoteResult> & GetNoteResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promis
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetNoteResult> = pulumi.runtime.invoke("sakuracloud:index/getNote:getNote", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
     }, opts);
 
     return pulumi.utils.liftProperties(promise, opts);
@@ -44,53 +26,22 @@ export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getNote.
  */
 export interface GetNoteArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetNoteFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
+    readonly filter?: inputs.GetNoteFilter;
 }
 
 /**
  * A collection of values returned by getNote.
  */
 export interface GetNoteResult {
-    /**
-     * The name of the note class.
-     */
     readonly class: string;
-    /**
-     * The body of the note. 
-     */
     readonly content: string;
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetNoteFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetNoteFilter;
     readonly iconId: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly tags: string[];
 }

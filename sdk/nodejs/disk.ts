@@ -4,11 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Disk resource. This can be used to create, update, and delete Disks.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/disk.html.markdown.
- */
 export class Disk extends pulumi.CustomResource {
     /**
      * Get an existing Disk resource's state with the given name, ID, and optional extra
@@ -36,54 +31,52 @@ export class Disk extends pulumi.CustomResource {
         return obj['__pulumiType'] === Disk.__pulumiType;
     }
 
+    /**
+     * The name of the disk connector. This must be one of [`virtio`/`ide`]
+     */
     public readonly connector!: pulumi.Output<string | undefined>;
     /**
-     * The description of the resource.
+     * The description of the disk. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The ID list of the Disks isolated from Disk.
+     * A list of disk id. The disk will be located to different storage from these disks
      */
     public readonly distantFroms!: pulumi.Output<string[] | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the disk
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the disk. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The plan of the resource.  
-     * Valid value is one of the following: [ "ssd" (default) / "hdd"]
+     * The plan name of the disk. This must be one of [`ssd`/`hdd`]
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The ID of the server connected to the disk.
+     * The id of the Server connected to the disk
      */
     public /*out*/ readonly serverId!: pulumi.Output<string>;
     /**
-     * Size of the resource (unit:`GB`).
+     * The size of disk in GiB
      */
     public readonly size!: pulumi.Output<number | undefined>;
     /**
-     * The ID of source Archive.
+     * The id of the source archive. This conflicts with [`source_disk_id`]
      */
     public readonly sourceArchiveId!: pulumi.Output<string | undefined>;
     /**
-     * The ID of source Disk.
+     * The id of the source disk. This conflicts with [`source_archive_id`]
      */
     public readonly sourceDiskId!: pulumi.Output<string | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the disk
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -102,7 +95,6 @@ export class Disk extends pulumi.CustomResource {
             inputs["connector"] = state ? state.connector : undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["distantFroms"] = state ? state.distantFroms : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["plan"] = state ? state.plan : undefined;
@@ -117,7 +109,6 @@ export class Disk extends pulumi.CustomResource {
             inputs["connector"] = args ? args.connector : undefined;
             inputs["description"] = args ? args.description : undefined;
             inputs["distantFroms"] = args ? args.distantFroms : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["plan"] = args ? args.plan : undefined;
@@ -143,54 +134,52 @@ export class Disk extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Disk resources.
  */
 export interface DiskState {
+    /**
+     * The name of the disk connector. This must be one of [`virtio`/`ide`]
+     */
     readonly connector?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the disk. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ID list of the Disks isolated from Disk.
+     * A list of disk id. The disk will be located to different storage from these disks
      */
     readonly distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the disk
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the disk. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan of the resource.  
-     * Valid value is one of the following: [ "ssd" (default) / "hdd"]
+     * The plan name of the disk. This must be one of [`ssd`/`hdd`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The ID of the server connected to the disk.
+     * The id of the Server connected to the disk
      */
     readonly serverId?: pulumi.Input<string>;
     /**
-     * Size of the resource (unit:`GB`).
+     * The size of disk in GiB
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The ID of source Archive.
+     * The id of the source archive. This conflicts with [`source_disk_id`]
      */
     readonly sourceArchiveId?: pulumi.Input<string>;
     /**
-     * The ID of source Disk.
+     * The id of the source disk. This conflicts with [`source_archive_id`]
      */
     readonly sourceDiskId?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the disk
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -199,50 +188,48 @@ export interface DiskState {
  * The set of arguments for constructing a Disk resource.
  */
 export interface DiskArgs {
+    /**
+     * The name of the disk connector. This must be one of [`virtio`/`ide`]
+     */
     readonly connector?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the disk. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The ID list of the Disks isolated from Disk.
+     * A list of disk id. The disk will be located to different storage from these disks
      */
     readonly distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The wait time (seconds) to do graceful shutdown the server connected to the resource.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the disk
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the disk. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan of the resource.  
-     * Valid value is one of the following: [ "ssd" (default) / "hdd"]
+     * The plan name of the disk. This must be one of [`ssd`/`hdd`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * Size of the resource (unit:`GB`).
+     * The size of disk in GiB
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The ID of source Archive.
+     * The id of the source archive. This conflicts with [`source_disk_id`]
      */
     readonly sourceArchiveId?: pulumi.Input<string>;
     /**
-     * The ID of source Disk.
+     * The id of the source disk. This conflicts with [`source_archive_id`]
      */
     readonly sourceDiskId?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the disk
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

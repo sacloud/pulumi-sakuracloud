@@ -13,95 +13,67 @@ class GetSubnetResult:
     """
     A collection of values returned by getSubnet.
     """
-    def __init__(__self__, index=None, internet_id=None, ipaddresses=None, max_ipaddress=None, min_ipaddress=None, next_hop=None, nw_address=None, nw_mask_len=None, switch_id=None, zone=None, id=None):
-        if index and not isinstance(index, float):
-            raise TypeError("Expected argument 'index' to be a float")
-        __self__.index = index
-        if internet_id and not isinstance(internet_id, str):
-            raise TypeError("Expected argument 'internet_id' to be a str")
-        __self__.internet_id = internet_id
-        if ipaddresses and not isinstance(ipaddresses, list):
-            raise TypeError("Expected argument 'ipaddresses' to be a list")
-        __self__.ipaddresses = ipaddresses
-        """
-        Global IP address list.
-        """
-        if max_ipaddress and not isinstance(max_ipaddress, str):
-            raise TypeError("Expected argument 'max_ipaddress' to be a str")
-        __self__.max_ipaddress = max_ipaddress
-        """
-        Max global IP address.
-        """
-        if min_ipaddress and not isinstance(min_ipaddress, str):
-            raise TypeError("Expected argument 'min_ipaddress' to be a str")
-        __self__.min_ipaddress = min_ipaddress
-        """
-        Min global IP address.
-        """
-        if next_hop and not isinstance(next_hop, str):
-            raise TypeError("Expected argument 'next_hop' to be a str")
-        __self__.next_hop = next_hop
-        """
-        Next hop address.
-        """
-        if nw_address and not isinstance(nw_address, str):
-            raise TypeError("Expected argument 'nw_address' to be a str")
-        __self__.nw_address = nw_address
-        """
-        The network address.
-        """
-        if nw_mask_len and not isinstance(nw_mask_len, float):
-            raise TypeError("Expected argument 'nw_mask_len' to be a float")
-        __self__.nw_mask_len = nw_mask_len
-        """
-        Network mask length of the Subnet.
-        """
-        if switch_id and not isinstance(switch_id, str):
-            raise TypeError("Expected argument 'switch_id' to be a str")
-        __self__.switch_id = switch_id
-        """
-        The ID of the switch connected to the Subnet.
-        """
-        if zone and not isinstance(zone, str):
-            raise TypeError("Expected argument 'zone' to be a str")
-        __self__.zone = zone
-        """
-        The ID of the zone to which the resource belongs.
-        """
+    def __init__(__self__, id=None, index=None, internet_id=None, ip_addresses=None, max_ip_address=None, min_ip_address=None, netmask=None, network_address=None, next_hop=None, switch_id=None, zone=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if index and not isinstance(index, float):
+            raise TypeError("Expected argument 'index' to be a float")
+        __self__.index = index
+        if internet_id and not isinstance(internet_id, str):
+            raise TypeError("Expected argument 'internet_id' to be a str")
+        __self__.internet_id = internet_id
+        if ip_addresses and not isinstance(ip_addresses, list):
+            raise TypeError("Expected argument 'ip_addresses' to be a list")
+        __self__.ip_addresses = ip_addresses
+        if max_ip_address and not isinstance(max_ip_address, str):
+            raise TypeError("Expected argument 'max_ip_address' to be a str")
+        __self__.max_ip_address = max_ip_address
+        if min_ip_address and not isinstance(min_ip_address, str):
+            raise TypeError("Expected argument 'min_ip_address' to be a str")
+        __self__.min_ip_address = min_ip_address
+        if netmask and not isinstance(netmask, float):
+            raise TypeError("Expected argument 'netmask' to be a float")
+        __self__.netmask = netmask
+        if network_address and not isinstance(network_address, str):
+            raise TypeError("Expected argument 'network_address' to be a str")
+        __self__.network_address = network_address
+        if next_hop and not isinstance(next_hop, str):
+            raise TypeError("Expected argument 'next_hop' to be a str")
+        __self__.next_hop = next_hop
+        if switch_id and not isinstance(switch_id, str):
+            raise TypeError("Expected argument 'switch_id' to be a str")
+        __self__.switch_id = switch_id
+        if zone and not isinstance(zone, str):
+            raise TypeError("Expected argument 'zone' to be a str")
+        __self__.zone = zone
 class AwaitableGetSubnetResult(GetSubnetResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
         return GetSubnetResult(
+            id=self.id,
             index=self.index,
             internet_id=self.internet_id,
-            ipaddresses=self.ipaddresses,
-            max_ipaddress=self.max_ipaddress,
-            min_ipaddress=self.min_ipaddress,
+            ip_addresses=self.ip_addresses,
+            max_ip_address=self.max_ip_address,
+            min_ip_address=self.min_ip_address,
+            netmask=self.netmask,
+            network_address=self.network_address,
             next_hop=self.next_hop,
-            nw_address=self.nw_address,
-            nw_mask_len=self.nw_mask_len,
             switch_id=self.switch_id,
-            zone=self.zone,
-            id=self.id)
+            zone=self.zone)
 
 def get_subnet(index=None,internet_id=None,zone=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Subnet.
-    
-    :param float index: The index of the target subnet.
-    :param str internet_id: The ID of the Internet resource.
-
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/subnet.html.markdown.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
+
 
     __args__['index'] = index
     __args__['internetId'] = internet_id
@@ -113,14 +85,14 @@ def get_subnet(index=None,internet_id=None,zone=None,opts=None):
     __ret__ = pulumi.runtime.invoke('sakuracloud:index/getSubnet:getSubnet', __args__, opts=opts).value
 
     return AwaitableGetSubnetResult(
+        id=__ret__.get('id'),
         index=__ret__.get('index'),
         internet_id=__ret__.get('internetId'),
-        ipaddresses=__ret__.get('ipaddresses'),
-        max_ipaddress=__ret__.get('maxIpaddress'),
-        min_ipaddress=__ret__.get('minIpaddress'),
+        ip_addresses=__ret__.get('ipAddresses'),
+        max_ip_address=__ret__.get('maxIpAddress'),
+        min_ip_address=__ret__.get('minIpAddress'),
+        netmask=__ret__.get('netmask'),
+        network_address=__ret__.get('networkAddress'),
         next_hop=__ret__.get('nextHop'),
-        nw_address=__ret__.get('nwAddress'),
-        nw_mask_len=__ret__.get('nwMaskLen'),
         switch_id=__ret__.get('switchId'),
-        zone=__ret__.get('zone'),
-        id=__ret__.get('id'))
+        zone=__ret__.get('zone'))

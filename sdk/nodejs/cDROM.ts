@@ -4,11 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud CDROM (ISO-Image) resource. This can be used to create, update, and delete CDROMs.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/cdrom.html.markdown.
- */
 export class CDROM extends pulumi.CustomResource {
     /**
      * Get an existing CDROM resource's state with the given name, ID, and optional extra
@@ -37,41 +32,44 @@ export class CDROM extends pulumi.CustomResource {
     }
 
     /**
-     * String of the value of the CDROM. 
+     * The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
      */
     public readonly content!: pulumi.Output<string | undefined>;
+    /**
+     * The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+     * [`iso_image_file`]
+     */
     public readonly contentFileName!: pulumi.Output<string | undefined>;
     /**
-     * The description of the resource.
+     * The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * MD5 hash value of the CDROM file.
+     * The md5 checksum calculated from the base64 encoded file body
      */
     public readonly hash!: pulumi.Output<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the CD-ROM
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * CDROM file to upload (format:`raw`).
+     * The file path to upload to as the CD-ROM. This conflicts with [`content`]
      */
     public readonly isoImageFile!: pulumi.Output<string | undefined>;
     /**
-     * The name of the resource.
+     * The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The size of the resource (unit:`GB`).   
-     * Valid value is one of the following: [ 5 (default) / 10 ]
+     * The size of CD-ROM in GiB. This must be one of [`5`/`10`]
      */
     public readonly size!: pulumi.Output<number | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the CD-ROM
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -126,41 +124,44 @@ export class CDROM extends pulumi.CustomResource {
  */
 export interface CDROMState {
     /**
-     * String of the value of the CDROM. 
+     * The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
      */
     readonly content?: pulumi.Input<string>;
+    /**
+     * The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+     * [`iso_image_file`]
+     */
     readonly contentFileName?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * MD5 hash value of the CDROM file.
+     * The md5 checksum calculated from the base64 encoded file body
      */
     readonly hash?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the CD-ROM
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * CDROM file to upload (format:`raw`).
+     * The file path to upload to as the CD-ROM. This conflicts with [`content`]
      */
     readonly isoImageFile?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The size of the resource (unit:`GB`).   
-     * Valid value is one of the following: [ 5 (default) / 10 ]
+     * The size of CD-ROM in GiB. This must be one of [`5`/`10`]
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the CD-ROM
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -170,41 +171,44 @@ export interface CDROMState {
  */
 export interface CDROMArgs {
     /**
-     * String of the value of the CDROM. 
+     * The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
      */
     readonly content?: pulumi.Input<string>;
+    /**
+     * The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with
+     * [`iso_image_file`]
+     */
     readonly contentFileName?: pulumi.Input<string>;
     /**
-     * The description of the resource.
+     * The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * MD5 hash value of the CDROM file.
+     * The md5 checksum calculated from the base64 encoded file body
      */
     readonly hash?: pulumi.Input<string>;
     /**
-     * The ID of the icon.
+     * The icon id to attach to the CD-ROM
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * CDROM file to upload (format:`raw`).
+     * The file path to upload to as the CD-ROM. This conflicts with [`content`]
      */
     readonly isoImageFile?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The size of the resource (unit:`GB`).   
-     * Valid value is one of the following: [ 5 (default) / 10 ]
+     * The size of CD-ROM in GiB. This must be one of [`5`/`10`]
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the CD-ROM
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

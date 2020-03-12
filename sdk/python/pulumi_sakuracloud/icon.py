@@ -12,40 +12,33 @@ from . import utilities, tables
 class Icon(pulumi.CustomResource):
     base64content: pulumi.Output[str]
     """
-    The base64 encoded body of source content.
-    """
-    body: pulumi.Output[str]
-    """
-    Base64 encoded icon data (size:`small`).
+    The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the Icon. The length of this value must be in the range [`1`-`64`]
     """
     source: pulumi.Output[str]
     """
-    The path of source content file.
+    The file path to upload to as the Icon. This conflicts with [`base64content`]
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the Icon
     """
     url: pulumi.Output[str]
     """
-    URL to access this resource.
+    The URL for getting the icon's raw data
     """
     def __init__(__self__, resource_name, opts=None, base64content=None, name=None, source=None, tags=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Icon resource. This can be used to create, update, and delete Icons.
-        
+        Create a Icon resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] base64content: The base64 encoded body of source content.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] source: The path of source content file.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
+        :param pulumi.Input[str] base64content: The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
+        :param pulumi.Input[str] name: The name of the Icon. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] source: The file path to upload to as the Icon. This conflicts with [`base64content`]
+        :param pulumi.Input[list] tags: Any tags to assign to the Icon
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -68,7 +61,6 @@ class Icon(pulumi.CustomResource):
             __props__['name'] = name
             __props__['source'] = source
             __props__['tags'] = tags
-            __props__['body'] = None
             __props__['url'] = None
         super(Icon, __self__).__init__(
             'sakuracloud:index/icon:Icon',
@@ -77,28 +69,25 @@ class Icon(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, base64content=None, body=None, name=None, source=None, tags=None, url=None):
+    def get(resource_name, id, opts=None, base64content=None, name=None, source=None, tags=None, url=None):
         """
         Get an existing Icon resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] base64content: The base64 encoded body of source content.
-        :param pulumi.Input[str] body: Base64 encoded icon data (size:`small`).
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[str] source: The path of source content file.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] url: URL to access this resource.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/icon.html.markdown.
+        :param pulumi.Input[str] base64content: The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
+        :param pulumi.Input[str] name: The name of the Icon. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] source: The file path to upload to as the Icon. This conflicts with [`base64content`]
+        :param pulumi.Input[list] tags: Any tags to assign to the Icon
+        :param pulumi.Input[str] url: The URL for getting the icon's raw data
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["base64content"] = base64content
-        __props__["body"] = body
         __props__["name"] = name
         __props__["source"] = source
         __props__["tags"] = tags

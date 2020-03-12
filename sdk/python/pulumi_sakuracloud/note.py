@@ -12,43 +12,38 @@ from . import utilities, tables
 class Note(pulumi.CustomResource):
     class_: pulumi.Output[str]
     """
-    The content body of the Note.  
-    Valid value is one of the following: [ "shell" (default) / "yaml_cloud_config" ]
+    The class of the Note. This must be one of `shell`/`yaml_cloud_config`
     """
     content: pulumi.Output[str]
     """
-    The content body of the Note.
+    The content of the Note. This must be specified as a shell script or as a cloud-config
     """
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the Note. This will be computed from special tags within body of `content`
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the Note
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the Note. The length of this value must be in the range [`1`-`64`]
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the Note
     """
     def __init__(__self__, resource_name, opts=None, class_=None, content=None, icon_id=None, name=None, tags=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Note (Startup-Script) resource. This can be used to create, update, and delete Notes.
-        
+        Create a Note resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] class_: The content body of the Note.  
-               Valid value is one of the following: [ "shell" (default) / "yaml_cloud_config" ]
-        :param pulumi.Input[str] content: The content body of the Note.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/note.html.markdown.
+        :param pulumi.Input[str] class_: The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+        :param pulumi.Input[str] content: The content of the Note. This must be specified as a shell script or as a cloud-config
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Note
+        :param pulumi.Input[str] name: The name of the Note. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[list] tags: Any tags to assign to the Note
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -86,23 +81,21 @@ class Note(pulumi.CustomResource):
         """
         Get an existing Note resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] class_: The content body of the Note.  
-               Valid value is one of the following: [ "shell" (default) / "yaml_cloud_config" ]
-        :param pulumi.Input[str] content: The content body of the Note.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/note.html.markdown.
+        :param pulumi.Input[str] class_: The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+        :param pulumi.Input[str] content: The content of the Note. This must be specified as a shell script or as a cloud-config
+        :param pulumi.Input[str] description: The description of the Note. This will be computed from special tags within body of `content`
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Note
+        :param pulumi.Input[str] name: The name of the Note. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[list] tags: Any tags to assign to the Note
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["class_"] = class_
         __props__["content"] = content
         __props__["description"] = description

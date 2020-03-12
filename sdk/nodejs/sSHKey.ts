@@ -2,15 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud SSH Key resource. This can be used to create, update, and delete SSH Keys.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/ssh_key.html.markdown.
- */
 export class SSHKey extends pulumi.CustomResource {
     /**
      * Get an existing SSHKey resource's state with the given name, ID, and optional extra
@@ -39,16 +32,19 @@ export class SSHKey extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * The fingerprint of the public key
+     */
     public /*out*/ readonly fingerprint!: pulumi.Output<string>;
     /**
-     * The name of the resource.
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The body of the public key. 
+     * The body of the public key
      */
     public readonly publicKey!: pulumi.Output<string>;
 
@@ -94,16 +90,19 @@ export class SSHKey extends pulumi.CustomResource {
  */
 export interface SSHKeyState {
     /**
-     * The description of the resource.
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * The fingerprint of the public key
+     */
     readonly fingerprint?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The body of the public key. 
+     * The body of the public key
      */
     readonly publicKey?: pulumi.Input<string>;
 }
@@ -113,15 +112,15 @@ export interface SSHKeyState {
  */
 export interface SSHKeyArgs {
     /**
-     * The description of the resource.
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the resource.
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The body of the public key. 
+     * The body of the public key
      */
     readonly publicKey: pulumi.Input<string>;
 }

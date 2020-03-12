@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
- */
 export class ProxyLBACME extends pulumi.CustomResource {
     /**
      * Get an existing ProxyLBACME resource's state with the given name, ID, and optional extra
@@ -39,23 +34,21 @@ export class ProxyLBACME extends pulumi.CustomResource {
     }
 
     /**
-     * The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
+     * The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+     * set `true` explicitly
      */
     public readonly acceptTos!: pulumi.Output<boolean>;
-    /**
-     * Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-     */
     public /*out*/ readonly certificates!: pulumi.Output<outputs.ProxyLBACMECertificate[]>;
     /**
-     * The FQDN of target domain.  
+     * The FQDN used by ACME. This must set resolvable value
      */
     public readonly commonName!: pulumi.Output<string>;
     /**
-     * The ID of target ProxyLB resource.  
+     * The id of the ProxyLB that set ACME settings to
      */
     public readonly proxylbId!: pulumi.Output<string>;
     /**
-     * The wait time for update settings.
+     * The wait time in seconds. This typically used for waiting for a DNS propagation
      */
     public readonly updateDelaySec!: pulumi.Output<number | undefined>;
 
@@ -109,23 +102,21 @@ export class ProxyLBACME extends pulumi.CustomResource {
  */
 export interface ProxyLBACMEState {
     /**
-     * The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
+     * The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+     * set `true` explicitly
      */
     readonly acceptTos?: pulumi.Input<boolean>;
-    /**
-     * Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-     */
     readonly certificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBACMECertificate>[]>;
     /**
-     * The FQDN of target domain.  
+     * The FQDN used by ACME. This must set resolvable value
      */
     readonly commonName?: pulumi.Input<string>;
     /**
-     * The ID of target ProxyLB resource.  
+     * The id of the ProxyLB that set ACME settings to
      */
     readonly proxylbId?: pulumi.Input<string>;
     /**
-     * The wait time for update settings.
+     * The wait time in seconds. This typically used for waiting for a DNS propagation
      */
     readonly updateDelaySec?: pulumi.Input<number>;
 }
@@ -135,19 +126,20 @@ export interface ProxyLBACMEState {
  */
 export interface ProxyLBACMEArgs {
     /**
-     * The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
+     * The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+     * set `true` explicitly
      */
     readonly acceptTos: pulumi.Input<boolean>;
     /**
-     * The FQDN of target domain.  
+     * The FQDN used by ACME. This must set resolvable value
      */
     readonly commonName: pulumi.Input<string>;
     /**
-     * The ID of target ProxyLB resource.  
+     * The id of the ProxyLB that set ACME settings to
      */
     readonly proxylbId: pulumi.Input<string>;
     /**
-     * The wait time for update settings.
+     * The wait time in seconds. This typically used for waiting for a DNS propagation
      */
     readonly updateDelaySec?: pulumi.Input<number>;
 }

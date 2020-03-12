@@ -13,43 +13,25 @@ class GetBridgeResult:
     """
     A collection of values returned by getBridge.
     """
-    def __init__(__self__, description=None, filters=None, name=None, name_selectors=None, switch_ids=None, zone=None, id=None):
+    def __init__(__self__, description=None, filter=None, id=None, name=None, zone=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if switch_ids and not isinstance(switch_ids, list):
-            raise TypeError("Expected argument 'switch_ids' to be a list")
-        __self__.switch_ids = switch_ids
-        """
-        The ID list of the switches connected to the bridge.
-        """
-        if zone and not isinstance(zone, str):
-            raise TypeError("Expected argument 'zone' to be a str")
-        __self__.zone = zone
-        """
-        The ID of the zone to which the resource belongs.
-        """
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if zone and not isinstance(zone, str):
+            raise TypeError("Expected argument 'zone' to be a str")
+        __self__.zone = zone
 class AwaitableGetBridgeResult(GetBridgeResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -57,32 +39,29 @@ class AwaitableGetBridgeResult(GetBridgeResult):
             yield self
         return GetBridgeResult(
             description=self.description,
-            filters=self.filters,
+            filter=self.filter,
+            id=self.id,
             name=self.name,
-            name_selectors=self.name_selectors,
-            switch_ids=self.switch_ids,
-            zone=self.zone,
-            id=self.id)
+            zone=self.zone)
 
-def get_bridge(filters=None,name_selectors=None,zone=None,opts=None):
+def get_bridge(filter=None,zone=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Bridge.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    :param str zone: The ID of the zone.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`) - The name of the resource.
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/bridge.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
+
+    __args__['filter'] = filter
     __args__['zone'] = zone
     if opts is None:
         opts = pulumi.InvokeOptions()
@@ -92,9 +71,7 @@ def get_bridge(filters=None,name_selectors=None,zone=None,opts=None):
 
     return AwaitableGetBridgeResult(
         description=__ret__.get('description'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
+        id=__ret__.get('id'),
         name=__ret__.get('name'),
-        name_selectors=__ret__.get('nameSelectors'),
-        switch_ids=__ret__.get('switchIds'),
-        zone=__ret__.get('zone'),
-        id=__ret__.get('id'))
+        zone=__ret__.get('zone'))

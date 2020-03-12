@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud CD-ROM.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getCDROM({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/cdrom.html.markdown.
- */
 export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Promise<GetCDROMResult> & GetCDROMResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Prom
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetCDROMResult> = pulumi.runtime.invoke("sakuracloud:index/getCDROM:getCDROM", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Prom
  * A collection of arguments for invoking getCDROM.
  */
 export interface GetCDROMArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetCDROMFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetCDROMFilter;
     readonly zone?: string;
 }
 
@@ -67,35 +35,15 @@ export interface GetCDROMArgs {
  * A collection of values returned by getCDROM.
  */
 export interface GetCDROMResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetCDROMFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetCDROMFilter;
     readonly iconId: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * Size of the resource (unit:`GB`).
-     */
-    readonly size: number;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly size: number;
+    readonly tags: string[];
+    readonly zone: string;
 }

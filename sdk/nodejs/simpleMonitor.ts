@@ -6,49 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Simple Monitor resource. This can be used to create, update, and delete Simple Monitors.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Simple Monitor(protocol: sslcertificate)
- * const cert = new sakuracloud.SimpleMonitor("cert", {
- *     healthCheck: {
- *         protocol: "sslcertificate",
- *         remainingDays: 30,
- *     },
- *     target: "www.example.com",
- * });
- * // Create a new Simple Monitor(protocol: https)
- * const foobar = new sakuracloud.SimpleMonitor("foobar", {
- *     description: "description",
- *     healthCheck: {
- *         delayLoop: 60,
- *         hostHeader: "hostname.example.com",
- *         path: "/",
- *         protocol: "https",
- *         sni: true,
- *         status: "200",
- *     },
- *     notifyEmailEnabled: true,
- *     notifyEmailHtml: true,
- *     notifyInterval: 7200,
- *     notifySlackEnabled: true,
- *     notifySlackWebhook: "https://hooks.slack.com/services/XXX/XXX/XXXXXX",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- *     target: "www.example.com",
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/simple_monitor.html.markdown.
- */
 export class SimpleMonitor extends pulumi.CustomResource {
     /**
      * Get an existing SimpleMonitor resource's state with the given name, ID, and optional extra
@@ -77,47 +34,48 @@ export class SimpleMonitor extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the resource.
+     * The interval in seconds between checks. This must be in the range [`60`-`3600`]
+     */
+    public readonly delayLoop!: pulumi.Output<number | undefined>;
+    /**
+     * The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The flag of enable/disable monitoring.
+     * The flag to enable monitoring by the simple monitor
      */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     public readonly healthCheck!: pulumi.Output<outputs.SimpleMonitorHealthCheck>;
     /**
-     * The ID of the icon of the resource.
+     * The icon id to attach to the SimpleMonitor
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The flag of enable/disable notification by E-mail.
+     * The flag to enable notification by email
      */
     public readonly notifyEmailEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * The flag of enable/disable HTML format for E-mail.
+     * The flag to enable HTML format instead of text format
      */
     public readonly notifyEmailHtml!: pulumi.Output<boolean | undefined>;
     /**
-     * The intervals of notify (unit:`second`).  
+     * The interval in hours between notification. This must be in the range [`1`-`72`]
      */
     public readonly notifyInterval!: pulumi.Output<number | undefined>;
     /**
-     * The flag of enable/disable notification by slack.
+     * The flag to enable notification by slack/discord
      */
     public readonly notifySlackEnabled!: pulumi.Output<boolean | undefined>;
     /**
-     * The webhook URL of destination of slack notification.
+     * The webhook URL for sending notification by slack/discord
      */
     public readonly notifySlackWebhook!: pulumi.Output<string | undefined>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the SimpleMonitor
      */
-    public readonly tags!: pulumi.Output<string[]>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The HostName or IP address of monitoring target.
+     * The monitoring target of the simple monitor. This must be IP address or FQDN
      */
     public readonly target!: pulumi.Output<string>;
 
@@ -133,6 +91,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as SimpleMonitorState | undefined;
+            inputs["delayLoop"] = state ? state.delayLoop : undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["enabled"] = state ? state.enabled : undefined;
             inputs["healthCheck"] = state ? state.healthCheck : undefined;
@@ -152,6 +111,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
             if (!args || args.target === undefined) {
                 throw new Error("Missing required property 'target'");
             }
+            inputs["delayLoop"] = args ? args.delayLoop : undefined;
             inputs["description"] = args ? args.description : undefined;
             inputs["enabled"] = args ? args.enabled : undefined;
             inputs["healthCheck"] = args ? args.healthCheck : undefined;
@@ -180,47 +140,48 @@ export class SimpleMonitor extends pulumi.CustomResource {
  */
 export interface SimpleMonitorState {
     /**
-     * The description of the resource.
+     * The interval in seconds between checks. This must be in the range [`60`-`3600`]
+     */
+    readonly delayLoop?: pulumi.Input<number>;
+    /**
+     * The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable monitoring.
+     * The flag to enable monitoring by the simple monitor
      */
     readonly enabled?: pulumi.Input<boolean>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck?: pulumi.Input<inputs.SimpleMonitorHealthCheck>;
     /**
-     * The ID of the icon of the resource.
+     * The icon id to attach to the SimpleMonitor
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable notification by E-mail.
+     * The flag to enable notification by email
      */
     readonly notifyEmailEnabled?: pulumi.Input<boolean>;
     /**
-     * The flag of enable/disable HTML format for E-mail.
+     * The flag to enable HTML format instead of text format
      */
     readonly notifyEmailHtml?: pulumi.Input<boolean>;
     /**
-     * The intervals of notify (unit:`second`).  
+     * The interval in hours between notification. This must be in the range [`1`-`72`]
      */
     readonly notifyInterval?: pulumi.Input<number>;
     /**
-     * The flag of enable/disable notification by slack.
+     * The flag to enable notification by slack/discord
      */
     readonly notifySlackEnabled?: pulumi.Input<boolean>;
     /**
-     * The webhook URL of destination of slack notification.
+     * The webhook URL for sending notification by slack/discord
      */
     readonly notifySlackWebhook?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the SimpleMonitor
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The HostName or IP address of monitoring target.
+     * The monitoring target of the simple monitor. This must be IP address or FQDN
      */
     readonly target?: pulumi.Input<string>;
 }
@@ -230,47 +191,48 @@ export interface SimpleMonitorState {
  */
 export interface SimpleMonitorArgs {
     /**
-     * The description of the resource.
+     * The interval in seconds between checks. This must be in the range [`60`-`3600`]
+     */
+    readonly delayLoop?: pulumi.Input<number>;
+    /**
+     * The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable monitoring.
+     * The flag to enable monitoring by the simple monitor
      */
     readonly enabled?: pulumi.Input<boolean>;
-    /**
-     * Health check rules. It contains some attributes to Health Check.
-     */
     readonly healthCheck: pulumi.Input<inputs.SimpleMonitorHealthCheck>;
     /**
-     * The ID of the icon of the resource.
+     * The icon id to attach to the SimpleMonitor
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag of enable/disable notification by E-mail.
+     * The flag to enable notification by email
      */
     readonly notifyEmailEnabled?: pulumi.Input<boolean>;
     /**
-     * The flag of enable/disable HTML format for E-mail.
+     * The flag to enable HTML format instead of text format
      */
     readonly notifyEmailHtml?: pulumi.Input<boolean>;
     /**
-     * The intervals of notify (unit:`second`).  
+     * The interval in hours between notification. This must be in the range [`1`-`72`]
      */
     readonly notifyInterval?: pulumi.Input<number>;
     /**
-     * The flag of enable/disable notification by slack.
+     * The flag to enable notification by slack/discord
      */
     readonly notifySlackEnabled?: pulumi.Input<boolean>;
     /**
-     * The webhook URL of destination of slack notification.
+     * The webhook URL for sending notification by slack/discord
      */
     readonly notifySlackWebhook?: pulumi.Input<string>;
     /**
-     * The tag list of the resources.
+     * Any tags to assign to the SimpleMonitor
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The HostName or IP address of monitoring target.
+     * The monitoring target of the simple monitor. This must be IP address or FQDN
      */
     readonly target: pulumi.Input<string>;
 }

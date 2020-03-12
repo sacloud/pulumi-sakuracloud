@@ -12,84 +12,60 @@ from . import utilities, tables
 class GSLB(pulumi.CustomResource):
     description: pulumi.Output[str]
     """
-    The description of the resource.
+    The description of the GSLB. The length of this value must be in the range [`1`-`512`]
     """
     fqdn: pulumi.Output[str]
     """
-    FQDN to access this resource.
+    The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
     """
     health_check: pulumi.Output[dict]
-    """
-    Health check rules. It contains some attributes to Health Check.
-    
-      * `delayLoop` (`float`) - Health check access interval (unit:`second`, default:`10`).
-      * `hostHeader` (`str`) - The value of `Host` header used in http/https health check access.
-      * `path` (`str`) - The request path used in http/https health check access.
-      * `port` (`float`) - Port number used in tcp health check access.
-      * `protocol` (`str`) - Protocol used in health check.  
-        Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-      * `status` (`str`) - HTTP status code expected by health check access.
-    """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
+    The icon id to attach to the GSLB
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the GSLB. The length of this value must be in the range [`1`-`64`]
     """
     servers: pulumi.Output[list]
-    """
-    Real servers. It contains some attributes to Servers.
-    
-      * `enabled` (`bool`) - The flag for enable/disable the GSLB Server (default:`true`).
-      * `ipaddress` (`str`) - The IP address of the GSLB Server.
-      * `weight` (`float`) - The weight of GSLB server used when weighting is enabled in the GSLB.
-    """
     sorry_server: pulumi.Output[str]
     """
-    The hostname or IP address of sorry server.
+    The IP address of the SorryServer. This will be used when all servers are down
     """
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the GSLB
     """
     weighted: pulumi.Output[bool]
     """
-    The flag for enable/disable weighting (default:`true`).
+    The flag to enable weighted load-balancing
     """
     def __init__(__self__, resource_name, opts=None, description=None, health_check=None, icon_id=None, name=None, servers=None, sorry_server=None, tags=None, weighted=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud GSLB resource. This can be used to create, update, and delete GSLBs.
-        
+        Create a GSLB resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[dict] health_check: Health check rules. It contains some attributes to Health Check.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[list] servers: Real servers. It contains some attributes to Servers.
-        :param pulumi.Input[str] sorry_server: The hostname or IP address of sorry server.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[bool] weighted: The flag for enable/disable weighting (default:`true`).
-        
-        The **health_check** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - Health check access interval (unit:`second`, default:`10`).
-          * `hostHeader` (`pulumi.Input[str]`) - The value of `Host` header used in http/https health check access.
-          * `path` (`pulumi.Input[str]`) - The request path used in http/https health check access.
-          * `port` (`pulumi.Input[float]`) - Port number used in tcp health check access.
-          * `protocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-            Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-          * `status` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
-        
-        The **servers** object supports the following:
-        
-          * `enabled` (`pulumi.Input[bool]`) - The flag for enable/disable the GSLB Server (default:`true`).
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the GSLB Server.
-          * `weight` (`pulumi.Input[float]`) - The weight of GSLB server used when weighting is enabled in the GSLB.
+        :param pulumi.Input[str] description: The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the GSLB
+        :param pulumi.Input[str] name: The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] sorry_server: The IP address of the SorryServer. This will be used when all servers are down
+        :param pulumi.Input[list] tags: Any tags to assign to the GSLB
+        :param pulumi.Input[bool] weighted: The flag to enable weighted load-balancing
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
+        The **health_check** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `hostHeader` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `protocol` (`pulumi.Input[str]`)
+          * `status` (`pulumi.Input[str]`)
+
+        The **servers** object supports the following:
+
+          * `enabled` (`pulumi.Input[bool]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `weight` (`pulumi.Input[float]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -130,41 +106,37 @@ class GSLB(pulumi.CustomResource):
         """
         Get an existing GSLB resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[str] fqdn: FQDN to access this resource.
-        :param pulumi.Input[dict] health_check: Health check rules. It contains some attributes to Health Check.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[list] servers: Real servers. It contains some attributes to Servers.
-        :param pulumi.Input[str] sorry_server: The hostname or IP address of sorry server.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[bool] weighted: The flag for enable/disable weighting (default:`true`).
-        
-        The **health_check** object supports the following:
-        
-          * `delayLoop` (`pulumi.Input[float]`) - Health check access interval (unit:`second`, default:`10`).
-          * `hostHeader` (`pulumi.Input[str]`) - The value of `Host` header used in http/https health check access.
-          * `path` (`pulumi.Input[str]`) - The request path used in http/https health check access.
-          * `port` (`pulumi.Input[float]`) - Port number used in tcp health check access.
-          * `protocol` (`pulumi.Input[str]`) - Protocol used in health check.  
-            Valid value is one of the following: [ "http" / "https" / "ping" / "tcp" ]
-          * `status` (`pulumi.Input[str]`) - HTTP status code expected by health check access.
-        
-        The **servers** object supports the following:
-        
-          * `enabled` (`pulumi.Input[bool]`) - The flag for enable/disable the GSLB Server (default:`true`).
-          * `ipaddress` (`pulumi.Input[str]`) - The IP address of the GSLB Server.
-          * `weight` (`pulumi.Input[float]`) - The weight of GSLB server used when weighting is enabled in the GSLB.
+        :param pulumi.Input[str] description: The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] fqdn: The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
+        :param pulumi.Input[str] icon_id: The icon id to attach to the GSLB
+        :param pulumi.Input[str] name: The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[str] sorry_server: The IP address of the SorryServer. This will be used when all servers are down
+        :param pulumi.Input[list] tags: Any tags to assign to the GSLB
+        :param pulumi.Input[bool] weighted: The flag to enable weighted load-balancing
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/gslb.html.markdown.
+        The **health_check** object supports the following:
+
+          * `delay_loop` (`pulumi.Input[float]`)
+          * `hostHeader` (`pulumi.Input[str]`)
+          * `path` (`pulumi.Input[str]`)
+          * `port` (`pulumi.Input[float]`)
+          * `protocol` (`pulumi.Input[str]`)
+          * `status` (`pulumi.Input[str]`)
+
+        The **servers** object supports the following:
+
+          * `enabled` (`pulumi.Input[bool]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `weight` (`pulumi.Input[float]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["description"] = description
         __props__["fqdn"] = fqdn
         __props__["health_check"] = health_check

@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud NFS Appliance resource. This can be used to create, update, and delete NFS Appliances.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/nfs.html.markdown.
- */
 export class NFS extends pulumi.CustomResource {
     /**
      * Get an existing NFS resource's state with the given name, ID, and optional extra
@@ -39,53 +34,32 @@ export class NFS extends pulumi.CustomResource {
     }
 
     /**
-     * The default route IP address of the NFS Appliance.
-     */
-    public readonly defaultRoute!: pulumi.Output<string | undefined>;
-    /**
-     * The description of the resource.
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The wait time (seconds) to do graceful shutdown the NFS Appliance.
-     */
-    public readonly gracefulShutdownTimeout!: pulumi.Output<number | undefined>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the NFS
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The IP address of the NFS Appliance.
-     */
-    public readonly ipaddress!: pulumi.Output<string>;
-    /**
-     * The name of the resource.
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
+    public readonly networkInterface!: pulumi.Output<outputs.NFSNetworkInterface>;
     /**
-     * The network mask length of the NFS Appliance.
-     */
-    public readonly nwMaskLen!: pulumi.Output<number>;
-    /**
-     * The plan of the NFS Appliance 
-     * Valid value is one of the following: [ hdd (default) / ssd ]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The size of the NFS Appliance (unit:`GB`).  
-     * Valid value is one of the following: [ 100 (default) / 500 / 1024 / 2048 / 4096 / 8192(hdd only) / 12288(hdd only) ]
+     * The size of NFS in GiB
      */
     public readonly size!: pulumi.Output<number | undefined>;
     /**
-     * The ID of the switch connected to the NFS Appliance.
+     * Any tags to assign to the NFS
      */
-    public readonly switchId!: pulumi.Output<string>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The tag list of the resources.
-     */
-    public readonly tags!: pulumi.Output<string[]>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -101,39 +75,25 @@ export class NFS extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
             const state = argsOrState as NFSState | undefined;
-            inputs["defaultRoute"] = state ? state.defaultRoute : undefined;
             inputs["description"] = state ? state.description : undefined;
-            inputs["gracefulShutdownTimeout"] = state ? state.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
-            inputs["ipaddress"] = state ? state.ipaddress : undefined;
             inputs["name"] = state ? state.name : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
+            inputs["networkInterface"] = state ? state.networkInterface : undefined;
             inputs["plan"] = state ? state.plan : undefined;
             inputs["size"] = state ? state.size : undefined;
-            inputs["switchId"] = state ? state.switchId : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as NFSArgs | undefined;
-            if (!args || args.ipaddress === undefined) {
-                throw new Error("Missing required property 'ipaddress'");
+            if (!args || args.networkInterface === undefined) {
+                throw new Error("Missing required property 'networkInterface'");
             }
-            if (!args || args.nwMaskLen === undefined) {
-                throw new Error("Missing required property 'nwMaskLen'");
-            }
-            if (!args || args.switchId === undefined) {
-                throw new Error("Missing required property 'switchId'");
-            }
-            inputs["defaultRoute"] = args ? args.defaultRoute : undefined;
             inputs["description"] = args ? args.description : undefined;
-            inputs["gracefulShutdownTimeout"] = args ? args.gracefulShutdownTimeout : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
-            inputs["ipaddress"] = args ? args.ipaddress : undefined;
             inputs["name"] = args ? args.name : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
+            inputs["networkInterface"] = args ? args.networkInterface : undefined;
             inputs["plan"] = args ? args.plan : undefined;
             inputs["size"] = args ? args.size : undefined;
-            inputs["switchId"] = args ? args.switchId : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
@@ -153,53 +113,32 @@ export class NFS extends pulumi.CustomResource {
  */
 export interface NFSState {
     /**
-     * The default route IP address of the NFS Appliance.
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the NFS Appliance.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the NFS
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the NFS Appliance.
-     */
-    readonly ipaddress?: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface?: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
-     * The network mask length of the NFS Appliance.
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
-    /**
-     * The plan of the NFS Appliance 
-     * Valid value is one of the following: [ hdd (default) / ssd ]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The size of the NFS Appliance (unit:`GB`).  
-     * Valid value is one of the following: [ 100 (default) / 500 / 1024 / 2048 / 4096 / 8192(hdd only) / 12288(hdd only) ]
+     * The size of NFS in GiB
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The ID of the switch connected to the NFS Appliance.
-     */
-    readonly switchId?: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the NFS
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -209,53 +148,32 @@ export interface NFSState {
  */
 export interface NFSArgs {
     /**
-     * The default route IP address of the NFS Appliance.
-     */
-    readonly defaultRoute?: pulumi.Input<string>;
-    /**
-     * The description of the resource.
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The wait time (seconds) to do graceful shutdown the NFS Appliance.
-     */
-    readonly gracefulShutdownTimeout?: pulumi.Input<number>;
-    /**
-     * The ID of the icon.
+     * The icon id to attach to the NFS
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The IP address of the NFS Appliance.
-     */
-    readonly ipaddress: pulumi.Input<string>;
-    /**
-     * The name of the resource.
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
+    readonly networkInterface: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
-     * The network mask length of the NFS Appliance.
-     */
-    readonly nwMaskLen: pulumi.Input<number>;
-    /**
-     * The plan of the NFS Appliance 
-     * Valid value is one of the following: [ hdd (default) / ssd ]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The size of the NFS Appliance (unit:`GB`).  
-     * Valid value is one of the following: [ 100 (default) / 500 / 1024 / 2048 / 4096 / 8192(hdd only) / 12288(hdd only) ]
+     * The size of NFS in GiB
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The ID of the switch connected to the NFS Appliance.
-     */
-    readonly switchId: pulumi.Input<string>;
-    /**
-     * The tag list of the resources.
+     * Any tags to assign to the NFS
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

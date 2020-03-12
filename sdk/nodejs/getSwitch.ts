@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Switch.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getSwitch({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/switch.html.markdown.
- */
 export function getSwitch(args?: GetSwitchArgs, opts?: pulumi.InvokeOptions): Promise<GetSwitchResult> & GetSwitchResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getSwitch(args?: GetSwitchArgs, opts?: pulumi.InvokeOptions): Pr
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetSwitchResult> = pulumi.runtime.invoke("sakuracloud:index/getSwitch:getSwitch", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getSwitch(args?: GetSwitchArgs, opts?: pulumi.InvokeOptions): Pr
  * A collection of arguments for invoking getSwitch.
  */
 export interface GetSwitchArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetSwitchFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetSwitchFilter;
     readonly zone?: string;
 }
 
@@ -67,39 +35,16 @@ export interface GetSwitchArgs {
  * A collection of values returned by getSwitch.
  */
 export interface GetSwitchResult {
-    /**
-     * The ID of the bridge connected to the switch.
-     */
     readonly bridgeId: string;
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetSwitchFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetSwitchFilter;
     readonly iconId: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The ID list of the servers connected to the switch.
-     */
-    readonly serverIds: string[];
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly serverIds: string[];
+    readonly tags: string[];
+    readonly zone: string;
 }

@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud SSH Key.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getSSHKey({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/ssh_key.html.markdown.
- */
 export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetSSHKeyResult> & GetSSHKeyResult {
     args = args || {};
     if (!opts) {
@@ -32,8 +16,7 @@ export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Pr
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetSSHKeyResult> = pulumi.runtime.invoke("sakuracloud:index/getSSHKey:getSSHKey", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
+        "filter": args.filter,
     }, opts);
 
     return pulumi.utils.liftProperties(promise, opts);
@@ -43,37 +26,20 @@ export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Pr
  * A collection of arguments for invoking getSSHKey.
  */
 export interface GetSSHKeyArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetSSHKeyFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
+    readonly filter?: inputs.GetSSHKeyFilter;
 }
 
 /**
  * A collection of values returned by getSSHKey.
  */
 export interface GetSSHKeyResult {
-    /**
-     * The description of the resource.
-     */
     readonly description: string;
-    readonly filters?: outputs.GetSSHKeyFilter[];
+    readonly filter?: outputs.GetSSHKeyFilter;
     readonly fingerprint: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The body of the public key. 
-     */
-    readonly publicKey: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly publicKey: string;
 }

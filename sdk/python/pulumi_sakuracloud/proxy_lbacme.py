@@ -12,46 +12,32 @@ from . import utilities, tables
 class ProxyLBACME(pulumi.CustomResource):
     accept_tos: pulumi.Output[bool]
     """
-    The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
+    The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+    set `true` explicitly
     """
     certificates: pulumi.Output[list]
-    """
-    Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-    
-      * `additionalCertificates` (`list`) - Additional certificates.
-    
-        * `intermediateCert` (`str`) - The intermediate certificate.
-        * `private_key` (`str`) - The private key.
-        * `serverCert` (`str`) - The server certificate.
-    
-      * `intermediateCert` (`str`) - The intermediate certificate.
-      * `private_key` (`str`) - The private key.
-      * `serverCert` (`str`) - The server certificate.
-    """
     common_name: pulumi.Output[str]
     """
-    The FQDN of target domain.  
+    The FQDN used by ACME. This must set resolvable value
     """
     proxylb_id: pulumi.Output[str]
     """
-    The ID of target ProxyLB resource.  
+    The id of the ProxyLB that set ACME settings to
     """
     update_delay_sec: pulumi.Output[float]
     """
-    The wait time for update settings.
+    The wait time in seconds. This typically used for waiting for a DNS propagation
     """
     def __init__(__self__, resource_name, opts=None, accept_tos=None, common_name=None, proxylb_id=None, update_delay_sec=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud ProxyLB(Enhanced-LoadBalancer) resource. This can be used to create, update, and delete ProxyLBs.
-        
+        Create a ProxyLBACME resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] accept_tos: The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
-        :param pulumi.Input[str] common_name: The FQDN of target domain.  
-        :param pulumi.Input[str] proxylb_id: The ID of target ProxyLB resource.  
-        :param pulumi.Input[float] update_delay_sec: The wait time for update settings.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
+        :param pulumi.Input[bool] accept_tos: The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+               set `true` explicitly
+        :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value
+        :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to
+        :param pulumi.Input[float] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -92,33 +78,31 @@ class ProxyLBACME(pulumi.CustomResource):
         """
         Get an existing ProxyLBACME resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] accept_tos: The flag for accept Let's Encrypt's [Terms of Service](https://letsencrypt.org/repository/).  
-        :param pulumi.Input[list] certificates: Certificate used to terminate SSL/TSL. It contains some attributes to Certificate.
-        :param pulumi.Input[str] common_name: The FQDN of target domain.  
-        :param pulumi.Input[str] proxylb_id: The ID of target ProxyLB resource.  
-        :param pulumi.Input[float] update_delay_sec: The wait time for update settings.
-        
-        The **certificates** object supports the following:
-        
-          * `additionalCertificates` (`pulumi.Input[list]`) - Additional certificates.
-        
-            * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-            * `private_key` (`pulumi.Input[str]`) - The private key.
-            * `serverCert` (`pulumi.Input[str]`) - The server certificate.
-        
-          * `intermediateCert` (`pulumi.Input[str]`) - The intermediate certificate.
-          * `private_key` (`pulumi.Input[str]`) - The private key.
-          * `serverCert` (`pulumi.Input[str]`) - The server certificate.
+        :param pulumi.Input[bool] accept_tos: The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
+               set `true` explicitly
+        :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value
+        :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to
+        :param pulumi.Input[float] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/proxylb_acme.html.markdown.
+        The **certificates** object supports the following:
+
+          * `additionalCertificates` (`pulumi.Input[list]`)
+            * `intermediateCert` (`pulumi.Input[str]`)
+            * `private_key` (`pulumi.Input[str]`)
+            * `serverCert` (`pulumi.Input[str]`)
+
+          * `intermediateCert` (`pulumi.Input[str]`)
+          * `private_key` (`pulumi.Input[str]`)
+          * `serverCert` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
+
         __props__["accept_tos"] = accept_tos
         __props__["certificates"] = certificates
         __props__["common_name"] = common_name

@@ -4,34 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Bucket Object resource. This can be used to create, update, and delete Bucket Objects.
- * 
- * > **NOTE on Bucket:**  Sakura Cloud does not support bucket creation by API.
- * Buckets should be created on the control panel.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Bucket Object
- * const foobar = new sakuracloud.BucketObject("foobar", {
- *     bucket: "your-bucket-name",
- *     contentType: "application/json",
- *     key: "path/to/your/object",
- *     source: "path/to/your/source/file",
- * });
- * ```
- * 
- * 
- * ## Import (not supported)
- * 
- * Import of Bucket Object is not supported.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/bucket_object.html.markdown.
- */
 export class BucketObject extends pulumi.CustomResource {
     /**
      * Get an existing BucketObject resource's state with the given name, ID, and optional extra
@@ -60,64 +32,67 @@ export class BucketObject extends pulumi.CustomResource {
     }
 
     /**
-     * The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
+     * The access key for using SakuraCloud Object Storage API
      */
     public readonly accessKey!: pulumi.Output<string>;
     /**
-     * The name of bucket.
+     * The name of the bucket
      */
     public readonly bucket!: pulumi.Output<string>;
     /**
-     * String of the value of the bucket object. 
+     * The content to upload to as the bucket object. This conflicts with [`source`]
      */
     public readonly content!: pulumi.Output<string | undefined>;
     /**
-     * Content-Type header value of the bucket object.
+     * The content-type of the bucket object
      */
     public readonly contentType!: pulumi.Output<string>;
     /**
-     * ETag of the resource.
+     * The etag of the bucket object
      */
     public readonly etag!: pulumi.Output<string>;
     /**
-     * URL for accessing the object via HTTP (type:`cache`).
+     * The URL for cached access to the bucket object via HTTP
      */
     public /*out*/ readonly httpCacheUrl!: pulumi.Output<string>;
     /**
-     * URL for accessing the object via HTTP (type:`path`).
+     * The URL with path-format for accessing the bucket object via HTTP
      */
     public /*out*/ readonly httpPathUrl!: pulumi.Output<string>;
     /**
-     * URL for accessing the object via HTTP (type:`subdomain`).
+     * The URL for accessing the bucket object via HTTP
      */
     public /*out*/ readonly httpUrl!: pulumi.Output<string>;
     /**
-     * URL for accessing the object via HTTPS (type:`cache`)..
+     * The URL for cached access to the bucket object via HTTPS
      */
     public /*out*/ readonly httpsCacheUrl!: pulumi.Output<string>;
+    /**
+     * The URL with path-format for accessing the bucket object via HTTPS
+     */
     public /*out*/ readonly httpsPathUrl!: pulumi.Output<string>;
     /**
-     * URL for accessing the object via HTTPS (type:`subdomain`).
+     * The URL for accessing the bucket object via HTTPS
      */
     public /*out*/ readonly httpsUrl!: pulumi.Output<string>;
     /**
-     * The key of the bucket object.
+     * The name of the bucket object
      */
     public readonly key!: pulumi.Output<string>;
     /**
-     * Update date of the resource.
+     * The time when the bucket object last modified
      */
     public /*out*/ readonly lastModified!: pulumi.Output<string>;
     /**
-     * The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
+     * The secret key for using SakuraCloud Object Storage API
      */
     public readonly secretKey!: pulumi.Output<string>;
     /**
-     * Size of the resource (unit:`byte`).
+     * The size of the bucket object in bytes
      */
     public /*out*/ readonly size!: pulumi.Output<number>;
     /**
-     * Source file path of value of the bucket object.
+     * The file path to upload to as the bucket object. This conflicts with [`content`]
      */
     public readonly source!: pulumi.Output<string | undefined>;
 
@@ -196,64 +171,67 @@ export class BucketObject extends pulumi.CustomResource {
  */
 export interface BucketObjectState {
     /**
-     * The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
+     * The access key for using SakuraCloud Object Storage API
      */
     readonly accessKey?: pulumi.Input<string>;
     /**
-     * The name of bucket.
+     * The name of the bucket
      */
     readonly bucket?: pulumi.Input<string>;
     /**
-     * String of the value of the bucket object. 
+     * The content to upload to as the bucket object. This conflicts with [`source`]
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * Content-Type header value of the bucket object.
+     * The content-type of the bucket object
      */
     readonly contentType?: pulumi.Input<string>;
     /**
-     * ETag of the resource.
+     * The etag of the bucket object
      */
     readonly etag?: pulumi.Input<string>;
     /**
-     * URL for accessing the object via HTTP (type:`cache`).
+     * The URL for cached access to the bucket object via HTTP
      */
     readonly httpCacheUrl?: pulumi.Input<string>;
     /**
-     * URL for accessing the object via HTTP (type:`path`).
+     * The URL with path-format for accessing the bucket object via HTTP
      */
     readonly httpPathUrl?: pulumi.Input<string>;
     /**
-     * URL for accessing the object via HTTP (type:`subdomain`).
+     * The URL for accessing the bucket object via HTTP
      */
     readonly httpUrl?: pulumi.Input<string>;
     /**
-     * URL for accessing the object via HTTPS (type:`cache`)..
+     * The URL for cached access to the bucket object via HTTPS
      */
     readonly httpsCacheUrl?: pulumi.Input<string>;
+    /**
+     * The URL with path-format for accessing the bucket object via HTTPS
+     */
     readonly httpsPathUrl?: pulumi.Input<string>;
     /**
-     * URL for accessing the object via HTTPS (type:`subdomain`).
+     * The URL for accessing the bucket object via HTTPS
      */
     readonly httpsUrl?: pulumi.Input<string>;
     /**
-     * The key of the bucket object.
+     * The name of the bucket object
      */
     readonly key?: pulumi.Input<string>;
     /**
-     * Update date of the resource.
+     * The time when the bucket object last modified
      */
     readonly lastModified?: pulumi.Input<string>;
     /**
-     * The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
+     * The secret key for using SakuraCloud Object Storage API
      */
     readonly secretKey?: pulumi.Input<string>;
     /**
-     * Size of the resource (unit:`byte`).
+     * The size of the bucket object in bytes
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * Source file path of value of the bucket object.
+     * The file path to upload to as the bucket object. This conflicts with [`content`]
      */
     readonly source?: pulumi.Input<string>;
 }
@@ -263,35 +241,35 @@ export interface BucketObjectState {
  */
 export interface BucketObjectArgs {
     /**
-     * The access key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_ACCESS_KEY_ID` or `AWS_ACCESS_KEY_ID` environment variable.
+     * The access key for using SakuraCloud Object Storage API
      */
     readonly accessKey: pulumi.Input<string>;
     /**
-     * The name of bucket.
+     * The name of the bucket
      */
     readonly bucket: pulumi.Input<string>;
     /**
-     * String of the value of the bucket object. 
+     * The content to upload to as the bucket object. This conflicts with [`source`]
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * Content-Type header value of the bucket object.
+     * The content-type of the bucket object
      */
     readonly contentType?: pulumi.Input<string>;
     /**
-     * ETag of the resource.
+     * The etag of the bucket object
      */
     readonly etag?: pulumi.Input<string>;
     /**
-     * The key of the bucket object.
+     * The name of the bucket object
      */
     readonly key: pulumi.Input<string>;
     /**
-     * The secret key of bucket. It must be provided, but it can also be sourced from the `SACLOUD_OJS_SECRET_ACCESS_KEY` or `AWS_SECRET_ACCESS_KEY` environment variable.
+     * The secret key for using SakuraCloud Object Storage API
      */
     readonly secretKey: pulumi.Input<string>;
     /**
-     * Source file path of value of the bucket object.
+     * The file path to upload to as the bucket object. This conflicts with [`content`]
      */
     readonly source?: pulumi.Input<string>;
 }

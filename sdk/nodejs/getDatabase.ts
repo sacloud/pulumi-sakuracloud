@@ -6,22 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Use this data source to retrieve information about a SakuraCloud Database.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * const foobar = sakuracloud.getDatabase({
- *     nameSelectors: ["foobar"],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/database.html.markdown.
- */
 export function getDatabase(args?: GetDatabaseArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseResult> & GetDatabaseResult {
     args = args || {};
     if (!opts) {
@@ -32,9 +16,7 @@ export function getDatabase(args?: GetDatabaseArgs, opts?: pulumi.InvokeOptions)
         opts.version = utilities.getVersion();
     }
     const promise: Promise<GetDatabaseResult> = pulumi.runtime.invoke("sakuracloud:index/getDatabase:getDatabase", {
-        "filters": args.filters,
-        "nameSelectors": args.nameSelectors,
-        "tagSelectors": args.tagSelectors,
+        "filter": args.filter,
         "zone": args.zone,
     }, opts);
 
@@ -45,21 +27,7 @@ export function getDatabase(args?: GetDatabaseArgs, opts?: pulumi.InvokeOptions)
  * A collection of arguments for invoking getDatabase.
  */
 export interface GetDatabaseArgs {
-    /**
-     * The map of filter key and value.
-     */
-    readonly filters?: inputs.GetDatabaseFilter[];
-    /**
-     * The list of names to filtering.
-     */
-    readonly nameSelectors?: string[];
-    /**
-     * The list of tags to filtering.
-     */
-    readonly tagSelectors?: string[];
-    /**
-     * The ID of the zone.
-     */
+    readonly filter?: inputs.GetDatabaseFilter;
     readonly zone?: string;
 }
 
@@ -67,77 +35,22 @@ export interface GetDatabaseArgs {
  * A collection of values returned by getDatabase.
  */
 export interface GetDatabaseResult {
-    /**
-     * The network address list that allowed connections to the database.
-     */
-    readonly allowNetworks: string[];
-    /**
-     * The time to perform backup.
-     */
-    readonly backupTime: string;
-    /**
-     * Day of the week to get backup.  
-     */
-    readonly backupWeekdays: string[];
-    /**
-     * The default route IP address of the database.
-     */
-    readonly defaultRoute: string;
-    /**
-     * The description of the resource.
-     */
+    readonly backups: outputs.GetDatabaseBackup[];
+    readonly databaseType: string;
     readonly description: string;
-    readonly filters?: outputs.GetDatabaseFilter[];
-    /**
-     * The ID of the icon of the resource.
-     */
+    readonly filter?: outputs.GetDatabaseFilter;
     readonly iconId: string;
-    /**
-     * The IP address of the database.
-     */
-    readonly ipaddress1: string;
-    /**
-     * The name of the resource.
-     */
-    readonly name: string;
-    readonly nameSelectors?: string[];
-    /**
-     * The network mask length of the database.
-     */
-    readonly nwMaskLen: number;
-    /**
-     * The name of the resource plan.
-     */
-    readonly plan: string;
-    /**
-     * The number of the port on which the database is listening.
-     */
-    readonly port: number;
-    readonly replicaPassword: string;
-    readonly replicaUser: string;
-    /**
-     * The ID of the switch connected to the database.
-     */
-    readonly switchId: string;
-    readonly tagSelectors?: string[];
-    /**
-     * The tag list of the resources.
-     */
-    readonly tags: string[];
-    /**
-     * The username to access database.
-     */
-    readonly userName: string;
-    /**
-     * The password to access database.
-     */
-    readonly userPassword: string;
-    /**
-     * The ID of the zone to which the resource belongs.
-     */
-    readonly zone: string;
     /**
      * id is the provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly name: string;
+    readonly networkInterfaces: outputs.GetDatabaseNetworkInterface[];
+    readonly password: string;
+    readonly plan: string;
+    readonly replicaPassword: string;
+    readonly replicaUser: string;
+    readonly tags: string[];
+    readonly username: string;
+    readonly zone: string;
 }

@@ -58,7 +58,7 @@ build:: tfgen provider
 		sed -i.bak "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 	cd ${PACKDIR}/python/ && \
 		cp ../../README.md . && \
-		sed -i.bak -e "s/terraform-providers/sacloud/g" pulumi_sakuracloud/*.py pulumi_sakuracloud/*.md pulumi_sakuracloud/config/*.md \pulumi_sakuracloud/config/*.py && \
+		sed -i.bak -e "s/terraform-providers/sacloud/g" pulumi_sakuracloud/*.py pulumi_sakuracloud/config/*.md \pulumi_sakuracloud/config/*.py && \
 		rm pulumi_sakuracloud/*.bak && \
 		rm pulumi_sakuracloud/config/*.bak && \
 		perl -pe "s;check_call\(\['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '\x24\{PLUGIN_VERSION\}'\]\);check_call\(\['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '\x24\{PLUGIN_VERSION\}', '--server', 'https://github.com/sacloud/pulumi-sakuracloud/releases/download/\x24\{PLUGIN_VERSION\}'\]\);g" -i setup.py && \

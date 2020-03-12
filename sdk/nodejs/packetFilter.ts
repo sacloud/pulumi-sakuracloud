@@ -6,37 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Packet Filter resource. This can be used to create, update, and delete Packet Filters.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Packet Filter
- * const foobar = new sakuracloud.PacketFilter("foobar", {
- *     description: "description",
- *     expressions: [
- *         {
- *             destPort: "80",
- *             protocol: "tcp",
- *             sourceNw: "0.0.0.0/0",
- *             sourcePort: "0-65535",
- *         },
- *         {
- *             allow: false,
- *             description: "deny all",
- *             protocol: "ip",
- *             sourceNw: "0.0.0.0/0",
- *         },
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/packet_filter.html.markdown.
- */
 export class PacketFilter extends pulumi.CustomResource {
     /**
      * Get an existing PacketFilter resource's state with the given name, ID, and optional extra
@@ -65,19 +34,16 @@ export class PacketFilter extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the expression.
+     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
      */
     public readonly description!: pulumi.Output<string | undefined>;
-    /**
-     * Health check rules. It contains some attributes to Expressions.
-     */
     public readonly expressions!: pulumi.Output<outputs.PacketFilterExpression[]>;
     /**
-     * The name of the resource.
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * target SakuraCloud zone
+     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -120,19 +86,16 @@ export class PacketFilter extends pulumi.CustomResource {
  */
 export interface PacketFilterState {
     /**
-     * The description of the expression.
+     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
-    /**
-     * Health check rules. It contains some attributes to Expressions.
-     */
     readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
-     * The name of the resource.
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * target SakuraCloud zone
+     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -142,19 +105,16 @@ export interface PacketFilterState {
  */
 export interface PacketFilterArgs {
     /**
-     * The description of the expression.
+     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
      */
     readonly description?: pulumi.Input<string>;
-    /**
-     * Health check rules. It contains some attributes to Expressions.
-     */
     readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
-     * The name of the resource.
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * target SakuraCloud zone
+     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

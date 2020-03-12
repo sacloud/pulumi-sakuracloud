@@ -2,32 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * Provides a SakuraCloud Subnet resource. This can be used to create, update, and delete Subnets.
- * 
- * ## Example Usage
- * 
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
- * 
- * // Create a new Subnet
- * const foobar = new sakuracloud.Subnet("foobar", {
- *     description: "description",
- *     name: "foobar",
- *     tags: [
- *         "foo",
- *         "bar",
- *     ],
- * });
- * ```
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/subnet.html.markdown.
- */
 export class Subnet extends pulumi.CustomResource {
     /**
      * Get an existing Subnet resource's state with the given name, ID, and optional extra
@@ -56,37 +32,39 @@ export class Subnet extends pulumi.CustomResource {
     }
 
     /**
-     * The ID of the Internet resource.
+     * The id of the switch+router resource that the subnet belongs
      */
     public readonly internetId!: pulumi.Output<string>;
     /**
-     * Global IP address list.
+     * A list of assigned global address to the subnet
      */
-    public /*out*/ readonly ipaddresses!: pulumi.Output<string[]>;
+    public /*out*/ readonly ipAddresses!: pulumi.Output<string[]>;
     /**
-     * Max global IP address.
+     * Maximum IP address in assigned global addresses to the subnet
      */
-    public /*out*/ readonly maxIpaddress!: pulumi.Output<string>;
+    public /*out*/ readonly maxIpAddress!: pulumi.Output<string>;
     /**
-     * Min global IP address.
+     * Minimum IP address in assigned global addresses to the subnet
      */
-    public /*out*/ readonly minIpaddress!: pulumi.Output<string>;
+    public /*out*/ readonly minIpAddress!: pulumi.Output<string>;
     /**
-     * The next hop IP address.
+     * The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+     */
+    public readonly netmask!: pulumi.Output<number | undefined>;
+    /**
+     * The IPv4 network address assigned to the Subnet
+     */
+    public /*out*/ readonly networkAddress!: pulumi.Output<string>;
+    /**
+     * The ip address of the next-hop at the subnet
      */
     public readonly nextHop!: pulumi.Output<string>;
     /**
-     * The network address.
+     * The id of the switch connected from the Subnet
      */
-    public /*out*/ readonly nwAddress!: pulumi.Output<string>;
-    /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-     */
-    public readonly nwMaskLen!: pulumi.Output<number | undefined>;
     public /*out*/ readonly switchId!: pulumi.Output<string>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -103,12 +81,12 @@ export class Subnet extends pulumi.CustomResource {
         if (opts && opts.id) {
             const state = argsOrState as SubnetState | undefined;
             inputs["internetId"] = state ? state.internetId : undefined;
-            inputs["ipaddresses"] = state ? state.ipaddresses : undefined;
-            inputs["maxIpaddress"] = state ? state.maxIpaddress : undefined;
-            inputs["minIpaddress"] = state ? state.minIpaddress : undefined;
+            inputs["ipAddresses"] = state ? state.ipAddresses : undefined;
+            inputs["maxIpAddress"] = state ? state.maxIpAddress : undefined;
+            inputs["minIpAddress"] = state ? state.minIpAddress : undefined;
+            inputs["netmask"] = state ? state.netmask : undefined;
+            inputs["networkAddress"] = state ? state.networkAddress : undefined;
             inputs["nextHop"] = state ? state.nextHop : undefined;
-            inputs["nwAddress"] = state ? state.nwAddress : undefined;
-            inputs["nwMaskLen"] = state ? state.nwMaskLen : undefined;
             inputs["switchId"] = state ? state.switchId : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
@@ -120,13 +98,13 @@ export class Subnet extends pulumi.CustomResource {
                 throw new Error("Missing required property 'nextHop'");
             }
             inputs["internetId"] = args ? args.internetId : undefined;
+            inputs["netmask"] = args ? args.netmask : undefined;
             inputs["nextHop"] = args ? args.nextHop : undefined;
-            inputs["nwMaskLen"] = args ? args.nwMaskLen : undefined;
             inputs["zone"] = args ? args.zone : undefined;
-            inputs["ipaddresses"] = undefined /*out*/;
-            inputs["maxIpaddress"] = undefined /*out*/;
-            inputs["minIpaddress"] = undefined /*out*/;
-            inputs["nwAddress"] = undefined /*out*/;
+            inputs["ipAddresses"] = undefined /*out*/;
+            inputs["maxIpAddress"] = undefined /*out*/;
+            inputs["minIpAddress"] = undefined /*out*/;
+            inputs["networkAddress"] = undefined /*out*/;
             inputs["switchId"] = undefined /*out*/;
         }
         if (!opts) {
@@ -145,37 +123,39 @@ export class Subnet extends pulumi.CustomResource {
  */
 export interface SubnetState {
     /**
-     * The ID of the Internet resource.
+     * The id of the switch+router resource that the subnet belongs
      */
     readonly internetId?: pulumi.Input<string>;
     /**
-     * Global IP address list.
+     * A list of assigned global address to the subnet
      */
-    readonly ipaddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Max global IP address.
+     * Maximum IP address in assigned global addresses to the subnet
      */
-    readonly maxIpaddress?: pulumi.Input<string>;
+    readonly maxIpAddress?: pulumi.Input<string>;
     /**
-     * Min global IP address.
+     * Minimum IP address in assigned global addresses to the subnet
      */
-    readonly minIpaddress?: pulumi.Input<string>;
+    readonly minIpAddress?: pulumi.Input<string>;
     /**
-     * The next hop IP address.
+     * The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+     */
+    readonly netmask?: pulumi.Input<number>;
+    /**
+     * The IPv4 network address assigned to the Subnet
+     */
+    readonly networkAddress?: pulumi.Input<string>;
+    /**
+     * The ip address of the next-hop at the subnet
      */
     readonly nextHop?: pulumi.Input<string>;
     /**
-     * The network address.
+     * The id of the switch connected from the Subnet
      */
-    readonly nwAddress?: pulumi.Input<string>;
-    /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
     readonly switchId?: pulumi.Input<string>;
     /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -185,20 +165,19 @@ export interface SubnetState {
  */
 export interface SubnetArgs {
     /**
-     * The ID of the Internet resource.
+     * The id of the switch+router resource that the subnet belongs
      */
     readonly internetId: pulumi.Input<string>;
     /**
-     * The next hop IP address.
+     * The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+     */
+    readonly netmask?: pulumi.Input<number>;
+    /**
+     * The ip address of the next-hop at the subnet
      */
     readonly nextHop: pulumi.Input<string>;
     /**
-     * Network mask length.  
-     * Valid value is one of the following: [ 28 (default) / 27 / 26 ]
-     */
-    readonly nwMaskLen?: pulumi.Input<number>;
-    /**
-     * The ID of the zone to which the resource belongs.
+     * The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
      */
     readonly zone?: pulumi.Input<string>;
 }

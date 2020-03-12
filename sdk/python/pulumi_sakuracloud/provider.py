@@ -10,17 +10,50 @@ from typing import Union
 from . import utilities, tables
 
 class Provider(pulumi.ProviderResource):
-    def __init__(__self__, resource_name, opts=None, accept_language=None, api_request_rate_limit=None, api_request_timeout=None, api_root_url=None, retry_interval=None, retry_max=None, secret=None, timeout=None, token=None, trace=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, accept_language=None, api_request_rate_limit=None, api_request_timeout=None, api_root_url=None, fake_mode=None, fake_store_path=None, profile=None, retry_max=None, retry_wait_max=None, retry_wait_min=None, secret=None, token=None, trace=None, zone=None, zones=None, __props__=None, __name__=None, __opts__=None):
         """
         The provider type for the sakuracloud package. By default, resources use package-wide configuration
         settings, however an explicit `Provider` instance may be created and passed during resource
         construction to achieve fine-grained programmatic control over provider settings. See the
         [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
-        
-        :param str resource_name: The name of the resource.
-        :param pulumi.ResourceOptions opts: Options for the resource.
 
         > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/index.html.markdown.
+
+        :param str resource_name: The name of the resource.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] accept_language: The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+               `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[float] api_request_rate_limit: The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+               environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
+        :param pulumi.Input[float] api_request_timeout: The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+               environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
+        :param pulumi.Input[str] api_root_url: The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+               via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        :param pulumi.Input[str] fake_mode: The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+               from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] fake_store_path: The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+               provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+               `profile` is specified
+        :param pulumi.Input[str] profile: The profile name of your SakuraCloud account. Default:`default`
+        :param pulumi.Input[float] retry_max: The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+               sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+               specified. Default:`100`
+        :param pulumi.Input[float] retry_wait_max: The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+               `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+               file if `profile` is specified
+        :param pulumi.Input[float] retry_wait_min: The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+               `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+               file if `profile` is specified
+        :param pulumi.Input[str] secret: The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+               `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] token: The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+               `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] trace: The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+               shared credentials file if `profile` is specified
+        :param pulumi.Input[str] zone: The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+               environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[list] zones: A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+               specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -43,41 +76,31 @@ class Provider(pulumi.ProviderResource):
             __props__['api_request_rate_limit'] = pulumi.Output.from_input(api_request_rate_limit).apply(json.dumps) if api_request_rate_limit is not None else None
             __props__['api_request_timeout'] = pulumi.Output.from_input(api_request_timeout).apply(json.dumps) if api_request_timeout is not None else None
             __props__['api_root_url'] = api_root_url
-            __props__['retry_interval'] = pulumi.Output.from_input(retry_interval).apply(json.dumps) if retry_interval is not None else None
+            __props__['fake_mode'] = fake_mode
+            __props__['fake_store_path'] = fake_store_path
+            if profile is None:
+                profile = (utilities.get_env('SAKURACLOUD_PROFILE') or 'default')
+            __props__['profile'] = profile
             __props__['retry_max'] = pulumi.Output.from_input(retry_max).apply(json.dumps) if retry_max is not None else None
+            __props__['retry_wait_max'] = pulumi.Output.from_input(retry_wait_max).apply(json.dumps) if retry_wait_max is not None else None
+            __props__['retry_wait_min'] = pulumi.Output.from_input(retry_wait_min).apply(json.dumps) if retry_wait_min is not None else None
             if secret is None:
                 secret = (utilities.get_env('SAKURACLOUD_ACCESS_TOKEN_SECRET') or '')
             __props__['secret'] = secret
-            __props__['timeout'] = pulumi.Output.from_input(timeout).apply(json.dumps) if timeout is not None else None
             if token is None:
                 token = (utilities.get_env('SAKURACLOUD_ACCESS_TOKEN') or '')
             __props__['token'] = token
-            __props__['trace'] = pulumi.Output.from_input(trace).apply(json.dumps) if trace is not None else None
+            __props__['trace'] = trace
             if zone is None:
                 zone = (utilities.get_env('SAKURACLOUD_ZONE') or 'is1b')
             __props__['zone'] = zone
+            __props__['zones'] = pulumi.Output.from_input(zones).apply(json.dumps) if zones is not None else None
         super(Provider, __self__).__init__(
             'sakuracloud',
             resource_name,
             __props__,
             opts)
 
-    @staticmethod
-    def get(resource_name, id, opts=None):
-        """
-        Get an existing Provider resource's state with the given name, id, and optional extra
-        properties used to qualify the lookup.
-        
-        :param str resource_name: The unique name of the resulting resource.
-        :param str id: The unique provider ID of the resource to lookup.
-        :param pulumi.ResourceOptions opts: Options for the resource.
-
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/index.html.markdown.
-        """
-        opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
-
-        __props__ = dict()
-        return Provider(resource_name, opts=opts, __props__=__props__)
     def translate_output_property(self, prop):
         return tables._CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 

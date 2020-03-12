@@ -13,243 +13,124 @@ class GetServerResult:
     """
     A collection of values returned by getServer.
     """
-    def __init__(__self__, additional_display_ipaddresses=None, additional_nics=None, cdrom_id=None, commitment=None, core=None, description=None, disks=None, display_ipaddress=None, dns_servers=None, filters=None, gateway=None, icon_id=None, interface_driver=None, ipaddress=None, macaddresses=None, memory=None, name=None, name_selectors=None, nic=None, nw_address=None, nw_mask_len=None, packet_filter_ids=None, private_host_id=None, private_host_name=None, tag_selectors=None, tags=None, vnc_host=None, vnc_password=None, vnc_port=None, zone=None, id=None):
-        if additional_display_ipaddresses and not isinstance(additional_display_ipaddresses, list):
-            raise TypeError("Expected argument 'additional_display_ipaddresses' to be a list")
-        __self__.additional_display_ipaddresses = additional_display_ipaddresses
-        """
-        The display IP address list of the NICs (excluding primary NIC) of Server.  
-        """
-        if additional_nics and not isinstance(additional_nics, list):
-            raise TypeError("Expected argument 'additional_nics' to be a list")
-        __self__.additional_nics = additional_nics
-        """
-        The ID list of the Switches connected to NICs (excluding primary NIC) of Server.
-        """
+    def __init__(__self__, cdrom_id=None, commitment=None, core=None, description=None, disks=None, dns_servers=None, filter=None, gateway=None, hostname=None, icon_id=None, id=None, interface_driver=None, ip_address=None, memory=None, name=None, netmask=None, network_address=None, network_interfaces=None, private_host_id=None, private_host_name=None, tags=None, zone=None):
         if cdrom_id and not isinstance(cdrom_id, str):
             raise TypeError("Expected argument 'cdrom_id' to be a str")
         __self__.cdrom_id = cdrom_id
-        """
-        The ID of the CD-ROM inserted to Server.
-        """
         if commitment and not isinstance(commitment, str):
             raise TypeError("Expected argument 'commitment' to be a str")
         __self__.commitment = commitment
-        """
-        The plan of assignment of CPU to VM.
-        """
         if core and not isinstance(core, float):
             raise TypeError("Expected argument 'core' to be a float")
         __self__.core = core
-        """
-        The number of cores.
-        """
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
         if disks and not isinstance(disks, list):
             raise TypeError("Expected argument 'disks' to be a list")
         __self__.disks = disks
-        """
-        The ID list of the Disks connected to Server.
-        """
-        if display_ipaddress and not isinstance(display_ipaddress, str):
-            raise TypeError("Expected argument 'display_ipaddress' to be a str")
-        __self__.display_ipaddress = display_ipaddress
-        """
-        The IP address of NIC for display.
-        """
         if dns_servers and not isinstance(dns_servers, list):
             raise TypeError("Expected argument 'dns_servers' to be a list")
         __self__.dns_servers = dns_servers
-        """
-        List of default DNS servers for the zone to which the Server belongs.
-        """
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
-        __self__.filters = filters
+        if filter and not isinstance(filter, dict):
+            raise TypeError("Expected argument 'filter' to be a dict")
+        __self__.filter = filter
         if gateway and not isinstance(gateway, str):
             raise TypeError("Expected argument 'gateway' to be a str")
         __self__.gateway = gateway
-        """
-        Default gateway address of the Server.	 
-        """
+        if hostname and not isinstance(hostname, str):
+            raise TypeError("Expected argument 'hostname' to be a str")
+        __self__.hostname = hostname
         if icon_id and not isinstance(icon_id, str):
             raise TypeError("Expected argument 'icon_id' to be a str")
         __self__.icon_id = icon_id
-        """
-        The ID of the icon of the resource.
-        """
-        if interface_driver and not isinstance(interface_driver, str):
-            raise TypeError("Expected argument 'interface_driver' to be a str")
-        __self__.interface_driver = interface_driver
-        """
-        The name of network interface driver.
-        """
-        if ipaddress and not isinstance(ipaddress, str):
-            raise TypeError("Expected argument 'ipaddress' to be a str")
-        __self__.ipaddress = ipaddress
-        """
-        The IP address of primary NIC.
-        """
-        if macaddresses and not isinstance(macaddresses, list):
-            raise TypeError("Expected argument 'macaddresses' to be a list")
-        __self__.macaddresses = macaddresses
-        """
-        The MAC address list of NICs connected to Server.
-        """
-        if memory and not isinstance(memory, float):
-            raise TypeError("Expected argument 'memory' to be a float")
-        __self__.memory = memory
-        """
-        The size of memory (unit:`GB`).
-        """
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if name_selectors and not isinstance(name_selectors, list):
-            raise TypeError("Expected argument 'name_selectors' to be a list")
-        __self__.name_selectors = name_selectors
-        if nic and not isinstance(nic, str):
-            raise TypeError("Expected argument 'nic' to be a str")
-        __self__.nic = nic
-        """
-        The primary NIC's connection destination.
-        """
-        if nw_address and not isinstance(nw_address, str):
-            raise TypeError("Expected argument 'nw_address' to be a str")
-        __self__.nw_address = nw_address
-        """
-        The network address of the Server.
-        """
-        if nw_mask_len and not isinstance(nw_mask_len, str):
-            raise TypeError("Expected argument 'nw_mask_len' to be a str")
-        __self__.nw_mask_len = nw_mask_len
-        """
-        Network mask length of the Server.
-        """
-        if packet_filter_ids and not isinstance(packet_filter_ids, list):
-            raise TypeError("Expected argument 'packet_filter_ids' to be a list")
-        __self__.packet_filter_ids = packet_filter_ids
-        """
-        The ID list of the Packet Filter connected to Server.
-        """
-        if private_host_id and not isinstance(private_host_id, str):
-            raise TypeError("Expected argument 'private_host_id' to be a str")
-        __self__.private_host_id = private_host_id
-        """
-        The ID of the Private Host to which the Server belongs.
-        """
-        if private_host_name and not isinstance(private_host_name, str):
-            raise TypeError("Expected argument 'private_host_name' to be a str")
-        __self__.private_host_name = private_host_name
-        """
-        The name of the Private Host to which the Server belongs.
-        """
-        if tag_selectors and not isinstance(tag_selectors, list):
-            raise TypeError("Expected argument 'tag_selectors' to be a list")
-        __self__.tag_selectors = tag_selectors
-        if tags and not isinstance(tags, list):
-            raise TypeError("Expected argument 'tags' to be a list")
-        __self__.tags = tags
-        """
-        The tag list of the resources.
-        """
-        if vnc_host and not isinstance(vnc_host, str):
-            raise TypeError("Expected argument 'vnc_host' to be a str")
-        __self__.vnc_host = vnc_host
-        """
-        The hostname of VNC server.
-        """
-        if vnc_password and not isinstance(vnc_password, str):
-            raise TypeError("Expected argument 'vnc_password' to be a str")
-        __self__.vnc_password = vnc_password
-        """
-        The password of VNC server.
-        """
-        if vnc_port and not isinstance(vnc_port, float):
-            raise TypeError("Expected argument 'vnc_port' to be a float")
-        __self__.vnc_port = vnc_port
-        """
-        The port number of VNC server.
-        """
-        if zone and not isinstance(zone, str):
-            raise TypeError("Expected argument 'zone' to be a str")
-        __self__.zone = zone
-        """
-        The ID of the zone to which the resource belongs.
-        """
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if interface_driver and not isinstance(interface_driver, str):
+            raise TypeError("Expected argument 'interface_driver' to be a str")
+        __self__.interface_driver = interface_driver
+        if ip_address and not isinstance(ip_address, str):
+            raise TypeError("Expected argument 'ip_address' to be a str")
+        __self__.ip_address = ip_address
+        if memory and not isinstance(memory, float):
+            raise TypeError("Expected argument 'memory' to be a float")
+        __self__.memory = memory
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if netmask and not isinstance(netmask, float):
+            raise TypeError("Expected argument 'netmask' to be a float")
+        __self__.netmask = netmask
+        if network_address and not isinstance(network_address, str):
+            raise TypeError("Expected argument 'network_address' to be a str")
+        __self__.network_address = network_address
+        if network_interfaces and not isinstance(network_interfaces, list):
+            raise TypeError("Expected argument 'network_interfaces' to be a list")
+        __self__.network_interfaces = network_interfaces
+        if private_host_id and not isinstance(private_host_id, str):
+            raise TypeError("Expected argument 'private_host_id' to be a str")
+        __self__.private_host_id = private_host_id
+        if private_host_name and not isinstance(private_host_name, str):
+            raise TypeError("Expected argument 'private_host_name' to be a str")
+        __self__.private_host_name = private_host_name
+        if tags and not isinstance(tags, list):
+            raise TypeError("Expected argument 'tags' to be a list")
+        __self__.tags = tags
+        if zone and not isinstance(zone, str):
+            raise TypeError("Expected argument 'zone' to be a str")
+        __self__.zone = zone
 class AwaitableGetServerResult(GetServerResult):
     # pylint: disable=using-constant-test
     def __await__(self):
         if False:
             yield self
         return GetServerResult(
-            additional_display_ipaddresses=self.additional_display_ipaddresses,
-            additional_nics=self.additional_nics,
             cdrom_id=self.cdrom_id,
             commitment=self.commitment,
             core=self.core,
             description=self.description,
             disks=self.disks,
-            display_ipaddress=self.display_ipaddress,
             dns_servers=self.dns_servers,
-            filters=self.filters,
+            filter=self.filter,
             gateway=self.gateway,
+            hostname=self.hostname,
             icon_id=self.icon_id,
+            id=self.id,
             interface_driver=self.interface_driver,
-            ipaddress=self.ipaddress,
-            macaddresses=self.macaddresses,
+            ip_address=self.ip_address,
             memory=self.memory,
             name=self.name,
-            name_selectors=self.name_selectors,
-            nic=self.nic,
-            nw_address=self.nw_address,
-            nw_mask_len=self.nw_mask_len,
-            packet_filter_ids=self.packet_filter_ids,
+            netmask=self.netmask,
+            network_address=self.network_address,
+            network_interfaces=self.network_interfaces,
             private_host_id=self.private_host_id,
             private_host_name=self.private_host_name,
-            tag_selectors=self.tag_selectors,
             tags=self.tags,
-            vnc_host=self.vnc_host,
-            vnc_password=self.vnc_password,
-            vnc_port=self.vnc_port,
-            zone=self.zone,
-            id=self.id)
+            zone=self.zone)
 
-def get_server(filters=None,name_selectors=None,tag_selectors=None,zone=None,opts=None):
+def get_server(filter=None,zone=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Server.
-    
-    :param list filters: The map of filter key and value.
-    :param list name_selectors: The list of names to filtering.
-    :param list tag_selectors: The list of tags to filtering.
-    :param str zone: The ID of the zone.
-    
-    The **filters** object supports the following:
-    
-      * `name` (`str`) - The name of the resource.
-      * `values` (`list`)
+    Use this data source to access information about an existing resource.
 
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/server.html.markdown.
+
+    The **filter** object supports the following:
+
+      * `conditions` (`list`)
+        * `name` (`str`)
+        * `values` (`list`)
+
+      * `id` (`str`)
+      * `names` (`list`)
+      * `tags` (`list`)
     """
     __args__ = dict()
 
-    __args__['filters'] = filters
-    __args__['nameSelectors'] = name_selectors
-    __args__['tagSelectors'] = tag_selectors
+
+    __args__['filter'] = filter
     __args__['zone'] = zone
     if opts is None:
         opts = pulumi.InvokeOptions()
@@ -258,34 +139,25 @@ def get_server(filters=None,name_selectors=None,tag_selectors=None,zone=None,opt
     __ret__ = pulumi.runtime.invoke('sakuracloud:index/getServer:getServer', __args__, opts=opts).value
 
     return AwaitableGetServerResult(
-        additional_display_ipaddresses=__ret__.get('additionalDisplayIpaddresses'),
-        additional_nics=__ret__.get('additionalNics'),
         cdrom_id=__ret__.get('cdromId'),
         commitment=__ret__.get('commitment'),
         core=__ret__.get('core'),
         description=__ret__.get('description'),
         disks=__ret__.get('disks'),
-        display_ipaddress=__ret__.get('displayIpaddress'),
         dns_servers=__ret__.get('dnsServers'),
-        filters=__ret__.get('filters'),
+        filter=__ret__.get('filter'),
         gateway=__ret__.get('gateway'),
+        hostname=__ret__.get('hostname'),
         icon_id=__ret__.get('iconId'),
+        id=__ret__.get('id'),
         interface_driver=__ret__.get('interfaceDriver'),
-        ipaddress=__ret__.get('ipaddress'),
-        macaddresses=__ret__.get('macaddresses'),
+        ip_address=__ret__.get('ipAddress'),
         memory=__ret__.get('memory'),
         name=__ret__.get('name'),
-        name_selectors=__ret__.get('nameSelectors'),
-        nic=__ret__.get('nic'),
-        nw_address=__ret__.get('nwAddress'),
-        nw_mask_len=__ret__.get('nwMaskLen'),
-        packet_filter_ids=__ret__.get('packetFilterIds'),
+        netmask=__ret__.get('netmask'),
+        network_address=__ret__.get('networkAddress'),
+        network_interfaces=__ret__.get('networkInterfaces'),
         private_host_id=__ret__.get('privateHostId'),
         private_host_name=__ret__.get('privateHostName'),
-        tag_selectors=__ret__.get('tagSelectors'),
         tags=__ret__.get('tags'),
-        vnc_host=__ret__.get('vncHost'),
-        vnc_password=__ret__.get('vncPassword'),
-        vnc_port=__ret__.get('vncPort'),
-        zone=__ret__.get('zone'),
-        id=__ret__.get('id'))
+        zone=__ret__.get('zone'))

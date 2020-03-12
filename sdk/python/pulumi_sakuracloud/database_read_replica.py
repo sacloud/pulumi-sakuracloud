@@ -10,69 +10,50 @@ from typing import Union
 from . import utilities, tables
 
 class DatabaseReadReplica(pulumi.CustomResource):
-    default_route: pulumi.Output[str]
-    """
-    The default route IP address of the database.
-    """
     description: pulumi.Output[str]
     """
-    The description of the resource.
-    """
-    graceful_shutdown_timeout: pulumi.Output[float]
-    """
-    The wait time (seconds) to do graceful shutdown the Database.
+    The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
     """
     icon_id: pulumi.Output[str]
     """
-    The ID of the icon.
-    """
-    ipaddress1: pulumi.Output[str]
-    """
-    The IP address of the database.
+    The icon id to attach to the read-replica database
     """
     master_id: pulumi.Output[str]
     """
-    The ID of the master Database Appliance.
+    The id of the replication master database
     """
     name: pulumi.Output[str]
     """
-    The name of the resource.
+    The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
     """
-    nw_mask_len: pulumi.Output[float]
-    """
-    The network mask length of the database.
-    """
-    switch_id: pulumi.Output[str]
-    """
-    The ID of the switch connected to the database.
-    """
+    network_interface: pulumi.Output[dict]
     tags: pulumi.Output[list]
     """
-    The tag list of the resources.
+    Any tags to assign to the read-replica database
     """
     zone: pulumi.Output[str]
     """
-    The ID of the zone to which the resource belongs.
+    The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, default_route=None, description=None, graceful_shutdown_timeout=None, icon_id=None, ipaddress1=None, master_id=None, name=None, nw_mask_len=None, switch_id=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, description=None, icon_id=None, master_id=None, name=None, network_interface=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
-        Provides a SakuraCloud Database(ReadReplica) resource. This can be used to create, update, and delete Databases.
-        
+        Create a DatabaseReadReplica resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_route: The default route IP address of the database.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the Database.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] ipaddress1: The IP address of the database.
-        :param pulumi.Input[str] master_id: The ID of the master Database Appliance.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] nw_mask_len: The network mask length of the database.
-        :param pulumi.Input[str] switch_id: The ID of the switch connected to the database.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
+        :param pulumi.Input[str] description: The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the read-replica database
+        :param pulumi.Input[str] master_id: The id of the replication master database
+        :param pulumi.Input[str] name: The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[list] tags: Any tags to assign to the read-replica database
+        :param pulumi.Input[str] zone: The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database_read_replica.html.markdown.
+        The **network_interface** object supports the following:
+
+          * `gateway` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `sourceRanges` (`pulumi.Input[list]`)
+          * `switch_id` (`pulumi.Input[str]`)
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -91,19 +72,15 @@ class DatabaseReadReplica(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            __props__['default_route'] = default_route
             __props__['description'] = description
-            __props__['graceful_shutdown_timeout'] = graceful_shutdown_timeout
             __props__['icon_id'] = icon_id
-            if ipaddress1 is None:
-                raise TypeError("Missing required property 'ipaddress1'")
-            __props__['ipaddress1'] = ipaddress1
             if master_id is None:
                 raise TypeError("Missing required property 'master_id'")
             __props__['master_id'] = master_id
             __props__['name'] = name
-            __props__['nw_mask_len'] = nw_mask_len
-            __props__['switch_id'] = switch_id
+            if network_interface is None:
+                raise TypeError("Missing required property 'network_interface'")
+            __props__['network_interface'] = network_interface
             __props__['tags'] = tags
             __props__['zone'] = zone
         super(DatabaseReadReplica, __self__).__init__(
@@ -113,40 +90,38 @@ class DatabaseReadReplica(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, default_route=None, description=None, graceful_shutdown_timeout=None, icon_id=None, ipaddress1=None, master_id=None, name=None, nw_mask_len=None, switch_id=None, tags=None, zone=None):
+    def get(resource_name, id, opts=None, description=None, icon_id=None, master_id=None, name=None, network_interface=None, tags=None, zone=None):
         """
         Get an existing DatabaseReadReplica resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
-        
+
         :param str resource_name: The unique name of the resulting resource.
         :param str id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] default_route: The default route IP address of the database.
-        :param pulumi.Input[str] description: The description of the resource.
-        :param pulumi.Input[float] graceful_shutdown_timeout: The wait time (seconds) to do graceful shutdown the Database.
-        :param pulumi.Input[str] icon_id: The ID of the icon.
-        :param pulumi.Input[str] ipaddress1: The IP address of the database.
-        :param pulumi.Input[str] master_id: The ID of the master Database Appliance.
-        :param pulumi.Input[str] name: The name of the resource.
-        :param pulumi.Input[float] nw_mask_len: The network mask length of the database.
-        :param pulumi.Input[str] switch_id: The ID of the switch connected to the database.
-        :param pulumi.Input[list] tags: The tag list of the resources.
-        :param pulumi.Input[str] zone: The ID of the zone to which the resource belongs.
+        :param pulumi.Input[str] description: The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
+        :param pulumi.Input[str] icon_id: The icon id to attach to the read-replica database
+        :param pulumi.Input[str] master_id: The id of the replication master database
+        :param pulumi.Input[str] name: The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
+        :param pulumi.Input[list] tags: Any tags to assign to the read-replica database
+        :param pulumi.Input[str] zone: The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
 
-        > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/r/database_read_replica.html.markdown.
+        The **network_interface** object supports the following:
+
+          * `gateway` (`pulumi.Input[str]`)
+          * `ip_address` (`pulumi.Input[str]`)
+          * `netmask` (`pulumi.Input[float]`)
+          * `sourceRanges` (`pulumi.Input[list]`)
+          * `switch_id` (`pulumi.Input[str]`)
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-        __props__["default_route"] = default_route
+
         __props__["description"] = description
-        __props__["graceful_shutdown_timeout"] = graceful_shutdown_timeout
         __props__["icon_id"] = icon_id
-        __props__["ipaddress1"] = ipaddress1
         __props__["master_id"] = master_id
         __props__["name"] = name
-        __props__["nw_mask_len"] = nw_mask_len
-        __props__["switch_id"] = switch_id
+        __props__["network_interface"] = network_interface
         __props__["tags"] = tags
         __props__["zone"] = zone
         return DatabaseReadReplica(resource_name, opts=opts, __props__=__props__)

@@ -13,49 +13,31 @@ class GetZoneResult:
     """
     A collection of values returned by getZone.
     """
-    def __init__(__self__, description=None, dns_servers=None, name=None, region_id=None, region_name=None, zone_id=None, id=None):
+    def __init__(__self__, description=None, dns_servers=None, id=None, name=None, region_id=None, region_name=None, zone_id=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         __self__.description = description
-        """
-        The description of the resource.
-        """
         if dns_servers and not isinstance(dns_servers, list):
             raise TypeError("Expected argument 'dns_servers' to be a list")
         __self__.dns_servers = dns_servers
-        """
-        The IP Address list of the region.
-        """
-        if name and not isinstance(name, str):
-            raise TypeError("Expected argument 'name' to be a str")
-        __self__.name = name
-        """
-        The name of the resource.
-        """
-        if region_id and not isinstance(region_id, str):
-            raise TypeError("Expected argument 'region_id' to be a str")
-        __self__.region_id = region_id
-        """
-        The ID of the region.
-        """
-        if region_name and not isinstance(region_name, str):
-            raise TypeError("Expected argument 'region_name' to be a str")
-        __self__.region_name = region_name
-        """
-        The Name of the region.
-        """
-        if zone_id and not isinstance(zone_id, str):
-            raise TypeError("Expected argument 'zone_id' to be a str")
-        __self__.zone_id = zone_id
-        """
-        The Id of the resource.
-        """
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         __self__.id = id
         """
         id is the provider-assigned unique ID for this managed resource.
         """
+        if name and not isinstance(name, str):
+            raise TypeError("Expected argument 'name' to be a str")
+        __self__.name = name
+        if region_id and not isinstance(region_id, str):
+            raise TypeError("Expected argument 'region_id' to be a str")
+        __self__.region_id = region_id
+        if region_name and not isinstance(region_name, str):
+            raise TypeError("Expected argument 'region_name' to be a str")
+        __self__.region_name = region_name
+        if zone_id and not isinstance(zone_id, str):
+            raise TypeError("Expected argument 'zone_id' to be a str")
+        __self__.zone_id = zone_id
 class AwaitableGetZoneResult(GetZoneResult):
     # pylint: disable=using-constant-test
     def __await__(self):
@@ -64,21 +46,18 @@ class AwaitableGetZoneResult(GetZoneResult):
         return GetZoneResult(
             description=self.description,
             dns_servers=self.dns_servers,
+            id=self.id,
             name=self.name,
             region_id=self.region_id,
             region_name=self.region_name,
-            zone_id=self.zone_id,
-            id=self.id)
+            zone_id=self.zone_id)
 
 def get_zone(name=None,opts=None):
     """
-    Use this data source to retrieve information about a SakuraCloud Zone.
-    
-    :param str name: The name of zone(default: use provider settings).
-
-    > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/d/zone.html.markdown.
+    Use this data source to access information about an existing resource.
     """
     __args__ = dict()
+
 
     __args__['name'] = name
     if opts is None:
@@ -90,8 +69,8 @@ def get_zone(name=None,opts=None):
     return AwaitableGetZoneResult(
         description=__ret__.get('description'),
         dns_servers=__ret__.get('dnsServers'),
+        id=__ret__.get('id'),
         name=__ret__.get('name'),
         region_id=__ret__.get('regionId'),
         region_name=__ret__.get('regionName'),
-        zone_id=__ret__.get('zoneId'),
-        id=__ret__.get('id'))
+        zone_id=__ret__.get('zoneId'))
