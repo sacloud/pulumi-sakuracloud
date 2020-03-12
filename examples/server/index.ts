@@ -1,6 +1,7 @@
 import * as sakuracloud from "@sacloud/pulumi_sakuracloud";
+import Constants from "@sacloud/constants"
 
-const centOSArchive = sakuracloud.getArchive({osType: "centos"});
+const centOSArchive = sakuracloud.getArchive({osType: Constants.Archive.OSTypes.CentOS});
 
 const disk = new sakuracloud.Disk("pulumi-example", {
     name: "pulumi-example",
