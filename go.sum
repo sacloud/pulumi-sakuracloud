@@ -436,10 +436,10 @@ github.com/sacloud/ftps v0.0.0-20171205062625-42fc0f9886fe h1:JSZLn4B8X9V1ynSEht
 github.com/sacloud/ftps v0.0.0-20171205062625-42fc0f9886fe/go.mod h1:sdVeG85LaUt1f+0meZqSf6hSQYlwdgFLI8tJqLZ58VM=
 github.com/sacloud/iso9660wrap v0.0.0-20171031075302-eda21f77f6a8 h1:5piK7EELHKRxGqBjgVEHsdfsFwEzF/Kds/bMWLS6gCw=
 github.com/sacloud/iso9660wrap v0.0.0-20171031075302-eda21f77f6a8/go.mod h1:1jHHCa624cG5rODkWmourombJaNmkY9/SBHWhLJcg+w=
-github.com/sacloud/libsacloud/v2 v2.1.1 h1:E2xfO6x0Ny+z7Ym4oHDMQpOaRy/gMhy/FN6zPjTBDRA=
-github.com/sacloud/libsacloud/v2 v2.1.1/go.mod h1:BG2crADa3HJrADiZK2zK1/UxsVUtWSy6q7nd6YqleD4=
-github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20200213234703-f3266b2e27e1 h1:IePp6WCCIpAlnLB3WnxZ8KDNiRaLzOkbEYohevWGq2E=
-github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20200213234703-f3266b2e27e1/go.mod h1:BxyxMvFcVff6RCdYeDH8MQWYCn4jcERNhVKToE2zjpM=
+github.com/sacloud/libsacloud/v2 v2.1.9 h1:hTQMDdn/szSIe1akDSTi4nBHP1UUYkqZNP6OarXm6qM=
+github.com/sacloud/libsacloud/v2 v2.1.9/go.mod h1:BG2crADa3HJrADiZK2zK1/UxsVUtWSy6q7nd6YqleD4=
+github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20200310020735-34172136162f h1:eJjW82n8vPNwrD7Jx59OpLoop5MpPfSgBtMb5GCJRkI=
+github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20200310020735-34172136162f/go.mod h1:hJv4h4T8bWl3IdVdSiO23oJzgafuIcuCMjkL3uQjYZQ=
 github.com/satori/go.uuid v1.2.0 h1:0uYX9dsZ2yD7q2RtLRtPSdGDWzjeM3TbMJP9utgA0ww=
 github.com/satori/go.uuid v1.2.0/go.mod h1:dA0hQrYB0VpLJoorglMZABFdXlWrHn1NEOzdhQKdks0=
 github.com/sergi/go-diff v1.0.0 h1:Kpca3qRNrduNnOQeazBd0ysaKrUJiIuISHxogkT9RPQ=
