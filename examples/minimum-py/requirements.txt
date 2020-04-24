@@ -1,2 +1,2 @@
 pulumi>=1.0.0
-pulumi-sakuracloud == 0.0.1
+pulumi-sakuracloud == 0.3.0

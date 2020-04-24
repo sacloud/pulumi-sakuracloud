@@ -4,7 +4,7 @@
 
 ### pulumi plugin
 
-    $ pulumi plugin install resource sakuracloud 0.2.0 --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/0.2.0
+    $ pulumi plugin install resource sakuracloud 0.3.0 --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/0.3.0
 
 ### SDK
 
