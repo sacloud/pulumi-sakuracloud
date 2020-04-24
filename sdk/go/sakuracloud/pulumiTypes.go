@@ -3796,6 +3796,7 @@ type ServerDiskEditParameter struct {
 	IpAddress *string `pulumi:"ipAddress"`
 	Netmask *int `pulumi:"netmask"`
 	NoteIds []string `pulumi:"noteIds"`
+	Notes []ServerDiskEditParameterNote `pulumi:"notes"`
 	Password *string `pulumi:"password"`
 	SshKeyIds []string `pulumi:"sshKeyIds"`
 }
@@ -3816,6 +3817,7 @@ type ServerDiskEditParameterArgs struct {
 	IpAddress pulumi.StringPtrInput `pulumi:"ipAddress"`
 	Netmask pulumi.IntPtrInput `pulumi:"netmask"`
 	NoteIds pulumi.StringArrayInput `pulumi:"noteIds"`
+	Notes ServerDiskEditParameterNoteArrayInput `pulumi:"notes"`
 	Password pulumi.StringPtrInput `pulumi:"password"`
 	SshKeyIds pulumi.StringArrayInput `pulumi:"sshKeyIds"`
 }
@@ -3919,6 +3921,10 @@ func (o ServerDiskEditParameterOutput) NoteIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
 }
 
+func (o ServerDiskEditParameterOutput) Notes() ServerDiskEditParameterNoteArrayOutput {
+	return o.ApplyT(func (v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
+}
+
 func (o ServerDiskEditParameterOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
@@ -3977,12 +3983,114 @@ func (o ServerDiskEditParameterPtrOutput) NoteIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
 }
 
+func (o ServerDiskEditParameterPtrOutput) Notes() ServerDiskEditParameterNoteArrayOutput {
+	return o.ApplyT(func (v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
+}
+
 func (o ServerDiskEditParameterPtrOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) SshKeyIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.SshKeyIds }).(pulumi.StringArrayOutput)
+}
+
+type ServerDiskEditParameterNote struct {
+	ApiKeyId *string `pulumi:"apiKeyId"`
+	Id string `pulumi:"id"`
+	Variables map[string]string `pulumi:"variables"`
+}
+
+type ServerDiskEditParameterNoteInput interface {
+	pulumi.Input
+
+	ToServerDiskEditParameterNoteOutput() ServerDiskEditParameterNoteOutput
+	ToServerDiskEditParameterNoteOutputWithContext(context.Context) ServerDiskEditParameterNoteOutput
+}
+
+type ServerDiskEditParameterNoteArgs struct {
+	ApiKeyId pulumi.StringPtrInput `pulumi:"apiKeyId"`
+	Id pulumi.StringInput `pulumi:"id"`
+	Variables pulumi.StringMapInput `pulumi:"variables"`
+}
+
+func (ServerDiskEditParameterNoteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerDiskEditParameterNote)(nil)).Elem()
+}
+
+func (i ServerDiskEditParameterNoteArgs) ToServerDiskEditParameterNoteOutput() ServerDiskEditParameterNoteOutput {
+	return i.ToServerDiskEditParameterNoteOutputWithContext(context.Background())
+}
+
+func (i ServerDiskEditParameterNoteArgs) ToServerDiskEditParameterNoteOutputWithContext(ctx context.Context) ServerDiskEditParameterNoteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerDiskEditParameterNoteOutput)
+}
+
+type ServerDiskEditParameterNoteArrayInput interface {
+	pulumi.Input
+
+	ToServerDiskEditParameterNoteArrayOutput() ServerDiskEditParameterNoteArrayOutput
+	ToServerDiskEditParameterNoteArrayOutputWithContext(context.Context) ServerDiskEditParameterNoteArrayOutput
+}
+
+type ServerDiskEditParameterNoteArray []ServerDiskEditParameterNoteInput
+
+func (ServerDiskEditParameterNoteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerDiskEditParameterNote)(nil)).Elem()
+}
+
+func (i ServerDiskEditParameterNoteArray) ToServerDiskEditParameterNoteArrayOutput() ServerDiskEditParameterNoteArrayOutput {
+	return i.ToServerDiskEditParameterNoteArrayOutputWithContext(context.Background())
+}
+
+func (i ServerDiskEditParameterNoteArray) ToServerDiskEditParameterNoteArrayOutputWithContext(ctx context.Context) ServerDiskEditParameterNoteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ServerDiskEditParameterNoteArrayOutput)
+}
+
+type ServerDiskEditParameterNoteOutput struct { *pulumi.OutputState }
+
+func (ServerDiskEditParameterNoteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ServerDiskEditParameterNote)(nil)).Elem()
+}
+
+func (o ServerDiskEditParameterNoteOutput) ToServerDiskEditParameterNoteOutput() ServerDiskEditParameterNoteOutput {
+	return o
+}
+
+func (o ServerDiskEditParameterNoteOutput) ToServerDiskEditParameterNoteOutputWithContext(ctx context.Context) ServerDiskEditParameterNoteOutput {
+	return o
+}
+
+func (o ServerDiskEditParameterNoteOutput) ApiKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func (v ServerDiskEditParameterNote) *string { return v.ApiKeyId }).(pulumi.StringPtrOutput)
+}
+
+func (o ServerDiskEditParameterNoteOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func (v ServerDiskEditParameterNote) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o ServerDiskEditParameterNoteOutput) Variables() pulumi.StringMapOutput {
+	return o.ApplyT(func (v ServerDiskEditParameterNote) map[string]string { return v.Variables }).(pulumi.StringMapOutput)
+}
+
+type ServerDiskEditParameterNoteArrayOutput struct { *pulumi.OutputState}
+
+func (ServerDiskEditParameterNoteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ServerDiskEditParameterNote)(nil)).Elem()
+}
+
+func (o ServerDiskEditParameterNoteArrayOutput) ToServerDiskEditParameterNoteArrayOutput() ServerDiskEditParameterNoteArrayOutput {
+	return o
+}
+
+func (o ServerDiskEditParameterNoteArrayOutput) ToServerDiskEditParameterNoteArrayOutputWithContext(ctx context.Context) ServerDiskEditParameterNoteArrayOutput {
+	return o
+}
+
+func (o ServerDiskEditParameterNoteArrayOutput) Index(i pulumi.IntInput) ServerDiskEditParameterNoteOutput {
+	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ServerDiskEditParameterNote {
+		return vs[0].([]ServerDiskEditParameterNote)[vs[1].(int)]
+	}).(ServerDiskEditParameterNoteOutput)
 }
 
 type ServerNetworkInterface struct {
@@ -13214,6 +13322,8 @@ func init() {
 	pulumi.RegisterOutputType(ProxyLBSorryServerPtrOutput{})
 	pulumi.RegisterOutputType(ServerDiskEditParameterOutput{})
 	pulumi.RegisterOutputType(ServerDiskEditParameterPtrOutput{})
+	pulumi.RegisterOutputType(ServerDiskEditParameterNoteOutput{})
+	pulumi.RegisterOutputType(ServerDiskEditParameterNoteArrayOutput{})
 	pulumi.RegisterOutputType(ServerNetworkInterfaceOutput{})
 	pulumi.RegisterOutputType(ServerNetworkInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(SimpleMonitorHealthCheckOutput{})

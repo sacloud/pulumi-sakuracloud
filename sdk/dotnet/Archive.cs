@@ -15,7 +15,7 @@ namespace Pulumi.SakuraCloud
         /// The file path to upload to the SakuraCloud
         /// </summary>
         [Output("archiveFile")]
-        public Output<string> ArchiveFile { get; private set; } = null!;
+        public Output<string?> ArchiveFile { get; private set; } = null!;
 
         /// <summary>
         /// The description of the archive. The length of this value must be in the range [`1`-`512`]
@@ -48,6 +48,30 @@ namespace Pulumi.SakuraCloud
         public Output<int?> Size { get; private set; } = null!;
 
         /// <summary>
+        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// </summary>
+        [Output("sourceArchiveId")]
+        public Output<string?> SourceArchiveId { get; private set; } = null!;
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Output("sourceArchiveZone")]
+        public Output<string?> SourceArchiveZone { get; private set; } = null!;
+
+        /// <summary>
+        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// </summary>
+        [Output("sourceDiskId")]
+        public Output<string?> SourceDiskId { get; private set; } = null!;
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Output("sourceSharedKey")]
+        public Output<string?> SourceSharedKey { get; private set; } = null!;
+
+        /// <summary>
         /// Any tags to assign to the archive
         /// </summary>
         [Output("tags")]
@@ -67,7 +91,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Archive(string name, ArchiveArgs args, CustomResourceOptions? options = null)
+        public Archive(string name, ArchiveArgs? args = null, CustomResourceOptions? options = null)
             : base("sakuracloud:index/archive:Archive", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
         {
         }
@@ -108,8 +132,8 @@ namespace Pulumi.SakuraCloud
         /// <summary>
         /// The file path to upload to the SakuraCloud
         /// </summary>
-        [Input("archiveFile", required: true)]
-        public Input<string> ArchiveFile { get; set; } = null!;
+        [Input("archiveFile")]
+        public Input<string>? ArchiveFile { get; set; }
 
         /// <summary>
         /// The description of the archive. The length of this value must be in the range [`1`-`512`]
@@ -140,6 +164,30 @@ namespace Pulumi.SakuraCloud
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
+
+        /// <summary>
+        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// </summary>
+        [Input("sourceArchiveId")]
+        public Input<string>? SourceArchiveId { get; set; }
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Input("sourceArchiveZone")]
+        public Input<string>? SourceArchiveZone { get; set; }
+
+        /// <summary>
+        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// </summary>
+        [Input("sourceDiskId")]
+        public Input<string>? SourceDiskId { get; set; }
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Input("sourceSharedKey")]
+        public Input<string>? SourceSharedKey { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -201,6 +249,30 @@ namespace Pulumi.SakuraCloud
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
+
+        /// <summary>
+        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// </summary>
+        [Input("sourceArchiveId")]
+        public Input<string>? SourceArchiveId { get; set; }
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Input("sourceArchiveZone")]
+        public Input<string>? SourceArchiveZone { get; set; }
+
+        /// <summary>
+        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// </summary>
+        [Input("sourceDiskId")]
+        public Input<string>? SourceDiskId { get; set; }
+
+        /// <summary>
+        /// The share key of source shared archive
+        /// </summary>
+        [Input("sourceSharedKey")]
+        public Input<string>? SourceSharedKey { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;

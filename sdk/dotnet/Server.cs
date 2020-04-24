@@ -471,8 +471,17 @@ namespace Pulumi.SakuraCloud
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
+        [Input("notes")]
+        private InputList<ServerDiskEditParameterNotesArgs>? _notes;
+        public InputList<ServerDiskEditParameterNotesArgs> Notes
+        {
+            get => _notes ?? (_notes = new InputList<ServerDiskEditParameterNotesArgs>());
+            set => _notes = value;
+        }
+
         [Input("noteIds")]
         private InputList<string>? _noteIds;
+        [Obsolete(@"The note_ids field will be removed in a future version. Please use the note field instead")]
         public InputList<string> NoteIds
         {
             get => _noteIds ?? (_noteIds = new InputList<string>());
@@ -518,8 +527,17 @@ namespace Pulumi.SakuraCloud
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
+        [Input("notes")]
+        private InputList<ServerDiskEditParameterNotesGetArgs>? _notes;
+        public InputList<ServerDiskEditParameterNotesGetArgs> Notes
+        {
+            get => _notes ?? (_notes = new InputList<ServerDiskEditParameterNotesGetArgs>());
+            set => _notes = value;
+        }
+
         [Input("noteIds")]
         private InputList<string>? _noteIds;
+        [Obsolete(@"The note_ids field will be removed in a future version. Please use the note field instead")]
         public InputList<string> NoteIds
         {
             get => _noteIds ?? (_noteIds = new InputList<string>());
@@ -538,6 +556,48 @@ namespace Pulumi.SakuraCloud
         }
 
         public ServerDiskEditParameterGetArgs()
+        {
+        }
+    }
+
+    public sealed class ServerDiskEditParameterNotesArgs : Pulumi.ResourceArgs
+    {
+        [Input("apiKeyId")]
+        public Input<string>? ApiKeyId { get; set; }
+
+        [Input("id", required: true)]
+        public Input<string> Id { get; set; } = null!;
+
+        [Input("variables")]
+        private InputMap<string>? _variables;
+        public InputMap<string> Variables
+        {
+            get => _variables ?? (_variables = new InputMap<string>());
+            set => _variables = value;
+        }
+
+        public ServerDiskEditParameterNotesArgs()
+        {
+        }
+    }
+
+    public sealed class ServerDiskEditParameterNotesGetArgs : Pulumi.ResourceArgs
+    {
+        [Input("apiKeyId")]
+        public Input<string>? ApiKeyId { get; set; }
+
+        [Input("id", required: true)]
+        public Input<string> Id { get; set; } = null!;
+
+        [Input("variables")]
+        private InputMap<string>? _variables;
+        public InputMap<string> Variables
+        {
+            get => _variables ?? (_variables = new InputMap<string>());
+            set => _variables = value;
+        }
+
+        public ServerDiskEditParameterNotesGetArgs()
         {
         }
     }
@@ -594,6 +654,7 @@ namespace Pulumi.SakuraCloud
         public readonly string? Hostname;
         public readonly string? IpAddress;
         public readonly int? Netmask;
+        public readonly ImmutableArray<ServerDiskEditParameterNotes> Notes;
         public readonly ImmutableArray<string> NoteIds;
         public readonly string? Password;
         public readonly ImmutableArray<string> SshKeyIds;
@@ -607,6 +668,7 @@ namespace Pulumi.SakuraCloud
             string? hostname,
             string? ipAddress,
             int? netmask,
+            ImmutableArray<ServerDiskEditParameterNotes> notes,
             ImmutableArray<string> noteIds,
             string? password,
             ImmutableArray<string> sshKeyIds)
@@ -618,9 +680,29 @@ namespace Pulumi.SakuraCloud
             Hostname = hostname;
             IpAddress = ipAddress;
             Netmask = netmask;
+            Notes = notes;
             NoteIds = noteIds;
             Password = password;
             SshKeyIds = sshKeyIds;
+        }
+    }
+
+    [OutputType]
+    public sealed class ServerDiskEditParameterNotes
+    {
+        public readonly string? ApiKeyId;
+        public readonly string Id;
+        public readonly ImmutableDictionary<string, string>? Variables;
+
+        [OutputConstructor]
+        private ServerDiskEditParameterNotes(
+            string? apiKeyId,
+            string id,
+            ImmutableDictionary<string, string>? variables)
+        {
+            ApiKeyId = apiKeyId;
+            Id = id;
+            Variables = variables;
         }
     }
 

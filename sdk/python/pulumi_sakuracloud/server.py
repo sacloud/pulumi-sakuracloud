@@ -121,6 +121,11 @@ class Server(pulumi.CustomResource):
           * `ip_address` (`pulumi.Input[str]`)
           * `netmask` (`pulumi.Input[float]`)
           * `noteIds` (`pulumi.Input[list]`)
+          * `notes` (`pulumi.Input[list]`)
+            * `apiKeyId` (`pulumi.Input[str]`)
+            * `id` (`pulumi.Input[str]`)
+            * `variables` (`pulumi.Input[dict]`)
+
           * `password` (`pulumi.Input[str]`)
           * `sshKeyIds` (`pulumi.Input[list]`)
 
@@ -216,6 +221,11 @@ class Server(pulumi.CustomResource):
           * `ip_address` (`pulumi.Input[str]`)
           * `netmask` (`pulumi.Input[float]`)
           * `noteIds` (`pulumi.Input[list]`)
+          * `notes` (`pulumi.Input[list]`)
+            * `apiKeyId` (`pulumi.Input[str]`)
+            * `id` (`pulumi.Input[str]`)
+            * `variables` (`pulumi.Input[dict]`)
+
           * `password` (`pulumi.Input[str]`)
           * `sshKeyIds` (`pulumi.Input[list]`)
 

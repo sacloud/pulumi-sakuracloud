@@ -771,9 +771,19 @@ export interface ServerDiskEditParameter {
     hostname?: pulumi.Input<string>;
     ipAddress?: pulumi.Input<string>;
     netmask?: pulumi.Input<number>;
+    /**
+     * @deprecated The note_ids field will be removed in a future version. Please use the note field instead
+     */
     noteIds?: pulumi.Input<pulumi.Input<string>[]>;
+    notes?: pulumi.Input<pulumi.Input<outputs.ServerDiskEditParameterNote>[]>;
     password?: pulumi.Input<string>;
     sshKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ServerDiskEditParameterNote {
+    apiKeyId?: pulumi.Input<string>;
+    id: pulumi.Input<string>;
+    variables?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
 }
 
 export interface ServerNetworkInterface {
