@@ -34,6 +34,22 @@ class Archive(pulumi.CustomResource):
     """
     The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
     """
+    source_archive_id: pulumi.Output[str]
+    """
+    The id of the source archive. This conflicts with [`source_disk_id`]
+    """
+    source_archive_zone: pulumi.Output[str]
+    """
+    The share key of source shared archive
+    """
+    source_disk_id: pulumi.Output[str]
+    """
+    The id of the source disk. This conflicts with [`source_archive_id`]
+    """
+    source_shared_key: pulumi.Output[str]
+    """
+    The share key of source shared archive
+    """
     tags: pulumi.Output[list]
     """
     Any tags to assign to the archive
@@ -42,7 +58,7 @@ class Archive(pulumi.CustomResource):
     """
     The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
     """
-    def __init__(__self__, resource_name, opts=None, archive_file=None, description=None, hash=None, icon_id=None, name=None, size=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
+    def __init__(__self__, resource_name, opts=None, archive_file=None, description=None, hash=None, icon_id=None, name=None, size=None, source_archive_id=None, source_archive_zone=None, source_disk_id=None, source_shared_key=None, tags=None, zone=None, __props__=None, __name__=None, __opts__=None):
         """
         Create a Archive resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
@@ -53,6 +69,10 @@ class Archive(pulumi.CustomResource):
         :param pulumi.Input[str] icon_id: The icon id to attach to the archive
         :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`]
         :param pulumi.Input[float] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        :param pulumi.Input[str] source_archive_id: The id of the source archive. This conflicts with [`source_disk_id`]
+        :param pulumi.Input[str] source_archive_zone: The share key of source shared archive
+        :param pulumi.Input[str] source_disk_id: The id of the source disk. This conflicts with [`source_archive_id`]
+        :param pulumi.Input[str] source_shared_key: The share key of source shared archive
         :param pulumi.Input[list] tags: Any tags to assign to the archive
         :param pulumi.Input[str] zone: The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
         """
@@ -73,14 +93,16 @@ class Archive(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            if archive_file is None:
-                raise TypeError("Missing required property 'archive_file'")
             __props__['archive_file'] = archive_file
             __props__['description'] = description
             __props__['hash'] = hash
             __props__['icon_id'] = icon_id
             __props__['name'] = name
             __props__['size'] = size
+            __props__['source_archive_id'] = source_archive_id
+            __props__['source_archive_zone'] = source_archive_zone
+            __props__['source_disk_id'] = source_disk_id
+            __props__['source_shared_key'] = source_shared_key
             __props__['tags'] = tags
             __props__['zone'] = zone
         super(Archive, __self__).__init__(
@@ -90,7 +112,7 @@ class Archive(pulumi.CustomResource):
             opts)
 
     @staticmethod
-    def get(resource_name, id, opts=None, archive_file=None, description=None, hash=None, icon_id=None, name=None, size=None, tags=None, zone=None):
+    def get(resource_name, id, opts=None, archive_file=None, description=None, hash=None, icon_id=None, name=None, size=None, source_archive_id=None, source_archive_zone=None, source_disk_id=None, source_shared_key=None, tags=None, zone=None):
         """
         Get an existing Archive resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -104,6 +126,10 @@ class Archive(pulumi.CustomResource):
         :param pulumi.Input[str] icon_id: The icon id to attach to the archive
         :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`]
         :param pulumi.Input[float] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        :param pulumi.Input[str] source_archive_id: The id of the source archive. This conflicts with [`source_disk_id`]
+        :param pulumi.Input[str] source_archive_zone: The share key of source shared archive
+        :param pulumi.Input[str] source_disk_id: The id of the source disk. This conflicts with [`source_archive_id`]
+        :param pulumi.Input[str] source_shared_key: The share key of source shared archive
         :param pulumi.Input[list] tags: Any tags to assign to the archive
         :param pulumi.Input[str] zone: The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
         """
@@ -117,6 +143,10 @@ class Archive(pulumi.CustomResource):
         __props__["icon_id"] = icon_id
         __props__["name"] = name
         __props__["size"] = size
+        __props__["source_archive_id"] = source_archive_id
+        __props__["source_archive_zone"] = source_archive_zone
+        __props__["source_disk_id"] = source_disk_id
+        __props__["source_shared_key"] = source_shared_key
         __props__["tags"] = tags
         __props__["zone"] = zone
         return Archive(resource_name, opts=opts, __props__=__props__)

@@ -34,7 +34,7 @@ export class Archive extends pulumi.CustomResource {
     /**
      * The file path to upload to the SakuraCloud
      */
-    public readonly archiveFile!: pulumi.Output<string>;
+    public readonly archiveFile!: pulumi.Output<string | undefined>;
     /**
      * The description of the archive. The length of this value must be in the range [`1`-`512`]
      */
@@ -56,6 +56,22 @@ export class Archive extends pulumi.CustomResource {
      */
     public readonly size!: pulumi.Output<number | undefined>;
     /**
+     * The id of the source archive. This conflicts with [`source_disk_id`]
+     */
+    public readonly sourceArchiveId!: pulumi.Output<string | undefined>;
+    /**
+     * The share key of source shared archive
+     */
+    public readonly sourceArchiveZone!: pulumi.Output<string | undefined>;
+    /**
+     * The id of the source disk. This conflicts with [`source_archive_id`]
+     */
+    public readonly sourceDiskId!: pulumi.Output<string | undefined>;
+    /**
+     * The share key of source shared archive
+     */
+    public readonly sourceSharedKey!: pulumi.Output<string | undefined>;
+    /**
      * Any tags to assign to the archive
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
@@ -71,7 +87,7 @@ export class Archive extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ArchiveArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: ArchiveArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ArchiveArgs | ArchiveState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
         if (opts && opts.id) {
@@ -82,19 +98,24 @@ export class Archive extends pulumi.CustomResource {
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["size"] = state ? state.size : undefined;
+            inputs["sourceArchiveId"] = state ? state.sourceArchiveId : undefined;
+            inputs["sourceArchiveZone"] = state ? state.sourceArchiveZone : undefined;
+            inputs["sourceDiskId"] = state ? state.sourceDiskId : undefined;
+            inputs["sourceSharedKey"] = state ? state.sourceSharedKey : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as ArchiveArgs | undefined;
-            if (!args || args.archiveFile === undefined) {
-                throw new Error("Missing required property 'archiveFile'");
-            }
             inputs["archiveFile"] = args ? args.archiveFile : undefined;
             inputs["description"] = args ? args.description : undefined;
             inputs["hash"] = args ? args.hash : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["size"] = args ? args.size : undefined;
+            inputs["sourceArchiveId"] = args ? args.sourceArchiveId : undefined;
+            inputs["sourceArchiveZone"] = args ? args.sourceArchiveZone : undefined;
+            inputs["sourceDiskId"] = args ? args.sourceDiskId : undefined;
+            inputs["sourceSharedKey"] = args ? args.sourceSharedKey : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
@@ -138,6 +159,22 @@ export interface ArchiveState {
      */
     readonly size?: pulumi.Input<number>;
     /**
+     * The id of the source archive. This conflicts with [`source_disk_id`]
+     */
+    readonly sourceArchiveId?: pulumi.Input<string>;
+    /**
+     * The share key of source shared archive
+     */
+    readonly sourceArchiveZone?: pulumi.Input<string>;
+    /**
+     * The id of the source disk. This conflicts with [`source_archive_id`]
+     */
+    readonly sourceDiskId?: pulumi.Input<string>;
+    /**
+     * The share key of source shared archive
+     */
+    readonly sourceSharedKey?: pulumi.Input<string>;
+    /**
      * Any tags to assign to the archive
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
@@ -154,7 +191,7 @@ export interface ArchiveArgs {
     /**
      * The file path to upload to the SakuraCloud
      */
-    readonly archiveFile: pulumi.Input<string>;
+    readonly archiveFile?: pulumi.Input<string>;
     /**
      * The description of the archive. The length of this value must be in the range [`1`-`512`]
      */
@@ -175,6 +212,22 @@ export interface ArchiveArgs {
      * The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
      */
     readonly size?: pulumi.Input<number>;
+    /**
+     * The id of the source archive. This conflicts with [`source_disk_id`]
+     */
+    readonly sourceArchiveId?: pulumi.Input<string>;
+    /**
+     * The share key of source shared archive
+     */
+    readonly sourceArchiveZone?: pulumi.Input<string>;
+    /**
+     * The id of the source disk. This conflicts with [`source_archive_id`]
+     */
+    readonly sourceDiskId?: pulumi.Input<string>;
+    /**
+     * The share key of source shared archive
+     */
+    readonly sourceSharedKey?: pulumi.Input<string>;
     /**
      * Any tags to assign to the archive
      */

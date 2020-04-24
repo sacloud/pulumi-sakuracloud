@@ -7,7 +7,6 @@ package sakuracloud
 import (
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/go/pulumi"
 )
 
@@ -15,7 +14,7 @@ type Archive struct {
 	pulumi.CustomResourceState
 
 	// The file path to upload to the SakuraCloud
-	ArchiveFile pulumi.StringOutput `pulumi:"archiveFile"`
+	ArchiveFile pulumi.StringPtrOutput `pulumi:"archiveFile"`
 	// The description of the archive. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The md5 checksum calculated from the base64 encoded file body
@@ -26,6 +25,14 @@ type Archive struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
 	Size pulumi.IntPtrOutput `pulumi:"size"`
+	// The id of the source archive. This conflicts with [`source_disk_id`]
+	SourceArchiveId pulumi.StringPtrOutput `pulumi:"sourceArchiveId"`
+	// The share key of source shared archive
+	SourceArchiveZone pulumi.StringPtrOutput `pulumi:"sourceArchiveZone"`
+	// The id of the source disk. This conflicts with [`source_archive_id`]
+	SourceDiskId pulumi.StringPtrOutput `pulumi:"sourceDiskId"`
+	// The share key of source shared archive
+	SourceSharedKey pulumi.StringPtrOutput `pulumi:"sourceSharedKey"`
 	// Any tags to assign to the archive
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
@@ -35,9 +42,6 @@ type Archive struct {
 // NewArchive registers a new resource with the given unique name, arguments, and options.
 func NewArchive(ctx *pulumi.Context,
 	name string, args *ArchiveArgs, opts ...pulumi.ResourceOption) (*Archive, error) {
-	if args == nil || args.ArchiveFile == nil {
-		return nil, errors.New("missing required argument 'ArchiveFile'")
-	}
 	if args == nil {
 		args = &ArchiveArgs{}
 	}
@@ -75,6 +79,14 @@ type archiveState struct {
 	Name *string `pulumi:"name"`
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
 	Size *int `pulumi:"size"`
+	// The id of the source archive. This conflicts with [`source_disk_id`]
+	SourceArchiveId *string `pulumi:"sourceArchiveId"`
+	// The share key of source shared archive
+	SourceArchiveZone *string `pulumi:"sourceArchiveZone"`
+	// The id of the source disk. This conflicts with [`source_archive_id`]
+	SourceDiskId *string `pulumi:"sourceDiskId"`
+	// The share key of source shared archive
+	SourceSharedKey *string `pulumi:"sourceSharedKey"`
 	// Any tags to assign to the archive
 	Tags []string `pulumi:"tags"`
 	// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
@@ -94,6 +106,14 @@ type ArchiveState struct {
 	Name pulumi.StringPtrInput
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
 	Size pulumi.IntPtrInput
+	// The id of the source archive. This conflicts with [`source_disk_id`]
+	SourceArchiveId pulumi.StringPtrInput
+	// The share key of source shared archive
+	SourceArchiveZone pulumi.StringPtrInput
+	// The id of the source disk. This conflicts with [`source_archive_id`]
+	SourceDiskId pulumi.StringPtrInput
+	// The share key of source shared archive
+	SourceSharedKey pulumi.StringPtrInput
 	// Any tags to assign to the archive
 	Tags pulumi.StringArrayInput
 	// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
@@ -106,7 +126,7 @@ func (ArchiveState) ElementType() reflect.Type {
 
 type archiveArgs struct {
 	// The file path to upload to the SakuraCloud
-	ArchiveFile string `pulumi:"archiveFile"`
+	ArchiveFile *string `pulumi:"archiveFile"`
 	// The description of the archive. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The md5 checksum calculated from the base64 encoded file body
@@ -117,6 +137,14 @@ type archiveArgs struct {
 	Name *string `pulumi:"name"`
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
 	Size *int `pulumi:"size"`
+	// The id of the source archive. This conflicts with [`source_disk_id`]
+	SourceArchiveId *string `pulumi:"sourceArchiveId"`
+	// The share key of source shared archive
+	SourceArchiveZone *string `pulumi:"sourceArchiveZone"`
+	// The id of the source disk. This conflicts with [`source_archive_id`]
+	SourceDiskId *string `pulumi:"sourceDiskId"`
+	// The share key of source shared archive
+	SourceSharedKey *string `pulumi:"sourceSharedKey"`
 	// Any tags to assign to the archive
 	Tags []string `pulumi:"tags"`
 	// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
@@ -126,7 +154,7 @@ type archiveArgs struct {
 // The set of arguments for constructing a Archive resource.
 type ArchiveArgs struct {
 	// The file path to upload to the SakuraCloud
-	ArchiveFile pulumi.StringInput
+	ArchiveFile pulumi.StringPtrInput
 	// The description of the archive. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The md5 checksum calculated from the base64 encoded file body
@@ -137,6 +165,14 @@ type ArchiveArgs struct {
 	Name pulumi.StringPtrInput
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
 	Size pulumi.IntPtrInput
+	// The id of the source archive. This conflicts with [`source_disk_id`]
+	SourceArchiveId pulumi.StringPtrInput
+	// The share key of source shared archive
+	SourceArchiveZone pulumi.StringPtrInput
+	// The id of the source disk. This conflicts with [`source_archive_id`]
+	SourceDiskId pulumi.StringPtrInput
+	// The share key of source shared archive
+	SourceSharedKey pulumi.StringPtrInput
 	// Any tags to assign to the archive
 	Tags pulumi.StringArrayInput
 	// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
