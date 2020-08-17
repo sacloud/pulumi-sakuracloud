@@ -20,23 +20,21 @@ func LookupPrivateHost(ctx *pulumi.Context, args *LookupPrivateHostArgs, opts ..
 // A collection of arguments for invoking getPrivateHost.
 type LookupPrivateHostArgs struct {
 	Filter *GetPrivateHostFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string               `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getPrivateHost.
 type LookupPrivateHostResult struct {
-	AssignedCore int `pulumi:"assignedCore"`
-	AssignedMemory int `pulumi:"assignedMemory"`
-	Class string `pulumi:"class"`
-	Description string `pulumi:"description"`
-	Filter *GetPrivateHostFilter `pulumi:"filter"`
-	Hostname string `pulumi:"hostname"`
-	IconId string `pulumi:"iconId"`
+	AssignedCore   int                   `pulumi:"assignedCore"`
+	AssignedMemory int                   `pulumi:"assignedMemory"`
+	Class          string                `pulumi:"class"`
+	Description    string                `pulumi:"description"`
+	Filter         *GetPrivateHostFilter `pulumi:"filter"`
+	Hostname       string                `pulumi:"hostname"`
+	IconId         string                `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id   string   `pulumi:"id"`
+	Name string   `pulumi:"name"`
 	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Zone string   `pulumi:"zone"`
 }
-

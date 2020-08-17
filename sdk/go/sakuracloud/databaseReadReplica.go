@@ -21,7 +21,7 @@ type DatabaseReadReplica struct {
 	// The id of the replication master database
 	MasterId pulumi.StringOutput `pulumi:"masterId"`
 	// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name             pulumi.StringOutput                       `pulumi:"name"`
 	NetworkInterface DatabaseReadReplicaNetworkInterfaceOutput `pulumi:"networkInterface"`
 	// Any tags to assign to the read-replica database
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
@@ -70,7 +70,7 @@ type databaseReadReplicaState struct {
 	// The id of the replication master database
 	MasterId *string `pulumi:"masterId"`
 	// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                              `pulumi:"name"`
 	NetworkInterface *DatabaseReadReplicaNetworkInterface `pulumi:"networkInterface"`
 	// Any tags to assign to the read-replica database
 	Tags []string `pulumi:"tags"`
@@ -86,7 +86,7 @@ type DatabaseReadReplicaState struct {
 	// The id of the replication master database
 	MasterId pulumi.StringPtrInput
 	// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface DatabaseReadReplicaNetworkInterfacePtrInput
 	// Any tags to assign to the read-replica database
 	Tags pulumi.StringArrayInput
@@ -106,7 +106,7 @@ type databaseReadReplicaArgs struct {
 	// The id of the replication master database
 	MasterId string `pulumi:"masterId"`
 	// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                             `pulumi:"name"`
 	NetworkInterface DatabaseReadReplicaNetworkInterface `pulumi:"networkInterface"`
 	// Any tags to assign to the read-replica database
 	Tags []string `pulumi:"tags"`
@@ -123,7 +123,7 @@ type DatabaseReadReplicaArgs struct {
 	// The id of the replication master database
 	MasterId pulumi.StringInput
 	// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface DatabaseReadReplicaNetworkInterfaceInput
 	// Any tags to assign to the read-replica database
 	Tags pulumi.StringArrayInput
@@ -134,4 +134,3 @@ type DatabaseReadReplicaArgs struct {
 func (DatabaseReadReplicaArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*databaseReadReplicaArgs)(nil)).Elem()
 }
-

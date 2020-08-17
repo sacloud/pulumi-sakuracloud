@@ -14,12 +14,12 @@ import (
 type ProxyLB struct {
 	pulumi.CustomResourceState
 
-	BindPorts ProxyLBBindPortArrayOutput `pulumi:"bindPorts"`
-	Certificate ProxyLBCertificateOutput `pulumi:"certificate"`
+	BindPorts   ProxyLBBindPortArrayOutput `pulumi:"bindPorts"`
+	Certificate ProxyLBCertificateOutput   `pulumi:"certificate"`
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
-	Fqdn pulumi.StringOutput `pulumi:"fqdn"`
+	Fqdn        pulumi.StringOutput      `pulumi:"fqdn"`
 	HealthCheck ProxyLBHealthCheckOutput `pulumi:"healthCheck"`
 	// The icon id to attach to the ProxyLB
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
@@ -29,10 +29,10 @@ type ProxyLB struct {
 	Plan pulumi.IntPtrOutput `pulumi:"plan"`
 	// A list of CIDR block used by the ProxyLB to access the server
 	ProxyNetworks pulumi.StringArrayOutput `pulumi:"proxyNetworks"`
-	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
-	Region pulumi.StringPtrOutput `pulumi:"region"`
-	Rules ProxyLBRuleArrayOutput `pulumi:"rules"`
-	Servers ProxyLBServerArrayOutput `pulumi:"servers"`
+	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
+	Region      pulumi.StringPtrOutput      `pulumi:"region"`
+	Rules       ProxyLBRuleArrayOutput      `pulumi:"rules"`
+	Servers     ProxyLBServerArrayOutput    `pulumi:"servers"`
 	SorryServer ProxyLBSorryServerPtrOutput `pulumi:"sorryServer"`
 	// The flag to enable sticky session
 	StickySession pulumi.BoolPtrOutput `pulumi:"stickySession"`
@@ -80,12 +80,12 @@ func GetProxyLB(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProxyLB resources.
 type proxyLBState struct {
-	BindPorts []ProxyLBBindPort `pulumi:"bindPorts"`
+	BindPorts   []ProxyLBBindPort   `pulumi:"bindPorts"`
 	Certificate *ProxyLBCertificate `pulumi:"certificate"`
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
-	Fqdn *string `pulumi:"fqdn"`
+	Fqdn        *string             `pulumi:"fqdn"`
 	HealthCheck *ProxyLBHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the ProxyLB
 	IconId *string `pulumi:"iconId"`
@@ -95,10 +95,10 @@ type proxyLBState struct {
 	Plan *int `pulumi:"plan"`
 	// A list of CIDR block used by the ProxyLB to access the server
 	ProxyNetworks []string `pulumi:"proxyNetworks"`
-	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
-	Region *string `pulumi:"region"`
-	Rules []ProxyLBRule `pulumi:"rules"`
-	Servers []ProxyLBServer `pulumi:"servers"`
+	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
+	Region      *string             `pulumi:"region"`
+	Rules       []ProxyLBRule       `pulumi:"rules"`
+	Servers     []ProxyLBServer     `pulumi:"servers"`
 	SorryServer *ProxyLBSorryServer `pulumi:"sorryServer"`
 	// The flag to enable sticky session
 	StickySession *bool `pulumi:"stickySession"`
@@ -113,12 +113,12 @@ type proxyLBState struct {
 }
 
 type ProxyLBState struct {
-	BindPorts ProxyLBBindPortArrayInput
+	BindPorts   ProxyLBBindPortArrayInput
 	Certificate ProxyLBCertificatePtrInput
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record
-	Fqdn pulumi.StringPtrInput
+	Fqdn        pulumi.StringPtrInput
 	HealthCheck ProxyLBHealthCheckPtrInput
 	// The icon id to attach to the ProxyLB
 	IconId pulumi.StringPtrInput
@@ -128,10 +128,10 @@ type ProxyLBState struct {
 	Plan pulumi.IntPtrInput
 	// A list of CIDR block used by the ProxyLB to access the server
 	ProxyNetworks pulumi.StringArrayInput
-	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
-	Region pulumi.StringPtrInput
-	Rules ProxyLBRuleArrayInput
-	Servers ProxyLBServerArrayInput
+	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
+	Region      pulumi.StringPtrInput
+	Rules       ProxyLBRuleArrayInput
+	Servers     ProxyLBServerArrayInput
 	SorryServer ProxyLBSorryServerPtrInput
 	// The flag to enable sticky session
 	StickySession pulumi.BoolPtrInput
@@ -150,10 +150,10 @@ func (ProxyLBState) ElementType() reflect.Type {
 }
 
 type proxyLBArgs struct {
-	BindPorts []ProxyLBBindPort `pulumi:"bindPorts"`
+	BindPorts   []ProxyLBBindPort   `pulumi:"bindPorts"`
 	Certificate *ProxyLBCertificate `pulumi:"certificate"`
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description *string            `pulumi:"description"`
 	HealthCheck ProxyLBHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the ProxyLB
 	IconId *string `pulumi:"iconId"`
@@ -161,10 +161,10 @@ type proxyLBArgs struct {
 	Name *string `pulumi:"name"`
 	// The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
 	Plan *int `pulumi:"plan"`
-	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
-	Region *string `pulumi:"region"`
-	Rules []ProxyLBRule `pulumi:"rules"`
-	Servers []ProxyLBServer `pulumi:"servers"`
+	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
+	Region      *string             `pulumi:"region"`
+	Rules       []ProxyLBRule       `pulumi:"rules"`
+	Servers     []ProxyLBServer     `pulumi:"servers"`
 	SorryServer *ProxyLBSorryServer `pulumi:"sorryServer"`
 	// The flag to enable sticky session
 	StickySession *bool `pulumi:"stickySession"`
@@ -178,7 +178,7 @@ type proxyLBArgs struct {
 
 // The set of arguments for constructing a ProxyLB resource.
 type ProxyLBArgs struct {
-	BindPorts ProxyLBBindPortArrayInput
+	BindPorts   ProxyLBBindPortArrayInput
 	Certificate ProxyLBCertificatePtrInput
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
@@ -189,10 +189,10 @@ type ProxyLBArgs struct {
 	Name pulumi.StringPtrInput
 	// The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
 	Plan pulumi.IntPtrInput
-	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
-	Region pulumi.StringPtrInput
-	Rules ProxyLBRuleArrayInput
-	Servers ProxyLBServerArrayInput
+	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
+	Region      pulumi.StringPtrInput
+	Rules       ProxyLBRuleArrayInput
+	Servers     ProxyLBServerArrayInput
 	SorryServer ProxyLBSorryServerPtrInput
 	// The flag to enable sticky session
 	StickySession pulumi.BoolPtrInput
@@ -207,4 +207,3 @@ type ProxyLBArgs struct {
 func (ProxyLBArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*proxyLBArgs)(nil)).Elem()
 }
-

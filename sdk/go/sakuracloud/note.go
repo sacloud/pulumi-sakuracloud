@@ -122,4 +122,3 @@ type NoteArgs struct {
 func (NoteArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*noteArgs)(nil)).Elem()
 }
-

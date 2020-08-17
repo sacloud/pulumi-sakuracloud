@@ -19,7 +19,7 @@ type DNS struct {
 	// A list of IP address of DNS server that manage this zone
 	DnsServers pulumi.StringArrayOutput `pulumi:"dnsServers"`
 	// The icon id to attach to the DNS
-	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
+	IconId  pulumi.StringPtrOutput   `pulumi:"iconId"`
 	Records DNSRecordTypeArrayOutput `pulumi:"records"`
 	// Any tags to assign to the DNS
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
@@ -63,7 +63,7 @@ type dnsState struct {
 	// A list of IP address of DNS server that manage this zone
 	DnsServers []string `pulumi:"dnsServers"`
 	// The icon id to attach to the DNS
-	IconId *string `pulumi:"iconId"`
+	IconId  *string         `pulumi:"iconId"`
 	Records []DNSRecordType `pulumi:"records"`
 	// Any tags to assign to the DNS
 	Tags []string `pulumi:"tags"`
@@ -77,7 +77,7 @@ type DNSState struct {
 	// A list of IP address of DNS server that manage this zone
 	DnsServers pulumi.StringArrayInput
 	// The icon id to attach to the DNS
-	IconId pulumi.StringPtrInput
+	IconId  pulumi.StringPtrInput
 	Records DNSRecordTypeArrayInput
 	// Any tags to assign to the DNS
 	Tags pulumi.StringArrayInput
@@ -93,7 +93,7 @@ type dnsArgs struct {
 	// The description of the DNS. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The icon id to attach to the DNS
-	IconId *string `pulumi:"iconId"`
+	IconId  *string         `pulumi:"iconId"`
 	Records []DNSRecordType `pulumi:"records"`
 	// Any tags to assign to the DNS
 	Tags []string `pulumi:"tags"`
@@ -106,7 +106,7 @@ type DNSArgs struct {
 	// The description of the DNS. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The icon id to attach to the DNS
-	IconId pulumi.StringPtrInput
+	IconId  pulumi.StringPtrInput
 	Records DNSRecordTypeArrayInput
 	// Any tags to assign to the DNS
 	Tags pulumi.StringArrayInput
@@ -117,4 +117,3 @@ type DNSArgs struct {
 func (DNSArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*dnsArgs)(nil)).Elem()
 }
-

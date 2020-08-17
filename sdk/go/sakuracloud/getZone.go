@@ -22,16 +22,14 @@ type GetZoneArgs struct {
 	Name *string `pulumi:"name"`
 }
 
-
 // A collection of values returned by getZone.
 type GetZoneResult struct {
-	Description string `pulumi:"description"`
-	DnsServers []string `pulumi:"dnsServers"`
+	Description string   `pulumi:"description"`
+	DnsServers  []string `pulumi:"dnsServers"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	RegionId string `pulumi:"regionId"`
+	Id         string `pulumi:"id"`
+	Name       string `pulumi:"name"`
+	RegionId   string `pulumi:"regionId"`
 	RegionName string `pulumi:"regionName"`
-	ZoneId string `pulumi:"zoneId"`
+	ZoneId     string `pulumi:"zoneId"`
 }
-

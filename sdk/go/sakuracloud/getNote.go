@@ -22,17 +22,15 @@ type LookupNoteArgs struct {
 	Filter *GetNoteFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getNote.
 type LookupNoteResult struct {
-	Class string `pulumi:"class"`
-	Content string `pulumi:"content"`
-	Description string `pulumi:"description"`
-	Filter *GetNoteFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Class       string         `pulumi:"class"`
+	Content     string         `pulumi:"content"`
+	Description string         `pulumi:"description"`
+	Filter      *GetNoteFilter `pulumi:"filter"`
+	IconId      string         `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id   string   `pulumi:"id"`
+	Name string   `pulumi:"name"`
 	Tags []string `pulumi:"tags"`
 }
-

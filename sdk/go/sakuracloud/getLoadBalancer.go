@@ -20,22 +20,20 @@ func LookupLoadBalancer(ctx *pulumi.Context, args *LookupLoadBalancerArgs, opts 
 // A collection of arguments for invoking getLoadBalancer.
 type LookupLoadBalancerArgs struct {
 	Filter *GetLoadBalancerFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string                `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getLoadBalancer.
 type LookupLoadBalancerResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetLoadBalancerFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string                 `pulumi:"description"`
+	Filter      *GetLoadBalancerFilter `pulumi:"filter"`
+	IconId      string                 `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id                string                            `pulumi:"id"`
+	Name              string                            `pulumi:"name"`
 	NetworkInterfaces []GetLoadBalancerNetworkInterface `pulumi:"networkInterfaces"`
-	Plan string `pulumi:"plan"`
-	Tags []string `pulumi:"tags"`
-	Vips []GetLoadBalancerVip `pulumi:"vips"`
-	Zone string `pulumi:"zone"`
+	Plan              string                            `pulumi:"plan"`
+	Tags              []string                          `pulumi:"tags"`
+	Vips              []GetLoadBalancerVip              `pulumi:"vips"`
+	Zone              string                            `pulumi:"zone"`
 }
-

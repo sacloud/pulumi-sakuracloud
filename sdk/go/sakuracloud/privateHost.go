@@ -140,4 +140,3 @@ type PrivateHostArgs struct {
 func (PrivateHostArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*privateHostArgs)(nil)).Elem()
 }
-

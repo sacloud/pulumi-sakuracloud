@@ -20,27 +20,25 @@ func LookupDatabase(ctx *pulumi.Context, args *LookupDatabaseArgs, opts ...pulum
 // A collection of arguments for invoking getDatabase.
 type LookupDatabaseArgs struct {
 	Filter *GetDatabaseFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string            `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getDatabase.
 type LookupDatabaseResult struct {
-	Backups []GetDatabaseBackup `pulumi:"backups"`
-	DatabaseType string `pulumi:"databaseType"`
-	Description string `pulumi:"description"`
-	Filter *GetDatabaseFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Backups      []GetDatabaseBackup `pulumi:"backups"`
+	DatabaseType string              `pulumi:"databaseType"`
+	Description  string              `pulumi:"description"`
+	Filter       *GetDatabaseFilter  `pulumi:"filter"`
+	IconId       string              `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id                string                        `pulumi:"id"`
+	Name              string                        `pulumi:"name"`
 	NetworkInterfaces []GetDatabaseNetworkInterface `pulumi:"networkInterfaces"`
-	Password string `pulumi:"password"`
-	Plan string `pulumi:"plan"`
-	ReplicaPassword string `pulumi:"replicaPassword"`
-	ReplicaUser string `pulumi:"replicaUser"`
-	Tags []string `pulumi:"tags"`
-	Username string `pulumi:"username"`
-	Zone string `pulumi:"zone"`
+	Password          string                        `pulumi:"password"`
+	Plan              string                        `pulumi:"plan"`
+	ReplicaPassword   string                        `pulumi:"replicaPassword"`
+	ReplicaUser       string                        `pulumi:"replicaUser"`
+	Tags              []string                      `pulumi:"tags"`
+	Username          string                        `pulumi:"username"`
+	Zone              string                        `pulumi:"zone"`
 }
-

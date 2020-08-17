@@ -22,14 +22,12 @@ type LookupIconArgs struct {
 	Filter *GetIconFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getIcon.
 type LookupIconResult struct {
 	Filter *GetIconFilter `pulumi:"filter"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id   string   `pulumi:"id"`
+	Name string   `pulumi:"name"`
 	Tags []string `pulumi:"tags"`
-	Url string `pulumi:"url"`
+	Url  string   `pulumi:"url"`
 }
-

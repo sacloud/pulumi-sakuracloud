@@ -91,4 +91,3 @@ type PacketFilterRuleArgs struct {
 func (PacketFilterRuleArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*packetFilterRuleArgs)(nil)).Elem()
 }
-

@@ -57,7 +57,7 @@ namespace Pulumi.SakuraCloud
         public Output<ImmutableArray<string>> ProxyNetworks { get; private set; } = null!;
 
         /// <summary>
-        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
         /// </summary>
         [Output("region")]
         public Output<string?> Region { get; private set; } = null!;
@@ -186,7 +186,7 @@ namespace Pulumi.SakuraCloud
         public Input<int>? Plan { get; set; }
 
         /// <summary>
-        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
@@ -304,7 +304,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }

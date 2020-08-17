@@ -167,4 +167,3 @@ type CDROMArgs struct {
 func (CDROMArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*cdromArgs)(nil)).Elem()
 }
-

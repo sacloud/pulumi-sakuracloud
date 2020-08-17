@@ -20,17 +20,15 @@ func LookupBridge(ctx *pulumi.Context, args *LookupBridgeArgs, opts ...pulumi.In
 // A collection of arguments for invoking getBridge.
 type LookupBridgeArgs struct {
 	Filter *GetBridgeFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string          `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getBridge.
 type LookupBridgeResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetBridgeFilter `pulumi:"filter"`
+	Description string           `pulumi:"description"`
+	Filter      *GetBridgeFilter `pulumi:"filter"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id   string `pulumi:"id"`
 	Name string `pulumi:"name"`
 	Zone string `pulumi:"zone"`
 }
-

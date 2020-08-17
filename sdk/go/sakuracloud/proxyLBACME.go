@@ -16,7 +16,7 @@ type ProxyLBACME struct {
 
 	// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
 	// set `true` explicitly
-	AcceptTos pulumi.BoolOutput `pulumi:"acceptTos"`
+	AcceptTos    pulumi.BoolOutput                 `pulumi:"acceptTos"`
 	Certificates ProxyLBACMECertificateArrayOutput `pulumi:"certificates"`
 	// The FQDN used by ACME. This must set resolvable value
 	CommonName pulumi.StringOutput `pulumi:"commonName"`
@@ -65,7 +65,7 @@ func GetProxyLBACME(ctx *pulumi.Context,
 type proxyLBACMEState struct {
 	// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
 	// set `true` explicitly
-	AcceptTos *bool `pulumi:"acceptTos"`
+	AcceptTos    *bool                    `pulumi:"acceptTos"`
 	Certificates []ProxyLBACMECertificate `pulumi:"certificates"`
 	// The FQDN used by ACME. This must set resolvable value
 	CommonName *string `pulumi:"commonName"`
@@ -78,7 +78,7 @@ type proxyLBACMEState struct {
 type ProxyLBACMEState struct {
 	// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be
 	// set `true` explicitly
-	AcceptTos pulumi.BoolPtrInput
+	AcceptTos    pulumi.BoolPtrInput
 	Certificates ProxyLBACMECertificateArrayInput
 	// The FQDN used by ACME. This must set resolvable value
 	CommonName pulumi.StringPtrInput
@@ -120,4 +120,3 @@ type ProxyLBACMEArgs struct {
 func (ProxyLBACMEArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*proxyLBACMEArgs)(nil)).Elem()
 }
-

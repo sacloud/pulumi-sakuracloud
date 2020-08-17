@@ -22,29 +22,27 @@ type LookupProxyLBArgs struct {
 	Filter *GetProxyLBFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getProxyLB.
 type LookupProxyLBResult struct {
-	BindPorts []GetProxyLBBindPort `pulumi:"bindPorts"`
+	BindPorts    []GetProxyLBBindPort    `pulumi:"bindPorts"`
 	Certificates []GetProxyLBCertificate `pulumi:"certificates"`
-	Description string `pulumi:"description"`
-	Filter *GetProxyLBFilter `pulumi:"filter"`
-	Fqdn string `pulumi:"fqdn"`
+	Description  string                  `pulumi:"description"`
+	Filter       *GetProxyLBFilter       `pulumi:"filter"`
+	Fqdn         string                  `pulumi:"fqdn"`
 	HealthChecks []GetProxyLBHealthCheck `pulumi:"healthChecks"`
-	IconId string `pulumi:"iconId"`
+	IconId       string                  `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	Plan int `pulumi:"plan"`
-	ProxyNetworks []string `pulumi:"proxyNetworks"`
-	Region string `pulumi:"region"`
-	Rules []GetProxyLBRule `pulumi:"rules"`
-	Servers []GetProxyLBServer `pulumi:"servers"`
-	SorryServers []GetProxyLBSorryServer `pulumi:"sorryServers"`
-	StickySession bool `pulumi:"stickySession"`
-	Tags []string `pulumi:"tags"`
-	Timeout int `pulumi:"timeout"`
-	Vip string `pulumi:"vip"`
-	VipFailover bool `pulumi:"vipFailover"`
+	Id            string                  `pulumi:"id"`
+	Name          string                  `pulumi:"name"`
+	Plan          int                     `pulumi:"plan"`
+	ProxyNetworks []string                `pulumi:"proxyNetworks"`
+	Region        string                  `pulumi:"region"`
+	Rules         []GetProxyLBRule        `pulumi:"rules"`
+	Servers       []GetProxyLBServer      `pulumi:"servers"`
+	SorryServers  []GetProxyLBSorryServer `pulumi:"sorryServers"`
+	StickySession bool                    `pulumi:"stickySession"`
+	Tags          []string                `pulumi:"tags"`
+	Timeout       int                     `pulumi:"timeout"`
+	Vip           string                  `pulumi:"vip"`
+	VipFailover   bool                    `pulumi:"vipFailover"`
 }
-

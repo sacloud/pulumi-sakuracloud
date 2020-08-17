@@ -20,30 +20,28 @@ func LookupBucketObject(ctx *pulumi.Context, args *LookupBucketObjectArgs, opts 
 // A collection of arguments for invoking getBucketObject.
 type LookupBucketObjectArgs struct {
 	AccessKey string `pulumi:"accessKey"`
-	Bucket string `pulumi:"bucket"`
-	Key string `pulumi:"key"`
+	Bucket    string `pulumi:"bucket"`
+	Key       string `pulumi:"key"`
 	SecretKey string `pulumi:"secretKey"`
 }
-
 
 // A collection of values returned by getBucketObject.
 type LookupBucketObjectResult struct {
-	AccessKey string `pulumi:"accessKey"`
-	Body string `pulumi:"body"`
-	Bucket string `pulumi:"bucket"`
-	ContentType string `pulumi:"contentType"`
-	Etag string `pulumi:"etag"`
-	HttpCacheUrl string `pulumi:"httpCacheUrl"`
-	HttpPathUrl string `pulumi:"httpPathUrl"`
-	HttpUrl string `pulumi:"httpUrl"`
+	AccessKey     string `pulumi:"accessKey"`
+	Body          string `pulumi:"body"`
+	Bucket        string `pulumi:"bucket"`
+	ContentType   string `pulumi:"contentType"`
+	Etag          string `pulumi:"etag"`
+	HttpCacheUrl  string `pulumi:"httpCacheUrl"`
+	HttpPathUrl   string `pulumi:"httpPathUrl"`
+	HttpUrl       string `pulumi:"httpUrl"`
 	HttpsCacheUrl string `pulumi:"httpsCacheUrl"`
-	HttpsPathUrl string `pulumi:"httpsPathUrl"`
-	HttpsUrl string `pulumi:"httpsUrl"`
+	HttpsPathUrl  string `pulumi:"httpsPathUrl"`
+	HttpsUrl      string `pulumi:"httpsUrl"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Key string `pulumi:"key"`
+	Id           string `pulumi:"id"`
+	Key          string `pulumi:"key"`
 	LastModified string `pulumi:"lastModified"`
-	SecretKey string `pulumi:"secretKey"`
-	Size int `pulumi:"size"`
+	SecretKey    string `pulumi:"secretKey"`
+	Size         int    `pulumi:"size"`
 }
-

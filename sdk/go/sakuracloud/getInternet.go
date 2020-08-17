@@ -20,32 +20,30 @@ func LookupInternet(ctx *pulumi.Context, args *LookupInternetArgs, opts ...pulum
 // A collection of arguments for invoking getInternet.
 type LookupInternetArgs struct {
 	Filter *GetInternetFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string            `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getInternet.
 type LookupInternetResult struct {
-	BandWidth int `pulumi:"bandWidth"`
-	Description string `pulumi:"description"`
-	EnableIpv6 bool `pulumi:"enableIpv6"`
-	Filter *GetInternetFilter `pulumi:"filter"`
-	Gateway string `pulumi:"gateway"`
-	IconId string `pulumi:"iconId"`
+	BandWidth   int                `pulumi:"bandWidth"`
+	Description string             `pulumi:"description"`
+	EnableIpv6  bool               `pulumi:"enableIpv6"`
+	Filter      *GetInternetFilter `pulumi:"filter"`
+	Gateway     string             `pulumi:"gateway"`
+	IconId      string             `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	IpAddresses []string `pulumi:"ipAddresses"`
-	Ipv6NetworkAddress string `pulumi:"ipv6NetworkAddress"`
-	Ipv6Prefix string `pulumi:"ipv6Prefix"`
-	Ipv6PrefixLen int `pulumi:"ipv6PrefixLen"`
-	MaxIpAddress string `pulumi:"maxIpAddress"`
-	MinIpAddress string `pulumi:"minIpAddress"`
-	Name string `pulumi:"name"`
-	Netmask int `pulumi:"netmask"`
-	NetworkAddress string `pulumi:"networkAddress"`
-	ServerIds []string `pulumi:"serverIds"`
-	SwitchId string `pulumi:"switchId"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Id                 string   `pulumi:"id"`
+	IpAddresses        []string `pulumi:"ipAddresses"`
+	Ipv6NetworkAddress string   `pulumi:"ipv6NetworkAddress"`
+	Ipv6Prefix         string   `pulumi:"ipv6Prefix"`
+	Ipv6PrefixLen      int      `pulumi:"ipv6PrefixLen"`
+	MaxIpAddress       string   `pulumi:"maxIpAddress"`
+	MinIpAddress       string   `pulumi:"minIpAddress"`
+	Name               string   `pulumi:"name"`
+	Netmask            int      `pulumi:"netmask"`
+	NetworkAddress     string   `pulumi:"networkAddress"`
+	ServerIds          []string `pulumi:"serverIds"`
+	SwitchId           string   `pulumi:"switchId"`
+	Tags               []string `pulumi:"tags"`
+	Zone               string   `pulumi:"zone"`
 }
-

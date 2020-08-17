@@ -20,18 +20,16 @@ func LookupPacketFilter(ctx *pulumi.Context, args *LookupPacketFilterArgs, opts 
 // A collection of arguments for invoking getPacketFilter.
 type LookupPacketFilterArgs struct {
 	Filter *GetPacketFilterFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string                `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getPacketFilter.
 type LookupPacketFilterResult struct {
-	Description string `pulumi:"description"`
+	Description string                      `pulumi:"description"`
 	Expressions []GetPacketFilterExpression `pulumi:"expressions"`
-	Filter *GetPacketFilterFilter `pulumi:"filter"`
+	Filter      *GetPacketFilterFilter      `pulumi:"filter"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id   string `pulumi:"id"`
 	Name string `pulumi:"name"`
 	Zone string `pulumi:"zone"`
 }
-

@@ -22,20 +22,18 @@ type LookupContainerRegistryArgs struct {
 	Filter *GetContainerRegistryFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getContainerRegistry.
 type LookupContainerRegistryResult struct {
-	AccessLevel string `pulumi:"accessLevel"`
-	Description string `pulumi:"description"`
-	Filter *GetContainerRegistryFilter `pulumi:"filter"`
-	Fqdn string `pulumi:"fqdn"`
-	IconId string `pulumi:"iconId"`
+	AccessLevel string                      `pulumi:"accessLevel"`
+	Description string                      `pulumi:"description"`
+	Filter      *GetContainerRegistryFilter `pulumi:"filter"`
+	Fqdn        string                      `pulumi:"fqdn"`
+	IconId      string                      `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	SubdomainLabel string `pulumi:"subdomainLabel"`
-	Tags []string `pulumi:"tags"`
-	Users []GetContainerRegistryUser `pulumi:"users"`
-	VirtualDomain string `pulumi:"virtualDomain"`
+	Id             string                     `pulumi:"id"`
+	Name           string                     `pulumi:"name"`
+	SubdomainLabel string                     `pulumi:"subdomainLabel"`
+	Tags           []string                   `pulumi:"tags"`
+	Users          []GetContainerRegistryUser `pulumi:"users"`
+	VirtualDomain  string                     `pulumi:"virtualDomain"`
 }
-

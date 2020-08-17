@@ -39,7 +39,7 @@ class ProxyLB(pulumi.CustomResource):
     """
     region: pulumi.Output[str]
     """
-    The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+    The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
     """
     rules: pulumi.Output[list]
     servers: pulumi.Output[list]
@@ -73,7 +73,7 @@ class ProxyLB(pulumi.CustomResource):
         :param pulumi.Input[str] icon_id: The icon id to attach to the ProxyLB
         :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
         :param pulumi.Input[float] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
-        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
         :param pulumi.Input[bool] sticky_session: The flag to enable sticky session
         :param pulumi.Input[list] tags: Any tags to assign to the ProxyLB
         :param pulumi.Input[float] timeout: The timeout duration in seconds
@@ -187,7 +187,7 @@ class ProxyLB(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`]
         :param pulumi.Input[float] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]
         :param pulumi.Input[list] proxy_networks: A list of CIDR block used by the ProxyLB to access the server
-        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+        :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
         :param pulumi.Input[bool] sticky_session: The flag to enable sticky session
         :param pulumi.Input[list] tags: Any tags to assign to the ProxyLB
         :param pulumi.Input[float] timeout: The timeout duration in seconds

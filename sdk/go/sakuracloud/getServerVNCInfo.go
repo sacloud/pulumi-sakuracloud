@@ -19,19 +19,17 @@ func GetServerVNCInfo(ctx *pulumi.Context, args *GetServerVNCInfoArgs, opts ...p
 
 // A collection of arguments for invoking getServerVNCInfo.
 type GetServerVNCInfoArgs struct {
-	ServerId string `pulumi:"serverId"`
-	Zone *string `pulumi:"zone"`
+	ServerId string  `pulumi:"serverId"`
+	Zone     *string `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getServerVNCInfo.
 type GetServerVNCInfoResult struct {
 	Host string `pulumi:"host"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id       string `pulumi:"id"`
 	Password string `pulumi:"password"`
-	Port int `pulumi:"port"`
+	Port     int    `pulumi:"port"`
 	ServerId string `pulumi:"serverId"`
-	Zone string `pulumi:"zone"`
+	Zone     string `pulumi:"zone"`
 }
-

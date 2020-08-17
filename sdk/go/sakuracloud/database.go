@@ -22,7 +22,7 @@ type Database struct {
 	// The icon id to attach to the Database
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The name of the Database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name             pulumi.StringOutput            `pulumi:"name"`
 	NetworkInterface DatabaseNetworkInterfaceOutput `pulumi:"networkInterface"`
 	// The password of default user on the database
 	Password pulumi.StringOutput `pulumi:"password"`
@@ -85,7 +85,7 @@ type databaseState struct {
 	// The icon id to attach to the Database
 	IconId *string `pulumi:"iconId"`
 	// The name of the Database. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                   `pulumi:"name"`
 	NetworkInterface *DatabaseNetworkInterface `pulumi:"networkInterface"`
 	// The password of default user on the database
 	Password *string `pulumi:"password"`
@@ -112,7 +112,7 @@ type DatabaseState struct {
 	// The icon id to attach to the Database
 	IconId pulumi.StringPtrInput
 	// The name of the Database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface DatabaseNetworkInterfacePtrInput
 	// The password of default user on the database
 	Password pulumi.StringPtrInput
@@ -143,7 +143,7 @@ type databaseArgs struct {
 	// The icon id to attach to the Database
 	IconId *string `pulumi:"iconId"`
 	// The name of the Database. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                  `pulumi:"name"`
 	NetworkInterface DatabaseNetworkInterface `pulumi:"networkInterface"`
 	// The password of default user on the database
 	Password string `pulumi:"password"`
@@ -171,7 +171,7 @@ type DatabaseArgs struct {
 	// The icon id to attach to the Database
 	IconId pulumi.StringPtrInput
 	// The name of the Database. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface DatabaseNetworkInterfaceInput
 	// The password of default user on the database
 	Password pulumi.StringInput
@@ -192,4 +192,3 @@ type DatabaseArgs struct {
 func (DatabaseArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*databaseArgs)(nil)).Elem()
 }
-

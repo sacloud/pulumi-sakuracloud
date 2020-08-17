@@ -174,4 +174,3 @@ type SIMArgs struct {
 func (SIMArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*simArgs)(nil)).Elem()
 }
-

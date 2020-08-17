@@ -22,20 +22,18 @@ type LookupLocalRouterArgs struct {
 	Filter *GetLocalRouterFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getLocalRouter.
 type LookupLocalRouterResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetLocalRouterFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string                `pulumi:"description"`
+	Filter      *GetLocalRouterFilter `pulumi:"filter"`
+	IconId      string                `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id                string                           `pulumi:"id"`
+	Name              string                           `pulumi:"name"`
 	NetworkInterfaces []GetLocalRouterNetworkInterface `pulumi:"networkInterfaces"`
-	Peers []GetLocalRouterPeer `pulumi:"peers"`
-	SecretKeys []string `pulumi:"secretKeys"`
-	StaticRoutes []GetLocalRouterStaticRoute `pulumi:"staticRoutes"`
-	Switches []GetLocalRouterSwitch `pulumi:"switches"`
-	Tags []string `pulumi:"tags"`
+	Peers             []GetLocalRouterPeer             `pulumi:"peers"`
+	SecretKeys        []string                         `pulumi:"secretKeys"`
+	StaticRoutes      []GetLocalRouterStaticRoute      `pulumi:"staticRoutes"`
+	Switches          []GetLocalRouterSwitch           `pulumi:"switches"`
+	Tags              []string                         `pulumi:"tags"`
 }
-

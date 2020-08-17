@@ -25,17 +25,17 @@ type MobileGateway struct {
 	// The flag to enable connect to the Internet
 	InternetConnection pulumi.BoolPtrOutput `pulumi:"internetConnection"`
 	// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name                    pulumi.StringOutput                           `pulumi:"name"`
 	PrivateNetworkInterface MobileGatewayPrivateNetworkInterfacePtrOutput `pulumi:"privateNetworkInterface"`
 	// The public IP address assigned to the MobileGateway
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
 	// The bit length of the subnet assigned to the MobileGateway
-	PublicNetmask pulumi.IntOutput `pulumi:"publicNetmask"`
-	SimRoutes MobileGatewaySimRouteArrayOutput `pulumi:"simRoutes"`
-	Sims MobileGatewaySimArrayOutput `pulumi:"sims"`
-	StaticRoutes MobileGatewayStaticRouteArrayOutput `pulumi:"staticRoutes"`
+	PublicNetmask pulumi.IntOutput                    `pulumi:"publicNetmask"`
+	SimRoutes     MobileGatewaySimRouteArrayOutput    `pulumi:"simRoutes"`
+	Sims          MobileGatewaySimArrayOutput         `pulumi:"sims"`
+	StaticRoutes  MobileGatewayStaticRouteArrayOutput `pulumi:"staticRoutes"`
 	// Any tags to assign to the MobileGateway
-	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	Tags           pulumi.StringArrayOutput             `pulumi:"tags"`
 	TrafficControl MobileGatewayTrafficControlPtrOutput `pulumi:"trafficControl"`
 	// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringOutput `pulumi:"zone"`
@@ -83,17 +83,17 @@ type mobileGatewayState struct {
 	// The flag to enable connect to the Internet
 	InternetConnection *bool `pulumi:"internetConnection"`
 	// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name                    *string                               `pulumi:"name"`
 	PrivateNetworkInterface *MobileGatewayPrivateNetworkInterface `pulumi:"privateNetworkInterface"`
 	// The public IP address assigned to the MobileGateway
 	PublicIp *string `pulumi:"publicIp"`
 	// The bit length of the subnet assigned to the MobileGateway
-	PublicNetmask *int `pulumi:"publicNetmask"`
-	SimRoutes []MobileGatewaySimRoute `pulumi:"simRoutes"`
-	Sims []MobileGatewaySim `pulumi:"sims"`
-	StaticRoutes []MobileGatewayStaticRoute `pulumi:"staticRoutes"`
+	PublicNetmask *int                       `pulumi:"publicNetmask"`
+	SimRoutes     []MobileGatewaySimRoute    `pulumi:"simRoutes"`
+	Sims          []MobileGatewaySim         `pulumi:"sims"`
+	StaticRoutes  []MobileGatewayStaticRoute `pulumi:"staticRoutes"`
 	// Any tags to assign to the MobileGateway
-	Tags []string `pulumi:"tags"`
+	Tags           []string                     `pulumi:"tags"`
 	TrafficControl *MobileGatewayTrafficControl `pulumi:"trafficControl"`
 	// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -111,17 +111,17 @@ type MobileGatewayState struct {
 	// The flag to enable connect to the Internet
 	InternetConnection pulumi.BoolPtrInput
 	// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name                    pulumi.StringPtrInput
 	PrivateNetworkInterface MobileGatewayPrivateNetworkInterfacePtrInput
 	// The public IP address assigned to the MobileGateway
 	PublicIp pulumi.StringPtrInput
 	// The bit length of the subnet assigned to the MobileGateway
 	PublicNetmask pulumi.IntPtrInput
-	SimRoutes MobileGatewaySimRouteArrayInput
-	Sims MobileGatewaySimArrayInput
-	StaticRoutes MobileGatewayStaticRouteArrayInput
+	SimRoutes     MobileGatewaySimRouteArrayInput
+	Sims          MobileGatewaySimArrayInput
+	StaticRoutes  MobileGatewayStaticRouteArrayInput
 	// Any tags to assign to the MobileGateway
-	Tags pulumi.StringArrayInput
+	Tags           pulumi.StringArrayInput
 	TrafficControl MobileGatewayTrafficControlPtrInput
 	// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringPtrInput
@@ -143,13 +143,13 @@ type mobileGatewayArgs struct {
 	// The flag to enable connect to the Internet
 	InternetConnection *bool `pulumi:"internetConnection"`
 	// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name                    *string                               `pulumi:"name"`
 	PrivateNetworkInterface *MobileGatewayPrivateNetworkInterface `pulumi:"privateNetworkInterface"`
-	SimRoutes []MobileGatewaySimRoute `pulumi:"simRoutes"`
-	Sims []MobileGatewaySim `pulumi:"sims"`
-	StaticRoutes []MobileGatewayStaticRoute `pulumi:"staticRoutes"`
+	SimRoutes               []MobileGatewaySimRoute               `pulumi:"simRoutes"`
+	Sims                    []MobileGatewaySim                    `pulumi:"sims"`
+	StaticRoutes            []MobileGatewayStaticRoute            `pulumi:"staticRoutes"`
 	// Any tags to assign to the MobileGateway
-	Tags []string `pulumi:"tags"`
+	Tags           []string                     `pulumi:"tags"`
 	TrafficControl *MobileGatewayTrafficControl `pulumi:"trafficControl"`
 	// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -168,13 +168,13 @@ type MobileGatewayArgs struct {
 	// The flag to enable connect to the Internet
 	InternetConnection pulumi.BoolPtrInput
 	// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name                    pulumi.StringPtrInput
 	PrivateNetworkInterface MobileGatewayPrivateNetworkInterfacePtrInput
-	SimRoutes MobileGatewaySimRouteArrayInput
-	Sims MobileGatewaySimArrayInput
-	StaticRoutes MobileGatewayStaticRouteArrayInput
+	SimRoutes               MobileGatewaySimRouteArrayInput
+	Sims                    MobileGatewaySimArrayInput
+	StaticRoutes            MobileGatewayStaticRouteArrayInput
 	// Any tags to assign to the MobileGateway
-	Tags pulumi.StringArrayInput
+	Tags           pulumi.StringArrayInput
 	TrafficControl MobileGatewayTrafficControlPtrInput
 	// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringPtrInput
@@ -183,4 +183,3 @@ type MobileGatewayArgs struct {
 func (MobileGatewayArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*mobileGatewayArgs)(nil)).Elem()
 }
-

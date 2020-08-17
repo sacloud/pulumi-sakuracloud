@@ -61,7 +61,7 @@ export class ProxyLB extends pulumi.CustomResource {
      */
     public /*out*/ readonly proxyNetworks!: pulumi.Output<string[]>;
     /**
-     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
      */
     public readonly region!: pulumi.Output<string | undefined>;
     public readonly rules!: pulumi.Output<outputs.ProxyLBRule[] | undefined>;
@@ -188,7 +188,7 @@ export interface ProxyLBState {
      */
     readonly proxyNetworks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
      */
     readonly region?: pulumi.Input<string>;
     readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
@@ -240,7 +240,7 @@ export interface ProxyLBArgs {
      */
     readonly plan?: pulumi.Input<number>;
     /**
-     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`]
+     * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]
      */
     readonly region?: pulumi.Input<string>;
     readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
