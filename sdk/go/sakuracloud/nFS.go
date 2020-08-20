@@ -19,7 +19,7 @@ type NFS struct {
 	// The icon id to attach to the NFS
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The name of the NFS. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name             pulumi.StringOutput       `pulumi:"name"`
 	NetworkInterface NFSNetworkInterfaceOutput `pulumi:"networkInterface"`
 	// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
 	Plan pulumi.StringPtrOutput `pulumi:"plan"`
@@ -67,7 +67,7 @@ type nfsState struct {
 	// The icon id to attach to the NFS
 	IconId *string `pulumi:"iconId"`
 	// The name of the NFS. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string              `pulumi:"name"`
 	NetworkInterface *NFSNetworkInterface `pulumi:"networkInterface"`
 	// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
 	Plan *string `pulumi:"plan"`
@@ -85,7 +85,7 @@ type NFSState struct {
 	// The icon id to attach to the NFS
 	IconId pulumi.StringPtrInput
 	// The name of the NFS. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface NFSNetworkInterfacePtrInput
 	// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
 	Plan pulumi.StringPtrInput
@@ -107,7 +107,7 @@ type nfsArgs struct {
 	// The icon id to attach to the NFS
 	IconId *string `pulumi:"iconId"`
 	// The name of the NFS. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string             `pulumi:"name"`
 	NetworkInterface NFSNetworkInterface `pulumi:"networkInterface"`
 	// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
 	Plan *string `pulumi:"plan"`
@@ -126,7 +126,7 @@ type NFSArgs struct {
 	// The icon id to attach to the NFS
 	IconId pulumi.StringPtrInput
 	// The name of the NFS. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface NFSNetworkInterfaceInput
 	// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
 	Plan pulumi.StringPtrInput
@@ -141,4 +141,3 @@ type NFSArgs struct {
 func (NFSArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*nfsArgs)(nil)).Elem()
 }
-

@@ -207,4 +207,3 @@ type InternetArgs struct {
 func (InternetArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*internetArgs)(nil)).Elem()
 }
-

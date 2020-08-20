@@ -14,7 +14,7 @@ type PacketFilter struct {
 	pulumi.CustomResourceState
 
 	// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput            `pulumi:"description"`
 	Expressions PacketFilterExpressionArrayOutput `pulumi:"expressions"`
 	// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -51,7 +51,7 @@ func GetPacketFilter(ctx *pulumi.Context,
 // Input properties used for looking up and filtering PacketFilter resources.
 type packetFilterState struct {
 	// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description *string                  `pulumi:"description"`
 	Expressions []PacketFilterExpression `pulumi:"expressions"`
 	// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
 	Name *string `pulumi:"name"`
@@ -75,7 +75,7 @@ func (PacketFilterState) ElementType() reflect.Type {
 
 type packetFilterArgs struct {
 	// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description *string                  `pulumi:"description"`
 	Expressions []PacketFilterExpression `pulumi:"expressions"`
 	// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
 	Name *string `pulumi:"name"`
@@ -97,4 +97,3 @@ type PacketFilterArgs struct {
 func (PacketFilterArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*packetFilterArgs)(nil)).Elem()
 }
-

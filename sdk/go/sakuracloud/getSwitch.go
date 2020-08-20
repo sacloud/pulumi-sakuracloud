@@ -20,21 +20,19 @@ func LookupSwitch(ctx *pulumi.Context, args *LookupSwitchArgs, opts ...pulumi.In
 // A collection of arguments for invoking getSwitch.
 type LookupSwitchArgs struct {
 	Filter *GetSwitchFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string          `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getSwitch.
 type LookupSwitchResult struct {
-	BridgeId string `pulumi:"bridgeId"`
-	Description string `pulumi:"description"`
-	Filter *GetSwitchFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	BridgeId    string           `pulumi:"bridgeId"`
+	Description string           `pulumi:"description"`
+	Filter      *GetSwitchFilter `pulumi:"filter"`
+	IconId      string           `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id        string   `pulumi:"id"`
+	Name      string   `pulumi:"name"`
 	ServerIds []string `pulumi:"serverIds"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Tags      []string `pulumi:"tags"`
+	Zone      string   `pulumi:"zone"`
 }
-

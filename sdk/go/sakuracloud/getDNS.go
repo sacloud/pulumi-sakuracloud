@@ -22,17 +22,15 @@ type LookupDNSArgs struct {
 	Filter *GetDNSFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getDNS.
 type LookupDNSResult struct {
-	Description string `pulumi:"description"`
-	DnsServers []string `pulumi:"dnsServers"`
-	Filter *GetDNSFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string        `pulumi:"description"`
+	DnsServers  []string      `pulumi:"dnsServers"`
+	Filter      *GetDNSFilter `pulumi:"filter"`
+	IconId      string        `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id      string             `pulumi:"id"`
 	Records []GetDNSRecordType `pulumi:"records"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Tags    []string           `pulumi:"tags"`
+	Zone    string             `pulumi:"zone"`
 }
-

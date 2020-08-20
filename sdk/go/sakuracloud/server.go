@@ -20,7 +20,7 @@ type Server struct {
 	// The number of virtual CPUs
 	Core pulumi.IntPtrOutput `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description       pulumi.StringPtrOutput           `pulumi:"description"`
 	DiskEditParameter ServerDiskEditParameterPtrOutput `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server
 	Disks pulumi.StringArrayOutput `pulumi:"disks"`
@@ -45,7 +45,7 @@ type Server struct {
 	// The bit length of the subnet assigned to the Server
 	Netmask pulumi.IntOutput `pulumi:"netmask"`
 	// The network address which the `ip_address` belongs
-	NetworkAddress pulumi.StringOutput `pulumi:"networkAddress"`
+	NetworkAddress    pulumi.StringOutput               `pulumi:"networkAddress"`
 	NetworkInterfaces ServerNetworkInterfaceArrayOutput `pulumi:"networkInterfaces"`
 	// The id of the PrivateHost which the Server is assigned
 	PrivateHostId pulumi.StringPtrOutput `pulumi:"privateHostId"`
@@ -92,7 +92,7 @@ type serverState struct {
 	// The number of virtual CPUs
 	Core *int `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description       *string                  `pulumi:"description"`
 	DiskEditParameter *ServerDiskEditParameter `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server
 	Disks []string `pulumi:"disks"`
@@ -117,7 +117,7 @@ type serverState struct {
 	// The bit length of the subnet assigned to the Server
 	Netmask *int `pulumi:"netmask"`
 	// The network address which the `ip_address` belongs
-	NetworkAddress *string `pulumi:"networkAddress"`
+	NetworkAddress    *string                  `pulumi:"networkAddress"`
 	NetworkInterfaces []ServerNetworkInterface `pulumi:"networkInterfaces"`
 	// The id of the PrivateHost which the Server is assigned
 	PrivateHostId *string `pulumi:"privateHostId"`
@@ -137,7 +137,7 @@ type ServerState struct {
 	// The number of virtual CPUs
 	Core pulumi.IntPtrInput
 	// The description of the Server. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrInput
+	Description       pulumi.StringPtrInput
 	DiskEditParameter ServerDiskEditParameterPtrInput
 	// A list of disk id connected to the server
 	Disks pulumi.StringArrayInput
@@ -162,7 +162,7 @@ type ServerState struct {
 	// The bit length of the subnet assigned to the Server
 	Netmask pulumi.IntPtrInput
 	// The network address which the `ip_address` belongs
-	NetworkAddress pulumi.StringPtrInput
+	NetworkAddress    pulumi.StringPtrInput
 	NetworkInterfaces ServerNetworkInterfaceArrayInput
 	// The id of the PrivateHost which the Server is assigned
 	PrivateHostId pulumi.StringPtrInput
@@ -186,7 +186,7 @@ type serverArgs struct {
 	// The number of virtual CPUs
 	Core *int `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description       *string                  `pulumi:"description"`
 	DiskEditParameter *ServerDiskEditParameter `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server
 	Disks []string `pulumi:"disks"`
@@ -199,7 +199,7 @@ type serverArgs struct {
 	// The size of memory in GiB
 	Memory *int `pulumi:"memory"`
 	// The name of the Server. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name              *string                  `pulumi:"name"`
 	NetworkInterfaces []ServerNetworkInterface `pulumi:"networkInterfaces"`
 	// The id of the PrivateHost which the Server is assigned
 	PrivateHostId *string `pulumi:"privateHostId"`
@@ -218,7 +218,7 @@ type ServerArgs struct {
 	// The number of virtual CPUs
 	Core pulumi.IntPtrInput
 	// The description of the Server. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrInput
+	Description       pulumi.StringPtrInput
 	DiskEditParameter ServerDiskEditParameterPtrInput
 	// A list of disk id connected to the server
 	Disks pulumi.StringArrayInput
@@ -231,7 +231,7 @@ type ServerArgs struct {
 	// The size of memory in GiB
 	Memory pulumi.IntPtrInput
 	// The name of the Server. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
 	NetworkInterfaces ServerNetworkInterfaceArrayInput
 	// The id of the PrivateHost which the Server is assigned
 	PrivateHostId pulumi.StringPtrInput
@@ -244,4 +244,3 @@ type ServerArgs struct {
 func (ServerArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*serverArgs)(nil)).Elem()
 }
-

@@ -102,4 +102,3 @@ type SSHKeyArgs struct {
 func (SSHKeyArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*sshkeyArgs)(nil)).Elem()
 }
-

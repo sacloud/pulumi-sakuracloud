@@ -20,36 +20,34 @@ func LookupVPCRouter(ctx *pulumi.Context, args *LookupVPCRouterArgs, opts ...pul
 // A collection of arguments for invoking getVPCRouter.
 type LookupVPCRouterArgs struct {
 	Filter *GetVPCRouterFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string             `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getVPCRouter.
 type LookupVPCRouterResult struct {
-	Description string `pulumi:"description"`
-	DhcpServers []GetVPCRouterDhcpServer `pulumi:"dhcpServers"`
+	Description        string                          `pulumi:"description"`
+	DhcpServers        []GetVPCRouterDhcpServer        `pulumi:"dhcpServers"`
 	DhcpStaticMappings []GetVPCRouterDhcpStaticMapping `pulumi:"dhcpStaticMappings"`
-	Filter *GetVPCRouterFilter `pulumi:"filter"`
-	Firewalls []GetVPCRouterFirewall `pulumi:"firewalls"`
-	IconId string `pulumi:"iconId"`
+	Filter             *GetVPCRouterFilter             `pulumi:"filter"`
+	Firewalls          []GetVPCRouterFirewall          `pulumi:"firewalls"`
+	IconId             string                          `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	InternetConnection bool `pulumi:"internetConnection"`
-	L2tps []GetVPCRouterL2tp `pulumi:"l2tps"`
-	Name string `pulumi:"name"`
-	Plan string `pulumi:"plan"`
-	PortForwardings []GetVPCRouterPortForwarding `pulumi:"portForwardings"`
-	Pptps []GetVPCRouterPptp `pulumi:"pptps"`
+	Id                       string                                `pulumi:"id"`
+	InternetConnection       bool                                  `pulumi:"internetConnection"`
+	L2tps                    []GetVPCRouterL2tp                    `pulumi:"l2tps"`
+	Name                     string                                `pulumi:"name"`
+	Plan                     string                                `pulumi:"plan"`
+	PortForwardings          []GetVPCRouterPortForwarding          `pulumi:"portForwardings"`
+	Pptps                    []GetVPCRouterPptp                    `pulumi:"pptps"`
 	PrivateNetworkInterfaces []GetVPCRouterPrivateNetworkInterface `pulumi:"privateNetworkInterfaces"`
-	PublicIp string `pulumi:"publicIp"`
-	PublicNetmask int `pulumi:"publicNetmask"`
-	PublicNetworkInterfaces []GetVPCRouterPublicNetworkInterface `pulumi:"publicNetworkInterfaces"`
-	SiteToSiteVpns []GetVPCRouterSiteToSiteVpn `pulumi:"siteToSiteVpns"`
-	StaticNats []GetVPCRouterStaticNat `pulumi:"staticNats"`
-	StaticRoutes []GetVPCRouterStaticRoute `pulumi:"staticRoutes"`
-	SyslogHost string `pulumi:"syslogHost"`
-	Tags []string `pulumi:"tags"`
-	Users []GetVPCRouterUser `pulumi:"users"`
-	Zone string `pulumi:"zone"`
+	PublicIp                 string                                `pulumi:"publicIp"`
+	PublicNetmask            int                                   `pulumi:"publicNetmask"`
+	PublicNetworkInterfaces  []GetVPCRouterPublicNetworkInterface  `pulumi:"publicNetworkInterfaces"`
+	SiteToSiteVpns           []GetVPCRouterSiteToSiteVpn           `pulumi:"siteToSiteVpns"`
+	StaticNats               []GetVPCRouterStaticNat               `pulumi:"staticNats"`
+	StaticRoutes             []GetVPCRouterStaticRoute             `pulumi:"staticRoutes"`
+	SyslogHost               string                                `pulumi:"syslogHost"`
+	Tags                     []string                              `pulumi:"tags"`
+	Users                    []GetVPCRouterUser                    `pulumi:"users"`
+	Zone                     string                                `pulumi:"zone"`
 }
-

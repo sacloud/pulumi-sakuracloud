@@ -14,35 +14,35 @@ type VPCRouter struct {
 	pulumi.CustomResourceState
 
 	// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrOutput `pulumi:"description"`
-	DhcpServers VPCRouterDhcpServerArrayOutput `pulumi:"dhcpServers"`
+	Description        pulumi.StringPtrOutput                `pulumi:"description"`
+	DhcpServers        VPCRouterDhcpServerArrayOutput        `pulumi:"dhcpServers"`
 	DhcpStaticMappings VPCRouterDhcpStaticMappingArrayOutput `pulumi:"dhcpStaticMappings"`
-	Firewalls VPCRouterFirewallArrayOutput `pulumi:"firewalls"`
+	Firewalls          VPCRouterFirewallArrayOutput          `pulumi:"firewalls"`
 	// The icon id to attach to the VPCRouter
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The flag to enable connecting to the Internet from the VPC Router
-	InternetConnection pulumi.BoolPtrOutput `pulumi:"internetConnection"`
-	L2tp VPCRouterL2tpPtrOutput `pulumi:"l2tp"`
+	InternetConnection pulumi.BoolPtrOutput   `pulumi:"internetConnection"`
+	L2tp               VPCRouterL2tpPtrOutput `pulumi:"l2tp"`
 	// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
-	Plan pulumi.StringPtrOutput `pulumi:"plan"`
+	Plan            pulumi.StringPtrOutput             `pulumi:"plan"`
 	PortForwardings VPCRouterPortForwardingArrayOutput `pulumi:"portForwardings"`
-	Pptp VPCRouterPptpPtrOutput `pulumi:"pptp"`
+	Pptp            VPCRouterPptpPtrOutput             `pulumi:"pptp"`
 	// A list of additional network interface setting. This doesn't include primary network interface setting
 	PrivateNetworkInterfaces VPCRouterPrivateNetworkInterfaceArrayOutput `pulumi:"privateNetworkInterfaces"`
 	// The public ip address of the VPC Router
 	PublicIp pulumi.StringOutput `pulumi:"publicIp"`
 	// The bit length of the subnet to assign to the public network interface
-	PublicNetmask pulumi.IntOutput `pulumi:"publicNetmask"`
+	PublicNetmask          pulumi.IntOutput                         `pulumi:"publicNetmask"`
 	PublicNetworkInterface VPCRouterPublicNetworkInterfacePtrOutput `pulumi:"publicNetworkInterface"`
-	SiteToSiteVpns VPCRouterSiteToSiteVpnArrayOutput `pulumi:"siteToSiteVpns"`
-	StaticNats VPCRouterStaticNatArrayOutput `pulumi:"staticNats"`
-	StaticRoutes VPCRouterStaticRouteArrayOutput `pulumi:"staticRoutes"`
+	SiteToSiteVpns         VPCRouterSiteToSiteVpnArrayOutput        `pulumi:"siteToSiteVpns"`
+	StaticNats             VPCRouterStaticNatArrayOutput            `pulumi:"staticNats"`
+	StaticRoutes           VPCRouterStaticRouteArrayOutput          `pulumi:"staticRoutes"`
 	// The ip address of the syslog host to which the VPC Router sends logs
 	SyslogHost pulumi.StringPtrOutput `pulumi:"syslogHost"`
 	// Any tags to assign to the VPCRouter
-	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	Tags  pulumi.StringArrayOutput `pulumi:"tags"`
 	Users VPCRouterUserArrayOutput `pulumi:"users"`
 	// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringOutput `pulumi:"zone"`
@@ -77,35 +77,35 @@ func GetVPCRouter(ctx *pulumi.Context,
 // Input properties used for looking up and filtering VPCRouter resources.
 type vpcrouterState struct {
 	// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
-	DhcpServers []VPCRouterDhcpServer `pulumi:"dhcpServers"`
+	Description        *string                      `pulumi:"description"`
+	DhcpServers        []VPCRouterDhcpServer        `pulumi:"dhcpServers"`
 	DhcpStaticMappings []VPCRouterDhcpStaticMapping `pulumi:"dhcpStaticMappings"`
-	Firewalls []VPCRouterFirewall `pulumi:"firewalls"`
+	Firewalls          []VPCRouterFirewall          `pulumi:"firewalls"`
 	// The icon id to attach to the VPCRouter
 	IconId *string `pulumi:"iconId"`
 	// The flag to enable connecting to the Internet from the VPC Router
-	InternetConnection *bool `pulumi:"internetConnection"`
-	L2tp *VPCRouterL2tp `pulumi:"l2tp"`
+	InternetConnection *bool          `pulumi:"internetConnection"`
+	L2tp               *VPCRouterL2tp `pulumi:"l2tp"`
 	// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
 	Name *string `pulumi:"name"`
 	// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
-	Plan *string `pulumi:"plan"`
+	Plan            *string                   `pulumi:"plan"`
 	PortForwardings []VPCRouterPortForwarding `pulumi:"portForwardings"`
-	Pptp *VPCRouterPptp `pulumi:"pptp"`
+	Pptp            *VPCRouterPptp            `pulumi:"pptp"`
 	// A list of additional network interface setting. This doesn't include primary network interface setting
 	PrivateNetworkInterfaces []VPCRouterPrivateNetworkInterface `pulumi:"privateNetworkInterfaces"`
 	// The public ip address of the VPC Router
 	PublicIp *string `pulumi:"publicIp"`
 	// The bit length of the subnet to assign to the public network interface
-	PublicNetmask *int `pulumi:"publicNetmask"`
+	PublicNetmask          *int                             `pulumi:"publicNetmask"`
 	PublicNetworkInterface *VPCRouterPublicNetworkInterface `pulumi:"publicNetworkInterface"`
-	SiteToSiteVpns []VPCRouterSiteToSiteVpn `pulumi:"siteToSiteVpns"`
-	StaticNats []VPCRouterStaticNat `pulumi:"staticNats"`
-	StaticRoutes []VPCRouterStaticRoute `pulumi:"staticRoutes"`
+	SiteToSiteVpns         []VPCRouterSiteToSiteVpn         `pulumi:"siteToSiteVpns"`
+	StaticNats             []VPCRouterStaticNat             `pulumi:"staticNats"`
+	StaticRoutes           []VPCRouterStaticRoute           `pulumi:"staticRoutes"`
 	// The ip address of the syslog host to which the VPC Router sends logs
 	SyslogHost *string `pulumi:"syslogHost"`
 	// Any tags to assign to the VPCRouter
-	Tags []string `pulumi:"tags"`
+	Tags  []string        `pulumi:"tags"`
 	Users []VPCRouterUser `pulumi:"users"`
 	// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -113,35 +113,35 @@ type vpcrouterState struct {
 
 type VPCRouterState struct {
 	// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrInput
-	DhcpServers VPCRouterDhcpServerArrayInput
+	Description        pulumi.StringPtrInput
+	DhcpServers        VPCRouterDhcpServerArrayInput
 	DhcpStaticMappings VPCRouterDhcpStaticMappingArrayInput
-	Firewalls VPCRouterFirewallArrayInput
+	Firewalls          VPCRouterFirewallArrayInput
 	// The icon id to attach to the VPCRouter
 	IconId pulumi.StringPtrInput
 	// The flag to enable connecting to the Internet from the VPC Router
 	InternetConnection pulumi.BoolPtrInput
-	L2tp VPCRouterL2tpPtrInput
+	L2tp               VPCRouterL2tpPtrInput
 	// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
 	Name pulumi.StringPtrInput
 	// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
-	Plan pulumi.StringPtrInput
+	Plan            pulumi.StringPtrInput
 	PortForwardings VPCRouterPortForwardingArrayInput
-	Pptp VPCRouterPptpPtrInput
+	Pptp            VPCRouterPptpPtrInput
 	// A list of additional network interface setting. This doesn't include primary network interface setting
 	PrivateNetworkInterfaces VPCRouterPrivateNetworkInterfaceArrayInput
 	// The public ip address of the VPC Router
 	PublicIp pulumi.StringPtrInput
 	// The bit length of the subnet to assign to the public network interface
-	PublicNetmask pulumi.IntPtrInput
+	PublicNetmask          pulumi.IntPtrInput
 	PublicNetworkInterface VPCRouterPublicNetworkInterfacePtrInput
-	SiteToSiteVpns VPCRouterSiteToSiteVpnArrayInput
-	StaticNats VPCRouterStaticNatArrayInput
-	StaticRoutes VPCRouterStaticRouteArrayInput
+	SiteToSiteVpns         VPCRouterSiteToSiteVpnArrayInput
+	StaticNats             VPCRouterStaticNatArrayInput
+	StaticRoutes           VPCRouterStaticRouteArrayInput
 	// The ip address of the syslog host to which the VPC Router sends logs
 	SyslogHost pulumi.StringPtrInput
 	// Any tags to assign to the VPCRouter
-	Tags pulumi.StringArrayInput
+	Tags  pulumi.StringArrayInput
 	Users VPCRouterUserArrayInput
 	// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringPtrInput
@@ -153,31 +153,31 @@ func (VPCRouterState) ElementType() reflect.Type {
 
 type vpcrouterArgs struct {
 	// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
-	DhcpServers []VPCRouterDhcpServer `pulumi:"dhcpServers"`
+	Description        *string                      `pulumi:"description"`
+	DhcpServers        []VPCRouterDhcpServer        `pulumi:"dhcpServers"`
 	DhcpStaticMappings []VPCRouterDhcpStaticMapping `pulumi:"dhcpStaticMappings"`
-	Firewalls []VPCRouterFirewall `pulumi:"firewalls"`
+	Firewalls          []VPCRouterFirewall          `pulumi:"firewalls"`
 	// The icon id to attach to the VPCRouter
 	IconId *string `pulumi:"iconId"`
 	// The flag to enable connecting to the Internet from the VPC Router
-	InternetConnection *bool `pulumi:"internetConnection"`
-	L2tp *VPCRouterL2tp `pulumi:"l2tp"`
+	InternetConnection *bool          `pulumi:"internetConnection"`
+	L2tp               *VPCRouterL2tp `pulumi:"l2tp"`
 	// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
 	Name *string `pulumi:"name"`
 	// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
-	Plan *string `pulumi:"plan"`
+	Plan            *string                   `pulumi:"plan"`
 	PortForwardings []VPCRouterPortForwarding `pulumi:"portForwardings"`
-	Pptp *VPCRouterPptp `pulumi:"pptp"`
+	Pptp            *VPCRouterPptp            `pulumi:"pptp"`
 	// A list of additional network interface setting. This doesn't include primary network interface setting
 	PrivateNetworkInterfaces []VPCRouterPrivateNetworkInterface `pulumi:"privateNetworkInterfaces"`
-	PublicNetworkInterface *VPCRouterPublicNetworkInterface `pulumi:"publicNetworkInterface"`
-	SiteToSiteVpns []VPCRouterSiteToSiteVpn `pulumi:"siteToSiteVpns"`
-	StaticNats []VPCRouterStaticNat `pulumi:"staticNats"`
-	StaticRoutes []VPCRouterStaticRoute `pulumi:"staticRoutes"`
+	PublicNetworkInterface   *VPCRouterPublicNetworkInterface   `pulumi:"publicNetworkInterface"`
+	SiteToSiteVpns           []VPCRouterSiteToSiteVpn           `pulumi:"siteToSiteVpns"`
+	StaticNats               []VPCRouterStaticNat               `pulumi:"staticNats"`
+	StaticRoutes             []VPCRouterStaticRoute             `pulumi:"staticRoutes"`
 	// The ip address of the syslog host to which the VPC Router sends logs
 	SyslogHost *string `pulumi:"syslogHost"`
 	// Any tags to assign to the VPCRouter
-	Tags []string `pulumi:"tags"`
+	Tags  []string        `pulumi:"tags"`
 	Users []VPCRouterUser `pulumi:"users"`
 	// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -186,31 +186,31 @@ type vpcrouterArgs struct {
 // The set of arguments for constructing a VPCRouter resource.
 type VPCRouterArgs struct {
 	// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
-	Description pulumi.StringPtrInput
-	DhcpServers VPCRouterDhcpServerArrayInput
+	Description        pulumi.StringPtrInput
+	DhcpServers        VPCRouterDhcpServerArrayInput
 	DhcpStaticMappings VPCRouterDhcpStaticMappingArrayInput
-	Firewalls VPCRouterFirewallArrayInput
+	Firewalls          VPCRouterFirewallArrayInput
 	// The icon id to attach to the VPCRouter
 	IconId pulumi.StringPtrInput
 	// The flag to enable connecting to the Internet from the VPC Router
 	InternetConnection pulumi.BoolPtrInput
-	L2tp VPCRouterL2tpPtrInput
+	L2tp               VPCRouterL2tpPtrInput
 	// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
 	Name pulumi.StringPtrInput
 	// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
-	Plan pulumi.StringPtrInput
+	Plan            pulumi.StringPtrInput
 	PortForwardings VPCRouterPortForwardingArrayInput
-	Pptp VPCRouterPptpPtrInput
+	Pptp            VPCRouterPptpPtrInput
 	// A list of additional network interface setting. This doesn't include primary network interface setting
 	PrivateNetworkInterfaces VPCRouterPrivateNetworkInterfaceArrayInput
-	PublicNetworkInterface VPCRouterPublicNetworkInterfacePtrInput
-	SiteToSiteVpns VPCRouterSiteToSiteVpnArrayInput
-	StaticNats VPCRouterStaticNatArrayInput
-	StaticRoutes VPCRouterStaticRouteArrayInput
+	PublicNetworkInterface   VPCRouterPublicNetworkInterfacePtrInput
+	SiteToSiteVpns           VPCRouterSiteToSiteVpnArrayInput
+	StaticNats               VPCRouterStaticNatArrayInput
+	StaticRoutes             VPCRouterStaticRouteArrayInput
 	// The ip address of the syslog host to which the VPC Router sends logs
 	SyslogHost pulumi.StringPtrInput
 	// Any tags to assign to the VPCRouter
-	Tags pulumi.StringArrayInput
+	Tags  pulumi.StringArrayInput
 	Users VPCRouterUserArrayInput
 	// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringPtrInput
@@ -219,4 +219,3 @@ type VPCRouterArgs struct {
 func (VPCRouterArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*vpcrouterArgs)(nil)).Elem()
 }
-

@@ -19,13 +19,13 @@ type LocalRouter struct {
 	// The icon id to attach to the LocalRouter
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name             pulumi.StringOutput               `pulumi:"name"`
 	NetworkInterface LocalRouterNetworkInterfaceOutput `pulumi:"networkInterface"`
-	Peers LocalRouterPeerArrayOutput `pulumi:"peers"`
+	Peers            LocalRouterPeerArrayOutput        `pulumi:"peers"`
 	// A list of secret key used for peering from other LocalRouters
-	SecretKeys pulumi.StringArrayOutput `pulumi:"secretKeys"`
+	SecretKeys   pulumi.StringArrayOutput          `pulumi:"secretKeys"`
 	StaticRoutes LocalRouterStaticRouteArrayOutput `pulumi:"staticRoutes"`
-	Switch LocalRouterSwitchOutput `pulumi:"switch"`
+	Switch       LocalRouterSwitchOutput           `pulumi:"switch"`
 	// Any tags to assign to the LocalRouter
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 }
@@ -69,13 +69,13 @@ type localRouterState struct {
 	// The icon id to attach to the LocalRouter
 	IconId *string `pulumi:"iconId"`
 	// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                      `pulumi:"name"`
 	NetworkInterface *LocalRouterNetworkInterface `pulumi:"networkInterface"`
-	Peers []LocalRouterPeer `pulumi:"peers"`
+	Peers            []LocalRouterPeer            `pulumi:"peers"`
 	// A list of secret key used for peering from other LocalRouters
-	SecretKeys []string `pulumi:"secretKeys"`
+	SecretKeys   []string                 `pulumi:"secretKeys"`
 	StaticRoutes []LocalRouterStaticRoute `pulumi:"staticRoutes"`
-	Switch *LocalRouterSwitch `pulumi:"switch"`
+	Switch       *LocalRouterSwitch       `pulumi:"switch"`
 	// Any tags to assign to the LocalRouter
 	Tags []string `pulumi:"tags"`
 }
@@ -86,13 +86,13 @@ type LocalRouterState struct {
 	// The icon id to attach to the LocalRouter
 	IconId pulumi.StringPtrInput
 	// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface LocalRouterNetworkInterfacePtrInput
-	Peers LocalRouterPeerArrayInput
+	Peers            LocalRouterPeerArrayInput
 	// A list of secret key used for peering from other LocalRouters
-	SecretKeys pulumi.StringArrayInput
+	SecretKeys   pulumi.StringArrayInput
 	StaticRoutes LocalRouterStaticRouteArrayInput
-	Switch LocalRouterSwitchPtrInput
+	Switch       LocalRouterSwitchPtrInput
 	// Any tags to assign to the LocalRouter
 	Tags pulumi.StringArrayInput
 }
@@ -107,11 +107,11 @@ type localRouterArgs struct {
 	// The icon id to attach to the LocalRouter
 	IconId *string `pulumi:"iconId"`
 	// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                     `pulumi:"name"`
 	NetworkInterface LocalRouterNetworkInterface `pulumi:"networkInterface"`
-	Peers []LocalRouterPeer `pulumi:"peers"`
-	StaticRoutes []LocalRouterStaticRoute `pulumi:"staticRoutes"`
-	Switch LocalRouterSwitch `pulumi:"switch"`
+	Peers            []LocalRouterPeer           `pulumi:"peers"`
+	StaticRoutes     []LocalRouterStaticRoute    `pulumi:"staticRoutes"`
+	Switch           LocalRouterSwitch           `pulumi:"switch"`
 	// Any tags to assign to the LocalRouter
 	Tags []string `pulumi:"tags"`
 }
@@ -123,11 +123,11 @@ type LocalRouterArgs struct {
 	// The icon id to attach to the LocalRouter
 	IconId pulumi.StringPtrInput
 	// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface LocalRouterNetworkInterfaceInput
-	Peers LocalRouterPeerArrayInput
-	StaticRoutes LocalRouterStaticRouteArrayInput
-	Switch LocalRouterSwitchInput
+	Peers            LocalRouterPeerArrayInput
+	StaticRoutes     LocalRouterStaticRouteArrayInput
+	Switch           LocalRouterSwitchInput
 	// Any tags to assign to the LocalRouter
 	Tags pulumi.StringArrayInput
 }
@@ -135,4 +135,3 @@ type LocalRouterArgs struct {
 func (LocalRouterArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*localRouterArgs)(nil)).Elem()
 }
-

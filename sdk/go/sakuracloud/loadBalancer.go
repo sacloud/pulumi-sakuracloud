@@ -19,12 +19,12 @@ type LoadBalancer struct {
 	// The icon id to attach to the LoadBalancer
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name             pulumi.StringOutput                `pulumi:"name"`
 	NetworkInterface LoadBalancerNetworkInterfaceOutput `pulumi:"networkInterface"`
 	// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
 	Plan pulumi.StringPtrOutput `pulumi:"plan"`
 	// Any tags to assign to the LoadBalancer
-	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	Tags pulumi.StringArrayOutput   `pulumi:"tags"`
 	Vips LoadBalancerVipArrayOutput `pulumi:"vips"`
 	// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
 	Zone pulumi.StringOutput `pulumi:"zone"`
@@ -66,12 +66,12 @@ type loadBalancerState struct {
 	// The icon id to attach to the LoadBalancer
 	IconId *string `pulumi:"iconId"`
 	// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                       `pulumi:"name"`
 	NetworkInterface *LoadBalancerNetworkInterface `pulumi:"networkInterface"`
 	// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
 	Plan *string `pulumi:"plan"`
 	// Any tags to assign to the LoadBalancer
-	Tags []string `pulumi:"tags"`
+	Tags []string          `pulumi:"tags"`
 	Vips []LoadBalancerVip `pulumi:"vips"`
 	// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -83,7 +83,7 @@ type LoadBalancerState struct {
 	// The icon id to attach to the LoadBalancer
 	IconId pulumi.StringPtrInput
 	// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface LoadBalancerNetworkInterfacePtrInput
 	// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
 	Plan pulumi.StringPtrInput
@@ -104,12 +104,12 @@ type loadBalancerArgs struct {
 	// The icon id to attach to the LoadBalancer
 	IconId *string `pulumi:"iconId"`
 	// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name             *string                      `pulumi:"name"`
 	NetworkInterface LoadBalancerNetworkInterface `pulumi:"networkInterface"`
 	// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
 	Plan *string `pulumi:"plan"`
 	// Any tags to assign to the LoadBalancer
-	Tags []string `pulumi:"tags"`
+	Tags []string          `pulumi:"tags"`
 	Vips []LoadBalancerVip `pulumi:"vips"`
 	// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
 	Zone *string `pulumi:"zone"`
@@ -122,7 +122,7 @@ type LoadBalancerArgs struct {
 	// The icon id to attach to the LoadBalancer
 	IconId pulumi.StringPtrInput
 	// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
 	NetworkInterface LoadBalancerNetworkInterfaceInput
 	// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
 	Plan pulumi.StringPtrInput
@@ -136,4 +136,3 @@ type LoadBalancerArgs struct {
 func (LoadBalancerArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*loadBalancerArgs)(nil)).Elem()
 }
-

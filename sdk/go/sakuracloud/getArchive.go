@@ -20,22 +20,20 @@ func LookupArchive(ctx *pulumi.Context, args *LookupArchiveArgs, opts ...pulumi.
 // A collection of arguments for invoking getArchive.
 type LookupArchiveArgs struct {
 	Filter *GetArchiveFilter `pulumi:"filter"`
-	OsType *string `pulumi:"osType"`
-	Zone *string `pulumi:"zone"`
+	OsType *string           `pulumi:"osType"`
+	Zone   *string           `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getArchive.
 type LookupArchiveResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetArchiveFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string            `pulumi:"description"`
+	Filter      *GetArchiveFilter `pulumi:"filter"`
+	IconId      string            `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	OsType *string `pulumi:"osType"`
-	Size int `pulumi:"size"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Id     string   `pulumi:"id"`
+	Name   string   `pulumi:"name"`
+	OsType *string  `pulumi:"osType"`
+	Size   int      `pulumi:"size"`
+	Tags   []string `pulumi:"tags"`
+	Zone   string   `pulumi:"zone"`
 }
-

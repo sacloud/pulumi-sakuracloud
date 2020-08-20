@@ -92,4 +92,3 @@ type BridgeArgs struct {
 func (BridgeArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*bridgeArgs)(nil)).Elem()
 }
-

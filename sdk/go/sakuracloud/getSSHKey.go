@@ -22,15 +22,13 @@ type LookupSSHKeyArgs struct {
 	Filter *GetSSHKeyFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getSSHKey.
 type LookupSSHKeyResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetSSHKeyFilter `pulumi:"filter"`
-	Fingerprint string `pulumi:"fingerprint"`
+	Description string           `pulumi:"description"`
+	Filter      *GetSSHKeyFilter `pulumi:"filter"`
+	Fingerprint string           `pulumi:"fingerprint"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id        string `pulumi:"id"`
+	Name      string `pulumi:"name"`
 	PublicKey string `pulumi:"publicKey"`
 }
-

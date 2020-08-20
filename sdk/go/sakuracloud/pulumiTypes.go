@@ -12,8 +12,8 @@ import (
 )
 
 type ContainerRegistryUser struct {
-	Name string `pulumi:"name"`
-	Password string `pulumi:"password"`
+	Name       string `pulumi:"name"`
+	Password   string `pulumi:"password"`
 	Permission string `pulumi:"permission"`
 }
 
@@ -25,8 +25,8 @@ type ContainerRegistryUserInput interface {
 }
 
 type ContainerRegistryUserArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
-	Password pulumi.StringInput `pulumi:"password"`
+	Name       pulumi.StringInput `pulumi:"name"`
+	Password   pulumi.StringInput `pulumi:"password"`
 	Permission pulumi.StringInput `pulumi:"permission"`
 }
 
@@ -63,7 +63,7 @@ func (i ContainerRegistryUserArray) ToContainerRegistryUserArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerRegistryUserArrayOutput)
 }
 
-type ContainerRegistryUserOutput struct { *pulumi.OutputState }
+type ContainerRegistryUserOutput struct{ *pulumi.OutputState }
 
 func (ContainerRegistryUserOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ContainerRegistryUser)(nil)).Elem()
@@ -78,18 +78,18 @@ func (o ContainerRegistryUserOutput) ToContainerRegistryUserOutputWithContext(ct
 }
 
 func (o ContainerRegistryUserOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v ContainerRegistryUser) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ContainerRegistryUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o ContainerRegistryUserOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func (v ContainerRegistryUser) string { return v.Password }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ContainerRegistryUser) string { return v.Password }).(pulumi.StringOutput)
 }
 
 func (o ContainerRegistryUserOutput) Permission() pulumi.StringOutput {
-	return o.ApplyT(func (v ContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
 }
 
-type ContainerRegistryUserArrayOutput struct { *pulumi.OutputState}
+type ContainerRegistryUserArrayOutput struct{ *pulumi.OutputState }
 
 func (ContainerRegistryUserArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ContainerRegistryUser)(nil)).Elem()
@@ -104,19 +104,19 @@ func (o ContainerRegistryUserArrayOutput) ToContainerRegistryUserArrayOutputWith
 }
 
 func (o ContainerRegistryUserArrayOutput) Index(i pulumi.IntInput) ContainerRegistryUserOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ContainerRegistryUser {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ContainerRegistryUser {
 		return vs[0].([]ContainerRegistryUser)[vs[1].(int)]
 	}).(ContainerRegistryUserOutput)
 }
 
 type DNSRecordType struct {
-	Name string `pulumi:"name"`
-	Port *int `pulumi:"port"`
-	Priority *int `pulumi:"priority"`
-	Ttl *int `pulumi:"ttl"`
-	Type string `pulumi:"type"`
-	Value string `pulumi:"value"`
-	Weight *int `pulumi:"weight"`
+	Name     string `pulumi:"name"`
+	Port     *int   `pulumi:"port"`
+	Priority *int   `pulumi:"priority"`
+	Ttl      *int   `pulumi:"ttl"`
+	Type     string `pulumi:"type"`
+	Value    string `pulumi:"value"`
+	Weight   *int   `pulumi:"weight"`
 }
 
 type DNSRecordTypeInput interface {
@@ -127,13 +127,13 @@ type DNSRecordTypeInput interface {
 }
 
 type DNSRecordTypeArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
+	Name     pulumi.StringInput `pulumi:"name"`
+	Port     pulumi.IntPtrInput `pulumi:"port"`
 	Priority pulumi.IntPtrInput `pulumi:"priority"`
-	Ttl pulumi.IntPtrInput `pulumi:"ttl"`
-	Type pulumi.StringInput `pulumi:"type"`
-	Value pulumi.StringInput `pulumi:"value"`
-	Weight pulumi.IntPtrInput `pulumi:"weight"`
+	Ttl      pulumi.IntPtrInput `pulumi:"ttl"`
+	Type     pulumi.StringInput `pulumi:"type"`
+	Value    pulumi.StringInput `pulumi:"value"`
+	Weight   pulumi.IntPtrInput `pulumi:"weight"`
 }
 
 func (DNSRecordTypeArgs) ElementType() reflect.Type {
@@ -169,7 +169,7 @@ func (i DNSRecordTypeArray) ToDNSRecordTypeArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(DNSRecordTypeArrayOutput)
 }
 
-type DNSRecordTypeOutput struct { *pulumi.OutputState }
+type DNSRecordTypeOutput struct{ *pulumi.OutputState }
 
 func (DNSRecordTypeOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DNSRecordType)(nil)).Elem()
@@ -184,34 +184,34 @@ func (o DNSRecordTypeOutput) ToDNSRecordTypeOutputWithContext(ctx context.Contex
 }
 
 func (o DNSRecordTypeOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v DNSRecordType) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DNSRecordType) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o DNSRecordTypeOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DNSRecordType) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DNSRecordType) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o DNSRecordTypeOutput) Priority() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DNSRecordType) *int { return v.Priority }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DNSRecordType) *int { return v.Priority }).(pulumi.IntPtrOutput)
 }
 
 func (o DNSRecordTypeOutput) Ttl() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DNSRecordType) *int { return v.Ttl }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DNSRecordType) *int { return v.Ttl }).(pulumi.IntPtrOutput)
 }
 
 func (o DNSRecordTypeOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func (v DNSRecordType) string { return v.Type }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DNSRecordType) string { return v.Type }).(pulumi.StringOutput)
 }
 
 func (o DNSRecordTypeOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func (v DNSRecordType) string { return v.Value }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DNSRecordType) string { return v.Value }).(pulumi.StringOutput)
 }
 
 func (o DNSRecordTypeOutput) Weight() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DNSRecordType) *int { return v.Weight }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DNSRecordType) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
 
-type DNSRecordTypeArrayOutput struct { *pulumi.OutputState}
+type DNSRecordTypeArrayOutput struct{ *pulumi.OutputState }
 
 func (DNSRecordTypeArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]DNSRecordType)(nil)).Elem()
@@ -226,13 +226,13 @@ func (o DNSRecordTypeArrayOutput) ToDNSRecordTypeArrayOutputWithContext(ctx cont
 }
 
 func (o DNSRecordTypeArrayOutput) Index(i pulumi.IntInput) DNSRecordTypeOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) DNSRecordType {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DNSRecordType {
 		return vs[0].([]DNSRecordType)[vs[1].(int)]
 	}).(DNSRecordTypeOutput)
 }
 
 type DatabaseBackup struct {
-	Time *string `pulumi:"time"`
+	Time     *string  `pulumi:"time"`
 	Weekdays []string `pulumi:"weekdays"`
 }
 
@@ -244,7 +244,7 @@ type DatabaseBackupInput interface {
 }
 
 type DatabaseBackupArgs struct {
-	Time pulumi.StringPtrInput `pulumi:"time"`
+	Time     pulumi.StringPtrInput   `pulumi:"time"`
 	Weekdays pulumi.StringArrayInput `pulumi:"weekdays"`
 }
 
@@ -277,7 +277,8 @@ type DatabaseBackupPtrInput interface {
 
 type databaseBackupPtrType DatabaseBackupArgs
 
-func DatabaseBackupPtr(v *DatabaseBackupArgs) DatabaseBackupPtrInput {	return (*databaseBackupPtrType)(v)
+func DatabaseBackupPtr(v *DatabaseBackupArgs) DatabaseBackupPtrInput {
+	return (*databaseBackupPtrType)(v)
 }
 
 func (*databaseBackupPtrType) ElementType() reflect.Type {
@@ -292,7 +293,7 @@ func (i *databaseBackupPtrType) ToDatabaseBackupPtrOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(DatabaseBackupPtrOutput)
 }
 
-type DatabaseBackupOutput struct { *pulumi.OutputState }
+type DatabaseBackupOutput struct{ *pulumi.OutputState }
 
 func (DatabaseBackupOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DatabaseBackup)(nil)).Elem()
@@ -316,14 +317,14 @@ func (o DatabaseBackupOutput) ToDatabaseBackupPtrOutputWithContext(ctx context.C
 	}).(DatabaseBackupPtrOutput)
 }
 func (o DatabaseBackupOutput) Time() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseBackup) *string { return v.Time }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseBackup) *string { return v.Time }).(pulumi.StringPtrOutput)
 }
 
 func (o DatabaseBackupOutput) Weekdays() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
 }
 
-type DatabaseBackupPtrOutput struct { *pulumi.OutputState}
+type DatabaseBackupPtrOutput struct{ *pulumi.OutputState }
 
 func (DatabaseBackupPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**DatabaseBackup)(nil)).Elem()
@@ -338,24 +339,24 @@ func (o DatabaseBackupPtrOutput) ToDatabaseBackupPtrOutputWithContext(ctx contex
 }
 
 func (o DatabaseBackupPtrOutput) Elem() DatabaseBackupOutput {
-	return o.ApplyT(func (v *DatabaseBackup) DatabaseBackup { return *v }).(DatabaseBackupOutput)
+	return o.ApplyT(func(v *DatabaseBackup) DatabaseBackup { return *v }).(DatabaseBackupOutput)
 }
 
 func (o DatabaseBackupPtrOutput) Time() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseBackup) *string { return v.Time }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseBackup) *string { return v.Time }).(pulumi.StringPtrOutput)
 }
 
 func (o DatabaseBackupPtrOutput) Weekdays() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
 }
 
 type DatabaseNetworkInterface struct {
-	Gateway string `pulumi:"gateway"`
-	IpAddress string `pulumi:"ipAddress"`
-	Netmask int `pulumi:"netmask"`
-	Port *int `pulumi:"port"`
+	Gateway      string   `pulumi:"gateway"`
+	IpAddress    string   `pulumi:"ipAddress"`
+	Netmask      int      `pulumi:"netmask"`
+	Port         *int     `pulumi:"port"`
 	SourceRanges []string `pulumi:"sourceRanges"`
-	SwitchId string `pulumi:"switchId"`
+	SwitchId     string   `pulumi:"switchId"`
 }
 
 type DatabaseNetworkInterfaceInput interface {
@@ -366,12 +367,12 @@ type DatabaseNetworkInterfaceInput interface {
 }
 
 type DatabaseNetworkInterfaceArgs struct {
-	Gateway pulumi.StringInput `pulumi:"gateway"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
+	Gateway      pulumi.StringInput      `pulumi:"gateway"`
+	IpAddress    pulumi.StringInput      `pulumi:"ipAddress"`
+	Netmask      pulumi.IntInput         `pulumi:"netmask"`
+	Port         pulumi.IntPtrInput      `pulumi:"port"`
 	SourceRanges pulumi.StringArrayInput `pulumi:"sourceRanges"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
+	SwitchId     pulumi.StringInput      `pulumi:"switchId"`
 }
 
 func (DatabaseNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -403,7 +404,8 @@ type DatabaseNetworkInterfacePtrInput interface {
 
 type databaseNetworkInterfacePtrType DatabaseNetworkInterfaceArgs
 
-func DatabaseNetworkInterfacePtr(v *DatabaseNetworkInterfaceArgs) DatabaseNetworkInterfacePtrInput {	return (*databaseNetworkInterfacePtrType)(v)
+func DatabaseNetworkInterfacePtr(v *DatabaseNetworkInterfaceArgs) DatabaseNetworkInterfacePtrInput {
+	return (*databaseNetworkInterfacePtrType)(v)
 }
 
 func (*databaseNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -418,7 +420,7 @@ func (i *databaseNetworkInterfacePtrType) ToDatabaseNetworkInterfacePtrOutputWit
 	return pulumi.ToOutputWithContext(ctx, i).(DatabaseNetworkInterfacePtrOutput)
 }
 
-type DatabaseNetworkInterfaceOutput struct { *pulumi.OutputState }
+type DatabaseNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (DatabaseNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DatabaseNetworkInterface)(nil)).Elem()
@@ -442,30 +444,30 @@ func (o DatabaseNetworkInterfaceOutput) ToDatabaseNetworkInterfacePtrOutputWithC
 	}).(DatabaseNetworkInterfacePtrOutput)
 }
 func (o DatabaseNetworkInterfaceOutput) Gateway() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
 }
 
 func (o DatabaseNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o DatabaseNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o DatabaseNetworkInterfaceOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o DatabaseNetworkInterfaceOutput) SourceRanges() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
 }
 
 func (o DatabaseNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
-type DatabaseNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type DatabaseNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (DatabaseNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**DatabaseNetworkInterface)(nil)).Elem()
@@ -480,39 +482,39 @@ func (o DatabaseNetworkInterfacePtrOutput) ToDatabaseNetworkInterfacePtrOutputWi
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) Elem() DatabaseNetworkInterfaceOutput {
-	return o.ApplyT(func (v *DatabaseNetworkInterface) DatabaseNetworkInterface { return *v }).(DatabaseNetworkInterfaceOutput)
+	return o.ApplyT(func(v *DatabaseNetworkInterface) DatabaseNetworkInterface { return *v }).(DatabaseNetworkInterfaceOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) Gateway() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) SourceRanges() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 type DatabaseReadReplicaNetworkInterface struct {
-	Gateway *string `pulumi:"gateway"`
-	IpAddress string `pulumi:"ipAddress"`
-	Netmask *int `pulumi:"netmask"`
+	Gateway      *string  `pulumi:"gateway"`
+	IpAddress    string   `pulumi:"ipAddress"`
+	Netmask      *int     `pulumi:"netmask"`
 	SourceRanges []string `pulumi:"sourceRanges"`
-	SwitchId *string `pulumi:"switchId"`
+	SwitchId     *string  `pulumi:"switchId"`
 }
 
 type DatabaseReadReplicaNetworkInterfaceInput interface {
@@ -523,11 +525,11 @@ type DatabaseReadReplicaNetworkInterfaceInput interface {
 }
 
 type DatabaseReadReplicaNetworkInterfaceArgs struct {
-	Gateway pulumi.StringPtrInput `pulumi:"gateway"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntPtrInput `pulumi:"netmask"`
+	Gateway      pulumi.StringPtrInput   `pulumi:"gateway"`
+	IpAddress    pulumi.StringInput      `pulumi:"ipAddress"`
+	Netmask      pulumi.IntPtrInput      `pulumi:"netmask"`
 	SourceRanges pulumi.StringArrayInput `pulumi:"sourceRanges"`
-	SwitchId pulumi.StringPtrInput `pulumi:"switchId"`
+	SwitchId     pulumi.StringPtrInput   `pulumi:"switchId"`
 }
 
 func (DatabaseReadReplicaNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -559,7 +561,8 @@ type DatabaseReadReplicaNetworkInterfacePtrInput interface {
 
 type databaseReadReplicaNetworkInterfacePtrType DatabaseReadReplicaNetworkInterfaceArgs
 
-func DatabaseReadReplicaNetworkInterfacePtr(v *DatabaseReadReplicaNetworkInterfaceArgs) DatabaseReadReplicaNetworkInterfacePtrInput {	return (*databaseReadReplicaNetworkInterfacePtrType)(v)
+func DatabaseReadReplicaNetworkInterfacePtr(v *DatabaseReadReplicaNetworkInterfaceArgs) DatabaseReadReplicaNetworkInterfacePtrInput {
+	return (*databaseReadReplicaNetworkInterfacePtrType)(v)
 }
 
 func (*databaseReadReplicaNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -574,7 +577,7 @@ func (i *databaseReadReplicaNetworkInterfacePtrType) ToDatabaseReadReplicaNetwor
 	return pulumi.ToOutputWithContext(ctx, i).(DatabaseReadReplicaNetworkInterfacePtrOutput)
 }
 
-type DatabaseReadReplicaNetworkInterfaceOutput struct { *pulumi.OutputState }
+type DatabaseReadReplicaNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (DatabaseReadReplicaNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DatabaseReadReplicaNetworkInterface)(nil)).Elem()
@@ -598,26 +601,26 @@ func (o DatabaseReadReplicaNetworkInterfaceOutput) ToDatabaseReadReplicaNetworkI
 	}).(DatabaseReadReplicaNetworkInterfacePtrOutput)
 }
 func (o DatabaseReadReplicaNetworkInterfaceOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfaceOutput) Netmask() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *int { return v.Netmask }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *int { return v.Netmask }).(pulumi.IntPtrOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfaceOutput) SourceRanges() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfaceOutput) SwitchId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
 }
 
-type DatabaseReadReplicaNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type DatabaseReadReplicaNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (DatabaseReadReplicaNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**DatabaseReadReplicaNetworkInterface)(nil)).Elem()
@@ -632,36 +635,36 @@ func (o DatabaseReadReplicaNetworkInterfacePtrOutput) ToDatabaseReadReplicaNetwo
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) Elem() DatabaseReadReplicaNetworkInterfaceOutput {
-	return o.ApplyT(func (v *DatabaseReadReplicaNetworkInterface) DatabaseReadReplicaNetworkInterface { return *v }).(DatabaseReadReplicaNetworkInterfaceOutput)
+	return o.ApplyT(func(v *DatabaseReadReplicaNetworkInterface) DatabaseReadReplicaNetworkInterface { return *v }).(DatabaseReadReplicaNetworkInterfaceOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) Netmask() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *int { return v.Netmask }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *int { return v.Netmask }).(pulumi.IntPtrOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) SourceRanges() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) SwitchId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v DatabaseReadReplicaNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
 }
 
 type GSLBHealthCheck struct {
-	DelayLoop *int `pulumi:"delayLoop"`
+	DelayLoop  *int    `pulumi:"delayLoop"`
 	HostHeader *string `pulumi:"hostHeader"`
-	Path *string `pulumi:"path"`
-	Port *int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
-	Status *string `pulumi:"status"`
+	Path       *string `pulumi:"path"`
+	Port       *int    `pulumi:"port"`
+	Protocol   string  `pulumi:"protocol"`
+	Status     *string `pulumi:"status"`
 }
 
 type GSLBHealthCheckInput interface {
@@ -672,12 +675,12 @@ type GSLBHealthCheckInput interface {
 }
 
 type GSLBHealthCheckArgs struct {
-	DelayLoop pulumi.IntPtrInput `pulumi:"delayLoop"`
+	DelayLoop  pulumi.IntPtrInput    `pulumi:"delayLoop"`
 	HostHeader pulumi.StringPtrInput `pulumi:"hostHeader"`
-	Path pulumi.StringPtrInput `pulumi:"path"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Status pulumi.StringPtrInput `pulumi:"status"`
+	Path       pulumi.StringPtrInput `pulumi:"path"`
+	Port       pulumi.IntPtrInput    `pulumi:"port"`
+	Protocol   pulumi.StringInput    `pulumi:"protocol"`
+	Status     pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (GSLBHealthCheckArgs) ElementType() reflect.Type {
@@ -709,7 +712,8 @@ type GSLBHealthCheckPtrInput interface {
 
 type gslbhealthCheckPtrType GSLBHealthCheckArgs
 
-func GSLBHealthCheckPtr(v *GSLBHealthCheckArgs) GSLBHealthCheckPtrInput {	return (*gslbhealthCheckPtrType)(v)
+func GSLBHealthCheckPtr(v *GSLBHealthCheckArgs) GSLBHealthCheckPtrInput {
+	return (*gslbhealthCheckPtrType)(v)
 }
 
 func (*gslbhealthCheckPtrType) ElementType() reflect.Type {
@@ -724,7 +728,7 @@ func (i *gslbhealthCheckPtrType) ToGSLBHealthCheckPtrOutputWithContext(ctx conte
 	return pulumi.ToOutputWithContext(ctx, i).(GSLBHealthCheckPtrOutput)
 }
 
-type GSLBHealthCheckOutput struct { *pulumi.OutputState }
+type GSLBHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (GSLBHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GSLBHealthCheck)(nil)).Elem()
@@ -748,30 +752,30 @@ func (o GSLBHealthCheckOutput) ToGSLBHealthCheckPtrOutputWithContext(ctx context
 	}).(GSLBHealthCheckPtrOutput)
 }
 func (o GSLBHealthCheckOutput) DelayLoop() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
 }
 
 func (o GSLBHealthCheckOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o GSLBHealthCheckOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o GSLBHealthCheckOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o GSLBHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GSLBHealthCheckOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.Status }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-type GSLBHealthCheckPtrOutput struct { *pulumi.OutputState}
+type GSLBHealthCheckPtrOutput struct{ *pulumi.OutputState }
 
 func (GSLBHealthCheckPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**GSLBHealthCheck)(nil)).Elem()
@@ -786,37 +790,37 @@ func (o GSLBHealthCheckPtrOutput) ToGSLBHealthCheckPtrOutputWithContext(ctx cont
 }
 
 func (o GSLBHealthCheckPtrOutput) Elem() GSLBHealthCheckOutput {
-	return o.ApplyT(func (v *GSLBHealthCheck) GSLBHealthCheck { return *v }).(GSLBHealthCheckOutput)
+	return o.ApplyT(func(v *GSLBHealthCheck) GSLBHealthCheck { return *v }).(GSLBHealthCheckOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) DelayLoop() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GSLBHealthCheckPtrOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GSLBHealthCheck) *string { return v.Status }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GSLBHealthCheck) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
 type GSLBServer struct {
-	Enabled *bool `pulumi:"enabled"`
+	Enabled   *bool  `pulumi:"enabled"`
 	IpAddress string `pulumi:"ipAddress"`
-	Weight *int `pulumi:"weight"`
+	Weight    *int   `pulumi:"weight"`
 }
 
 type GSLBServerInput interface {
@@ -827,9 +831,9 @@ type GSLBServerInput interface {
 }
 
 type GSLBServerArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Weight pulumi.IntPtrInput `pulumi:"weight"`
+	Enabled   pulumi.BoolPtrInput `pulumi:"enabled"`
+	IpAddress pulumi.StringInput  `pulumi:"ipAddress"`
+	Weight    pulumi.IntPtrInput  `pulumi:"weight"`
 }
 
 func (GSLBServerArgs) ElementType() reflect.Type {
@@ -865,7 +869,7 @@ func (i GSLBServerArray) ToGSLBServerArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GSLBServerArrayOutput)
 }
 
-type GSLBServerOutput struct { *pulumi.OutputState }
+type GSLBServerOutput struct{ *pulumi.OutputState }
 
 func (GSLBServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GSLBServer)(nil)).Elem()
@@ -880,18 +884,18 @@ func (o GSLBServerOutput) ToGSLBServerOutputWithContext(ctx context.Context) GSL
 }
 
 func (o GSLBServerOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v GSLBServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v GSLBServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 func (o GSLBServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GSLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GSLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GSLBServerOutput) Weight() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v GSLBServer) *int { return v.Weight }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v GSLBServer) *int { return v.Weight }).(pulumi.IntPtrOutput)
 }
 
-type GSLBServerArrayOutput struct { *pulumi.OutputState}
+type GSLBServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GSLBServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GSLBServer)(nil)).Elem()
@@ -906,17 +910,17 @@ func (o GSLBServerArrayOutput) ToGSLBServerArrayOutputWithContext(ctx context.Co
 }
 
 func (o GSLBServerArrayOutput) Index(i pulumi.IntInput) GSLBServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GSLBServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GSLBServer {
 		return vs[0].([]GSLBServer)[vs[1].(int)]
 	}).(GSLBServerOutput)
 }
 
 type LoadBalancerNetworkInterface struct {
-	Gateway *string `pulumi:"gateway"`
+	Gateway     *string  `pulumi:"gateway"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
-	Vrid int `pulumi:"vrid"`
+	Netmask     int      `pulumi:"netmask"`
+	SwitchId    string   `pulumi:"switchId"`
+	Vrid        int      `pulumi:"vrid"`
 }
 
 type LoadBalancerNetworkInterfaceInput interface {
@@ -927,11 +931,11 @@ type LoadBalancerNetworkInterfaceInput interface {
 }
 
 type LoadBalancerNetworkInterfaceArgs struct {
-	Gateway pulumi.StringPtrInput `pulumi:"gateway"`
+	Gateway     pulumi.StringPtrInput   `pulumi:"gateway"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
-	Vrid pulumi.IntInput `pulumi:"vrid"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	SwitchId    pulumi.StringInput      `pulumi:"switchId"`
+	Vrid        pulumi.IntInput         `pulumi:"vrid"`
 }
 
 func (LoadBalancerNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -963,7 +967,8 @@ type LoadBalancerNetworkInterfacePtrInput interface {
 
 type loadBalancerNetworkInterfacePtrType LoadBalancerNetworkInterfaceArgs
 
-func LoadBalancerNetworkInterfacePtr(v *LoadBalancerNetworkInterfaceArgs) LoadBalancerNetworkInterfacePtrInput {	return (*loadBalancerNetworkInterfacePtrType)(v)
+func LoadBalancerNetworkInterfacePtr(v *LoadBalancerNetworkInterfaceArgs) LoadBalancerNetworkInterfacePtrInput {
+	return (*loadBalancerNetworkInterfacePtrType)(v)
 }
 
 func (*loadBalancerNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -978,7 +983,7 @@ func (i *loadBalancerNetworkInterfacePtrType) ToLoadBalancerNetworkInterfacePtrO
 	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerNetworkInterfacePtrOutput)
 }
 
-type LoadBalancerNetworkInterfaceOutput struct { *pulumi.OutputState }
+type LoadBalancerNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LoadBalancerNetworkInterface)(nil)).Elem()
@@ -1002,26 +1007,26 @@ func (o LoadBalancerNetworkInterfaceOutput) ToLoadBalancerNetworkInterfacePtrOut
 	}).(LoadBalancerNetworkInterfacePtrOutput)
 }
 func (o LoadBalancerNetworkInterfaceOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o LoadBalancerNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o LoadBalancerNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o LoadBalancerNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o LoadBalancerNetworkInterfaceOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
-type LoadBalancerNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type LoadBalancerNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**LoadBalancerNetworkInterface)(nil)).Elem()
@@ -1036,36 +1041,36 @@ func (o LoadBalancerNetworkInterfacePtrOutput) ToLoadBalancerNetworkInterfacePtr
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) Elem() LoadBalancerNetworkInterfaceOutput {
-	return o.ApplyT(func (v *LoadBalancerNetworkInterface) LoadBalancerNetworkInterface { return *v }).(LoadBalancerNetworkInterfaceOutput)
+	return o.ApplyT(func(v *LoadBalancerNetworkInterface) LoadBalancerNetworkInterface { return *v }).(LoadBalancerNetworkInterfaceOutput)
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v LoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
 type LoadBalancerVip struct {
-	DelayLoop *int `pulumi:"delayLoop"`
-	Description *string `pulumi:"description"`
-	Port int `pulumi:"port"`
-	Servers []LoadBalancerVipServer `pulumi:"servers"`
-	SorryServer *string `pulumi:"sorryServer"`
-	Vip string `pulumi:"vip"`
+	DelayLoop   *int                    `pulumi:"delayLoop"`
+	Description *string                 `pulumi:"description"`
+	Port        int                     `pulumi:"port"`
+	Servers     []LoadBalancerVipServer `pulumi:"servers"`
+	SorryServer *string                 `pulumi:"sorryServer"`
+	Vip         string                  `pulumi:"vip"`
 }
 
 type LoadBalancerVipInput interface {
@@ -1076,12 +1081,12 @@ type LoadBalancerVipInput interface {
 }
 
 type LoadBalancerVipArgs struct {
-	DelayLoop pulumi.IntPtrInput `pulumi:"delayLoop"`
-	Description pulumi.StringPtrInput `pulumi:"description"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Servers LoadBalancerVipServerArrayInput `pulumi:"servers"`
-	SorryServer pulumi.StringPtrInput `pulumi:"sorryServer"`
-	Vip pulumi.StringInput `pulumi:"vip"`
+	DelayLoop   pulumi.IntPtrInput              `pulumi:"delayLoop"`
+	Description pulumi.StringPtrInput           `pulumi:"description"`
+	Port        pulumi.IntInput                 `pulumi:"port"`
+	Servers     LoadBalancerVipServerArrayInput `pulumi:"servers"`
+	SorryServer pulumi.StringPtrInput           `pulumi:"sorryServer"`
+	Vip         pulumi.StringInput              `pulumi:"vip"`
 }
 
 func (LoadBalancerVipArgs) ElementType() reflect.Type {
@@ -1117,7 +1122,7 @@ func (i LoadBalancerVipArray) ToLoadBalancerVipArrayOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerVipArrayOutput)
 }
 
-type LoadBalancerVipOutput struct { *pulumi.OutputState }
+type LoadBalancerVipOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerVipOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LoadBalancerVip)(nil)).Elem()
@@ -1132,30 +1137,30 @@ func (o LoadBalancerVipOutput) ToLoadBalancerVipOutputWithContext(ctx context.Co
 }
 
 func (o LoadBalancerVipOutput) DelayLoop() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVip) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVip) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
 }
 
 func (o LoadBalancerVipOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVip) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVip) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o LoadBalancerVipOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v LoadBalancerVip) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LoadBalancerVip) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o LoadBalancerVipOutput) Servers() LoadBalancerVipServerArrayOutput {
-	return o.ApplyT(func (v LoadBalancerVip) []LoadBalancerVipServer { return v.Servers }).(LoadBalancerVipServerArrayOutput)
+	return o.ApplyT(func(v LoadBalancerVip) []LoadBalancerVipServer { return v.Servers }).(LoadBalancerVipServerArrayOutput)
 }
 
 func (o LoadBalancerVipOutput) SorryServer() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVip) *string { return v.SorryServer }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVip) *string { return v.SorryServer }).(pulumi.StringPtrOutput)
 }
 
 func (o LoadBalancerVipOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v LoadBalancerVip) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LoadBalancerVip) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-type LoadBalancerVipArrayOutput struct { *pulumi.OutputState}
+type LoadBalancerVipArrayOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerVipArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]LoadBalancerVip)(nil)).Elem()
@@ -1170,17 +1175,17 @@ func (o LoadBalancerVipArrayOutput) ToLoadBalancerVipArrayOutputWithContext(ctx 
 }
 
 func (o LoadBalancerVipArrayOutput) Index(i pulumi.IntInput) LoadBalancerVipOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) LoadBalancerVip {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LoadBalancerVip {
 		return vs[0].([]LoadBalancerVip)[vs[1].(int)]
 	}).(LoadBalancerVipOutput)
 }
 
 type LoadBalancerVipServer struct {
-	Enabled *bool `pulumi:"enabled"`
-	IpAddress string `pulumi:"ipAddress"`
-	Path *string `pulumi:"path"`
-	Protocol string `pulumi:"protocol"`
-	Status *string `pulumi:"status"`
+	Enabled   *bool   `pulumi:"enabled"`
+	IpAddress string  `pulumi:"ipAddress"`
+	Path      *string `pulumi:"path"`
+	Protocol  string  `pulumi:"protocol"`
+	Status    *string `pulumi:"status"`
 }
 
 type LoadBalancerVipServerInput interface {
@@ -1191,11 +1196,11 @@ type LoadBalancerVipServerInput interface {
 }
 
 type LoadBalancerVipServerArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Path pulumi.StringPtrInput `pulumi:"path"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Status pulumi.StringPtrInput `pulumi:"status"`
+	Enabled   pulumi.BoolPtrInput   `pulumi:"enabled"`
+	IpAddress pulumi.StringInput    `pulumi:"ipAddress"`
+	Path      pulumi.StringPtrInput `pulumi:"path"`
+	Protocol  pulumi.StringInput    `pulumi:"protocol"`
+	Status    pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (LoadBalancerVipServerArgs) ElementType() reflect.Type {
@@ -1231,7 +1236,7 @@ func (i LoadBalancerVipServerArray) ToLoadBalancerVipServerArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(LoadBalancerVipServerArrayOutput)
 }
 
-type LoadBalancerVipServerOutput struct { *pulumi.OutputState }
+type LoadBalancerVipServerOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerVipServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LoadBalancerVipServer)(nil)).Elem()
@@ -1246,26 +1251,26 @@ func (o LoadBalancerVipServerOutput) ToLoadBalancerVipServerOutputWithContext(ct
 }
 
 func (o LoadBalancerVipServerOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVipServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVipServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 func (o LoadBalancerVipServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v LoadBalancerVipServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LoadBalancerVipServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o LoadBalancerVipServerOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVipServer) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVipServer) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o LoadBalancerVipServerOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v LoadBalancerVipServer) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LoadBalancerVipServer) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o LoadBalancerVipServerOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LoadBalancerVipServer) *string { return v.Status }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LoadBalancerVipServer) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-type LoadBalancerVipServerArrayOutput struct { *pulumi.OutputState}
+type LoadBalancerVipServerArrayOutput struct{ *pulumi.OutputState }
 
 func (LoadBalancerVipServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]LoadBalancerVipServer)(nil)).Elem()
@@ -1280,16 +1285,16 @@ func (o LoadBalancerVipServerArrayOutput) ToLoadBalancerVipServerArrayOutputWith
 }
 
 func (o LoadBalancerVipServerArrayOutput) Index(i pulumi.IntInput) LoadBalancerVipServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) LoadBalancerVipServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LoadBalancerVipServer {
 		return vs[0].([]LoadBalancerVipServer)[vs[1].(int)]
 	}).(LoadBalancerVipServerOutput)
 }
 
 type LocalRouterNetworkInterface struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	Vip string `pulumi:"vip"`
-	Vrid int `pulumi:"vrid"`
+	Netmask     int      `pulumi:"netmask"`
+	Vip         string   `pulumi:"vip"`
+	Vrid        int      `pulumi:"vrid"`
 }
 
 type LocalRouterNetworkInterfaceInput interface {
@@ -1301,9 +1306,9 @@ type LocalRouterNetworkInterfaceInput interface {
 
 type LocalRouterNetworkInterfaceArgs struct {
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	Vip pulumi.StringInput `pulumi:"vip"`
-	Vrid pulumi.IntInput `pulumi:"vrid"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	Vip         pulumi.StringInput      `pulumi:"vip"`
+	Vrid        pulumi.IntInput         `pulumi:"vrid"`
 }
 
 func (LocalRouterNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -1335,7 +1340,8 @@ type LocalRouterNetworkInterfacePtrInput interface {
 
 type localRouterNetworkInterfacePtrType LocalRouterNetworkInterfaceArgs
 
-func LocalRouterNetworkInterfacePtr(v *LocalRouterNetworkInterfaceArgs) LocalRouterNetworkInterfacePtrInput {	return (*localRouterNetworkInterfacePtrType)(v)
+func LocalRouterNetworkInterfacePtr(v *LocalRouterNetworkInterfaceArgs) LocalRouterNetworkInterfacePtrInput {
+	return (*localRouterNetworkInterfacePtrType)(v)
 }
 
 func (*localRouterNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -1350,7 +1356,7 @@ func (i *localRouterNetworkInterfacePtrType) ToLocalRouterNetworkInterfacePtrOut
 	return pulumi.ToOutputWithContext(ctx, i).(LocalRouterNetworkInterfacePtrOutput)
 }
 
-type LocalRouterNetworkInterfaceOutput struct { *pulumi.OutputState }
+type LocalRouterNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocalRouterNetworkInterface)(nil)).Elem()
@@ -1374,22 +1380,22 @@ func (o LocalRouterNetworkInterfaceOutput) ToLocalRouterNetworkInterfacePtrOutpu
 	}).(LocalRouterNetworkInterfacePtrOutput)
 }
 func (o LocalRouterNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o LocalRouterNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o LocalRouterNetworkInterfaceOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterNetworkInterfaceOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
-type LocalRouterNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type LocalRouterNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**LocalRouterNetworkInterface)(nil)).Elem()
@@ -1404,30 +1410,30 @@ func (o LocalRouterNetworkInterfacePtrOutput) ToLocalRouterNetworkInterfacePtrOu
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) Elem() LocalRouterNetworkInterfaceOutput {
-	return o.ApplyT(func (v *LocalRouterNetworkInterface) LocalRouterNetworkInterface { return *v }).(LocalRouterNetworkInterfaceOutput)
+	return o.ApplyT(func(v *LocalRouterNetworkInterface) LocalRouterNetworkInterface { return *v }).(LocalRouterNetworkInterfaceOutput)
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v LocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v LocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
 type LocalRouterPeer struct {
 	Description *string `pulumi:"description"`
-	Enabled *bool `pulumi:"enabled"`
-	PeerId string `pulumi:"peerId"`
-	SecretKey string `pulumi:"secretKey"`
+	Enabled     *bool   `pulumi:"enabled"`
+	PeerId      string  `pulumi:"peerId"`
+	SecretKey   string  `pulumi:"secretKey"`
 }
 
 type LocalRouterPeerInput interface {
@@ -1439,9 +1445,9 @@ type LocalRouterPeerInput interface {
 
 type LocalRouterPeerArgs struct {
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
-	PeerId pulumi.StringInput `pulumi:"peerId"`
-	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	Enabled     pulumi.BoolPtrInput   `pulumi:"enabled"`
+	PeerId      pulumi.StringInput    `pulumi:"peerId"`
+	SecretKey   pulumi.StringInput    `pulumi:"secretKey"`
 }
 
 func (LocalRouterPeerArgs) ElementType() reflect.Type {
@@ -1477,7 +1483,7 @@ func (i LocalRouterPeerArray) ToLocalRouterPeerArrayOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(LocalRouterPeerArrayOutput)
 }
 
-type LocalRouterPeerOutput struct { *pulumi.OutputState }
+type LocalRouterPeerOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterPeerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocalRouterPeer)(nil)).Elem()
@@ -1492,22 +1498,22 @@ func (o LocalRouterPeerOutput) ToLocalRouterPeerOutputWithContext(ctx context.Co
 }
 
 func (o LocalRouterPeerOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LocalRouterPeer) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LocalRouterPeer) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o LocalRouterPeerOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v LocalRouterPeer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v LocalRouterPeer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 func (o LocalRouterPeerOutput) PeerId() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterPeer) string { return v.PeerId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterPeer) string { return v.PeerId }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterPeerOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterPeer) string { return v.SecretKey }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterPeer) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-type LocalRouterPeerArrayOutput struct { *pulumi.OutputState}
+type LocalRouterPeerArrayOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterPeerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]LocalRouterPeer)(nil)).Elem()
@@ -1522,14 +1528,14 @@ func (o LocalRouterPeerArrayOutput) ToLocalRouterPeerArrayOutputWithContext(ctx 
 }
 
 func (o LocalRouterPeerArrayOutput) Index(i pulumi.IntInput) LocalRouterPeerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) LocalRouterPeer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LocalRouterPeer {
 		return vs[0].([]LocalRouterPeer)[vs[1].(int)]
 	}).(LocalRouterPeerOutput)
 }
 
 type LocalRouterStaticRoute struct {
 	NextHop string `pulumi:"nextHop"`
-	Prefix string `pulumi:"prefix"`
+	Prefix  string `pulumi:"prefix"`
 }
 
 type LocalRouterStaticRouteInput interface {
@@ -1541,7 +1547,7 @@ type LocalRouterStaticRouteInput interface {
 
 type LocalRouterStaticRouteArgs struct {
 	NextHop pulumi.StringInput `pulumi:"nextHop"`
-	Prefix pulumi.StringInput `pulumi:"prefix"`
+	Prefix  pulumi.StringInput `pulumi:"prefix"`
 }
 
 func (LocalRouterStaticRouteArgs) ElementType() reflect.Type {
@@ -1577,7 +1583,7 @@ func (i LocalRouterStaticRouteArray) ToLocalRouterStaticRouteArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(LocalRouterStaticRouteArrayOutput)
 }
 
-type LocalRouterStaticRouteOutput struct { *pulumi.OutputState }
+type LocalRouterStaticRouteOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterStaticRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocalRouterStaticRoute)(nil)).Elem()
@@ -1592,14 +1598,14 @@ func (o LocalRouterStaticRouteOutput) ToLocalRouterStaticRouteOutputWithContext(
 }
 
 func (o LocalRouterStaticRouteOutput) NextHop() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterStaticRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
-type LocalRouterStaticRouteArrayOutput struct { *pulumi.OutputState}
+type LocalRouterStaticRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterStaticRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]LocalRouterStaticRoute)(nil)).Elem()
@@ -1614,15 +1620,15 @@ func (o LocalRouterStaticRouteArrayOutput) ToLocalRouterStaticRouteArrayOutputWi
 }
 
 func (o LocalRouterStaticRouteArrayOutput) Index(i pulumi.IntInput) LocalRouterStaticRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) LocalRouterStaticRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LocalRouterStaticRoute {
 		return vs[0].([]LocalRouterStaticRoute)[vs[1].(int)]
 	}).(LocalRouterStaticRouteOutput)
 }
 
 type LocalRouterSwitch struct {
 	Category *string `pulumi:"category"`
-	Code string `pulumi:"code"`
-	ZoneId string `pulumi:"zoneId"`
+	Code     string  `pulumi:"code"`
+	ZoneId   string  `pulumi:"zoneId"`
 }
 
 type LocalRouterSwitchInput interface {
@@ -1634,8 +1640,8 @@ type LocalRouterSwitchInput interface {
 
 type LocalRouterSwitchArgs struct {
 	Category pulumi.StringPtrInput `pulumi:"category"`
-	Code pulumi.StringInput `pulumi:"code"`
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	Code     pulumi.StringInput    `pulumi:"code"`
+	ZoneId   pulumi.StringInput    `pulumi:"zoneId"`
 }
 
 func (LocalRouterSwitchArgs) ElementType() reflect.Type {
@@ -1667,7 +1673,8 @@ type LocalRouterSwitchPtrInput interface {
 
 type localRouterSwitchPtrType LocalRouterSwitchArgs
 
-func LocalRouterSwitchPtr(v *LocalRouterSwitchArgs) LocalRouterSwitchPtrInput {	return (*localRouterSwitchPtrType)(v)
+func LocalRouterSwitchPtr(v *LocalRouterSwitchArgs) LocalRouterSwitchPtrInput {
+	return (*localRouterSwitchPtrType)(v)
 }
 
 func (*localRouterSwitchPtrType) ElementType() reflect.Type {
@@ -1682,7 +1689,7 @@ func (i *localRouterSwitchPtrType) ToLocalRouterSwitchPtrOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(LocalRouterSwitchPtrOutput)
 }
 
-type LocalRouterSwitchOutput struct { *pulumi.OutputState }
+type LocalRouterSwitchOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterSwitchOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocalRouterSwitch)(nil)).Elem()
@@ -1706,18 +1713,18 @@ func (o LocalRouterSwitchOutput) ToLocalRouterSwitchPtrOutputWithContext(ctx con
 	}).(LocalRouterSwitchPtrOutput)
 }
 func (o LocalRouterSwitchOutput) Category() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) *string { return v.Category }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) *string { return v.Category }).(pulumi.StringPtrOutput)
 }
 
 func (o LocalRouterSwitchOutput) Code() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterSwitchOutput) ZoneId() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
 }
 
-type LocalRouterSwitchPtrOutput struct { *pulumi.OutputState}
+type LocalRouterSwitchPtrOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterSwitchPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**LocalRouterSwitch)(nil)).Elem()
@@ -1732,25 +1739,25 @@ func (o LocalRouterSwitchPtrOutput) ToLocalRouterSwitchPtrOutputWithContext(ctx 
 }
 
 func (o LocalRouterSwitchPtrOutput) Elem() LocalRouterSwitchOutput {
-	return o.ApplyT(func (v *LocalRouterSwitch) LocalRouterSwitch { return *v }).(LocalRouterSwitchOutput)
+	return o.ApplyT(func(v *LocalRouterSwitch) LocalRouterSwitch { return *v }).(LocalRouterSwitchOutput)
 }
 
 func (o LocalRouterSwitchPtrOutput) Category() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) *string { return v.Category }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) *string { return v.Category }).(pulumi.StringPtrOutput)
 }
 
 func (o LocalRouterSwitchPtrOutput) Code() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
 }
 
 func (o LocalRouterSwitchPtrOutput) ZoneId() pulumi.StringOutput {
-	return o.ApplyT(func (v LocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v LocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
 }
 
 type MobileGatewayPrivateNetworkInterface struct {
 	IpAddress string `pulumi:"ipAddress"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
+	Netmask   int    `pulumi:"netmask"`
+	SwitchId  string `pulumi:"switchId"`
 }
 
 type MobileGatewayPrivateNetworkInterfaceInput interface {
@@ -1762,8 +1769,8 @@ type MobileGatewayPrivateNetworkInterfaceInput interface {
 
 type MobileGatewayPrivateNetworkInterfaceArgs struct {
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
+	Netmask   pulumi.IntInput    `pulumi:"netmask"`
+	SwitchId  pulumi.StringInput `pulumi:"switchId"`
 }
 
 func (MobileGatewayPrivateNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -1795,7 +1802,8 @@ type MobileGatewayPrivateNetworkInterfacePtrInput interface {
 
 type mobileGatewayPrivateNetworkInterfacePtrType MobileGatewayPrivateNetworkInterfaceArgs
 
-func MobileGatewayPrivateNetworkInterfacePtr(v *MobileGatewayPrivateNetworkInterfaceArgs) MobileGatewayPrivateNetworkInterfacePtrInput {	return (*mobileGatewayPrivateNetworkInterfacePtrType)(v)
+func MobileGatewayPrivateNetworkInterfacePtr(v *MobileGatewayPrivateNetworkInterfaceArgs) MobileGatewayPrivateNetworkInterfacePtrInput {
+	return (*mobileGatewayPrivateNetworkInterfacePtrType)(v)
 }
 
 func (*mobileGatewayPrivateNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -1810,7 +1818,7 @@ func (i *mobileGatewayPrivateNetworkInterfacePtrType) ToMobileGatewayPrivateNetw
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewayPrivateNetworkInterfacePtrOutput)
 }
 
-type MobileGatewayPrivateNetworkInterfaceOutput struct { *pulumi.OutputState }
+type MobileGatewayPrivateNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayPrivateNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGatewayPrivateNetworkInterface)(nil)).Elem()
@@ -1834,18 +1842,18 @@ func (o MobileGatewayPrivateNetworkInterfaceOutput) ToMobileGatewayPrivateNetwor
 	}).(MobileGatewayPrivateNetworkInterfacePtrOutput)
 }
 func (o MobileGatewayPrivateNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o MobileGatewayPrivateNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o MobileGatewayPrivateNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
-type MobileGatewayPrivateNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type MobileGatewayPrivateNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayPrivateNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**MobileGatewayPrivateNetworkInterface)(nil)).Elem()
@@ -1860,24 +1868,24 @@ func (o MobileGatewayPrivateNetworkInterfacePtrOutput) ToMobileGatewayPrivateNet
 }
 
 func (o MobileGatewayPrivateNetworkInterfacePtrOutput) Elem() MobileGatewayPrivateNetworkInterfaceOutput {
-	return o.ApplyT(func (v *MobileGatewayPrivateNetworkInterface) MobileGatewayPrivateNetworkInterface { return *v }).(MobileGatewayPrivateNetworkInterfaceOutput)
+	return o.ApplyT(func(v *MobileGatewayPrivateNetworkInterface) MobileGatewayPrivateNetworkInterface { return *v }).(MobileGatewayPrivateNetworkInterfaceOutput)
 }
 
 func (o MobileGatewayPrivateNetworkInterfacePtrOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o MobileGatewayPrivateNetworkInterfacePtrOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o MobileGatewayPrivateNetworkInterfacePtrOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 type MobileGatewaySim struct {
 	IpAddress string `pulumi:"ipAddress"`
-	SimId string `pulumi:"simId"`
+	SimId     string `pulumi:"simId"`
 }
 
 type MobileGatewaySimInput interface {
@@ -1889,7 +1897,7 @@ type MobileGatewaySimInput interface {
 
 type MobileGatewaySimArgs struct {
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	SimId pulumi.StringInput `pulumi:"simId"`
+	SimId     pulumi.StringInput `pulumi:"simId"`
 }
 
 func (MobileGatewaySimArgs) ElementType() reflect.Type {
@@ -1925,7 +1933,7 @@ func (i MobileGatewaySimArray) ToMobileGatewaySimArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewaySimArrayOutput)
 }
 
-type MobileGatewaySimOutput struct { *pulumi.OutputState }
+type MobileGatewaySimOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewaySimOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGatewaySim)(nil)).Elem()
@@ -1940,14 +1948,14 @@ func (o MobileGatewaySimOutput) ToMobileGatewaySimOutputWithContext(ctx context.
 }
 
 func (o MobileGatewaySimOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewaySim) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewaySim) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o MobileGatewaySimOutput) SimId() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewaySim) string { return v.SimId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewaySim) string { return v.SimId }).(pulumi.StringOutput)
 }
 
-type MobileGatewaySimArrayOutput struct { *pulumi.OutputState}
+type MobileGatewaySimArrayOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewaySimArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]MobileGatewaySim)(nil)).Elem()
@@ -1962,14 +1970,14 @@ func (o MobileGatewaySimArrayOutput) ToMobileGatewaySimArrayOutputWithContext(ct
 }
 
 func (o MobileGatewaySimArrayOutput) Index(i pulumi.IntInput) MobileGatewaySimOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) MobileGatewaySim {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MobileGatewaySim {
 		return vs[0].([]MobileGatewaySim)[vs[1].(int)]
 	}).(MobileGatewaySimOutput)
 }
 
 type MobileGatewaySimRoute struct {
 	Prefix string `pulumi:"prefix"`
-	SimId string `pulumi:"simId"`
+	SimId  string `pulumi:"simId"`
 }
 
 type MobileGatewaySimRouteInput interface {
@@ -1981,7 +1989,7 @@ type MobileGatewaySimRouteInput interface {
 
 type MobileGatewaySimRouteArgs struct {
 	Prefix pulumi.StringInput `pulumi:"prefix"`
-	SimId pulumi.StringInput `pulumi:"simId"`
+	SimId  pulumi.StringInput `pulumi:"simId"`
 }
 
 func (MobileGatewaySimRouteArgs) ElementType() reflect.Type {
@@ -2017,7 +2025,7 @@ func (i MobileGatewaySimRouteArray) ToMobileGatewaySimRouteArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewaySimRouteArrayOutput)
 }
 
-type MobileGatewaySimRouteOutput struct { *pulumi.OutputState }
+type MobileGatewaySimRouteOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewaySimRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGatewaySimRoute)(nil)).Elem()
@@ -2032,14 +2040,14 @@ func (o MobileGatewaySimRouteOutput) ToMobileGatewaySimRouteOutputWithContext(ct
 }
 
 func (o MobileGatewaySimRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewaySimRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewaySimRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
 func (o MobileGatewaySimRouteOutput) SimId() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewaySimRoute) string { return v.SimId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewaySimRoute) string { return v.SimId }).(pulumi.StringOutput)
 }
 
-type MobileGatewaySimRouteArrayOutput struct { *pulumi.OutputState}
+type MobileGatewaySimRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewaySimRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]MobileGatewaySimRoute)(nil)).Elem()
@@ -2054,14 +2062,14 @@ func (o MobileGatewaySimRouteArrayOutput) ToMobileGatewaySimRouteArrayOutputWith
 }
 
 func (o MobileGatewaySimRouteArrayOutput) Index(i pulumi.IntInput) MobileGatewaySimRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) MobileGatewaySimRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MobileGatewaySimRoute {
 		return vs[0].([]MobileGatewaySimRoute)[vs[1].(int)]
 	}).(MobileGatewaySimRouteOutput)
 }
 
 type MobileGatewayStaticRoute struct {
 	NextHop string `pulumi:"nextHop"`
-	Prefix string `pulumi:"prefix"`
+	Prefix  string `pulumi:"prefix"`
 }
 
 type MobileGatewayStaticRouteInput interface {
@@ -2073,7 +2081,7 @@ type MobileGatewayStaticRouteInput interface {
 
 type MobileGatewayStaticRouteArgs struct {
 	NextHop pulumi.StringInput `pulumi:"nextHop"`
-	Prefix pulumi.StringInput `pulumi:"prefix"`
+	Prefix  pulumi.StringInput `pulumi:"prefix"`
 }
 
 func (MobileGatewayStaticRouteArgs) ElementType() reflect.Type {
@@ -2109,7 +2117,7 @@ func (i MobileGatewayStaticRouteArray) ToMobileGatewayStaticRouteArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewayStaticRouteArrayOutput)
 }
 
-type MobileGatewayStaticRouteOutput struct { *pulumi.OutputState }
+type MobileGatewayStaticRouteOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayStaticRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGatewayStaticRoute)(nil)).Elem()
@@ -2124,14 +2132,14 @@ func (o MobileGatewayStaticRouteOutput) ToMobileGatewayStaticRouteOutputWithCont
 }
 
 func (o MobileGatewayStaticRouteOutput) NextHop() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
 }
 
 func (o MobileGatewayStaticRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v MobileGatewayStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v MobileGatewayStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
-type MobileGatewayStaticRouteArrayOutput struct { *pulumi.OutputState}
+type MobileGatewayStaticRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayStaticRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]MobileGatewayStaticRoute)(nil)).Elem()
@@ -2146,18 +2154,18 @@ func (o MobileGatewayStaticRouteArrayOutput) ToMobileGatewayStaticRouteArrayOutp
 }
 
 func (o MobileGatewayStaticRouteArrayOutput) Index(i pulumi.IntInput) MobileGatewayStaticRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) MobileGatewayStaticRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MobileGatewayStaticRoute {
 		return vs[0].([]MobileGatewayStaticRoute)[vs[1].(int)]
 	}).(MobileGatewayStaticRouteOutput)
 }
 
 type MobileGatewayTrafficControl struct {
-	AutoTrafficShaping *bool `pulumi:"autoTrafficShaping"`
-	BandWidthLimit *int `pulumi:"bandWidthLimit"`
-	EnableEmail *bool `pulumi:"enableEmail"`
-	EnableSlack *bool `pulumi:"enableSlack"`
-	Quota int `pulumi:"quota"`
-	SlackWebhook *string `pulumi:"slackWebhook"`
+	AutoTrafficShaping *bool   `pulumi:"autoTrafficShaping"`
+	BandWidthLimit     *int    `pulumi:"bandWidthLimit"`
+	EnableEmail        *bool   `pulumi:"enableEmail"`
+	EnableSlack        *bool   `pulumi:"enableSlack"`
+	Quota              int     `pulumi:"quota"`
+	SlackWebhook       *string `pulumi:"slackWebhook"`
 }
 
 type MobileGatewayTrafficControlInput interface {
@@ -2168,12 +2176,12 @@ type MobileGatewayTrafficControlInput interface {
 }
 
 type MobileGatewayTrafficControlArgs struct {
-	AutoTrafficShaping pulumi.BoolPtrInput `pulumi:"autoTrafficShaping"`
-	BandWidthLimit pulumi.IntPtrInput `pulumi:"bandWidthLimit"`
-	EnableEmail pulumi.BoolPtrInput `pulumi:"enableEmail"`
-	EnableSlack pulumi.BoolPtrInput `pulumi:"enableSlack"`
-	Quota pulumi.IntInput `pulumi:"quota"`
-	SlackWebhook pulumi.StringPtrInput `pulumi:"slackWebhook"`
+	AutoTrafficShaping pulumi.BoolPtrInput   `pulumi:"autoTrafficShaping"`
+	BandWidthLimit     pulumi.IntPtrInput    `pulumi:"bandWidthLimit"`
+	EnableEmail        pulumi.BoolPtrInput   `pulumi:"enableEmail"`
+	EnableSlack        pulumi.BoolPtrInput   `pulumi:"enableSlack"`
+	Quota              pulumi.IntInput       `pulumi:"quota"`
+	SlackWebhook       pulumi.StringPtrInput `pulumi:"slackWebhook"`
 }
 
 func (MobileGatewayTrafficControlArgs) ElementType() reflect.Type {
@@ -2205,7 +2213,8 @@ type MobileGatewayTrafficControlPtrInput interface {
 
 type mobileGatewayTrafficControlPtrType MobileGatewayTrafficControlArgs
 
-func MobileGatewayTrafficControlPtr(v *MobileGatewayTrafficControlArgs) MobileGatewayTrafficControlPtrInput {	return (*mobileGatewayTrafficControlPtrType)(v)
+func MobileGatewayTrafficControlPtr(v *MobileGatewayTrafficControlArgs) MobileGatewayTrafficControlPtrInput {
+	return (*mobileGatewayTrafficControlPtrType)(v)
 }
 
 func (*mobileGatewayTrafficControlPtrType) ElementType() reflect.Type {
@@ -2220,7 +2229,7 @@ func (i *mobileGatewayTrafficControlPtrType) ToMobileGatewayTrafficControlPtrOut
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewayTrafficControlPtrOutput)
 }
 
-type MobileGatewayTrafficControlOutput struct { *pulumi.OutputState }
+type MobileGatewayTrafficControlOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayTrafficControlOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGatewayTrafficControl)(nil)).Elem()
@@ -2244,30 +2253,30 @@ func (o MobileGatewayTrafficControlOutput) ToMobileGatewayTrafficControlPtrOutpu
 	}).(MobileGatewayTrafficControlPtrOutput)
 }
 func (o MobileGatewayTrafficControlOutput) AutoTrafficShaping() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.AutoTrafficShaping }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.AutoTrafficShaping }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlOutput) BandWidthLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *int { return v.BandWidthLimit }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *int { return v.BandWidthLimit }).(pulumi.IntPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlOutput) EnableEmail() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.EnableEmail }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.EnableEmail }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlOutput) EnableSlack() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.EnableSlack }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.EnableSlack }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlOutput) Quota() pulumi.IntOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) int { return v.Quota }).(pulumi.IntOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) int { return v.Quota }).(pulumi.IntOutput)
 }
 
 func (o MobileGatewayTrafficControlOutput) SlackWebhook() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *string { return v.SlackWebhook }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *string { return v.SlackWebhook }).(pulumi.StringPtrOutput)
 }
 
-type MobileGatewayTrafficControlPtrOutput struct { *pulumi.OutputState}
+type MobileGatewayTrafficControlPtrOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayTrafficControlPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**MobileGatewayTrafficControl)(nil)).Elem()
@@ -2282,38 +2291,38 @@ func (o MobileGatewayTrafficControlPtrOutput) ToMobileGatewayTrafficControlPtrOu
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) Elem() MobileGatewayTrafficControlOutput {
-	return o.ApplyT(func (v *MobileGatewayTrafficControl) MobileGatewayTrafficControl { return *v }).(MobileGatewayTrafficControlOutput)
+	return o.ApplyT(func(v *MobileGatewayTrafficControl) MobileGatewayTrafficControl { return *v }).(MobileGatewayTrafficControlOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) AutoTrafficShaping() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.AutoTrafficShaping }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.AutoTrafficShaping }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) BandWidthLimit() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *int { return v.BandWidthLimit }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *int { return v.BandWidthLimit }).(pulumi.IntPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) EnableEmail() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.EnableEmail }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.EnableEmail }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) EnableSlack() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *bool { return v.EnableSlack }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *bool { return v.EnableSlack }).(pulumi.BoolPtrOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) Quota() pulumi.IntOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) int { return v.Quota }).(pulumi.IntOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) int { return v.Quota }).(pulumi.IntOutput)
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) SlackWebhook() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v MobileGatewayTrafficControl) *string { return v.SlackWebhook }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v MobileGatewayTrafficControl) *string { return v.SlackWebhook }).(pulumi.StringPtrOutput)
 }
 
 type NFSNetworkInterface struct {
-	Gateway *string `pulumi:"gateway"`
-	IpAddress string `pulumi:"ipAddress"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
+	Gateway   *string `pulumi:"gateway"`
+	IpAddress string  `pulumi:"ipAddress"`
+	Netmask   int     `pulumi:"netmask"`
+	SwitchId  string  `pulumi:"switchId"`
 }
 
 type NFSNetworkInterfaceInput interface {
@@ -2324,10 +2333,10 @@ type NFSNetworkInterfaceInput interface {
 }
 
 type NFSNetworkInterfaceArgs struct {
-	Gateway pulumi.StringPtrInput `pulumi:"gateway"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
+	Gateway   pulumi.StringPtrInput `pulumi:"gateway"`
+	IpAddress pulumi.StringInput    `pulumi:"ipAddress"`
+	Netmask   pulumi.IntInput       `pulumi:"netmask"`
+	SwitchId  pulumi.StringInput    `pulumi:"switchId"`
 }
 
 func (NFSNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -2359,7 +2368,8 @@ type NFSNetworkInterfacePtrInput interface {
 
 type nfsnetworkInterfacePtrType NFSNetworkInterfaceArgs
 
-func NFSNetworkInterfacePtr(v *NFSNetworkInterfaceArgs) NFSNetworkInterfacePtrInput {	return (*nfsnetworkInterfacePtrType)(v)
+func NFSNetworkInterfacePtr(v *NFSNetworkInterfaceArgs) NFSNetworkInterfacePtrInput {
+	return (*nfsnetworkInterfacePtrType)(v)
 }
 
 func (*nfsnetworkInterfacePtrType) ElementType() reflect.Type {
@@ -2374,7 +2384,7 @@ func (i *nfsnetworkInterfacePtrType) ToNFSNetworkInterfacePtrOutputWithContext(c
 	return pulumi.ToOutputWithContext(ctx, i).(NFSNetworkInterfacePtrOutput)
 }
 
-type NFSNetworkInterfaceOutput struct { *pulumi.OutputState }
+type NFSNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (NFSNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*NFSNetworkInterface)(nil)).Elem()
@@ -2398,22 +2408,22 @@ func (o NFSNetworkInterfaceOutput) ToNFSNetworkInterfacePtrOutputWithContext(ctx
 	}).(NFSNetworkInterfacePtrOutput)
 }
 func (o NFSNetworkInterfaceOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o NFSNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o NFSNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o NFSNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
-type NFSNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type NFSNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (NFSNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**NFSNetworkInterface)(nil)).Elem()
@@ -2428,32 +2438,32 @@ func (o NFSNetworkInterfacePtrOutput) ToNFSNetworkInterfacePtrOutputWithContext(
 }
 
 func (o NFSNetworkInterfacePtrOutput) Elem() NFSNetworkInterfaceOutput {
-	return o.ApplyT(func (v *NFSNetworkInterface) NFSNetworkInterface { return *v }).(NFSNetworkInterfaceOutput)
+	return o.ApplyT(func(v *NFSNetworkInterface) NFSNetworkInterface { return *v }).(NFSNetworkInterfaceOutput)
 }
 
 func (o NFSNetworkInterfacePtrOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o NFSNetworkInterfacePtrOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o NFSNetworkInterfacePtrOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o NFSNetworkInterfacePtrOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v NFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v NFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 type PacketFilterExpression struct {
-	Allow *bool `pulumi:"allow"`
-	Description *string `pulumi:"description"`
+	Allow           *bool   `pulumi:"allow"`
+	Description     *string `pulumi:"description"`
 	DestinationPort *string `pulumi:"destinationPort"`
-	Protocol string `pulumi:"protocol"`
-	SourceNetwork *string `pulumi:"sourceNetwork"`
-	SourcePort *string `pulumi:"sourcePort"`
+	Protocol        string  `pulumi:"protocol"`
+	SourceNetwork   *string `pulumi:"sourceNetwork"`
+	SourcePort      *string `pulumi:"sourcePort"`
 }
 
 type PacketFilterExpressionInput interface {
@@ -2464,12 +2474,12 @@ type PacketFilterExpressionInput interface {
 }
 
 type PacketFilterExpressionArgs struct {
-	Allow pulumi.BoolPtrInput `pulumi:"allow"`
-	Description pulumi.StringPtrInput `pulumi:"description"`
+	Allow           pulumi.BoolPtrInput   `pulumi:"allow"`
+	Description     pulumi.StringPtrInput `pulumi:"description"`
 	DestinationPort pulumi.StringPtrInput `pulumi:"destinationPort"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	SourceNetwork pulumi.StringPtrInput `pulumi:"sourceNetwork"`
-	SourcePort pulumi.StringPtrInput `pulumi:"sourcePort"`
+	Protocol        pulumi.StringInput    `pulumi:"protocol"`
+	SourceNetwork   pulumi.StringPtrInput `pulumi:"sourceNetwork"`
+	SourcePort      pulumi.StringPtrInput `pulumi:"sourcePort"`
 }
 
 func (PacketFilterExpressionArgs) ElementType() reflect.Type {
@@ -2505,7 +2515,7 @@ func (i PacketFilterExpressionArray) ToPacketFilterExpressionArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(PacketFilterExpressionArrayOutput)
 }
 
-type PacketFilterExpressionOutput struct { *pulumi.OutputState }
+type PacketFilterExpressionOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterExpressionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*PacketFilterExpression)(nil)).Elem()
@@ -2520,30 +2530,30 @@ func (o PacketFilterExpressionOutput) ToPacketFilterExpressionOutputWithContext(
 }
 
 func (o PacketFilterExpressionOutput) Allow() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v PacketFilterExpression) *bool { return v.Allow }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v PacketFilterExpression) *bool { return v.Allow }).(pulumi.BoolPtrOutput)
 }
 
 func (o PacketFilterExpressionOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterExpressionOutput) DestinationPort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterExpressionOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v PacketFilterExpression) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v PacketFilterExpression) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o PacketFilterExpressionOutput) SourceNetwork() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterExpressionOutput) SourcePort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
 }
 
-type PacketFilterExpressionArrayOutput struct { *pulumi.OutputState}
+type PacketFilterExpressionArrayOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterExpressionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]PacketFilterExpression)(nil)).Elem()
@@ -2558,18 +2568,18 @@ func (o PacketFilterExpressionArrayOutput) ToPacketFilterExpressionArrayOutputWi
 }
 
 func (o PacketFilterExpressionArrayOutput) Index(i pulumi.IntInput) PacketFilterExpressionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) PacketFilterExpression {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PacketFilterExpression {
 		return vs[0].([]PacketFilterExpression)[vs[1].(int)]
 	}).(PacketFilterExpressionOutput)
 }
 
 type PacketFilterRuleExpression struct {
-	Allow *bool `pulumi:"allow"`
-	Description *string `pulumi:"description"`
+	Allow           *bool   `pulumi:"allow"`
+	Description     *string `pulumi:"description"`
 	DestinationPort *string `pulumi:"destinationPort"`
-	Protocol string `pulumi:"protocol"`
-	SourceNetwork *string `pulumi:"sourceNetwork"`
-	SourcePort *string `pulumi:"sourcePort"`
+	Protocol        string  `pulumi:"protocol"`
+	SourceNetwork   *string `pulumi:"sourceNetwork"`
+	SourcePort      *string `pulumi:"sourcePort"`
 }
 
 type PacketFilterRuleExpressionInput interface {
@@ -2580,12 +2590,12 @@ type PacketFilterRuleExpressionInput interface {
 }
 
 type PacketFilterRuleExpressionArgs struct {
-	Allow pulumi.BoolPtrInput `pulumi:"allow"`
-	Description pulumi.StringPtrInput `pulumi:"description"`
+	Allow           pulumi.BoolPtrInput   `pulumi:"allow"`
+	Description     pulumi.StringPtrInput `pulumi:"description"`
 	DestinationPort pulumi.StringPtrInput `pulumi:"destinationPort"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	SourceNetwork pulumi.StringPtrInput `pulumi:"sourceNetwork"`
-	SourcePort pulumi.StringPtrInput `pulumi:"sourcePort"`
+	Protocol        pulumi.StringInput    `pulumi:"protocol"`
+	SourceNetwork   pulumi.StringPtrInput `pulumi:"sourceNetwork"`
+	SourcePort      pulumi.StringPtrInput `pulumi:"sourcePort"`
 }
 
 func (PacketFilterRuleExpressionArgs) ElementType() reflect.Type {
@@ -2621,7 +2631,7 @@ func (i PacketFilterRuleExpressionArray) ToPacketFilterRuleExpressionArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(PacketFilterRuleExpressionArrayOutput)
 }
 
-type PacketFilterRuleExpressionOutput struct { *pulumi.OutputState }
+type PacketFilterRuleExpressionOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterRuleExpressionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*PacketFilterRuleExpression)(nil)).Elem()
@@ -2636,30 +2646,30 @@ func (o PacketFilterRuleExpressionOutput) ToPacketFilterRuleExpressionOutputWith
 }
 
 func (o PacketFilterRuleExpressionOutput) Allow() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) *bool { return v.Allow }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) *bool { return v.Allow }).(pulumi.BoolPtrOutput)
 }
 
 func (o PacketFilterRuleExpressionOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterRuleExpressionOutput) DestinationPort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterRuleExpressionOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o PacketFilterRuleExpressionOutput) SourceNetwork() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
 }
 
 func (o PacketFilterRuleExpressionOutput) SourcePort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v PacketFilterRuleExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v PacketFilterRuleExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
 }
 
-type PacketFilterRuleExpressionArrayOutput struct { *pulumi.OutputState}
+type PacketFilterRuleExpressionArrayOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterRuleExpressionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]PacketFilterRuleExpression)(nil)).Elem()
@@ -2674,16 +2684,16 @@ func (o PacketFilterRuleExpressionArrayOutput) ToPacketFilterRuleExpressionArray
 }
 
 func (o PacketFilterRuleExpressionArrayOutput) Index(i pulumi.IntInput) PacketFilterRuleExpressionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) PacketFilterRuleExpression {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PacketFilterRuleExpression {
 		return vs[0].([]PacketFilterRuleExpression)[vs[1].(int)]
 	}).(PacketFilterRuleExpressionOutput)
 }
 
 type ProxyLBACMECertificate struct {
 	AdditionalCertificates []ProxyLBACMECertificateAdditionalCertificate `pulumi:"additionalCertificates"`
-	IntermediateCert *string `pulumi:"intermediateCert"`
-	PrivateKey *string `pulumi:"privateKey"`
-	ServerCert *string `pulumi:"serverCert"`
+	IntermediateCert       *string                                       `pulumi:"intermediateCert"`
+	PrivateKey             *string                                       `pulumi:"privateKey"`
+	ServerCert             *string                                       `pulumi:"serverCert"`
 }
 
 type ProxyLBACMECertificateInput interface {
@@ -2695,9 +2705,9 @@ type ProxyLBACMECertificateInput interface {
 
 type ProxyLBACMECertificateArgs struct {
 	AdditionalCertificates ProxyLBACMECertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
-	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringPtrInput `pulumi:"serverCert"`
+	IntermediateCert       pulumi.StringPtrInput                                 `pulumi:"intermediateCert"`
+	PrivateKey             pulumi.StringPtrInput                                 `pulumi:"privateKey"`
+	ServerCert             pulumi.StringPtrInput                                 `pulumi:"serverCert"`
 }
 
 func (ProxyLBACMECertificateArgs) ElementType() reflect.Type {
@@ -2733,7 +2743,7 @@ func (i ProxyLBACMECertificateArray) ToProxyLBACMECertificateArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBACMECertificateArrayOutput)
 }
 
-type ProxyLBACMECertificateOutput struct { *pulumi.OutputState }
+type ProxyLBACMECertificateOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMECertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBACMECertificate)(nil)).Elem()
@@ -2748,22 +2758,24 @@ func (o ProxyLBACMECertificateOutput) ToProxyLBACMECertificateOutputWithContext(
 }
 
 func (o ProxyLBACMECertificateOutput) AdditionalCertificates() ProxyLBACMECertificateAdditionalCertificateArrayOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificate) []ProxyLBACMECertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBACMECertificateAdditionalCertificateArrayOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificate) []ProxyLBACMECertificateAdditionalCertificate {
+		return v.AdditionalCertificates
+	}).(ProxyLBACMECertificateAdditionalCertificateArrayOutput)
 }
 
 func (o ProxyLBACMECertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBACMECertificateOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBACMECertificateOutput) ServerCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
 }
 
-type ProxyLBACMECertificateArrayOutput struct { *pulumi.OutputState}
+type ProxyLBACMECertificateArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMECertificateArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBACMECertificate)(nil)).Elem()
@@ -2778,15 +2790,15 @@ func (o ProxyLBACMECertificateArrayOutput) ToProxyLBACMECertificateArrayOutputWi
 }
 
 func (o ProxyLBACMECertificateArrayOutput) Index(i pulumi.IntInput) ProxyLBACMECertificateOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBACMECertificate {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBACMECertificate {
 		return vs[0].([]ProxyLBACMECertificate)[vs[1].(int)]
 	}).(ProxyLBACMECertificateOutput)
 }
 
 type ProxyLBACMECertificateAdditionalCertificate struct {
 	IntermediateCert *string `pulumi:"intermediateCert"`
-	PrivateKey *string `pulumi:"privateKey"`
-	ServerCert *string `pulumi:"serverCert"`
+	PrivateKey       *string `pulumi:"privateKey"`
+	ServerCert       *string `pulumi:"serverCert"`
 }
 
 type ProxyLBACMECertificateAdditionalCertificateInput interface {
@@ -2798,8 +2810,8 @@ type ProxyLBACMECertificateAdditionalCertificateInput interface {
 
 type ProxyLBACMECertificateAdditionalCertificateArgs struct {
 	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringPtrInput `pulumi:"serverCert"`
+	PrivateKey       pulumi.StringPtrInput `pulumi:"privateKey"`
+	ServerCert       pulumi.StringPtrInput `pulumi:"serverCert"`
 }
 
 func (ProxyLBACMECertificateAdditionalCertificateArgs) ElementType() reflect.Type {
@@ -2835,7 +2847,7 @@ func (i ProxyLBACMECertificateAdditionalCertificateArray) ToProxyLBACMECertifica
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBACMECertificateAdditionalCertificateArrayOutput)
 }
 
-type ProxyLBACMECertificateAdditionalCertificateOutput struct { *pulumi.OutputState }
+type ProxyLBACMECertificateAdditionalCertificateOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMECertificateAdditionalCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBACMECertificateAdditionalCertificate)(nil)).Elem()
@@ -2850,18 +2862,18 @@ func (o ProxyLBACMECertificateAdditionalCertificateOutput) ToProxyLBACMECertific
 }
 
 func (o ProxyLBACMECertificateAdditionalCertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificateAdditionalCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificateAdditionalCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBACMECertificateAdditionalCertificateOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificateAdditionalCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificateAdditionalCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBACMECertificateAdditionalCertificateOutput) ServerCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBACMECertificateAdditionalCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBACMECertificateAdditionalCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
 }
 
-type ProxyLBACMECertificateAdditionalCertificateArrayOutput struct { *pulumi.OutputState}
+type ProxyLBACMECertificateAdditionalCertificateArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMECertificateAdditionalCertificateArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBACMECertificateAdditionalCertificate)(nil)).Elem()
@@ -2876,17 +2888,17 @@ func (o ProxyLBACMECertificateAdditionalCertificateArrayOutput) ToProxyLBACMECer
 }
 
 func (o ProxyLBACMECertificateAdditionalCertificateArrayOutput) Index(i pulumi.IntInput) ProxyLBACMECertificateAdditionalCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBACMECertificateAdditionalCertificate {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBACMECertificateAdditionalCertificate {
 		return vs[0].([]ProxyLBACMECertificateAdditionalCertificate)[vs[1].(int)]
 	}).(ProxyLBACMECertificateAdditionalCertificateOutput)
 }
 
 type ProxyLBBindPort struct {
-	Port *int `pulumi:"port"`
-	ProxyMode string `pulumi:"proxyMode"`
-	RedirectToHttps *bool `pulumi:"redirectToHttps"`
+	Port            *int                            `pulumi:"port"`
+	ProxyMode       string                          `pulumi:"proxyMode"`
+	RedirectToHttps *bool                           `pulumi:"redirectToHttps"`
 	ResponseHeaders []ProxyLBBindPortResponseHeader `pulumi:"responseHeaders"`
-	SupportHttp2 *bool `pulumi:"supportHttp2"`
+	SupportHttp2    *bool                           `pulumi:"supportHttp2"`
 }
 
 type ProxyLBBindPortInput interface {
@@ -2897,11 +2909,11 @@ type ProxyLBBindPortInput interface {
 }
 
 type ProxyLBBindPortArgs struct {
-	Port pulumi.IntPtrInput `pulumi:"port"`
-	ProxyMode pulumi.StringInput `pulumi:"proxyMode"`
-	RedirectToHttps pulumi.BoolPtrInput `pulumi:"redirectToHttps"`
+	Port            pulumi.IntPtrInput                      `pulumi:"port"`
+	ProxyMode       pulumi.StringInput                      `pulumi:"proxyMode"`
+	RedirectToHttps pulumi.BoolPtrInput                     `pulumi:"redirectToHttps"`
 	ResponseHeaders ProxyLBBindPortResponseHeaderArrayInput `pulumi:"responseHeaders"`
-	SupportHttp2 pulumi.BoolPtrInput `pulumi:"supportHttp2"`
+	SupportHttp2    pulumi.BoolPtrInput                     `pulumi:"supportHttp2"`
 }
 
 func (ProxyLBBindPortArgs) ElementType() reflect.Type {
@@ -2937,7 +2949,7 @@ func (i ProxyLBBindPortArray) ToProxyLBBindPortArrayOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBBindPortArrayOutput)
 }
 
-type ProxyLBBindPortOutput struct { *pulumi.OutputState }
+type ProxyLBBindPortOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBBindPortOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBBindPort)(nil)).Elem()
@@ -2952,26 +2964,26 @@ func (o ProxyLBBindPortOutput) ToProxyLBBindPortOutputWithContext(ctx context.Co
 }
 
 func (o ProxyLBBindPortOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBBindPort) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBBindPort) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o ProxyLBBindPortOutput) ProxyMode() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBBindPort) string { return v.ProxyMode }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBBindPort) string { return v.ProxyMode }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBBindPortOutput) RedirectToHttps() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ProxyLBBindPort) *bool { return v.RedirectToHttps }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ProxyLBBindPort) *bool { return v.RedirectToHttps }).(pulumi.BoolPtrOutput)
 }
 
 func (o ProxyLBBindPortOutput) ResponseHeaders() ProxyLBBindPortResponseHeaderArrayOutput {
-	return o.ApplyT(func (v ProxyLBBindPort) []ProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(ProxyLBBindPortResponseHeaderArrayOutput)
+	return o.ApplyT(func(v ProxyLBBindPort) []ProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(ProxyLBBindPortResponseHeaderArrayOutput)
 }
 
 func (o ProxyLBBindPortOutput) SupportHttp2() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ProxyLBBindPort) *bool { return v.SupportHttp2 }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ProxyLBBindPort) *bool { return v.SupportHttp2 }).(pulumi.BoolPtrOutput)
 }
 
-type ProxyLBBindPortArrayOutput struct { *pulumi.OutputState}
+type ProxyLBBindPortArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBBindPortArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBBindPort)(nil)).Elem()
@@ -2986,14 +2998,14 @@ func (o ProxyLBBindPortArrayOutput) ToProxyLBBindPortArrayOutputWithContext(ctx 
 }
 
 func (o ProxyLBBindPortArrayOutput) Index(i pulumi.IntInput) ProxyLBBindPortOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBBindPort {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBBindPort {
 		return vs[0].([]ProxyLBBindPort)[vs[1].(int)]
 	}).(ProxyLBBindPortOutput)
 }
 
 type ProxyLBBindPortResponseHeader struct {
 	Header string `pulumi:"header"`
-	Value string `pulumi:"value"`
+	Value  string `pulumi:"value"`
 }
 
 type ProxyLBBindPortResponseHeaderInput interface {
@@ -3005,7 +3017,7 @@ type ProxyLBBindPortResponseHeaderInput interface {
 
 type ProxyLBBindPortResponseHeaderArgs struct {
 	Header pulumi.StringInput `pulumi:"header"`
-	Value pulumi.StringInput `pulumi:"value"`
+	Value  pulumi.StringInput `pulumi:"value"`
 }
 
 func (ProxyLBBindPortResponseHeaderArgs) ElementType() reflect.Type {
@@ -3041,7 +3053,7 @@ func (i ProxyLBBindPortResponseHeaderArray) ToProxyLBBindPortResponseHeaderArray
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBBindPortResponseHeaderArrayOutput)
 }
 
-type ProxyLBBindPortResponseHeaderOutput struct { *pulumi.OutputState }
+type ProxyLBBindPortResponseHeaderOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBBindPortResponseHeaderOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBBindPortResponseHeader)(nil)).Elem()
@@ -3056,14 +3068,14 @@ func (o ProxyLBBindPortResponseHeaderOutput) ToProxyLBBindPortResponseHeaderOutp
 }
 
 func (o ProxyLBBindPortResponseHeaderOutput) Header() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBBindPortResponseHeader) string { return v.Header }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBBindPortResponseHeader) string { return v.Header }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBBindPortResponseHeaderOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBBindPortResponseHeader) string { return v.Value }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBBindPortResponseHeader) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type ProxyLBBindPortResponseHeaderArrayOutput struct { *pulumi.OutputState}
+type ProxyLBBindPortResponseHeaderArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBBindPortResponseHeaderArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBBindPortResponseHeader)(nil)).Elem()
@@ -3078,16 +3090,16 @@ func (o ProxyLBBindPortResponseHeaderArrayOutput) ToProxyLBBindPortResponseHeade
 }
 
 func (o ProxyLBBindPortResponseHeaderArrayOutput) Index(i pulumi.IntInput) ProxyLBBindPortResponseHeaderOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBBindPortResponseHeader {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBBindPortResponseHeader {
 		return vs[0].([]ProxyLBBindPortResponseHeader)[vs[1].(int)]
 	}).(ProxyLBBindPortResponseHeaderOutput)
 }
 
 type ProxyLBCertificate struct {
 	AdditionalCertificates []ProxyLBCertificateAdditionalCertificate `pulumi:"additionalCertificates"`
-	IntermediateCert *string `pulumi:"intermediateCert"`
-	PrivateKey *string `pulumi:"privateKey"`
-	ServerCert *string `pulumi:"serverCert"`
+	IntermediateCert       *string                                   `pulumi:"intermediateCert"`
+	PrivateKey             *string                                   `pulumi:"privateKey"`
+	ServerCert             *string                                   `pulumi:"serverCert"`
 }
 
 type ProxyLBCertificateInput interface {
@@ -3099,9 +3111,9 @@ type ProxyLBCertificateInput interface {
 
 type ProxyLBCertificateArgs struct {
 	AdditionalCertificates ProxyLBCertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
-	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringPtrInput `pulumi:"serverCert"`
+	IntermediateCert       pulumi.StringPtrInput                             `pulumi:"intermediateCert"`
+	PrivateKey             pulumi.StringPtrInput                             `pulumi:"privateKey"`
+	ServerCert             pulumi.StringPtrInput                             `pulumi:"serverCert"`
 }
 
 func (ProxyLBCertificateArgs) ElementType() reflect.Type {
@@ -3133,7 +3145,8 @@ type ProxyLBCertificatePtrInput interface {
 
 type proxyLBCertificatePtrType ProxyLBCertificateArgs
 
-func ProxyLBCertificatePtr(v *ProxyLBCertificateArgs) ProxyLBCertificatePtrInput {	return (*proxyLBCertificatePtrType)(v)
+func ProxyLBCertificatePtr(v *ProxyLBCertificateArgs) ProxyLBCertificatePtrInput {
+	return (*proxyLBCertificatePtrType)(v)
 }
 
 func (*proxyLBCertificatePtrType) ElementType() reflect.Type {
@@ -3148,7 +3161,7 @@ func (i *proxyLBCertificatePtrType) ToProxyLBCertificatePtrOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBCertificatePtrOutput)
 }
 
-type ProxyLBCertificateOutput struct { *pulumi.OutputState }
+type ProxyLBCertificateOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBCertificate)(nil)).Elem()
@@ -3172,22 +3185,22 @@ func (o ProxyLBCertificateOutput) ToProxyLBCertificatePtrOutputWithContext(ctx c
 	}).(ProxyLBCertificatePtrOutput)
 }
 func (o ProxyLBCertificateOutput) AdditionalCertificates() ProxyLBCertificateAdditionalCertificateArrayOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) []ProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBCertificateAdditionalCertificateArrayOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) []ProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
 func (o ProxyLBCertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBCertificateOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBCertificateOutput) ServerCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
 }
 
-type ProxyLBCertificatePtrOutput struct { *pulumi.OutputState}
+type ProxyLBCertificatePtrOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBCertificatePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ProxyLBCertificate)(nil)).Elem()
@@ -3202,29 +3215,29 @@ func (o ProxyLBCertificatePtrOutput) ToProxyLBCertificatePtrOutputWithContext(ct
 }
 
 func (o ProxyLBCertificatePtrOutput) Elem() ProxyLBCertificateOutput {
-	return o.ApplyT(func (v *ProxyLBCertificate) ProxyLBCertificate { return *v }).(ProxyLBCertificateOutput)
+	return o.ApplyT(func(v *ProxyLBCertificate) ProxyLBCertificate { return *v }).(ProxyLBCertificateOutput)
 }
 
 func (o ProxyLBCertificatePtrOutput) AdditionalCertificates() ProxyLBCertificateAdditionalCertificateArrayOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) []ProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBCertificateAdditionalCertificateArrayOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) []ProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
 func (o ProxyLBCertificatePtrOutput) IntermediateCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBCertificatePtrOutput) PrivateKey() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.PrivateKey }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBCertificatePtrOutput) ServerCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
 }
 
 type ProxyLBCertificateAdditionalCertificate struct {
 	IntermediateCert *string `pulumi:"intermediateCert"`
-	PrivateKey string `pulumi:"privateKey"`
-	ServerCert string `pulumi:"serverCert"`
+	PrivateKey       string  `pulumi:"privateKey"`
+	ServerCert       string  `pulumi:"serverCert"`
 }
 
 type ProxyLBCertificateAdditionalCertificateInput interface {
@@ -3236,8 +3249,8 @@ type ProxyLBCertificateAdditionalCertificateInput interface {
 
 type ProxyLBCertificateAdditionalCertificateArgs struct {
 	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringInput `pulumi:"serverCert"`
+	PrivateKey       pulumi.StringInput    `pulumi:"privateKey"`
+	ServerCert       pulumi.StringInput    `pulumi:"serverCert"`
 }
 
 func (ProxyLBCertificateAdditionalCertificateArgs) ElementType() reflect.Type {
@@ -3273,7 +3286,7 @@ func (i ProxyLBCertificateAdditionalCertificateArray) ToProxyLBCertificateAdditi
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
-type ProxyLBCertificateAdditionalCertificateOutput struct { *pulumi.OutputState }
+type ProxyLBCertificateAdditionalCertificateOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBCertificateAdditionalCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBCertificateAdditionalCertificate)(nil)).Elem()
@@ -3288,18 +3301,18 @@ func (o ProxyLBCertificateAdditionalCertificateOutput) ToProxyLBCertificateAddit
 }
 
 func (o ProxyLBCertificateAdditionalCertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBCertificateAdditionalCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBCertificateAdditionalCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBCertificateAdditionalCertificateOutput) PrivateKey() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBCertificateAdditionalCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBCertificateAdditionalCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBCertificateAdditionalCertificateOutput) ServerCert() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBCertificateAdditionalCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBCertificateAdditionalCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
 }
 
-type ProxyLBCertificateAdditionalCertificateArrayOutput struct { *pulumi.OutputState}
+type ProxyLBCertificateAdditionalCertificateArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBCertificateAdditionalCertificateArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBCertificateAdditionalCertificate)(nil)).Elem()
@@ -3314,17 +3327,17 @@ func (o ProxyLBCertificateAdditionalCertificateArrayOutput) ToProxyLBCertificate
 }
 
 func (o ProxyLBCertificateAdditionalCertificateArrayOutput) Index(i pulumi.IntInput) ProxyLBCertificateAdditionalCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBCertificateAdditionalCertificate {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBCertificateAdditionalCertificate {
 		return vs[0].([]ProxyLBCertificateAdditionalCertificate)[vs[1].(int)]
 	}).(ProxyLBCertificateAdditionalCertificateOutput)
 }
 
 type ProxyLBHealthCheck struct {
-	DelayLoop *int `pulumi:"delayLoop"`
+	DelayLoop  *int    `pulumi:"delayLoop"`
 	HostHeader *string `pulumi:"hostHeader"`
-	Path *string `pulumi:"path"`
-	Port *int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
+	Path       *string `pulumi:"path"`
+	Port       *int    `pulumi:"port"`
+	Protocol   string  `pulumi:"protocol"`
 }
 
 type ProxyLBHealthCheckInput interface {
@@ -3335,11 +3348,11 @@ type ProxyLBHealthCheckInput interface {
 }
 
 type ProxyLBHealthCheckArgs struct {
-	DelayLoop pulumi.IntPtrInput `pulumi:"delayLoop"`
+	DelayLoop  pulumi.IntPtrInput    `pulumi:"delayLoop"`
 	HostHeader pulumi.StringPtrInput `pulumi:"hostHeader"`
-	Path pulumi.StringPtrInput `pulumi:"path"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
+	Path       pulumi.StringPtrInput `pulumi:"path"`
+	Port       pulumi.IntPtrInput    `pulumi:"port"`
+	Protocol   pulumi.StringInput    `pulumi:"protocol"`
 }
 
 func (ProxyLBHealthCheckArgs) ElementType() reflect.Type {
@@ -3371,7 +3384,8 @@ type ProxyLBHealthCheckPtrInput interface {
 
 type proxyLBHealthCheckPtrType ProxyLBHealthCheckArgs
 
-func ProxyLBHealthCheckPtr(v *ProxyLBHealthCheckArgs) ProxyLBHealthCheckPtrInput {	return (*proxyLBHealthCheckPtrType)(v)
+func ProxyLBHealthCheckPtr(v *ProxyLBHealthCheckArgs) ProxyLBHealthCheckPtrInput {
+	return (*proxyLBHealthCheckPtrType)(v)
 }
 
 func (*proxyLBHealthCheckPtrType) ElementType() reflect.Type {
@@ -3386,7 +3400,7 @@ func (i *proxyLBHealthCheckPtrType) ToProxyLBHealthCheckPtrOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBHealthCheckPtrOutput)
 }
 
-type ProxyLBHealthCheckOutput struct { *pulumi.OutputState }
+type ProxyLBHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBHealthCheck)(nil)).Elem()
@@ -3410,26 +3424,26 @@ func (o ProxyLBHealthCheckOutput) ToProxyLBHealthCheckPtrOutputWithContext(ctx c
 	}).(ProxyLBHealthCheckPtrOutput)
 }
 func (o ProxyLBHealthCheckOutput) DelayLoop() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
 }
 
 func (o ProxyLBHealthCheckOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBHealthCheckOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBHealthCheckOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o ProxyLBHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-type ProxyLBHealthCheckPtrOutput struct { *pulumi.OutputState}
+type ProxyLBHealthCheckPtrOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBHealthCheckPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ProxyLBHealthCheck)(nil)).Elem()
@@ -3444,33 +3458,33 @@ func (o ProxyLBHealthCheckPtrOutput) ToProxyLBHealthCheckPtrOutputWithContext(ct
 }
 
 func (o ProxyLBHealthCheckPtrOutput) Elem() ProxyLBHealthCheckOutput {
-	return o.ApplyT(func (v *ProxyLBHealthCheck) ProxyLBHealthCheck { return *v }).(ProxyLBHealthCheckOutput)
+	return o.ApplyT(func(v *ProxyLBHealthCheck) ProxyLBHealthCheck { return *v }).(ProxyLBHealthCheckOutput)
 }
 
 func (o ProxyLBHealthCheckPtrOutput) DelayLoop() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *int { return v.DelayLoop }).(pulumi.IntPtrOutput)
 }
 
 func (o ProxyLBHealthCheckPtrOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBHealthCheckPtrOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBHealthCheckPtrOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o ProxyLBHealthCheckPtrOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 type ProxyLBRule struct {
 	Group *string `pulumi:"group"`
-	Host *string `pulumi:"host"`
-	Path *string `pulumi:"path"`
+	Host  *string `pulumi:"host"`
+	Path  *string `pulumi:"path"`
 }
 
 type ProxyLBRuleInput interface {
@@ -3482,8 +3496,8 @@ type ProxyLBRuleInput interface {
 
 type ProxyLBRuleArgs struct {
 	Group pulumi.StringPtrInput `pulumi:"group"`
-	Host pulumi.StringPtrInput `pulumi:"host"`
-	Path pulumi.StringPtrInput `pulumi:"path"`
+	Host  pulumi.StringPtrInput `pulumi:"host"`
+	Path  pulumi.StringPtrInput `pulumi:"path"`
 }
 
 func (ProxyLBRuleArgs) ElementType() reflect.Type {
@@ -3519,7 +3533,7 @@ func (i ProxyLBRuleArray) ToProxyLBRuleArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBRuleArrayOutput)
 }
 
-type ProxyLBRuleOutput struct { *pulumi.OutputState }
+type ProxyLBRuleOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBRuleOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBRule)(nil)).Elem()
@@ -3534,18 +3548,18 @@ func (o ProxyLBRuleOutput) ToProxyLBRuleOutputWithContext(ctx context.Context) P
 }
 
 func (o ProxyLBRuleOutput) Group() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBRule) *string { return v.Group }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.Group }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBRuleOutput) Host() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBRule) *string { return v.Host }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.Host }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBRuleOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBRule) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
-type ProxyLBRuleArrayOutput struct { *pulumi.OutputState}
+type ProxyLBRuleArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBRuleArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBRule)(nil)).Elem()
@@ -3560,16 +3574,16 @@ func (o ProxyLBRuleArrayOutput) ToProxyLBRuleArrayOutputWithContext(ctx context.
 }
 
 func (o ProxyLBRuleArrayOutput) Index(i pulumi.IntInput) ProxyLBRuleOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBRule {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBRule {
 		return vs[0].([]ProxyLBRule)[vs[1].(int)]
 	}).(ProxyLBRuleOutput)
 }
 
 type ProxyLBServer struct {
-	Enabled *bool `pulumi:"enabled"`
-	Group *string `pulumi:"group"`
-	IpAddress string `pulumi:"ipAddress"`
-	Port int `pulumi:"port"`
+	Enabled   *bool   `pulumi:"enabled"`
+	Group     *string `pulumi:"group"`
+	IpAddress string  `pulumi:"ipAddress"`
+	Port      int     `pulumi:"port"`
 }
 
 type ProxyLBServerInput interface {
@@ -3580,10 +3594,10 @@ type ProxyLBServerInput interface {
 }
 
 type ProxyLBServerArgs struct {
-	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
-	Group pulumi.StringPtrInput `pulumi:"group"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Port pulumi.IntInput `pulumi:"port"`
+	Enabled   pulumi.BoolPtrInput   `pulumi:"enabled"`
+	Group     pulumi.StringPtrInput `pulumi:"group"`
+	IpAddress pulumi.StringInput    `pulumi:"ipAddress"`
+	Port      pulumi.IntInput       `pulumi:"port"`
 }
 
 func (ProxyLBServerArgs) ElementType() reflect.Type {
@@ -3619,7 +3633,7 @@ func (i ProxyLBServerArray) ToProxyLBServerArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBServerArrayOutput)
 }
 
-type ProxyLBServerOutput struct { *pulumi.OutputState }
+type ProxyLBServerOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBServer)(nil)).Elem()
@@ -3634,22 +3648,22 @@ func (o ProxyLBServerOutput) ToProxyLBServerOutputWithContext(ctx context.Contex
 }
 
 func (o ProxyLBServerOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ProxyLBServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ProxyLBServer) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 func (o ProxyLBServerOutput) Group() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ProxyLBServer) *string { return v.Group }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ProxyLBServer) *string { return v.Group }).(pulumi.StringPtrOutput)
 }
 
 func (o ProxyLBServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBServerOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v ProxyLBServer) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v ProxyLBServer) int { return v.Port }).(pulumi.IntOutput)
 }
 
-type ProxyLBServerArrayOutput struct { *pulumi.OutputState}
+type ProxyLBServerArrayOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ProxyLBServer)(nil)).Elem()
@@ -3664,14 +3678,14 @@ func (o ProxyLBServerArrayOutput) ToProxyLBServerArrayOutputWithContext(ctx cont
 }
 
 func (o ProxyLBServerArrayOutput) Index(i pulumi.IntInput) ProxyLBServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ProxyLBServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyLBServer {
 		return vs[0].([]ProxyLBServer)[vs[1].(int)]
 	}).(ProxyLBServerOutput)
 }
 
 type ProxyLBSorryServer struct {
 	IpAddress string `pulumi:"ipAddress"`
-	Port *int `pulumi:"port"`
+	Port      *int   `pulumi:"port"`
 }
 
 type ProxyLBSorryServerInput interface {
@@ -3683,7 +3697,7 @@ type ProxyLBSorryServerInput interface {
 
 type ProxyLBSorryServerArgs struct {
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
+	Port      pulumi.IntPtrInput `pulumi:"port"`
 }
 
 func (ProxyLBSorryServerArgs) ElementType() reflect.Type {
@@ -3715,7 +3729,8 @@ type ProxyLBSorryServerPtrInput interface {
 
 type proxyLBSorryServerPtrType ProxyLBSorryServerArgs
 
-func ProxyLBSorryServerPtr(v *ProxyLBSorryServerArgs) ProxyLBSorryServerPtrInput {	return (*proxyLBSorryServerPtrType)(v)
+func ProxyLBSorryServerPtr(v *ProxyLBSorryServerArgs) ProxyLBSorryServerPtrInput {
+	return (*proxyLBSorryServerPtrType)(v)
 }
 
 func (*proxyLBSorryServerPtrType) ElementType() reflect.Type {
@@ -3730,7 +3745,7 @@ func (i *proxyLBSorryServerPtrType) ToProxyLBSorryServerPtrOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBSorryServerPtrOutput)
 }
 
-type ProxyLBSorryServerOutput struct { *pulumi.OutputState }
+type ProxyLBSorryServerOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBSorryServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBSorryServer)(nil)).Elem()
@@ -3754,14 +3769,14 @@ func (o ProxyLBSorryServerOutput) ToProxyLBSorryServerPtrOutputWithContext(ctx c
 	}).(ProxyLBSorryServerPtrOutput)
 }
 func (o ProxyLBSorryServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBSorryServerOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBSorryServer) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBSorryServer) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-type ProxyLBSorryServerPtrOutput struct { *pulumi.OutputState}
+type ProxyLBSorryServerPtrOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBSorryServerPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ProxyLBSorryServer)(nil)).Elem()
@@ -3776,29 +3791,29 @@ func (o ProxyLBSorryServerPtrOutput) ToProxyLBSorryServerPtrOutputWithContext(ct
 }
 
 func (o ProxyLBSorryServerPtrOutput) Elem() ProxyLBSorryServerOutput {
-	return o.ApplyT(func (v *ProxyLBSorryServer) ProxyLBSorryServer { return *v }).(ProxyLBSorryServerOutput)
+	return o.ApplyT(func(v *ProxyLBSorryServer) ProxyLBSorryServer { return *v }).(ProxyLBSorryServerOutput)
 }
 
 func (o ProxyLBSorryServerPtrOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v ProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o ProxyLBSorryServerPtrOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ProxyLBSorryServer) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ProxyLBSorryServer) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 type ServerDiskEditParameter struct {
-	ChangePartitionUuid *bool `pulumi:"changePartitionUuid"`
-	DisablePwAuth *bool `pulumi:"disablePwAuth"`
-	EnableDhcp *bool `pulumi:"enableDhcp"`
-	Gateway *string `pulumi:"gateway"`
-	Hostname *string `pulumi:"hostname"`
-	IpAddress *string `pulumi:"ipAddress"`
-	Netmask *int `pulumi:"netmask"`
-	NoteIds []string `pulumi:"noteIds"`
-	Notes []ServerDiskEditParameterNote `pulumi:"notes"`
-	Password *string `pulumi:"password"`
-	SshKeyIds []string `pulumi:"sshKeyIds"`
+	ChangePartitionUuid *bool                         `pulumi:"changePartitionUuid"`
+	DisablePwAuth       *bool                         `pulumi:"disablePwAuth"`
+	EnableDhcp          *bool                         `pulumi:"enableDhcp"`
+	Gateway             *string                       `pulumi:"gateway"`
+	Hostname            *string                       `pulumi:"hostname"`
+	IpAddress           *string                       `pulumi:"ipAddress"`
+	Netmask             *int                          `pulumi:"netmask"`
+	NoteIds             []string                      `pulumi:"noteIds"`
+	Notes               []ServerDiskEditParameterNote `pulumi:"notes"`
+	Password            *string                       `pulumi:"password"`
+	SshKeyIds           []string                      `pulumi:"sshKeyIds"`
 }
 
 type ServerDiskEditParameterInput interface {
@@ -3809,17 +3824,17 @@ type ServerDiskEditParameterInput interface {
 }
 
 type ServerDiskEditParameterArgs struct {
-	ChangePartitionUuid pulumi.BoolPtrInput `pulumi:"changePartitionUuid"`
-	DisablePwAuth pulumi.BoolPtrInput `pulumi:"disablePwAuth"`
-	EnableDhcp pulumi.BoolPtrInput `pulumi:"enableDhcp"`
-	Gateway pulumi.StringPtrInput `pulumi:"gateway"`
-	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
-	IpAddress pulumi.StringPtrInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntPtrInput `pulumi:"netmask"`
-	NoteIds pulumi.StringArrayInput `pulumi:"noteIds"`
-	Notes ServerDiskEditParameterNoteArrayInput `pulumi:"notes"`
-	Password pulumi.StringPtrInput `pulumi:"password"`
-	SshKeyIds pulumi.StringArrayInput `pulumi:"sshKeyIds"`
+	ChangePartitionUuid pulumi.BoolPtrInput                   `pulumi:"changePartitionUuid"`
+	DisablePwAuth       pulumi.BoolPtrInput                   `pulumi:"disablePwAuth"`
+	EnableDhcp          pulumi.BoolPtrInput                   `pulumi:"enableDhcp"`
+	Gateway             pulumi.StringPtrInput                 `pulumi:"gateway"`
+	Hostname            pulumi.StringPtrInput                 `pulumi:"hostname"`
+	IpAddress           pulumi.StringPtrInput                 `pulumi:"ipAddress"`
+	Netmask             pulumi.IntPtrInput                    `pulumi:"netmask"`
+	NoteIds             pulumi.StringArrayInput               `pulumi:"noteIds"`
+	Notes               ServerDiskEditParameterNoteArrayInput `pulumi:"notes"`
+	Password            pulumi.StringPtrInput                 `pulumi:"password"`
+	SshKeyIds           pulumi.StringArrayInput               `pulumi:"sshKeyIds"`
 }
 
 func (ServerDiskEditParameterArgs) ElementType() reflect.Type {
@@ -3851,7 +3866,8 @@ type ServerDiskEditParameterPtrInput interface {
 
 type serverDiskEditParameterPtrType ServerDiskEditParameterArgs
 
-func ServerDiskEditParameterPtr(v *ServerDiskEditParameterArgs) ServerDiskEditParameterPtrInput {	return (*serverDiskEditParameterPtrType)(v)
+func ServerDiskEditParameterPtr(v *ServerDiskEditParameterArgs) ServerDiskEditParameterPtrInput {
+	return (*serverDiskEditParameterPtrType)(v)
 }
 
 func (*serverDiskEditParameterPtrType) ElementType() reflect.Type {
@@ -3866,7 +3882,7 @@ func (i *serverDiskEditParameterPtrType) ToServerDiskEditParameterPtrOutputWithC
 	return pulumi.ToOutputWithContext(ctx, i).(ServerDiskEditParameterPtrOutput)
 }
 
-type ServerDiskEditParameterOutput struct { *pulumi.OutputState }
+type ServerDiskEditParameterOutput struct{ *pulumi.OutputState }
 
 func (ServerDiskEditParameterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ServerDiskEditParameter)(nil)).Elem()
@@ -3890,50 +3906,50 @@ func (o ServerDiskEditParameterOutput) ToServerDiskEditParameterPtrOutputWithCon
 	}).(ServerDiskEditParameterPtrOutput)
 }
 func (o ServerDiskEditParameterOutput) ChangePartitionUuid() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.ChangePartitionUuid }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.ChangePartitionUuid }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) DisablePwAuth() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.DisablePwAuth }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.DisablePwAuth }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) EnableDhcp() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.EnableDhcp }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.EnableDhcp }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) Hostname() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Hostname }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Hostname }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) IpAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) Netmask() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *int { return v.Netmask }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *int { return v.Netmask }).(pulumi.IntPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) NoteIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
 }
 
 func (o ServerDiskEditParameterOutput) Notes() ServerDiskEditParameterNoteArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
 }
 
 func (o ServerDiskEditParameterOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterOutput) SshKeyIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.SshKeyIds }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []string { return v.SshKeyIds }).(pulumi.StringArrayOutput)
 }
 
-type ServerDiskEditParameterPtrOutput struct { *pulumi.OutputState}
+type ServerDiskEditParameterPtrOutput struct{ *pulumi.OutputState }
 
 func (ServerDiskEditParameterPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ServerDiskEditParameter)(nil)).Elem()
@@ -3948,56 +3964,56 @@ func (o ServerDiskEditParameterPtrOutput) ToServerDiskEditParameterPtrOutputWith
 }
 
 func (o ServerDiskEditParameterPtrOutput) Elem() ServerDiskEditParameterOutput {
-	return o.ApplyT(func (v *ServerDiskEditParameter) ServerDiskEditParameter { return *v }).(ServerDiskEditParameterOutput)
+	return o.ApplyT(func(v *ServerDiskEditParameter) ServerDiskEditParameter { return *v }).(ServerDiskEditParameterOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) ChangePartitionUuid() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.ChangePartitionUuid }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.ChangePartitionUuid }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) DisablePwAuth() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.DisablePwAuth }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.DisablePwAuth }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) EnableDhcp() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *bool { return v.EnableDhcp }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *bool { return v.EnableDhcp }).(pulumi.BoolPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) Gateway() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Gateway }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Gateway }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) Hostname() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Hostname }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Hostname }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) IpAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) Netmask() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *int { return v.Netmask }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *int { return v.Netmask }).(pulumi.IntPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) NoteIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []string { return v.NoteIds }).(pulumi.StringArrayOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) Notes() ServerDiskEditParameterNoteArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []ServerDiskEditParameterNote { return v.Notes }).(ServerDiskEditParameterNoteArrayOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterPtrOutput) SshKeyIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v ServerDiskEditParameter) []string { return v.SshKeyIds }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v ServerDiskEditParameter) []string { return v.SshKeyIds }).(pulumi.StringArrayOutput)
 }
 
 type ServerDiskEditParameterNote struct {
-	ApiKeyId *string `pulumi:"apiKeyId"`
-	Id string `pulumi:"id"`
+	ApiKeyId  *string           `pulumi:"apiKeyId"`
+	Id        string            `pulumi:"id"`
 	Variables map[string]string `pulumi:"variables"`
 }
 
@@ -4009,8 +4025,8 @@ type ServerDiskEditParameterNoteInput interface {
 }
 
 type ServerDiskEditParameterNoteArgs struct {
-	ApiKeyId pulumi.StringPtrInput `pulumi:"apiKeyId"`
-	Id pulumi.StringInput `pulumi:"id"`
+	ApiKeyId  pulumi.StringPtrInput `pulumi:"apiKeyId"`
+	Id        pulumi.StringInput    `pulumi:"id"`
 	Variables pulumi.StringMapInput `pulumi:"variables"`
 }
 
@@ -4047,7 +4063,7 @@ func (i ServerDiskEditParameterNoteArray) ToServerDiskEditParameterNoteArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ServerDiskEditParameterNoteArrayOutput)
 }
 
-type ServerDiskEditParameterNoteOutput struct { *pulumi.OutputState }
+type ServerDiskEditParameterNoteOutput struct{ *pulumi.OutputState }
 
 func (ServerDiskEditParameterNoteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ServerDiskEditParameterNote)(nil)).Elem()
@@ -4062,18 +4078,18 @@ func (o ServerDiskEditParameterNoteOutput) ToServerDiskEditParameterNoteOutputWi
 }
 
 func (o ServerDiskEditParameterNoteOutput) ApiKeyId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerDiskEditParameterNote) *string { return v.ApiKeyId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerDiskEditParameterNote) *string { return v.ApiKeyId }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerDiskEditParameterNoteOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func (v ServerDiskEditParameterNote) string { return v.Id }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ServerDiskEditParameterNote) string { return v.Id }).(pulumi.StringOutput)
 }
 
 func (o ServerDiskEditParameterNoteOutput) Variables() pulumi.StringMapOutput {
-	return o.ApplyT(func (v ServerDiskEditParameterNote) map[string]string { return v.Variables }).(pulumi.StringMapOutput)
+	return o.ApplyT(func(v ServerDiskEditParameterNote) map[string]string { return v.Variables }).(pulumi.StringMapOutput)
 }
 
-type ServerDiskEditParameterNoteArrayOutput struct { *pulumi.OutputState}
+type ServerDiskEditParameterNoteArrayOutput struct{ *pulumi.OutputState }
 
 func (ServerDiskEditParameterNoteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ServerDiskEditParameterNote)(nil)).Elem()
@@ -4088,16 +4104,16 @@ func (o ServerDiskEditParameterNoteArrayOutput) ToServerDiskEditParameterNoteArr
 }
 
 func (o ServerDiskEditParameterNoteArrayOutput) Index(i pulumi.IntInput) ServerDiskEditParameterNoteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ServerDiskEditParameterNote {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServerDiskEditParameterNote {
 		return vs[0].([]ServerDiskEditParameterNote)[vs[1].(int)]
 	}).(ServerDiskEditParameterNoteOutput)
 }
 
 type ServerNetworkInterface struct {
-	MacAddress *string `pulumi:"macAddress"`
+	MacAddress     *string `pulumi:"macAddress"`
 	PacketFilterId *string `pulumi:"packetFilterId"`
-	Upstream string `pulumi:"upstream"`
-	UserIpAddress *string `pulumi:"userIpAddress"`
+	Upstream       string  `pulumi:"upstream"`
+	UserIpAddress  *string `pulumi:"userIpAddress"`
 }
 
 type ServerNetworkInterfaceInput interface {
@@ -4108,10 +4124,10 @@ type ServerNetworkInterfaceInput interface {
 }
 
 type ServerNetworkInterfaceArgs struct {
-	MacAddress pulumi.StringPtrInput `pulumi:"macAddress"`
+	MacAddress     pulumi.StringPtrInput `pulumi:"macAddress"`
 	PacketFilterId pulumi.StringPtrInput `pulumi:"packetFilterId"`
-	Upstream pulumi.StringInput `pulumi:"upstream"`
-	UserIpAddress pulumi.StringPtrInput `pulumi:"userIpAddress"`
+	Upstream       pulumi.StringInput    `pulumi:"upstream"`
+	UserIpAddress  pulumi.StringPtrInput `pulumi:"userIpAddress"`
 }
 
 func (ServerNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -4147,7 +4163,7 @@ func (i ServerNetworkInterfaceArray) ToServerNetworkInterfaceArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(ServerNetworkInterfaceArrayOutput)
 }
 
-type ServerNetworkInterfaceOutput struct { *pulumi.OutputState }
+type ServerNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (ServerNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ServerNetworkInterface)(nil)).Elem()
@@ -4162,22 +4178,22 @@ func (o ServerNetworkInterfaceOutput) ToServerNetworkInterfaceOutputWithContext(
 }
 
 func (o ServerNetworkInterfaceOutput) MacAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerNetworkInterface) *string { return v.MacAddress }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerNetworkInterface) *string { return v.MacAddress }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerNetworkInterfaceOutput) PacketFilterId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerNetworkInterface) *string { return v.PacketFilterId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerNetworkInterface) *string { return v.PacketFilterId }).(pulumi.StringPtrOutput)
 }
 
 func (o ServerNetworkInterfaceOutput) Upstream() pulumi.StringOutput {
-	return o.ApplyT(func (v ServerNetworkInterface) string { return v.Upstream }).(pulumi.StringOutput)
+	return o.ApplyT(func(v ServerNetworkInterface) string { return v.Upstream }).(pulumi.StringOutput)
 }
 
 func (o ServerNetworkInterfaceOutput) UserIpAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v ServerNetworkInterface) *string { return v.UserIpAddress }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v ServerNetworkInterface) *string { return v.UserIpAddress }).(pulumi.StringPtrOutput)
 }
 
-type ServerNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type ServerNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (ServerNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]ServerNetworkInterface)(nil)).Elem()
@@ -4192,26 +4208,26 @@ func (o ServerNetworkInterfaceArrayOutput) ToServerNetworkInterfaceArrayOutputWi
 }
 
 func (o ServerNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) ServerNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) ServerNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServerNetworkInterface {
 		return vs[0].([]ServerNetworkInterface)[vs[1].(int)]
 	}).(ServerNetworkInterfaceOutput)
 }
 
 type SimpleMonitorHealthCheck struct {
-	Community *string `pulumi:"community"`
+	Community     *string `pulumi:"community"`
 	ExcepctedData *string `pulumi:"excepctedData"`
-	HostHeader *string `pulumi:"hostHeader"`
-	Oid *string `pulumi:"oid"`
-	Password *string `pulumi:"password"`
-	Path *string `pulumi:"path"`
-	Port *int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
-	Qname *string `pulumi:"qname"`
-	RemainingDays *int `pulumi:"remainingDays"`
-	Sni *bool `pulumi:"sni"`
-	SnmpVersion *string `pulumi:"snmpVersion"`
-	Status *int `pulumi:"status"`
-	Username *string `pulumi:"username"`
+	HostHeader    *string `pulumi:"hostHeader"`
+	Oid           *string `pulumi:"oid"`
+	Password      *string `pulumi:"password"`
+	Path          *string `pulumi:"path"`
+	Port          *int    `pulumi:"port"`
+	Protocol      string  `pulumi:"protocol"`
+	Qname         *string `pulumi:"qname"`
+	RemainingDays *int    `pulumi:"remainingDays"`
+	Sni           *bool   `pulumi:"sni"`
+	SnmpVersion   *string `pulumi:"snmpVersion"`
+	Status        *int    `pulumi:"status"`
+	Username      *string `pulumi:"username"`
 }
 
 type SimpleMonitorHealthCheckInput interface {
@@ -4222,20 +4238,20 @@ type SimpleMonitorHealthCheckInput interface {
 }
 
 type SimpleMonitorHealthCheckArgs struct {
-	Community pulumi.StringPtrInput `pulumi:"community"`
+	Community     pulumi.StringPtrInput `pulumi:"community"`
 	ExcepctedData pulumi.StringPtrInput `pulumi:"excepctedData"`
-	HostHeader pulumi.StringPtrInput `pulumi:"hostHeader"`
-	Oid pulumi.StringPtrInput `pulumi:"oid"`
-	Password pulumi.StringPtrInput `pulumi:"password"`
-	Path pulumi.StringPtrInput `pulumi:"path"`
-	Port pulumi.IntPtrInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Qname pulumi.StringPtrInput `pulumi:"qname"`
-	RemainingDays pulumi.IntPtrInput `pulumi:"remainingDays"`
-	Sni pulumi.BoolPtrInput `pulumi:"sni"`
-	SnmpVersion pulumi.StringPtrInput `pulumi:"snmpVersion"`
-	Status pulumi.IntPtrInput `pulumi:"status"`
-	Username pulumi.StringPtrInput `pulumi:"username"`
+	HostHeader    pulumi.StringPtrInput `pulumi:"hostHeader"`
+	Oid           pulumi.StringPtrInput `pulumi:"oid"`
+	Password      pulumi.StringPtrInput `pulumi:"password"`
+	Path          pulumi.StringPtrInput `pulumi:"path"`
+	Port          pulumi.IntPtrInput    `pulumi:"port"`
+	Protocol      pulumi.StringInput    `pulumi:"protocol"`
+	Qname         pulumi.StringPtrInput `pulumi:"qname"`
+	RemainingDays pulumi.IntPtrInput    `pulumi:"remainingDays"`
+	Sni           pulumi.BoolPtrInput   `pulumi:"sni"`
+	SnmpVersion   pulumi.StringPtrInput `pulumi:"snmpVersion"`
+	Status        pulumi.IntPtrInput    `pulumi:"status"`
+	Username      pulumi.StringPtrInput `pulumi:"username"`
 }
 
 func (SimpleMonitorHealthCheckArgs) ElementType() reflect.Type {
@@ -4267,7 +4283,8 @@ type SimpleMonitorHealthCheckPtrInput interface {
 
 type simpleMonitorHealthCheckPtrType SimpleMonitorHealthCheckArgs
 
-func SimpleMonitorHealthCheckPtr(v *SimpleMonitorHealthCheckArgs) SimpleMonitorHealthCheckPtrInput {	return (*simpleMonitorHealthCheckPtrType)(v)
+func SimpleMonitorHealthCheckPtr(v *SimpleMonitorHealthCheckArgs) SimpleMonitorHealthCheckPtrInput {
+	return (*simpleMonitorHealthCheckPtrType)(v)
 }
 
 func (*simpleMonitorHealthCheckPtrType) ElementType() reflect.Type {
@@ -4282,7 +4299,7 @@ func (i *simpleMonitorHealthCheckPtrType) ToSimpleMonitorHealthCheckPtrOutputWit
 	return pulumi.ToOutputWithContext(ctx, i).(SimpleMonitorHealthCheckPtrOutput)
 }
 
-type SimpleMonitorHealthCheckOutput struct { *pulumi.OutputState }
+type SimpleMonitorHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (SimpleMonitorHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*SimpleMonitorHealthCheck)(nil)).Elem()
@@ -4306,62 +4323,62 @@ func (o SimpleMonitorHealthCheckOutput) ToSimpleMonitorHealthCheckPtrOutputWithC
 	}).(SimpleMonitorHealthCheckPtrOutput)
 }
 func (o SimpleMonitorHealthCheckOutput) Community() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Community }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Community }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) ExcepctedData() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.ExcepctedData }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.ExcepctedData }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Oid() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Oid }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Oid }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Password }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Qname() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Qname }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Qname }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) RemainingDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.RemainingDays }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.RemainingDays }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Sni() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *bool { return v.Sni }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *bool { return v.Sni }).(pulumi.BoolPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) SnmpVersion() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.SnmpVersion }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.SnmpVersion }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Status() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.Status }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.Status }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckOutput) Username() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Username }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
 
-type SimpleMonitorHealthCheckPtrOutput struct { *pulumi.OutputState}
+type SimpleMonitorHealthCheckPtrOutput struct{ *pulumi.OutputState }
 
 func (SimpleMonitorHealthCheckPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**SimpleMonitorHealthCheck)(nil)).Elem()
@@ -4376,70 +4393,70 @@ func (o SimpleMonitorHealthCheckPtrOutput) ToSimpleMonitorHealthCheckPtrOutputWi
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Elem() SimpleMonitorHealthCheckOutput {
-	return o.ApplyT(func (v *SimpleMonitorHealthCheck) SimpleMonitorHealthCheck { return *v }).(SimpleMonitorHealthCheckOutput)
+	return o.ApplyT(func(v *SimpleMonitorHealthCheck) SimpleMonitorHealthCheck { return *v }).(SimpleMonitorHealthCheckOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Community() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Community }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Community }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) ExcepctedData() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.ExcepctedData }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.ExcepctedData }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) HostHeader() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Oid() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Oid }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Oid }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Password() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Password }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Path() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Qname() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Qname }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Qname }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) RemainingDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.RemainingDays }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.RemainingDays }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Sni() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *bool { return v.Sni }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *bool { return v.Sni }).(pulumi.BoolPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) SnmpVersion() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.SnmpVersion }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.SnmpVersion }).(pulumi.StringPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Status() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *int { return v.Status }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.Status }).(pulumi.IntPtrOutput)
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Username() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v SimpleMonitorHealthCheck) *string { return v.Username }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
 
 type VPCRouterDhcpServer struct {
-	DnsServers []string `pulumi:"dnsServers"`
-	InterfaceIndex int `pulumi:"interfaceIndex"`
-	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	DnsServers     []string `pulumi:"dnsServers"`
+	InterfaceIndex int      `pulumi:"interfaceIndex"`
+	RangeStart     string   `pulumi:"rangeStart"`
+	RangeStop      string   `pulumi:"rangeStop"`
 }
 
 type VPCRouterDhcpServerInput interface {
@@ -4450,10 +4467,10 @@ type VPCRouterDhcpServerInput interface {
 }
 
 type VPCRouterDhcpServerArgs struct {
-	DnsServers pulumi.StringArrayInput `pulumi:"dnsServers"`
-	InterfaceIndex pulumi.IntInput `pulumi:"interfaceIndex"`
-	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	DnsServers     pulumi.StringArrayInput `pulumi:"dnsServers"`
+	InterfaceIndex pulumi.IntInput         `pulumi:"interfaceIndex"`
+	RangeStart     pulumi.StringInput      `pulumi:"rangeStart"`
+	RangeStop      pulumi.StringInput      `pulumi:"rangeStop"`
 }
 
 func (VPCRouterDhcpServerArgs) ElementType() reflect.Type {
@@ -4489,7 +4506,7 @@ func (i VPCRouterDhcpServerArray) ToVPCRouterDhcpServerArrayOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterDhcpServerArrayOutput)
 }
 
-type VPCRouterDhcpServerOutput struct { *pulumi.OutputState }
+type VPCRouterDhcpServerOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterDhcpServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterDhcpServer)(nil)).Elem()
@@ -4504,22 +4521,22 @@ func (o VPCRouterDhcpServerOutput) ToVPCRouterDhcpServerOutputWithContext(ctx co
 }
 
 func (o VPCRouterDhcpServerOutput) DnsServers() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterDhcpServer) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterDhcpServer) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterDhcpServerOutput) InterfaceIndex() pulumi.IntOutput {
-	return o.ApplyT(func (v VPCRouterDhcpServer) int { return v.InterfaceIndex }).(pulumi.IntOutput)
+	return o.ApplyT(func(v VPCRouterDhcpServer) int { return v.InterfaceIndex }).(pulumi.IntOutput)
 }
 
 func (o VPCRouterDhcpServerOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterDhcpServer) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterDhcpServer) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterDhcpServerOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterDhcpServer) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterDhcpServer) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type VPCRouterDhcpServerArrayOutput struct { *pulumi.OutputState}
+type VPCRouterDhcpServerArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterDhcpServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterDhcpServer)(nil)).Elem()
@@ -4534,13 +4551,13 @@ func (o VPCRouterDhcpServerArrayOutput) ToVPCRouterDhcpServerArrayOutputWithCont
 }
 
 func (o VPCRouterDhcpServerArrayOutput) Index(i pulumi.IntInput) VPCRouterDhcpServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterDhcpServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterDhcpServer {
 		return vs[0].([]VPCRouterDhcpServer)[vs[1].(int)]
 	}).(VPCRouterDhcpServerOutput)
 }
 
 type VPCRouterDhcpStaticMapping struct {
-	IpAddress string `pulumi:"ipAddress"`
+	IpAddress  string `pulumi:"ipAddress"`
 	MacAddress string `pulumi:"macAddress"`
 }
 
@@ -4552,7 +4569,7 @@ type VPCRouterDhcpStaticMappingInput interface {
 }
 
 type VPCRouterDhcpStaticMappingArgs struct {
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	IpAddress  pulumi.StringInput `pulumi:"ipAddress"`
 	MacAddress pulumi.StringInput `pulumi:"macAddress"`
 }
 
@@ -4589,7 +4606,7 @@ func (i VPCRouterDhcpStaticMappingArray) ToVPCRouterDhcpStaticMappingArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterDhcpStaticMappingArrayOutput)
 }
 
-type VPCRouterDhcpStaticMappingOutput struct { *pulumi.OutputState }
+type VPCRouterDhcpStaticMappingOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterDhcpStaticMappingOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterDhcpStaticMapping)(nil)).Elem()
@@ -4604,14 +4621,14 @@ func (o VPCRouterDhcpStaticMappingOutput) ToVPCRouterDhcpStaticMappingOutputWith
 }
 
 func (o VPCRouterDhcpStaticMappingOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterDhcpStaticMapping) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterDhcpStaticMapping) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterDhcpStaticMappingOutput) MacAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterDhcpStaticMapping) string { return v.MacAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterDhcpStaticMapping) string { return v.MacAddress }).(pulumi.StringOutput)
 }
 
-type VPCRouterDhcpStaticMappingArrayOutput struct { *pulumi.OutputState}
+type VPCRouterDhcpStaticMappingArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterDhcpStaticMappingArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterDhcpStaticMapping)(nil)).Elem()
@@ -4626,15 +4643,15 @@ func (o VPCRouterDhcpStaticMappingArrayOutput) ToVPCRouterDhcpStaticMappingArray
 }
 
 func (o VPCRouterDhcpStaticMappingArrayOutput) Index(i pulumi.IntInput) VPCRouterDhcpStaticMappingOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterDhcpStaticMapping {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterDhcpStaticMapping {
 		return vs[0].([]VPCRouterDhcpStaticMapping)[vs[1].(int)]
 	}).(VPCRouterDhcpStaticMappingOutput)
 }
 
 type VPCRouterFirewall struct {
-	Direction string `pulumi:"direction"`
-	Expressions []VPCRouterFirewallExpression `pulumi:"expressions"`
-	InterfaceIndex *int `pulumi:"interfaceIndex"`
+	Direction      string                        `pulumi:"direction"`
+	Expressions    []VPCRouterFirewallExpression `pulumi:"expressions"`
+	InterfaceIndex *int                          `pulumi:"interfaceIndex"`
 }
 
 type VPCRouterFirewallInput interface {
@@ -4645,9 +4662,9 @@ type VPCRouterFirewallInput interface {
 }
 
 type VPCRouterFirewallArgs struct {
-	Direction pulumi.StringInput `pulumi:"direction"`
-	Expressions VPCRouterFirewallExpressionArrayInput `pulumi:"expressions"`
-	InterfaceIndex pulumi.IntPtrInput `pulumi:"interfaceIndex"`
+	Direction      pulumi.StringInput                    `pulumi:"direction"`
+	Expressions    VPCRouterFirewallExpressionArrayInput `pulumi:"expressions"`
+	InterfaceIndex pulumi.IntPtrInput                    `pulumi:"interfaceIndex"`
 }
 
 func (VPCRouterFirewallArgs) ElementType() reflect.Type {
@@ -4683,7 +4700,7 @@ func (i VPCRouterFirewallArray) ToVPCRouterFirewallArrayOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterFirewallArrayOutput)
 }
 
-type VPCRouterFirewallOutput struct { *pulumi.OutputState }
+type VPCRouterFirewallOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterFirewallOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterFirewall)(nil)).Elem()
@@ -4698,18 +4715,18 @@ func (o VPCRouterFirewallOutput) ToVPCRouterFirewallOutputWithContext(ctx contex
 }
 
 func (o VPCRouterFirewallOutput) Direction() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterFirewall) string { return v.Direction }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterFirewall) string { return v.Direction }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterFirewallOutput) Expressions() VPCRouterFirewallExpressionArrayOutput {
-	return o.ApplyT(func (v VPCRouterFirewall) []VPCRouterFirewallExpression { return v.Expressions }).(VPCRouterFirewallExpressionArrayOutput)
+	return o.ApplyT(func(v VPCRouterFirewall) []VPCRouterFirewallExpression { return v.Expressions }).(VPCRouterFirewallExpressionArrayOutput)
 }
 
 func (o VPCRouterFirewallOutput) InterfaceIndex() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewall) *int { return v.InterfaceIndex }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewall) *int { return v.InterfaceIndex }).(pulumi.IntPtrOutput)
 }
 
-type VPCRouterFirewallArrayOutput struct { *pulumi.OutputState}
+type VPCRouterFirewallArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterFirewallArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterFirewall)(nil)).Elem()
@@ -4724,20 +4741,20 @@ func (o VPCRouterFirewallArrayOutput) ToVPCRouterFirewallArrayOutputWithContext(
 }
 
 func (o VPCRouterFirewallArrayOutput) Index(i pulumi.IntInput) VPCRouterFirewallOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterFirewall {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterFirewall {
 		return vs[0].([]VPCRouterFirewall)[vs[1].(int)]
 	}).(VPCRouterFirewallOutput)
 }
 
 type VPCRouterFirewallExpression struct {
-	Allow bool `pulumi:"allow"`
-	Description *string `pulumi:"description"`
+	Allow              bool    `pulumi:"allow"`
+	Description        *string `pulumi:"description"`
 	DestinationNetwork *string `pulumi:"destinationNetwork"`
-	DestinationPort *string `pulumi:"destinationPort"`
-	Logging *bool `pulumi:"logging"`
-	Protocol string `pulumi:"protocol"`
-	SourceNetwork *string `pulumi:"sourceNetwork"`
-	SourcePort *string `pulumi:"sourcePort"`
+	DestinationPort    *string `pulumi:"destinationPort"`
+	Logging            *bool   `pulumi:"logging"`
+	Protocol           string  `pulumi:"protocol"`
+	SourceNetwork      *string `pulumi:"sourceNetwork"`
+	SourcePort         *string `pulumi:"sourcePort"`
 }
 
 type VPCRouterFirewallExpressionInput interface {
@@ -4748,14 +4765,14 @@ type VPCRouterFirewallExpressionInput interface {
 }
 
 type VPCRouterFirewallExpressionArgs struct {
-	Allow pulumi.BoolInput `pulumi:"allow"`
-	Description pulumi.StringPtrInput `pulumi:"description"`
+	Allow              pulumi.BoolInput      `pulumi:"allow"`
+	Description        pulumi.StringPtrInput `pulumi:"description"`
 	DestinationNetwork pulumi.StringPtrInput `pulumi:"destinationNetwork"`
-	DestinationPort pulumi.StringPtrInput `pulumi:"destinationPort"`
-	Logging pulumi.BoolPtrInput `pulumi:"logging"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	SourceNetwork pulumi.StringPtrInput `pulumi:"sourceNetwork"`
-	SourcePort pulumi.StringPtrInput `pulumi:"sourcePort"`
+	DestinationPort    pulumi.StringPtrInput `pulumi:"destinationPort"`
+	Logging            pulumi.BoolPtrInput   `pulumi:"logging"`
+	Protocol           pulumi.StringInput    `pulumi:"protocol"`
+	SourceNetwork      pulumi.StringPtrInput `pulumi:"sourceNetwork"`
+	SourcePort         pulumi.StringPtrInput `pulumi:"sourcePort"`
 }
 
 func (VPCRouterFirewallExpressionArgs) ElementType() reflect.Type {
@@ -4791,7 +4808,7 @@ func (i VPCRouterFirewallExpressionArray) ToVPCRouterFirewallExpressionArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterFirewallExpressionArrayOutput)
 }
 
-type VPCRouterFirewallExpressionOutput struct { *pulumi.OutputState }
+type VPCRouterFirewallExpressionOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterFirewallExpressionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterFirewallExpression)(nil)).Elem()
@@ -4806,38 +4823,38 @@ func (o VPCRouterFirewallExpressionOutput) ToVPCRouterFirewallExpressionOutputWi
 }
 
 func (o VPCRouterFirewallExpressionOutput) Allow() pulumi.BoolOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) bool { return v.Allow }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) bool { return v.Allow }).(pulumi.BoolOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) DestinationNetwork() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *string { return v.DestinationNetwork }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *string { return v.DestinationNetwork }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) DestinationPort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) Logging() pulumi.BoolPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *bool { return v.Logging }).(pulumi.BoolPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *bool { return v.Logging }).(pulumi.BoolPtrOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) SourceNetwork() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *string { return v.SourceNetwork }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterFirewallExpressionOutput) SourcePort() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterFirewallExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterFirewallExpression) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
 }
 
-type VPCRouterFirewallExpressionArrayOutput struct { *pulumi.OutputState}
+type VPCRouterFirewallExpressionArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterFirewallExpressionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterFirewallExpression)(nil)).Elem()
@@ -4852,15 +4869,15 @@ func (o VPCRouterFirewallExpressionArrayOutput) ToVPCRouterFirewallExpressionArr
 }
 
 func (o VPCRouterFirewallExpressionArrayOutput) Index(i pulumi.IntInput) VPCRouterFirewallExpressionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterFirewallExpression {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterFirewallExpression {
 		return vs[0].([]VPCRouterFirewallExpression)[vs[1].(int)]
 	}).(VPCRouterFirewallExpressionOutput)
 }
 
 type VPCRouterL2tp struct {
 	PreSharedSecret string `pulumi:"preSharedSecret"`
-	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	RangeStart      string `pulumi:"rangeStart"`
+	RangeStop       string `pulumi:"rangeStop"`
 }
 
 type VPCRouterL2tpInput interface {
@@ -4872,8 +4889,8 @@ type VPCRouterL2tpInput interface {
 
 type VPCRouterL2tpArgs struct {
 	PreSharedSecret pulumi.StringInput `pulumi:"preSharedSecret"`
-	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	RangeStart      pulumi.StringInput `pulumi:"rangeStart"`
+	RangeStop       pulumi.StringInput `pulumi:"rangeStop"`
 }
 
 func (VPCRouterL2tpArgs) ElementType() reflect.Type {
@@ -4905,7 +4922,8 @@ type VPCRouterL2tpPtrInput interface {
 
 type vpcrouterL2tpPtrType VPCRouterL2tpArgs
 
-func VPCRouterL2tpPtr(v *VPCRouterL2tpArgs) VPCRouterL2tpPtrInput {	return (*vpcrouterL2tpPtrType)(v)
+func VPCRouterL2tpPtr(v *VPCRouterL2tpArgs) VPCRouterL2tpPtrInput {
+	return (*vpcrouterL2tpPtrType)(v)
 }
 
 func (*vpcrouterL2tpPtrType) ElementType() reflect.Type {
@@ -4920,7 +4938,7 @@ func (i *vpcrouterL2tpPtrType) ToVPCRouterL2tpPtrOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterL2tpPtrOutput)
 }
 
-type VPCRouterL2tpOutput struct { *pulumi.OutputState }
+type VPCRouterL2tpOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterL2tpOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterL2tp)(nil)).Elem()
@@ -4944,18 +4962,18 @@ func (o VPCRouterL2tpOutput) ToVPCRouterL2tpPtrOutputWithContext(ctx context.Con
 	}).(VPCRouterL2tpPtrOutput)
 }
 func (o VPCRouterL2tpOutput) PreSharedSecret() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterL2tpOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterL2tpOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type VPCRouterL2tpPtrOutput struct { *pulumi.OutputState}
+type VPCRouterL2tpPtrOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterL2tpPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**VPCRouterL2tp)(nil)).Elem()
@@ -4970,27 +4988,27 @@ func (o VPCRouterL2tpPtrOutput) ToVPCRouterL2tpPtrOutputWithContext(ctx context.
 }
 
 func (o VPCRouterL2tpPtrOutput) Elem() VPCRouterL2tpOutput {
-	return o.ApplyT(func (v *VPCRouterL2tp) VPCRouterL2tp { return *v }).(VPCRouterL2tpOutput)
+	return o.ApplyT(func(v *VPCRouterL2tp) VPCRouterL2tp { return *v }).(VPCRouterL2tpOutput)
 }
 
 func (o VPCRouterL2tpPtrOutput) PreSharedSecret() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterL2tpPtrOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterL2tpPtrOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
 type VPCRouterPortForwarding struct {
 	Description *string `pulumi:"description"`
-	PrivateIp string `pulumi:"privateIp"`
-	PrivatePort int `pulumi:"privatePort"`
-	Protocol string `pulumi:"protocol"`
-	PublicPort int `pulumi:"publicPort"`
+	PrivateIp   string  `pulumi:"privateIp"`
+	PrivatePort int     `pulumi:"privatePort"`
+	Protocol    string  `pulumi:"protocol"`
+	PublicPort  int     `pulumi:"publicPort"`
 }
 
 type VPCRouterPortForwardingInput interface {
@@ -5002,10 +5020,10 @@ type VPCRouterPortForwardingInput interface {
 
 type VPCRouterPortForwardingArgs struct {
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
-	PrivatePort pulumi.IntInput `pulumi:"privatePort"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	PublicPort pulumi.IntInput `pulumi:"publicPort"`
+	PrivateIp   pulumi.StringInput    `pulumi:"privateIp"`
+	PrivatePort pulumi.IntInput       `pulumi:"privatePort"`
+	Protocol    pulumi.StringInput    `pulumi:"protocol"`
+	PublicPort  pulumi.IntInput       `pulumi:"publicPort"`
 }
 
 func (VPCRouterPortForwardingArgs) ElementType() reflect.Type {
@@ -5041,7 +5059,7 @@ func (i VPCRouterPortForwardingArray) ToVPCRouterPortForwardingArrayOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterPortForwardingArrayOutput)
 }
 
-type VPCRouterPortForwardingOutput struct { *pulumi.OutputState }
+type VPCRouterPortForwardingOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPortForwardingOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterPortForwarding)(nil)).Elem()
@@ -5056,26 +5074,26 @@ func (o VPCRouterPortForwardingOutput) ToVPCRouterPortForwardingOutputWithContex
 }
 
 func (o VPCRouterPortForwardingOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPortForwarding) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPortForwarding) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterPortForwardingOutput) PrivateIp() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPortForwarding) string { return v.PrivateIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPortForwarding) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterPortForwardingOutput) PrivatePort() pulumi.IntOutput {
-	return o.ApplyT(func (v VPCRouterPortForwarding) int { return v.PrivatePort }).(pulumi.IntOutput)
+	return o.ApplyT(func(v VPCRouterPortForwarding) int { return v.PrivatePort }).(pulumi.IntOutput)
 }
 
 func (o VPCRouterPortForwardingOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPortForwarding) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPortForwarding) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterPortForwardingOutput) PublicPort() pulumi.IntOutput {
-	return o.ApplyT(func (v VPCRouterPortForwarding) int { return v.PublicPort }).(pulumi.IntOutput)
+	return o.ApplyT(func(v VPCRouterPortForwarding) int { return v.PublicPort }).(pulumi.IntOutput)
 }
 
-type VPCRouterPortForwardingArrayOutput struct { *pulumi.OutputState}
+type VPCRouterPortForwardingArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPortForwardingArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterPortForwarding)(nil)).Elem()
@@ -5090,14 +5108,14 @@ func (o VPCRouterPortForwardingArrayOutput) ToVPCRouterPortForwardingArrayOutput
 }
 
 func (o VPCRouterPortForwardingArrayOutput) Index(i pulumi.IntInput) VPCRouterPortForwardingOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterPortForwarding {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterPortForwarding {
 		return vs[0].([]VPCRouterPortForwarding)[vs[1].(int)]
 	}).(VPCRouterPortForwardingOutput)
 }
 
 type VPCRouterPptp struct {
 	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	RangeStop  string `pulumi:"rangeStop"`
 }
 
 type VPCRouterPptpInput interface {
@@ -5109,7 +5127,7 @@ type VPCRouterPptpInput interface {
 
 type VPCRouterPptpArgs struct {
 	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	RangeStop  pulumi.StringInput `pulumi:"rangeStop"`
 }
 
 func (VPCRouterPptpArgs) ElementType() reflect.Type {
@@ -5141,7 +5159,8 @@ type VPCRouterPptpPtrInput interface {
 
 type vpcrouterPptpPtrType VPCRouterPptpArgs
 
-func VPCRouterPptpPtr(v *VPCRouterPptpArgs) VPCRouterPptpPtrInput {	return (*vpcrouterPptpPtrType)(v)
+func VPCRouterPptpPtr(v *VPCRouterPptpArgs) VPCRouterPptpPtrInput {
+	return (*vpcrouterPptpPtrType)(v)
 }
 
 func (*vpcrouterPptpPtrType) ElementType() reflect.Type {
@@ -5156,7 +5175,7 @@ func (i *vpcrouterPptpPtrType) ToVPCRouterPptpPtrOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterPptpPtrOutput)
 }
 
-type VPCRouterPptpOutput struct { *pulumi.OutputState }
+type VPCRouterPptpOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPptpOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterPptp)(nil)).Elem()
@@ -5180,14 +5199,14 @@ func (o VPCRouterPptpOutput) ToVPCRouterPptpPtrOutputWithContext(ctx context.Con
 	}).(VPCRouterPptpPtrOutput)
 }
 func (o VPCRouterPptpOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterPptpOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type VPCRouterPptpPtrOutput struct { *pulumi.OutputState}
+type VPCRouterPptpPtrOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPptpPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**VPCRouterPptp)(nil)).Elem()
@@ -5202,23 +5221,23 @@ func (o VPCRouterPptpPtrOutput) ToVPCRouterPptpPtrOutputWithContext(ctx context.
 }
 
 func (o VPCRouterPptpPtrOutput) Elem() VPCRouterPptpOutput {
-	return o.ApplyT(func (v *VPCRouterPptp) VPCRouterPptp { return *v }).(VPCRouterPptpOutput)
+	return o.ApplyT(func(v *VPCRouterPptp) VPCRouterPptp { return *v }).(VPCRouterPptpOutput)
 }
 
 func (o VPCRouterPptpPtrOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterPptpPtrOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
 type VPCRouterPrivateNetworkInterface struct {
-	Index int `pulumi:"index"`
+	Index       int      `pulumi:"index"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
-	Vip *string `pulumi:"vip"`
+	Netmask     int      `pulumi:"netmask"`
+	SwitchId    string   `pulumi:"switchId"`
+	Vip         *string  `pulumi:"vip"`
 }
 
 type VPCRouterPrivateNetworkInterfaceInput interface {
@@ -5229,11 +5248,11 @@ type VPCRouterPrivateNetworkInterfaceInput interface {
 }
 
 type VPCRouterPrivateNetworkInterfaceArgs struct {
-	Index pulumi.IntInput `pulumi:"index"`
+	Index       pulumi.IntInput         `pulumi:"index"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
-	Vip pulumi.StringPtrInput `pulumi:"vip"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	SwitchId    pulumi.StringInput      `pulumi:"switchId"`
+	Vip         pulumi.StringPtrInput   `pulumi:"vip"`
 }
 
 func (VPCRouterPrivateNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -5269,7 +5288,7 @@ func (i VPCRouterPrivateNetworkInterfaceArray) ToVPCRouterPrivateNetworkInterfac
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterPrivateNetworkInterfaceArrayOutput)
 }
 
-type VPCRouterPrivateNetworkInterfaceOutput struct { *pulumi.OutputState }
+type VPCRouterPrivateNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPrivateNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterPrivateNetworkInterface)(nil)).Elem()
@@ -5284,26 +5303,26 @@ func (o VPCRouterPrivateNetworkInterfaceOutput) ToVPCRouterPrivateNetworkInterfa
 }
 
 func (o VPCRouterPrivateNetworkInterfaceOutput) Index() pulumi.IntOutput {
-	return o.ApplyT(func (v VPCRouterPrivateNetworkInterface) int { return v.Index }).(pulumi.IntOutput)
+	return o.ApplyT(func(v VPCRouterPrivateNetworkInterface) int { return v.Index }).(pulumi.IntOutput)
 }
 
 func (o VPCRouterPrivateNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterPrivateNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterPrivateNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterPrivateNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v VPCRouterPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v VPCRouterPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o VPCRouterPrivateNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterPrivateNetworkInterfaceOutput) Vip() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPrivateNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPrivateNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
 }
 
-type VPCRouterPrivateNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type VPCRouterPrivateNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPrivateNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterPrivateNetworkInterface)(nil)).Elem()
@@ -5318,17 +5337,17 @@ func (o VPCRouterPrivateNetworkInterfaceArrayOutput) ToVPCRouterPrivateNetworkIn
 }
 
 func (o VPCRouterPrivateNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) VPCRouterPrivateNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterPrivateNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterPrivateNetworkInterface {
 		return vs[0].([]VPCRouterPrivateNetworkInterface)[vs[1].(int)]
 	}).(VPCRouterPrivateNetworkInterfaceOutput)
 }
 
 type VPCRouterPublicNetworkInterface struct {
-	Aliases []string `pulumi:"aliases"`
+	Aliases     []string `pulumi:"aliases"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	SwitchId *string `pulumi:"switchId"`
-	Vip *string `pulumi:"vip"`
-	Vrid *int `pulumi:"vrid"`
+	SwitchId    *string  `pulumi:"switchId"`
+	Vip         *string  `pulumi:"vip"`
+	Vrid        *int     `pulumi:"vrid"`
 }
 
 type VPCRouterPublicNetworkInterfaceInput interface {
@@ -5339,11 +5358,11 @@ type VPCRouterPublicNetworkInterfaceInput interface {
 }
 
 type VPCRouterPublicNetworkInterfaceArgs struct {
-	Aliases pulumi.StringArrayInput `pulumi:"aliases"`
+	Aliases     pulumi.StringArrayInput `pulumi:"aliases"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	SwitchId pulumi.StringPtrInput `pulumi:"switchId"`
-	Vip pulumi.StringPtrInput `pulumi:"vip"`
-	Vrid pulumi.IntPtrInput `pulumi:"vrid"`
+	SwitchId    pulumi.StringPtrInput   `pulumi:"switchId"`
+	Vip         pulumi.StringPtrInput   `pulumi:"vip"`
+	Vrid        pulumi.IntPtrInput      `pulumi:"vrid"`
 }
 
 func (VPCRouterPublicNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -5375,7 +5394,8 @@ type VPCRouterPublicNetworkInterfacePtrInput interface {
 
 type vpcrouterPublicNetworkInterfacePtrType VPCRouterPublicNetworkInterfaceArgs
 
-func VPCRouterPublicNetworkInterfacePtr(v *VPCRouterPublicNetworkInterfaceArgs) VPCRouterPublicNetworkInterfacePtrInput {	return (*vpcrouterPublicNetworkInterfacePtrType)(v)
+func VPCRouterPublicNetworkInterfacePtr(v *VPCRouterPublicNetworkInterfaceArgs) VPCRouterPublicNetworkInterfacePtrInput {
+	return (*vpcrouterPublicNetworkInterfacePtrType)(v)
 }
 
 func (*vpcrouterPublicNetworkInterfacePtrType) ElementType() reflect.Type {
@@ -5390,7 +5410,7 @@ func (i *vpcrouterPublicNetworkInterfacePtrType) ToVPCRouterPublicNetworkInterfa
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterPublicNetworkInterfacePtrOutput)
 }
 
-type VPCRouterPublicNetworkInterfaceOutput struct { *pulumi.OutputState }
+type VPCRouterPublicNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPublicNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterPublicNetworkInterface)(nil)).Elem()
@@ -5414,26 +5434,26 @@ func (o VPCRouterPublicNetworkInterfaceOutput) ToVPCRouterPublicNetworkInterface
 	}).(VPCRouterPublicNetworkInterfacePtrOutput)
 }
 func (o VPCRouterPublicNetworkInterfaceOutput) Aliases() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfaceOutput) SwitchId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfaceOutput) Vip() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfaceOutput) Vrid() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *int { return v.Vrid }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *int { return v.Vrid }).(pulumi.IntPtrOutput)
 }
 
-type VPCRouterPublicNetworkInterfacePtrOutput struct { *pulumi.OutputState}
+type VPCRouterPublicNetworkInterfacePtrOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPublicNetworkInterfacePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**VPCRouterPublicNetworkInterface)(nil)).Elem()
@@ -5448,35 +5468,35 @@ func (o VPCRouterPublicNetworkInterfacePtrOutput) ToVPCRouterPublicNetworkInterf
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) Elem() VPCRouterPublicNetworkInterfaceOutput {
-	return o.ApplyT(func (v *VPCRouterPublicNetworkInterface) VPCRouterPublicNetworkInterface { return *v }).(VPCRouterPublicNetworkInterfaceOutput)
+	return o.ApplyT(func(v *VPCRouterPublicNetworkInterface) VPCRouterPublicNetworkInterface { return *v }).(VPCRouterPublicNetworkInterfaceOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) Aliases() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) SwitchId() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *string { return v.SwitchId }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) Vip() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *string { return v.Vip }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) Vrid() pulumi.IntPtrOutput {
-	return o.ApplyT(func (v VPCRouterPublicNetworkInterface) *int { return v.Vrid }).(pulumi.IntPtrOutput)
+	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *int { return v.Vrid }).(pulumi.IntPtrOutput)
 }
 
 type VPCRouterSiteToSiteVpn struct {
-	LocalPrefixes []string `pulumi:"localPrefixes"`
-	Peer string `pulumi:"peer"`
-	PreSharedSecret string `pulumi:"preSharedSecret"`
-	RemoteId string `pulumi:"remoteId"`
-	Routes []string `pulumi:"routes"`
+	LocalPrefixes   []string `pulumi:"localPrefixes"`
+	Peer            string   `pulumi:"peer"`
+	PreSharedSecret string   `pulumi:"preSharedSecret"`
+	RemoteId        string   `pulumi:"remoteId"`
+	Routes          []string `pulumi:"routes"`
 }
 
 type VPCRouterSiteToSiteVpnInput interface {
@@ -5487,11 +5507,11 @@ type VPCRouterSiteToSiteVpnInput interface {
 }
 
 type VPCRouterSiteToSiteVpnArgs struct {
-	LocalPrefixes pulumi.StringArrayInput `pulumi:"localPrefixes"`
-	Peer pulumi.StringInput `pulumi:"peer"`
-	PreSharedSecret pulumi.StringInput `pulumi:"preSharedSecret"`
-	RemoteId pulumi.StringInput `pulumi:"remoteId"`
-	Routes pulumi.StringArrayInput `pulumi:"routes"`
+	LocalPrefixes   pulumi.StringArrayInput `pulumi:"localPrefixes"`
+	Peer            pulumi.StringInput      `pulumi:"peer"`
+	PreSharedSecret pulumi.StringInput      `pulumi:"preSharedSecret"`
+	RemoteId        pulumi.StringInput      `pulumi:"remoteId"`
+	Routes          pulumi.StringArrayInput `pulumi:"routes"`
 }
 
 func (VPCRouterSiteToSiteVpnArgs) ElementType() reflect.Type {
@@ -5527,7 +5547,7 @@ func (i VPCRouterSiteToSiteVpnArray) ToVPCRouterSiteToSiteVpnArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterSiteToSiteVpnArrayOutput)
 }
 
-type VPCRouterSiteToSiteVpnOutput struct { *pulumi.OutputState }
+type VPCRouterSiteToSiteVpnOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterSiteToSiteVpnOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterSiteToSiteVpn)(nil)).Elem()
@@ -5542,26 +5562,26 @@ func (o VPCRouterSiteToSiteVpnOutput) ToVPCRouterSiteToSiteVpnOutputWithContext(
 }
 
 func (o VPCRouterSiteToSiteVpnOutput) LocalPrefixes() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterSiteToSiteVpn) []string { return v.LocalPrefixes }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterSiteToSiteVpn) []string { return v.LocalPrefixes }).(pulumi.StringArrayOutput)
 }
 
 func (o VPCRouterSiteToSiteVpnOutput) Peer() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterSiteToSiteVpn) string { return v.Peer }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterSiteToSiteVpn) string { return v.Peer }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterSiteToSiteVpnOutput) PreSharedSecret() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterSiteToSiteVpn) string { return v.PreSharedSecret }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterSiteToSiteVpn) string { return v.PreSharedSecret }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterSiteToSiteVpnOutput) RemoteId() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterSiteToSiteVpn) string { return v.RemoteId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterSiteToSiteVpn) string { return v.RemoteId }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterSiteToSiteVpnOutput) Routes() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v VPCRouterSiteToSiteVpn) []string { return v.Routes }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v VPCRouterSiteToSiteVpn) []string { return v.Routes }).(pulumi.StringArrayOutput)
 }
 
-type VPCRouterSiteToSiteVpnArrayOutput struct { *pulumi.OutputState}
+type VPCRouterSiteToSiteVpnArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterSiteToSiteVpnArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterSiteToSiteVpn)(nil)).Elem()
@@ -5576,15 +5596,15 @@ func (o VPCRouterSiteToSiteVpnArrayOutput) ToVPCRouterSiteToSiteVpnArrayOutputWi
 }
 
 func (o VPCRouterSiteToSiteVpnArrayOutput) Index(i pulumi.IntInput) VPCRouterSiteToSiteVpnOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterSiteToSiteVpn {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterSiteToSiteVpn {
 		return vs[0].([]VPCRouterSiteToSiteVpn)[vs[1].(int)]
 	}).(VPCRouterSiteToSiteVpnOutput)
 }
 
 type VPCRouterStaticNat struct {
 	Description *string `pulumi:"description"`
-	PrivateIp string `pulumi:"privateIp"`
-	PublicIp string `pulumi:"publicIp"`
+	PrivateIp   string  `pulumi:"privateIp"`
+	PublicIp    string  `pulumi:"publicIp"`
 }
 
 type VPCRouterStaticNatInput interface {
@@ -5596,8 +5616,8 @@ type VPCRouterStaticNatInput interface {
 
 type VPCRouterStaticNatArgs struct {
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
-	PublicIp pulumi.StringInput `pulumi:"publicIp"`
+	PrivateIp   pulumi.StringInput    `pulumi:"privateIp"`
+	PublicIp    pulumi.StringInput    `pulumi:"publicIp"`
 }
 
 func (VPCRouterStaticNatArgs) ElementType() reflect.Type {
@@ -5633,7 +5653,7 @@ func (i VPCRouterStaticNatArray) ToVPCRouterStaticNatArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterStaticNatArrayOutput)
 }
 
-type VPCRouterStaticNatOutput struct { *pulumi.OutputState }
+type VPCRouterStaticNatOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterStaticNatOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterStaticNat)(nil)).Elem()
@@ -5648,18 +5668,18 @@ func (o VPCRouterStaticNatOutput) ToVPCRouterStaticNatOutputWithContext(ctx cont
 }
 
 func (o VPCRouterStaticNatOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v VPCRouterStaticNat) *string { return v.Description }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v VPCRouterStaticNat) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 func (o VPCRouterStaticNatOutput) PrivateIp() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterStaticNat) string { return v.PrivateIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterStaticNat) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterStaticNatOutput) PublicIp() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterStaticNat) string { return v.PublicIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterStaticNat) string { return v.PublicIp }).(pulumi.StringOutput)
 }
 
-type VPCRouterStaticNatArrayOutput struct { *pulumi.OutputState}
+type VPCRouterStaticNatArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterStaticNatArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterStaticNat)(nil)).Elem()
@@ -5674,14 +5694,14 @@ func (o VPCRouterStaticNatArrayOutput) ToVPCRouterStaticNatArrayOutputWithContex
 }
 
 func (o VPCRouterStaticNatArrayOutput) Index(i pulumi.IntInput) VPCRouterStaticNatOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterStaticNat {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterStaticNat {
 		return vs[0].([]VPCRouterStaticNat)[vs[1].(int)]
 	}).(VPCRouterStaticNatOutput)
 }
 
 type VPCRouterStaticRoute struct {
 	NextHop string `pulumi:"nextHop"`
-	Prefix string `pulumi:"prefix"`
+	Prefix  string `pulumi:"prefix"`
 }
 
 type VPCRouterStaticRouteInput interface {
@@ -5693,7 +5713,7 @@ type VPCRouterStaticRouteInput interface {
 
 type VPCRouterStaticRouteArgs struct {
 	NextHop pulumi.StringInput `pulumi:"nextHop"`
-	Prefix pulumi.StringInput `pulumi:"prefix"`
+	Prefix  pulumi.StringInput `pulumi:"prefix"`
 }
 
 func (VPCRouterStaticRouteArgs) ElementType() reflect.Type {
@@ -5729,7 +5749,7 @@ func (i VPCRouterStaticRouteArray) ToVPCRouterStaticRouteArrayOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterStaticRouteArrayOutput)
 }
 
-type VPCRouterStaticRouteOutput struct { *pulumi.OutputState }
+type VPCRouterStaticRouteOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterStaticRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterStaticRoute)(nil)).Elem()
@@ -5744,14 +5764,14 @@ func (o VPCRouterStaticRouteOutput) ToVPCRouterStaticRouteOutputWithContext(ctx 
 }
 
 func (o VPCRouterStaticRouteOutput) NextHop() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterStaticRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
-type VPCRouterStaticRouteArrayOutput struct { *pulumi.OutputState}
+type VPCRouterStaticRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterStaticRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterStaticRoute)(nil)).Elem()
@@ -5766,13 +5786,13 @@ func (o VPCRouterStaticRouteArrayOutput) ToVPCRouterStaticRouteArrayOutputWithCo
 }
 
 func (o VPCRouterStaticRouteArrayOutput) Index(i pulumi.IntInput) VPCRouterStaticRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterStaticRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterStaticRoute {
 		return vs[0].([]VPCRouterStaticRoute)[vs[1].(int)]
 	}).(VPCRouterStaticRouteOutput)
 }
 
 type VPCRouterUser struct {
-	Name string `pulumi:"name"`
+	Name     string `pulumi:"name"`
 	Password string `pulumi:"password"`
 }
 
@@ -5784,7 +5804,7 @@ type VPCRouterUserInput interface {
 }
 
 type VPCRouterUserArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name     pulumi.StringInput `pulumi:"name"`
 	Password pulumi.StringInput `pulumi:"password"`
 }
 
@@ -5821,7 +5841,7 @@ func (i VPCRouterUserArray) ToVPCRouterUserArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterUserArrayOutput)
 }
 
-type VPCRouterUserOutput struct { *pulumi.OutputState }
+type VPCRouterUserOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterUserOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouterUser)(nil)).Elem()
@@ -5836,14 +5856,14 @@ func (o VPCRouterUserOutput) ToVPCRouterUserOutputWithContext(ctx context.Contex
 }
 
 func (o VPCRouterUserOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterUser) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o VPCRouterUserOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func (v VPCRouterUser) string { return v.Password }).(pulumi.StringOutput)
+	return o.ApplyT(func(v VPCRouterUser) string { return v.Password }).(pulumi.StringOutput)
 }
 
-type VPCRouterUserArrayOutput struct { *pulumi.OutputState}
+type VPCRouterUserArrayOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterUserArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]VPCRouterUser)(nil)).Elem()
@@ -5858,16 +5878,16 @@ func (o VPCRouterUserArrayOutput) ToVPCRouterUserArrayOutputWithContext(ctx cont
 }
 
 func (o VPCRouterUserArrayOutput) Index(i pulumi.IntInput) VPCRouterUserOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) VPCRouterUser {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterUser {
 		return vs[0].([]VPCRouterUser)[vs[1].(int)]
 	}).(VPCRouterUserOutput)
 }
 
 type GetArchiveFilter struct {
 	Conditions []GetArchiveFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                     `pulumi:"id"`
+	Names      []string                    `pulumi:"names"`
+	Tags       []string                    `pulumi:"tags"`
 }
 
 type GetArchiveFilterInput interface {
@@ -5879,9 +5899,9 @@ type GetArchiveFilterInput interface {
 
 type GetArchiveFilterArgs struct {
 	Conditions GetArchiveFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput               `pulumi:"id"`
+	Names      pulumi.StringArrayInput             `pulumi:"names"`
+	Tags       pulumi.StringArrayInput             `pulumi:"tags"`
 }
 
 func (GetArchiveFilterArgs) ElementType() reflect.Type {
@@ -5896,7 +5916,7 @@ func (i GetArchiveFilterArgs) ToGetArchiveFilterOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetArchiveFilterOutput)
 }
 
-type GetArchiveFilterOutput struct { *pulumi.OutputState }
+type GetArchiveFilterOutput struct{ *pulumi.OutputState }
 
 func (GetArchiveFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetArchiveFilter)(nil)).Elem()
@@ -5911,23 +5931,23 @@ func (o GetArchiveFilterOutput) ToGetArchiveFilterOutputWithContext(ctx context.
 }
 
 func (o GetArchiveFilterOutput) Conditions() GetArchiveFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetArchiveFilter) []GetArchiveFilterCondition { return v.Conditions }).(GetArchiveFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetArchiveFilter) []GetArchiveFilterCondition { return v.Conditions }).(GetArchiveFilterConditionArrayOutput)
 }
 
 func (o GetArchiveFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetArchiveFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetArchiveFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetArchiveFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetArchiveFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetArchiveFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetArchiveFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetArchiveFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetArchiveFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetArchiveFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -5939,7 +5959,7 @@ type GetArchiveFilterConditionInput interface {
 }
 
 type GetArchiveFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -5976,7 +5996,7 @@ func (i GetArchiveFilterConditionArray) ToGetArchiveFilterConditionArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetArchiveFilterConditionArrayOutput)
 }
 
-type GetArchiveFilterConditionOutput struct { *pulumi.OutputState }
+type GetArchiveFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetArchiveFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetArchiveFilterCondition)(nil)).Elem()
@@ -5991,14 +6011,14 @@ func (o GetArchiveFilterConditionOutput) ToGetArchiveFilterConditionOutputWithCo
 }
 
 func (o GetArchiveFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetArchiveFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetArchiveFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetArchiveFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetArchiveFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetArchiveFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetArchiveFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetArchiveFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetArchiveFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetArchiveFilterCondition)(nil)).Elem()
@@ -6013,15 +6033,15 @@ func (o GetArchiveFilterConditionArrayOutput) ToGetArchiveFilterConditionArrayOu
 }
 
 func (o GetArchiveFilterConditionArrayOutput) Index(i pulumi.IntInput) GetArchiveFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetArchiveFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArchiveFilterCondition {
 		return vs[0].([]GetArchiveFilterCondition)[vs[1].(int)]
 	}).(GetArchiveFilterConditionOutput)
 }
 
 type GetBridgeFilter struct {
 	Conditions []GetBridgeFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
+	Id         *string                    `pulumi:"id"`
+	Names      []string                   `pulumi:"names"`
 }
 
 type GetBridgeFilterInput interface {
@@ -6033,8 +6053,8 @@ type GetBridgeFilterInput interface {
 
 type GetBridgeFilterArgs struct {
 	Conditions GetBridgeFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
+	Id         pulumi.StringPtrInput              `pulumi:"id"`
+	Names      pulumi.StringArrayInput            `pulumi:"names"`
 }
 
 func (GetBridgeFilterArgs) ElementType() reflect.Type {
@@ -6049,7 +6069,7 @@ func (i GetBridgeFilterArgs) ToGetBridgeFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetBridgeFilterOutput)
 }
 
-type GetBridgeFilterOutput struct { *pulumi.OutputState }
+type GetBridgeFilterOutput struct{ *pulumi.OutputState }
 
 func (GetBridgeFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetBridgeFilter)(nil)).Elem()
@@ -6064,19 +6084,19 @@ func (o GetBridgeFilterOutput) ToGetBridgeFilterOutputWithContext(ctx context.Co
 }
 
 func (o GetBridgeFilterOutput) Conditions() GetBridgeFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetBridgeFilter) []GetBridgeFilterCondition { return v.Conditions }).(GetBridgeFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetBridgeFilter) []GetBridgeFilterCondition { return v.Conditions }).(GetBridgeFilterConditionArrayOutput)
 }
 
 func (o GetBridgeFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetBridgeFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetBridgeFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetBridgeFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetBridgeFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetBridgeFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 type GetBridgeFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -6088,7 +6108,7 @@ type GetBridgeFilterConditionInput interface {
 }
 
 type GetBridgeFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -6125,7 +6145,7 @@ func (i GetBridgeFilterConditionArray) ToGetBridgeFilterConditionArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetBridgeFilterConditionArrayOutput)
 }
 
-type GetBridgeFilterConditionOutput struct { *pulumi.OutputState }
+type GetBridgeFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetBridgeFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetBridgeFilterCondition)(nil)).Elem()
@@ -6140,14 +6160,14 @@ func (o GetBridgeFilterConditionOutput) ToGetBridgeFilterConditionOutputWithCont
 }
 
 func (o GetBridgeFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetBridgeFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetBridgeFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetBridgeFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetBridgeFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetBridgeFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetBridgeFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetBridgeFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetBridgeFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetBridgeFilterCondition)(nil)).Elem()
@@ -6162,16 +6182,16 @@ func (o GetBridgeFilterConditionArrayOutput) ToGetBridgeFilterConditionArrayOutp
 }
 
 func (o GetBridgeFilterConditionArrayOutput) Index(i pulumi.IntInput) GetBridgeFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetBridgeFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBridgeFilterCondition {
 		return vs[0].([]GetBridgeFilterCondition)[vs[1].(int)]
 	}).(GetBridgeFilterConditionOutput)
 }
 
 type GetCDROMFilter struct {
 	Conditions []GetCDROMFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                   `pulumi:"id"`
+	Names      []string                  `pulumi:"names"`
+	Tags       []string                  `pulumi:"tags"`
 }
 
 type GetCDROMFilterInput interface {
@@ -6183,9 +6203,9 @@ type GetCDROMFilterInput interface {
 
 type GetCDROMFilterArgs struct {
 	Conditions GetCDROMFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput             `pulumi:"id"`
+	Names      pulumi.StringArrayInput           `pulumi:"names"`
+	Tags       pulumi.StringArrayInput           `pulumi:"tags"`
 }
 
 func (GetCDROMFilterArgs) ElementType() reflect.Type {
@@ -6200,7 +6220,7 @@ func (i GetCDROMFilterArgs) ToGetCDROMFilterOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(GetCDROMFilterOutput)
 }
 
-type GetCDROMFilterOutput struct { *pulumi.OutputState }
+type GetCDROMFilterOutput struct{ *pulumi.OutputState }
 
 func (GetCDROMFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetCDROMFilter)(nil)).Elem()
@@ -6215,23 +6235,23 @@ func (o GetCDROMFilterOutput) ToGetCDROMFilterOutputWithContext(ctx context.Cont
 }
 
 func (o GetCDROMFilterOutput) Conditions() GetCDROMFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetCDROMFilter) []GetCDROMFilterCondition { return v.Conditions }).(GetCDROMFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetCDROMFilter) []GetCDROMFilterCondition { return v.Conditions }).(GetCDROMFilterConditionArrayOutput)
 }
 
 func (o GetCDROMFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetCDROMFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetCDROMFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetCDROMFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetCDROMFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetCDROMFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetCDROMFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetCDROMFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetCDROMFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetCDROMFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -6243,7 +6263,7 @@ type GetCDROMFilterConditionInput interface {
 }
 
 type GetCDROMFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -6280,7 +6300,7 @@ func (i GetCDROMFilterConditionArray) ToGetCDROMFilterConditionArrayOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(GetCDROMFilterConditionArrayOutput)
 }
 
-type GetCDROMFilterConditionOutput struct { *pulumi.OutputState }
+type GetCDROMFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetCDROMFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetCDROMFilterCondition)(nil)).Elem()
@@ -6295,14 +6315,14 @@ func (o GetCDROMFilterConditionOutput) ToGetCDROMFilterConditionOutputWithContex
 }
 
 func (o GetCDROMFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetCDROMFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetCDROMFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetCDROMFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetCDROMFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetCDROMFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetCDROMFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetCDROMFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetCDROMFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetCDROMFilterCondition)(nil)).Elem()
@@ -6317,16 +6337,16 @@ func (o GetCDROMFilterConditionArrayOutput) ToGetCDROMFilterConditionArrayOutput
 }
 
 func (o GetCDROMFilterConditionArrayOutput) Index(i pulumi.IntInput) GetCDROMFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetCDROMFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCDROMFilterCondition {
 		return vs[0].([]GetCDROMFilterCondition)[vs[1].(int)]
 	}).(GetCDROMFilterConditionOutput)
 }
 
 type GetContainerRegistryFilter struct {
 	Conditions []GetContainerRegistryFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                               `pulumi:"id"`
+	Names      []string                              `pulumi:"names"`
+	Tags       []string                              `pulumi:"tags"`
 }
 
 type GetContainerRegistryFilterInput interface {
@@ -6338,9 +6358,9 @@ type GetContainerRegistryFilterInput interface {
 
 type GetContainerRegistryFilterArgs struct {
 	Conditions GetContainerRegistryFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                         `pulumi:"id"`
+	Names      pulumi.StringArrayInput                       `pulumi:"names"`
+	Tags       pulumi.StringArrayInput                       `pulumi:"tags"`
 }
 
 func (GetContainerRegistryFilterArgs) ElementType() reflect.Type {
@@ -6355,7 +6375,7 @@ func (i GetContainerRegistryFilterArgs) ToGetContainerRegistryFilterOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryFilterOutput)
 }
 
-type GetContainerRegistryFilterOutput struct { *pulumi.OutputState }
+type GetContainerRegistryFilterOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetContainerRegistryFilter)(nil)).Elem()
@@ -6370,23 +6390,23 @@ func (o GetContainerRegistryFilterOutput) ToGetContainerRegistryFilterOutputWith
 }
 
 func (o GetContainerRegistryFilterOutput) Conditions() GetContainerRegistryFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilter) []GetContainerRegistryFilterCondition { return v.Conditions }).(GetContainerRegistryFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilter) []GetContainerRegistryFilterCondition { return v.Conditions }).(GetContainerRegistryFilterConditionArrayOutput)
 }
 
 func (o GetContainerRegistryFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetContainerRegistryFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetContainerRegistryFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetContainerRegistryFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -6398,7 +6418,7 @@ type GetContainerRegistryFilterConditionInput interface {
 }
 
 type GetContainerRegistryFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -6435,7 +6455,7 @@ func (i GetContainerRegistryFilterConditionArray) ToGetContainerRegistryFilterCo
 	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryFilterConditionArrayOutput)
 }
 
-type GetContainerRegistryFilterConditionOutput struct { *pulumi.OutputState }
+type GetContainerRegistryFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetContainerRegistryFilterCondition)(nil)).Elem()
@@ -6450,14 +6470,14 @@ func (o GetContainerRegistryFilterConditionOutput) ToGetContainerRegistryFilterC
 }
 
 func (o GetContainerRegistryFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetContainerRegistryFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetContainerRegistryFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetContainerRegistryFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetContainerRegistryFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetContainerRegistryFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetContainerRegistryFilterCondition)(nil)).Elem()
@@ -6472,13 +6492,13 @@ func (o GetContainerRegistryFilterConditionArrayOutput) ToGetContainerRegistryFi
 }
 
 func (o GetContainerRegistryFilterConditionArrayOutput) Index(i pulumi.IntInput) GetContainerRegistryFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetContainerRegistryFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetContainerRegistryFilterCondition {
 		return vs[0].([]GetContainerRegistryFilterCondition)[vs[1].(int)]
 	}).(GetContainerRegistryFilterConditionOutput)
 }
 
 type GetContainerRegistryUser struct {
-	Name string `pulumi:"name"`
+	Name       string `pulumi:"name"`
 	Permission string `pulumi:"permission"`
 }
 
@@ -6490,7 +6510,7 @@ type GetContainerRegistryUserInput interface {
 }
 
 type GetContainerRegistryUserArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name       pulumi.StringInput `pulumi:"name"`
 	Permission pulumi.StringInput `pulumi:"permission"`
 }
 
@@ -6527,7 +6547,7 @@ func (i GetContainerRegistryUserArray) ToGetContainerRegistryUserArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryUserArrayOutput)
 }
 
-type GetContainerRegistryUserOutput struct { *pulumi.OutputState }
+type GetContainerRegistryUserOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryUserOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetContainerRegistryUser)(nil)).Elem()
@@ -6542,14 +6562,14 @@ func (o GetContainerRegistryUserOutput) ToGetContainerRegistryUserOutputWithCont
 }
 
 func (o GetContainerRegistryUserOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetContainerRegistryUser) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetContainerRegistryUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetContainerRegistryUserOutput) Permission() pulumi.StringOutput {
-	return o.ApplyT(func (v GetContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetContainerRegistryUser) string { return v.Permission }).(pulumi.StringOutput)
 }
 
-type GetContainerRegistryUserArrayOutput struct { *pulumi.OutputState}
+type GetContainerRegistryUserArrayOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryUserArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetContainerRegistryUser)(nil)).Elem()
@@ -6564,16 +6584,16 @@ func (o GetContainerRegistryUserArrayOutput) ToGetContainerRegistryUserArrayOutp
 }
 
 func (o GetContainerRegistryUserArrayOutput) Index(i pulumi.IntInput) GetContainerRegistryUserOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetContainerRegistryUser {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetContainerRegistryUser {
 		return vs[0].([]GetContainerRegistryUser)[vs[1].(int)]
 	}).(GetContainerRegistryUserOutput)
 }
 
 type GetDNSFilter struct {
 	Conditions []GetDNSFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                 `pulumi:"id"`
+	Names      []string                `pulumi:"names"`
+	Tags       []string                `pulumi:"tags"`
 }
 
 type GetDNSFilterInput interface {
@@ -6585,9 +6605,9 @@ type GetDNSFilterInput interface {
 
 type GetDNSFilterArgs struct {
 	Conditions GetDNSFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput           `pulumi:"id"`
+	Names      pulumi.StringArrayInput         `pulumi:"names"`
+	Tags       pulumi.StringArrayInput         `pulumi:"tags"`
 }
 
 func (GetDNSFilterArgs) ElementType() reflect.Type {
@@ -6602,7 +6622,7 @@ func (i GetDNSFilterArgs) ToGetDNSFilterOutputWithContext(ctx context.Context) G
 	return pulumi.ToOutputWithContext(ctx, i).(GetDNSFilterOutput)
 }
 
-type GetDNSFilterOutput struct { *pulumi.OutputState }
+type GetDNSFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDNSFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDNSFilter)(nil)).Elem()
@@ -6617,23 +6637,23 @@ func (o GetDNSFilterOutput) ToGetDNSFilterOutputWithContext(ctx context.Context)
 }
 
 func (o GetDNSFilterOutput) Conditions() GetDNSFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetDNSFilter) []GetDNSFilterCondition { return v.Conditions }).(GetDNSFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetDNSFilter) []GetDNSFilterCondition { return v.Conditions }).(GetDNSFilterConditionArrayOutput)
 }
 
 func (o GetDNSFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetDNSFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetDNSFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetDNSFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDNSFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDNSFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetDNSFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDNSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDNSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetDNSFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -6645,7 +6665,7 @@ type GetDNSFilterConditionInput interface {
 }
 
 type GetDNSFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -6682,7 +6702,7 @@ func (i GetDNSFilterConditionArray) ToGetDNSFilterConditionArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetDNSFilterConditionArrayOutput)
 }
 
-type GetDNSFilterConditionOutput struct { *pulumi.OutputState }
+type GetDNSFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetDNSFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDNSFilterCondition)(nil)).Elem()
@@ -6697,14 +6717,14 @@ func (o GetDNSFilterConditionOutput) ToGetDNSFilterConditionOutputWithContext(ct
 }
 
 func (o GetDNSFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDNSFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDNSFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetDNSFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDNSFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDNSFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetDNSFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetDNSFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDNSFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDNSFilterCondition)(nil)).Elem()
@@ -6719,19 +6739,19 @@ func (o GetDNSFilterConditionArrayOutput) ToGetDNSFilterConditionArrayOutputWith
 }
 
 func (o GetDNSFilterConditionArrayOutput) Index(i pulumi.IntInput) GetDNSFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDNSFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDNSFilterCondition {
 		return vs[0].([]GetDNSFilterCondition)[vs[1].(int)]
 	}).(GetDNSFilterConditionOutput)
 }
 
 type GetDNSRecordType struct {
-	Name string `pulumi:"name"`
-	Port int `pulumi:"port"`
-	Priority int `pulumi:"priority"`
-	Ttl int `pulumi:"ttl"`
-	Type string `pulumi:"type"`
-	Value string `pulumi:"value"`
-	Weight int `pulumi:"weight"`
+	Name     string `pulumi:"name"`
+	Port     int    `pulumi:"port"`
+	Priority int    `pulumi:"priority"`
+	Ttl      int    `pulumi:"ttl"`
+	Type     string `pulumi:"type"`
+	Value    string `pulumi:"value"`
+	Weight   int    `pulumi:"weight"`
 }
 
 type GetDNSRecordTypeInput interface {
@@ -6742,13 +6762,13 @@ type GetDNSRecordTypeInput interface {
 }
 
 type GetDNSRecordTypeArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Priority pulumi.IntInput `pulumi:"priority"`
-	Ttl pulumi.IntInput `pulumi:"ttl"`
-	Type pulumi.StringInput `pulumi:"type"`
-	Value pulumi.StringInput `pulumi:"value"`
-	Weight pulumi.IntInput `pulumi:"weight"`
+	Name     pulumi.StringInput `pulumi:"name"`
+	Port     pulumi.IntInput    `pulumi:"port"`
+	Priority pulumi.IntInput    `pulumi:"priority"`
+	Ttl      pulumi.IntInput    `pulumi:"ttl"`
+	Type     pulumi.StringInput `pulumi:"type"`
+	Value    pulumi.StringInput `pulumi:"value"`
+	Weight   pulumi.IntInput    `pulumi:"weight"`
 }
 
 func (GetDNSRecordTypeArgs) ElementType() reflect.Type {
@@ -6784,7 +6804,7 @@ func (i GetDNSRecordTypeArray) ToGetDNSRecordTypeArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetDNSRecordTypeArrayOutput)
 }
 
-type GetDNSRecordTypeOutput struct { *pulumi.OutputState }
+type GetDNSRecordTypeOutput struct{ *pulumi.OutputState }
 
 func (GetDNSRecordTypeOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDNSRecordType)(nil)).Elem()
@@ -6799,34 +6819,34 @@ func (o GetDNSRecordTypeOutput) ToGetDNSRecordTypeOutputWithContext(ctx context.
 }
 
 func (o GetDNSRecordTypeOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDNSRecordType) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDNSRecordType) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDNSRecordType) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDNSRecordType) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Priority() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDNSRecordType) int { return v.Priority }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDNSRecordType) int { return v.Priority }).(pulumi.IntOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Ttl() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDNSRecordType) int { return v.Ttl }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDNSRecordType) int { return v.Ttl }).(pulumi.IntOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDNSRecordType) string { return v.Type }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDNSRecordType) string { return v.Type }).(pulumi.StringOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDNSRecordType) string { return v.Value }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDNSRecordType) string { return v.Value }).(pulumi.StringOutput)
 }
 
 func (o GetDNSRecordTypeOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDNSRecordType) int { return v.Weight }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDNSRecordType) int { return v.Weight }).(pulumi.IntOutput)
 }
 
-type GetDNSRecordTypeArrayOutput struct { *pulumi.OutputState}
+type GetDNSRecordTypeArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDNSRecordTypeArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDNSRecordType)(nil)).Elem()
@@ -6841,13 +6861,13 @@ func (o GetDNSRecordTypeArrayOutput) ToGetDNSRecordTypeArrayOutputWithContext(ct
 }
 
 func (o GetDNSRecordTypeArrayOutput) Index(i pulumi.IntInput) GetDNSRecordTypeOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDNSRecordType {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDNSRecordType {
 		return vs[0].([]GetDNSRecordType)[vs[1].(int)]
 	}).(GetDNSRecordTypeOutput)
 }
 
 type GetDatabaseBackup struct {
-	Time string `pulumi:"time"`
+	Time     string   `pulumi:"time"`
 	Weekdays []string `pulumi:"weekdays"`
 }
 
@@ -6859,7 +6879,7 @@ type GetDatabaseBackupInput interface {
 }
 
 type GetDatabaseBackupArgs struct {
-	Time pulumi.StringInput `pulumi:"time"`
+	Time     pulumi.StringInput      `pulumi:"time"`
 	Weekdays pulumi.StringArrayInput `pulumi:"weekdays"`
 }
 
@@ -6896,7 +6916,7 @@ func (i GetDatabaseBackupArray) ToGetDatabaseBackupArrayOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseBackupArrayOutput)
 }
 
-type GetDatabaseBackupOutput struct { *pulumi.OutputState }
+type GetDatabaseBackupOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseBackupOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDatabaseBackup)(nil)).Elem()
@@ -6911,14 +6931,14 @@ func (o GetDatabaseBackupOutput) ToGetDatabaseBackupOutputWithContext(ctx contex
 }
 
 func (o GetDatabaseBackupOutput) Time() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDatabaseBackup) string { return v.Time }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDatabaseBackup) string { return v.Time }).(pulumi.StringOutput)
 }
 
 func (o GetDatabaseBackupOutput) Weekdays() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDatabaseBackup) []string { return v.Weekdays }).(pulumi.StringArrayOutput)
 }
 
-type GetDatabaseBackupArrayOutput struct { *pulumi.OutputState}
+type GetDatabaseBackupArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseBackupArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDatabaseBackup)(nil)).Elem()
@@ -6933,16 +6953,16 @@ func (o GetDatabaseBackupArrayOutput) ToGetDatabaseBackupArrayOutputWithContext(
 }
 
 func (o GetDatabaseBackupArrayOutput) Index(i pulumi.IntInput) GetDatabaseBackupOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDatabaseBackup {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabaseBackup {
 		return vs[0].([]GetDatabaseBackup)[vs[1].(int)]
 	}).(GetDatabaseBackupOutput)
 }
 
 type GetDatabaseFilter struct {
 	Conditions []GetDatabaseFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                      `pulumi:"id"`
+	Names      []string                     `pulumi:"names"`
+	Tags       []string                     `pulumi:"tags"`
 }
 
 type GetDatabaseFilterInput interface {
@@ -6954,9 +6974,9 @@ type GetDatabaseFilterInput interface {
 
 type GetDatabaseFilterArgs struct {
 	Conditions GetDatabaseFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                `pulumi:"id"`
+	Names      pulumi.StringArrayInput              `pulumi:"names"`
+	Tags       pulumi.StringArrayInput              `pulumi:"tags"`
 }
 
 func (GetDatabaseFilterArgs) ElementType() reflect.Type {
@@ -6971,7 +6991,7 @@ func (i GetDatabaseFilterArgs) ToGetDatabaseFilterOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseFilterOutput)
 }
 
-type GetDatabaseFilterOutput struct { *pulumi.OutputState }
+type GetDatabaseFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDatabaseFilter)(nil)).Elem()
@@ -6986,23 +7006,23 @@ func (o GetDatabaseFilterOutput) ToGetDatabaseFilterOutputWithContext(ctx contex
 }
 
 func (o GetDatabaseFilterOutput) Conditions() GetDatabaseFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetDatabaseFilter) []GetDatabaseFilterCondition { return v.Conditions }).(GetDatabaseFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetDatabaseFilter) []GetDatabaseFilterCondition { return v.Conditions }).(GetDatabaseFilterConditionArrayOutput)
 }
 
 func (o GetDatabaseFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetDatabaseFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetDatabaseFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetDatabaseFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDatabaseFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDatabaseFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetDatabaseFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDatabaseFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDatabaseFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetDatabaseFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -7014,7 +7034,7 @@ type GetDatabaseFilterConditionInput interface {
 }
 
 type GetDatabaseFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -7051,7 +7071,7 @@ func (i GetDatabaseFilterConditionArray) ToGetDatabaseFilterConditionArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseFilterConditionArrayOutput)
 }
 
-type GetDatabaseFilterConditionOutput struct { *pulumi.OutputState }
+type GetDatabaseFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDatabaseFilterCondition)(nil)).Elem()
@@ -7066,14 +7086,14 @@ func (o GetDatabaseFilterConditionOutput) ToGetDatabaseFilterConditionOutputWith
 }
 
 func (o GetDatabaseFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDatabaseFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDatabaseFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetDatabaseFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDatabaseFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDatabaseFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetDatabaseFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetDatabaseFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDatabaseFilterCondition)(nil)).Elem()
@@ -7088,18 +7108,18 @@ func (o GetDatabaseFilterConditionArrayOutput) ToGetDatabaseFilterConditionArray
 }
 
 func (o GetDatabaseFilterConditionArrayOutput) Index(i pulumi.IntInput) GetDatabaseFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDatabaseFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabaseFilterCondition {
 		return vs[0].([]GetDatabaseFilterCondition)[vs[1].(int)]
 	}).(GetDatabaseFilterConditionOutput)
 }
 
 type GetDatabaseNetworkInterface struct {
-	Gateway string `pulumi:"gateway"`
-	IpAddress string `pulumi:"ipAddress"`
-	Netmask int `pulumi:"netmask"`
-	Port int `pulumi:"port"`
+	Gateway      string   `pulumi:"gateway"`
+	IpAddress    string   `pulumi:"ipAddress"`
+	Netmask      int      `pulumi:"netmask"`
+	Port         int      `pulumi:"port"`
 	SourceRanges []string `pulumi:"sourceRanges"`
-	SwitchId string `pulumi:"switchId"`
+	SwitchId     string   `pulumi:"switchId"`
 }
 
 type GetDatabaseNetworkInterfaceInput interface {
@@ -7110,12 +7130,12 @@ type GetDatabaseNetworkInterfaceInput interface {
 }
 
 type GetDatabaseNetworkInterfaceArgs struct {
-	Gateway pulumi.StringInput `pulumi:"gateway"`
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	Port pulumi.IntInput `pulumi:"port"`
+	Gateway      pulumi.StringInput      `pulumi:"gateway"`
+	IpAddress    pulumi.StringInput      `pulumi:"ipAddress"`
+	Netmask      pulumi.IntInput         `pulumi:"netmask"`
+	Port         pulumi.IntInput         `pulumi:"port"`
 	SourceRanges pulumi.StringArrayInput `pulumi:"sourceRanges"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
+	SwitchId     pulumi.StringInput      `pulumi:"switchId"`
 }
 
 func (GetDatabaseNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -7151,7 +7171,7 @@ func (i GetDatabaseNetworkInterfaceArray) ToGetDatabaseNetworkInterfaceArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseNetworkInterfaceArrayOutput)
 }
 
-type GetDatabaseNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetDatabaseNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDatabaseNetworkInterface)(nil)).Elem()
@@ -7166,30 +7186,30 @@ func (o GetDatabaseNetworkInterfaceOutput) ToGetDatabaseNetworkInterfaceOutputWi
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) Gateway() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) SourceRanges() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) []string { return v.SourceRanges }).(pulumi.StringArrayOutput)
 }
 
 func (o GetDatabaseNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDatabaseNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
-type GetDatabaseNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetDatabaseNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDatabaseNetworkInterface)(nil)).Elem()
@@ -7204,16 +7224,16 @@ func (o GetDatabaseNetworkInterfaceArrayOutput) ToGetDatabaseNetworkInterfaceArr
 }
 
 func (o GetDatabaseNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetDatabaseNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDatabaseNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabaseNetworkInterface {
 		return vs[0].([]GetDatabaseNetworkInterface)[vs[1].(int)]
 	}).(GetDatabaseNetworkInterfaceOutput)
 }
 
 type GetDiskFilter struct {
 	Conditions []GetDiskFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                  `pulumi:"id"`
+	Names      []string                 `pulumi:"names"`
+	Tags       []string                 `pulumi:"tags"`
 }
 
 type GetDiskFilterInput interface {
@@ -7225,9 +7245,9 @@ type GetDiskFilterInput interface {
 
 type GetDiskFilterArgs struct {
 	Conditions GetDiskFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput            `pulumi:"id"`
+	Names      pulumi.StringArrayInput          `pulumi:"names"`
+	Tags       pulumi.StringArrayInput          `pulumi:"tags"`
 }
 
 func (GetDiskFilterArgs) ElementType() reflect.Type {
@@ -7242,7 +7262,7 @@ func (i GetDiskFilterArgs) ToGetDiskFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetDiskFilterOutput)
 }
 
-type GetDiskFilterOutput struct { *pulumi.OutputState }
+type GetDiskFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDiskFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDiskFilter)(nil)).Elem()
@@ -7257,23 +7277,23 @@ func (o GetDiskFilterOutput) ToGetDiskFilterOutputWithContext(ctx context.Contex
 }
 
 func (o GetDiskFilterOutput) Conditions() GetDiskFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetDiskFilter) []GetDiskFilterCondition { return v.Conditions }).(GetDiskFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetDiskFilter) []GetDiskFilterCondition { return v.Conditions }).(GetDiskFilterConditionArrayOutput)
 }
 
 func (o GetDiskFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetDiskFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetDiskFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetDiskFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDiskFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDiskFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetDiskFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDiskFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDiskFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetDiskFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -7285,7 +7305,7 @@ type GetDiskFilterConditionInput interface {
 }
 
 type GetDiskFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -7322,7 +7342,7 @@ func (i GetDiskFilterConditionArray) ToGetDiskFilterConditionArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetDiskFilterConditionArrayOutput)
 }
 
-type GetDiskFilterConditionOutput struct { *pulumi.OutputState }
+type GetDiskFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetDiskFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetDiskFilterCondition)(nil)).Elem()
@@ -7337,14 +7357,14 @@ func (o GetDiskFilterConditionOutput) ToGetDiskFilterConditionOutputWithContext(
 }
 
 func (o GetDiskFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetDiskFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetDiskFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetDiskFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetDiskFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetDiskFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetDiskFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetDiskFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetDiskFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetDiskFilterCondition)(nil)).Elem()
@@ -7359,16 +7379,16 @@ func (o GetDiskFilterConditionArrayOutput) ToGetDiskFilterConditionArrayOutputWi
 }
 
 func (o GetDiskFilterConditionArrayOutput) Index(i pulumi.IntInput) GetDiskFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetDiskFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiskFilterCondition {
 		return vs[0].([]GetDiskFilterCondition)[vs[1].(int)]
 	}).(GetDiskFilterConditionOutput)
 }
 
 type GetGSLBFilter struct {
 	Conditions []GetGSLBFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                  `pulumi:"id"`
+	Names      []string                 `pulumi:"names"`
+	Tags       []string                 `pulumi:"tags"`
 }
 
 type GetGSLBFilterInput interface {
@@ -7380,9 +7400,9 @@ type GetGSLBFilterInput interface {
 
 type GetGSLBFilterArgs struct {
 	Conditions GetGSLBFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput            `pulumi:"id"`
+	Names      pulumi.StringArrayInput          `pulumi:"names"`
+	Tags       pulumi.StringArrayInput          `pulumi:"tags"`
 }
 
 func (GetGSLBFilterArgs) ElementType() reflect.Type {
@@ -7397,7 +7417,7 @@ func (i GetGSLBFilterArgs) ToGetGSLBFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBFilterOutput)
 }
 
-type GetGSLBFilterOutput struct { *pulumi.OutputState }
+type GetGSLBFilterOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetGSLBFilter)(nil)).Elem()
@@ -7412,23 +7432,23 @@ func (o GetGSLBFilterOutput) ToGetGSLBFilterOutputWithContext(ctx context.Contex
 }
 
 func (o GetGSLBFilterOutput) Conditions() GetGSLBFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetGSLBFilter) []GetGSLBFilterCondition { return v.Conditions }).(GetGSLBFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetGSLBFilter) []GetGSLBFilterCondition { return v.Conditions }).(GetGSLBFilterConditionArrayOutput)
 }
 
 func (o GetGSLBFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetGSLBFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetGSLBFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetGSLBFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetGSLBFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetGSLBFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetGSLBFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetGSLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetGSLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetGSLBFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -7440,7 +7460,7 @@ type GetGSLBFilterConditionInput interface {
 }
 
 type GetGSLBFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -7477,7 +7497,7 @@ func (i GetGSLBFilterConditionArray) ToGetGSLBFilterConditionArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBFilterConditionArrayOutput)
 }
 
-type GetGSLBFilterConditionOutput struct { *pulumi.OutputState }
+type GetGSLBFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetGSLBFilterCondition)(nil)).Elem()
@@ -7492,14 +7512,14 @@ func (o GetGSLBFilterConditionOutput) ToGetGSLBFilterConditionOutputWithContext(
 }
 
 func (o GetGSLBFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetGSLBFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetGSLBFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetGSLBFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetGSLBFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetGSLBFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetGSLBFilterCondition)(nil)).Elem()
@@ -7514,18 +7534,18 @@ func (o GetGSLBFilterConditionArrayOutput) ToGetGSLBFilterConditionArrayOutputWi
 }
 
 func (o GetGSLBFilterConditionArrayOutput) Index(i pulumi.IntInput) GetGSLBFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetGSLBFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGSLBFilterCondition {
 		return vs[0].([]GetGSLBFilterCondition)[vs[1].(int)]
 	}).(GetGSLBFilterConditionOutput)
 }
 
 type GetGSLBHealthCheck struct {
-	DelayLoop int `pulumi:"delayLoop"`
+	DelayLoop  int    `pulumi:"delayLoop"`
 	HostHeader string `pulumi:"hostHeader"`
-	Path string `pulumi:"path"`
-	Port int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
-	Status string `pulumi:"status"`
+	Path       string `pulumi:"path"`
+	Port       int    `pulumi:"port"`
+	Protocol   string `pulumi:"protocol"`
+	Status     string `pulumi:"status"`
 }
 
 type GetGSLBHealthCheckInput interface {
@@ -7536,12 +7556,12 @@ type GetGSLBHealthCheckInput interface {
 }
 
 type GetGSLBHealthCheckArgs struct {
-	DelayLoop pulumi.IntInput `pulumi:"delayLoop"`
+	DelayLoop  pulumi.IntInput    `pulumi:"delayLoop"`
 	HostHeader pulumi.StringInput `pulumi:"hostHeader"`
-	Path pulumi.StringInput `pulumi:"path"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Status pulumi.StringInput `pulumi:"status"`
+	Path       pulumi.StringInput `pulumi:"path"`
+	Port       pulumi.IntInput    `pulumi:"port"`
+	Protocol   pulumi.StringInput `pulumi:"protocol"`
+	Status     pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetGSLBHealthCheckArgs) ElementType() reflect.Type {
@@ -7577,7 +7597,7 @@ func (i GetGSLBHealthCheckArray) ToGetGSLBHealthCheckArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBHealthCheckArrayOutput)
 }
 
-type GetGSLBHealthCheckOutput struct { *pulumi.OutputState }
+type GetGSLBHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetGSLBHealthCheck)(nil)).Elem()
@@ -7592,30 +7612,30 @@ func (o GetGSLBHealthCheckOutput) ToGetGSLBHealthCheckOutputWithContext(ctx cont
 }
 
 func (o GetGSLBHealthCheckOutput) DelayLoop() pulumi.IntOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) int { return v.DelayLoop }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) int { return v.DelayLoop }).(pulumi.IntOutput)
 }
 
 func (o GetGSLBHealthCheckOutput) HostHeader() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
 }
 
 func (o GetGSLBHealthCheckOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) string { return v.Path }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) string { return v.Path }).(pulumi.StringOutput)
 }
 
 func (o GetGSLBHealthCheckOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetGSLBHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetGSLBHealthCheckOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBHealthCheck) string { return v.Status }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBHealthCheck) string { return v.Status }).(pulumi.StringOutput)
 }
 
-type GetGSLBHealthCheckArrayOutput struct { *pulumi.OutputState}
+type GetGSLBHealthCheckArrayOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBHealthCheckArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetGSLBHealthCheck)(nil)).Elem()
@@ -7630,15 +7650,15 @@ func (o GetGSLBHealthCheckArrayOutput) ToGetGSLBHealthCheckArrayOutputWithContex
 }
 
 func (o GetGSLBHealthCheckArrayOutput) Index(i pulumi.IntInput) GetGSLBHealthCheckOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetGSLBHealthCheck {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGSLBHealthCheck {
 		return vs[0].([]GetGSLBHealthCheck)[vs[1].(int)]
 	}).(GetGSLBHealthCheckOutput)
 }
 
 type GetGSLBServer struct {
-	Enabled bool `pulumi:"enabled"`
+	Enabled   bool   `pulumi:"enabled"`
 	IpAddress string `pulumi:"ipAddress"`
-	Weight int `pulumi:"weight"`
+	Weight    int    `pulumi:"weight"`
 }
 
 type GetGSLBServerInput interface {
@@ -7649,9 +7669,9 @@ type GetGSLBServerInput interface {
 }
 
 type GetGSLBServerArgs struct {
-	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	Enabled   pulumi.BoolInput   `pulumi:"enabled"`
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Weight pulumi.IntInput `pulumi:"weight"`
+	Weight    pulumi.IntInput    `pulumi:"weight"`
 }
 
 func (GetGSLBServerArgs) ElementType() reflect.Type {
@@ -7687,7 +7707,7 @@ func (i GetGSLBServerArray) ToGetGSLBServerArrayOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBServerArrayOutput)
 }
 
-type GetGSLBServerOutput struct { *pulumi.OutputState }
+type GetGSLBServerOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetGSLBServer)(nil)).Elem()
@@ -7702,18 +7722,18 @@ func (o GetGSLBServerOutput) ToGetGSLBServerOutputWithContext(ctx context.Contex
 }
 
 func (o GetGSLBServerOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetGSLBServer) bool { return v.Enabled }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetGSLBServer) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
 func (o GetGSLBServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetGSLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetGSLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetGSLBServerOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func (v GetGSLBServer) int { return v.Weight }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetGSLBServer) int { return v.Weight }).(pulumi.IntOutput)
 }
 
-type GetGSLBServerArrayOutput struct { *pulumi.OutputState}
+type GetGSLBServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetGSLBServer)(nil)).Elem()
@@ -7728,16 +7748,16 @@ func (o GetGSLBServerArrayOutput) ToGetGSLBServerArrayOutputWithContext(ctx cont
 }
 
 func (o GetGSLBServerArrayOutput) Index(i pulumi.IntInput) GetGSLBServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetGSLBServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGSLBServer {
 		return vs[0].([]GetGSLBServer)[vs[1].(int)]
 	}).(GetGSLBServerOutput)
 }
 
 type GetIconFilter struct {
 	Conditions []GetIconFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                  `pulumi:"id"`
+	Names      []string                 `pulumi:"names"`
+	Tags       []string                 `pulumi:"tags"`
 }
 
 type GetIconFilterInput interface {
@@ -7749,9 +7769,9 @@ type GetIconFilterInput interface {
 
 type GetIconFilterArgs struct {
 	Conditions GetIconFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput            `pulumi:"id"`
+	Names      pulumi.StringArrayInput          `pulumi:"names"`
+	Tags       pulumi.StringArrayInput          `pulumi:"tags"`
 }
 
 func (GetIconFilterArgs) ElementType() reflect.Type {
@@ -7766,7 +7786,7 @@ func (i GetIconFilterArgs) ToGetIconFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetIconFilterOutput)
 }
 
-type GetIconFilterOutput struct { *pulumi.OutputState }
+type GetIconFilterOutput struct{ *pulumi.OutputState }
 
 func (GetIconFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetIconFilter)(nil)).Elem()
@@ -7781,23 +7801,23 @@ func (o GetIconFilterOutput) ToGetIconFilterOutputWithContext(ctx context.Contex
 }
 
 func (o GetIconFilterOutput) Conditions() GetIconFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetIconFilter) []GetIconFilterCondition { return v.Conditions }).(GetIconFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetIconFilter) []GetIconFilterCondition { return v.Conditions }).(GetIconFilterConditionArrayOutput)
 }
 
 func (o GetIconFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetIconFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetIconFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetIconFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetIconFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetIconFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetIconFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetIconFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetIconFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetIconFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -7809,7 +7829,7 @@ type GetIconFilterConditionInput interface {
 }
 
 type GetIconFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -7846,7 +7866,7 @@ func (i GetIconFilterConditionArray) ToGetIconFilterConditionArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetIconFilterConditionArrayOutput)
 }
 
-type GetIconFilterConditionOutput struct { *pulumi.OutputState }
+type GetIconFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetIconFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetIconFilterCondition)(nil)).Elem()
@@ -7861,14 +7881,14 @@ func (o GetIconFilterConditionOutput) ToGetIconFilterConditionOutputWithContext(
 }
 
 func (o GetIconFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetIconFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetIconFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetIconFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetIconFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetIconFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetIconFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetIconFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetIconFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetIconFilterCondition)(nil)).Elem()
@@ -7883,16 +7903,16 @@ func (o GetIconFilterConditionArrayOutput) ToGetIconFilterConditionArrayOutputWi
 }
 
 func (o GetIconFilterConditionArrayOutput) Index(i pulumi.IntInput) GetIconFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetIconFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIconFilterCondition {
 		return vs[0].([]GetIconFilterCondition)[vs[1].(int)]
 	}).(GetIconFilterConditionOutput)
 }
 
 type GetInternetFilter struct {
 	Conditions []GetInternetFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                      `pulumi:"id"`
+	Names      []string                     `pulumi:"names"`
+	Tags       []string                     `pulumi:"tags"`
 }
 
 type GetInternetFilterInput interface {
@@ -7904,9 +7924,9 @@ type GetInternetFilterInput interface {
 
 type GetInternetFilterArgs struct {
 	Conditions GetInternetFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                `pulumi:"id"`
+	Names      pulumi.StringArrayInput              `pulumi:"names"`
+	Tags       pulumi.StringArrayInput              `pulumi:"tags"`
 }
 
 func (GetInternetFilterArgs) ElementType() reflect.Type {
@@ -7921,7 +7941,7 @@ func (i GetInternetFilterArgs) ToGetInternetFilterOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetInternetFilterOutput)
 }
 
-type GetInternetFilterOutput struct { *pulumi.OutputState }
+type GetInternetFilterOutput struct{ *pulumi.OutputState }
 
 func (GetInternetFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetInternetFilter)(nil)).Elem()
@@ -7936,23 +7956,23 @@ func (o GetInternetFilterOutput) ToGetInternetFilterOutputWithContext(ctx contex
 }
 
 func (o GetInternetFilterOutput) Conditions() GetInternetFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetInternetFilter) []GetInternetFilterCondition { return v.Conditions }).(GetInternetFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetInternetFilter) []GetInternetFilterCondition { return v.Conditions }).(GetInternetFilterConditionArrayOutput)
 }
 
 func (o GetInternetFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetInternetFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetInternetFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetInternetFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetInternetFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetInternetFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetInternetFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetInternetFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetInternetFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetInternetFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -7964,7 +7984,7 @@ type GetInternetFilterConditionInput interface {
 }
 
 type GetInternetFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -8001,7 +8021,7 @@ func (i GetInternetFilterConditionArray) ToGetInternetFilterConditionArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(GetInternetFilterConditionArrayOutput)
 }
 
-type GetInternetFilterConditionOutput struct { *pulumi.OutputState }
+type GetInternetFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetInternetFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetInternetFilterCondition)(nil)).Elem()
@@ -8016,14 +8036,14 @@ func (o GetInternetFilterConditionOutput) ToGetInternetFilterConditionOutputWith
 }
 
 func (o GetInternetFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetInternetFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetInternetFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetInternetFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetInternetFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetInternetFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetInternetFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetInternetFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetInternetFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetInternetFilterCondition)(nil)).Elem()
@@ -8038,16 +8058,16 @@ func (o GetInternetFilterConditionArrayOutput) ToGetInternetFilterConditionArray
 }
 
 func (o GetInternetFilterConditionArrayOutput) Index(i pulumi.IntInput) GetInternetFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetInternetFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInternetFilterCondition {
 		return vs[0].([]GetInternetFilterCondition)[vs[1].(int)]
 	}).(GetInternetFilterConditionOutput)
 }
 
 type GetLoadBalancerFilter struct {
 	Conditions []GetLoadBalancerFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                          `pulumi:"id"`
+	Names      []string                         `pulumi:"names"`
+	Tags       []string                         `pulumi:"tags"`
 }
 
 type GetLoadBalancerFilterInput interface {
@@ -8059,9 +8079,9 @@ type GetLoadBalancerFilterInput interface {
 
 type GetLoadBalancerFilterArgs struct {
 	Conditions GetLoadBalancerFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                    `pulumi:"id"`
+	Names      pulumi.StringArrayInput                  `pulumi:"names"`
+	Tags       pulumi.StringArrayInput                  `pulumi:"tags"`
 }
 
 func (GetLoadBalancerFilterArgs) ElementType() reflect.Type {
@@ -8076,7 +8096,7 @@ func (i GetLoadBalancerFilterArgs) ToGetLoadBalancerFilterOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerFilterOutput)
 }
 
-type GetLoadBalancerFilterOutput struct { *pulumi.OutputState }
+type GetLoadBalancerFilterOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLoadBalancerFilter)(nil)).Elem()
@@ -8091,23 +8111,23 @@ func (o GetLoadBalancerFilterOutput) ToGetLoadBalancerFilterOutputWithContext(ct
 }
 
 func (o GetLoadBalancerFilterOutput) Conditions() GetLoadBalancerFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilter) []GetLoadBalancerFilterCondition { return v.Conditions }).(GetLoadBalancerFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilter) []GetLoadBalancerFilterCondition { return v.Conditions }).(GetLoadBalancerFilterConditionArrayOutput)
 }
 
 func (o GetLoadBalancerFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetLoadBalancerFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetLoadBalancerFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetLoadBalancerFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -8119,7 +8139,7 @@ type GetLoadBalancerFilterConditionInput interface {
 }
 
 type GetLoadBalancerFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -8156,7 +8176,7 @@ func (i GetLoadBalancerFilterConditionArray) ToGetLoadBalancerFilterConditionArr
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerFilterConditionArrayOutput)
 }
 
-type GetLoadBalancerFilterConditionOutput struct { *pulumi.OutputState }
+type GetLoadBalancerFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLoadBalancerFilterCondition)(nil)).Elem()
@@ -8171,14 +8191,14 @@ func (o GetLoadBalancerFilterConditionOutput) ToGetLoadBalancerFilterConditionOu
 }
 
 func (o GetLoadBalancerFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetLoadBalancerFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetLoadBalancerFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLoadBalancerFilterCondition)(nil)).Elem()
@@ -8193,17 +8213,17 @@ func (o GetLoadBalancerFilterConditionArrayOutput) ToGetLoadBalancerFilterCondit
 }
 
 func (o GetLoadBalancerFilterConditionArrayOutput) Index(i pulumi.IntInput) GetLoadBalancerFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLoadBalancerFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLoadBalancerFilterCondition {
 		return vs[0].([]GetLoadBalancerFilterCondition)[vs[1].(int)]
 	}).(GetLoadBalancerFilterConditionOutput)
 }
 
 type GetLoadBalancerNetworkInterface struct {
-	Gateway string `pulumi:"gateway"`
+	Gateway     string   `pulumi:"gateway"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
-	Vrid int `pulumi:"vrid"`
+	Netmask     int      `pulumi:"netmask"`
+	SwitchId    string   `pulumi:"switchId"`
+	Vrid        int      `pulumi:"vrid"`
 }
 
 type GetLoadBalancerNetworkInterfaceInput interface {
@@ -8214,11 +8234,11 @@ type GetLoadBalancerNetworkInterfaceInput interface {
 }
 
 type GetLoadBalancerNetworkInterfaceArgs struct {
-	Gateway pulumi.StringInput `pulumi:"gateway"`
+	Gateway     pulumi.StringInput      `pulumi:"gateway"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
-	Vrid pulumi.IntInput `pulumi:"vrid"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	SwitchId    pulumi.StringInput      `pulumi:"switchId"`
+	Vrid        pulumi.IntInput         `pulumi:"vrid"`
 }
 
 func (GetLoadBalancerNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -8254,7 +8274,7 @@ func (i GetLoadBalancerNetworkInterfaceArray) ToGetLoadBalancerNetworkInterfaceA
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerNetworkInterfaceArrayOutput)
 }
 
-type GetLoadBalancerNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetLoadBalancerNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLoadBalancerNetworkInterface)(nil)).Elem()
@@ -8269,26 +8289,26 @@ func (o GetLoadBalancerNetworkInterfaceOutput) ToGetLoadBalancerNetworkInterface
 }
 
 func (o GetLoadBalancerNetworkInterfaceOutput) Gateway() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o GetLoadBalancerNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLoadBalancerNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o GetLoadBalancerNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerNetworkInterfaceOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLoadBalancerNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
-type GetLoadBalancerNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetLoadBalancerNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLoadBalancerNetworkInterface)(nil)).Elem()
@@ -8303,18 +8323,18 @@ func (o GetLoadBalancerNetworkInterfaceArrayOutput) ToGetLoadBalancerNetworkInte
 }
 
 func (o GetLoadBalancerNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetLoadBalancerNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLoadBalancerNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLoadBalancerNetworkInterface {
 		return vs[0].([]GetLoadBalancerNetworkInterface)[vs[1].(int)]
 	}).(GetLoadBalancerNetworkInterfaceOutput)
 }
 
 type GetLoadBalancerVip struct {
-	DelayLoop int `pulumi:"delayLoop"`
-	Description string `pulumi:"description"`
-	Port int `pulumi:"port"`
-	Servers []GetLoadBalancerVipServer `pulumi:"servers"`
-	SorryServer string `pulumi:"sorryServer"`
-	Vip string `pulumi:"vip"`
+	DelayLoop   int                        `pulumi:"delayLoop"`
+	Description string                     `pulumi:"description"`
+	Port        int                        `pulumi:"port"`
+	Servers     []GetLoadBalancerVipServer `pulumi:"servers"`
+	SorryServer string                     `pulumi:"sorryServer"`
+	Vip         string                     `pulumi:"vip"`
 }
 
 type GetLoadBalancerVipInput interface {
@@ -8325,12 +8345,12 @@ type GetLoadBalancerVipInput interface {
 }
 
 type GetLoadBalancerVipArgs struct {
-	DelayLoop pulumi.IntInput `pulumi:"delayLoop"`
-	Description pulumi.StringInput `pulumi:"description"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Servers GetLoadBalancerVipServerArrayInput `pulumi:"servers"`
-	SorryServer pulumi.StringInput `pulumi:"sorryServer"`
-	Vip pulumi.StringInput `pulumi:"vip"`
+	DelayLoop   pulumi.IntInput                    `pulumi:"delayLoop"`
+	Description pulumi.StringInput                 `pulumi:"description"`
+	Port        pulumi.IntInput                    `pulumi:"port"`
+	Servers     GetLoadBalancerVipServerArrayInput `pulumi:"servers"`
+	SorryServer pulumi.StringInput                 `pulumi:"sorryServer"`
+	Vip         pulumi.StringInput                 `pulumi:"vip"`
 }
 
 func (GetLoadBalancerVipArgs) ElementType() reflect.Type {
@@ -8366,7 +8386,7 @@ func (i GetLoadBalancerVipArray) ToGetLoadBalancerVipArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerVipArrayOutput)
 }
 
-type GetLoadBalancerVipOutput struct { *pulumi.OutputState }
+type GetLoadBalancerVipOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerVipOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLoadBalancerVip)(nil)).Elem()
@@ -8381,30 +8401,30 @@ func (o GetLoadBalancerVipOutput) ToGetLoadBalancerVipOutputWithContext(ctx cont
 }
 
 func (o GetLoadBalancerVipOutput) DelayLoop() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) int { return v.DelayLoop }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) int { return v.DelayLoop }).(pulumi.IntOutput)
 }
 
 func (o GetLoadBalancerVipOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerVipOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetLoadBalancerVipOutput) Servers() GetLoadBalancerVipServerArrayOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) []GetLoadBalancerVipServer { return v.Servers }).(GetLoadBalancerVipServerArrayOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) []GetLoadBalancerVipServer { return v.Servers }).(GetLoadBalancerVipServerArrayOutput)
 }
 
 func (o GetLoadBalancerVipOutput) SorryServer() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) string { return v.SorryServer }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) string { return v.SorryServer }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerVipOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVip) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVip) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-type GetLoadBalancerVipArrayOutput struct { *pulumi.OutputState}
+type GetLoadBalancerVipArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerVipArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLoadBalancerVip)(nil)).Elem()
@@ -8419,17 +8439,17 @@ func (o GetLoadBalancerVipArrayOutput) ToGetLoadBalancerVipArrayOutputWithContex
 }
 
 func (o GetLoadBalancerVipArrayOutput) Index(i pulumi.IntInput) GetLoadBalancerVipOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLoadBalancerVip {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLoadBalancerVip {
 		return vs[0].([]GetLoadBalancerVip)[vs[1].(int)]
 	}).(GetLoadBalancerVipOutput)
 }
 
 type GetLoadBalancerVipServer struct {
-	Enabled bool `pulumi:"enabled"`
+	Enabled   bool   `pulumi:"enabled"`
 	IpAddress string `pulumi:"ipAddress"`
-	Path string `pulumi:"path"`
-	Protocol string `pulumi:"protocol"`
-	Status string `pulumi:"status"`
+	Path      string `pulumi:"path"`
+	Protocol  string `pulumi:"protocol"`
+	Status    string `pulumi:"status"`
 }
 
 type GetLoadBalancerVipServerInput interface {
@@ -8440,11 +8460,11 @@ type GetLoadBalancerVipServerInput interface {
 }
 
 type GetLoadBalancerVipServerArgs struct {
-	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	Enabled   pulumi.BoolInput   `pulumi:"enabled"`
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Path pulumi.StringInput `pulumi:"path"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Status pulumi.StringInput `pulumi:"status"`
+	Path      pulumi.StringInput `pulumi:"path"`
+	Protocol  pulumi.StringInput `pulumi:"protocol"`
+	Status    pulumi.StringInput `pulumi:"status"`
 }
 
 func (GetLoadBalancerVipServerArgs) ElementType() reflect.Type {
@@ -8480,7 +8500,7 @@ func (i GetLoadBalancerVipServerArray) ToGetLoadBalancerVipServerArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerVipServerArrayOutput)
 }
 
-type GetLoadBalancerVipServerOutput struct { *pulumi.OutputState }
+type GetLoadBalancerVipServerOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerVipServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLoadBalancerVipServer)(nil)).Elem()
@@ -8495,26 +8515,26 @@ func (o GetLoadBalancerVipServerOutput) ToGetLoadBalancerVipServerOutputWithCont
 }
 
 func (o GetLoadBalancerVipServerOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetLoadBalancerVipServer) bool { return v.Enabled }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetLoadBalancerVipServer) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
 func (o GetLoadBalancerVipServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVipServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVipServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerVipServerOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVipServer) string { return v.Path }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVipServer) string { return v.Path }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerVipServerOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVipServer) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVipServer) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetLoadBalancerVipServerOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLoadBalancerVipServer) string { return v.Status }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLoadBalancerVipServer) string { return v.Status }).(pulumi.StringOutput)
 }
 
-type GetLoadBalancerVipServerArrayOutput struct { *pulumi.OutputState}
+type GetLoadBalancerVipServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerVipServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLoadBalancerVipServer)(nil)).Elem()
@@ -8529,16 +8549,16 @@ func (o GetLoadBalancerVipServerArrayOutput) ToGetLoadBalancerVipServerArrayOutp
 }
 
 func (o GetLoadBalancerVipServerArrayOutput) Index(i pulumi.IntInput) GetLoadBalancerVipServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLoadBalancerVipServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLoadBalancerVipServer {
 		return vs[0].([]GetLoadBalancerVipServer)[vs[1].(int)]
 	}).(GetLoadBalancerVipServerOutput)
 }
 
 type GetLocalRouterFilter struct {
 	Conditions []GetLocalRouterFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                         `pulumi:"id"`
+	Names      []string                        `pulumi:"names"`
+	Tags       []string                        `pulumi:"tags"`
 }
 
 type GetLocalRouterFilterInput interface {
@@ -8550,9 +8570,9 @@ type GetLocalRouterFilterInput interface {
 
 type GetLocalRouterFilterArgs struct {
 	Conditions GetLocalRouterFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                   `pulumi:"id"`
+	Names      pulumi.StringArrayInput                 `pulumi:"names"`
+	Tags       pulumi.StringArrayInput                 `pulumi:"tags"`
 }
 
 func (GetLocalRouterFilterArgs) ElementType() reflect.Type {
@@ -8567,7 +8587,7 @@ func (i GetLocalRouterFilterArgs) ToGetLocalRouterFilterOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterFilterOutput)
 }
 
-type GetLocalRouterFilterOutput struct { *pulumi.OutputState }
+type GetLocalRouterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterFilter)(nil)).Elem()
@@ -8582,23 +8602,23 @@ func (o GetLocalRouterFilterOutput) ToGetLocalRouterFilterOutputWithContext(ctx 
 }
 
 func (o GetLocalRouterFilterOutput) Conditions() GetLocalRouterFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetLocalRouterFilter) []GetLocalRouterFilterCondition { return v.Conditions }).(GetLocalRouterFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetLocalRouterFilter) []GetLocalRouterFilterCondition { return v.Conditions }).(GetLocalRouterFilterConditionArrayOutput)
 }
 
 func (o GetLocalRouterFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetLocalRouterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetLocalRouterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetLocalRouterFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLocalRouterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLocalRouterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetLocalRouterFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLocalRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLocalRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetLocalRouterFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -8610,7 +8630,7 @@ type GetLocalRouterFilterConditionInput interface {
 }
 
 type GetLocalRouterFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -8647,7 +8667,7 @@ func (i GetLocalRouterFilterConditionArray) ToGetLocalRouterFilterConditionArray
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterFilterConditionArrayOutput)
 }
 
-type GetLocalRouterFilterConditionOutput struct { *pulumi.OutputState }
+type GetLocalRouterFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterFilterCondition)(nil)).Elem()
@@ -8662,14 +8682,14 @@ func (o GetLocalRouterFilterConditionOutput) ToGetLocalRouterFilterConditionOutp
 }
 
 func (o GetLocalRouterFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLocalRouterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLocalRouterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetLocalRouterFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetLocalRouterFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLocalRouterFilterCondition)(nil)).Elem()
@@ -8684,16 +8704,16 @@ func (o GetLocalRouterFilterConditionArrayOutput) ToGetLocalRouterFilterConditio
 }
 
 func (o GetLocalRouterFilterConditionArrayOutput) Index(i pulumi.IntInput) GetLocalRouterFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLocalRouterFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLocalRouterFilterCondition {
 		return vs[0].([]GetLocalRouterFilterCondition)[vs[1].(int)]
 	}).(GetLocalRouterFilterConditionOutput)
 }
 
 type GetLocalRouterNetworkInterface struct {
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	Vip string `pulumi:"vip"`
-	Vrid int `pulumi:"vrid"`
+	Netmask     int      `pulumi:"netmask"`
+	Vip         string   `pulumi:"vip"`
+	Vrid        int      `pulumi:"vrid"`
 }
 
 type GetLocalRouterNetworkInterfaceInput interface {
@@ -8705,9 +8725,9 @@ type GetLocalRouterNetworkInterfaceInput interface {
 
 type GetLocalRouterNetworkInterfaceArgs struct {
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	Vip pulumi.StringInput `pulumi:"vip"`
-	Vrid pulumi.IntInput `pulumi:"vrid"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	Vip         pulumi.StringInput      `pulumi:"vip"`
+	Vrid        pulumi.IntInput         `pulumi:"vrid"`
 }
 
 func (GetLocalRouterNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -8743,7 +8763,7 @@ func (i GetLocalRouterNetworkInterfaceArray) ToGetLocalRouterNetworkInterfaceArr
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterNetworkInterfaceArrayOutput)
 }
 
-type GetLocalRouterNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetLocalRouterNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterNetworkInterface)(nil)).Elem()
@@ -8758,22 +8778,22 @@ func (o GetLocalRouterNetworkInterfaceOutput) ToGetLocalRouterNetworkInterfaceOu
 }
 
 func (o GetLocalRouterNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetLocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetLocalRouterNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o GetLocalRouterNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLocalRouterNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o GetLocalRouterNetworkInterfaceOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterNetworkInterfaceOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v GetLocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetLocalRouterNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
-type GetLocalRouterNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetLocalRouterNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLocalRouterNetworkInterface)(nil)).Elem()
@@ -8788,16 +8808,16 @@ func (o GetLocalRouterNetworkInterfaceArrayOutput) ToGetLocalRouterNetworkInterf
 }
 
 func (o GetLocalRouterNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetLocalRouterNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLocalRouterNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLocalRouterNetworkInterface {
 		return vs[0].([]GetLocalRouterNetworkInterface)[vs[1].(int)]
 	}).(GetLocalRouterNetworkInterfaceOutput)
 }
 
 type GetLocalRouterPeer struct {
 	Description string `pulumi:"description"`
-	Enabled bool `pulumi:"enabled"`
-	PeerId string `pulumi:"peerId"`
-	SecretKey string `pulumi:"secretKey"`
+	Enabled     bool   `pulumi:"enabled"`
+	PeerId      string `pulumi:"peerId"`
+	SecretKey   string `pulumi:"secretKey"`
 }
 
 type GetLocalRouterPeerInput interface {
@@ -8809,9 +8829,9 @@ type GetLocalRouterPeerInput interface {
 
 type GetLocalRouterPeerArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
-	Enabled pulumi.BoolInput `pulumi:"enabled"`
-	PeerId pulumi.StringInput `pulumi:"peerId"`
-	SecretKey pulumi.StringInput `pulumi:"secretKey"`
+	Enabled     pulumi.BoolInput   `pulumi:"enabled"`
+	PeerId      pulumi.StringInput `pulumi:"peerId"`
+	SecretKey   pulumi.StringInput `pulumi:"secretKey"`
 }
 
 func (GetLocalRouterPeerArgs) ElementType() reflect.Type {
@@ -8847,7 +8867,7 @@ func (i GetLocalRouterPeerArray) ToGetLocalRouterPeerArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterPeerArrayOutput)
 }
 
-type GetLocalRouterPeerOutput struct { *pulumi.OutputState }
+type GetLocalRouterPeerOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterPeerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterPeer)(nil)).Elem()
@@ -8862,22 +8882,22 @@ func (o GetLocalRouterPeerOutput) ToGetLocalRouterPeerOutputWithContext(ctx cont
 }
 
 func (o GetLocalRouterPeerOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterPeer) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterPeer) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterPeerOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetLocalRouterPeer) bool { return v.Enabled }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetLocalRouterPeer) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
 func (o GetLocalRouterPeerOutput) PeerId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterPeer) string { return v.PeerId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterPeer) string { return v.PeerId }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterPeerOutput) SecretKey() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterPeer) string { return v.SecretKey }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterPeer) string { return v.SecretKey }).(pulumi.StringOutput)
 }
 
-type GetLocalRouterPeerArrayOutput struct { *pulumi.OutputState}
+type GetLocalRouterPeerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterPeerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLocalRouterPeer)(nil)).Elem()
@@ -8892,14 +8912,14 @@ func (o GetLocalRouterPeerArrayOutput) ToGetLocalRouterPeerArrayOutputWithContex
 }
 
 func (o GetLocalRouterPeerArrayOutput) Index(i pulumi.IntInput) GetLocalRouterPeerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLocalRouterPeer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLocalRouterPeer {
 		return vs[0].([]GetLocalRouterPeer)[vs[1].(int)]
 	}).(GetLocalRouterPeerOutput)
 }
 
 type GetLocalRouterStaticRoute struct {
 	NextHop string `pulumi:"nextHop"`
-	Prefix string `pulumi:"prefix"`
+	Prefix  string `pulumi:"prefix"`
 }
 
 type GetLocalRouterStaticRouteInput interface {
@@ -8911,7 +8931,7 @@ type GetLocalRouterStaticRouteInput interface {
 
 type GetLocalRouterStaticRouteArgs struct {
 	NextHop pulumi.StringInput `pulumi:"nextHop"`
-	Prefix pulumi.StringInput `pulumi:"prefix"`
+	Prefix  pulumi.StringInput `pulumi:"prefix"`
 }
 
 func (GetLocalRouterStaticRouteArgs) ElementType() reflect.Type {
@@ -8947,7 +8967,7 @@ func (i GetLocalRouterStaticRouteArray) ToGetLocalRouterStaticRouteArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterStaticRouteArrayOutput)
 }
 
-type GetLocalRouterStaticRouteOutput struct { *pulumi.OutputState }
+type GetLocalRouterStaticRouteOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterStaticRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterStaticRoute)(nil)).Elem()
@@ -8962,14 +8982,14 @@ func (o GetLocalRouterStaticRouteOutput) ToGetLocalRouterStaticRouteOutputWithCo
 }
 
 func (o GetLocalRouterStaticRouteOutput) NextHop() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterStaticRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
-type GetLocalRouterStaticRouteArrayOutput struct { *pulumi.OutputState}
+type GetLocalRouterStaticRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterStaticRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLocalRouterStaticRoute)(nil)).Elem()
@@ -8984,15 +9004,15 @@ func (o GetLocalRouterStaticRouteArrayOutput) ToGetLocalRouterStaticRouteArrayOu
 }
 
 func (o GetLocalRouterStaticRouteArrayOutput) Index(i pulumi.IntInput) GetLocalRouterStaticRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLocalRouterStaticRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLocalRouterStaticRoute {
 		return vs[0].([]GetLocalRouterStaticRoute)[vs[1].(int)]
 	}).(GetLocalRouterStaticRouteOutput)
 }
 
 type GetLocalRouterSwitch struct {
 	Category string `pulumi:"category"`
-	Code string `pulumi:"code"`
-	ZoneId string `pulumi:"zoneId"`
+	Code     string `pulumi:"code"`
+	ZoneId   string `pulumi:"zoneId"`
 }
 
 type GetLocalRouterSwitchInput interface {
@@ -9004,8 +9024,8 @@ type GetLocalRouterSwitchInput interface {
 
 type GetLocalRouterSwitchArgs struct {
 	Category pulumi.StringInput `pulumi:"category"`
-	Code pulumi.StringInput `pulumi:"code"`
-	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+	Code     pulumi.StringInput `pulumi:"code"`
+	ZoneId   pulumi.StringInput `pulumi:"zoneId"`
 }
 
 func (GetLocalRouterSwitchArgs) ElementType() reflect.Type {
@@ -9041,7 +9061,7 @@ func (i GetLocalRouterSwitchArray) ToGetLocalRouterSwitchArrayOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterSwitchArrayOutput)
 }
 
-type GetLocalRouterSwitchOutput struct { *pulumi.OutputState }
+type GetLocalRouterSwitchOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterSwitchOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetLocalRouterSwitch)(nil)).Elem()
@@ -9056,18 +9076,18 @@ func (o GetLocalRouterSwitchOutput) ToGetLocalRouterSwitchOutputWithContext(ctx 
 }
 
 func (o GetLocalRouterSwitchOutput) Category() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterSwitch) string { return v.Category }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterSwitch) string { return v.Category }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterSwitchOutput) Code() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterSwitch) string { return v.Code }).(pulumi.StringOutput)
 }
 
 func (o GetLocalRouterSwitchOutput) ZoneId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetLocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetLocalRouterSwitch) string { return v.ZoneId }).(pulumi.StringOutput)
 }
 
-type GetLocalRouterSwitchArrayOutput struct { *pulumi.OutputState}
+type GetLocalRouterSwitchArrayOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterSwitchArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetLocalRouterSwitch)(nil)).Elem()
@@ -9082,16 +9102,16 @@ func (o GetLocalRouterSwitchArrayOutput) ToGetLocalRouterSwitchArrayOutputWithCo
 }
 
 func (o GetLocalRouterSwitchArrayOutput) Index(i pulumi.IntInput) GetLocalRouterSwitchOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetLocalRouterSwitch {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetLocalRouterSwitch {
 		return vs[0].([]GetLocalRouterSwitch)[vs[1].(int)]
 	}).(GetLocalRouterSwitchOutput)
 }
 
 type GetNFSFilter struct {
 	Conditions []GetNFSFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                 `pulumi:"id"`
+	Names      []string                `pulumi:"names"`
+	Tags       []string                `pulumi:"tags"`
 }
 
 type GetNFSFilterInput interface {
@@ -9103,9 +9123,9 @@ type GetNFSFilterInput interface {
 
 type GetNFSFilterArgs struct {
 	Conditions GetNFSFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput           `pulumi:"id"`
+	Names      pulumi.StringArrayInput         `pulumi:"names"`
+	Tags       pulumi.StringArrayInput         `pulumi:"tags"`
 }
 
 func (GetNFSFilterArgs) ElementType() reflect.Type {
@@ -9120,7 +9140,7 @@ func (i GetNFSFilterArgs) ToGetNFSFilterOutputWithContext(ctx context.Context) G
 	return pulumi.ToOutputWithContext(ctx, i).(GetNFSFilterOutput)
 }
 
-type GetNFSFilterOutput struct { *pulumi.OutputState }
+type GetNFSFilterOutput struct{ *pulumi.OutputState }
 
 func (GetNFSFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetNFSFilter)(nil)).Elem()
@@ -9135,23 +9155,23 @@ func (o GetNFSFilterOutput) ToGetNFSFilterOutputWithContext(ctx context.Context)
 }
 
 func (o GetNFSFilterOutput) Conditions() GetNFSFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetNFSFilter) []GetNFSFilterCondition { return v.Conditions }).(GetNFSFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetNFSFilter) []GetNFSFilterCondition { return v.Conditions }).(GetNFSFilterConditionArrayOutput)
 }
 
 func (o GetNFSFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetNFSFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetNFSFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetNFSFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNFSFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNFSFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetNFSFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNFSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNFSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetNFSFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -9163,7 +9183,7 @@ type GetNFSFilterConditionInput interface {
 }
 
 type GetNFSFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -9200,7 +9220,7 @@ func (i GetNFSFilterConditionArray) ToGetNFSFilterConditionArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetNFSFilterConditionArrayOutput)
 }
 
-type GetNFSFilterConditionOutput struct { *pulumi.OutputState }
+type GetNFSFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetNFSFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetNFSFilterCondition)(nil)).Elem()
@@ -9215,14 +9235,14 @@ func (o GetNFSFilterConditionOutput) ToGetNFSFilterConditionOutputWithContext(ct
 }
 
 func (o GetNFSFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetNFSFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetNFSFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetNFSFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNFSFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNFSFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetNFSFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetNFSFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetNFSFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetNFSFilterCondition)(nil)).Elem()
@@ -9237,16 +9257,16 @@ func (o GetNFSFilterConditionArrayOutput) ToGetNFSFilterConditionArrayOutputWith
 }
 
 func (o GetNFSFilterConditionArrayOutput) Index(i pulumi.IntInput) GetNFSFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetNFSFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNFSFilterCondition {
 		return vs[0].([]GetNFSFilterCondition)[vs[1].(int)]
 	}).(GetNFSFilterConditionOutput)
 }
 
 type GetNFSNetworkInterface struct {
-	Gateway string `pulumi:"gateway"`
+	Gateway   string `pulumi:"gateway"`
 	IpAddress string `pulumi:"ipAddress"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
+	Netmask   int    `pulumi:"netmask"`
+	SwitchId  string `pulumi:"switchId"`
 }
 
 type GetNFSNetworkInterfaceInput interface {
@@ -9257,10 +9277,10 @@ type GetNFSNetworkInterfaceInput interface {
 }
 
 type GetNFSNetworkInterfaceArgs struct {
-	Gateway pulumi.StringInput `pulumi:"gateway"`
+	Gateway   pulumi.StringInput `pulumi:"gateway"`
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
+	Netmask   pulumi.IntInput    `pulumi:"netmask"`
+	SwitchId  pulumi.StringInput `pulumi:"switchId"`
 }
 
 func (GetNFSNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -9296,7 +9316,7 @@ func (i GetNFSNetworkInterfaceArray) ToGetNFSNetworkInterfaceArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetNFSNetworkInterfaceArrayOutput)
 }
 
-type GetNFSNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetNFSNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetNFSNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetNFSNetworkInterface)(nil)).Elem()
@@ -9311,22 +9331,22 @@ func (o GetNFSNetworkInterfaceOutput) ToGetNFSNetworkInterfaceOutputWithContext(
 }
 
 func (o GetNFSNetworkInterfaceOutput) Gateway() pulumi.StringOutput {
-	return o.ApplyT(func (v GetNFSNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetNFSNetworkInterface) string { return v.Gateway }).(pulumi.StringOutput)
 }
 
 func (o GetNFSNetworkInterfaceOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetNFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetNFSNetworkInterface) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetNFSNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v GetNFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetNFSNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o GetNFSNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetNFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetNFSNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
-type GetNFSNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetNFSNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetNFSNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetNFSNetworkInterface)(nil)).Elem()
@@ -9341,16 +9361,16 @@ func (o GetNFSNetworkInterfaceArrayOutput) ToGetNFSNetworkInterfaceArrayOutputWi
 }
 
 func (o GetNFSNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetNFSNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetNFSNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNFSNetworkInterface {
 		return vs[0].([]GetNFSNetworkInterface)[vs[1].(int)]
 	}).(GetNFSNetworkInterfaceOutput)
 }
 
 type GetNoteFilter struct {
 	Conditions []GetNoteFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                  `pulumi:"id"`
+	Names      []string                 `pulumi:"names"`
+	Tags       []string                 `pulumi:"tags"`
 }
 
 type GetNoteFilterInput interface {
@@ -9362,9 +9382,9 @@ type GetNoteFilterInput interface {
 
 type GetNoteFilterArgs struct {
 	Conditions GetNoteFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput            `pulumi:"id"`
+	Names      pulumi.StringArrayInput          `pulumi:"names"`
+	Tags       pulumi.StringArrayInput          `pulumi:"tags"`
 }
 
 func (GetNoteFilterArgs) ElementType() reflect.Type {
@@ -9379,7 +9399,7 @@ func (i GetNoteFilterArgs) ToGetNoteFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetNoteFilterOutput)
 }
 
-type GetNoteFilterOutput struct { *pulumi.OutputState }
+type GetNoteFilterOutput struct{ *pulumi.OutputState }
 
 func (GetNoteFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetNoteFilter)(nil)).Elem()
@@ -9394,23 +9414,23 @@ func (o GetNoteFilterOutput) ToGetNoteFilterOutputWithContext(ctx context.Contex
 }
 
 func (o GetNoteFilterOutput) Conditions() GetNoteFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetNoteFilter) []GetNoteFilterCondition { return v.Conditions }).(GetNoteFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetNoteFilter) []GetNoteFilterCondition { return v.Conditions }).(GetNoteFilterConditionArrayOutput)
 }
 
 func (o GetNoteFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetNoteFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetNoteFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetNoteFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNoteFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNoteFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetNoteFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNoteFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNoteFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetNoteFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -9422,7 +9442,7 @@ type GetNoteFilterConditionInput interface {
 }
 
 type GetNoteFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -9459,7 +9479,7 @@ func (i GetNoteFilterConditionArray) ToGetNoteFilterConditionArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetNoteFilterConditionArrayOutput)
 }
 
-type GetNoteFilterConditionOutput struct { *pulumi.OutputState }
+type GetNoteFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetNoteFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetNoteFilterCondition)(nil)).Elem()
@@ -9474,14 +9494,14 @@ func (o GetNoteFilterConditionOutput) ToGetNoteFilterConditionOutputWithContext(
 }
 
 func (o GetNoteFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetNoteFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetNoteFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetNoteFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetNoteFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetNoteFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetNoteFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetNoteFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetNoteFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetNoteFilterCondition)(nil)).Elem()
@@ -9496,18 +9516,18 @@ func (o GetNoteFilterConditionArrayOutput) ToGetNoteFilterConditionArrayOutputWi
 }
 
 func (o GetNoteFilterConditionArrayOutput) Index(i pulumi.IntInput) GetNoteFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetNoteFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoteFilterCondition {
 		return vs[0].([]GetNoteFilterCondition)[vs[1].(int)]
 	}).(GetNoteFilterConditionOutput)
 }
 
 type GetPacketFilterExpression struct {
-	Allow bool `pulumi:"allow"`
-	Description string `pulumi:"description"`
+	Allow           bool   `pulumi:"allow"`
+	Description     string `pulumi:"description"`
 	DestinationPort string `pulumi:"destinationPort"`
-	Protocol string `pulumi:"protocol"`
-	SourceNetwork string `pulumi:"sourceNetwork"`
-	SourcePort string `pulumi:"sourcePort"`
+	Protocol        string `pulumi:"protocol"`
+	SourceNetwork   string `pulumi:"sourceNetwork"`
+	SourcePort      string `pulumi:"sourcePort"`
 }
 
 type GetPacketFilterExpressionInput interface {
@@ -9518,12 +9538,12 @@ type GetPacketFilterExpressionInput interface {
 }
 
 type GetPacketFilterExpressionArgs struct {
-	Allow pulumi.BoolInput `pulumi:"allow"`
-	Description pulumi.StringInput `pulumi:"description"`
+	Allow           pulumi.BoolInput   `pulumi:"allow"`
+	Description     pulumi.StringInput `pulumi:"description"`
 	DestinationPort pulumi.StringInput `pulumi:"destinationPort"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	SourceNetwork pulumi.StringInput `pulumi:"sourceNetwork"`
-	SourcePort pulumi.StringInput `pulumi:"sourcePort"`
+	Protocol        pulumi.StringInput `pulumi:"protocol"`
+	SourceNetwork   pulumi.StringInput `pulumi:"sourceNetwork"`
+	SourcePort      pulumi.StringInput `pulumi:"sourcePort"`
 }
 
 func (GetPacketFilterExpressionArgs) ElementType() reflect.Type {
@@ -9559,7 +9579,7 @@ func (i GetPacketFilterExpressionArray) ToGetPacketFilterExpressionArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterExpressionArrayOutput)
 }
 
-type GetPacketFilterExpressionOutput struct { *pulumi.OutputState }
+type GetPacketFilterExpressionOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterExpressionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetPacketFilterExpression)(nil)).Elem()
@@ -9574,30 +9594,30 @@ func (o GetPacketFilterExpressionOutput) ToGetPacketFilterExpressionOutputWithCo
 }
 
 func (o GetPacketFilterExpressionOutput) Allow() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) bool { return v.Allow }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) bool { return v.Allow }).(pulumi.BoolOutput)
 }
 
 func (o GetPacketFilterExpressionOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetPacketFilterExpressionOutput) DestinationPort() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) string { return v.DestinationPort }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) string { return v.DestinationPort }).(pulumi.StringOutput)
 }
 
 func (o GetPacketFilterExpressionOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetPacketFilterExpressionOutput) SourceNetwork() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) string { return v.SourceNetwork }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) string { return v.SourceNetwork }).(pulumi.StringOutput)
 }
 
 func (o GetPacketFilterExpressionOutput) SourcePort() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterExpression) string { return v.SourcePort }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterExpression) string { return v.SourcePort }).(pulumi.StringOutput)
 }
 
-type GetPacketFilterExpressionArrayOutput struct { *pulumi.OutputState}
+type GetPacketFilterExpressionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterExpressionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetPacketFilterExpression)(nil)).Elem()
@@ -9612,15 +9632,15 @@ func (o GetPacketFilterExpressionArrayOutput) ToGetPacketFilterExpressionArrayOu
 }
 
 func (o GetPacketFilterExpressionArrayOutput) Index(i pulumi.IntInput) GetPacketFilterExpressionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetPacketFilterExpression {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPacketFilterExpression {
 		return vs[0].([]GetPacketFilterExpression)[vs[1].(int)]
 	}).(GetPacketFilterExpressionOutput)
 }
 
 type GetPacketFilterFilter struct {
 	Conditions []GetPacketFilterFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
+	Id         *string                          `pulumi:"id"`
+	Names      []string                         `pulumi:"names"`
 }
 
 type GetPacketFilterFilterInput interface {
@@ -9632,8 +9652,8 @@ type GetPacketFilterFilterInput interface {
 
 type GetPacketFilterFilterArgs struct {
 	Conditions GetPacketFilterFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
+	Id         pulumi.StringPtrInput                    `pulumi:"id"`
+	Names      pulumi.StringArrayInput                  `pulumi:"names"`
 }
 
 func (GetPacketFilterFilterArgs) ElementType() reflect.Type {
@@ -9648,7 +9668,7 @@ func (i GetPacketFilterFilterArgs) ToGetPacketFilterFilterOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterFilterOutput)
 }
 
-type GetPacketFilterFilterOutput struct { *pulumi.OutputState }
+type GetPacketFilterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetPacketFilterFilter)(nil)).Elem()
@@ -9663,19 +9683,19 @@ func (o GetPacketFilterFilterOutput) ToGetPacketFilterFilterOutputWithContext(ct
 }
 
 func (o GetPacketFilterFilterOutput) Conditions() GetPacketFilterFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetPacketFilterFilter) []GetPacketFilterFilterCondition { return v.Conditions }).(GetPacketFilterFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetPacketFilterFilter) []GetPacketFilterFilterCondition { return v.Conditions }).(GetPacketFilterFilterConditionArrayOutput)
 }
 
 func (o GetPacketFilterFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetPacketFilterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetPacketFilterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetPacketFilterFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetPacketFilterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetPacketFilterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 type GetPacketFilterFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -9687,7 +9707,7 @@ type GetPacketFilterFilterConditionInput interface {
 }
 
 type GetPacketFilterFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -9724,7 +9744,7 @@ func (i GetPacketFilterFilterConditionArray) ToGetPacketFilterFilterConditionArr
 	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterFilterConditionArrayOutput)
 }
 
-type GetPacketFilterFilterConditionOutput struct { *pulumi.OutputState }
+type GetPacketFilterFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetPacketFilterFilterCondition)(nil)).Elem()
@@ -9739,14 +9759,14 @@ func (o GetPacketFilterFilterConditionOutput) ToGetPacketFilterFilterConditionOu
 }
 
 func (o GetPacketFilterFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPacketFilterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPacketFilterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetPacketFilterFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetPacketFilterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetPacketFilterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetPacketFilterFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetPacketFilterFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetPacketFilterFilterCondition)(nil)).Elem()
@@ -9761,16 +9781,16 @@ func (o GetPacketFilterFilterConditionArrayOutput) ToGetPacketFilterFilterCondit
 }
 
 func (o GetPacketFilterFilterConditionArrayOutput) Index(i pulumi.IntInput) GetPacketFilterFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetPacketFilterFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPacketFilterFilterCondition {
 		return vs[0].([]GetPacketFilterFilterCondition)[vs[1].(int)]
 	}).(GetPacketFilterFilterConditionOutput)
 }
 
 type GetPrivateHostFilter struct {
 	Conditions []GetPrivateHostFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                         `pulumi:"id"`
+	Names      []string                        `pulumi:"names"`
+	Tags       []string                        `pulumi:"tags"`
 }
 
 type GetPrivateHostFilterInput interface {
@@ -9782,9 +9802,9 @@ type GetPrivateHostFilterInput interface {
 
 type GetPrivateHostFilterArgs struct {
 	Conditions GetPrivateHostFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                   `pulumi:"id"`
+	Names      pulumi.StringArrayInput                 `pulumi:"names"`
+	Tags       pulumi.StringArrayInput                 `pulumi:"tags"`
 }
 
 func (GetPrivateHostFilterArgs) ElementType() reflect.Type {
@@ -9799,7 +9819,7 @@ func (i GetPrivateHostFilterArgs) ToGetPrivateHostFilterOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateHostFilterOutput)
 }
 
-type GetPrivateHostFilterOutput struct { *pulumi.OutputState }
+type GetPrivateHostFilterOutput struct{ *pulumi.OutputState }
 
 func (GetPrivateHostFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetPrivateHostFilter)(nil)).Elem()
@@ -9814,23 +9834,23 @@ func (o GetPrivateHostFilterOutput) ToGetPrivateHostFilterOutputWithContext(ctx 
 }
 
 func (o GetPrivateHostFilterOutput) Conditions() GetPrivateHostFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetPrivateHostFilter) []GetPrivateHostFilterCondition { return v.Conditions }).(GetPrivateHostFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetPrivateHostFilter) []GetPrivateHostFilterCondition { return v.Conditions }).(GetPrivateHostFilterConditionArrayOutput)
 }
 
 func (o GetPrivateHostFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetPrivateHostFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetPrivateHostFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetPrivateHostFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetPrivateHostFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetPrivateHostFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetPrivateHostFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetPrivateHostFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetPrivateHostFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetPrivateHostFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -9842,7 +9862,7 @@ type GetPrivateHostFilterConditionInput interface {
 }
 
 type GetPrivateHostFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -9879,7 +9899,7 @@ func (i GetPrivateHostFilterConditionArray) ToGetPrivateHostFilterConditionArray
 	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateHostFilterConditionArrayOutput)
 }
 
-type GetPrivateHostFilterConditionOutput struct { *pulumi.OutputState }
+type GetPrivateHostFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetPrivateHostFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetPrivateHostFilterCondition)(nil)).Elem()
@@ -9894,14 +9914,14 @@ func (o GetPrivateHostFilterConditionOutput) ToGetPrivateHostFilterConditionOutp
 }
 
 func (o GetPrivateHostFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetPrivateHostFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetPrivateHostFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetPrivateHostFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetPrivateHostFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetPrivateHostFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetPrivateHostFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetPrivateHostFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetPrivateHostFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetPrivateHostFilterCondition)(nil)).Elem()
@@ -9916,17 +9936,17 @@ func (o GetPrivateHostFilterConditionArrayOutput) ToGetPrivateHostFilterConditio
 }
 
 func (o GetPrivateHostFilterConditionArrayOutput) Index(i pulumi.IntInput) GetPrivateHostFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetPrivateHostFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPrivateHostFilterCondition {
 		return vs[0].([]GetPrivateHostFilterCondition)[vs[1].(int)]
 	}).(GetPrivateHostFilterConditionOutput)
 }
 
 type GetProxyLBBindPort struct {
-	Port int `pulumi:"port"`
-	ProxyMode string `pulumi:"proxyMode"`
-	RedirectToHttps bool `pulumi:"redirectToHttps"`
+	Port            int                                `pulumi:"port"`
+	ProxyMode       string                             `pulumi:"proxyMode"`
+	RedirectToHttps bool                               `pulumi:"redirectToHttps"`
 	ResponseHeaders []GetProxyLBBindPortResponseHeader `pulumi:"responseHeaders"`
-	SupportHttp2 bool `pulumi:"supportHttp2"`
+	SupportHttp2    bool                               `pulumi:"supportHttp2"`
 }
 
 type GetProxyLBBindPortInput interface {
@@ -9937,11 +9957,11 @@ type GetProxyLBBindPortInput interface {
 }
 
 type GetProxyLBBindPortArgs struct {
-	Port pulumi.IntInput `pulumi:"port"`
-	ProxyMode pulumi.StringInput `pulumi:"proxyMode"`
-	RedirectToHttps pulumi.BoolInput `pulumi:"redirectToHttps"`
+	Port            pulumi.IntInput                            `pulumi:"port"`
+	ProxyMode       pulumi.StringInput                         `pulumi:"proxyMode"`
+	RedirectToHttps pulumi.BoolInput                           `pulumi:"redirectToHttps"`
 	ResponseHeaders GetProxyLBBindPortResponseHeaderArrayInput `pulumi:"responseHeaders"`
-	SupportHttp2 pulumi.BoolInput `pulumi:"supportHttp2"`
+	SupportHttp2    pulumi.BoolInput                           `pulumi:"supportHttp2"`
 }
 
 func (GetProxyLBBindPortArgs) ElementType() reflect.Type {
@@ -9977,7 +9997,7 @@ func (i GetProxyLBBindPortArray) ToGetProxyLBBindPortArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBBindPortArrayOutput)
 }
 
-type GetProxyLBBindPortOutput struct { *pulumi.OutputState }
+type GetProxyLBBindPortOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBBindPortOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBBindPort)(nil)).Elem()
@@ -9992,26 +10012,26 @@ func (o GetProxyLBBindPortOutput) ToGetProxyLBBindPortOutputWithContext(ctx cont
 }
 
 func (o GetProxyLBBindPortOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetProxyLBBindPort) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetProxyLBBindPort) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetProxyLBBindPortOutput) ProxyMode() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBBindPort) string { return v.ProxyMode }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBBindPort) string { return v.ProxyMode }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBBindPortOutput) RedirectToHttps() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetProxyLBBindPort) bool { return v.RedirectToHttps }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetProxyLBBindPort) bool { return v.RedirectToHttps }).(pulumi.BoolOutput)
 }
 
 func (o GetProxyLBBindPortOutput) ResponseHeaders() GetProxyLBBindPortResponseHeaderArrayOutput {
-	return o.ApplyT(func (v GetProxyLBBindPort) []GetProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(GetProxyLBBindPortResponseHeaderArrayOutput)
+	return o.ApplyT(func(v GetProxyLBBindPort) []GetProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(GetProxyLBBindPortResponseHeaderArrayOutput)
 }
 
 func (o GetProxyLBBindPortOutput) SupportHttp2() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetProxyLBBindPort) bool { return v.SupportHttp2 }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetProxyLBBindPort) bool { return v.SupportHttp2 }).(pulumi.BoolOutput)
 }
 
-type GetProxyLBBindPortArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBBindPortArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBBindPortArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBBindPort)(nil)).Elem()
@@ -10026,14 +10046,14 @@ func (o GetProxyLBBindPortArrayOutput) ToGetProxyLBBindPortArrayOutputWithContex
 }
 
 func (o GetProxyLBBindPortArrayOutput) Index(i pulumi.IntInput) GetProxyLBBindPortOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBBindPort {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBBindPort {
 		return vs[0].([]GetProxyLBBindPort)[vs[1].(int)]
 	}).(GetProxyLBBindPortOutput)
 }
 
 type GetProxyLBBindPortResponseHeader struct {
 	Header string `pulumi:"header"`
-	Value string `pulumi:"value"`
+	Value  string `pulumi:"value"`
 }
 
 type GetProxyLBBindPortResponseHeaderInput interface {
@@ -10045,7 +10065,7 @@ type GetProxyLBBindPortResponseHeaderInput interface {
 
 type GetProxyLBBindPortResponseHeaderArgs struct {
 	Header pulumi.StringInput `pulumi:"header"`
-	Value pulumi.StringInput `pulumi:"value"`
+	Value  pulumi.StringInput `pulumi:"value"`
 }
 
 func (GetProxyLBBindPortResponseHeaderArgs) ElementType() reflect.Type {
@@ -10081,7 +10101,7 @@ func (i GetProxyLBBindPortResponseHeaderArray) ToGetProxyLBBindPortResponseHeade
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBBindPortResponseHeaderArrayOutput)
 }
 
-type GetProxyLBBindPortResponseHeaderOutput struct { *pulumi.OutputState }
+type GetProxyLBBindPortResponseHeaderOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBBindPortResponseHeaderOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBBindPortResponseHeader)(nil)).Elem()
@@ -10096,14 +10116,14 @@ func (o GetProxyLBBindPortResponseHeaderOutput) ToGetProxyLBBindPortResponseHead
 }
 
 func (o GetProxyLBBindPortResponseHeaderOutput) Header() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBBindPortResponseHeader) string { return v.Header }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBBindPortResponseHeader) string { return v.Header }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBBindPortResponseHeaderOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBBindPortResponseHeader) string { return v.Value }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBBindPortResponseHeader) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type GetProxyLBBindPortResponseHeaderArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBBindPortResponseHeaderArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBBindPortResponseHeaderArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBBindPortResponseHeader)(nil)).Elem()
@@ -10118,16 +10138,16 @@ func (o GetProxyLBBindPortResponseHeaderArrayOutput) ToGetProxyLBBindPortRespons
 }
 
 func (o GetProxyLBBindPortResponseHeaderArrayOutput) Index(i pulumi.IntInput) GetProxyLBBindPortResponseHeaderOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBBindPortResponseHeader {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBBindPortResponseHeader {
 		return vs[0].([]GetProxyLBBindPortResponseHeader)[vs[1].(int)]
 	}).(GetProxyLBBindPortResponseHeaderOutput)
 }
 
 type GetProxyLBCertificate struct {
 	AdditionalCertificates []GetProxyLBCertificateAdditionalCertificate `pulumi:"additionalCertificates"`
-	IntermediateCert string `pulumi:"intermediateCert"`
-	PrivateKey string `pulumi:"privateKey"`
-	ServerCert string `pulumi:"serverCert"`
+	IntermediateCert       string                                       `pulumi:"intermediateCert"`
+	PrivateKey             string                                       `pulumi:"privateKey"`
+	ServerCert             string                                       `pulumi:"serverCert"`
 }
 
 type GetProxyLBCertificateInput interface {
@@ -10139,9 +10159,9 @@ type GetProxyLBCertificateInput interface {
 
 type GetProxyLBCertificateArgs struct {
 	AdditionalCertificates GetProxyLBCertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
-	IntermediateCert pulumi.StringInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringInput `pulumi:"serverCert"`
+	IntermediateCert       pulumi.StringInput                                   `pulumi:"intermediateCert"`
+	PrivateKey             pulumi.StringInput                                   `pulumi:"privateKey"`
+	ServerCert             pulumi.StringInput                                   `pulumi:"serverCert"`
 }
 
 func (GetProxyLBCertificateArgs) ElementType() reflect.Type {
@@ -10177,7 +10197,7 @@ func (i GetProxyLBCertificateArray) ToGetProxyLBCertificateArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBCertificateArrayOutput)
 }
 
-type GetProxyLBCertificateOutput struct { *pulumi.OutputState }
+type GetProxyLBCertificateOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBCertificate)(nil)).Elem()
@@ -10192,22 +10212,24 @@ func (o GetProxyLBCertificateOutput) ToGetProxyLBCertificateOutputWithContext(ct
 }
 
 func (o GetProxyLBCertificateOutput) AdditionalCertificates() GetProxyLBCertificateAdditionalCertificateArrayOutput {
-	return o.ApplyT(func (v GetProxyLBCertificate) []GetProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(GetProxyLBCertificateAdditionalCertificateArrayOutput)
+	return o.ApplyT(func(v GetProxyLBCertificate) []GetProxyLBCertificateAdditionalCertificate {
+		return v.AdditionalCertificates
+	}).(GetProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
 func (o GetProxyLBCertificateOutput) IntermediateCert() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificate) string { return v.IntermediateCert }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.IntermediateCert }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBCertificateOutput) PrivateKey() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBCertificateOutput) ServerCert() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
 }
 
-type GetProxyLBCertificateArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBCertificateArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBCertificateArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBCertificate)(nil)).Elem()
@@ -10222,15 +10244,15 @@ func (o GetProxyLBCertificateArrayOutput) ToGetProxyLBCertificateArrayOutputWith
 }
 
 func (o GetProxyLBCertificateArrayOutput) Index(i pulumi.IntInput) GetProxyLBCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBCertificate {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBCertificate {
 		return vs[0].([]GetProxyLBCertificate)[vs[1].(int)]
 	}).(GetProxyLBCertificateOutput)
 }
 
 type GetProxyLBCertificateAdditionalCertificate struct {
 	IntermediateCert string `pulumi:"intermediateCert"`
-	PrivateKey string `pulumi:"privateKey"`
-	ServerCert string `pulumi:"serverCert"`
+	PrivateKey       string `pulumi:"privateKey"`
+	ServerCert       string `pulumi:"serverCert"`
 }
 
 type GetProxyLBCertificateAdditionalCertificateInput interface {
@@ -10242,8 +10264,8 @@ type GetProxyLBCertificateAdditionalCertificateInput interface {
 
 type GetProxyLBCertificateAdditionalCertificateArgs struct {
 	IntermediateCert pulumi.StringInput `pulumi:"intermediateCert"`
-	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
-	ServerCert pulumi.StringInput `pulumi:"serverCert"`
+	PrivateKey       pulumi.StringInput `pulumi:"privateKey"`
+	ServerCert       pulumi.StringInput `pulumi:"serverCert"`
 }
 
 func (GetProxyLBCertificateAdditionalCertificateArgs) ElementType() reflect.Type {
@@ -10279,7 +10301,7 @@ func (i GetProxyLBCertificateAdditionalCertificateArray) ToGetProxyLBCertificate
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
-type GetProxyLBCertificateAdditionalCertificateOutput struct { *pulumi.OutputState }
+type GetProxyLBCertificateAdditionalCertificateOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBCertificateAdditionalCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBCertificateAdditionalCertificate)(nil)).Elem()
@@ -10294,18 +10316,18 @@ func (o GetProxyLBCertificateAdditionalCertificateOutput) ToGetProxyLBCertificat
 }
 
 func (o GetProxyLBCertificateAdditionalCertificateOutput) IntermediateCert() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificateAdditionalCertificate) string { return v.IntermediateCert }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificateAdditionalCertificate) string { return v.IntermediateCert }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBCertificateAdditionalCertificateOutput) PrivateKey() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificateAdditionalCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificateAdditionalCertificate) string { return v.PrivateKey }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBCertificateAdditionalCertificateOutput) ServerCert() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBCertificateAdditionalCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBCertificateAdditionalCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
 }
 
-type GetProxyLBCertificateAdditionalCertificateArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBCertificateAdditionalCertificateArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBCertificateAdditionalCertificateArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBCertificateAdditionalCertificate)(nil)).Elem()
@@ -10320,16 +10342,16 @@ func (o GetProxyLBCertificateAdditionalCertificateArrayOutput) ToGetProxyLBCerti
 }
 
 func (o GetProxyLBCertificateAdditionalCertificateArrayOutput) Index(i pulumi.IntInput) GetProxyLBCertificateAdditionalCertificateOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBCertificateAdditionalCertificate {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBCertificateAdditionalCertificate {
 		return vs[0].([]GetProxyLBCertificateAdditionalCertificate)[vs[1].(int)]
 	}).(GetProxyLBCertificateAdditionalCertificateOutput)
 }
 
 type GetProxyLBFilter struct {
 	Conditions []GetProxyLBFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                     `pulumi:"id"`
+	Names      []string                    `pulumi:"names"`
+	Tags       []string                    `pulumi:"tags"`
 }
 
 type GetProxyLBFilterInput interface {
@@ -10341,9 +10363,9 @@ type GetProxyLBFilterInput interface {
 
 type GetProxyLBFilterArgs struct {
 	Conditions GetProxyLBFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput               `pulumi:"id"`
+	Names      pulumi.StringArrayInput             `pulumi:"names"`
+	Tags       pulumi.StringArrayInput             `pulumi:"tags"`
 }
 
 func (GetProxyLBFilterArgs) ElementType() reflect.Type {
@@ -10358,7 +10380,7 @@ func (i GetProxyLBFilterArgs) ToGetProxyLBFilterOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBFilterOutput)
 }
 
-type GetProxyLBFilterOutput struct { *pulumi.OutputState }
+type GetProxyLBFilterOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBFilter)(nil)).Elem()
@@ -10373,23 +10395,23 @@ func (o GetProxyLBFilterOutput) ToGetProxyLBFilterOutputWithContext(ctx context.
 }
 
 func (o GetProxyLBFilterOutput) Conditions() GetProxyLBFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetProxyLBFilter) []GetProxyLBFilterCondition { return v.Conditions }).(GetProxyLBFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetProxyLBFilter) []GetProxyLBFilterCondition { return v.Conditions }).(GetProxyLBFilterConditionArrayOutput)
 }
 
 func (o GetProxyLBFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetProxyLBFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetProxyLBFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetProxyLBFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetProxyLBFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetProxyLBFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetProxyLBFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetProxyLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetProxyLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetProxyLBFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -10401,7 +10423,7 @@ type GetProxyLBFilterConditionInput interface {
 }
 
 type GetProxyLBFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -10438,7 +10460,7 @@ func (i GetProxyLBFilterConditionArray) ToGetProxyLBFilterConditionArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBFilterConditionArrayOutput)
 }
 
-type GetProxyLBFilterConditionOutput struct { *pulumi.OutputState }
+type GetProxyLBFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBFilterCondition)(nil)).Elem()
@@ -10453,14 +10475,14 @@ func (o GetProxyLBFilterConditionOutput) ToGetProxyLBFilterConditionOutputWithCo
 }
 
 func (o GetProxyLBFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetProxyLBFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetProxyLBFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetProxyLBFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBFilterCondition)(nil)).Elem()
@@ -10475,17 +10497,17 @@ func (o GetProxyLBFilterConditionArrayOutput) ToGetProxyLBFilterConditionArrayOu
 }
 
 func (o GetProxyLBFilterConditionArrayOutput) Index(i pulumi.IntInput) GetProxyLBFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBFilterCondition {
 		return vs[0].([]GetProxyLBFilterCondition)[vs[1].(int)]
 	}).(GetProxyLBFilterConditionOutput)
 }
 
 type GetProxyLBHealthCheck struct {
-	DelayLoop int `pulumi:"delayLoop"`
+	DelayLoop  int    `pulumi:"delayLoop"`
 	HostHeader string `pulumi:"hostHeader"`
-	Path string `pulumi:"path"`
-	Port int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
+	Path       string `pulumi:"path"`
+	Port       int    `pulumi:"port"`
+	Protocol   string `pulumi:"protocol"`
 }
 
 type GetProxyLBHealthCheckInput interface {
@@ -10496,11 +10518,11 @@ type GetProxyLBHealthCheckInput interface {
 }
 
 type GetProxyLBHealthCheckArgs struct {
-	DelayLoop pulumi.IntInput `pulumi:"delayLoop"`
+	DelayLoop  pulumi.IntInput    `pulumi:"delayLoop"`
 	HostHeader pulumi.StringInput `pulumi:"hostHeader"`
-	Path pulumi.StringInput `pulumi:"path"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
+	Path       pulumi.StringInput `pulumi:"path"`
+	Port       pulumi.IntInput    `pulumi:"port"`
+	Protocol   pulumi.StringInput `pulumi:"protocol"`
 }
 
 func (GetProxyLBHealthCheckArgs) ElementType() reflect.Type {
@@ -10536,7 +10558,7 @@ func (i GetProxyLBHealthCheckArray) ToGetProxyLBHealthCheckArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBHealthCheckArrayOutput)
 }
 
-type GetProxyLBHealthCheckOutput struct { *pulumi.OutputState }
+type GetProxyLBHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBHealthCheck)(nil)).Elem()
@@ -10551,26 +10573,26 @@ func (o GetProxyLBHealthCheckOutput) ToGetProxyLBHealthCheckOutputWithContext(ct
 }
 
 func (o GetProxyLBHealthCheckOutput) DelayLoop() pulumi.IntOutput {
-	return o.ApplyT(func (v GetProxyLBHealthCheck) int { return v.DelayLoop }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetProxyLBHealthCheck) int { return v.DelayLoop }).(pulumi.IntOutput)
 }
 
 func (o GetProxyLBHealthCheckOutput) HostHeader() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBHealthCheckOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBHealthCheck) string { return v.Path }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBHealthCheck) string { return v.Path }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBHealthCheckOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetProxyLBHealthCheck) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetProxyLBHealthCheck) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetProxyLBHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
-type GetProxyLBHealthCheckArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBHealthCheckArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBHealthCheckArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBHealthCheck)(nil)).Elem()
@@ -10585,15 +10607,15 @@ func (o GetProxyLBHealthCheckArrayOutput) ToGetProxyLBHealthCheckArrayOutputWith
 }
 
 func (o GetProxyLBHealthCheckArrayOutput) Index(i pulumi.IntInput) GetProxyLBHealthCheckOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBHealthCheck {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBHealthCheck {
 		return vs[0].([]GetProxyLBHealthCheck)[vs[1].(int)]
 	}).(GetProxyLBHealthCheckOutput)
 }
 
 type GetProxyLBRule struct {
 	Group string `pulumi:"group"`
-	Host string `pulumi:"host"`
-	Path string `pulumi:"path"`
+	Host  string `pulumi:"host"`
+	Path  string `pulumi:"path"`
 }
 
 type GetProxyLBRuleInput interface {
@@ -10605,8 +10627,8 @@ type GetProxyLBRuleInput interface {
 
 type GetProxyLBRuleArgs struct {
 	Group pulumi.StringInput `pulumi:"group"`
-	Host pulumi.StringInput `pulumi:"host"`
-	Path pulumi.StringInput `pulumi:"path"`
+	Host  pulumi.StringInput `pulumi:"host"`
+	Path  pulumi.StringInput `pulumi:"path"`
 }
 
 func (GetProxyLBRuleArgs) ElementType() reflect.Type {
@@ -10642,7 +10664,7 @@ func (i GetProxyLBRuleArray) ToGetProxyLBRuleArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBRuleArrayOutput)
 }
 
-type GetProxyLBRuleOutput struct { *pulumi.OutputState }
+type GetProxyLBRuleOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBRuleOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBRule)(nil)).Elem()
@@ -10657,18 +10679,18 @@ func (o GetProxyLBRuleOutput) ToGetProxyLBRuleOutputWithContext(ctx context.Cont
 }
 
 func (o GetProxyLBRuleOutput) Group() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBRule) string { return v.Group }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.Group }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBRuleOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBRule) string { return v.Host }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.Host }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBRuleOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBRule) string { return v.Path }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.Path }).(pulumi.StringOutput)
 }
 
-type GetProxyLBRuleArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBRuleArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBRuleArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBRule)(nil)).Elem()
@@ -10683,16 +10705,16 @@ func (o GetProxyLBRuleArrayOutput) ToGetProxyLBRuleArrayOutputWithContext(ctx co
 }
 
 func (o GetProxyLBRuleArrayOutput) Index(i pulumi.IntInput) GetProxyLBRuleOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBRule {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBRule {
 		return vs[0].([]GetProxyLBRule)[vs[1].(int)]
 	}).(GetProxyLBRuleOutput)
 }
 
 type GetProxyLBServer struct {
-	Enabled bool `pulumi:"enabled"`
-	Group string `pulumi:"group"`
+	Enabled   bool   `pulumi:"enabled"`
+	Group     string `pulumi:"group"`
 	IpAddress string `pulumi:"ipAddress"`
-	Port int `pulumi:"port"`
+	Port      int    `pulumi:"port"`
 }
 
 type GetProxyLBServerInput interface {
@@ -10703,10 +10725,10 @@ type GetProxyLBServerInput interface {
 }
 
 type GetProxyLBServerArgs struct {
-	Enabled pulumi.BoolInput `pulumi:"enabled"`
-	Group pulumi.StringInput `pulumi:"group"`
+	Enabled   pulumi.BoolInput   `pulumi:"enabled"`
+	Group     pulumi.StringInput `pulumi:"group"`
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Port pulumi.IntInput `pulumi:"port"`
+	Port      pulumi.IntInput    `pulumi:"port"`
 }
 
 func (GetProxyLBServerArgs) ElementType() reflect.Type {
@@ -10742,7 +10764,7 @@ func (i GetProxyLBServerArray) ToGetProxyLBServerArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBServerArrayOutput)
 }
 
-type GetProxyLBServerOutput struct { *pulumi.OutputState }
+type GetProxyLBServerOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBServer)(nil)).Elem()
@@ -10757,22 +10779,22 @@ func (o GetProxyLBServerOutput) ToGetProxyLBServerOutputWithContext(ctx context.
 }
 
 func (o GetProxyLBServerOutput) Enabled() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetProxyLBServer) bool { return v.Enabled }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetProxyLBServer) bool { return v.Enabled }).(pulumi.BoolOutput)
 }
 
 func (o GetProxyLBServerOutput) Group() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBServer) string { return v.Group }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBServer) string { return v.Group }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBServerOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetProxyLBServer) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetProxyLBServer) int { return v.Port }).(pulumi.IntOutput)
 }
 
-type GetProxyLBServerArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBServer)(nil)).Elem()
@@ -10787,14 +10809,14 @@ func (o GetProxyLBServerArrayOutput) ToGetProxyLBServerArrayOutputWithContext(ct
 }
 
 func (o GetProxyLBServerArrayOutput) Index(i pulumi.IntInput) GetProxyLBServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBServer {
 		return vs[0].([]GetProxyLBServer)[vs[1].(int)]
 	}).(GetProxyLBServerOutput)
 }
 
 type GetProxyLBSorryServer struct {
 	IpAddress string `pulumi:"ipAddress"`
-	Port int `pulumi:"port"`
+	Port      int    `pulumi:"port"`
 }
 
 type GetProxyLBSorryServerInput interface {
@@ -10806,7 +10828,7 @@ type GetProxyLBSorryServerInput interface {
 
 type GetProxyLBSorryServerArgs struct {
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	Port pulumi.IntInput `pulumi:"port"`
+	Port      pulumi.IntInput    `pulumi:"port"`
 }
 
 func (GetProxyLBSorryServerArgs) ElementType() reflect.Type {
@@ -10842,7 +10864,7 @@ func (i GetProxyLBSorryServerArray) ToGetProxyLBSorryServerArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBSorryServerArrayOutput)
 }
 
-type GetProxyLBSorryServerOutput struct { *pulumi.OutputState }
+type GetProxyLBSorryServerOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBSorryServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetProxyLBSorryServer)(nil)).Elem()
@@ -10857,14 +10879,14 @@ func (o GetProxyLBSorryServerOutput) ToGetProxyLBSorryServerOutputWithContext(ct
 }
 
 func (o GetProxyLBSorryServerOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetProxyLBSorryServerOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetProxyLBSorryServer) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetProxyLBSorryServer) int { return v.Port }).(pulumi.IntOutput)
 }
 
-type GetProxyLBSorryServerArrayOutput struct { *pulumi.OutputState}
+type GetProxyLBSorryServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBSorryServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetProxyLBSorryServer)(nil)).Elem()
@@ -10879,15 +10901,15 @@ func (o GetProxyLBSorryServerArrayOutput) ToGetProxyLBSorryServerArrayOutputWith
 }
 
 func (o GetProxyLBSorryServerArrayOutput) Index(i pulumi.IntInput) GetProxyLBSorryServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetProxyLBSorryServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBSorryServer {
 		return vs[0].([]GetProxyLBSorryServer)[vs[1].(int)]
 	}).(GetProxyLBSorryServerOutput)
 }
 
 type GetSSHKeyFilter struct {
 	Conditions []GetSSHKeyFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
+	Id         *string                    `pulumi:"id"`
+	Names      []string                   `pulumi:"names"`
 }
 
 type GetSSHKeyFilterInput interface {
@@ -10899,8 +10921,8 @@ type GetSSHKeyFilterInput interface {
 
 type GetSSHKeyFilterArgs struct {
 	Conditions GetSSHKeyFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
+	Id         pulumi.StringPtrInput              `pulumi:"id"`
+	Names      pulumi.StringArrayInput            `pulumi:"names"`
 }
 
 func (GetSSHKeyFilterArgs) ElementType() reflect.Type {
@@ -10915,7 +10937,7 @@ func (i GetSSHKeyFilterArgs) ToGetSSHKeyFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetSSHKeyFilterOutput)
 }
 
-type GetSSHKeyFilterOutput struct { *pulumi.OutputState }
+type GetSSHKeyFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSSHKeyFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSSHKeyFilter)(nil)).Elem()
@@ -10930,19 +10952,19 @@ func (o GetSSHKeyFilterOutput) ToGetSSHKeyFilterOutputWithContext(ctx context.Co
 }
 
 func (o GetSSHKeyFilterOutput) Conditions() GetSSHKeyFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetSSHKeyFilter) []GetSSHKeyFilterCondition { return v.Conditions }).(GetSSHKeyFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetSSHKeyFilter) []GetSSHKeyFilterCondition { return v.Conditions }).(GetSSHKeyFilterConditionArrayOutput)
 }
 
 func (o GetSSHKeyFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetSSHKeyFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetSSHKeyFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetSSHKeyFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSSHKeyFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSSHKeyFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 type GetSSHKeyFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -10954,7 +10976,7 @@ type GetSSHKeyFilterConditionInput interface {
 }
 
 type GetSSHKeyFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -10991,7 +11013,7 @@ func (i GetSSHKeyFilterConditionArray) ToGetSSHKeyFilterConditionArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetSSHKeyFilterConditionArrayOutput)
 }
 
-type GetSSHKeyFilterConditionOutput struct { *pulumi.OutputState }
+type GetSSHKeyFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetSSHKeyFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSSHKeyFilterCondition)(nil)).Elem()
@@ -11006,14 +11028,14 @@ func (o GetSSHKeyFilterConditionOutput) ToGetSSHKeyFilterConditionOutputWithCont
 }
 
 func (o GetSSHKeyFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSSHKeyFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSSHKeyFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetSSHKeyFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSSHKeyFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSSHKeyFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetSSHKeyFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetSSHKeyFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetSSHKeyFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetSSHKeyFilterCondition)(nil)).Elem()
@@ -11028,16 +11050,16 @@ func (o GetSSHKeyFilterConditionArrayOutput) ToGetSSHKeyFilterConditionArrayOutp
 }
 
 func (o GetSSHKeyFilterConditionArrayOutput) Index(i pulumi.IntInput) GetSSHKeyFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetSSHKeyFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSSHKeyFilterCondition {
 		return vs[0].([]GetSSHKeyFilterCondition)[vs[1].(int)]
 	}).(GetSSHKeyFilterConditionOutput)
 }
 
 type GetServerFilter struct {
 	Conditions []GetServerFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                    `pulumi:"id"`
+	Names      []string                   `pulumi:"names"`
+	Tags       []string                   `pulumi:"tags"`
 }
 
 type GetServerFilterInput interface {
@@ -11049,9 +11071,9 @@ type GetServerFilterInput interface {
 
 type GetServerFilterArgs struct {
 	Conditions GetServerFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput              `pulumi:"id"`
+	Names      pulumi.StringArrayInput            `pulumi:"names"`
+	Tags       pulumi.StringArrayInput            `pulumi:"tags"`
 }
 
 func (GetServerFilterArgs) ElementType() reflect.Type {
@@ -11066,7 +11088,7 @@ func (i GetServerFilterArgs) ToGetServerFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetServerFilterOutput)
 }
 
-type GetServerFilterOutput struct { *pulumi.OutputState }
+type GetServerFilterOutput struct{ *pulumi.OutputState }
 
 func (GetServerFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetServerFilter)(nil)).Elem()
@@ -11081,23 +11103,23 @@ func (o GetServerFilterOutput) ToGetServerFilterOutputWithContext(ctx context.Co
 }
 
 func (o GetServerFilterOutput) Conditions() GetServerFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetServerFilter) []GetServerFilterCondition { return v.Conditions }).(GetServerFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetServerFilter) []GetServerFilterCondition { return v.Conditions }).(GetServerFilterConditionArrayOutput)
 }
 
 func (o GetServerFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetServerFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetServerFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetServerFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetServerFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetServerFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetServerFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetServerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetServerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetServerFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -11109,7 +11131,7 @@ type GetServerFilterConditionInput interface {
 }
 
 type GetServerFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -11146,7 +11168,7 @@ func (i GetServerFilterConditionArray) ToGetServerFilterConditionArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetServerFilterConditionArrayOutput)
 }
 
-type GetServerFilterConditionOutput struct { *pulumi.OutputState }
+type GetServerFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetServerFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetServerFilterCondition)(nil)).Elem()
@@ -11161,14 +11183,14 @@ func (o GetServerFilterConditionOutput) ToGetServerFilterConditionOutputWithCont
 }
 
 func (o GetServerFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetServerFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetServerFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetServerFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetServerFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetServerFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetServerFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetServerFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetServerFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetServerFilterCondition)(nil)).Elem()
@@ -11183,16 +11205,16 @@ func (o GetServerFilterConditionArrayOutput) ToGetServerFilterConditionArrayOutp
 }
 
 func (o GetServerFilterConditionArrayOutput) Index(i pulumi.IntInput) GetServerFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetServerFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServerFilterCondition {
 		return vs[0].([]GetServerFilterCondition)[vs[1].(int)]
 	}).(GetServerFilterConditionOutput)
 }
 
 type GetServerNetworkInterface struct {
-	MacAddress string `pulumi:"macAddress"`
+	MacAddress     string `pulumi:"macAddress"`
 	PacketFilterId string `pulumi:"packetFilterId"`
-	Upstream string `pulumi:"upstream"`
-	UserIpAddress string `pulumi:"userIpAddress"`
+	Upstream       string `pulumi:"upstream"`
+	UserIpAddress  string `pulumi:"userIpAddress"`
 }
 
 type GetServerNetworkInterfaceInput interface {
@@ -11203,10 +11225,10 @@ type GetServerNetworkInterfaceInput interface {
 }
 
 type GetServerNetworkInterfaceArgs struct {
-	MacAddress pulumi.StringInput `pulumi:"macAddress"`
+	MacAddress     pulumi.StringInput `pulumi:"macAddress"`
 	PacketFilterId pulumi.StringInput `pulumi:"packetFilterId"`
-	Upstream pulumi.StringInput `pulumi:"upstream"`
-	UserIpAddress pulumi.StringInput `pulumi:"userIpAddress"`
+	Upstream       pulumi.StringInput `pulumi:"upstream"`
+	UserIpAddress  pulumi.StringInput `pulumi:"userIpAddress"`
 }
 
 func (GetServerNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -11242,7 +11264,7 @@ func (i GetServerNetworkInterfaceArray) ToGetServerNetworkInterfaceArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetServerNetworkInterfaceArrayOutput)
 }
 
-type GetServerNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetServerNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetServerNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetServerNetworkInterface)(nil)).Elem()
@@ -11257,22 +11279,22 @@ func (o GetServerNetworkInterfaceOutput) ToGetServerNetworkInterfaceOutputWithCo
 }
 
 func (o GetServerNetworkInterfaceOutput) MacAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetServerNetworkInterface) string { return v.MacAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetServerNetworkInterface) string { return v.MacAddress }).(pulumi.StringOutput)
 }
 
 func (o GetServerNetworkInterfaceOutput) PacketFilterId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetServerNetworkInterface) string { return v.PacketFilterId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetServerNetworkInterface) string { return v.PacketFilterId }).(pulumi.StringOutput)
 }
 
 func (o GetServerNetworkInterfaceOutput) Upstream() pulumi.StringOutput {
-	return o.ApplyT(func (v GetServerNetworkInterface) string { return v.Upstream }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetServerNetworkInterface) string { return v.Upstream }).(pulumi.StringOutput)
 }
 
 func (o GetServerNetworkInterfaceOutput) UserIpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetServerNetworkInterface) string { return v.UserIpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetServerNetworkInterface) string { return v.UserIpAddress }).(pulumi.StringOutput)
 }
 
-type GetServerNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetServerNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetServerNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetServerNetworkInterface)(nil)).Elem()
@@ -11287,16 +11309,16 @@ func (o GetServerNetworkInterfaceArrayOutput) ToGetServerNetworkInterfaceArrayOu
 }
 
 func (o GetServerNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetServerNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetServerNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServerNetworkInterface {
 		return vs[0].([]GetServerNetworkInterface)[vs[1].(int)]
 	}).(GetServerNetworkInterfaceOutput)
 }
 
 type GetSimpleMonitorFilter struct {
 	Conditions []GetSimpleMonitorFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                           `pulumi:"id"`
+	Names      []string                          `pulumi:"names"`
+	Tags       []string                          `pulumi:"tags"`
 }
 
 type GetSimpleMonitorFilterInput interface {
@@ -11308,9 +11330,9 @@ type GetSimpleMonitorFilterInput interface {
 
 type GetSimpleMonitorFilterArgs struct {
 	Conditions GetSimpleMonitorFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                     `pulumi:"id"`
+	Names      pulumi.StringArrayInput                   `pulumi:"names"`
+	Tags       pulumi.StringArrayInput                   `pulumi:"tags"`
 }
 
 func (GetSimpleMonitorFilterArgs) ElementType() reflect.Type {
@@ -11325,7 +11347,7 @@ func (i GetSimpleMonitorFilterArgs) ToGetSimpleMonitorFilterOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorFilterOutput)
 }
 
-type GetSimpleMonitorFilterOutput struct { *pulumi.OutputState }
+type GetSimpleMonitorFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSimpleMonitorFilter)(nil)).Elem()
@@ -11340,23 +11362,23 @@ func (o GetSimpleMonitorFilterOutput) ToGetSimpleMonitorFilterOutputWithContext(
 }
 
 func (o GetSimpleMonitorFilterOutput) Conditions() GetSimpleMonitorFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilter) []GetSimpleMonitorFilterCondition { return v.Conditions }).(GetSimpleMonitorFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilter) []GetSimpleMonitorFilterCondition { return v.Conditions }).(GetSimpleMonitorFilterConditionArrayOutput)
 }
 
 func (o GetSimpleMonitorFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetSimpleMonitorFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetSimpleMonitorFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetSimpleMonitorFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -11368,7 +11390,7 @@ type GetSimpleMonitorFilterConditionInput interface {
 }
 
 type GetSimpleMonitorFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -11405,7 +11427,7 @@ func (i GetSimpleMonitorFilterConditionArray) ToGetSimpleMonitorFilterConditionA
 	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorFilterConditionArrayOutput)
 }
 
-type GetSimpleMonitorFilterConditionOutput struct { *pulumi.OutputState }
+type GetSimpleMonitorFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSimpleMonitorFilterCondition)(nil)).Elem()
@@ -11420,14 +11442,14 @@ func (o GetSimpleMonitorFilterConditionOutput) ToGetSimpleMonitorFilterCondition
 }
 
 func (o GetSimpleMonitorFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSimpleMonitorFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSimpleMonitorFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetSimpleMonitorFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetSimpleMonitorFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetSimpleMonitorFilterCondition)(nil)).Elem()
@@ -11442,26 +11464,26 @@ func (o GetSimpleMonitorFilterConditionArrayOutput) ToGetSimpleMonitorFilterCond
 }
 
 func (o GetSimpleMonitorFilterConditionArrayOutput) Index(i pulumi.IntInput) GetSimpleMonitorFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetSimpleMonitorFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSimpleMonitorFilterCondition {
 		return vs[0].([]GetSimpleMonitorFilterCondition)[vs[1].(int)]
 	}).(GetSimpleMonitorFilterConditionOutput)
 }
 
 type GetSimpleMonitorHealthCheck struct {
-	Community string `pulumi:"community"`
+	Community     string `pulumi:"community"`
 	ExcepctedData string `pulumi:"excepctedData"`
-	HostHeader string `pulumi:"hostHeader"`
-	Oid string `pulumi:"oid"`
-	Password string `pulumi:"password"`
-	Path string `pulumi:"path"`
-	Port int `pulumi:"port"`
-	Protocol string `pulumi:"protocol"`
-	Qname string `pulumi:"qname"`
-	RemainingDays int `pulumi:"remainingDays"`
-	Sni bool `pulumi:"sni"`
-	SnmpVersion string `pulumi:"snmpVersion"`
-	Status int `pulumi:"status"`
-	Username string `pulumi:"username"`
+	HostHeader    string `pulumi:"hostHeader"`
+	Oid           string `pulumi:"oid"`
+	Password      string `pulumi:"password"`
+	Path          string `pulumi:"path"`
+	Port          int    `pulumi:"port"`
+	Protocol      string `pulumi:"protocol"`
+	Qname         string `pulumi:"qname"`
+	RemainingDays int    `pulumi:"remainingDays"`
+	Sni           bool   `pulumi:"sni"`
+	SnmpVersion   string `pulumi:"snmpVersion"`
+	Status        int    `pulumi:"status"`
+	Username      string `pulumi:"username"`
 }
 
 type GetSimpleMonitorHealthCheckInput interface {
@@ -11472,20 +11494,20 @@ type GetSimpleMonitorHealthCheckInput interface {
 }
 
 type GetSimpleMonitorHealthCheckArgs struct {
-	Community pulumi.StringInput `pulumi:"community"`
+	Community     pulumi.StringInput `pulumi:"community"`
 	ExcepctedData pulumi.StringInput `pulumi:"excepctedData"`
-	HostHeader pulumi.StringInput `pulumi:"hostHeader"`
-	Oid pulumi.StringInput `pulumi:"oid"`
-	Password pulumi.StringInput `pulumi:"password"`
-	Path pulumi.StringInput `pulumi:"path"`
-	Port pulumi.IntInput `pulumi:"port"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	Qname pulumi.StringInput `pulumi:"qname"`
-	RemainingDays pulumi.IntInput `pulumi:"remainingDays"`
-	Sni pulumi.BoolInput `pulumi:"sni"`
-	SnmpVersion pulumi.StringInput `pulumi:"snmpVersion"`
-	Status pulumi.IntInput `pulumi:"status"`
-	Username pulumi.StringInput `pulumi:"username"`
+	HostHeader    pulumi.StringInput `pulumi:"hostHeader"`
+	Oid           pulumi.StringInput `pulumi:"oid"`
+	Password      pulumi.StringInput `pulumi:"password"`
+	Path          pulumi.StringInput `pulumi:"path"`
+	Port          pulumi.IntInput    `pulumi:"port"`
+	Protocol      pulumi.StringInput `pulumi:"protocol"`
+	Qname         pulumi.StringInput `pulumi:"qname"`
+	RemainingDays pulumi.IntInput    `pulumi:"remainingDays"`
+	Sni           pulumi.BoolInput   `pulumi:"sni"`
+	SnmpVersion   pulumi.StringInput `pulumi:"snmpVersion"`
+	Status        pulumi.IntInput    `pulumi:"status"`
+	Username      pulumi.StringInput `pulumi:"username"`
 }
 
 func (GetSimpleMonitorHealthCheckArgs) ElementType() reflect.Type {
@@ -11521,7 +11543,7 @@ func (i GetSimpleMonitorHealthCheckArray) ToGetSimpleMonitorHealthCheckArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorHealthCheckArrayOutput)
 }
 
-type GetSimpleMonitorHealthCheckOutput struct { *pulumi.OutputState }
+type GetSimpleMonitorHealthCheckOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorHealthCheckOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSimpleMonitorHealthCheck)(nil)).Elem()
@@ -11536,62 +11558,62 @@ func (o GetSimpleMonitorHealthCheckOutput) ToGetSimpleMonitorHealthCheckOutputWi
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Community() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Community }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Community }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) ExcepctedData() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.ExcepctedData }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.ExcepctedData }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) HostHeader() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Oid() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Oid }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Oid }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Password }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Password }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Path() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Path }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Path }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) int { return v.Port }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) int { return v.Port }).(pulumi.IntOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Qname() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Qname }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Qname }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) RemainingDays() pulumi.IntOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) int { return v.RemainingDays }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) int { return v.RemainingDays }).(pulumi.IntOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Sni() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) bool { return v.Sni }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) bool { return v.Sni }).(pulumi.BoolOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) SnmpVersion() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.SnmpVersion }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.SnmpVersion }).(pulumi.StringOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Status() pulumi.IntOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) int { return v.Status }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) int { return v.Status }).(pulumi.IntOutput)
 }
 
 func (o GetSimpleMonitorHealthCheckOutput) Username() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSimpleMonitorHealthCheck) string { return v.Username }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Username }).(pulumi.StringOutput)
 }
 
-type GetSimpleMonitorHealthCheckArrayOutput struct { *pulumi.OutputState}
+type GetSimpleMonitorHealthCheckArrayOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorHealthCheckArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetSimpleMonitorHealthCheck)(nil)).Elem()
@@ -11606,16 +11628,16 @@ func (o GetSimpleMonitorHealthCheckArrayOutput) ToGetSimpleMonitorHealthCheckArr
 }
 
 func (o GetSimpleMonitorHealthCheckArrayOutput) Index(i pulumi.IntInput) GetSimpleMonitorHealthCheckOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetSimpleMonitorHealthCheck {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSimpleMonitorHealthCheck {
 		return vs[0].([]GetSimpleMonitorHealthCheck)[vs[1].(int)]
 	}).(GetSimpleMonitorHealthCheckOutput)
 }
 
 type GetSwitchFilter struct {
 	Conditions []GetSwitchFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                    `pulumi:"id"`
+	Names      []string                   `pulumi:"names"`
+	Tags       []string                   `pulumi:"tags"`
 }
 
 type GetSwitchFilterInput interface {
@@ -11627,9 +11649,9 @@ type GetSwitchFilterInput interface {
 
 type GetSwitchFilterArgs struct {
 	Conditions GetSwitchFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput              `pulumi:"id"`
+	Names      pulumi.StringArrayInput            `pulumi:"names"`
+	Tags       pulumi.StringArrayInput            `pulumi:"tags"`
 }
 
 func (GetSwitchFilterArgs) ElementType() reflect.Type {
@@ -11644,7 +11666,7 @@ func (i GetSwitchFilterArgs) ToGetSwitchFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetSwitchFilterOutput)
 }
 
-type GetSwitchFilterOutput struct { *pulumi.OutputState }
+type GetSwitchFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSwitchFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSwitchFilter)(nil)).Elem()
@@ -11659,23 +11681,23 @@ func (o GetSwitchFilterOutput) ToGetSwitchFilterOutputWithContext(ctx context.Co
 }
 
 func (o GetSwitchFilterOutput) Conditions() GetSwitchFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetSwitchFilter) []GetSwitchFilterCondition { return v.Conditions }).(GetSwitchFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetSwitchFilter) []GetSwitchFilterCondition { return v.Conditions }).(GetSwitchFilterConditionArrayOutput)
 }
 
 func (o GetSwitchFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetSwitchFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetSwitchFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetSwitchFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSwitchFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSwitchFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetSwitchFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSwitchFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSwitchFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetSwitchFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -11687,7 +11709,7 @@ type GetSwitchFilterConditionInput interface {
 }
 
 type GetSwitchFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -11724,7 +11746,7 @@ func (i GetSwitchFilterConditionArray) ToGetSwitchFilterConditionArrayOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(GetSwitchFilterConditionArrayOutput)
 }
 
-type GetSwitchFilterConditionOutput struct { *pulumi.OutputState }
+type GetSwitchFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetSwitchFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetSwitchFilterCondition)(nil)).Elem()
@@ -11739,14 +11761,14 @@ func (o GetSwitchFilterConditionOutput) ToGetSwitchFilterConditionOutputWithCont
 }
 
 func (o GetSwitchFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetSwitchFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetSwitchFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetSwitchFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetSwitchFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetSwitchFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetSwitchFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetSwitchFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetSwitchFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetSwitchFilterCondition)(nil)).Elem()
@@ -11761,16 +11783,16 @@ func (o GetSwitchFilterConditionArrayOutput) ToGetSwitchFilterConditionArrayOutp
 }
 
 func (o GetSwitchFilterConditionArrayOutput) Index(i pulumi.IntInput) GetSwitchFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetSwitchFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSwitchFilterCondition {
 		return vs[0].([]GetSwitchFilterCondition)[vs[1].(int)]
 	}).(GetSwitchFilterConditionOutput)
 }
 
 type GetVPCRouterDhcpServer struct {
-	DnsServers []string `pulumi:"dnsServers"`
-	InterfaceIndex int `pulumi:"interfaceIndex"`
-	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	DnsServers     []string `pulumi:"dnsServers"`
+	InterfaceIndex int      `pulumi:"interfaceIndex"`
+	RangeStart     string   `pulumi:"rangeStart"`
+	RangeStop      string   `pulumi:"rangeStop"`
 }
 
 type GetVPCRouterDhcpServerInput interface {
@@ -11781,10 +11803,10 @@ type GetVPCRouterDhcpServerInput interface {
 }
 
 type GetVPCRouterDhcpServerArgs struct {
-	DnsServers pulumi.StringArrayInput `pulumi:"dnsServers"`
-	InterfaceIndex pulumi.IntInput `pulumi:"interfaceIndex"`
-	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	DnsServers     pulumi.StringArrayInput `pulumi:"dnsServers"`
+	InterfaceIndex pulumi.IntInput         `pulumi:"interfaceIndex"`
+	RangeStart     pulumi.StringInput      `pulumi:"rangeStart"`
+	RangeStop      pulumi.StringInput      `pulumi:"rangeStop"`
 }
 
 func (GetVPCRouterDhcpServerArgs) ElementType() reflect.Type {
@@ -11820,7 +11842,7 @@ func (i GetVPCRouterDhcpServerArray) ToGetVPCRouterDhcpServerArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterDhcpServerArrayOutput)
 }
 
-type GetVPCRouterDhcpServerOutput struct { *pulumi.OutputState }
+type GetVPCRouterDhcpServerOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterDhcpServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterDhcpServer)(nil)).Elem()
@@ -11835,22 +11857,22 @@ func (o GetVPCRouterDhcpServerOutput) ToGetVPCRouterDhcpServerOutputWithContext(
 }
 
 func (o GetVPCRouterDhcpServerOutput) DnsServers() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpServer) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpServer) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterDhcpServerOutput) InterfaceIndex() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpServer) int { return v.InterfaceIndex }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpServer) int { return v.InterfaceIndex }).(pulumi.IntOutput)
 }
 
 func (o GetVPCRouterDhcpServerOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpServer) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpServer) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterDhcpServerOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpServer) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpServer) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterDhcpServerArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterDhcpServerArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterDhcpServerArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterDhcpServer)(nil)).Elem()
@@ -11865,13 +11887,13 @@ func (o GetVPCRouterDhcpServerArrayOutput) ToGetVPCRouterDhcpServerArrayOutputWi
 }
 
 func (o GetVPCRouterDhcpServerArrayOutput) Index(i pulumi.IntInput) GetVPCRouterDhcpServerOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterDhcpServer {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterDhcpServer {
 		return vs[0].([]GetVPCRouterDhcpServer)[vs[1].(int)]
 	}).(GetVPCRouterDhcpServerOutput)
 }
 
 type GetVPCRouterDhcpStaticMapping struct {
-	IpAddress string `pulumi:"ipAddress"`
+	IpAddress  string `pulumi:"ipAddress"`
 	MacAddress string `pulumi:"macAddress"`
 }
 
@@ -11883,7 +11905,7 @@ type GetVPCRouterDhcpStaticMappingInput interface {
 }
 
 type GetVPCRouterDhcpStaticMappingArgs struct {
-	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	IpAddress  pulumi.StringInput `pulumi:"ipAddress"`
 	MacAddress pulumi.StringInput `pulumi:"macAddress"`
 }
 
@@ -11920,7 +11942,7 @@ func (i GetVPCRouterDhcpStaticMappingArray) ToGetVPCRouterDhcpStaticMappingArray
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterDhcpStaticMappingArrayOutput)
 }
 
-type GetVPCRouterDhcpStaticMappingOutput struct { *pulumi.OutputState }
+type GetVPCRouterDhcpStaticMappingOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterDhcpStaticMappingOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterDhcpStaticMapping)(nil)).Elem()
@@ -11935,14 +11957,14 @@ func (o GetVPCRouterDhcpStaticMappingOutput) ToGetVPCRouterDhcpStaticMappingOutp
 }
 
 func (o GetVPCRouterDhcpStaticMappingOutput) IpAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpStaticMapping) string { return v.IpAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpStaticMapping) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterDhcpStaticMappingOutput) MacAddress() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterDhcpStaticMapping) string { return v.MacAddress }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterDhcpStaticMapping) string { return v.MacAddress }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterDhcpStaticMappingArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterDhcpStaticMappingArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterDhcpStaticMappingArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterDhcpStaticMapping)(nil)).Elem()
@@ -11957,16 +11979,16 @@ func (o GetVPCRouterDhcpStaticMappingArrayOutput) ToGetVPCRouterDhcpStaticMappin
 }
 
 func (o GetVPCRouterDhcpStaticMappingArrayOutput) Index(i pulumi.IntInput) GetVPCRouterDhcpStaticMappingOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterDhcpStaticMapping {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterDhcpStaticMapping {
 		return vs[0].([]GetVPCRouterDhcpStaticMapping)[vs[1].(int)]
 	}).(GetVPCRouterDhcpStaticMappingOutput)
 }
 
 type GetVPCRouterFilter struct {
 	Conditions []GetVPCRouterFilterCondition `pulumi:"conditions"`
-	Id *string `pulumi:"id"`
-	Names []string `pulumi:"names"`
-	Tags []string `pulumi:"tags"`
+	Id         *string                       `pulumi:"id"`
+	Names      []string                      `pulumi:"names"`
+	Tags       []string                      `pulumi:"tags"`
 }
 
 type GetVPCRouterFilterInput interface {
@@ -11978,9 +12000,9 @@ type GetVPCRouterFilterInput interface {
 
 type GetVPCRouterFilterArgs struct {
 	Conditions GetVPCRouterFilterConditionArrayInput `pulumi:"conditions"`
-	Id pulumi.StringPtrInput `pulumi:"id"`
-	Names pulumi.StringArrayInput `pulumi:"names"`
-	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	Id         pulumi.StringPtrInput                 `pulumi:"id"`
+	Names      pulumi.StringArrayInput               `pulumi:"names"`
+	Tags       pulumi.StringArrayInput               `pulumi:"tags"`
 }
 
 func (GetVPCRouterFilterArgs) ElementType() reflect.Type {
@@ -11995,7 +12017,7 @@ func (i GetVPCRouterFilterArgs) ToGetVPCRouterFilterOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFilterOutput)
 }
 
-type GetVPCRouterFilterOutput struct { *pulumi.OutputState }
+type GetVPCRouterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterFilter)(nil)).Elem()
@@ -12010,23 +12032,23 @@ func (o GetVPCRouterFilterOutput) ToGetVPCRouterFilterOutputWithContext(ctx cont
 }
 
 func (o GetVPCRouterFilterOutput) Conditions() GetVPCRouterFilterConditionArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterFilter) []GetVPCRouterFilterCondition { return v.Conditions }).(GetVPCRouterFilterConditionArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterFilter) []GetVPCRouterFilterCondition { return v.Conditions }).(GetVPCRouterFilterConditionArrayOutput)
 }
 
 func (o GetVPCRouterFilterOutput) Id() pulumi.StringPtrOutput {
-	return o.ApplyT(func (v GetVPCRouterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+	return o.ApplyT(func(v GetVPCRouterFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
 func (o GetVPCRouterFilterOutput) Names() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterFilterOutput) Tags() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
 type GetVPCRouterFilterCondition struct {
-	Name string `pulumi:"name"`
+	Name   string   `pulumi:"name"`
 	Values []string `pulumi:"values"`
 }
 
@@ -12038,7 +12060,7 @@ type GetVPCRouterFilterConditionInput interface {
 }
 
 type GetVPCRouterFilterConditionArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name   pulumi.StringInput      `pulumi:"name"`
 	Values pulumi.StringArrayInput `pulumi:"values"`
 }
 
@@ -12075,7 +12097,7 @@ func (i GetVPCRouterFilterConditionArray) ToGetVPCRouterFilterConditionArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFilterConditionArrayOutput)
 }
 
-type GetVPCRouterFilterConditionOutput struct { *pulumi.OutputState }
+type GetVPCRouterFilterConditionOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFilterConditionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterFilterCondition)(nil)).Elem()
@@ -12090,14 +12112,14 @@ func (o GetVPCRouterFilterConditionOutput) ToGetVPCRouterFilterConditionOutputWi
 }
 
 func (o GetVPCRouterFilterConditionOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFilterCondition) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFilterConditionOutput) Values() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
 }
 
-type GetVPCRouterFilterConditionArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterFilterConditionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFilterConditionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterFilterCondition)(nil)).Elem()
@@ -12112,15 +12134,15 @@ func (o GetVPCRouterFilterConditionArrayOutput) ToGetVPCRouterFilterConditionArr
 }
 
 func (o GetVPCRouterFilterConditionArrayOutput) Index(i pulumi.IntInput) GetVPCRouterFilterConditionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterFilterCondition {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterFilterCondition {
 		return vs[0].([]GetVPCRouterFilterCondition)[vs[1].(int)]
 	}).(GetVPCRouterFilterConditionOutput)
 }
 
 type GetVPCRouterFirewall struct {
-	Direction string `pulumi:"direction"`
-	Expressions []GetVPCRouterFirewallExpression `pulumi:"expressions"`
-	InterfaceIndex int `pulumi:"interfaceIndex"`
+	Direction      string                           `pulumi:"direction"`
+	Expressions    []GetVPCRouterFirewallExpression `pulumi:"expressions"`
+	InterfaceIndex int                              `pulumi:"interfaceIndex"`
 }
 
 type GetVPCRouterFirewallInput interface {
@@ -12131,9 +12153,9 @@ type GetVPCRouterFirewallInput interface {
 }
 
 type GetVPCRouterFirewallArgs struct {
-	Direction pulumi.StringInput `pulumi:"direction"`
-	Expressions GetVPCRouterFirewallExpressionArrayInput `pulumi:"expressions"`
-	InterfaceIndex pulumi.IntInput `pulumi:"interfaceIndex"`
+	Direction      pulumi.StringInput                       `pulumi:"direction"`
+	Expressions    GetVPCRouterFirewallExpressionArrayInput `pulumi:"expressions"`
+	InterfaceIndex pulumi.IntInput                          `pulumi:"interfaceIndex"`
 }
 
 func (GetVPCRouterFirewallArgs) ElementType() reflect.Type {
@@ -12169,7 +12191,7 @@ func (i GetVPCRouterFirewallArray) ToGetVPCRouterFirewallArrayOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFirewallArrayOutput)
 }
 
-type GetVPCRouterFirewallOutput struct { *pulumi.OutputState }
+type GetVPCRouterFirewallOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFirewallOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterFirewall)(nil)).Elem()
@@ -12184,18 +12206,18 @@ func (o GetVPCRouterFirewallOutput) ToGetVPCRouterFirewallOutputWithContext(ctx 
 }
 
 func (o GetVPCRouterFirewallOutput) Direction() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewall) string { return v.Direction }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewall) string { return v.Direction }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallOutput) Expressions() GetVPCRouterFirewallExpressionArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewall) []GetVPCRouterFirewallExpression { return v.Expressions }).(GetVPCRouterFirewallExpressionArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewall) []GetVPCRouterFirewallExpression { return v.Expressions }).(GetVPCRouterFirewallExpressionArrayOutput)
 }
 
 func (o GetVPCRouterFirewallOutput) InterfaceIndex() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewall) int { return v.InterfaceIndex }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewall) int { return v.InterfaceIndex }).(pulumi.IntOutput)
 }
 
-type GetVPCRouterFirewallArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterFirewallArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFirewallArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterFirewall)(nil)).Elem()
@@ -12210,20 +12232,20 @@ func (o GetVPCRouterFirewallArrayOutput) ToGetVPCRouterFirewallArrayOutputWithCo
 }
 
 func (o GetVPCRouterFirewallArrayOutput) Index(i pulumi.IntInput) GetVPCRouterFirewallOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterFirewall {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterFirewall {
 		return vs[0].([]GetVPCRouterFirewall)[vs[1].(int)]
 	}).(GetVPCRouterFirewallOutput)
 }
 
 type GetVPCRouterFirewallExpression struct {
-	Allow bool `pulumi:"allow"`
-	Description string `pulumi:"description"`
+	Allow              bool   `pulumi:"allow"`
+	Description        string `pulumi:"description"`
 	DestinationNetwork string `pulumi:"destinationNetwork"`
-	DestinationPort string `pulumi:"destinationPort"`
-	Logging bool `pulumi:"logging"`
-	Protocol string `pulumi:"protocol"`
-	SourceNetwork string `pulumi:"sourceNetwork"`
-	SourcePort string `pulumi:"sourcePort"`
+	DestinationPort    string `pulumi:"destinationPort"`
+	Logging            bool   `pulumi:"logging"`
+	Protocol           string `pulumi:"protocol"`
+	SourceNetwork      string `pulumi:"sourceNetwork"`
+	SourcePort         string `pulumi:"sourcePort"`
 }
 
 type GetVPCRouterFirewallExpressionInput interface {
@@ -12234,14 +12256,14 @@ type GetVPCRouterFirewallExpressionInput interface {
 }
 
 type GetVPCRouterFirewallExpressionArgs struct {
-	Allow pulumi.BoolInput `pulumi:"allow"`
-	Description pulumi.StringInput `pulumi:"description"`
+	Allow              pulumi.BoolInput   `pulumi:"allow"`
+	Description        pulumi.StringInput `pulumi:"description"`
 	DestinationNetwork pulumi.StringInput `pulumi:"destinationNetwork"`
-	DestinationPort pulumi.StringInput `pulumi:"destinationPort"`
-	Logging pulumi.BoolInput `pulumi:"logging"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	SourceNetwork pulumi.StringInput `pulumi:"sourceNetwork"`
-	SourcePort pulumi.StringInput `pulumi:"sourcePort"`
+	DestinationPort    pulumi.StringInput `pulumi:"destinationPort"`
+	Logging            pulumi.BoolInput   `pulumi:"logging"`
+	Protocol           pulumi.StringInput `pulumi:"protocol"`
+	SourceNetwork      pulumi.StringInput `pulumi:"sourceNetwork"`
+	SourcePort         pulumi.StringInput `pulumi:"sourcePort"`
 }
 
 func (GetVPCRouterFirewallExpressionArgs) ElementType() reflect.Type {
@@ -12277,7 +12299,7 @@ func (i GetVPCRouterFirewallExpressionArray) ToGetVPCRouterFirewallExpressionArr
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFirewallExpressionArrayOutput)
 }
 
-type GetVPCRouterFirewallExpressionOutput struct { *pulumi.OutputState }
+type GetVPCRouterFirewallExpressionOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFirewallExpressionOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterFirewallExpression)(nil)).Elem()
@@ -12292,38 +12314,38 @@ func (o GetVPCRouterFirewallExpressionOutput) ToGetVPCRouterFirewallExpressionOu
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) Allow() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) bool { return v.Allow }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) bool { return v.Allow }).(pulumi.BoolOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) DestinationNetwork() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.DestinationNetwork }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.DestinationNetwork }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) DestinationPort() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.DestinationPort }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.DestinationPort }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) Logging() pulumi.BoolOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) bool { return v.Logging }).(pulumi.BoolOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) bool { return v.Logging }).(pulumi.BoolOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) SourceNetwork() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.SourceNetwork }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.SourceNetwork }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterFirewallExpressionOutput) SourcePort() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterFirewallExpression) string { return v.SourcePort }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterFirewallExpression) string { return v.SourcePort }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterFirewallExpressionArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterFirewallExpressionArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFirewallExpressionArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterFirewallExpression)(nil)).Elem()
@@ -12338,15 +12360,15 @@ func (o GetVPCRouterFirewallExpressionArrayOutput) ToGetVPCRouterFirewallExpress
 }
 
 func (o GetVPCRouterFirewallExpressionArrayOutput) Index(i pulumi.IntInput) GetVPCRouterFirewallExpressionOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterFirewallExpression {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterFirewallExpression {
 		return vs[0].([]GetVPCRouterFirewallExpression)[vs[1].(int)]
 	}).(GetVPCRouterFirewallExpressionOutput)
 }
 
 type GetVPCRouterL2tp struct {
 	PreSharedSecret string `pulumi:"preSharedSecret"`
-	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	RangeStart      string `pulumi:"rangeStart"`
+	RangeStop       string `pulumi:"rangeStop"`
 }
 
 type GetVPCRouterL2tpInput interface {
@@ -12358,8 +12380,8 @@ type GetVPCRouterL2tpInput interface {
 
 type GetVPCRouterL2tpArgs struct {
 	PreSharedSecret pulumi.StringInput `pulumi:"preSharedSecret"`
-	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	RangeStart      pulumi.StringInput `pulumi:"rangeStart"`
+	RangeStop       pulumi.StringInput `pulumi:"rangeStop"`
 }
 
 func (GetVPCRouterL2tpArgs) ElementType() reflect.Type {
@@ -12395,7 +12417,7 @@ func (i GetVPCRouterL2tpArray) ToGetVPCRouterL2tpArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterL2tpArrayOutput)
 }
 
-type GetVPCRouterL2tpOutput struct { *pulumi.OutputState }
+type GetVPCRouterL2tpOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterL2tpOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterL2tp)(nil)).Elem()
@@ -12410,18 +12432,18 @@ func (o GetVPCRouterL2tpOutput) ToGetVPCRouterL2tpOutputWithContext(ctx context.
 }
 
 func (o GetVPCRouterL2tpOutput) PreSharedSecret() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterL2tp) string { return v.PreSharedSecret }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterL2tpOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterL2tp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterL2tpOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterL2tp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterL2tpArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterL2tpArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterL2tpArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterL2tp)(nil)).Elem()
@@ -12436,17 +12458,17 @@ func (o GetVPCRouterL2tpArrayOutput) ToGetVPCRouterL2tpArrayOutputWithContext(ct
 }
 
 func (o GetVPCRouterL2tpArrayOutput) Index(i pulumi.IntInput) GetVPCRouterL2tpOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterL2tp {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterL2tp {
 		return vs[0].([]GetVPCRouterL2tp)[vs[1].(int)]
 	}).(GetVPCRouterL2tpOutput)
 }
 
 type GetVPCRouterPortForwarding struct {
 	Description string `pulumi:"description"`
-	PrivateIp string `pulumi:"privateIp"`
-	PrivatePort int `pulumi:"privatePort"`
-	Protocol string `pulumi:"protocol"`
-	PublicPort int `pulumi:"publicPort"`
+	PrivateIp   string `pulumi:"privateIp"`
+	PrivatePort int    `pulumi:"privatePort"`
+	Protocol    string `pulumi:"protocol"`
+	PublicPort  int    `pulumi:"publicPort"`
 }
 
 type GetVPCRouterPortForwardingInput interface {
@@ -12458,10 +12480,10 @@ type GetVPCRouterPortForwardingInput interface {
 
 type GetVPCRouterPortForwardingArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
-	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
-	PrivatePort pulumi.IntInput `pulumi:"privatePort"`
-	Protocol pulumi.StringInput `pulumi:"protocol"`
-	PublicPort pulumi.IntInput `pulumi:"publicPort"`
+	PrivateIp   pulumi.StringInput `pulumi:"privateIp"`
+	PrivatePort pulumi.IntInput    `pulumi:"privatePort"`
+	Protocol    pulumi.StringInput `pulumi:"protocol"`
+	PublicPort  pulumi.IntInput    `pulumi:"publicPort"`
 }
 
 func (GetVPCRouterPortForwardingArgs) ElementType() reflect.Type {
@@ -12497,7 +12519,7 @@ func (i GetVPCRouterPortForwardingArray) ToGetVPCRouterPortForwardingArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterPortForwardingArrayOutput)
 }
 
-type GetVPCRouterPortForwardingOutput struct { *pulumi.OutputState }
+type GetVPCRouterPortForwardingOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPortForwardingOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterPortForwarding)(nil)).Elem()
@@ -12512,26 +12534,26 @@ func (o GetVPCRouterPortForwardingOutput) ToGetVPCRouterPortForwardingOutputWith
 }
 
 func (o GetVPCRouterPortForwardingOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPortForwarding) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPortForwarding) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPortForwardingOutput) PrivateIp() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPortForwarding) string { return v.PrivateIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPortForwarding) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPortForwardingOutput) PrivatePort() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterPortForwarding) int { return v.PrivatePort }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterPortForwarding) int { return v.PrivatePort }).(pulumi.IntOutput)
 }
 
 func (o GetVPCRouterPortForwardingOutput) Protocol() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPortForwarding) string { return v.Protocol }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPortForwarding) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPortForwardingOutput) PublicPort() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterPortForwarding) int { return v.PublicPort }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterPortForwarding) int { return v.PublicPort }).(pulumi.IntOutput)
 }
 
-type GetVPCRouterPortForwardingArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterPortForwardingArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPortForwardingArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterPortForwarding)(nil)).Elem()
@@ -12546,14 +12568,14 @@ func (o GetVPCRouterPortForwardingArrayOutput) ToGetVPCRouterPortForwardingArray
 }
 
 func (o GetVPCRouterPortForwardingArrayOutput) Index(i pulumi.IntInput) GetVPCRouterPortForwardingOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterPortForwarding {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterPortForwarding {
 		return vs[0].([]GetVPCRouterPortForwarding)[vs[1].(int)]
 	}).(GetVPCRouterPortForwardingOutput)
 }
 
 type GetVPCRouterPptp struct {
 	RangeStart string `pulumi:"rangeStart"`
-	RangeStop string `pulumi:"rangeStop"`
+	RangeStop  string `pulumi:"rangeStop"`
 }
 
 type GetVPCRouterPptpInput interface {
@@ -12565,7 +12587,7 @@ type GetVPCRouterPptpInput interface {
 
 type GetVPCRouterPptpArgs struct {
 	RangeStart pulumi.StringInput `pulumi:"rangeStart"`
-	RangeStop pulumi.StringInput `pulumi:"rangeStop"`
+	RangeStop  pulumi.StringInput `pulumi:"rangeStop"`
 }
 
 func (GetVPCRouterPptpArgs) ElementType() reflect.Type {
@@ -12601,7 +12623,7 @@ func (i GetVPCRouterPptpArray) ToGetVPCRouterPptpArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterPptpArrayOutput)
 }
 
-type GetVPCRouterPptpOutput struct { *pulumi.OutputState }
+type GetVPCRouterPptpOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPptpOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterPptp)(nil)).Elem()
@@ -12616,14 +12638,14 @@ func (o GetVPCRouterPptpOutput) ToGetVPCRouterPptpOutputWithContext(ctx context.
 }
 
 func (o GetVPCRouterPptpOutput) RangeStart() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPptp) string { return v.RangeStart }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPptpOutput) RangeStop() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPptp) string { return v.RangeStop }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterPptpArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterPptpArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPptpArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterPptp)(nil)).Elem()
@@ -12638,17 +12660,17 @@ func (o GetVPCRouterPptpArrayOutput) ToGetVPCRouterPptpArrayOutputWithContext(ct
 }
 
 func (o GetVPCRouterPptpArrayOutput) Index(i pulumi.IntInput) GetVPCRouterPptpOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterPptp {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterPptp {
 		return vs[0].([]GetVPCRouterPptp)[vs[1].(int)]
 	}).(GetVPCRouterPptpOutput)
 }
 
 type GetVPCRouterPrivateNetworkInterface struct {
-	Index int `pulumi:"index"`
+	Index       int      `pulumi:"index"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	Netmask int `pulumi:"netmask"`
-	SwitchId string `pulumi:"switchId"`
-	Vip string `pulumi:"vip"`
+	Netmask     int      `pulumi:"netmask"`
+	SwitchId    string   `pulumi:"switchId"`
+	Vip         string   `pulumi:"vip"`
 }
 
 type GetVPCRouterPrivateNetworkInterfaceInput interface {
@@ -12659,11 +12681,11 @@ type GetVPCRouterPrivateNetworkInterfaceInput interface {
 }
 
 type GetVPCRouterPrivateNetworkInterfaceArgs struct {
-	Index pulumi.IntInput `pulumi:"index"`
+	Index       pulumi.IntInput         `pulumi:"index"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	Netmask pulumi.IntInput `pulumi:"netmask"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
-	Vip pulumi.StringInput `pulumi:"vip"`
+	Netmask     pulumi.IntInput         `pulumi:"netmask"`
+	SwitchId    pulumi.StringInput      `pulumi:"switchId"`
+	Vip         pulumi.StringInput      `pulumi:"vip"`
 }
 
 func (GetVPCRouterPrivateNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -12699,7 +12721,7 @@ func (i GetVPCRouterPrivateNetworkInterfaceArray) ToGetVPCRouterPrivateNetworkIn
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterPrivateNetworkInterfaceArrayOutput)
 }
 
-type GetVPCRouterPrivateNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetVPCRouterPrivateNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPrivateNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterPrivateNetworkInterface)(nil)).Elem()
@@ -12714,26 +12736,26 @@ func (o GetVPCRouterPrivateNetworkInterfaceOutput) ToGetVPCRouterPrivateNetworkI
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceOutput) Index() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterPrivateNetworkInterface) int { return v.Index }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterPrivateNetworkInterface) int { return v.Index }).(pulumi.IntOutput)
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterPrivateNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterPrivateNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceOutput) Netmask() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterPrivateNetworkInterface) int { return v.Netmask }).(pulumi.IntOutput)
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPrivateNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPrivateNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPrivateNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterPrivateNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterPrivateNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPrivateNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterPrivateNetworkInterface)(nil)).Elem()
@@ -12748,17 +12770,17 @@ func (o GetVPCRouterPrivateNetworkInterfaceArrayOutput) ToGetVPCRouterPrivateNet
 }
 
 func (o GetVPCRouterPrivateNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetVPCRouterPrivateNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterPrivateNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterPrivateNetworkInterface {
 		return vs[0].([]GetVPCRouterPrivateNetworkInterface)[vs[1].(int)]
 	}).(GetVPCRouterPrivateNetworkInterfaceOutput)
 }
 
 type GetVPCRouterPublicNetworkInterface struct {
-	Aliases []string `pulumi:"aliases"`
+	Aliases     []string `pulumi:"aliases"`
 	IpAddresses []string `pulumi:"ipAddresses"`
-	SwitchId string `pulumi:"switchId"`
-	Vip string `pulumi:"vip"`
-	Vrid int `pulumi:"vrid"`
+	SwitchId    string   `pulumi:"switchId"`
+	Vip         string   `pulumi:"vip"`
+	Vrid        int      `pulumi:"vrid"`
 }
 
 type GetVPCRouterPublicNetworkInterfaceInput interface {
@@ -12769,11 +12791,11 @@ type GetVPCRouterPublicNetworkInterfaceInput interface {
 }
 
 type GetVPCRouterPublicNetworkInterfaceArgs struct {
-	Aliases pulumi.StringArrayInput `pulumi:"aliases"`
+	Aliases     pulumi.StringArrayInput `pulumi:"aliases"`
 	IpAddresses pulumi.StringArrayInput `pulumi:"ipAddresses"`
-	SwitchId pulumi.StringInput `pulumi:"switchId"`
-	Vip pulumi.StringInput `pulumi:"vip"`
-	Vrid pulumi.IntInput `pulumi:"vrid"`
+	SwitchId    pulumi.StringInput      `pulumi:"switchId"`
+	Vip         pulumi.StringInput      `pulumi:"vip"`
+	Vrid        pulumi.IntInput         `pulumi:"vrid"`
 }
 
 func (GetVPCRouterPublicNetworkInterfaceArgs) ElementType() reflect.Type {
@@ -12809,7 +12831,7 @@ func (i GetVPCRouterPublicNetworkInterfaceArray) ToGetVPCRouterPublicNetworkInte
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterPublicNetworkInterfaceArrayOutput)
 }
 
-type GetVPCRouterPublicNetworkInterfaceOutput struct { *pulumi.OutputState }
+type GetVPCRouterPublicNetworkInterfaceOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPublicNetworkInterfaceOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterPublicNetworkInterface)(nil)).Elem()
@@ -12824,26 +12846,26 @@ func (o GetVPCRouterPublicNetworkInterfaceOutput) ToGetVPCRouterPublicNetworkInt
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceOutput) Aliases() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterPublicNetworkInterface) []string { return v.Aliases }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceOutput) IpAddresses() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterPublicNetworkInterface) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceOutput) SwitchId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPublicNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPublicNetworkInterface) string { return v.SwitchId }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterPublicNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterPublicNetworkInterface) string { return v.Vip }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceOutput) Vrid() pulumi.IntOutput {
-	return o.ApplyT(func (v GetVPCRouterPublicNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
+	return o.ApplyT(func(v GetVPCRouterPublicNetworkInterface) int { return v.Vrid }).(pulumi.IntOutput)
 }
 
-type GetVPCRouterPublicNetworkInterfaceArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterPublicNetworkInterfaceArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterPublicNetworkInterfaceArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterPublicNetworkInterface)(nil)).Elem()
@@ -12858,17 +12880,17 @@ func (o GetVPCRouterPublicNetworkInterfaceArrayOutput) ToGetVPCRouterPublicNetwo
 }
 
 func (o GetVPCRouterPublicNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) GetVPCRouterPublicNetworkInterfaceOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterPublicNetworkInterface {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterPublicNetworkInterface {
 		return vs[0].([]GetVPCRouterPublicNetworkInterface)[vs[1].(int)]
 	}).(GetVPCRouterPublicNetworkInterfaceOutput)
 }
 
 type GetVPCRouterSiteToSiteVpn struct {
-	LocalPrefixes []string `pulumi:"localPrefixes"`
-	Peer string `pulumi:"peer"`
-	PreSharedSecret string `pulumi:"preSharedSecret"`
-	RemoteId string `pulumi:"remoteId"`
-	Routes []string `pulumi:"routes"`
+	LocalPrefixes   []string `pulumi:"localPrefixes"`
+	Peer            string   `pulumi:"peer"`
+	PreSharedSecret string   `pulumi:"preSharedSecret"`
+	RemoteId        string   `pulumi:"remoteId"`
+	Routes          []string `pulumi:"routes"`
 }
 
 type GetVPCRouterSiteToSiteVpnInput interface {
@@ -12879,11 +12901,11 @@ type GetVPCRouterSiteToSiteVpnInput interface {
 }
 
 type GetVPCRouterSiteToSiteVpnArgs struct {
-	LocalPrefixes pulumi.StringArrayInput `pulumi:"localPrefixes"`
-	Peer pulumi.StringInput `pulumi:"peer"`
-	PreSharedSecret pulumi.StringInput `pulumi:"preSharedSecret"`
-	RemoteId pulumi.StringInput `pulumi:"remoteId"`
-	Routes pulumi.StringArrayInput `pulumi:"routes"`
+	LocalPrefixes   pulumi.StringArrayInput `pulumi:"localPrefixes"`
+	Peer            pulumi.StringInput      `pulumi:"peer"`
+	PreSharedSecret pulumi.StringInput      `pulumi:"preSharedSecret"`
+	RemoteId        pulumi.StringInput      `pulumi:"remoteId"`
+	Routes          pulumi.StringArrayInput `pulumi:"routes"`
 }
 
 func (GetVPCRouterSiteToSiteVpnArgs) ElementType() reflect.Type {
@@ -12919,7 +12941,7 @@ func (i GetVPCRouterSiteToSiteVpnArray) ToGetVPCRouterSiteToSiteVpnArrayOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterSiteToSiteVpnArrayOutput)
 }
 
-type GetVPCRouterSiteToSiteVpnOutput struct { *pulumi.OutputState }
+type GetVPCRouterSiteToSiteVpnOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterSiteToSiteVpnOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterSiteToSiteVpn)(nil)).Elem()
@@ -12934,26 +12956,26 @@ func (o GetVPCRouterSiteToSiteVpnOutput) ToGetVPCRouterSiteToSiteVpnOutputWithCo
 }
 
 func (o GetVPCRouterSiteToSiteVpnOutput) LocalPrefixes() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterSiteToSiteVpn) []string { return v.LocalPrefixes }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) []string { return v.LocalPrefixes }).(pulumi.StringArrayOutput)
 }
 
 func (o GetVPCRouterSiteToSiteVpnOutput) Peer() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterSiteToSiteVpn) string { return v.Peer }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) string { return v.Peer }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterSiteToSiteVpnOutput) PreSharedSecret() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterSiteToSiteVpn) string { return v.PreSharedSecret }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) string { return v.PreSharedSecret }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterSiteToSiteVpnOutput) RemoteId() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterSiteToSiteVpn) string { return v.RemoteId }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) string { return v.RemoteId }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterSiteToSiteVpnOutput) Routes() pulumi.StringArrayOutput {
-	return o.ApplyT(func (v GetVPCRouterSiteToSiteVpn) []string { return v.Routes }).(pulumi.StringArrayOutput)
+	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) []string { return v.Routes }).(pulumi.StringArrayOutput)
 }
 
-type GetVPCRouterSiteToSiteVpnArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterSiteToSiteVpnArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterSiteToSiteVpnArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterSiteToSiteVpn)(nil)).Elem()
@@ -12968,15 +12990,15 @@ func (o GetVPCRouterSiteToSiteVpnArrayOutput) ToGetVPCRouterSiteToSiteVpnArrayOu
 }
 
 func (o GetVPCRouterSiteToSiteVpnArrayOutput) Index(i pulumi.IntInput) GetVPCRouterSiteToSiteVpnOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterSiteToSiteVpn {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterSiteToSiteVpn {
 		return vs[0].([]GetVPCRouterSiteToSiteVpn)[vs[1].(int)]
 	}).(GetVPCRouterSiteToSiteVpnOutput)
 }
 
 type GetVPCRouterStaticNat struct {
 	Description string `pulumi:"description"`
-	PrivateIp string `pulumi:"privateIp"`
-	PublicIp string `pulumi:"publicIp"`
+	PrivateIp   string `pulumi:"privateIp"`
+	PublicIp    string `pulumi:"publicIp"`
 }
 
 type GetVPCRouterStaticNatInput interface {
@@ -12988,8 +13010,8 @@ type GetVPCRouterStaticNatInput interface {
 
 type GetVPCRouterStaticNatArgs struct {
 	Description pulumi.StringInput `pulumi:"description"`
-	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
-	PublicIp pulumi.StringInput `pulumi:"publicIp"`
+	PrivateIp   pulumi.StringInput `pulumi:"privateIp"`
+	PublicIp    pulumi.StringInput `pulumi:"publicIp"`
 }
 
 func (GetVPCRouterStaticNatArgs) ElementType() reflect.Type {
@@ -13025,7 +13047,7 @@ func (i GetVPCRouterStaticNatArray) ToGetVPCRouterStaticNatArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterStaticNatArrayOutput)
 }
 
-type GetVPCRouterStaticNatOutput struct { *pulumi.OutputState }
+type GetVPCRouterStaticNatOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterStaticNatOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterStaticNat)(nil)).Elem()
@@ -13040,18 +13062,18 @@ func (o GetVPCRouterStaticNatOutput) ToGetVPCRouterStaticNatOutputWithContext(ct
 }
 
 func (o GetVPCRouterStaticNatOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterStaticNat) string { return v.Description }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterStaticNat) string { return v.Description }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterStaticNatOutput) PrivateIp() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterStaticNat) string { return v.PrivateIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterStaticNat) string { return v.PrivateIp }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterStaticNatOutput) PublicIp() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterStaticNat) string { return v.PublicIp }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterStaticNat) string { return v.PublicIp }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterStaticNatArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterStaticNatArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterStaticNatArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterStaticNat)(nil)).Elem()
@@ -13066,14 +13088,14 @@ func (o GetVPCRouterStaticNatArrayOutput) ToGetVPCRouterStaticNatArrayOutputWith
 }
 
 func (o GetVPCRouterStaticNatArrayOutput) Index(i pulumi.IntInput) GetVPCRouterStaticNatOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterStaticNat {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterStaticNat {
 		return vs[0].([]GetVPCRouterStaticNat)[vs[1].(int)]
 	}).(GetVPCRouterStaticNatOutput)
 }
 
 type GetVPCRouterStaticRoute struct {
 	NextHop string `pulumi:"nextHop"`
-	Prefix string `pulumi:"prefix"`
+	Prefix  string `pulumi:"prefix"`
 }
 
 type GetVPCRouterStaticRouteInput interface {
@@ -13085,7 +13107,7 @@ type GetVPCRouterStaticRouteInput interface {
 
 type GetVPCRouterStaticRouteArgs struct {
 	NextHop pulumi.StringInput `pulumi:"nextHop"`
-	Prefix pulumi.StringInput `pulumi:"prefix"`
+	Prefix  pulumi.StringInput `pulumi:"prefix"`
 }
 
 func (GetVPCRouterStaticRouteArgs) ElementType() reflect.Type {
@@ -13121,7 +13143,7 @@ func (i GetVPCRouterStaticRouteArray) ToGetVPCRouterStaticRouteArrayOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterStaticRouteArrayOutput)
 }
 
-type GetVPCRouterStaticRouteOutput struct { *pulumi.OutputState }
+type GetVPCRouterStaticRouteOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterStaticRouteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterStaticRoute)(nil)).Elem()
@@ -13136,14 +13158,14 @@ func (o GetVPCRouterStaticRouteOutput) ToGetVPCRouterStaticRouteOutputWithContex
 }
 
 func (o GetVPCRouterStaticRouteOutput) NextHop() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterStaticRoute) string { return v.NextHop }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterStaticRouteOutput) Prefix() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterStaticRoute) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterStaticRouteArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterStaticRouteArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterStaticRouteArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterStaticRoute)(nil)).Elem()
@@ -13158,13 +13180,13 @@ func (o GetVPCRouterStaticRouteArrayOutput) ToGetVPCRouterStaticRouteArrayOutput
 }
 
 func (o GetVPCRouterStaticRouteArrayOutput) Index(i pulumi.IntInput) GetVPCRouterStaticRouteOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterStaticRoute {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterStaticRoute {
 		return vs[0].([]GetVPCRouterStaticRoute)[vs[1].(int)]
 	}).(GetVPCRouterStaticRouteOutput)
 }
 
 type GetVPCRouterUser struct {
-	Name string `pulumi:"name"`
+	Name     string `pulumi:"name"`
 	Password string `pulumi:"password"`
 }
 
@@ -13176,7 +13198,7 @@ type GetVPCRouterUserInput interface {
 }
 
 type GetVPCRouterUserArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	Name     pulumi.StringInput `pulumi:"name"`
 	Password pulumi.StringInput `pulumi:"password"`
 }
 
@@ -13213,7 +13235,7 @@ func (i GetVPCRouterUserArray) ToGetVPCRouterUserArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterUserArrayOutput)
 }
 
-type GetVPCRouterUserOutput struct { *pulumi.OutputState }
+type GetVPCRouterUserOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterUserOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GetVPCRouterUser)(nil)).Elem()
@@ -13228,14 +13250,14 @@ func (o GetVPCRouterUserOutput) ToGetVPCRouterUserOutputWithContext(ctx context.
 }
 
 func (o GetVPCRouterUserOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterUser) string { return v.Name }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterUser) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetVPCRouterUserOutput) Password() pulumi.StringOutput {
-	return o.ApplyT(func (v GetVPCRouterUser) string { return v.Password }).(pulumi.StringOutput)
+	return o.ApplyT(func(v GetVPCRouterUser) string { return v.Password }).(pulumi.StringOutput)
 }
 
-type GetVPCRouterUserArrayOutput struct { *pulumi.OutputState}
+type GetVPCRouterUserArrayOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterUserArrayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*[]GetVPCRouterUser)(nil)).Elem()
@@ -13250,7 +13272,7 @@ func (o GetVPCRouterUserArrayOutput) ToGetVPCRouterUserArrayOutputWithContext(ct
 }
 
 func (o GetVPCRouterUserArrayOutput) Index(i pulumi.IntInput) GetVPCRouterUserOutput {
-	return pulumi.All(o, i).ApplyT(func (vs []interface{}) GetVPCRouterUser {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterUser {
 		return vs[0].([]GetVPCRouterUser)[vs[1].(int)]
 	}).(GetVPCRouterUserOutput)
 }

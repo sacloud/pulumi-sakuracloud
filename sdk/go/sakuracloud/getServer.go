@@ -20,34 +20,32 @@ func LookupServer(ctx *pulumi.Context, args *LookupServerArgs, opts ...pulumi.In
 // A collection of arguments for invoking getServer.
 type LookupServerArgs struct {
 	Filter *GetServerFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string          `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getServer.
 type LookupServerResult struct {
-	CdromId string `pulumi:"cdromId"`
-	Commitment string `pulumi:"commitment"`
-	Core int `pulumi:"core"`
-	Description string `pulumi:"description"`
-	Disks []string `pulumi:"disks"`
-	DnsServers []string `pulumi:"dnsServers"`
-	Filter *GetServerFilter `pulumi:"filter"`
-	Gateway string `pulumi:"gateway"`
-	Hostname string `pulumi:"hostname"`
-	IconId string `pulumi:"iconId"`
+	CdromId     string           `pulumi:"cdromId"`
+	Commitment  string           `pulumi:"commitment"`
+	Core        int              `pulumi:"core"`
+	Description string           `pulumi:"description"`
+	Disks       []string         `pulumi:"disks"`
+	DnsServers  []string         `pulumi:"dnsServers"`
+	Filter      *GetServerFilter `pulumi:"filter"`
+	Gateway     string           `pulumi:"gateway"`
+	Hostname    string           `pulumi:"hostname"`
+	IconId      string           `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	InterfaceDriver string `pulumi:"interfaceDriver"`
-	IpAddress string `pulumi:"ipAddress"`
-	Memory int `pulumi:"memory"`
-	Name string `pulumi:"name"`
-	Netmask int `pulumi:"netmask"`
-	NetworkAddress string `pulumi:"networkAddress"`
+	Id                string                      `pulumi:"id"`
+	InterfaceDriver   string                      `pulumi:"interfaceDriver"`
+	IpAddress         string                      `pulumi:"ipAddress"`
+	Memory            int                         `pulumi:"memory"`
+	Name              string                      `pulumi:"name"`
+	Netmask           int                         `pulumi:"netmask"`
+	NetworkAddress    string                      `pulumi:"networkAddress"`
 	NetworkInterfaces []GetServerNetworkInterface `pulumi:"networkInterfaces"`
-	PrivateHostId string `pulumi:"privateHostId"`
-	PrivateHostName string `pulumi:"privateHostName"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	PrivateHostId     string                      `pulumi:"privateHostId"`
+	PrivateHostName   string                      `pulumi:"privateHostName"`
+	Tags              []string                    `pulumi:"tags"`
+	Zone              string                      `pulumi:"zone"`
 }
-

@@ -28,7 +28,7 @@ type ContainerRegistry struct {
 	// [`1`-`64`]
 	SubdomainLabel pulumi.StringOutput `pulumi:"subdomainLabel"`
 	// Any tags to assign to the Container Registry
-	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	Tags  pulumi.StringArrayOutput         `pulumi:"tags"`
 	Users ContainerRegistryUserArrayOutput `pulumi:"users"`
 	// The alias for accessing the container registry
 	VirtualDomain pulumi.StringPtrOutput `pulumi:"virtualDomain"`
@@ -82,7 +82,7 @@ type containerRegistryState struct {
 	// [`1`-`64`]
 	SubdomainLabel *string `pulumi:"subdomainLabel"`
 	// Any tags to assign to the Container Registry
-	Tags []string `pulumi:"tags"`
+	Tags  []string                `pulumi:"tags"`
 	Users []ContainerRegistryUser `pulumi:"users"`
 	// The alias for accessing the container registry
 	VirtualDomain *string `pulumi:"virtualDomain"`
@@ -103,7 +103,7 @@ type ContainerRegistryState struct {
 	// [`1`-`64`]
 	SubdomainLabel pulumi.StringPtrInput
 	// Any tags to assign to the Container Registry
-	Tags pulumi.StringArrayInput
+	Tags  pulumi.StringArrayInput
 	Users ContainerRegistryUserArrayInput
 	// The alias for accessing the container registry
 	VirtualDomain pulumi.StringPtrInput
@@ -126,7 +126,7 @@ type containerRegistryArgs struct {
 	// [`1`-`64`]
 	SubdomainLabel string `pulumi:"subdomainLabel"`
 	// Any tags to assign to the Container Registry
-	Tags []string `pulumi:"tags"`
+	Tags  []string                `pulumi:"tags"`
 	Users []ContainerRegistryUser `pulumi:"users"`
 	// The alias for accessing the container registry
 	VirtualDomain *string `pulumi:"virtualDomain"`
@@ -146,7 +146,7 @@ type ContainerRegistryArgs struct {
 	// [`1`-`64`]
 	SubdomainLabel pulumi.StringInput
 	// Any tags to assign to the Container Registry
-	Tags pulumi.StringArrayInput
+	Tags  pulumi.StringArrayInput
 	Users ContainerRegistryUserArrayInput
 	// The alias for accessing the container registry
 	VirtualDomain pulumi.StringPtrInput
@@ -155,4 +155,3 @@ type ContainerRegistryArgs struct {
 func (ContainerRegistryArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*containerRegistryArgs)(nil)).Elem()
 }
-

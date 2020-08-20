@@ -108,4 +108,3 @@ type IconArgs struct {
 func (IconArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*iconArgs)(nil)).Elem()
 }
-

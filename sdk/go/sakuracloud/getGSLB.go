@@ -22,20 +22,18 @@ type LookupGSLBArgs struct {
 	Filter *GetGSLBFilter `pulumi:"filter"`
 }
 
-
 // A collection of values returned by getGSLB.
 type LookupGSLBResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetGSLBFilter `pulumi:"filter"`
-	Fqdn string `pulumi:"fqdn"`
+	Description  string               `pulumi:"description"`
+	Filter       *GetGSLBFilter       `pulumi:"filter"`
+	Fqdn         string               `pulumi:"fqdn"`
 	HealthChecks []GetGSLBHealthCheck `pulumi:"healthChecks"`
-	IconId string `pulumi:"iconId"`
+	IconId       string               `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	Servers []GetGSLBServer `pulumi:"servers"`
-	SorryServer string `pulumi:"sorryServer"`
-	Tags []string `pulumi:"tags"`
-	Weighted bool `pulumi:"weighted"`
+	Id          string          `pulumi:"id"`
+	Name        string          `pulumi:"name"`
+	Servers     []GetGSLBServer `pulumi:"servers"`
+	SorryServer string          `pulumi:"sorryServer"`
+	Tags        []string        `pulumi:"tags"`
+	Weighted    bool            `pulumi:"weighted"`
 }
-

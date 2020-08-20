@@ -119,4 +119,3 @@ type IPv4PtrArgs struct {
 func (IPv4PtrArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*ipv4PtrArgs)(nil)).Elem()
 }
-

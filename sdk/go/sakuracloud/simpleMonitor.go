@@ -19,7 +19,7 @@ type SimpleMonitor struct {
 	// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The flag to enable monitoring by the simple monitor
-	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
+	Enabled     pulumi.BoolPtrOutput           `pulumi:"enabled"`
 	HealthCheck SimpleMonitorHealthCheckOutput `pulumi:"healthCheck"`
 	// The icon id to attach to the SimpleMonitor
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
@@ -78,7 +78,7 @@ type simpleMonitorState struct {
 	// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The flag to enable monitoring by the simple monitor
-	Enabled *bool `pulumi:"enabled"`
+	Enabled     *bool                     `pulumi:"enabled"`
 	HealthCheck *SimpleMonitorHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the SimpleMonitor
 	IconId *string `pulumi:"iconId"`
@@ -104,7 +104,7 @@ type SimpleMonitorState struct {
 	// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The flag to enable monitoring by the simple monitor
-	Enabled pulumi.BoolPtrInput
+	Enabled     pulumi.BoolPtrInput
 	HealthCheck SimpleMonitorHealthCheckPtrInput
 	// The icon id to attach to the SimpleMonitor
 	IconId pulumi.StringPtrInput
@@ -134,7 +134,7 @@ type simpleMonitorArgs struct {
 	// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The flag to enable monitoring by the simple monitor
-	Enabled *bool `pulumi:"enabled"`
+	Enabled     *bool                    `pulumi:"enabled"`
 	HealthCheck SimpleMonitorHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the SimpleMonitor
 	IconId *string `pulumi:"iconId"`
@@ -161,7 +161,7 @@ type SimpleMonitorArgs struct {
 	// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The flag to enable monitoring by the simple monitor
-	Enabled pulumi.BoolPtrInput
+	Enabled     pulumi.BoolPtrInput
 	HealthCheck SimpleMonitorHealthCheckInput
 	// The icon id to attach to the SimpleMonitor
 	IconId pulumi.StringPtrInput
@@ -184,4 +184,3 @@ type SimpleMonitorArgs struct {
 func (SimpleMonitorArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*simpleMonitorArgs)(nil)).Elem()
 }
-

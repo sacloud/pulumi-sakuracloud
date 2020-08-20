@@ -20,20 +20,18 @@ func LookupCDROM(ctx *pulumi.Context, args *LookupCDROMArgs, opts ...pulumi.Invo
 // A collection of arguments for invoking getCDROM.
 type LookupCDROMArgs struct {
 	Filter *GetCDROMFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string         `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getCDROM.
 type LookupCDROMResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetCDROMFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string          `pulumi:"description"`
+	Filter      *GetCDROMFilter `pulumi:"filter"`
+	IconId      string          `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	Size int `pulumi:"size"`
+	Id   string   `pulumi:"id"`
+	Name string   `pulumi:"name"`
+	Size int      `pulumi:"size"`
 	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Zone string   `pulumi:"zone"`
 }
-

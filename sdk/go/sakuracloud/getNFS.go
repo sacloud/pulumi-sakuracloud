@@ -20,22 +20,20 @@ func LookupNFS(ctx *pulumi.Context, args *LookupNFSArgs, opts ...pulumi.InvokeOp
 // A collection of arguments for invoking getNFS.
 type LookupNFSArgs struct {
 	Filter *GetNFSFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string       `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getNFS.
 type LookupNFSResult struct {
-	Description string `pulumi:"description"`
-	Filter *GetNFSFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Description string        `pulumi:"description"`
+	Filter      *GetNFSFilter `pulumi:"filter"`
+	IconId      string        `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
+	Id                string                   `pulumi:"id"`
+	Name              string                   `pulumi:"name"`
 	NetworkInterfaces []GetNFSNetworkInterface `pulumi:"networkInterfaces"`
-	Plan string `pulumi:"plan"`
-	Size int `pulumi:"size"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Plan              string                   `pulumi:"plan"`
+	Size              int                      `pulumi:"size"`
+	Tags              []string                 `pulumi:"tags"`
+	Zone              string                   `pulumi:"zone"`
 }
-

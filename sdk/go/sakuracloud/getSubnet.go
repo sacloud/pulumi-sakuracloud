@@ -19,25 +19,23 @@ func LookupSubnet(ctx *pulumi.Context, args *LookupSubnetArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getSubnet.
 type LookupSubnetArgs struct {
-	Index int `pulumi:"index"`
-	InternetId string `pulumi:"internetId"`
-	Zone *string `pulumi:"zone"`
+	Index      int     `pulumi:"index"`
+	InternetId string  `pulumi:"internetId"`
+	Zone       *string `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getSubnet.
 type LookupSubnetResult struct {
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Index int `pulumi:"index"`
-	InternetId string `pulumi:"internetId"`
-	IpAddresses []string `pulumi:"ipAddresses"`
-	MaxIpAddress string `pulumi:"maxIpAddress"`
-	MinIpAddress string `pulumi:"minIpAddress"`
-	Netmask int `pulumi:"netmask"`
-	NetworkAddress string `pulumi:"networkAddress"`
-	NextHop string `pulumi:"nextHop"`
-	SwitchId string `pulumi:"switchId"`
-	Zone string `pulumi:"zone"`
+	Id             string   `pulumi:"id"`
+	Index          int      `pulumi:"index"`
+	InternetId     string   `pulumi:"internetId"`
+	IpAddresses    []string `pulumi:"ipAddresses"`
+	MaxIpAddress   string   `pulumi:"maxIpAddress"`
+	MinIpAddress   string   `pulumi:"minIpAddress"`
+	Netmask        int      `pulumi:"netmask"`
+	NetworkAddress string   `pulumi:"networkAddress"`
+	NextHop        string   `pulumi:"nextHop"`
+	SwitchId       string   `pulumi:"switchId"`
+	Zone           string   `pulumi:"zone"`
 }
-

@@ -17,12 +17,12 @@ type GSLB struct {
 	// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
-	Fqdn pulumi.StringOutput `pulumi:"fqdn"`
+	Fqdn        pulumi.StringOutput   `pulumi:"fqdn"`
 	HealthCheck GSLBHealthCheckOutput `pulumi:"healthCheck"`
 	// The icon id to attach to the GSLB
 	IconId pulumi.StringPtrOutput `pulumi:"iconId"`
 	// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringOutput `pulumi:"name"`
+	Name    pulumi.StringOutput   `pulumi:"name"`
 	Servers GSLBServerArrayOutput `pulumi:"servers"`
 	// The IP address of the SorryServer. This will be used when all servers are down
 	SorryServer pulumi.StringPtrOutput `pulumi:"sorryServer"`
@@ -66,12 +66,12 @@ type gslbState struct {
 	// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
 	Description *string `pulumi:"description"`
 	// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
-	Fqdn *string `pulumi:"fqdn"`
+	Fqdn        *string          `pulumi:"fqdn"`
 	HealthCheck *GSLBHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the GSLB
 	IconId *string `pulumi:"iconId"`
 	// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name    *string      `pulumi:"name"`
 	Servers []GSLBServer `pulumi:"servers"`
 	// The IP address of the SorryServer. This will be used when all servers are down
 	SorryServer *string `pulumi:"sorryServer"`
@@ -85,12 +85,12 @@ type GSLBState struct {
 	// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
 	Description pulumi.StringPtrInput
 	// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
-	Fqdn pulumi.StringPtrInput
+	Fqdn        pulumi.StringPtrInput
 	HealthCheck GSLBHealthCheckPtrInput
 	// The icon id to attach to the GSLB
 	IconId pulumi.StringPtrInput
 	// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name    pulumi.StringPtrInput
 	Servers GSLBServerArrayInput
 	// The IP address of the SorryServer. This will be used when all servers are down
 	SorryServer pulumi.StringPtrInput
@@ -106,12 +106,12 @@ func (GSLBState) ElementType() reflect.Type {
 
 type gslbArgs struct {
 	// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
-	Description *string `pulumi:"description"`
+	Description *string         `pulumi:"description"`
 	HealthCheck GSLBHealthCheck `pulumi:"healthCheck"`
 	// The icon id to attach to the GSLB
 	IconId *string `pulumi:"iconId"`
 	// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
-	Name *string `pulumi:"name"`
+	Name    *string      `pulumi:"name"`
 	Servers []GSLBServer `pulumi:"servers"`
 	// The IP address of the SorryServer. This will be used when all servers are down
 	SorryServer *string `pulumi:"sorryServer"`
@@ -129,7 +129,7 @@ type GSLBArgs struct {
 	// The icon id to attach to the GSLB
 	IconId pulumi.StringPtrInput
 	// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
-	Name pulumi.StringPtrInput
+	Name    pulumi.StringPtrInput
 	Servers GSLBServerArrayInput
 	// The IP address of the SorryServer. This will be used when all servers are down
 	SorryServer pulumi.StringPtrInput
@@ -142,4 +142,3 @@ type GSLBArgs struct {
 func (GSLBArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*gslbArgs)(nil)).Elem()
 }
-

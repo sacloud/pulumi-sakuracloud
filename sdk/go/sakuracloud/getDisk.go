@@ -20,25 +20,23 @@ func LookupDisk(ctx *pulumi.Context, args *LookupDiskArgs, opts ...pulumi.Invoke
 // A collection of arguments for invoking getDisk.
 type LookupDiskArgs struct {
 	Filter *GetDiskFilter `pulumi:"filter"`
-	Zone *string `pulumi:"zone"`
+	Zone   *string        `pulumi:"zone"`
 }
-
 
 // A collection of values returned by getDisk.
 type LookupDiskResult struct {
-	Connector string `pulumi:"connector"`
-	Description string `pulumi:"description"`
-	Filter *GetDiskFilter `pulumi:"filter"`
-	IconId string `pulumi:"iconId"`
+	Connector   string         `pulumi:"connector"`
+	Description string         `pulumi:"description"`
+	Filter      *GetDiskFilter `pulumi:"filter"`
+	IconId      string         `pulumi:"iconId"`
 	// id is the provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	Plan string `pulumi:"plan"`
-	ServerId string `pulumi:"serverId"`
-	Size int `pulumi:"size"`
-	SourceArchiveId string `pulumi:"sourceArchiveId"`
-	SourceDiskId string `pulumi:"sourceDiskId"`
-	Tags []string `pulumi:"tags"`
-	Zone string `pulumi:"zone"`
+	Id              string   `pulumi:"id"`
+	Name            string   `pulumi:"name"`
+	Plan            string   `pulumi:"plan"`
+	ServerId        string   `pulumi:"serverId"`
+	Size            int      `pulumi:"size"`
+	SourceArchiveId string   `pulumi:"sourceArchiveId"`
+	SourceDiskId    string   `pulumi:"sourceDiskId"`
+	Tags            []string `pulumi:"tags"`
+	Zone            string   `pulumi:"zone"`
 }
-
