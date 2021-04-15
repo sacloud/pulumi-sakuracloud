@@ -2,11 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): Promise<GetArchiveResult> & GetArchiveResult {
+/**
+ * Get information about an existing Archive.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getArchive({
+ *     osType: "centos8",
+ * }, { async: true }));
+ * ```
+ */
+export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): Promise<GetArchiveResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,21 +28,42 @@ export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): 
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetArchiveResult> = pulumi.runtime.invoke("sakuracloud:index/getArchive:getArchive", {
+    return pulumi.runtime.invoke("sakuracloud:index/getArchive:getArchive", {
         "filter": args.filter,
         "osType": args.osType,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getArchive.
  */
 export interface GetArchiveArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetArchiveFilter;
+    /**
+     * The criteria used to filter SakuraCloud archives. This must be one of following:  
+     * - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`/`centos6`]
+     * - **Ubuntu**: [`ubuntu`/`ubuntu2004`/`ubuntu1804`/`ubuntu1604`]
+     * - **Debian**: [`debian`/`debian10`/`debian9`]
+     * - **CoreOS/ContainerLinux**: `coreos`
+     * - **RancherOS**: `rancheros`
+     * - **k3OS**: `k3os`
+     * - **FreeBSD**: `freebsd`
+     * - **Kusanagi**: `kusanagi`
+     * - **Windows2016**: [`windows2016`/`windows2016-rds`/`windows2016-rds-office`]
+     * - **Windows2016+SQLServer**:  [`windows2016-sql-web`/`windows2016-sql-standard`/`windows2016-sql-standard-all`]
+     * - **Windows2016+SQLServer2017**: [`windows2016-sql2017-standard`/`windows2016-sql2017-enterprise`/`windows2016-sql2017-standard-all`]
+     * - **Windows2019**: [`windows2019`/`windows2019-rds`/`windows2019-rds-office2016`/`windows2019-rds-office2019`]
+     * - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
+     * - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
+     */
     readonly osType?: string;
+    /**
+     * The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -37,16 +71,31 @@ export interface GetArchiveArgs {
  * A collection of values returned by getArchive.
  */
 export interface GetArchiveResult {
+    /**
+     * The description of the Archive.
+     */
     readonly description: string;
     readonly filter?: outputs.GetArchiveFilter;
+    /**
+     * The icon id attached to the Archive.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the Archive.
+     */
     readonly name: string;
     readonly osType?: string;
+    /**
+     * The size of Archive in GiB.
+     */
     readonly size: number;
+    /**
+     * Any tags assigned to the Archive.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

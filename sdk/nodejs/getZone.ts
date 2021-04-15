@@ -2,11 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> & GetZoneResult {
+/**
+ * Get information about an existing Zone.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const current = pulumi.output(sakuracloud.getZone({ async: true }));
+ * const is1a = pulumi.output(sakuracloud.getZone({
+ *     name: "is1a",
+ * }, { async: true }));
+ * ```
+ */
+export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +29,18 @@ export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promis
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetZoneResult> = pulumi.runtime.invoke("sakuracloud:index/getZone:getZone", {
+    return pulumi.runtime.invoke("sakuracloud:index/getZone:getZone", {
         "name": args.name,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getZone.
  */
 export interface GetZoneArgs {
+    /**
+     * The name of the zone (e.g. `is1a`,`tk1a`).
+     */
     readonly name?: string;
 }
 
@@ -33,14 +48,29 @@ export interface GetZoneArgs {
  * A collection of values returned by getZone.
  */
 export interface GetZoneResult {
+    /**
+     * The description of the zone.
+     */
     readonly description: string;
+    /**
+     * A list of IP address of DNS server in the zone.
+     */
     readonly dnsServers: string[];
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
     readonly name: string;
+    /**
+     * The id of the region that the zone belongs.
+     */
     readonly regionId: string;
+    /**
+     * The name of the region that the zone belongs.
+     */
     readonly regionName: string;
+    /**
+     * The id of the zone.
+     */
     readonly zoneId: string;
 }

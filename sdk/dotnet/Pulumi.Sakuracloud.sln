@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulumi.Sakuracloud", "Pulumi.Sakuracloud.csproj", "{34E80C8D-F715-4C79-8357-D3AC77C518AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34E80C8D-F715-4C79-8357-D3AC77C518AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E80C8D-F715-4C79-8357-D3AC77C518AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E80C8D-F715-4C79-8357-D3AC77C518AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E80C8D-F715-4C79-8357-D3AC77C518AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C413BC4A-BD21-4397-9FDF-3A95E44EFD44}
+	EndGlobalSection
+EndGlobal

@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<GetNFSResult> & GetNFSResult {
+/**
+ * Get information about an existing NFS.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getNFS({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<GetNFSResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetNFSResult> = pulumi.runtime.invoke("sakuracloud:index/getNFS:getNFS", {
+    return pulumi.runtime.invoke("sakuracloud:index/getNFS:getNFS", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getNFS.
  */
 export interface GetNFSArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetNFSFilter;
+    /**
+     * The name of zone that the NFS is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,17 +54,38 @@ export interface GetNFSArgs {
  * A collection of values returned by getNFS.
  */
 export interface GetNFSResult {
+    /**
+     * The description of the NFS.
+     */
     readonly description: string;
     readonly filter?: outputs.GetNFSFilter;
+    /**
+     * The icon id attached to the NFS.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the NFS.
+     */
     readonly name: string;
+    /**
+     * A list of `networkInterface` blocks as defined below.
+     */
     readonly networkInterfaces: outputs.GetNFSNetworkInterface[];
+    /**
+     * The plan name of the NFS. This will be one of [`hdd`/`ssd`].
+     */
     readonly plan: string;
+    /**
+     * The size of NFS in GiB.
+     */
     readonly size: number;
+    /**
+     * Any tags assigned to the NFS.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

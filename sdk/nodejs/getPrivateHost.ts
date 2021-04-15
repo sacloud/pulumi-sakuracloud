@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getPrivateHost(args?: GetPrivateHostArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateHostResult> & GetPrivateHostResult {
+/**
+ * Get information about an existing Private Host.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getPrivateHost({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getPrivateHost(args?: GetPrivateHostArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateHostResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getPrivateHost(args?: GetPrivateHostArgs, opts?: pulumi.InvokeOp
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetPrivateHostResult> = pulumi.runtime.invoke("sakuracloud:index/getPrivateHost:getPrivateHost", {
+    return pulumi.runtime.invoke("sakuracloud:index/getPrivateHost:getPrivateHost", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getPrivateHost.
  */
 export interface GetPrivateHostArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetPrivateHostFilter;
+    /**
+     * The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,18 +54,42 @@ export interface GetPrivateHostArgs {
  * A collection of values returned by getPrivateHost.
  */
 export interface GetPrivateHostResult {
+    /**
+     * The total number of CPUs assigned to servers on the private host.
+     */
     readonly assignedCore: number;
+    /**
+     * The total size of memory assigned to servers on the private host.
+     */
     readonly assignedMemory: number;
+    /**
+     * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`].
+     */
     readonly class: string;
+    /**
+     * The description of the PrivateHost.
+     */
     readonly description: string;
     readonly filter?: outputs.GetPrivateHostFilter;
+    /**
+     * The hostname of the private host.
+     */
     readonly hostname: string;
+    /**
+     * The icon id attached to the PrivateHost.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the PrivateHost.
+     */
     readonly name: string;
+    /**
+     * Any tags assigned to the PrivateHost.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

@@ -7,132 +7,202 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Server.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarPacketFilter = Output.Create(Sakuracloud.GetPacketFilter.InvokeAsync(new Sakuracloud.GetPacketFilterArgs
+    ///         {
+    ///             Filter = new Sakuracloud.Inputs.GetPacketFilterFilterArgs
+    ///             {
+    ///                 Names = 
+    ///                 {
+    ///                     "foobar",
+    ///                 },
+    ///             },
+    ///         }));
+    ///         var ubuntu = Output.Create(Sakuracloud.GetArchive.InvokeAsync(new Sakuracloud.GetArchiveArgs
+    ///         {
+    ///             OsType = "ubuntu2004",
+    ///         }));
+    ///         var foobarDisk = new Sakuracloud.Disk("foobarDisk", new Sakuracloud.DiskArgs
+    ///         {
+    ///             SourceArchiveId = ubuntu.Apply(ubuntu =&gt; ubuntu.Id),
+    ///         });
+    ///         var foobarServer = new Sakuracloud.Server("foobarServer", new Sakuracloud.ServerArgs
+    ///         {
+    ///             Disks = 
+    ///             {
+    ///                 foobarDisk.Id,
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             NetworkInterfaces = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.ServerNetworkInterfaceArgs
+    ///                 {
+    ///                     Upstream = "shared",
+    ///                     PacketFilterId = foobarPacketFilter.Apply(foobarPacketFilter =&gt; foobarPacketFilter.Id),
+    ///                 },
+    ///             },
+    ///             DiskEditParameter = new Sakuracloud.Inputs.ServerDiskEditParameterArgs
+    ///             {
+    ///                 Hostname = "hostname",
+    ///                 Password = "password",
+    ///                 DisablePwAuth = true,
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/server:Server")]
     public partial class Server : Pulumi.CustomResource
     {
         /// <summary>
-        /// The id of the CD-ROM to attach to the Server
+        /// The id of the CD-ROM to attach to the Server.
         /// </summary>
         [Output("cdromId")]
         public Output<string?> CdromId { get; private set; } = null!;
 
         /// <summary>
-        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
+        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
         /// </summary>
         [Output("commitment")]
         public Output<string?> Commitment { get; private set; } = null!;
 
         /// <summary>
-        /// The number of virtual CPUs
+        /// The number of virtual CPUs. Default:`1`.
         /// </summary>
         [Output("core")]
         public Output<int?> Core { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Server. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Server. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
+        /// <summary>
+        /// A `disk_edit_parameter` block as defined below.
+        /// </summary>
         [Output("diskEditParameter")]
         public Output<Outputs.ServerDiskEditParameter?> DiskEditParameter { get; private set; } = null!;
 
         /// <summary>
-        /// A list of disk id connected to the server
+        /// A list of disk id connected to the server.
         /// </summary>
         [Output("disks")]
         public Output<ImmutableArray<string>> Disks { get; private set; } = null!;
 
         /// <summary>
-        /// A list of IP address of DNS server in the zone
+        /// A list of IP address of DNS server in the zone.
         /// </summary>
         [Output("dnsServers")]
         public Output<ImmutableArray<string>> DnsServers { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to use force shutdown when need to reboot/shutdown while applying
+        /// The flag to use force shutdown when need to reboot/shutdown while applying.
         /// </summary>
         [Output("forceShutdown")]
         public Output<bool?> ForceShutdown { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address of the gateway used by Server
+        /// The gateway address used by the Server.
         /// </summary>
         [Output("gateway")]
         public Output<string> Gateway { get; private set; } = null!;
 
         /// <summary>
-        /// The hostname of the Server
+        /// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("hostname")]
         public Output<string> Hostname { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Server
+        /// The icon id to attach to the Server.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]
+        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
         /// </summary>
         [Output("interfaceDriver")]
         public Output<string?> InterfaceDriver { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address assigned to the Server
+        /// The IP address to assign to the Server.
         /// </summary>
         [Output("ipAddress")]
         public Output<string> IpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The size of memory in GiB
+        /// The size of memory in GiB. Default:`1`.
         /// </summary>
         [Output("memory")]
         public Output<int?> Memory { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Server. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Server. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet assigned to the Server
+        /// The bit length of the subnet to assign to the Server.
         /// </summary>
         [Output("netmask")]
         public Output<int> Netmask { get; private set; } = null!;
 
         /// <summary>
-        /// The network address which the `ip_address` belongs
+        /// The network address which the `ip_address` belongs.
         /// </summary>
         [Output("networkAddress")]
         public Output<string> NetworkAddress { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `network_interface` blocks as defined below.
+        /// </summary>
         [Output("networkInterfaces")]
-        public Output<ImmutableArray<Outputs.ServerNetworkInterfaces>> NetworkInterfaces { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.ServerNetworkInterface>> NetworkInterfaces { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the PrivateHost which the Server is assigned
+        /// The id of the PrivateHost which the Server is assigned.
         /// </summary>
         [Output("privateHostId")]
         public Output<string?> PrivateHostId { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the PrivateHost which the Server is assigned
+        /// The id of the PrivateHost which the Server is assigned.
         /// </summary>
         [Output("privateHostName")]
         public Output<string> PrivateHostName { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Server
+        /// Any tags to assign to the Server.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -146,7 +216,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Server(string name, ServerArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/server:Server", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/server:Server", name, args ?? new ServerArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -184,29 +254,32 @@ namespace Pulumi.SakuraCloud
     public sealed class ServerArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the CD-ROM to attach to the Server
+        /// The id of the CD-ROM to attach to the Server.
         /// </summary>
         [Input("cdromId")]
         public Input<string>? CdromId { get; set; }
 
         /// <summary>
-        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
+        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
         /// </summary>
         [Input("commitment")]
         public Input<string>? Commitment { get; set; }
 
         /// <summary>
-        /// The number of virtual CPUs
+        /// The number of virtual CPUs. Default:`1`.
         /// </summary>
         [Input("core")]
         public Input<int>? Core { get; set; }
 
         /// <summary>
-        /// The description of the Server. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Server. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// A `disk_edit_parameter` block as defined below.
+        /// </summary>
         [Input("diskEditParameter")]
         public Input<Inputs.ServerDiskEditParameterArgs>? DiskEditParameter { get; set; }
 
@@ -214,7 +287,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _disks;
 
         /// <summary>
-        /// A list of disk id connected to the server
+        /// A list of disk id connected to the server.
         /// </summary>
         public InputList<string> Disks
         {
@@ -223,45 +296,49 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The flag to use force shutdown when need to reboot/shutdown while applying
+        /// The flag to use force shutdown when need to reboot/shutdown while applying.
         /// </summary>
         [Input("forceShutdown")]
         public Input<bool>? ForceShutdown { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Server
+        /// The icon id to attach to the Server.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]
+        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
         /// </summary>
         [Input("interfaceDriver")]
         public Input<string>? InterfaceDriver { get; set; }
 
         /// <summary>
-        /// The size of memory in GiB
+        /// The size of memory in GiB. Default:`1`.
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
 
         /// <summary>
-        /// The name of the Server. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Server. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("networkInterfaces")]
-        private InputList<Inputs.ServerNetworkInterfacesArgs>? _networkInterfaces;
-        public InputList<Inputs.ServerNetworkInterfacesArgs> NetworkInterfaces
+        private InputList<Inputs.ServerNetworkInterfaceArgs>? _networkInterfaces;
+
+        /// <summary>
+        /// One or more `network_interface` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.ServerNetworkInterfaceArgs> NetworkInterfaces
         {
-            get => _networkInterfaces ?? (_networkInterfaces = new InputList<Inputs.ServerNetworkInterfacesArgs>());
+            get => _networkInterfaces ?? (_networkInterfaces = new InputList<Inputs.ServerNetworkInterfaceArgs>());
             set => _networkInterfaces = value;
         }
 
         /// <summary>
-        /// The id of the PrivateHost which the Server is assigned
+        /// The id of the PrivateHost which the Server is assigned.
         /// </summary>
         [Input("privateHostId")]
         public Input<string>? PrivateHostId { get; set; }
@@ -270,7 +347,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Server
+        /// Any tags to assign to the Server.
         /// </summary>
         public InputList<string> Tags
         {
@@ -279,7 +356,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -292,29 +369,32 @@ namespace Pulumi.SakuraCloud
     public sealed class ServerState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the CD-ROM to attach to the Server
+        /// The id of the CD-ROM to attach to the Server.
         /// </summary>
         [Input("cdromId")]
         public Input<string>? CdromId { get; set; }
 
         /// <summary>
-        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]
+        /// The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
         /// </summary>
         [Input("commitment")]
         public Input<string>? Commitment { get; set; }
 
         /// <summary>
-        /// The number of virtual CPUs
+        /// The number of virtual CPUs. Default:`1`.
         /// </summary>
         [Input("core")]
         public Input<int>? Core { get; set; }
 
         /// <summary>
-        /// The description of the Server. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Server. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// A `disk_edit_parameter` block as defined below.
+        /// </summary>
         [Input("diskEditParameter")]
         public Input<Inputs.ServerDiskEditParameterGetArgs>? DiskEditParameter { get; set; }
 
@@ -322,7 +402,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _disks;
 
         /// <summary>
-        /// A list of disk id connected to the server
+        /// A list of disk id connected to the server.
         /// </summary>
         public InputList<string> Disks
         {
@@ -334,7 +414,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _dnsServers;
 
         /// <summary>
-        /// A list of IP address of DNS server in the zone
+        /// A list of IP address of DNS server in the zone.
         /// </summary>
         public InputList<string> DnsServers
         {
@@ -343,81 +423,85 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The flag to use force shutdown when need to reboot/shutdown while applying
+        /// The flag to use force shutdown when need to reboot/shutdown while applying.
         /// </summary>
         [Input("forceShutdown")]
         public Input<bool>? ForceShutdown { get; set; }
 
         /// <summary>
-        /// The IP address of the gateway used by Server
+        /// The gateway address used by the Server.
         /// </summary>
         [Input("gateway")]
         public Input<string>? Gateway { get; set; }
 
         /// <summary>
-        /// The hostname of the Server
+        /// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Server
+        /// The icon id to attach to the Server.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]
+        /// The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
         /// </summary>
         [Input("interfaceDriver")]
         public Input<string>? InterfaceDriver { get; set; }
 
         /// <summary>
-        /// The IP address assigned to the Server
+        /// The IP address to assign to the Server.
         /// </summary>
         [Input("ipAddress")]
         public Input<string>? IpAddress { get; set; }
 
         /// <summary>
-        /// The size of memory in GiB
+        /// The size of memory in GiB. Default:`1`.
         /// </summary>
         [Input("memory")]
         public Input<int>? Memory { get; set; }
 
         /// <summary>
-        /// The name of the Server. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Server. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet assigned to the Server
+        /// The bit length of the subnet to assign to the Server.
         /// </summary>
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
         /// <summary>
-        /// The network address which the `ip_address` belongs
+        /// The network address which the `ip_address` belongs.
         /// </summary>
         [Input("networkAddress")]
         public Input<string>? NetworkAddress { get; set; }
 
         [Input("networkInterfaces")]
-        private InputList<Inputs.ServerNetworkInterfacesGetArgs>? _networkInterfaces;
-        public InputList<Inputs.ServerNetworkInterfacesGetArgs> NetworkInterfaces
+        private InputList<Inputs.ServerNetworkInterfaceGetArgs>? _networkInterfaces;
+
+        /// <summary>
+        /// One or more `network_interface` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.ServerNetworkInterfaceGetArgs> NetworkInterfaces
         {
-            get => _networkInterfaces ?? (_networkInterfaces = new InputList<Inputs.ServerNetworkInterfacesGetArgs>());
+            get => _networkInterfaces ?? (_networkInterfaces = new InputList<Inputs.ServerNetworkInterfaceGetArgs>());
             set => _networkInterfaces = value;
         }
 
         /// <summary>
-        /// The id of the PrivateHost which the Server is assigned
+        /// The id of the PrivateHost which the Server is assigned.
         /// </summary>
         [Input("privateHostId")]
         public Input<string>? PrivateHostId { get; set; }
 
         /// <summary>
-        /// The id of the PrivateHost which the Server is assigned
+        /// The id of the PrivateHost which the Server is assigned.
         /// </summary>
         [Input("privateHostName")]
         public Input<string>? PrivateHostName { get; set; }
@@ -426,7 +510,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Server
+        /// Any tags to assign to the Server.
         /// </summary>
         public InputList<string> Tags
         {
@@ -435,7 +519,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Server will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -443,289 +527,5 @@ namespace Pulumi.SakuraCloud
         public ServerState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class ServerDiskEditParameterArgs : Pulumi.ResourceArgs
-    {
-        [Input("changePartitionUuid")]
-        public Input<bool>? ChangePartitionUuid { get; set; }
-
-        [Input("disablePwAuth")]
-        public Input<bool>? DisablePwAuth { get; set; }
-
-        [Input("enableDhcp")]
-        public Input<bool>? EnableDhcp { get; set; }
-
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("hostname")]
-        public Input<string>? Hostname { get; set; }
-
-        [Input("ipAddress")]
-        public Input<string>? IpAddress { get; set; }
-
-        [Input("netmask")]
-        public Input<int>? Netmask { get; set; }
-
-        [Input("notes")]
-        private InputList<ServerDiskEditParameterNotesArgs>? _notes;
-        public InputList<ServerDiskEditParameterNotesArgs> Notes
-        {
-            get => _notes ?? (_notes = new InputList<ServerDiskEditParameterNotesArgs>());
-            set => _notes = value;
-        }
-
-        [Input("noteIds")]
-        private InputList<string>? _noteIds;
-        [Obsolete(@"The note_ids field will be removed in a future version. Please use the note field instead")]
-        public InputList<string> NoteIds
-        {
-            get => _noteIds ?? (_noteIds = new InputList<string>());
-            set => _noteIds = value;
-        }
-
-        [Input("password")]
-        public Input<string>? Password { get; set; }
-
-        [Input("sshKeyIds")]
-        private InputList<string>? _sshKeyIds;
-        public InputList<string> SshKeyIds
-        {
-            get => _sshKeyIds ?? (_sshKeyIds = new InputList<string>());
-            set => _sshKeyIds = value;
-        }
-
-        public ServerDiskEditParameterArgs()
-        {
-        }
-    }
-
-    public sealed class ServerDiskEditParameterGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("changePartitionUuid")]
-        public Input<bool>? ChangePartitionUuid { get; set; }
-
-        [Input("disablePwAuth")]
-        public Input<bool>? DisablePwAuth { get; set; }
-
-        [Input("enableDhcp")]
-        public Input<bool>? EnableDhcp { get; set; }
-
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("hostname")]
-        public Input<string>? Hostname { get; set; }
-
-        [Input("ipAddress")]
-        public Input<string>? IpAddress { get; set; }
-
-        [Input("netmask")]
-        public Input<int>? Netmask { get; set; }
-
-        [Input("notes")]
-        private InputList<ServerDiskEditParameterNotesGetArgs>? _notes;
-        public InputList<ServerDiskEditParameterNotesGetArgs> Notes
-        {
-            get => _notes ?? (_notes = new InputList<ServerDiskEditParameterNotesGetArgs>());
-            set => _notes = value;
-        }
-
-        [Input("noteIds")]
-        private InputList<string>? _noteIds;
-        [Obsolete(@"The note_ids field will be removed in a future version. Please use the note field instead")]
-        public InputList<string> NoteIds
-        {
-            get => _noteIds ?? (_noteIds = new InputList<string>());
-            set => _noteIds = value;
-        }
-
-        [Input("password")]
-        public Input<string>? Password { get; set; }
-
-        [Input("sshKeyIds")]
-        private InputList<string>? _sshKeyIds;
-        public InputList<string> SshKeyIds
-        {
-            get => _sshKeyIds ?? (_sshKeyIds = new InputList<string>());
-            set => _sshKeyIds = value;
-        }
-
-        public ServerDiskEditParameterGetArgs()
-        {
-        }
-    }
-
-    public sealed class ServerDiskEditParameterNotesArgs : Pulumi.ResourceArgs
-    {
-        [Input("apiKeyId")]
-        public Input<string>? ApiKeyId { get; set; }
-
-        [Input("id", required: true)]
-        public Input<string> Id { get; set; } = null!;
-
-        [Input("variables")]
-        private InputMap<string>? _variables;
-        public InputMap<string> Variables
-        {
-            get => _variables ?? (_variables = new InputMap<string>());
-            set => _variables = value;
-        }
-
-        public ServerDiskEditParameterNotesArgs()
-        {
-        }
-    }
-
-    public sealed class ServerDiskEditParameterNotesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("apiKeyId")]
-        public Input<string>? ApiKeyId { get; set; }
-
-        [Input("id", required: true)]
-        public Input<string> Id { get; set; } = null!;
-
-        [Input("variables")]
-        private InputMap<string>? _variables;
-        public InputMap<string> Variables
-        {
-            get => _variables ?? (_variables = new InputMap<string>());
-            set => _variables = value;
-        }
-
-        public ServerDiskEditParameterNotesGetArgs()
-        {
-        }
-    }
-
-    public sealed class ServerNetworkInterfacesArgs : Pulumi.ResourceArgs
-    {
-        [Input("macAddress")]
-        public Input<string>? MacAddress { get; set; }
-
-        [Input("packetFilterId")]
-        public Input<string>? PacketFilterId { get; set; }
-
-        [Input("upstream", required: true)]
-        public Input<string> Upstream { get; set; } = null!;
-
-        [Input("userIpAddress")]
-        public Input<string>? UserIpAddress { get; set; }
-
-        public ServerNetworkInterfacesArgs()
-        {
-        }
-    }
-
-    public sealed class ServerNetworkInterfacesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("macAddress")]
-        public Input<string>? MacAddress { get; set; }
-
-        [Input("packetFilterId")]
-        public Input<string>? PacketFilterId { get; set; }
-
-        [Input("upstream", required: true)]
-        public Input<string> Upstream { get; set; } = null!;
-
-        [Input("userIpAddress")]
-        public Input<string>? UserIpAddress { get; set; }
-
-        public ServerNetworkInterfacesGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class ServerDiskEditParameter
-    {
-        public readonly bool? ChangePartitionUuid;
-        public readonly bool? DisablePwAuth;
-        public readonly bool? EnableDhcp;
-        public readonly string? Gateway;
-        public readonly string? Hostname;
-        public readonly string? IpAddress;
-        public readonly int? Netmask;
-        public readonly ImmutableArray<ServerDiskEditParameterNotes> Notes;
-        public readonly ImmutableArray<string> NoteIds;
-        public readonly string? Password;
-        public readonly ImmutableArray<string> SshKeyIds;
-
-        [OutputConstructor]
-        private ServerDiskEditParameter(
-            bool? changePartitionUuid,
-            bool? disablePwAuth,
-            bool? enableDhcp,
-            string? gateway,
-            string? hostname,
-            string? ipAddress,
-            int? netmask,
-            ImmutableArray<ServerDiskEditParameterNotes> notes,
-            ImmutableArray<string> noteIds,
-            string? password,
-            ImmutableArray<string> sshKeyIds)
-        {
-            ChangePartitionUuid = changePartitionUuid;
-            DisablePwAuth = disablePwAuth;
-            EnableDhcp = enableDhcp;
-            Gateway = gateway;
-            Hostname = hostname;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            Notes = notes;
-            NoteIds = noteIds;
-            Password = password;
-            SshKeyIds = sshKeyIds;
-        }
-    }
-
-    [OutputType]
-    public sealed class ServerDiskEditParameterNotes
-    {
-        public readonly string? ApiKeyId;
-        public readonly string Id;
-        public readonly ImmutableDictionary<string, string>? Variables;
-
-        [OutputConstructor]
-        private ServerDiskEditParameterNotes(
-            string? apiKeyId,
-            string id,
-            ImmutableDictionary<string, string>? variables)
-        {
-            ApiKeyId = apiKeyId;
-            Id = id;
-            Variables = variables;
-        }
-    }
-
-    [OutputType]
-    public sealed class ServerNetworkInterfaces
-    {
-        public readonly string MacAddress;
-        public readonly string? PacketFilterId;
-        public readonly string Upstream;
-        public readonly string UserIpAddress;
-
-        [OutputConstructor]
-        private ServerNetworkInterfaces(
-            string macAddress,
-            string? packetFilterId,
-            string upstream,
-            string userIpAddress)
-        {
-            MacAddress = macAddress;
-            PacketFilterId = packetFilterId;
-            Upstream = upstream;
-            UserIpAddress = userIpAddress;
-        }
-    }
     }
 }

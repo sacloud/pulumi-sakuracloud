@@ -2,8 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "../types/input";
-import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 let __config = new pulumi.Config("sakuracloud");
@@ -28,6 +26,11 @@ export let apiRequestTimeout: number | undefined = __config.getObject<number>("a
  * via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
  */
 export let apiRootUrl: string | undefined = __config.get("apiRootUrl");
+/**
+ * The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+ * `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+ */
+export let defaultZone: string | undefined = __config.get("defaultZone");
 /**
  * The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
  * from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified

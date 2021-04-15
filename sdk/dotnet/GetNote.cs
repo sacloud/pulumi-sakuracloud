@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetNote
     {
-        public static Task<GetNoteResult> GetNote(GetNoteArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNoteResult>("sakuracloud:index/getNote:getNote", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Note.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetNote.InvokeAsync(new Sakuracloud.GetNoteArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetNoteFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetNoteResult> InvokeAsync(GetNoteArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetNoteResult>("sakuracloud:index/getNote:getNote", args ?? new GetNoteArgs(), options.WithVersion());
     }
+
 
     public sealed class GetNoteArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetNoteFilterArgs? Filter { get; set; }
 
@@ -25,138 +61,66 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetNoteResult
     {
+        /// <summary>
+        /// The class of the Note. This will be one of [`shell`/`yaml_cloud_config`].
+        /// </summary>
         public readonly string Class;
+        /// <summary>
+        /// The content of the Note.
+        /// </summary>
         public readonly string Content;
+        /// <summary>
+        /// The description of the Note.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetNoteFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<string> Tags;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the Note.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Note.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// Any tags assigned to the Note.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
 
         [OutputConstructor]
         private GetNoteResult(
             string @class,
+
             string content,
+
             string description,
+
             Outputs.GetNoteFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
-            ImmutableArray<string> tags,
-            string id)
+
+            ImmutableArray<string> tags)
         {
             Class = @class;
             Content = content;
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             Tags = tags;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetNoteFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetNoteFilterConditionsArgs>? _conditions;
-        public List<GetNoteFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetNoteFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetNoteFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetNoteFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetNoteFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetNoteFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetNoteFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetNoteFilterResult
-    {
-        public readonly ImmutableArray<GetNoteFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetNoteFilterResult(
-            ImmutableArray<GetNoteFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

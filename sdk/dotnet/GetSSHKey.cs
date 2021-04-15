@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetSSHKey
     {
-        public static Task<GetSSHKeyResult> GetSSHKey(GetSSHKeyArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSSHKeyResult>("sakuracloud:index/getSSHKey:getSSHKey", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing SSH Key.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetSSHKey.InvokeAsync(new Sakuracloud.GetSSHKeyArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetSSHKeyFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetSSHKeyResult> InvokeAsync(GetSSHKeyArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetSSHKeyResult>("sakuracloud:index/getSSHKey:getSSHKey", args ?? new GetSSHKeyArgs(), options.WithVersion());
     }
+
 
     public sealed class GetSSHKeyArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetSSHKeyFilterArgs? Filter { get; set; }
 
@@ -25,121 +61,52 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetSSHKeyResult
     {
+        /// <summary>
+        /// The description of the SSHKey.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetSSHKeyFilterResult? Filter;
-        public readonly string Fingerprint;
-        public readonly string Name;
-        public readonly string PublicKey;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The fingerprint of public key.
+        /// </summary>
+        public readonly string Fingerprint;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the SSHKey.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The value of public key.
+        /// </summary>
+        public readonly string PublicKey;
 
         [OutputConstructor]
         private GetSSHKeyResult(
             string description,
+
             Outputs.GetSSHKeyFilterResult? filter,
+
             string fingerprint,
+
+            string id,
+
             string name,
-            string publicKey,
-            string id)
+
+            string publicKey)
         {
             Description = description;
             Filter = filter;
             Fingerprint = fingerprint;
+            Id = id;
             Name = name;
             PublicKey = publicKey;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetSSHKeyFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetSSHKeyFilterConditionsArgs>? _conditions;
-        public List<GetSSHKeyFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetSSHKeyFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        public GetSSHKeyFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetSSHKeyFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetSSHKeyFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetSSHKeyFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetSSHKeyFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetSSHKeyFilterResult
-    {
-        public readonly ImmutableArray<GetSSHKeyFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-
-        [OutputConstructor]
-        private GetSSHKeyFilterResult(
-            ImmutableArray<GetSSHKeyFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-        }
-    }
     }
 }

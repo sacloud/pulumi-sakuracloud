@@ -2,11 +2,27 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Promise<GetSubnetResult> & GetSubnetResult {
+/**
+ * Get information about an existing Subnet.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const config = new pulumi.Config();
+ * const internetId = config.requireObject("internetId");
+ * const foobar = sakuracloud.getSubnet({
+ *     internetId: internetId,
+ *     index: 1,
+ * });
+ * ```
+ */
+export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Promise<GetSubnetResult> {
     if (!opts) {
         opts = {}
     }
@@ -14,21 +30,28 @@ export function getSubnet(args: GetSubnetArgs, opts?: pulumi.InvokeOptions): Pro
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetSubnetResult> = pulumi.runtime.invoke("sakuracloud:index/getSubnet:getSubnet", {
+    return pulumi.runtime.invoke("sakuracloud:index/getSubnet:getSubnet", {
         "index": args.index,
         "internetId": args.internetId,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getSubnet.
  */
 export interface GetSubnetArgs {
+    /**
+     * The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
+     */
     readonly index: number;
+    /**
+     * The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
+     */
     readonly internetId: string;
+    /**
+     * The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -37,17 +60,38 @@ export interface GetSubnetArgs {
  */
 export interface GetSubnetResult {
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
     readonly index: number;
     readonly internetId: string;
+    /**
+     * A list of assigned global address to the Subnet.
+     */
     readonly ipAddresses: string[];
+    /**
+     * Maximum IP address in assigned global addresses to the Subnet.
+     */
     readonly maxIpAddress: string;
+    /**
+     * Minimum IP address in assigned global addresses to the Subnet.
+     */
     readonly minIpAddress: string;
+    /**
+     * The bit length of the subnet assigned to the Subnet.
+     */
     readonly netmask: number;
+    /**
+     * The IPv4 network address assigned to the Subnet.
+     */
     readonly networkAddress: string;
+    /**
+     * The ip address of the next-hop at the Subnet.
+     */
     readonly nextHop: string;
+    /**
+     * The id of the switch connected from the Subnet.
+     */
     readonly switchId: string;
     readonly zone: string;
 }

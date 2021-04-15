@@ -7,22 +7,61 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetSubnet
     {
-        public static Task<GetSubnetResult> GetSubnet(GetSubnetArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSubnetResult>("sakuracloud:index/getSubnet:getSubnet", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Subnet.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var config = new Config();
+        ///         var internetId = config.RequireObject&lt;dynamic&gt;("internetId");
+        ///         var foobar = Output.Create(Sakuracloud.GetSubnet.InvokeAsync(new Sakuracloud.GetSubnetArgs
+        ///         {
+        ///             InternetId = internetId,
+        ///             Index = 1,
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetSubnetResult> InvokeAsync(GetSubnetArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetSubnetResult>("sakuracloud:index/getSubnet:getSubnet", args ?? new GetSubnetArgs(), options.WithVersion());
     }
+
 
     public sealed class GetSubnetArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
+        /// </summary>
         [Input("index", required: true)]
         public int Index { get; set; }
 
+        /// <summary>
+        /// The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
+        /// </summary>
         [Input("internetId", required: true)]
         public string InternetId { get; set; } = null!;
 
+        /// <summary>
+        /// The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -31,38 +70,71 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetSubnetResult
     {
-        public readonly int Index;
-        public readonly string InternetId;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly string MaxIpAddress;
-        public readonly string MinIpAddress;
-        public readonly int Netmask;
-        public readonly string NetworkAddress;
-        public readonly string NextHop;
-        public readonly string SwitchId;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        public readonly int Index;
+        public readonly string InternetId;
+        /// <summary>
+        /// A list of assigned global address to the Subnet.
+        /// </summary>
+        public readonly ImmutableArray<string> IpAddresses;
+        /// <summary>
+        /// Maximum IP address in assigned global addresses to the Subnet.
+        /// </summary>
+        public readonly string MaxIpAddress;
+        /// <summary>
+        /// Minimum IP address in assigned global addresses to the Subnet.
+        /// </summary>
+        public readonly string MinIpAddress;
+        /// <summary>
+        /// The bit length of the subnet assigned to the Subnet.
+        /// </summary>
+        public readonly int Netmask;
+        /// <summary>
+        /// The IPv4 network address assigned to the Subnet.
+        /// </summary>
+        public readonly string NetworkAddress;
+        /// <summary>
+        /// The ip address of the next-hop at the Subnet.
+        /// </summary>
+        public readonly string NextHop;
+        /// <summary>
+        /// The id of the switch connected from the Subnet.
+        /// </summary>
+        public readonly string SwitchId;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetSubnetResult(
+            string id,
+
             int index,
+
             string internetId,
+
             ImmutableArray<string> ipAddresses,
+
             string maxIpAddress,
+
             string minIpAddress,
+
             int netmask,
+
             string networkAddress,
+
             string nextHop,
+
             string switchId,
-            string zone,
-            string id)
+
+            string zone)
         {
+            Id = id;
             Index = index;
             InternetId = internetId;
             IpAddresses = ipAddresses;
@@ -73,7 +145,6 @@ namespace Pulumi.SakuraCloud
             NextHop = nextHop;
             SwitchId = switchId;
             Zone = zone;
-            Id = id;
         }
     }
 }

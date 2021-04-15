@@ -2,10 +2,36 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud NFS.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobarSwitch = new sakuracloud.Switch("foobarSwitch", {});
+ * const foobarNFS = new sakuracloud.NFS("foobarNFS", {
+ *     plan: "ssd",
+ *     size: "500",
+ *     networkInterface: {
+ *         switchId: foobarSwitch.id,
+ *         ipAddress: "192.168.11.101",
+ *         netmask: 24,
+ *         gateway: "192.168.11.1",
+ *     },
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ * });
+ * ```
+ */
 export class NFS extends pulumi.CustomResource {
     /**
      * Get an existing NFS resource's state with the given name, ID, and optional extra
@@ -14,6 +40,7 @@ export class NFS extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: NFSState, opts?: pulumi.CustomResourceOptions): NFS {
         return new NFS(name, <any>state, { ...opts, id: id });
@@ -34,32 +61,35 @@ export class NFS extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The icon id to attach to the NFS
+     * The icon id to attach to the NFS.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     public readonly networkInterface!: pulumi.Output<outputs.NFSNetworkInterface>;
     /**
-     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The size of NFS in GiB
+     * The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
      */
     public readonly size!: pulumi.Output<number | undefined>;
     /**
-     * Any tags to assign to the NFS
+     * Any tags to assign to the NFS.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -73,7 +103,8 @@ export class NFS extends pulumi.CustomResource {
     constructor(name: string, args: NFSArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: NFSArgs | NFSState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as NFSState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
@@ -85,7 +116,7 @@ export class NFS extends pulumi.CustomResource {
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as NFSArgs | undefined;
-            if (!args || args.networkInterface === undefined) {
+            if ((!args || args.networkInterface === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'networkInterface'");
             }
             inputs["description"] = args ? args.description : undefined;
@@ -97,12 +128,8 @@ export class NFS extends pulumi.CustomResource {
             inputs["tags"] = args ? args.tags : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(NFS.__pulumiType, name, inputs, opts);
     }
@@ -113,32 +140,35 @@ export class NFS extends pulumi.CustomResource {
  */
 export interface NFSState {
     /**
-     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the NFS
+     * The icon id to attach to the NFS.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface?: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
-     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The size of NFS in GiB
+     * The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * Any tags to assign to the NFS
+     * Any tags to assign to the NFS.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -148,32 +178,35 @@ export interface NFSState {
  */
 export interface NFSArgs {
     /**
-     * The description of the NFS. The length of this value must be in the range [`1`-`512`]
+     * The description of the NFS. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the NFS
+     * The icon id to attach to the NFS.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the NFS. The length of this value must be in the range [`1`-`64`]
+     * The name of the NFS. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
-     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+     * The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The size of NFS in GiB
+     * The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * Any tags to assign to the NFS
+     * Any tags to assign to the NFS.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

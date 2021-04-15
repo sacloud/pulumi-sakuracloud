@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetInternet
     {
-        public static Task<GetInternetResult> GetInternet(GetInternetArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInternetResult>("sakuracloud:index/getInternet:getInternet", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Switch+Router.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetInternet.InvokeAsync(new Sakuracloud.GetInternetArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetInternetFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetInternetResult> InvokeAsync(GetInternetArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetInternetResult>("sakuracloud:index/getInternet:getInternet", args ?? new GetInternetArgs(), options.WithVersion());
     }
+
 
     public sealed class GetInternetArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetInternetFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Switch+Router is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,55 +67,126 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetInternetResult
     {
+        /// <summary>
+        /// The bandwidth of the network connected to the Internet in Mbps.
+        /// </summary>
         public readonly int BandWidth;
+        /// <summary>
+        /// The description of the Switch+Router.
+        /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// The flag to enable IPv6.
+        /// </summary>
         public readonly bool EnableIpv6;
         public readonly Outputs.GetInternetFilterResult? Filter;
-        public readonly string Gateway;
-        public readonly string IconId;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly string Ipv6NetworkAddress;
-        public readonly string Ipv6Prefix;
-        public readonly int Ipv6PrefixLen;
-        public readonly string MaxIpAddress;
-        public readonly string MinIpAddress;
-        public readonly string Name;
-        public readonly int Netmask;
-        public readonly string NetworkAddress;
-        public readonly ImmutableArray<string> ServerIds;
-        public readonly string SwitchId;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The IP address of the gateway used by Switch+Router.
+        /// </summary>
+        public readonly string Gateway;
+        /// <summary>
+        /// The icon id attached to the Switch+Router.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// A list of assigned global address to the Switch+Router.
+        /// </summary>
+        public readonly ImmutableArray<string> IpAddresses;
+        /// <summary>
+        /// The IPv6 network address assigned to the Switch+Router.
+        /// </summary>
+        public readonly string Ipv6NetworkAddress;
+        /// <summary>
+        /// The network prefix of assigned IPv6 addresses to the Switch+Router.
+        /// </summary>
+        public readonly string Ipv6Prefix;
+        /// <summary>
+        /// The bit length of IPv6 network prefix.
+        /// </summary>
+        public readonly int Ipv6PrefixLen;
+        /// <summary>
+        /// Maximum IP address in assigned global addresses to the Switch+Router.
+        /// </summary>
+        public readonly string MaxIpAddress;
+        /// <summary>
+        /// Minimum IP address in assigned global addresses to the Switch+Router.
+        /// </summary>
+        public readonly string MinIpAddress;
+        /// <summary>
+        /// The name of the Switch+Router.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The bit length of the subnet assigned to the Switch+Router.
+        /// </summary>
+        public readonly int Netmask;
+        /// <summary>
+        /// The IPv4 network address assigned to the Switch+Router.
+        /// </summary>
+        public readonly string NetworkAddress;
+        /// <summary>
+        /// A list of the ID of Servers connected to the Switch+Router.
+        /// </summary>
+        public readonly ImmutableArray<string> ServerIds;
+        /// <summary>
+        /// The id of the switch connected from the Switch+Router.
+        /// </summary>
+        public readonly string SwitchId;
+        /// <summary>
+        /// Any tags assigned to the Switch+Router.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetInternetResult(
             int bandWidth,
+
             string description,
+
             bool enableIpv6,
+
             Outputs.GetInternetFilterResult? filter,
+
             string gateway,
+
             string iconId,
+
+            string id,
+
             ImmutableArray<string> ipAddresses,
+
             string ipv6NetworkAddress,
+
             string ipv6Prefix,
+
             int ipv6PrefixLen,
+
             string maxIpAddress,
+
             string minIpAddress,
+
             string name,
+
             int netmask,
+
             string networkAddress,
+
             ImmutableArray<string> serverIds,
+
             string switchId,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             BandWidth = bandWidth;
             Description = description;
@@ -84,6 +194,7 @@ namespace Pulumi.SakuraCloud
             Filter = filter;
             Gateway = gateway;
             IconId = iconId;
+            Id = id;
             IpAddresses = ipAddresses;
             Ipv6NetworkAddress = ipv6NetworkAddress;
             Ipv6Prefix = ipv6Prefix;
@@ -97,105 +208,6 @@ namespace Pulumi.SakuraCloud
             SwitchId = switchId;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetInternetFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetInternetFilterConditionsArgs>? _conditions;
-        public List<GetInternetFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetInternetFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetInternetFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetInternetFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetInternetFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetInternetFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetInternetFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetInternetFilterResult
-    {
-        public readonly ImmutableArray<GetInternetFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetInternetFilterResult(
-            ImmutableArray<GetInternetFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

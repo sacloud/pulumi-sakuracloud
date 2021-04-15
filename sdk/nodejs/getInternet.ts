@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getInternet(args?: GetInternetArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetResult> & GetInternetResult {
+/**
+ * Get information about an existing Switch+Router.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getInternet({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getInternet(args?: GetInternetArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getInternet(args?: GetInternetArgs, opts?: pulumi.InvokeOptions)
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetInternetResult> = pulumi.runtime.invoke("sakuracloud:index/getInternet:getInternet", {
+    return pulumi.runtime.invoke("sakuracloud:index/getInternet:getInternet", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getInternet.
  */
 export interface GetInternetArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetInternetFilter;
+    /**
+     * The name of zone that the Switch+Router is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,27 +54,78 @@ export interface GetInternetArgs {
  * A collection of values returned by getInternet.
  */
 export interface GetInternetResult {
+    /**
+     * The bandwidth of the network connected to the Internet in Mbps.
+     */
     readonly bandWidth: number;
+    /**
+     * The description of the Switch+Router.
+     */
     readonly description: string;
+    /**
+     * The flag to enable IPv6.
+     */
     readonly enableIpv6: boolean;
     readonly filter?: outputs.GetInternetFilter;
+    /**
+     * The IP address of the gateway used by Switch+Router.
+     */
     readonly gateway: string;
+    /**
+     * The icon id attached to the Switch+Router.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * A list of assigned global address to the Switch+Router.
+     */
     readonly ipAddresses: string[];
+    /**
+     * The IPv6 network address assigned to the Switch+Router.
+     */
     readonly ipv6NetworkAddress: string;
+    /**
+     * The network prefix of assigned IPv6 addresses to the Switch+Router.
+     */
     readonly ipv6Prefix: string;
+    /**
+     * The bit length of IPv6 network prefix.
+     */
     readonly ipv6PrefixLen: number;
+    /**
+     * Maximum IP address in assigned global addresses to the Switch+Router.
+     */
     readonly maxIpAddress: string;
+    /**
+     * Minimum IP address in assigned global addresses to the Switch+Router.
+     */
     readonly minIpAddress: string;
+    /**
+     * The name of the Switch+Router.
+     */
     readonly name: string;
+    /**
+     * The bit length of the subnet assigned to the Switch+Router.
+     */
     readonly netmask: number;
+    /**
+     * The IPv4 network address assigned to the Switch+Router.
+     */
     readonly networkAddress: string;
+    /**
+     * A list of the ID of Servers connected to the Switch+Router.
+     */
     readonly serverIds: string[];
+    /**
+     * The id of the switch connected from the Switch+Router.
+     */
     readonly switchId: string;
+    /**
+     * Any tags assigned to the Switch+Router.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

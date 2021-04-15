@@ -7,51 +7,94 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud NFS.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var foobarNFS = new Sakuracloud.NFS("foobarNFS", new Sakuracloud.NFSArgs
+    ///         {
+    ///             Plan = "ssd",
+    ///             Size = 500,
+    ///             NetworkInterface = new Sakuracloud.Inputs.NFSNetworkInterfaceArgs
+    ///             {
+    ///                 SwitchId = foobarSwitch.Id,
+    ///                 IpAddress = "192.168.11.101",
+    ///                 Netmask = 24,
+    ///                 Gateway = "192.168.11.1",
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/nFS:NFS")]
     public partial class NFS : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the NFS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the NFS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the NFS
+        /// The icon id to attach to the NFS.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the NFS. The length of this value must be in the range [`1`-`64`]
+        /// The name of the NFS. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Output("networkInterface")]
         public Output<Outputs.NFSNetworkInterface> NetworkInterface { get; private set; } = null!;
 
         /// <summary>
-        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
         /// </summary>
         [Output("plan")]
         public Output<string?> Plan { get; private set; } = null!;
 
         /// <summary>
-        /// The size of NFS in GiB
+        /// The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
         /// </summary>
         [Output("size")]
         public Output<int?> Size { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the NFS
+        /// Any tags to assign to the NFS.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -65,7 +108,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public NFS(string name, NFSArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/nFS:NFS", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/nFS:NFS", name, args ?? new NFSArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -103,34 +146,37 @@ namespace Pulumi.SakuraCloud
     public sealed class NFSArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the NFS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the NFS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the NFS
+        /// The icon id to attach to the NFS.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the NFS. The length of this value must be in the range [`1`-`64`]
+        /// The name of the NFS. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface", required: true)]
         public Input<Inputs.NFSNetworkInterfaceArgs> NetworkInterface { get; set; } = null!;
 
         /// <summary>
-        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The size of NFS in GiB
+        /// The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
@@ -139,7 +185,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the NFS
+        /// Any tags to assign to the NFS.
         /// </summary>
         public InputList<string> Tags
         {
@@ -148,7 +194,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -161,34 +207,37 @@ namespace Pulumi.SakuraCloud
     public sealed class NFSState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the NFS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the NFS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the NFS
+        /// The icon id to attach to the NFS.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the NFS. The length of this value must be in the range [`1`-`64`]
+        /// The name of the NFS. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface")]
         public Input<Inputs.NFSNetworkInterfaceGetArgs>? NetworkInterface { get; set; }
 
         /// <summary>
-        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]
+        /// The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The size of NFS in GiB
+        /// The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
@@ -197,7 +246,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the NFS
+        /// Any tags to assign to the NFS.
         /// </summary>
         public InputList<string> Tags
         {
@@ -206,7 +255,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the NFS will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -214,73 +263,5 @@ namespace Pulumi.SakuraCloud
         public NFSState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class NFSNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public NFSNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class NFSNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public NFSNetworkInterfaceGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class NFSNetworkInterface
-    {
-        public readonly string? Gateway;
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private NFSNetworkInterface(
-            string? gateway,
-            string ipAddress,
-            int netmask,
-            string switchId)
-        {
-            Gateway = gateway;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            SwitchId = switchId;
-        }
-    }
     }
 }

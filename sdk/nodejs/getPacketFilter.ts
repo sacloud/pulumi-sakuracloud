@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getPacketFilter(args?: GetPacketFilterArgs, opts?: pulumi.InvokeOptions): Promise<GetPacketFilterResult> & GetPacketFilterResult {
+/**
+ * Get information about an existing Packet Filter.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getPacketFilter({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getPacketFilter(args?: GetPacketFilterArgs, opts?: pulumi.InvokeOptions): Promise<GetPacketFilterResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getPacketFilter(args?: GetPacketFilterArgs, opts?: pulumi.Invoke
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetPacketFilterResult> = pulumi.runtime.invoke("sakuracloud:index/getPacketFilter:getPacketFilter", {
+    return pulumi.runtime.invoke("sakuracloud:index/getPacketFilter:getPacketFilter", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getPacketFilter.
  */
 export interface GetPacketFilterArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetPacketFilterFilter;
+    /**
+     * The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,13 +54,22 @@ export interface GetPacketFilterArgs {
  * A collection of values returned by getPacketFilter.
  */
 export interface GetPacketFilterResult {
+    /**
+     * The description of the expression.
+     */
     readonly description: string;
+    /**
+     * One or more `expression` blocks as defined below.
+     */
     readonly expressions: outputs.GetPacketFilterExpression[];
     readonly filter?: outputs.GetPacketFilterFilter;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the PacketFilter.
+     */
     readonly name: string;
     readonly zone: string;
 }

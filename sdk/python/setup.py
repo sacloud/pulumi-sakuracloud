@@ -7,11 +7,12 @@ from setuptools import setup, find_packages
 from setuptools.command.install import install
 from subprocess import check_call
 
+
 class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '${PLUGIN_VERSION}', '--server', 'https://github.com/sacloud/pulumi-sakuracloud/releases/download/${PLUGIN_VERSION}'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'sakuracloud', '${PLUGIN_VERSION}'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print("""
@@ -19,23 +20,20 @@ class InstallPluginCommand(install):
                 It looks like `pulumi` is not installed on your system.
                 Please visit https://pulumi.com/ to install the Pulumi CLI.
                 You may try manually installing the plugin by running
-                `pulumi plugin install resource sakuracloud ${PLUGIN_VERSION} --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/${PLUGIN_VERSION}`
+                `pulumi plugin install resource sakuracloud ${PLUGIN_VERSION}`
                 """)
             else:
                 raise
+
 
 def readme():
     with open('README.md', encoding='utf-8') as f:
         return f.read()
 
+
 setup(name='pulumi_sakuracloud',
       version='${VERSION}',
-      description="""A Pulumi package for creating and managing SakuraCloud resources.
-
-> This provider is a derived work of the [Terraform Provider](https://github.com/sacloud/terraform-provider-sakuracloud)
-> distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,
-> first check the [`pulumi/pulumi-sakuracloud` repo](https://github.com/pulumi/pulumi-sakuracloud/issues); however, if that doesn't turn up anything,
-> please consult the source [`sacloud/terraform-provider-sakuracloud` repo](https://github.com/sacloud/terraform-provider-sakuracloud/issues).""",
+      description="A Pulumi package for creating and managing SakuraCloud resources.",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={
@@ -50,12 +48,12 @@ setup(name='pulumi_sakuracloud',
       packages=find_packages(),
       package_data={
           'pulumi_sakuracloud': [
-              'py.typed'
+              'py.typed',
           ]
       },
       install_requires=[
           'parver>=0.2.1',
-          'pulumi>=1.0.0,<2.0.0',
+          'pulumi>=2.17.0,<3.0.0',
           'semver>=2.8.1'
       ],
       zip_safe=False)

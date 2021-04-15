@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<GetDNSResult> & GetDNSResult {
+/**
+ * Get information about an existing DNS.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getDNS({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<GetDNSResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetDNSResult> = pulumi.runtime.invoke("sakuracloud:index/getDNS:getDNS", {
+    return pulumi.runtime.invoke("sakuracloud:index/getDNS:getDNS", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getDNS.
  */
 export interface GetDNSArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetDNSFilter;
 }
 
@@ -33,15 +49,33 @@ export interface GetDNSArgs {
  * A collection of values returned by getDNS.
  */
 export interface GetDNSResult {
+    /**
+     * The description of the DNS.
+     */
     readonly description: string;
+    /**
+     * A list of IP address of DNS server that manage this zone.
+     */
     readonly dnsServers: string[];
     readonly filter?: outputs.GetDNSFilter;
+    /**
+     * The icon id attached to the DNS.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * A list of `record` blocks as defined below.
+     */
     readonly records: outputs.GetDNSRecord[];
+    /**
+     * Any tags assigned to the DNS.
+     */
     readonly tags: string[];
+    /**
+     * The name of managed domain.
+     */
     readonly zone: string;
 }

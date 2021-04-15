@@ -2,10 +2,58 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Database.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const config = new pulumi.Config();
+ * const username = config.requireObject("username");
+ * const password = config.requireObject("password");
+ * const replicaPassword = config.requireObject("replicaPassword");
+ * const foobarSwitch = new sakuracloud.Switch("foobarSwitch", {});
+ * const foobarDatabase = new sakuracloud.Database("foobarDatabase", {
+ *     databaseType: "mariadb",
+ *     plan: "30g",
+ *     username: username,
+ *     password: password,
+ *     replicaPassword: replicaPassword,
+ *     networkInterface: {
+ *         switchId: foobarSwitch.id,
+ *         ipAddress: "192.168.11.11",
+ *         netmask: 24,
+ *         gateway: "192.168.11.1",
+ *         port: 3306,
+ *         sourceRanges: [
+ *             "192.168.11.0/24",
+ *             "192.168.12.0/24",
+ *         ],
+ *     },
+ *     backup: {
+ *         time: "00:00",
+ *         weekdays: [
+ *             "mon",
+ *             "tue",
+ *         ],
+ *     },
+ *     parameters: {
+ *         max_connections: 100,
+ *     },
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ * });
+ * ```
+ */
 export class Database extends pulumi.CustomResource {
     /**
      * Get an existing Database resource's state with the given name, ID, and optional extra
@@ -14,6 +62,7 @@ export class Database extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: DatabaseState, opts?: pulumi.CustomResourceOptions): Database {
         return new Database(name, <any>state, { ...opts, id: id });
@@ -33,50 +82,60 @@ export class Database extends pulumi.CustomResource {
         return obj['__pulumiType'] === Database.__pulumiType;
     }
 
+    /**
+     * A `backup` block as defined below.
+     */
     public readonly backup!: pulumi.Output<outputs.DatabaseBackup | undefined>;
     /**
-     * The type of the database. This must be one of [`mariadb`/`postgres`]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
      */
     public readonly databaseType!: pulumi.Output<string | undefined>;
     /**
-     * The description of the Database. The length of this value must be in the range [`1`-`512`]
+     * The description of the Database. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The icon id to attach to the Database
+     * The icon id to attach to the Database.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the Database. The length of this value must be in the range [`1`-`64`]
+     * The name of the Database. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     public readonly networkInterface!: pulumi.Output<outputs.DatabaseNetworkInterface>;
     /**
-     * The password of default user on the database
+     * The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+     */
+    public readonly parameters!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
+     * The password of default user on the database.
      */
     public readonly password!: pulumi.Output<string>;
     /**
-     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
      */
     public readonly plan!: pulumi.Output<string | undefined>;
     /**
-     * The password of user that processing a replication
+     * The password of user that processing a replication.
      */
     public readonly replicaPassword!: pulumi.Output<string | undefined>;
     /**
-     * The name of user that processing a replication
+     * The name of user that processing a replication. Default:`replica`.
      */
     public readonly replicaUser!: pulumi.Output<string | undefined>;
     /**
-     * Any tags to assign to the Database
+     * Any tags to assign to the Database.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
      */
     public readonly username!: pulumi.Output<string>;
     /**
-     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -90,7 +149,8 @@ export class Database extends pulumi.CustomResource {
     constructor(name: string, args: DatabaseArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: DatabaseArgs | DatabaseState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as DatabaseState | undefined;
             inputs["backup"] = state ? state.backup : undefined;
             inputs["databaseType"] = state ? state.databaseType : undefined;
@@ -98,6 +158,7 @@ export class Database extends pulumi.CustomResource {
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["name"] = state ? state.name : undefined;
             inputs["networkInterface"] = state ? state.networkInterface : undefined;
+            inputs["parameters"] = state ? state.parameters : undefined;
             inputs["password"] = state ? state.password : undefined;
             inputs["plan"] = state ? state.plan : undefined;
             inputs["replicaPassword"] = state ? state.replicaPassword : undefined;
@@ -107,13 +168,13 @@ export class Database extends pulumi.CustomResource {
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as DatabaseArgs | undefined;
-            if (!args || args.networkInterface === undefined) {
+            if ((!args || args.networkInterface === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'networkInterface'");
             }
-            if (!args || args.password === undefined) {
+            if ((!args || args.password === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'password'");
             }
-            if (!args || args.username === undefined) {
+            if ((!args || args.username === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'username'");
             }
             inputs["backup"] = args ? args.backup : undefined;
@@ -122,6 +183,7 @@ export class Database extends pulumi.CustomResource {
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["networkInterface"] = args ? args.networkInterface : undefined;
+            inputs["parameters"] = args ? args.parameters : undefined;
             inputs["password"] = args ? args.password : undefined;
             inputs["plan"] = args ? args.plan : undefined;
             inputs["replicaPassword"] = args ? args.replicaPassword : undefined;
@@ -130,12 +192,8 @@ export class Database extends pulumi.CustomResource {
             inputs["username"] = args ? args.username : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Database.__pulumiType, name, inputs, opts);
     }
@@ -145,50 +203,60 @@ export class Database extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Database resources.
  */
 export interface DatabaseState {
+    /**
+     * A `backup` block as defined below.
+     */
     readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
-     * The type of the database. This must be one of [`mariadb`/`postgres`]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
      */
     readonly databaseType?: pulumi.Input<string>;
     /**
-     * The description of the Database. The length of this value must be in the range [`1`-`512`]
+     * The description of the Database. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Database
+     * The icon id to attach to the Database.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Database. The length of this value must be in the range [`1`-`64`]
+     * The name of the Database. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface?: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
-     * The password of default user on the database
+     * The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+     */
+    readonly parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The password of default user on the database.
      */
     readonly password?: pulumi.Input<string>;
     /**
-     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The password of user that processing a replication
+     * The password of user that processing a replication.
      */
     readonly replicaPassword?: pulumi.Input<string>;
     /**
-     * The name of user that processing a replication
+     * The name of user that processing a replication. Default:`replica`.
      */
     readonly replicaUser?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Database
+     * Any tags to assign to the Database.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
      */
     readonly username?: pulumi.Input<string>;
     /**
-     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -197,50 +265,60 @@ export interface DatabaseState {
  * The set of arguments for constructing a Database resource.
  */
 export interface DatabaseArgs {
+    /**
+     * A `backup` block as defined below.
+     */
     readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
-     * The type of the database. This must be one of [`mariadb`/`postgres`]
+     * The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
      */
     readonly databaseType?: pulumi.Input<string>;
     /**
-     * The description of the Database. The length of this value must be in the range [`1`-`512`]
+     * The description of the Database. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Database
+     * The icon id to attach to the Database.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Database. The length of this value must be in the range [`1`-`64`]
+     * The name of the Database. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
-     * The password of default user on the database
+     * The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+     */
+    readonly parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The password of default user on the database.
      */
     readonly password: pulumi.Input<string>;
     /**
-     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+     * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
      */
     readonly plan?: pulumi.Input<string>;
     /**
-     * The password of user that processing a replication
+     * The password of user that processing a replication.
      */
     readonly replicaPassword?: pulumi.Input<string>;
     /**
-     * The name of user that processing a replication
+     * The name of user that processing a replication. Default:`replica`.
      */
     readonly replicaUser?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Database
+     * Any tags to assign to the Database.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+     * The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
      */
     readonly username: pulumi.Input<string>;
     /**
-     * The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

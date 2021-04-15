@@ -2,10 +2,47 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud GSLB.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = new sakuracloud.GSLB("foobar", {
+ *     description: "description",
+ *     healthCheck: {
+ *         delayLoop: 10,
+ *         hostHeader: "example.com",
+ *         path: "/",
+ *         protocol: "http",
+ *         status: "200",
+ *     },
+ *     servers: [
+ *         {
+ *             enabled: true,
+ *             ipAddress: "192.2.0.11",
+ *             weight: 1,
+ *         },
+ *         {
+ *             enabled: true,
+ *             ipAddress: "192.2.0.12",
+ *             weight: 1,
+ *         },
+ *     ],
+ *     sorryServer: "192.2.0.1",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ * });
+ * ```
+ */
 export class GSLB extends pulumi.CustomResource {
     /**
      * Get an existing GSLB resource's state with the given name, ID, and optional extra
@@ -14,6 +51,7 @@ export class GSLB extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: GSLBState, opts?: pulumi.CustomResourceOptions): GSLB {
         return new GSLB(name, <any>state, { ...opts, id: id });
@@ -34,33 +72,39 @@ export class GSLB extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
+     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
      */
     public /*out*/ readonly fqdn!: pulumi.Output<string>;
+    /**
+     * A `healthCheck` block as defined below.
+     */
     public readonly healthCheck!: pulumi.Output<outputs.GSLBHealthCheck>;
     /**
-     * The icon id to attach to the GSLB
+     * The icon id to attach to the GSLB.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * One or more `server` blocks as defined below.
+     */
     public readonly servers!: pulumi.Output<outputs.GSLBServer[] | undefined>;
     /**
-     * The IP address of the SorryServer. This will be used when all servers are down
+     * The IP address of the SorryServer. This will be used when all servers are down.
      */
     public readonly sorryServer!: pulumi.Output<string | undefined>;
     /**
-     * Any tags to assign to the GSLB
+     * Any tags to assign to the GSLB.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The flag to enable weighted load-balancing
+     * The flag to enable weighted load-balancing.
      */
     public readonly weighted!: pulumi.Output<boolean | undefined>;
 
@@ -74,7 +118,8 @@ export class GSLB extends pulumi.CustomResource {
     constructor(name: string, args: GSLBArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: GSLBArgs | GSLBState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as GSLBState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["fqdn"] = state ? state.fqdn : undefined;
@@ -87,7 +132,7 @@ export class GSLB extends pulumi.CustomResource {
             inputs["weighted"] = state ? state.weighted : undefined;
         } else {
             const args = argsOrState as GSLBArgs | undefined;
-            if (!args || args.healthCheck === undefined) {
+            if ((!args || args.healthCheck === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'healthCheck'");
             }
             inputs["description"] = args ? args.description : undefined;
@@ -100,12 +145,8 @@ export class GSLB extends pulumi.CustomResource {
             inputs["weighted"] = args ? args.weighted : undefined;
             inputs["fqdn"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(GSLB.__pulumiType, name, inputs, opts);
     }
@@ -116,33 +157,39 @@ export class GSLB extends pulumi.CustomResource {
  */
 export interface GSLBState {
     /**
-     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
+     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
      */
     readonly fqdn?: pulumi.Input<string>;
+    /**
+     * A `healthCheck` block as defined below.
+     */
     readonly healthCheck?: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
-     * The icon id to attach to the GSLB
+     * The icon id to attach to the GSLB.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * One or more `server` blocks as defined below.
+     */
     readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
-     * The IP address of the SorryServer. This will be used when all servers are down
+     * The IP address of the SorryServer. This will be used when all servers are down.
      */
     readonly sorryServer?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the GSLB
+     * Any tags to assign to the GSLB.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The flag to enable weighted load-balancing
+     * The flag to enable weighted load-balancing.
      */
     readonly weighted?: pulumi.Input<boolean>;
 }
@@ -152,29 +199,35 @@ export interface GSLBState {
  */
 export interface GSLBArgs {
     /**
-     * The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+     * The description of the GSLB. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * A `healthCheck` block as defined below.
+     */
     readonly healthCheck: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
-     * The icon id to attach to the GSLB
+     * The icon id to attach to the GSLB.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+     * The name of the GSLB. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * One or more `server` blocks as defined below.
+     */
     readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
-     * The IP address of the SorryServer. This will be used when all servers are down
+     * The IP address of the SorryServer. This will be used when all servers are down.
      */
     readonly sorryServer?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the GSLB
+     * Any tags to assign to the GSLB.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The flag to enable weighted load-balancing
+     * The flag to enable weighted load-balancing.
      */
     readonly weighted?: pulumi.Input<boolean>;
 }

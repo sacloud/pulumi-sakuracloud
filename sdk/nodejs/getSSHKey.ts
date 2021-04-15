@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetSSHKeyResult> & GetSSHKeyResult {
+/**
+ * Get information about an existing SSH Key.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getSSHKey({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetSSHKeyResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Pr
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetSSHKeyResult> = pulumi.runtime.invoke("sakuracloud:index/getSSHKey:getSSHKey", {
+    return pulumi.runtime.invoke("sakuracloud:index/getSSHKey:getSSHKey", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getSSHKey.
  */
 export interface GetSSHKeyArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetSSHKeyFilter;
 }
 
@@ -33,13 +49,25 @@ export interface GetSSHKeyArgs {
  * A collection of values returned by getSSHKey.
  */
 export interface GetSSHKeyResult {
+    /**
+     * The description of the SSHKey.
+     */
     readonly description: string;
     readonly filter?: outputs.GetSSHKeyFilter;
+    /**
+     * The fingerprint of public key.
+     */
     readonly fingerprint: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the SSHKey.
+     */
     readonly name: string;
+    /**
+     * The value of public key.
+     */
     readonly publicKey: string;
 }

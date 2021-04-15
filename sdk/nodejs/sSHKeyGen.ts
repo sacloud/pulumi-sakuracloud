@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud SSH Key Gen.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = new sakuracloud.SSHKeyGen("foobar", {
+ *     //pass_phrase = "your-pass-phrase"
+ *     description: "description",
+ * });
+ * ```
+ */
 export class SSHKeyGen extends pulumi.CustomResource {
     /**
      * Get an existing SSHKeyGen resource's state with the given name, ID, and optional extra
@@ -12,6 +27,7 @@ export class SSHKeyGen extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: SSHKeyGenState, opts?: pulumi.CustomResourceOptions): SSHKeyGen {
         return new SSHKeyGen(name, <any>state, { ...opts, id: id });
@@ -32,27 +48,27 @@ export class SSHKeyGen extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The fingerprint of the public key
+     * The fingerprint of the public key.
      */
     public /*out*/ readonly fingerprint!: pulumi.Output<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
+     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
      */
     public readonly passPhrase!: pulumi.Output<string | undefined>;
     /**
-     * The body of the private key
+     * The body of the private key.
      */
     public /*out*/ readonly privateKey!: pulumi.Output<string>;
     /**
-     * The body of the public key
+     * The body of the public key.
      */
     public /*out*/ readonly publicKey!: pulumi.Output<string>;
 
@@ -66,7 +82,8 @@ export class SSHKeyGen extends pulumi.CustomResource {
     constructor(name: string, args?: SSHKeyGenArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: SSHKeyGenArgs | SSHKeyGenState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as SSHKeyGenState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["fingerprint"] = state ? state.fingerprint : undefined;
@@ -83,12 +100,8 @@ export class SSHKeyGen extends pulumi.CustomResource {
             inputs["privateKey"] = undefined /*out*/;
             inputs["publicKey"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(SSHKeyGen.__pulumiType, name, inputs, opts);
     }
@@ -99,27 +112,27 @@ export class SSHKeyGen extends pulumi.CustomResource {
  */
 export interface SSHKeyGenState {
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The fingerprint of the public key
+     * The fingerprint of the public key.
      */
     readonly fingerprint?: pulumi.Input<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
+     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
      */
     readonly passPhrase?: pulumi.Input<string>;
     /**
-     * The body of the private key
+     * The body of the private key.
      */
     readonly privateKey?: pulumi.Input<string>;
     /**
-     * The body of the public key
+     * The body of the public key.
      */
     readonly publicKey?: pulumi.Input<string>;
 }
@@ -129,15 +142,15 @@ export interface SSHKeyGenState {
  */
 export interface SSHKeyGenArgs {
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]
+     * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
      */
     readonly passPhrase?: pulumi.Input<string>;
 }

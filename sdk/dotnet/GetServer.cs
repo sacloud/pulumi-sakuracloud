@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetServer
     {
-        public static Task<GetServerResult> GetServer(GetServerArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServerResult>("sakuracloud:index/getServer:getServer", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Server.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetServer.InvokeAsync(new Sakuracloud.GetServerArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetServerFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetServerResult> InvokeAsync(GetServerArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetServerResult>("sakuracloud:index/getServer:getServer", args ?? new GetServerArgs(), options.WithVersion());
     }
+
 
     public sealed class GetServerArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetServerFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,59 +67,138 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetServerResult
     {
+        /// <summary>
+        /// The id of the CD-ROM attached to the server.
+        /// </summary>
         public readonly string CdromId;
+        /// <summary>
+        /// The policy of how to allocate virtual CPUs to the server. This will be one of [`standard`/`dedicatedcpu`].
+        /// </summary>
         public readonly string Commitment;
+        /// <summary>
+        /// The number of virtual CPUs.
+        /// </summary>
         public readonly int Core;
+        /// <summary>
+        /// The description of the Server.
+        /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// A list of disk id connected to the server.
+        /// </summary>
         public readonly ImmutableArray<string> Disks;
+        /// <summary>
+        /// A list of IP address of DNS server in the zone.
+        /// </summary>
         public readonly ImmutableArray<string> DnsServers;
         public readonly Outputs.GetServerFilterResult? Filter;
-        public readonly string Gateway;
-        public readonly string Hostname;
-        public readonly string IconId;
-        public readonly string InterfaceDriver;
-        public readonly string IpAddress;
-        public readonly int Memory;
-        public readonly string Name;
-        public readonly int Netmask;
-        public readonly string NetworkAddress;
-        public readonly ImmutableArray<Outputs.GetServerNetworkInterfacesResult> NetworkInterfaces;
-        public readonly string PrivateHostId;
-        public readonly string PrivateHostName;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The IP address of the gateway used by Server.
+        /// </summary>
+        public readonly string Gateway;
+        /// <summary>
+        /// The hostname of the Server.
+        /// </summary>
+        public readonly string Hostname;
+        /// <summary>
+        /// The icon id attached to the Server.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The driver name of network interface. This will be one of [`virtio`/`e1000`].
+        /// </summary>
+        public readonly string InterfaceDriver;
+        /// <summary>
+        /// The IP address assigned to the Server.
+        /// </summary>
+        public readonly string IpAddress;
+        /// <summary>
+        /// The size of memory in GiB.
+        /// </summary>
+        public readonly int Memory;
+        /// <summary>
+        /// The name of the Server.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The bit length of the subnet assigned to the Server.
+        /// </summary>
+        public readonly int Netmask;
+        /// <summary>
+        /// The network address which the `ip_address` belongs.
+        /// </summary>
+        public readonly string NetworkAddress;
+        /// <summary>
+        /// A list of `network_interface` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetServerNetworkInterfaceResult> NetworkInterfaces;
+        /// <summary>
+        /// The id of the private host which the server is assigned.
+        /// </summary>
+        public readonly string PrivateHostId;
+        /// <summary>
+        /// The name of the private host which the server is assigned.
+        /// </summary>
+        public readonly string PrivateHostName;
+        /// <summary>
+        /// Any tags assigned to the Server.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetServerResult(
             string cdromId,
+
             string commitment,
+
             int core,
+
             string description,
+
             ImmutableArray<string> disks,
+
             ImmutableArray<string> dnsServers,
+
             Outputs.GetServerFilterResult? filter,
+
             string gateway,
+
             string hostname,
+
             string iconId,
+
+            string id,
+
             string interfaceDriver,
+
             string ipAddress,
+
             int memory,
+
             string name,
+
             int netmask,
+
             string networkAddress,
-            ImmutableArray<Outputs.GetServerNetworkInterfacesResult> networkInterfaces,
+
+            ImmutableArray<Outputs.GetServerNetworkInterfaceResult> networkInterfaces,
+
             string privateHostId,
+
             string privateHostName,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             CdromId = cdromId;
             Commitment = commitment;
@@ -92,6 +210,7 @@ namespace Pulumi.SakuraCloud
             Gateway = gateway;
             Hostname = hostname;
             IconId = iconId;
+            Id = id;
             InterfaceDriver = interfaceDriver;
             IpAddress = ipAddress;
             Memory = memory;
@@ -103,127 +222,6 @@ namespace Pulumi.SakuraCloud
             PrivateHostName = privateHostName;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetServerFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetServerFilterConditionsArgs>? _conditions;
-        public List<GetServerFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetServerFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetServerFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetServerFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetServerFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetServerFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetServerFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetServerFilterResult
-    {
-        public readonly ImmutableArray<GetServerFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetServerFilterResult(
-            ImmutableArray<GetServerFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetServerNetworkInterfacesResult
-    {
-        public readonly string MacAddress;
-        public readonly string PacketFilterId;
-        public readonly string Upstream;
-        public readonly string UserIpAddress;
-
-        [OutputConstructor]
-        private GetServerNetworkInterfacesResult(
-            string macAddress,
-            string packetFilterId,
-            string upstream,
-            string userIpAddress)
-        {
-            MacAddress = macAddress;
-            PacketFilterId = packetFilterId;
-            Upstream = upstream;
-            UserIpAddress = userIpAddress;
-        }
-    }
     }
 }

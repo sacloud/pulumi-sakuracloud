@@ -7,30 +7,54 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud SSH Key.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.SSHKey("foobar", new Sakuracloud.SSHKeyArgs
+    ///         {
+    ///             PublicKey = File.ReadAllText("~/.ssh/id_rsa.pub"),
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/sSHKey:SSHKey")]
     public partial class SSHKey : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The fingerprint of the public key
+        /// The fingerprint of the public key.
         /// </summary>
         [Output("fingerprint")]
         public Output<string> Fingerprint { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The body of the public key
+        /// The body of the public key. Changing this forces a new resource to be created.
         /// </summary>
         [Output("publicKey")]
         public Output<string> PublicKey { get; private set; } = null!;
@@ -44,7 +68,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public SSHKey(string name, SSHKeyArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/sSHKey:SSHKey", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/sSHKey:SSHKey", name, args ?? new SSHKeyArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -82,19 +106,19 @@ namespace Pulumi.SakuraCloud
     public sealed class SSHKeyArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The body of the public key
+        /// The body of the public key. Changing this forces a new resource to be created.
         /// </summary>
         [Input("publicKey", required: true)]
         public Input<string> PublicKey { get; set; } = null!;
@@ -107,25 +131,25 @@ namespace Pulumi.SakuraCloud
     public sealed class SSHKeyState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The fingerprint of the public key
+        /// The fingerprint of the public key.
         /// </summary>
         [Input("fingerprint")]
         public Input<string>? Fingerprint { get; set; }
 
         /// <summary>
-        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The body of the public key
+        /// The body of the public key. Changing this forces a new resource to be created.
         /// </summary>
         [Input("publicKey")]
         public Input<string>? PublicKey { get; set; }

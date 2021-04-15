@@ -9,8 +9,6 @@ import * as utilities from "./utilities";
  * settings, however an explicit `Provider` instance may be created and passed during resource
  * construction to achieve fine-grained programmatic control over provider settings. See the
  * [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
- *
- * > This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/index.html.markdown.
  */
 export class Provider extends pulumi.ProviderResource {
     /** @internal */
@@ -37,35 +35,27 @@ export class Provider extends pulumi.ProviderResource {
      */
     constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let inputs: pulumi.Inputs = {};
+        opts = opts || {};
         {
             inputs["acceptLanguage"] = args ? args.acceptLanguage : undefined;
-            inputs["apiRequestRateLimit"] = pulumi.output(args ? args.apiRequestRateLimit : undefined).apply(JSON.stringify)
-;
-            inputs["apiRequestTimeout"] = pulumi.output(args ? args.apiRequestTimeout : undefined).apply(JSON.stringify)
-;
+            inputs["apiRequestRateLimit"] = pulumi.output(args ? args.apiRequestRateLimit : undefined).apply(JSON.stringify);
+            inputs["apiRequestTimeout"] = pulumi.output(args ? args.apiRequestTimeout : undefined).apply(JSON.stringify);
             inputs["apiRootUrl"] = args ? args.apiRootUrl : undefined;
+            inputs["defaultZone"] = args ? args.defaultZone : undefined;
             inputs["fakeMode"] = args ? args.fakeMode : undefined;
             inputs["fakeStorePath"] = args ? args.fakeStorePath : undefined;
-            inputs["profile"] = (args ? args.profile : undefined) || (utilities.getEnv("SAKURACLOUD_PROFILE") || "default");
-            inputs["retryMax"] = pulumi.output(args ? args.retryMax : undefined).apply(JSON.stringify)
-;
-            inputs["retryWaitMax"] = pulumi.output(args ? args.retryWaitMax : undefined).apply(JSON.stringify)
-;
-            inputs["retryWaitMin"] = pulumi.output(args ? args.retryWaitMin : undefined).apply(JSON.stringify)
-;
-            inputs["secret"] = (args ? args.secret : undefined) || (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN_SECRET") || "");
-            inputs["token"] = (args ? args.token : undefined) || (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN") || "");
+            inputs["profile"] = (args ? args.profile : undefined) ?? (utilities.getEnv("SAKURACLOUD_PROFILE") || "default");
+            inputs["retryMax"] = pulumi.output(args ? args.retryMax : undefined).apply(JSON.stringify);
+            inputs["retryWaitMax"] = pulumi.output(args ? args.retryWaitMax : undefined).apply(JSON.stringify);
+            inputs["retryWaitMin"] = pulumi.output(args ? args.retryWaitMin : undefined).apply(JSON.stringify);
+            inputs["secret"] = (args ? args.secret : undefined) ?? (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN_SECRET") || "");
+            inputs["token"] = (args ? args.token : undefined) ?? (utilities.getEnv("SAKURACLOUD_ACCESS_TOKEN") || "");
             inputs["trace"] = args ? args.trace : undefined;
-            inputs["zone"] = (args ? args.zone : undefined) || (utilities.getEnv("SAKURACLOUD_ZONE") || "is1b");
-            inputs["zones"] = pulumi.output(args ? args.zones : undefined).apply(JSON.stringify)
-;
+            inputs["zone"] = (args ? args.zone : undefined) ?? (utilities.getEnv("SAKURACLOUD_ZONE") || "is1b");
+            inputs["zones"] = pulumi.output(args ? args.zones : undefined).apply(JSON.stringify);
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Provider.__pulumiType, name, inputs, opts);
     }
@@ -95,6 +85,11 @@ export interface ProviderArgs {
      * via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
      */
     readonly apiRootUrl?: pulumi.Input<string>;
+    /**
+     * The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+     * `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+     */
+    readonly defaultZone?: pulumi.Input<string>;
     /**
      * The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
      * from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified

@@ -4,6 +4,26 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud IPv4 PTR.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const server = new sakuracloud.Server("server", {networkInterfaces: [{
+ *     upstream: "shared",
+ * }]});
+ * const foobar = new sakuracloud.IPv4Ptr("foobar", {
+ *     ipAddress: server.ipAddress,
+ *     hostname: "www.example.com",
+ *     retryMax: 30,
+ *     retryInterval: 10,
+ * });
+ * ```
+ */
 export class IPv4Ptr extends pulumi.CustomResource {
     /**
      * Get an existing IPv4Ptr resource's state with the given name, ID, and optional extra
@@ -12,6 +32,7 @@ export class IPv4Ptr extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: IPv4PtrState, opts?: pulumi.CustomResourceOptions): IPv4Ptr {
         return new IPv4Ptr(name, <any>state, { ...opts, id: id });
@@ -32,23 +53,23 @@ export class IPv4Ptr extends pulumi.CustomResource {
     }
 
     /**
-     * The value of the PTR record. This must be FQDN
+     * The value of the PTR record. This must be FQDN.
      */
     public readonly hostname!: pulumi.Output<string>;
     /**
-     * The IP address to which the PTR record is set
+     * The IP address to which the PTR record is set.
      */
     public readonly ipAddress!: pulumi.Output<string>;
     /**
-     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
      */
     public readonly retryInterval!: pulumi.Output<number | undefined>;
     /**
-     * The maximum number of API call retries used when SakuraCloud API returns any errors
+     * The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
      */
     public readonly retryMax!: pulumi.Output<number | undefined>;
     /**
-     * The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -62,7 +83,8 @@ export class IPv4Ptr extends pulumi.CustomResource {
     constructor(name: string, args: IPv4PtrArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: IPv4PtrArgs | IPv4PtrState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as IPv4PtrState | undefined;
             inputs["hostname"] = state ? state.hostname : undefined;
             inputs["ipAddress"] = state ? state.ipAddress : undefined;
@@ -71,10 +93,10 @@ export class IPv4Ptr extends pulumi.CustomResource {
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as IPv4PtrArgs | undefined;
-            if (!args || args.hostname === undefined) {
+            if ((!args || args.hostname === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'hostname'");
             }
-            if (!args || args.ipAddress === undefined) {
+            if ((!args || args.ipAddress === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'ipAddress'");
             }
             inputs["hostname"] = args ? args.hostname : undefined;
@@ -83,12 +105,8 @@ export class IPv4Ptr extends pulumi.CustomResource {
             inputs["retryMax"] = args ? args.retryMax : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(IPv4Ptr.__pulumiType, name, inputs, opts);
     }
@@ -99,23 +117,23 @@ export class IPv4Ptr extends pulumi.CustomResource {
  */
 export interface IPv4PtrState {
     /**
-     * The value of the PTR record. This must be FQDN
+     * The value of the PTR record. This must be FQDN.
      */
     readonly hostname?: pulumi.Input<string>;
     /**
-     * The IP address to which the PTR record is set
+     * The IP address to which the PTR record is set.
      */
     readonly ipAddress?: pulumi.Input<string>;
     /**
-     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
      */
     readonly retryInterval?: pulumi.Input<number>;
     /**
-     * The maximum number of API call retries used when SakuraCloud API returns any errors
+     * The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
      */
     readonly retryMax?: pulumi.Input<number>;
     /**
-     * The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -125,23 +143,23 @@ export interface IPv4PtrState {
  */
 export interface IPv4PtrArgs {
     /**
-     * The value of the PTR record. This must be FQDN
+     * The value of the PTR record. This must be FQDN.
      */
     readonly hostname: pulumi.Input<string>;
     /**
-     * The IP address to which the PTR record is set
+     * The IP address to which the PTR record is set.
      */
     readonly ipAddress: pulumi.Input<string>;
     /**
-     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+     * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
      */
     readonly retryInterval?: pulumi.Input<number>;
     /**
-     * The maximum number of API call retries used when SakuraCloud API returns any errors
+     * The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
      */
     readonly retryMax?: pulumi.Input<number>;
     /**
-     * The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

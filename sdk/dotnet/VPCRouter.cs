@@ -7,105 +7,339 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud VPC Router.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var standard = new Sakuracloud.VPCRouter("standard", new Sakuracloud.VPCRouterArgs
+    ///         {
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             InternetConnection = true,
+    ///         });
+    ///         var foobarInternet = new Sakuracloud.Internet("foobarInternet", new Sakuracloud.InternetArgs
+    ///         {
+    ///         });
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var premium = new Sakuracloud.VPCRouter("premium", new Sakuracloud.VPCRouterArgs
+    ///         {
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Plan = "premium",
+    ///             InternetConnection = true,
+    ///             PublicNetworkInterface = new Sakuracloud.Inputs.VPCRouterPublicNetworkInterfaceArgs
+    ///             {
+    ///                 SwitchId = foobarInternet.SwitchId,
+    ///                 Vip = foobarInternet.IpAddresses.Apply(ipAddresses =&gt; ipAddresses[0]),
+    ///                 IpAddresses = 
+    ///                 {
+    ///                     foobarInternet.IpAddresses.Apply(ipAddresses =&gt; ipAddresses[1]),
+    ///                     foobarInternet.IpAddresses.Apply(ipAddresses =&gt; ipAddresses[2]),
+    ///                 },
+    ///                 Aliases = 
+    ///                 {
+    ///                     foobarInternet.IpAddresses.Apply(ipAddresses =&gt; ipAddresses[3]),
+    ///                 },
+    ///                 Vrid = 1,
+    ///             },
+    ///             PrivateNetworkInterfaces = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterPrivateNetworkInterfaceArgs
+    ///                 {
+    ///                     Index = 1,
+    ///                     SwitchId = foobarSwitch.Id,
+    ///                     Vip = "192.168.11.1",
+    ///                     IpAddresses = 
+    ///                     {
+    ///                         "192.168.11.2",
+    ///                         "192.168.11.3",
+    ///                     },
+    ///                     Netmask = 24,
+    ///                 },
+    ///             },
+    ///             DhcpServers = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterDhcpServerArgs
+    ///                 {
+    ///                     InterfaceIndex = 1,
+    ///                     RangeStart = "192.168.11.11",
+    ///                     RangeStop = "192.168.11.20",
+    ///                     DnsServers = 
+    ///                     {
+    ///                         "8.8.8.8",
+    ///                         "8.8.4.4",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             DhcpStaticMappings = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterDhcpStaticMappingArgs
+    ///                 {
+    ///                     IpAddress = "192.168.11.10",
+    ///                     MacAddress = "aa:bb:cc:aa:bb:cc",
+    ///                 },
+    ///             },
+    ///             Firewalls = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterFirewallArgs
+    ///                 {
+    ///                     InterfaceIndex = 1,
+    ///                     Direction = "send",
+    ///                     Expressions = 
+    ///                     {
+    ///                         new Sakuracloud.Inputs.VPCRouterFirewallExpressionArgs
+    ///                         {
+    ///                             Protocol = "tcp",
+    ///                             SourceNetwork = "",
+    ///                             SourcePort = "80",
+    ///                             DestinationNetwork = "",
+    ///                             DestinationPort = "",
+    ///                             Allow = true,
+    ///                             Logging = true,
+    ///                             Description = "desc",
+    ///                         },
+    ///                         new Sakuracloud.Inputs.VPCRouterFirewallExpressionArgs
+    ///                         {
+    ///                             Protocol = "ip",
+    ///                             SourceNetwork = "",
+    ///                             SourcePort = "",
+    ///                             DestinationNetwork = "",
+    ///                             DestinationPort = "",
+    ///                             Allow = false,
+    ///                             Logging = true,
+    ///                             Description = "desc",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             L2tp = new Sakuracloud.Inputs.VPCRouterL2tpArgs
+    ///             {
+    ///                 PreSharedSecret = "example",
+    ///                 RangeStart = "192.168.11.21",
+    ///                 RangeStop = "192.168.11.30",
+    ///             },
+    ///             PortForwardings = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterPortForwardingArgs
+    ///                 {
+    ///                     Protocol = "udp",
+    ///                     PublicPort = 10022,
+    ///                     PrivateIp = "192.168.11.11",
+    ///                     PrivatePort = 22,
+    ///                     Description = "desc",
+    ///                 },
+    ///             },
+    ///             Pptp = new Sakuracloud.Inputs.VPCRouterPptpArgs
+    ///             {
+    ///                 RangeStart = "192.168.11.31",
+    ///                 RangeStop = "192.168.11.40",
+    ///             },
+    ///             SiteToSiteVpns = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterSiteToSiteVpnArgs
+    ///                 {
+    ///                     Peer = "10.0.0.1",
+    ///                     RemoteId = "10.0.0.1",
+    ///                     PreSharedSecret = "example",
+    ///                     Routes = 
+    ///                     {
+    ///                         "10.0.0.0/8",
+    ///                     },
+    ///                     LocalPrefixes = 
+    ///                     {
+    ///                         "192.168.21.0/24",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             StaticNats = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterStaticNatArgs
+    ///                 {
+    ///                     PublicIp = foobarInternet.IpAddresses.Apply(ipAddresses =&gt; ipAddresses[3]),
+    ///                     PrivateIp = "192.168.11.12",
+    ///                     Description = "desc",
+    ///                 },
+    ///             },
+    ///             StaticRoutes = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "172.16.0.0/16",
+    ///                     NextHop = "192.168.11.99",
+    ///                 },
+    ///             },
+    ///             Users = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.VPCRouterUserArgs
+    ///                 {
+    ///                     Name = "username",
+    ///                     Password = "password",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/vPCRouter:VPCRouter")]
     public partial class VPCRouter : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression. The length of this value must be in the range [`0`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `dhcp_server` blocks as defined below.
+        /// </summary>
         [Output("dhcpServers")]
-        public Output<ImmutableArray<Outputs.VPCRouterDhcpServers>> DhcpServers { get; private set; } = null!;
-
-        [Output("dhcpStaticMappings")]
-        public Output<ImmutableArray<Outputs.VPCRouterDhcpStaticMappings>> DhcpStaticMappings { get; private set; } = null!;
-
-        [Output("firewalls")]
-        public Output<ImmutableArray<Outputs.VPCRouterFirewalls>> Firewalls { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.VPCRouterDhcpServer>> DhcpServers { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the VPCRouter
+        /// One or more `dhcp_static_mapping` blocks as defined below.
+        /// </summary>
+        [Output("dhcpStaticMappings")]
+        public Output<ImmutableArray<Outputs.VPCRouterDhcpStaticMapping>> DhcpStaticMappings { get; private set; } = null!;
+
+        /// <summary>
+        /// One or more `firewall` blocks as defined below.
+        /// </summary>
+        [Output("firewalls")]
+        public Output<ImmutableArray<Outputs.VPCRouterFirewall>> Firewalls { get; private set; } = null!;
+
+        /// <summary>
+        /// The icon id to attach to the VPCRouter.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable connecting to the Internet from the VPC Router
+        /// The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
         /// </summary>
         [Output("internetConnection")]
         public Output<bool?> InternetConnection { get; private set; } = null!;
 
+        /// <summary>
+        /// A `l2tp` block as defined below.
+        /// </summary>
         [Output("l2tp")]
         public Output<Outputs.VPCRouterL2tp?> L2tp { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Output("plan")]
         public Output<string?> Plan { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `port_forwarding` blocks as defined below.
+        /// </summary>
         [Output("portForwardings")]
-        public Output<ImmutableArray<Outputs.VPCRouterPortForwardings>> PortForwardings { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.VPCRouterPortForwarding>> PortForwardings { get; private set; } = null!;
 
+        /// <summary>
+        /// A `pptp` block as defined below.
+        /// </summary>
         [Output("pptp")]
         public Output<Outputs.VPCRouterPptp?> Pptp { get; private set; } = null!;
 
         /// <summary>
-        /// A list of additional network interface setting. This doesn't include primary network interface setting
+        /// A list of additional network interface setting. This doesn't include primary network interface setting.
         /// </summary>
         [Output("privateNetworkInterfaces")]
-        public Output<ImmutableArray<Outputs.VPCRouterPrivateNetworkInterfaces>> PrivateNetworkInterfaces { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.VPCRouterPrivateNetworkInterface>> PrivateNetworkInterfaces { get; private set; } = null!;
 
         /// <summary>
-        /// The public ip address of the VPC Router
+        /// The public IP address used for the static NAT.
         /// </summary>
         [Output("publicIp")]
         public Output<string> PublicIp { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet to assign to the public network interface
+        /// The bit length of the subnet to assign to the public network interface.
         /// </summary>
         [Output("publicNetmask")]
         public Output<int> PublicNetmask { get; private set; } = null!;
 
+        /// <summary>
+        /// An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        /// </summary>
         [Output("publicNetworkInterface")]
         public Output<Outputs.VPCRouterPublicNetworkInterface?> PublicNetworkInterface { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `site_to_site_vpn` blocks as defined below.
+        /// </summary>
         [Output("siteToSiteVpns")]
-        public Output<ImmutableArray<Outputs.VPCRouterSiteToSiteVpns>> SiteToSiteVpns { get; private set; } = null!;
-
-        [Output("staticNats")]
-        public Output<ImmutableArray<Outputs.VPCRouterStaticNats>> StaticNats { get; private set; } = null!;
-
-        [Output("staticRoutes")]
-        public Output<ImmutableArray<Outputs.VPCRouterStaticRoutes>> StaticRoutes { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.VPCRouterSiteToSiteVpn>> SiteToSiteVpns { get; private set; } = null!;
 
         /// <summary>
-        /// The ip address of the syslog host to which the VPC Router sends logs
+        /// One or more `static_nat` blocks as defined below.
+        /// </summary>
+        [Output("staticNats")]
+        public Output<ImmutableArray<Outputs.VPCRouterStaticNat>> StaticNats { get; private set; } = null!;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        [Output("staticRoutes")]
+        public Output<ImmutableArray<Outputs.VPCRouterStaticRoute>> StaticRoutes { get; private set; } = null!;
+
+        /// <summary>
+        /// The ip address of the syslog host to which the VPC Router sends logs.
         /// </summary>
         [Output("syslogHost")]
         public Output<string?> SyslogHost { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the VPCRouter
+        /// Any tags to assign to the VPCRouter.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
         [Output("users")]
-        public Output<ImmutableArray<Outputs.VPCRouterUsers>> Users { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.VPCRouterUser>> Users { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+        /// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        /// </summary>
+        [Output("version")]
+        public Output<int?> Version { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -119,7 +353,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public VPCRouter(string name, VPCRouterArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/vPCRouter:VPCRouter", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/vPCRouter:VPCRouter", name, args ?? new VPCRouterArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -157,114 +391,151 @@ namespace Pulumi.SakuraCloud
     public sealed class VPCRouterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression. The length of this value must be in the range [`0`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("dhcpServers")]
-        private InputList<Inputs.VPCRouterDhcpServersArgs>? _dhcpServers;
-        public InputList<Inputs.VPCRouterDhcpServersArgs> DhcpServers
+        private InputList<Inputs.VPCRouterDhcpServerArgs>? _dhcpServers;
+
+        /// <summary>
+        /// One or more `dhcp_server` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterDhcpServerArgs> DhcpServers
         {
-            get => _dhcpServers ?? (_dhcpServers = new InputList<Inputs.VPCRouterDhcpServersArgs>());
+            get => _dhcpServers ?? (_dhcpServers = new InputList<Inputs.VPCRouterDhcpServerArgs>());
             set => _dhcpServers = value;
         }
 
         [Input("dhcpStaticMappings")]
-        private InputList<Inputs.VPCRouterDhcpStaticMappingsArgs>? _dhcpStaticMappings;
-        public InputList<Inputs.VPCRouterDhcpStaticMappingsArgs> DhcpStaticMappings
+        private InputList<Inputs.VPCRouterDhcpStaticMappingArgs>? _dhcpStaticMappings;
+
+        /// <summary>
+        /// One or more `dhcp_static_mapping` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterDhcpStaticMappingArgs> DhcpStaticMappings
         {
-            get => _dhcpStaticMappings ?? (_dhcpStaticMappings = new InputList<Inputs.VPCRouterDhcpStaticMappingsArgs>());
+            get => _dhcpStaticMappings ?? (_dhcpStaticMappings = new InputList<Inputs.VPCRouterDhcpStaticMappingArgs>());
             set => _dhcpStaticMappings = value;
         }
 
         [Input("firewalls")]
-        private InputList<Inputs.VPCRouterFirewallsArgs>? _firewalls;
-        public InputList<Inputs.VPCRouterFirewallsArgs> Firewalls
+        private InputList<Inputs.VPCRouterFirewallArgs>? _firewalls;
+
+        /// <summary>
+        /// One or more `firewall` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterFirewallArgs> Firewalls
         {
-            get => _firewalls ?? (_firewalls = new InputList<Inputs.VPCRouterFirewallsArgs>());
+            get => _firewalls ?? (_firewalls = new InputList<Inputs.VPCRouterFirewallArgs>());
             set => _firewalls = value;
         }
 
         /// <summary>
-        /// The icon id to attach to the VPCRouter
+        /// The icon id to attach to the VPCRouter.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to enable connecting to the Internet from the VPC Router
+        /// The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
         /// </summary>
         [Input("internetConnection")]
         public Input<bool>? InternetConnection { get; set; }
 
+        /// <summary>
+        /// A `l2tp` block as defined below.
+        /// </summary>
         [Input("l2tp")]
         public Input<Inputs.VPCRouterL2tpArgs>? L2tp { get; set; }
 
         /// <summary>
-        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         [Input("portForwardings")]
-        private InputList<Inputs.VPCRouterPortForwardingsArgs>? _portForwardings;
-        public InputList<Inputs.VPCRouterPortForwardingsArgs> PortForwardings
+        private InputList<Inputs.VPCRouterPortForwardingArgs>? _portForwardings;
+
+        /// <summary>
+        /// One or more `port_forwarding` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterPortForwardingArgs> PortForwardings
         {
-            get => _portForwardings ?? (_portForwardings = new InputList<Inputs.VPCRouterPortForwardingsArgs>());
+            get => _portForwardings ?? (_portForwardings = new InputList<Inputs.VPCRouterPortForwardingArgs>());
             set => _portForwardings = value;
         }
 
+        /// <summary>
+        /// A `pptp` block as defined below.
+        /// </summary>
         [Input("pptp")]
         public Input<Inputs.VPCRouterPptpArgs>? Pptp { get; set; }
 
         [Input("privateNetworkInterfaces")]
-        private InputList<Inputs.VPCRouterPrivateNetworkInterfacesArgs>? _privateNetworkInterfaces;
+        private InputList<Inputs.VPCRouterPrivateNetworkInterfaceArgs>? _privateNetworkInterfaces;
 
         /// <summary>
-        /// A list of additional network interface setting. This doesn't include primary network interface setting
+        /// A list of additional network interface setting. This doesn't include primary network interface setting.
         /// </summary>
-        public InputList<Inputs.VPCRouterPrivateNetworkInterfacesArgs> PrivateNetworkInterfaces
+        public InputList<Inputs.VPCRouterPrivateNetworkInterfaceArgs> PrivateNetworkInterfaces
         {
-            get => _privateNetworkInterfaces ?? (_privateNetworkInterfaces = new InputList<Inputs.VPCRouterPrivateNetworkInterfacesArgs>());
+            get => _privateNetworkInterfaces ?? (_privateNetworkInterfaces = new InputList<Inputs.VPCRouterPrivateNetworkInterfaceArgs>());
             set => _privateNetworkInterfaces = value;
         }
 
+        /// <summary>
+        /// An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        /// </summary>
         [Input("publicNetworkInterface")]
         public Input<Inputs.VPCRouterPublicNetworkInterfaceArgs>? PublicNetworkInterface { get; set; }
 
         [Input("siteToSiteVpns")]
-        private InputList<Inputs.VPCRouterSiteToSiteVpnsArgs>? _siteToSiteVpns;
-        public InputList<Inputs.VPCRouterSiteToSiteVpnsArgs> SiteToSiteVpns
+        private InputList<Inputs.VPCRouterSiteToSiteVpnArgs>? _siteToSiteVpns;
+
+        /// <summary>
+        /// One or more `site_to_site_vpn` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterSiteToSiteVpnArgs> SiteToSiteVpns
         {
-            get => _siteToSiteVpns ?? (_siteToSiteVpns = new InputList<Inputs.VPCRouterSiteToSiteVpnsArgs>());
+            get => _siteToSiteVpns ?? (_siteToSiteVpns = new InputList<Inputs.VPCRouterSiteToSiteVpnArgs>());
             set => _siteToSiteVpns = value;
         }
 
         [Input("staticNats")]
-        private InputList<Inputs.VPCRouterStaticNatsArgs>? _staticNats;
-        public InputList<Inputs.VPCRouterStaticNatsArgs> StaticNats
+        private InputList<Inputs.VPCRouterStaticNatArgs>? _staticNats;
+
+        /// <summary>
+        /// One or more `static_nat` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterStaticNatArgs> StaticNats
         {
-            get => _staticNats ?? (_staticNats = new InputList<Inputs.VPCRouterStaticNatsArgs>());
+            get => _staticNats ?? (_staticNats = new InputList<Inputs.VPCRouterStaticNatArgs>());
             set => _staticNats = value;
         }
 
         [Input("staticRoutes")]
-        private InputList<Inputs.VPCRouterStaticRoutesArgs>? _staticRoutes;
-        public InputList<Inputs.VPCRouterStaticRoutesArgs> StaticRoutes
+        private InputList<Inputs.VPCRouterStaticRouteArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterStaticRouteArgs> StaticRoutes
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.VPCRouterStaticRoutesArgs>());
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.VPCRouterStaticRouteArgs>());
             set => _staticRoutes = value;
         }
 
         /// <summary>
-        /// The ip address of the syslog host to which the VPC Router sends logs
+        /// The ip address of the syslog host to which the VPC Router sends logs.
         /// </summary>
         [Input("syslogHost")]
         public Input<string>? SyslogHost { get; set; }
@@ -273,7 +544,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the VPCRouter
+        /// Any tags to assign to the VPCRouter.
         /// </summary>
         public InputList<string> Tags
         {
@@ -282,15 +553,25 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("users")]
-        private InputList<Inputs.VPCRouterUsersArgs>? _users;
-        public InputList<Inputs.VPCRouterUsersArgs> Users
+        private InputList<Inputs.VPCRouterUserArgs>? _users;
+
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterUserArgs> Users
         {
-            get => _users ?? (_users = new InputList<Inputs.VPCRouterUsersArgs>());
+            get => _users ?? (_users = new InputList<Inputs.VPCRouterUserArgs>());
             set => _users = value;
         }
 
         /// <summary>
-        /// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+        /// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        /// </summary>
+        [Input("version")]
+        public Input<int>? Version { get; set; }
+
+        /// <summary>
+        /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -303,126 +584,163 @@ namespace Pulumi.SakuraCloud
     public sealed class VPCRouterState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression. The length of this value must be in the range [`0`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("dhcpServers")]
-        private InputList<Inputs.VPCRouterDhcpServersGetArgs>? _dhcpServers;
-        public InputList<Inputs.VPCRouterDhcpServersGetArgs> DhcpServers
+        private InputList<Inputs.VPCRouterDhcpServerGetArgs>? _dhcpServers;
+
+        /// <summary>
+        /// One or more `dhcp_server` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterDhcpServerGetArgs> DhcpServers
         {
-            get => _dhcpServers ?? (_dhcpServers = new InputList<Inputs.VPCRouterDhcpServersGetArgs>());
+            get => _dhcpServers ?? (_dhcpServers = new InputList<Inputs.VPCRouterDhcpServerGetArgs>());
             set => _dhcpServers = value;
         }
 
         [Input("dhcpStaticMappings")]
-        private InputList<Inputs.VPCRouterDhcpStaticMappingsGetArgs>? _dhcpStaticMappings;
-        public InputList<Inputs.VPCRouterDhcpStaticMappingsGetArgs> DhcpStaticMappings
+        private InputList<Inputs.VPCRouterDhcpStaticMappingGetArgs>? _dhcpStaticMappings;
+
+        /// <summary>
+        /// One or more `dhcp_static_mapping` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterDhcpStaticMappingGetArgs> DhcpStaticMappings
         {
-            get => _dhcpStaticMappings ?? (_dhcpStaticMappings = new InputList<Inputs.VPCRouterDhcpStaticMappingsGetArgs>());
+            get => _dhcpStaticMappings ?? (_dhcpStaticMappings = new InputList<Inputs.VPCRouterDhcpStaticMappingGetArgs>());
             set => _dhcpStaticMappings = value;
         }
 
         [Input("firewalls")]
-        private InputList<Inputs.VPCRouterFirewallsGetArgs>? _firewalls;
-        public InputList<Inputs.VPCRouterFirewallsGetArgs> Firewalls
+        private InputList<Inputs.VPCRouterFirewallGetArgs>? _firewalls;
+
+        /// <summary>
+        /// One or more `firewall` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterFirewallGetArgs> Firewalls
         {
-            get => _firewalls ?? (_firewalls = new InputList<Inputs.VPCRouterFirewallsGetArgs>());
+            get => _firewalls ?? (_firewalls = new InputList<Inputs.VPCRouterFirewallGetArgs>());
             set => _firewalls = value;
         }
 
         /// <summary>
-        /// The icon id to attach to the VPCRouter
+        /// The icon id to attach to the VPCRouter.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to enable connecting to the Internet from the VPC Router
+        /// The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
         /// </summary>
         [Input("internetConnection")]
         public Input<bool>? InternetConnection { get; set; }
 
+        /// <summary>
+        /// A `l2tp` block as defined below.
+        /// </summary>
         [Input("l2tp")]
         public Input<Inputs.VPCRouterL2tpGetArgs>? L2tp { get; set; }
 
         /// <summary>
-        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+        /// The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         [Input("portForwardings")]
-        private InputList<Inputs.VPCRouterPortForwardingsGetArgs>? _portForwardings;
-        public InputList<Inputs.VPCRouterPortForwardingsGetArgs> PortForwardings
+        private InputList<Inputs.VPCRouterPortForwardingGetArgs>? _portForwardings;
+
+        /// <summary>
+        /// One or more `port_forwarding` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterPortForwardingGetArgs> PortForwardings
         {
-            get => _portForwardings ?? (_portForwardings = new InputList<Inputs.VPCRouterPortForwardingsGetArgs>());
+            get => _portForwardings ?? (_portForwardings = new InputList<Inputs.VPCRouterPortForwardingGetArgs>());
             set => _portForwardings = value;
         }
 
+        /// <summary>
+        /// A `pptp` block as defined below.
+        /// </summary>
         [Input("pptp")]
         public Input<Inputs.VPCRouterPptpGetArgs>? Pptp { get; set; }
 
         [Input("privateNetworkInterfaces")]
-        private InputList<Inputs.VPCRouterPrivateNetworkInterfacesGetArgs>? _privateNetworkInterfaces;
+        private InputList<Inputs.VPCRouterPrivateNetworkInterfaceGetArgs>? _privateNetworkInterfaces;
 
         /// <summary>
-        /// A list of additional network interface setting. This doesn't include primary network interface setting
+        /// A list of additional network interface setting. This doesn't include primary network interface setting.
         /// </summary>
-        public InputList<Inputs.VPCRouterPrivateNetworkInterfacesGetArgs> PrivateNetworkInterfaces
+        public InputList<Inputs.VPCRouterPrivateNetworkInterfaceGetArgs> PrivateNetworkInterfaces
         {
-            get => _privateNetworkInterfaces ?? (_privateNetworkInterfaces = new InputList<Inputs.VPCRouterPrivateNetworkInterfacesGetArgs>());
+            get => _privateNetworkInterfaces ?? (_privateNetworkInterfaces = new InputList<Inputs.VPCRouterPrivateNetworkInterfaceGetArgs>());
             set => _privateNetworkInterfaces = value;
         }
 
         /// <summary>
-        /// The public ip address of the VPC Router
+        /// The public IP address used for the static NAT.
         /// </summary>
         [Input("publicIp")]
         public Input<string>? PublicIp { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet to assign to the public network interface
+        /// The bit length of the subnet to assign to the public network interface.
         /// </summary>
         [Input("publicNetmask")]
         public Input<int>? PublicNetmask { get; set; }
 
+        /// <summary>
+        /// An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        /// </summary>
         [Input("publicNetworkInterface")]
         public Input<Inputs.VPCRouterPublicNetworkInterfaceGetArgs>? PublicNetworkInterface { get; set; }
 
         [Input("siteToSiteVpns")]
-        private InputList<Inputs.VPCRouterSiteToSiteVpnsGetArgs>? _siteToSiteVpns;
-        public InputList<Inputs.VPCRouterSiteToSiteVpnsGetArgs> SiteToSiteVpns
+        private InputList<Inputs.VPCRouterSiteToSiteVpnGetArgs>? _siteToSiteVpns;
+
+        /// <summary>
+        /// One or more `site_to_site_vpn` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterSiteToSiteVpnGetArgs> SiteToSiteVpns
         {
-            get => _siteToSiteVpns ?? (_siteToSiteVpns = new InputList<Inputs.VPCRouterSiteToSiteVpnsGetArgs>());
+            get => _siteToSiteVpns ?? (_siteToSiteVpns = new InputList<Inputs.VPCRouterSiteToSiteVpnGetArgs>());
             set => _siteToSiteVpns = value;
         }
 
         [Input("staticNats")]
-        private InputList<Inputs.VPCRouterStaticNatsGetArgs>? _staticNats;
-        public InputList<Inputs.VPCRouterStaticNatsGetArgs> StaticNats
+        private InputList<Inputs.VPCRouterStaticNatGetArgs>? _staticNats;
+
+        /// <summary>
+        /// One or more `static_nat` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterStaticNatGetArgs> StaticNats
         {
-            get => _staticNats ?? (_staticNats = new InputList<Inputs.VPCRouterStaticNatsGetArgs>());
+            get => _staticNats ?? (_staticNats = new InputList<Inputs.VPCRouterStaticNatGetArgs>());
             set => _staticNats = value;
         }
 
         [Input("staticRoutes")]
-        private InputList<Inputs.VPCRouterStaticRoutesGetArgs>? _staticRoutes;
-        public InputList<Inputs.VPCRouterStaticRoutesGetArgs> StaticRoutes
+        private InputList<Inputs.VPCRouterStaticRouteGetArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterStaticRouteGetArgs> StaticRoutes
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.VPCRouterStaticRoutesGetArgs>());
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.VPCRouterStaticRouteGetArgs>());
             set => _staticRoutes = value;
         }
 
         /// <summary>
-        /// The ip address of the syslog host to which the VPC Router sends logs
+        /// The ip address of the syslog host to which the VPC Router sends logs.
         /// </summary>
         [Input("syslogHost")]
         public Input<string>? SyslogHost { get; set; }
@@ -431,7 +749,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the VPCRouter
+        /// Any tags to assign to the VPCRouter.
         /// </summary>
         public InputList<string> Tags
         {
@@ -440,15 +758,25 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("users")]
-        private InputList<Inputs.VPCRouterUsersGetArgs>? _users;
-        public InputList<Inputs.VPCRouterUsersGetArgs> Users
+        private InputList<Inputs.VPCRouterUserGetArgs>? _users;
+
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.VPCRouterUserGetArgs> Users
         {
-            get => _users ?? (_users = new InputList<Inputs.VPCRouterUsersGetArgs>());
+            get => _users ?? (_users = new InputList<Inputs.VPCRouterUserGetArgs>());
             set => _users = value;
         }
 
         /// <summary>
-        /// The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+        /// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        /// </summary>
+        [Input("version")]
+        public Input<int>? Version { get; set; }
+
+        /// <summary>
+        /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -456,836 +784,5 @@ namespace Pulumi.SakuraCloud
         public VPCRouterState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class VPCRouterDhcpServersArgs : Pulumi.ResourceArgs
-    {
-        [Input("dnsServers")]
-        private InputList<string>? _dnsServers;
-        public InputList<string> DnsServers
-        {
-            get => _dnsServers ?? (_dnsServers = new InputList<string>());
-            set => _dnsServers = value;
-        }
-
-        [Input("interfaceIndex", required: true)]
-        public Input<int> InterfaceIndex { get; set; } = null!;
-
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterDhcpServersArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterDhcpServersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("dnsServers")]
-        private InputList<string>? _dnsServers;
-        public InputList<string> DnsServers
-        {
-            get => _dnsServers ?? (_dnsServers = new InputList<string>());
-            set => _dnsServers = value;
-        }
-
-        [Input("interfaceIndex", required: true)]
-        public Input<int> InterfaceIndex { get; set; } = null!;
-
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterDhcpServersGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterDhcpStaticMappingsArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("macAddress", required: true)]
-        public Input<string> MacAddress { get; set; } = null!;
-
-        public VPCRouterDhcpStaticMappingsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterDhcpStaticMappingsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("macAddress", required: true)]
-        public Input<string> MacAddress { get; set; } = null!;
-
-        public VPCRouterDhcpStaticMappingsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterFirewallsArgs : Pulumi.ResourceArgs
-    {
-        [Input("direction", required: true)]
-        public Input<string> Direction { get; set; } = null!;
-
-        [Input("expressions", required: true)]
-        private InputList<VPCRouterFirewallsExpressionsArgs>? _expressions;
-        public InputList<VPCRouterFirewallsExpressionsArgs> Expressions
-        {
-            get => _expressions ?? (_expressions = new InputList<VPCRouterFirewallsExpressionsArgs>());
-            set => _expressions = value;
-        }
-
-        [Input("interfaceIndex")]
-        public Input<int>? InterfaceIndex { get; set; }
-
-        public VPCRouterFirewallsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterFirewallsExpressionsArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow", required: true)]
-        public Input<bool> Allow { get; set; } = null!;
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationNetwork")]
-        public Input<string>? DestinationNetwork { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("logging")]
-        public Input<bool>? Logging { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public VPCRouterFirewallsExpressionsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterFirewallsExpressionsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow", required: true)]
-        public Input<bool> Allow { get; set; } = null!;
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationNetwork")]
-        public Input<string>? DestinationNetwork { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("logging")]
-        public Input<bool>? Logging { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public VPCRouterFirewallsExpressionsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterFirewallsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("direction", required: true)]
-        public Input<string> Direction { get; set; } = null!;
-
-        [Input("expressions", required: true)]
-        private InputList<VPCRouterFirewallsExpressionsGetArgs>? _expressions;
-        public InputList<VPCRouterFirewallsExpressionsGetArgs> Expressions
-        {
-            get => _expressions ?? (_expressions = new InputList<VPCRouterFirewallsExpressionsGetArgs>());
-            set => _expressions = value;
-        }
-
-        [Input("interfaceIndex")]
-        public Input<int>? InterfaceIndex { get; set; }
-
-        public VPCRouterFirewallsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterL2tpArgs : Pulumi.ResourceArgs
-    {
-        [Input("preSharedSecret", required: true)]
-        public Input<string> PreSharedSecret { get; set; } = null!;
-
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterL2tpArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterL2tpGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("preSharedSecret", required: true)]
-        public Input<string> PreSharedSecret { get; set; } = null!;
-
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterL2tpGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPortForwardingsArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("privateIp", required: true)]
-        public Input<string> PrivateIp { get; set; } = null!;
-
-        [Input("privatePort", required: true)]
-        public Input<int> PrivatePort { get; set; } = null!;
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("publicPort", required: true)]
-        public Input<int> PublicPort { get; set; } = null!;
-
-        public VPCRouterPortForwardingsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPortForwardingsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("privateIp", required: true)]
-        public Input<string> PrivateIp { get; set; } = null!;
-
-        [Input("privatePort", required: true)]
-        public Input<int> PrivatePort { get; set; } = null!;
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("publicPort", required: true)]
-        public Input<int> PublicPort { get; set; } = null!;
-
-        public VPCRouterPortForwardingsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPptpArgs : Pulumi.ResourceArgs
-    {
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterPptpArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPptpGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("rangeStart", required: true)]
-        public Input<string> RangeStart { get; set; } = null!;
-
-        [Input("rangeStop", required: true)]
-        public Input<string> RangeStop { get; set; } = null!;
-
-        public VPCRouterPptpGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPrivateNetworkInterfacesArgs : Pulumi.ResourceArgs
-    {
-        [Input("index", required: true)]
-        public Input<int> Index { get; set; } = null!;
-
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        [Input("vip")]
-        public Input<string>? Vip { get; set; }
-
-        public VPCRouterPrivateNetworkInterfacesArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPrivateNetworkInterfacesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("index", required: true)]
-        public Input<int> Index { get; set; } = null!;
-
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        [Input("vip")]
-        public Input<string>? Vip { get; set; }
-
-        public VPCRouterPrivateNetworkInterfacesGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPublicNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("aliases")]
-        private InputList<string>? _aliases;
-        public InputList<string> Aliases
-        {
-            get => _aliases ?? (_aliases = new InputList<string>());
-            set => _aliases = value;
-        }
-
-        [Input("ipAddresses")]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("switchId")]
-        public Input<string>? SwitchId { get; set; }
-
-        [Input("vip")]
-        public Input<string>? Vip { get; set; }
-
-        [Input("vrid")]
-        public Input<int>? Vrid { get; set; }
-
-        public VPCRouterPublicNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterPublicNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("aliases")]
-        private InputList<string>? _aliases;
-        public InputList<string> Aliases
-        {
-            get => _aliases ?? (_aliases = new InputList<string>());
-            set => _aliases = value;
-        }
-
-        [Input("ipAddresses")]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("switchId")]
-        public Input<string>? SwitchId { get; set; }
-
-        [Input("vip")]
-        public Input<string>? Vip { get; set; }
-
-        [Input("vrid")]
-        public Input<int>? Vrid { get; set; }
-
-        public VPCRouterPublicNetworkInterfaceGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterSiteToSiteVpnsArgs : Pulumi.ResourceArgs
-    {
-        [Input("localPrefixes", required: true)]
-        private InputList<string>? _localPrefixes;
-        public InputList<string> LocalPrefixes
-        {
-            get => _localPrefixes ?? (_localPrefixes = new InputList<string>());
-            set => _localPrefixes = value;
-        }
-
-        [Input("peer", required: true)]
-        public Input<string> Peer { get; set; } = null!;
-
-        [Input("preSharedSecret", required: true)]
-        public Input<string> PreSharedSecret { get; set; } = null!;
-
-        [Input("remoteId", required: true)]
-        public Input<string> RemoteId { get; set; } = null!;
-
-        [Input("routes", required: true)]
-        private InputList<string>? _routes;
-        public InputList<string> Routes
-        {
-            get => _routes ?? (_routes = new InputList<string>());
-            set => _routes = value;
-        }
-
-        public VPCRouterSiteToSiteVpnsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterSiteToSiteVpnsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("localPrefixes", required: true)]
-        private InputList<string>? _localPrefixes;
-        public InputList<string> LocalPrefixes
-        {
-            get => _localPrefixes ?? (_localPrefixes = new InputList<string>());
-            set => _localPrefixes = value;
-        }
-
-        [Input("peer", required: true)]
-        public Input<string> Peer { get; set; } = null!;
-
-        [Input("preSharedSecret", required: true)]
-        public Input<string> PreSharedSecret { get; set; } = null!;
-
-        [Input("remoteId", required: true)]
-        public Input<string> RemoteId { get; set; } = null!;
-
-        [Input("routes", required: true)]
-        private InputList<string>? _routes;
-        public InputList<string> Routes
-        {
-            get => _routes ?? (_routes = new InputList<string>());
-            set => _routes = value;
-        }
-
-        public VPCRouterSiteToSiteVpnsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterStaticNatsArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("privateIp", required: true)]
-        public Input<string> PrivateIp { get; set; } = null!;
-
-        [Input("publicIp", required: true)]
-        public Input<string> PublicIp { get; set; } = null!;
-
-        public VPCRouterStaticNatsArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterStaticNatsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("privateIp", required: true)]
-        public Input<string> PrivateIp { get; set; } = null!;
-
-        [Input("publicIp", required: true)]
-        public Input<string> PublicIp { get; set; } = null!;
-
-        public VPCRouterStaticNatsGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterStaticRoutesArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public VPCRouterStaticRoutesArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterStaticRoutesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public VPCRouterStaticRoutesGetArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterUsersArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
-
-        public VPCRouterUsersArgs()
-        {
-        }
-    }
-
-    public sealed class VPCRouterUsersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
-
-        public VPCRouterUsersGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class VPCRouterDhcpServers
-    {
-        public readonly ImmutableArray<string> DnsServers;
-        public readonly int InterfaceIndex;
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private VPCRouterDhcpServers(
-            ImmutableArray<string> dnsServers,
-            int interfaceIndex,
-            string rangeStart,
-            string rangeStop)
-        {
-            DnsServers = dnsServers;
-            InterfaceIndex = interfaceIndex;
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterDhcpStaticMappings
-    {
-        public readonly string IpAddress;
-        public readonly string MacAddress;
-
-        [OutputConstructor]
-        private VPCRouterDhcpStaticMappings(
-            string ipAddress,
-            string macAddress)
-        {
-            IpAddress = ipAddress;
-            MacAddress = macAddress;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterFirewalls
-    {
-        public readonly string Direction;
-        public readonly ImmutableArray<VPCRouterFirewallsExpressions> Expressions;
-        public readonly int? InterfaceIndex;
-
-        [OutputConstructor]
-        private VPCRouterFirewalls(
-            string direction,
-            ImmutableArray<VPCRouterFirewallsExpressions> expressions,
-            int? interfaceIndex)
-        {
-            Direction = direction;
-            Expressions = expressions;
-            InterfaceIndex = interfaceIndex;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterFirewallsExpressions
-    {
-        public readonly bool Allow;
-        public readonly string? Description;
-        public readonly string? DestinationNetwork;
-        public readonly string? DestinationPort;
-        public readonly bool? Logging;
-        public readonly string Protocol;
-        public readonly string? SourceNetwork;
-        public readonly string? SourcePort;
-
-        [OutputConstructor]
-        private VPCRouterFirewallsExpressions(
-            bool allow,
-            string? description,
-            string? destinationNetwork,
-            string? destinationPort,
-            bool? logging,
-            string protocol,
-            string? sourceNetwork,
-            string? sourcePort)
-        {
-            Allow = allow;
-            Description = description;
-            DestinationNetwork = destinationNetwork;
-            DestinationPort = destinationPort;
-            Logging = logging;
-            Protocol = protocol;
-            SourceNetwork = sourceNetwork;
-            SourcePort = sourcePort;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterL2tp
-    {
-        public readonly string PreSharedSecret;
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private VPCRouterL2tp(
-            string preSharedSecret,
-            string rangeStart,
-            string rangeStop)
-        {
-            PreSharedSecret = preSharedSecret;
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterPortForwardings
-    {
-        public readonly string? Description;
-        public readonly string PrivateIp;
-        public readonly int PrivatePort;
-        public readonly string Protocol;
-        public readonly int PublicPort;
-
-        [OutputConstructor]
-        private VPCRouterPortForwardings(
-            string? description,
-            string privateIp,
-            int privatePort,
-            string protocol,
-            int publicPort)
-        {
-            Description = description;
-            PrivateIp = privateIp;
-            PrivatePort = privatePort;
-            Protocol = protocol;
-            PublicPort = publicPort;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterPptp
-    {
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private VPCRouterPptp(
-            string rangeStart,
-            string rangeStop)
-        {
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterPrivateNetworkInterfaces
-    {
-        public readonly int Index;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-        public readonly string? Vip;
-
-        [OutputConstructor]
-        private VPCRouterPrivateNetworkInterfaces(
-            int index,
-            ImmutableArray<string> ipAddresses,
-            int netmask,
-            string switchId,
-            string? vip)
-        {
-            Index = index;
-            IpAddresses = ipAddresses;
-            Netmask = netmask;
-            SwitchId = switchId;
-            Vip = vip;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterPublicNetworkInterface
-    {
-        public readonly ImmutableArray<string> Aliases;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly string? SwitchId;
-        public readonly string? Vip;
-        public readonly int? Vrid;
-
-        [OutputConstructor]
-        private VPCRouterPublicNetworkInterface(
-            ImmutableArray<string> aliases,
-            ImmutableArray<string> ipAddresses,
-            string? switchId,
-            string? vip,
-            int? vrid)
-        {
-            Aliases = aliases;
-            IpAddresses = ipAddresses;
-            SwitchId = switchId;
-            Vip = vip;
-            Vrid = vrid;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterSiteToSiteVpns
-    {
-        public readonly ImmutableArray<string> LocalPrefixes;
-        public readonly string Peer;
-        public readonly string PreSharedSecret;
-        public readonly string RemoteId;
-        public readonly ImmutableArray<string> Routes;
-
-        [OutputConstructor]
-        private VPCRouterSiteToSiteVpns(
-            ImmutableArray<string> localPrefixes,
-            string peer,
-            string preSharedSecret,
-            string remoteId,
-            ImmutableArray<string> routes)
-        {
-            LocalPrefixes = localPrefixes;
-            Peer = peer;
-            PreSharedSecret = preSharedSecret;
-            RemoteId = remoteId;
-            Routes = routes;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterStaticNats
-    {
-        public readonly string? Description;
-        public readonly string PrivateIp;
-        public readonly string PublicIp;
-
-        [OutputConstructor]
-        private VPCRouterStaticNats(
-            string? description,
-            string privateIp,
-            string publicIp)
-        {
-            Description = description;
-            PrivateIp = privateIp;
-            PublicIp = publicIp;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterStaticRoutes
-    {
-        public readonly string NextHop;
-        public readonly string Prefix;
-
-        [OutputConstructor]
-        private VPCRouterStaticRoutes(
-            string nextHop,
-            string prefix)
-        {
-            NextHop = nextHop;
-            Prefix = prefix;
-        }
-    }
-
-    [OutputType]
-    public sealed class VPCRouterUsers
-    {
-        public readonly string Name;
-        public readonly string Password;
-
-        [OutputConstructor]
-        private VPCRouterUsers(
-            string name,
-            string password)
-        {
-            Name = name;
-            Password = password;
-        }
-    }
     }
 }

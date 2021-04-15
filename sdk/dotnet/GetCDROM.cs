@@ -7,19 +7,65 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetCDROM
     {
-        public static Task<GetCDROMResult> GetCDROM(GetCDROMArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCDROMResult>("sakuracloud:index/getCDROM:getCDROM", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing CD-ROM.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetCDROM.InvokeAsync(new Sakuracloud.GetCDROMArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetCDROMFilterArgs
+        ///             {
+        ///                 Conditions = 
+        ///                 {
+        ///                     new Sakuracloud.Inputs.GetCDROMFilterConditionArgs
+        ///                     {
+        ///                         Name = "Name",
+        ///                         Values = 
+        ///                         {
+        ///                             "Parted Magic 2013_08_01",
+        ///                         },
+        ///                     },
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetCDROMResult> InvokeAsync(GetCDROMArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetCDROMResult>("sakuracloud:index/getCDROM:getCDROM", args ?? new GetCDROMArgs(), options.WithVersion());
     }
+
 
     public sealed class GetCDROMArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetCDROMFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the CD-ROM is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,138 +74,63 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetCDROMResult
     {
+        /// <summary>
+        /// The description of the CD-ROM.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetCDROMFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly int Size;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the CD-ROM.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the CD-ROM.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The size of CD-ROM in GiB.
+        /// </summary>
+        public readonly int Size;
+        /// <summary>
+        /// Any tags assigned to the CD-ROM.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetCDROMResult(
             string description,
+
             Outputs.GetCDROMFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
+
             int size,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             Size = size;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetCDROMFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetCDROMFilterConditionsArgs>? _conditions;
-        public List<GetCDROMFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetCDROMFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetCDROMFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetCDROMFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetCDROMFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetCDROMFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetCDROMFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetCDROMFilterResult
-    {
-        public readonly ImmutableArray<GetCDROMFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetCDROMFilterResult(
-            ImmutableArray<GetCDROMFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

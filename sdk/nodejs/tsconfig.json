@@ -14,6 +14,7 @@
     },
     "files": [
         "archive.ts",
+        "archiveShare.ts",
         "autoBackup.ts",
         "bridge.ts",
         "bucketObject.ts",
@@ -26,6 +27,7 @@
         "disk.ts",
         "dns.ts",
         "dnsrecord.ts",
+        "esme.ts",
         "getArchive.ts",
         "getBridge.ts",
         "getBucketObject.ts",
@@ -34,6 +36,7 @@
         "getDNS.ts",
         "getDatabase.ts",
         "getDisk.ts",
+        "getESME.ts",
         "getGSLB.ts",
         "getIcon.ts",
         "getInternet.ts",
@@ -51,6 +54,7 @@
         "getSubnet.ts",
         "getSwitch.ts",
         "getVPCRouter.ts",
+        "getWebAccel.ts",
         "getZone.ts",
         "gslb.ts",
         "icon.ts",
@@ -79,6 +83,7 @@
         "types/input.ts",
         "types/output.ts",
         "utilities.ts",
-        "vpcrouter.ts"
+        "vpcrouter.ts",
+        "webAccelCertificate.ts"
     ]
 }

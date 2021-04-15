@@ -7,54 +7,112 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud GSLB.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.GSLB("foobar", new Sakuracloud.GSLBArgs
+    ///         {
+    ///             Description = "description",
+    ///             HealthCheck = new Sakuracloud.Inputs.GSLBHealthCheckArgs
+    ///             {
+    ///                 DelayLoop = 10,
+    ///                 HostHeader = "example.com",
+    ///                 Path = "/",
+    ///                 Protocol = "http",
+    ///                 Status = "200",
+    ///             },
+    ///             Servers = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.GSLBServerArgs
+    ///                 {
+    ///                     Enabled = true,
+    ///                     IpAddress = "192.2.0.11",
+    ///                     Weight = 1,
+    ///                 },
+    ///                 new Sakuracloud.Inputs.GSLBServerArgs
+    ///                 {
+    ///                     Enabled = true,
+    ///                     IpAddress = "192.2.0.12",
+    ///                     Weight = 1,
+    ///                 },
+    ///             },
+    ///             SorryServer = "192.2.0.1",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/gSLB:GSLB")]
     public partial class GSLB : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
+        /// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
         /// </summary>
         [Output("fqdn")]
         public Output<string> Fqdn { get; private set; } = null!;
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Output("healthCheck")]
         public Output<Outputs.GSLBHealthCheck> HealthCheck { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the GSLB
+        /// The icon id to attach to the GSLB.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `server` blocks as defined below.
+        /// </summary>
         [Output("servers")]
-        public Output<ImmutableArray<Outputs.GSLBServers>> Servers { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.GSLBServer>> Servers { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address of the SorryServer. This will be used when all servers are down
+        /// The IP address of the SorryServer. This will be used when all servers are down.
         /// </summary>
         [Output("sorryServer")]
         public Output<string?> SorryServer { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the GSLB
+        /// Any tags to assign to the GSLB.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable weighted load-balancing
+        /// The flag to enable weighted load-balancing.
         /// </summary>
         [Output("weighted")]
         public Output<bool?> Weighted { get; private set; } = null!;
@@ -68,7 +126,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public GSLB(string name, GSLBArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/gSLB:GSLB", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/gSLB:GSLB", name, args ?? new GSLBArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -106,36 +164,43 @@ namespace Pulumi.SakuraCloud
     public sealed class GSLBArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Input("healthCheck", required: true)]
         public Input<Inputs.GSLBHealthCheckArgs> HealthCheck { get; set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the GSLB
+        /// The icon id to attach to the GSLB.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("servers")]
-        private InputList<Inputs.GSLBServersArgs>? _servers;
-        public InputList<Inputs.GSLBServersArgs> Servers
+        private InputList<Inputs.GSLBServerArgs>? _servers;
+
+        /// <summary>
+        /// One or more `server` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.GSLBServerArgs> Servers
         {
-            get => _servers ?? (_servers = new InputList<Inputs.GSLBServersArgs>());
+            get => _servers ?? (_servers = new InputList<Inputs.GSLBServerArgs>());
             set => _servers = value;
         }
 
         /// <summary>
-        /// The IP address of the SorryServer. This will be used when all servers are down
+        /// The IP address of the SorryServer. This will be used when all servers are down.
         /// </summary>
         [Input("sorryServer")]
         public Input<string>? SorryServer { get; set; }
@@ -144,7 +209,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the GSLB
+        /// Any tags to assign to the GSLB.
         /// </summary>
         public InputList<string> Tags
         {
@@ -153,7 +218,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The flag to enable weighted load-balancing
+        /// The flag to enable weighted load-balancing.
         /// </summary>
         [Input("weighted")]
         public Input<bool>? Weighted { get; set; }
@@ -166,42 +231,49 @@ namespace Pulumi.SakuraCloud
     public sealed class GSLBState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`]
+        /// The description of the GSLB. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record
+        /// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
         /// </summary>
         [Input("fqdn")]
         public Input<string>? Fqdn { get; set; }
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Input("healthCheck")]
         public Input<Inputs.GSLBHealthCheckGetArgs>? HealthCheck { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the GSLB
+        /// The icon id to attach to the GSLB.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`]
+        /// The name of the GSLB. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("servers")]
-        private InputList<Inputs.GSLBServersGetArgs>? _servers;
-        public InputList<Inputs.GSLBServersGetArgs> Servers
+        private InputList<Inputs.GSLBServerGetArgs>? _servers;
+
+        /// <summary>
+        /// One or more `server` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.GSLBServerGetArgs> Servers
         {
-            get => _servers ?? (_servers = new InputList<Inputs.GSLBServersGetArgs>());
+            get => _servers ?? (_servers = new InputList<Inputs.GSLBServerGetArgs>());
             set => _servers = value;
         }
 
         /// <summary>
-        /// The IP address of the SorryServer. This will be used when all servers are down
+        /// The IP address of the SorryServer. This will be used when all servers are down.
         /// </summary>
         [Input("sorryServer")]
         public Input<string>? SorryServer { get; set; }
@@ -210,7 +282,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the GSLB
+        /// Any tags to assign to the GSLB.
         /// </summary>
         public InputList<string> Tags
         {
@@ -219,7 +291,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The flag to enable weighted load-balancing
+        /// The flag to enable weighted load-balancing.
         /// </summary>
         [Input("weighted")]
         public Input<bool>? Weighted { get; set; }
@@ -227,142 +299,5 @@ namespace Pulumi.SakuraCloud
         public GSLBState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GSLBHealthCheckArgs : Pulumi.ResourceArgs
-    {
-        [Input("delayLoop")]
-        public Input<int>? DelayLoop { get; set; }
-
-        [Input("hostHeader")]
-        public Input<string>? HostHeader { get; set; }
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("status")]
-        public Input<string>? Status { get; set; }
-
-        public GSLBHealthCheckArgs()
-        {
-        }
-    }
-
-    public sealed class GSLBHealthCheckGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("delayLoop")]
-        public Input<int>? DelayLoop { get; set; }
-
-        [Input("hostHeader")]
-        public Input<string>? HostHeader { get; set; }
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("status")]
-        public Input<string>? Status { get; set; }
-
-        public GSLBHealthCheckGetArgs()
-        {
-        }
-    }
-
-    public sealed class GSLBServersArgs : Pulumi.ResourceArgs
-    {
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("weight")]
-        public Input<int>? Weight { get; set; }
-
-        public GSLBServersArgs()
-        {
-        }
-    }
-
-    public sealed class GSLBServersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("weight")]
-        public Input<int>? Weight { get; set; }
-
-        public GSLBServersGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GSLBHealthCheck
-    {
-        public readonly int? DelayLoop;
-        public readonly string? HostHeader;
-        public readonly string? Path;
-        public readonly int? Port;
-        public readonly string Protocol;
-        public readonly string? Status;
-
-        [OutputConstructor]
-        private GSLBHealthCheck(
-            int? delayLoop,
-            string? hostHeader,
-            string? path,
-            int? port,
-            string protocol,
-            string? status)
-        {
-            DelayLoop = delayLoop;
-            HostHeader = hostHeader;
-            Path = path;
-            Port = port;
-            Protocol = protocol;
-            Status = status;
-        }
-    }
-
-    [OutputType]
-    public sealed class GSLBServers
-    {
-        public readonly bool? Enabled;
-        public readonly string IpAddress;
-        public readonly int? Weight;
-
-        [OutputConstructor]
-        private GSLBServers(
-            bool? enabled,
-            string ipAddress,
-            int? weight)
-        {
-            Enabled = enabled;
-            IpAddress = ipAddress;
-            Weight = weight;
-        }
-    }
     }
 }

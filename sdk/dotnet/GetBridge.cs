@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetBridge
     {
-        public static Task<GetBridgeResult> GetBridge(GetBridgeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBridgeResult>("sakuracloud:index/getBridge:getBridge", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Bridge.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetBridge.InvokeAsync(new Sakuracloud.GetBridgeArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetBridgeFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetBridgeResult> InvokeAsync(GetBridgeArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetBridgeResult>("sakuracloud:index/getBridge:getBridge", args ?? new GetBridgeArgs(), options.WithVersion());
     }
+
 
     public sealed class GetBridgeArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetBridgeFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Bridge is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,118 +67,42 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetBridgeResult
     {
+        /// <summary>
+        /// The description of the Bridge.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetBridgeFilterResult? Filter;
-        public readonly string Name;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Bridge.
+        /// </summary>
+        public readonly string Name;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetBridgeResult(
             string description,
+
             Outputs.GetBridgeFilterResult? filter,
+
+            string id,
+
             string name,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             Filter = filter;
+            Id = id;
             Name = name;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetBridgeFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetBridgeFilterConditionsArgs>? _conditions;
-        public List<GetBridgeFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetBridgeFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        public GetBridgeFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetBridgeFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetBridgeFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetBridgeFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetBridgeFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetBridgeFilterResult
-    {
-        public readonly ImmutableArray<GetBridgeFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-
-        [OutputConstructor]
-        private GetBridgeFilterResult(
-            ImmutableArray<GetBridgeFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-        }
-    }
     }
 }

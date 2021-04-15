@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promise<GetGSLBResult> & GetGSLBResult {
+/**
+ * Get information about an existing GSLB.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getGSLB({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promise<GetGSLBResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promis
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetGSLBResult> = pulumi.runtime.invoke("sakuracloud:index/getGSLB:getGSLB", {
+    return pulumi.runtime.invoke("sakuracloud:index/getGSLB:getGSLB", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getGSLB.
  */
 export interface GetGSLBArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetGSLBFilter;
 }
 
@@ -33,18 +49,45 @@ export interface GetGSLBArgs {
  * A collection of values returned by getGSLB.
  */
 export interface GetGSLBResult {
+    /**
+     * The description of the GSLB.
+     */
     readonly description: string;
     readonly filter?: outputs.GetGSLBFilter;
+    /**
+     * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
+     */
     readonly fqdn: string;
+    /**
+     * A list of `healthCheck` blocks as defined below.
+     */
     readonly healthChecks: outputs.GetGSLBHealthCheck[];
+    /**
+     * The icon id attached to the GSLB.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the GSLB.
+     */
     readonly name: string;
+    /**
+     * A list of `server` blocks as defined below.
+     */
     readonly servers: outputs.GetGSLBServer[];
+    /**
+     * The IP address of the SorryServer. This will be used when all servers are down.
+     */
     readonly sorryServer: string;
+    /**
+     * Any tags assigned to the GSLB.
+     */
     readonly tags: string[];
+    /**
+     * The flag to enable weighted load-balancing.
+     */
     readonly weighted: boolean;
 }

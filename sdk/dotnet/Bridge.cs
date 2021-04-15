@@ -7,24 +7,59 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Bridge.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.Bridge("foobar", new Sakuracloud.BridgeArgs
+    ///         {
+    ///             Description = "description",
+    ///         });
+    ///         var is1a = new Sakuracloud.Switch("is1a", new Sakuracloud.SwitchArgs
+    ///         {
+    ///             Description = "description",
+    ///             BridgeId = foobar.Id,
+    ///             Zone = "is1a",
+    ///         });
+    ///         var is1b = new Sakuracloud.Switch("is1b", new Sakuracloud.SwitchArgs
+    ///         {
+    ///             Description = "description",
+    ///             BridgeId = foobar.Id,
+    ///             Zone = "is1b",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/bridge:Bridge")]
     public partial class Bridge : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -38,7 +73,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Bridge(string name, BridgeArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/bridge:Bridge", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/bridge:Bridge", name, args ?? new BridgeArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -76,19 +111,19 @@ namespace Pulumi.SakuraCloud
     public sealed class BridgeArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -101,19 +136,19 @@ namespace Pulumi.SakuraCloud
     public sealed class BridgeState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Bridge. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Bridge. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

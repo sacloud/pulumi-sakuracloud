@@ -2,10 +2,60 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Packet Filter.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = new sakuracloud.PacketFilter("foobar", {
+ *     description: "description",
+ *     expressions: [
+ *         {
+ *             destinationPort: "22",
+ *             protocol: "tcp",
+ *         },
+ *         {
+ *             destinationPort: "80",
+ *             protocol: "tcp",
+ *         },
+ *         {
+ *             destinationPort: "443",
+ *             protocol: "tcp",
+ *         },
+ *         {
+ *             protocol: "icmp",
+ *         },
+ *         {
+ *             protocol: "fragment",
+ *         },
+ *         {
+ *             protocol: "udp",
+ *             sourcePort: "123",
+ *         },
+ *         {
+ *             destinationPort: "32768-61000",
+ *             protocol: "tcp",
+ *         },
+ *         {
+ *             destinationPort: "32768-61000",
+ *             protocol: "udp",
+ *         },
+ *         {
+ *             allow: false,
+ *             description: "Deny ALL",
+ *             protocol: "ip",
+ *         },
+ *     ],
+ * });
+ * ```
+ */
 export class PacketFilter extends pulumi.CustomResource {
     /**
      * Get an existing PacketFilter resource's state with the given name, ID, and optional extra
@@ -14,6 +64,7 @@ export class PacketFilter extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: PacketFilterState, opts?: pulumi.CustomResourceOptions): PacketFilter {
         return new PacketFilter(name, <any>state, { ...opts, id: id });
@@ -34,16 +85,19 @@ export class PacketFilter extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression.
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * One or more `expression` blocks as defined below.
+     */
     public readonly expressions!: pulumi.Output<outputs.PacketFilterExpression[]>;
     /**
-     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -57,7 +111,8 @@ export class PacketFilter extends pulumi.CustomResource {
     constructor(name: string, args?: PacketFilterArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PacketFilterArgs | PacketFilterState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as PacketFilterState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["expressions"] = state ? state.expressions : undefined;
@@ -70,12 +125,8 @@ export class PacketFilter extends pulumi.CustomResource {
             inputs["name"] = args ? args.name : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(PacketFilter.__pulumiType, name, inputs, opts);
     }
@@ -86,16 +137,19 @@ export class PacketFilter extends pulumi.CustomResource {
  */
 export interface PacketFilterState {
     /**
-     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression.
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * One or more `expression` blocks as defined below.
+     */
     readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
-     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -105,16 +159,19 @@ export interface PacketFilterState {
  */
 export interface PacketFilterArgs {
     /**
-     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression.
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * One or more `expression` blocks as defined below.
+     */
     readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
-     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+     * The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getLoadBalancer(args?: GetLoadBalancerArgs, opts?: pulumi.InvokeOptions): Promise<GetLoadBalancerResult> & GetLoadBalancerResult {
+/**
+ * Get information about an existing Load Balancer.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getLoadBalancer({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getLoadBalancer(args?: GetLoadBalancerArgs, opts?: pulumi.InvokeOptions): Promise<GetLoadBalancerResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getLoadBalancer(args?: GetLoadBalancerArgs, opts?: pulumi.Invoke
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetLoadBalancerResult> = pulumi.runtime.invoke("sakuracloud:index/getLoadBalancer:getLoadBalancer", {
+    return pulumi.runtime.invoke("sakuracloud:index/getLoadBalancer:getLoadBalancer", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getLoadBalancer.
  */
 export interface GetLoadBalancerArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetLoadBalancerFilter;
+    /**
+     * The name of zone that the LoadBalancer is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,17 +54,38 @@ export interface GetLoadBalancerArgs {
  * A collection of values returned by getLoadBalancer.
  */
 export interface GetLoadBalancerResult {
+    /**
+     * The description of the VIP.
+     */
     readonly description: string;
     readonly filter?: outputs.GetLoadBalancerFilter;
+    /**
+     * The icon id attached to the LoadBalancer.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the LoadBalancer.
+     */
     readonly name: string;
+    /**
+     * A list of `networkInterface` blocks as defined below.
+     */
     readonly networkInterfaces: outputs.GetLoadBalancerNetworkInterface[];
+    /**
+     * The plan name of the LoadBalancer. This will be one of [`standard`/`highspec`].
+     */
     readonly plan: string;
+    /**
+     * Any tags assigned to the LoadBalancer.
+     */
     readonly tags: string[];
+    /**
+     * The virtual IP address.
+     */
     readonly vips: outputs.GetLoadBalancerVip[];
     readonly zone: string;
 }

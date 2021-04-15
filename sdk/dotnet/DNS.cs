@@ -7,39 +7,86 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud DNS.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.DNS("foobar", new Sakuracloud.DNSArgs
+    ///         {
+    ///             Description = "description",
+    ///             Records = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.DNSRecordArgs
+    ///                 {
+    ///                     Name = "www",
+    ///                     Type = "A",
+    ///                     Value = "192.168.11.1",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.DNSRecordArgs
+    ///                 {
+    ///                     Name = "www",
+    ///                     Type = "A",
+    ///                     Value = "192.168.11.2",
+    ///                 },
+    ///             },
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Zone = "example.com",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/dNS:DNS")]
     public partial class DNS : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the DNS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the DNS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// A list of IP address of DNS server that manage this zone
+        /// A list of IP address of DNS server that manage this zone.
         /// </summary>
         [Output("dnsServers")]
         public Output<ImmutableArray<string>> DnsServers { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the DNS
+        /// The icon id to attach to the DNS.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `record` blocks as defined below.
+        /// </summary>
         [Output("records")]
-        public Output<ImmutableArray<Outputs.DNSRecords>> Records { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.DNSRecord>> Records { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the DNS
+        /// Any tags to assign to the DNS.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The target zone. (e.g. `example.com`)
+        /// The target zone. (e.g. `example.com`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -53,7 +100,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public DNS(string name, DNSArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/dNS:DNS", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/dNS:DNS", name, args ?? new DNSArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -91,22 +138,26 @@ namespace Pulumi.SakuraCloud
     public sealed class DNSArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the DNS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the DNS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the DNS
+        /// The icon id to attach to the DNS.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         [Input("records")]
-        private InputList<Inputs.DNSRecordsArgs>? _records;
-        public InputList<Inputs.DNSRecordsArgs> Records
+        private InputList<Inputs.DNSRecordArgs>? _records;
+
+        /// <summary>
+        /// One or more `record` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.DNSRecordArgs> Records
         {
-            get => _records ?? (_records = new InputList<Inputs.DNSRecordsArgs>());
+            get => _records ?? (_records = new InputList<Inputs.DNSRecordArgs>());
             set => _records = value;
         }
 
@@ -114,7 +165,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the DNS
+        /// Any tags to assign to the DNS.
         /// </summary>
         public InputList<string> Tags
         {
@@ -123,7 +174,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The target zone. (e.g. `example.com`)
+        /// The target zone. (e.g. `example.com`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone", required: true)]
         public Input<string> Zone { get; set; } = null!;
@@ -136,7 +187,7 @@ namespace Pulumi.SakuraCloud
     public sealed class DNSState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the DNS. The length of this value must be in the range [`1`-`512`]
+        /// The description of the DNS. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -145,7 +196,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _dnsServers;
 
         /// <summary>
-        /// A list of IP address of DNS server that manage this zone
+        /// A list of IP address of DNS server that manage this zone.
         /// </summary>
         public InputList<string> DnsServers
         {
@@ -154,16 +205,20 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The icon id to attach to the DNS
+        /// The icon id to attach to the DNS.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         [Input("records")]
-        private InputList<Inputs.DNSRecordsGetArgs>? _records;
-        public InputList<Inputs.DNSRecordsGetArgs> Records
+        private InputList<Inputs.DNSRecordGetArgs>? _records;
+
+        /// <summary>
+        /// One or more `record` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.DNSRecordGetArgs> Records
         {
-            get => _records ?? (_records = new InputList<Inputs.DNSRecordsGetArgs>());
+            get => _records ?? (_records = new InputList<Inputs.DNSRecordGetArgs>());
             set => _records = value;
         }
 
@@ -171,7 +226,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the DNS
+        /// Any tags to assign to the DNS.
         /// </summary>
         public InputList<string> Tags
         {
@@ -180,7 +235,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The target zone. (e.g. `example.com`)
+        /// The target zone. (e.g. `example.com`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -188,100 +243,5 @@ namespace Pulumi.SakuraCloud
         public DNSState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class DNSRecordsArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("priority")]
-        public Input<int>? Priority { get; set; }
-
-        [Input("ttl")]
-        public Input<int>? Ttl { get; set; }
-
-        [Input("type", required: true)]
-        public Input<string> Type { get; set; } = null!;
-
-        [Input("value", required: true)]
-        public Input<string> Value { get; set; } = null!;
-
-        [Input("weight")]
-        public Input<int>? Weight { get; set; }
-
-        public DNSRecordsArgs()
-        {
-        }
-    }
-
-    public sealed class DNSRecordsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("priority")]
-        public Input<int>? Priority { get; set; }
-
-        [Input("ttl")]
-        public Input<int>? Ttl { get; set; }
-
-        [Input("type", required: true)]
-        public Input<string> Type { get; set; } = null!;
-
-        [Input("value", required: true)]
-        public Input<string> Value { get; set; } = null!;
-
-        [Input("weight")]
-        public Input<int>? Weight { get; set; }
-
-        public DNSRecordsGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class DNSRecords
-    {
-        public readonly string Name;
-        public readonly int? Port;
-        public readonly int? Priority;
-        public readonly int? Ttl;
-        public readonly string Type;
-        public readonly string Value;
-        public readonly int? Weight;
-
-        [OutputConstructor]
-        private DNSRecords(
-            string name,
-            int? port,
-            int? priority,
-            int? ttl,
-            string type,
-            string value,
-            int? weight)
-        {
-            Name = name;
-            Port = port;
-            Priority = priority;
-            Ttl = ttl;
-            Type = type;
-            Value = value;
-            Weight = weight;
-        }
-    }
     }
 }

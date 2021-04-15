@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetSimpleMonitor
     {
-        public static Task<GetSimpleMonitorResult> GetSimpleMonitor(GetSimpleMonitorArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSimpleMonitorResult>("sakuracloud:index/getSimpleMonitor:getSimpleMonitor", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Simple Monitor.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetSimpleMonitor.InvokeAsync(new Sakuracloud.GetSimpleMonitorArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetSimpleMonitorFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetSimpleMonitorResult> InvokeAsync(GetSimpleMonitorArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetSimpleMonitorResult>("sakuracloud:index/getSimpleMonitor:getSimpleMonitor", args ?? new GetSimpleMonitorArgs(), options.WithVersion());
     }
+
 
     public sealed class GetSimpleMonitorArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetSimpleMonitorFilterArgs? Filter { get; set; }
 
@@ -25,43 +61,93 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetSimpleMonitorResult
     {
+        /// <summary>
+        /// The interval in seconds between checks.
+        /// </summary>
         public readonly int DelayLoop;
+        /// <summary>
+        /// The description of the SimpleMonitor.
+        /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// The flag to enable monitoring by the simple monitor.
+        /// </summary>
         public readonly bool Enabled;
         public readonly Outputs.GetSimpleMonitorFilterResult? Filter;
-        public readonly ImmutableArray<Outputs.GetSimpleMonitorHealthChecksResult> HealthChecks;
-        public readonly string IconId;
-        public readonly bool NotifyEmailEnabled;
-        public readonly bool NotifyEmailHtml;
-        public readonly int NotifyInterval;
-        public readonly bool NotifySlackEnabled;
-        public readonly string NotifySlackWebhook;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Target;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// A list of `health_check` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetSimpleMonitorHealthCheckResult> HealthChecks;
+        /// <summary>
+        /// The icon id attached to the SimpleMonitor.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The flag to enable notification by email.
+        /// </summary>
+        public readonly bool NotifyEmailEnabled;
+        /// <summary>
+        /// The flag to enable HTML format instead of text format.
+        /// </summary>
+        public readonly bool NotifyEmailHtml;
+        /// <summary>
+        /// The interval in hours between notification.
+        /// </summary>
+        public readonly int NotifyInterval;
+        /// <summary>
+        /// The flag to enable notification by slack/discord.
+        /// </summary>
+        public readonly bool NotifySlackEnabled;
+        /// <summary>
+        /// The webhook URL for sending notification by slack/discord.
+        /// </summary>
+        public readonly string NotifySlackWebhook;
+        /// <summary>
+        /// Any tags assigned to the SimpleMonitor.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The monitoring target of the simple monitor. This will be IP address or FQDN.
+        /// </summary>
+        public readonly string Target;
 
         [OutputConstructor]
         private GetSimpleMonitorResult(
             int delayLoop,
+
             string description,
+
             bool enabled,
+
             Outputs.GetSimpleMonitorFilterResult? filter,
-            ImmutableArray<Outputs.GetSimpleMonitorHealthChecksResult> healthChecks,
+
+            ImmutableArray<Outputs.GetSimpleMonitorHealthCheckResult> healthChecks,
+
             string iconId,
+
+            string id,
+
             bool notifyEmailEnabled,
+
             bool notifyEmailHtml,
+
             int notifyInterval,
+
             bool notifySlackEnabled,
+
             string notifySlackWebhook,
+
             ImmutableArray<string> tags,
-            string target,
-            string id)
+
+            string target)
         {
             DelayLoop = delayLoop;
             Description = description;
@@ -69,6 +155,7 @@ namespace Pulumi.SakuraCloud
             Filter = filter;
             HealthChecks = healthChecks;
             IconId = iconId;
+            Id = id;
             NotifyEmailEnabled = notifyEmailEnabled;
             NotifyEmailHtml = notifyEmailHtml;
             NotifyInterval = notifyInterval;
@@ -76,157 +163,6 @@ namespace Pulumi.SakuraCloud
             NotifySlackWebhook = notifySlackWebhook;
             Tags = tags;
             Target = target;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetSimpleMonitorFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetSimpleMonitorFilterConditionsArgs>? _conditions;
-        public List<GetSimpleMonitorFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetSimpleMonitorFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetSimpleMonitorFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetSimpleMonitorFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetSimpleMonitorFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetSimpleMonitorFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetSimpleMonitorFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetSimpleMonitorFilterResult
-    {
-        public readonly ImmutableArray<GetSimpleMonitorFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetSimpleMonitorFilterResult(
-            ImmutableArray<GetSimpleMonitorFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetSimpleMonitorHealthChecksResult
-    {
-        public readonly string Community;
-        public readonly string ExcepctedData;
-        public readonly string HostHeader;
-        public readonly string Oid;
-        public readonly string Password;
-        public readonly string Path;
-        public readonly int Port;
-        public readonly string Protocol;
-        public readonly string Qname;
-        public readonly int RemainingDays;
-        public readonly bool Sni;
-        public readonly string SnmpVersion;
-        public readonly int Status;
-        public readonly string Username;
-
-        [OutputConstructor]
-        private GetSimpleMonitorHealthChecksResult(
-            string community,
-            string excepctedData,
-            string hostHeader,
-            string oid,
-            string password,
-            string path,
-            int port,
-            string protocol,
-            string qname,
-            int remainingDays,
-            bool sni,
-            string snmpVersion,
-            int status,
-            string username)
-        {
-            Community = community;
-            ExcepctedData = excepctedData;
-            HostHeader = hostHeader;
-            Oid = oid;
-            Password = password;
-            Path = path;
-            Port = port;
-            Protocol = protocol;
-            Qname = qname;
-            RemainingDays = remainingDays;
-            Sni = sni;
-            SnmpVersion = snmpVersion;
-            Status = status;
-            Username = username;
-        }
-    }
     }
 }

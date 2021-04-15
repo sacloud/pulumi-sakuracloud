@@ -7,16 +7,15 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
     /// <summary>
     /// The provider type for the sakuracloud package. By default, resources use package-wide configuration
     /// settings, however an explicit `Provider` instance may be created and passed during resource
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
-    /// 
-    /// &gt; This content is derived from https://github.com/sacloud/terraform-provider-sakuracloud/blob/master/website/docs/index.html.markdown.
     /// </summary>
+    [SakuracloudResourceType("pulumi:providers:sakuracloud")]
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>
@@ -26,18 +25,18 @@ namespace Pulumi.SakuraCloud
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Provider(string name, ProviderArgs? args = null, ResourceOptions? options = null)
-            : base("sakuracloud", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+        public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
+            : base("sakuracloud", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private static ResourceOptions MakeResourceOptions(ResourceOptions? options, Input<string>? id)
+        private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
-            var defaultOptions = new ResourceOptions
+            var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
             };
-            var merged = ResourceOptions.Merge(defaultOptions, options);
+            var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
@@ -48,48 +47,50 @@ namespace Pulumi.SakuraCloud
     {
         /// <summary>
         /// The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
-        /// `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is
-        /// specified
+        /// `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
         /// </summary>
         [Input("acceptLanguage")]
         public Input<string>? AcceptLanguage { get; set; }
 
         /// <summary>
-        /// The maximum number of SakuraCloud API calls per second. It can also be sourced from the
-        /// `SAKURACLOUD_RATE_LIMIT` environment variables, or via a shared credentials file if `profile` is specified.
-        /// Default:`10`
+        /// The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+        /// environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
         /// </summary>
         [Input("apiRequestRateLimit", json: true)]
         public Input<int>? ApiRequestRateLimit { get; set; }
 
         /// <summary>
-        /// The timeout seconds for each SakuraCloud API call. It can also be sourced from the
-        /// `SAKURACLOUD_API_REQUEST_TIMEOUT` environment variables, or via a shared credentials file if `profile` is
-        /// specified. Default:`300`
+        /// The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+        /// environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
         /// </summary>
         [Input("apiRequestTimeout", json: true)]
         public Input<int>? ApiRequestTimeout { get; set; }
 
         /// <summary>
-        /// The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment
-        /// variables, or via a shared credentials file if `profile` is specified.
-        /// Default:`https://secure.sakura.ad.jp/cloud/zone`
+        /// The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+        /// via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
         /// </summary>
         [Input("apiRootUrl")]
         public Input<string>? ApiRootUrl { get; set; }
 
         /// <summary>
-        /// The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can
-        /// also be sourced from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is
-        /// specified
+        /// The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+        /// `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Input("defaultZone")]
+        public Input<string>? DefaultZone { get; set; }
+
+        /// <summary>
+        /// The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+        /// from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
         /// </summary>
         [Input("fakeMode")]
         public Input<string>? FakeMode { get; set; }
 
         /// <summary>
-        /// The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping
-        /// the provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared
-        /// credentials file if `profile` is specified
+        /// The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+        /// provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+        /// `profile` is specified
         /// </summary>
         [Input("fakeStorePath")]
         public Input<string>? FakeStorePath { get; set; }
@@ -101,33 +102,32 @@ namespace Pulumi.SakuraCloud
         public Input<string>? Profile { get; set; }
 
         /// <summary>
-        /// The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can
-        /// also be sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if
-        /// `profile` is specified. Default:`100`
+        /// The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+        /// sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+        /// specified. Default:`100`
         /// </summary>
         [Input("retryMax", json: true)]
         public Input<int>? RetryMax { get; set; }
 
         /// <summary>
-        /// The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code
-        /// `423` or `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a
-        /// shared credentials file if `profile` is specified
+        /// The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        /// `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+        /// file if `profile` is specified
         /// </summary>
         [Input("retryWaitMax", json: true)]
         public Input<int>? RetryWaitMax { get; set; }
 
         /// <summary>
-        /// The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code
-        /// `423` or `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a
-        /// shared credentials file if `profile` is specified
+        /// The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        /// `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+        /// file if `profile` is specified
         /// </summary>
         [Input("retryWaitMin", json: true)]
         public Input<int>? RetryWaitMin { get; set; }
 
         /// <summary>
         /// The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
-        /// `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is
-        /// specified
+        /// `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
         /// </summary>
         [Input("secret")]
         public Input<string>? Secret { get; set; }
@@ -140,15 +140,15 @@ namespace Pulumi.SakuraCloud
         public Input<string>? Token { get; set; }
 
         /// <summary>
-        /// The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment
-        /// variables, or via a shared credentials file if `profile` is specified
+        /// The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+        /// shared credentials file if `profile` is specified
         /// </summary>
         [Input("trace")]
         public Input<string>? Trace { get; set; }
 
         /// <summary>
-        /// The name of zone to use as default. It must be provided, but it can also be sourced from the
-        /// `SAKURACLOUD_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        /// The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+        /// environment variables, or via a shared credentials file if `profile` is specified
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -157,8 +157,8 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _zones;
 
         /// <summary>
-        /// A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile`
-        /// is specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
+        /// A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+        /// specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
         /// </summary>
         public InputList<string> Zones
         {

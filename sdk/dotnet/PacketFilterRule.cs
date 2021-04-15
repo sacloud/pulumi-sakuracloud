@@ -7,21 +7,98 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Packet Filter Rules.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.PacketFilter("foobar", new Sakuracloud.PacketFilterArgs
+    ///         {
+    ///             Description = "description",
+    ///         });
+    ///         var rules = new Sakuracloud.PacketFilterRule("rules", new Sakuracloud.PacketFilterRuleArgs
+    ///         {
+    ///             PacketFilterId = foobar.Id,
+    ///             Expressions = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "tcp",
+    ///                     DestinationPort = "22",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "tcp",
+    ///                     DestinationPort = "80",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "tcp",
+    ///                     DestinationPort = "443",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "icmp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "fragment",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "udp",
+    ///                     SourcePort = "123",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "tcp",
+    ///                     DestinationPort = "32768-61000",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "udp",
+    ///                     DestinationPort = "32768-61000",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterRuleExpressionArgs
+    ///                 {
+    ///                     Protocol = "ip",
+    ///                     Allow = false,
+    ///                     Description = "Deny ALL",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/packetFilterRule:PacketFilterRule")]
     public partial class PacketFilterRule : Pulumi.CustomResource
     {
+        /// <summary>
+        /// One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        /// </summary>
         [Output("expressions")]
-        public Output<ImmutableArray<Outputs.PacketFilterRuleExpressions>> Expressions { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.PacketFilterRuleExpression>> Expressions { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the packet filter that set expressions to
+        /// The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
         /// </summary>
         [Output("packetFilterId")]
         public Output<string> PacketFilterId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -35,7 +112,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public PacketFilterRule(string name, PacketFilterRuleArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/packetFilterRule:PacketFilterRule", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/packetFilterRule:PacketFilterRule", name, args ?? new PacketFilterRuleArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -73,21 +150,25 @@ namespace Pulumi.SakuraCloud
     public sealed class PacketFilterRuleArgs : Pulumi.ResourceArgs
     {
         [Input("expressions")]
-        private InputList<Inputs.PacketFilterRuleExpressionsArgs>? _expressions;
-        public InputList<Inputs.PacketFilterRuleExpressionsArgs> Expressions
+        private InputList<Inputs.PacketFilterRuleExpressionArgs>? _expressions;
+
+        /// <summary>
+        /// One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        /// </summary>
+        public InputList<Inputs.PacketFilterRuleExpressionArgs> Expressions
         {
-            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterRuleExpressionsArgs>());
+            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterRuleExpressionArgs>());
             set => _expressions = value;
         }
 
         /// <summary>
-        /// The id of the packet filter that set expressions to
+        /// The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
         /// </summary>
         [Input("packetFilterId", required: true)]
         public Input<string> PacketFilterId { get; set; } = null!;
 
         /// <summary>
-        /// The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -100,21 +181,25 @@ namespace Pulumi.SakuraCloud
     public sealed class PacketFilterRuleState : Pulumi.ResourceArgs
     {
         [Input("expressions")]
-        private InputList<Inputs.PacketFilterRuleExpressionsGetArgs>? _expressions;
-        public InputList<Inputs.PacketFilterRuleExpressionsGetArgs> Expressions
+        private InputList<Inputs.PacketFilterRuleExpressionGetArgs>? _expressions;
+
+        /// <summary>
+        /// One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        /// </summary>
+        public InputList<Inputs.PacketFilterRuleExpressionGetArgs> Expressions
         {
-            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterRuleExpressionsGetArgs>());
+            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterRuleExpressionGetArgs>());
             set => _expressions = value;
         }
 
         /// <summary>
-        /// The id of the packet filter that set expressions to
+        /// The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
         /// </summary>
         [Input("packetFilterId")]
         public Input<string>? PacketFilterId { get; set; }
 
         /// <summary>
-        /// The name of zone that the PacketFilter Rule will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -122,91 +207,5 @@ namespace Pulumi.SakuraCloud
         public PacketFilterRuleState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class PacketFilterRuleExpressionsArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow")]
-        public Input<bool>? Allow { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public PacketFilterRuleExpressionsArgs()
-        {
-        }
-    }
-
-    public sealed class PacketFilterRuleExpressionsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow")]
-        public Input<bool>? Allow { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public PacketFilterRuleExpressionsGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class PacketFilterRuleExpressions
-    {
-        public readonly bool? Allow;
-        public readonly string? Description;
-        public readonly string? DestinationPort;
-        public readonly string Protocol;
-        public readonly string? SourceNetwork;
-        public readonly string? SourcePort;
-
-        [OutputConstructor]
-        private PacketFilterRuleExpressions(
-            bool? allow,
-            string? description,
-            string? destinationPort,
-            string protocol,
-            string? sourceNetwork,
-            string? sourcePort)
-        {
-            Allow = allow;
-            Description = description;
-            DestinationPort = destinationPort;
-            Protocol = protocol;
-            SourceNetwork = sourceNetwork;
-            SourcePort = sourcePort;
-        }
-    }
     }
 }

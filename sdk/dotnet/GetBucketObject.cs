@@ -7,25 +7,41 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetBucketObject
     {
-        public static Task<GetBucketObjectResult> GetBucketObject(GetBucketObjectArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBucketObjectResult>("sakuracloud:index/getBucketObject:getBucketObject", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Bucket Object.
+        /// </summary>
+        public static Task<GetBucketObjectResult> InvokeAsync(GetBucketObjectArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetBucketObjectResult>("sakuracloud:index/getBucketObject:getBucketObject", args ?? new GetBucketObjectArgs(), options.WithVersion());
     }
+
 
     public sealed class GetBucketObjectArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The access key for using SakuraCloud Object Storage API.
+        /// </summary>
         [Input("accessKey", required: true)]
         public string AccessKey { get; set; } = null!;
 
+        /// <summary>
+        /// The name of bucket.
+        /// </summary>
         [Input("bucket", required: true)]
         public string Bucket { get; set; } = null!;
 
+        /// <summary>
+        /// The name of the BucketObject.
+        /// </summary>
         [Input("key", required: true)]
         public string Key { get; set; } = null!;
 
+        /// <summary>
+        /// The secret key for using SakuraCloud Object Storage API.
+        /// </summary>
         [Input("secretKey", required: true)]
         public string SecretKey { get; set; } = null!;
 
@@ -34,47 +50,96 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetBucketObjectResult
     {
         public readonly string AccessKey;
+        /// <summary>
+        /// The body of the BucketObject.
+        /// </summary>
         public readonly string Body;
         public readonly string Bucket;
-        public readonly string ContentType;
-        public readonly string Etag;
-        public readonly string HttpCacheUrl;
-        public readonly string HttpPathUrl;
-        public readonly string HttpUrl;
-        public readonly string HttpsCacheUrl;
-        public readonly string HttpsPathUrl;
-        public readonly string HttpsUrl;
-        public readonly string Key;
-        public readonly string LastModified;
-        public readonly string SecretKey;
-        public readonly int Size;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The content type of the BucketObject.
+        /// </summary>
+        public readonly string ContentType;
+        /// <summary>
+        /// The etag of the BucketObject.
+        /// </summary>
+        public readonly string Etag;
+        /// <summary>
+        /// The URL for cached access to the BucketObject via HTTP.
+        /// </summary>
+        public readonly string HttpCacheUrl;
+        /// <summary>
+        /// The URL with path-format for accessing the BucketObject via HTTP.
+        /// </summary>
+        public readonly string HttpPathUrl;
+        /// <summary>
+        /// The URL for accessing the BucketObject via HTTP.
+        /// </summary>
+        public readonly string HttpUrl;
+        /// <summary>
+        /// The URL for cached access to the BucketObject via HTTPS.
+        /// </summary>
+        public readonly string HttpsCacheUrl;
+        /// <summary>
+        /// The URL with path-format for accessing the BucketObject via HTTPS.
+        /// </summary>
+        public readonly string HttpsPathUrl;
+        /// <summary>
+        /// The URL for accessing the BucketObject via HTTPS.
+        /// </summary>
+        public readonly string HttpsUrl;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        public readonly string Key;
+        /// <summary>
+        /// The time when the BucketObject last modified.
+        /// </summary>
+        public readonly string LastModified;
+        public readonly string SecretKey;
+        /// <summary>
+        /// The size of the BucketObject in bytes.
+        /// </summary>
+        public readonly int Size;
 
         [OutputConstructor]
         private GetBucketObjectResult(
             string accessKey,
+
             string body,
+
             string bucket,
+
             string contentType,
+
             string etag,
+
             string httpCacheUrl,
+
             string httpPathUrl,
+
             string httpUrl,
+
             string httpsCacheUrl,
+
             string httpsPathUrl,
+
             string httpsUrl,
+
+            string id,
+
             string key,
+
             string lastModified,
+
             string secretKey,
-            int size,
-            string id)
+
+            int size)
         {
             AccessKey = accessKey;
             Body = body;
@@ -87,11 +152,11 @@ namespace Pulumi.SakuraCloud
             HttpsCacheUrl = httpsCacheUrl;
             HttpsPathUrl = httpsPathUrl;
             HttpsUrl = httpsUrl;
+            Id = id;
             Key = key;
             LastModified = lastModified;
             SecretKey = secretKey;
             Size = size;
-            Id = id;
         }
     }
 }

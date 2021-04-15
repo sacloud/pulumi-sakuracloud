@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetLoadBalancer
     {
-        public static Task<GetLoadBalancerResult> GetLoadBalancer(GetLoadBalancerArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLoadBalancerResult>("sakuracloud:index/getLoadBalancer:getLoadBalancer", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Load Balancer.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetLoadBalancer.InvokeAsync(new Sakuracloud.GetLoadBalancerArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetLoadBalancerFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetLoadBalancerResult> InvokeAsync(GetLoadBalancerArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetLoadBalancerResult>("sakuracloud:index/getLoadBalancer:getLoadBalancer", args ?? new GetLoadBalancerArgs(), options.WithVersion());
     }
+
 
     public sealed class GetLoadBalancerArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetLoadBalancerFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the LoadBalancer is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,222 +67,77 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetLoadBalancerResult
     {
+        /// <summary>
+        /// The description of the VIP.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetLoadBalancerFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<Outputs.GetLoadBalancerNetworkInterfacesResult> NetworkInterfaces;
-        public readonly string Plan;
-        public readonly ImmutableArray<string> Tags;
-        public readonly ImmutableArray<Outputs.GetLoadBalancerVipsResult> Vips;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the LoadBalancer.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the LoadBalancer.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// A list of `network_interface` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetLoadBalancerNetworkInterfaceResult> NetworkInterfaces;
+        /// <summary>
+        /// The plan name of the LoadBalancer. This will be one of [`standard`/`highspec`].
+        /// </summary>
+        public readonly string Plan;
+        /// <summary>
+        /// Any tags assigned to the LoadBalancer.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The virtual IP address.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetLoadBalancerVipResult> Vips;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetLoadBalancerResult(
             string description,
+
             Outputs.GetLoadBalancerFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
-            ImmutableArray<Outputs.GetLoadBalancerNetworkInterfacesResult> networkInterfaces,
+
+            ImmutableArray<Outputs.GetLoadBalancerNetworkInterfaceResult> networkInterfaces,
+
             string plan,
+
             ImmutableArray<string> tags,
-            ImmutableArray<Outputs.GetLoadBalancerVipsResult> vips,
-            string zone,
-            string id)
+
+            ImmutableArray<Outputs.GetLoadBalancerVipResult> vips,
+
+            string zone)
         {
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             NetworkInterfaces = networkInterfaces;
             Plan = plan;
             Tags = tags;
             Vips = vips;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetLoadBalancerFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetLoadBalancerFilterConditionsArgs>? _conditions;
-        public List<GetLoadBalancerFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetLoadBalancerFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetLoadBalancerFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetLoadBalancerFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetLoadBalancerFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetLoadBalancerFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetLoadBalancerFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetLoadBalancerFilterResult
-    {
-        public readonly ImmutableArray<GetLoadBalancerFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetLoadBalancerFilterResult(
-            ImmutableArray<GetLoadBalancerFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetLoadBalancerNetworkInterfacesResult
-    {
-        public readonly string Gateway;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-        public readonly int Vrid;
-
-        [OutputConstructor]
-        private GetLoadBalancerNetworkInterfacesResult(
-            string gateway,
-            ImmutableArray<string> ipAddresses,
-            int netmask,
-            string switchId,
-            int vrid)
-        {
-            Gateway = gateway;
-            IpAddresses = ipAddresses;
-            Netmask = netmask;
-            SwitchId = switchId;
-            Vrid = vrid;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetLoadBalancerVipsResult
-    {
-        public readonly int DelayLoop;
-        public readonly string Description;
-        public readonly int Port;
-        public readonly ImmutableArray<GetLoadBalancerVipsServersResult> Servers;
-        public readonly string SorryServer;
-        public readonly string Vip;
-
-        [OutputConstructor]
-        private GetLoadBalancerVipsResult(
-            int delayLoop,
-            string description,
-            int port,
-            ImmutableArray<GetLoadBalancerVipsServersResult> servers,
-            string sorryServer,
-            string vip)
-        {
-            DelayLoop = delayLoop;
-            Description = description;
-            Port = port;
-            Servers = servers;
-            SorryServer = sorryServer;
-            Vip = vip;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetLoadBalancerVipsServersResult
-    {
-        public readonly bool Enabled;
-        public readonly string IpAddress;
-        public readonly string Path;
-        public readonly string Protocol;
-        public readonly string Status;
-
-        [OutputConstructor]
-        private GetLoadBalancerVipsServersResult(
-            bool enabled,
-            string ipAddress,
-            string path,
-            string protocol,
-            string status)
-        {
-            Enabled = enabled;
-            IpAddress = ipAddress;
-            Path = path;
-            Protocol = protocol;
-            Status = status;
-        }
-    }
     }
 }

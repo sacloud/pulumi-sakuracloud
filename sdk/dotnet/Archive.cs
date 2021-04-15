@@ -7,78 +7,132 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Archive.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         // from archive/disk
+    ///         var from_archive_or_disk = new Sakuracloud.Archive("from-archive-or-disk", new Sakuracloud.ArchiveArgs
+    ///         {
+    ///             Description = "description",
+    ///             SourceArchiveId = "123456789012",
+    ///             SourceArchiveZone = "tk1a",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///         // from shared archive
+    ///         var from_shared_archive = new Sakuracloud.Archive("from-shared-archive", new Sakuracloud.ArchiveArgs
+    ///         {
+    ///             Description = "description",
+    ///             SourceSharedKey = "is1a:123456789012:xxx",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///         // from local file
+    ///         var foobar = new Sakuracloud.Archive("foobar", new Sakuracloud.ArchiveArgs
+    ///         {
+    ///             ArchiveFile = "test/dummy.raw",
+    ///             Description = "description",
+    ///             Size = 20,
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/archive:Archive")]
     public partial class Archive : Pulumi.CustomResource
     {
         /// <summary>
-        /// The file path to upload to the SakuraCloud
+        /// The file path to upload to the SakuraCloud.
         /// </summary>
         [Output("archiveFile")]
         public Output<string?> ArchiveFile { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the archive. The length of this value must be in the range [`1`-`512`]
+        /// The description of the archive. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
         /// </summary>
         [Output("hash")]
         public Output<string> Hash { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the archive
+        /// The icon id to attach to the archive.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the archive. The length of this value must be in the range [`1`-`64`]
+        /// The name of the archive. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Output("size")]
         public Output<int?> Size { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceArchiveId")]
         public Output<string?> SourceArchiveId { get; private set; } = null!;
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceArchiveZone")]
         public Output<string?> SourceArchiveZone { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceDiskId")]
         public Output<string?> SourceDiskId { get; private set; } = null!;
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceSharedKey")]
         public Output<string?> SourceSharedKey { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the archive
+        /// Any tags to assign to the archive.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -92,7 +146,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Archive(string name, ArchiveArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/archive:Archive", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/archive:Archive", name, args ?? new ArchiveArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -130,61 +184,61 @@ namespace Pulumi.SakuraCloud
     public sealed class ArchiveArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The file path to upload to the SakuraCloud
+        /// The file path to upload to the SakuraCloud.
         /// </summary>
         [Input("archiveFile")]
         public Input<string>? ArchiveFile { get; set; }
 
         /// <summary>
-        /// The description of the archive. The length of this value must be in the range [`1`-`512`]
+        /// The description of the archive. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
         /// </summary>
         [Input("hash")]
         public Input<string>? Hash { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the archive
+        /// The icon id to attach to the archive.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the archive. The length of this value must be in the range [`1`-`64`]
+        /// The name of the archive. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveId")]
         public Input<string>? SourceArchiveId { get; set; }
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveZone")]
         public Input<string>? SourceArchiveZone { get; set; }
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceDiskId")]
         public Input<string>? SourceDiskId { get; set; }
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceSharedKey")]
         public Input<string>? SourceSharedKey { get; set; }
@@ -193,7 +247,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the archive
+        /// Any tags to assign to the archive.
         /// </summary>
         public InputList<string> Tags
         {
@@ -202,7 +256,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -215,61 +269,61 @@ namespace Pulumi.SakuraCloud
     public sealed class ArchiveState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The file path to upload to the SakuraCloud
+        /// The file path to upload to the SakuraCloud.
         /// </summary>
         [Input("archiveFile")]
         public Input<string>? ArchiveFile { get; set; }
 
         /// <summary>
-        /// The description of the archive. The length of this value must be in the range [`1`-`512`]
+        /// The description of the archive. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
         /// </summary>
         [Input("hash")]
         public Input<string>? Hash { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the archive
+        /// The icon id to attach to the archive.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the archive. The length of this value must be in the range [`1`-`64`]
+        /// The name of the archive. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]
+        /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveId")]
         public Input<string>? SourceArchiveId { get; set; }
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveZone")]
         public Input<string>? SourceArchiveZone { get; set; }
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceDiskId")]
         public Input<string>? SourceDiskId { get; set; }
 
         /// <summary>
-        /// The share key of source shared archive
+        /// The share key of source shared archive. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceSharedKey")]
         public Input<string>? SourceSharedKey { get; set; }
@@ -278,7 +332,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the archive
+        /// Any tags to assign to the archive.
         /// </summary>
         public InputList<string> Tags
         {
@@ -287,7 +341,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the archive will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
