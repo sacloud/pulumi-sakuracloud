@@ -1,10 +1,17 @@
 # Pulumi Provider for SakuraCloud
 
+## Compatibility with Pulumi
+
+- Pulumi v3.x ->  0.6+ (Unreleased)
+- Pulumi v2.x ->  0.5  (Unreleased)
+- Pulumi v1.x -> ~0.4
+
+
 ## Installing
 
 ### pulumi plugin
 
-    $ pulumi plugin install resource sakuracloud 0.4.0 --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/0.4.0
+    $ pulumi plugin install resource sakuracloud 0.5.0 --server https://github.com/sacloud/pulumi-sakuracloud/releases/download/0.5.0
 
 ### SDK
 
