@@ -122,9 +122,19 @@ install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 test::
 	cd examples && go test -v -tags=all -parallel ${TESTPARALLELISM} -timeout 2h
 
-# .PHONY: build_tgz
-# build_tgz:
-# 	./scripts/build-release-tgz.sh
+.PHONY: build_tgz
+build_tgz: tfgen install_plugins
+	rm -r $(WORKING_DIR)/bin; \
+	(cd provider && \
+		GOOS=linux GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-linux-amd64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		GOOS=darwin GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-amd64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		GOOS=darwin GOARCH=arm64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-arm64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		GOOS=windows GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER}.exe -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-windows-amd64.tar.tz ${PROVIDER}.exe; rm ${PROVIDER}.exe); \
+	)
 
 .PHONY: publish_npm
 publish_npm:
@@ -136,10 +146,10 @@ publish_pypi:
 	cd $(WORKING_DIR)/sdk/python/bin && \
 	twine upload --repository pypi dist/*
 
-# .PHONY: prepare_docker_build
-# prepare_docker_build:
-# 	docker build -t pulumi-sakuracloud-builder .
-#
-# .PHONY: build_docker
-# build_docker:
-# 	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) -e GOPROXY=https://proxy.golang.org pulumi-sakuracloud-builder make build_tgz
+.PHONY: prepare_docker_build
+prepare_docker_build:
+	docker build -t pulumi-sakuracloud-builder .
+
+.PHONY: build_docker
+build_docker: prepare_docker_build
+	docker run -it --rm -v $(PWD):$(PWD) -w $(PWD) -e GOPROXY=https://proxy.golang.org pulumi-sakuracloud-builder make build_tgz
