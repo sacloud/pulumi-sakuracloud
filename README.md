@@ -1,5 +1,12 @@
 # Pulumi Provider for SakuraCloud
 
+## Compatibility with Pulumi
+
+- Pulumi v3.x -> 0.6+ (Unreleased)
+- Pulumi v2.x -> 0.4  (Unreleased)
+- Pulumi v1.x -> 0.3-
+
+
 ## Installing
 
 ### pulumi plugin
