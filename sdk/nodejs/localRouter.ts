@@ -2,10 +2,62 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Local Router.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobarSwitch = new sakuracloud.Switch("foobarSwitch", {});
+ * const peer = sakuracloud.getLocalRouter({
+ *     filter: {
+ *         names: ["peer"],
+ *     },
+ * });
+ * const foobarLocalRouter = new sakuracloud.LocalRouter("foobarLocalRouter", {
+ *     description: "descriptio",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ *     "switch": {
+ *         code: foobarSwitch.id,
+ *         category: "cloud",
+ *         zoneId: "is1a",
+ *     },
+ *     networkInterface: {
+ *         vip: "192.168.11.1",
+ *         ipAddresses: [
+ *             "192.168.11.11",
+ *             "192.168.11.12",
+ *         ],
+ *         netmask: 24,
+ *         vrid: 101,
+ *     },
+ *     staticRoutes: [
+ *         {
+ *             prefix: "10.0.0.0/24",
+ *             nextHop: "192.168.11.2",
+ *         },
+ *         {
+ *             prefix: "172.16.0.0/16",
+ *             nextHop: "192.168.11.3",
+ *         },
+ *     ],
+ *     peers: [{
+ *         peerId: peer.then(peer => peer.id),
+ *         secretKey: peer.then(peer => peer.secretKeys[0]),
+ *         description: "description",
+ *     }],
+ * });
+ * ```
+ */
 export class LocalRouter extends pulumi.CustomResource {
     /**
      * Get an existing LocalRouter resource's state with the given name, ID, and optional extra
@@ -14,6 +66,7 @@ export class LocalRouter extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: LocalRouterState, opts?: pulumi.CustomResourceOptions): LocalRouter {
         return new LocalRouter(name, <any>state, { ...opts, id: id });
@@ -34,27 +87,39 @@ export class LocalRouter extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The icon id to attach to the LocalRouter
+     * The icon id to attach to the LoadBalancer.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     public readonly networkInterface!: pulumi.Output<outputs.LocalRouterNetworkInterface>;
+    /**
+     * One or more `peer` blocks as defined below.
+     */
     public readonly peers!: pulumi.Output<outputs.LocalRouterPeer[] | undefined>;
     /**
-     * A list of secret key used for peering from other LocalRouters
+     * A list of secret key used for peering from other LocalRouters.
      */
     public /*out*/ readonly secretKeys!: pulumi.Output<string[]>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     public readonly staticRoutes!: pulumi.Output<outputs.LocalRouterStaticRoute[] | undefined>;
+    /**
+     * A `switch` block as defined below.
+     */
     public readonly switch!: pulumi.Output<outputs.LocalRouterSwitch>;
     /**
-     * Any tags to assign to the LocalRouter
+     * Any tags to assign to the LoadBalancer.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
 
@@ -68,7 +133,8 @@ export class LocalRouter extends pulumi.CustomResource {
     constructor(name: string, args: LocalRouterArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: LocalRouterArgs | LocalRouterState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as LocalRouterState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
@@ -81,10 +147,10 @@ export class LocalRouter extends pulumi.CustomResource {
             inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as LocalRouterArgs | undefined;
-            if (!args || args.networkInterface === undefined) {
+            if ((!args || args.networkInterface === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'networkInterface'");
             }
-            if (!args || args.switch === undefined) {
+            if ((!args || args.switch === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'switch'");
             }
             inputs["description"] = args ? args.description : undefined;
@@ -97,12 +163,8 @@ export class LocalRouter extends pulumi.CustomResource {
             inputs["tags"] = args ? args.tags : undefined;
             inputs["secretKeys"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(LocalRouter.__pulumiType, name, inputs, opts);
     }
@@ -113,27 +175,39 @@ export class LocalRouter extends pulumi.CustomResource {
  */
 export interface LocalRouterState {
     /**
-     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the LocalRouter
+     * The icon id to attach to the LoadBalancer.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface?: pulumi.Input<inputs.LocalRouterNetworkInterface>;
+    /**
+     * One or more `peer` blocks as defined below.
+     */
     readonly peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
     /**
-     * A list of secret key used for peering from other LocalRouters
+     * A list of secret key used for peering from other LocalRouters.
      */
     readonly secretKeys?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
+    /**
+     * A `switch` block as defined below.
+     */
     readonly switch?: pulumi.Input<inputs.LocalRouterSwitch>;
     /**
-     * Any tags to assign to the LocalRouter
+     * Any tags to assign to the LoadBalancer.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -143,23 +217,35 @@ export interface LocalRouterState {
  */
 export interface LocalRouterArgs {
     /**
-     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the LocalRouter
+     * The icon id to attach to the LoadBalancer.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
+    /**
+     * An `networkInterface` block as defined below.
+     */
     readonly networkInterface: pulumi.Input<inputs.LocalRouterNetworkInterface>;
+    /**
+     * One or more `peer` blocks as defined below.
+     */
     readonly peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
+    /**
+     * A `switch` block as defined below.
+     */
     readonly switch: pulumi.Input<inputs.LocalRouterSwitch>;
     /**
-     * Any tags to assign to the LocalRouter
+     * Any tags to assign to the LoadBalancer.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

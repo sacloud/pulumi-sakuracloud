@@ -7,75 +7,123 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Simple Monitor.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.SimpleMonitor("foobar", new Sakuracloud.SimpleMonitorArgs
+    ///         {
+    ///             DelayLoop = 60,
+    ///             Description = "description",
+    ///             HealthCheck = new Sakuracloud.Inputs.SimpleMonitorHealthCheckArgs
+    ///             {
+    ///                 ContainsString = "ok",
+    ///                 HostHeader = "example.com",
+    ///                 Http2 = true,
+    ///                 Path = "/",
+    ///                 Port = 443,
+    ///                 Protocol = "https",
+    ///                 Sni = true,
+    ///                 Status = 200,
+    ///             },
+    ///             NotifyEmailEnabled = true,
+    ///             NotifyEmailHtml = true,
+    ///             NotifySlackEnabled = true,
+    ///             NotifySlackWebhook = "https://hooks.slack.com/services/xxx/xxx/xxx",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Target = "www.example.com",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/simpleMonitor:SimpleMonitor")]
     public partial class SimpleMonitor : Pulumi.CustomResource
     {
         /// <summary>
-        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]
+        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
         /// </summary>
         [Output("delayLoop")]
         public Output<int?> DelayLoop { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable monitoring by the simple monitor
+        /// The flag to enable monitoring by the simple monitor. Default:`true`.
         /// </summary>
         [Output("enabled")]
         public Output<bool?> Enabled { get; private set; } = null!;
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Output("healthCheck")]
         public Output<Outputs.SimpleMonitorHealthCheck> HealthCheck { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the SimpleMonitor
+        /// The icon id to attach to the SimpleMonitor.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable notification by email
+        /// The flag to enable notification by email. Default:`true`.
         /// </summary>
         [Output("notifyEmailEnabled")]
         public Output<bool?> NotifyEmailEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable HTML format instead of text format
+        /// The flag to enable HTML format instead of text format.
         /// </summary>
         [Output("notifyEmailHtml")]
         public Output<bool?> NotifyEmailHtml { get; private set; } = null!;
 
         /// <summary>
-        /// The interval in hours between notification. This must be in the range [`1`-`72`]
+        /// The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
         /// </summary>
         [Output("notifyInterval")]
         public Output<int?> NotifyInterval { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable notification by slack/discord
+        /// The flag to enable notification by slack/discord.
         /// </summary>
         [Output("notifySlackEnabled")]
         public Output<bool?> NotifySlackEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// The webhook URL for sending notification by slack/discord
+        /// The webhook URL for sending notification by slack/discord.
         /// </summary>
         [Output("notifySlackWebhook")]
         public Output<string?> NotifySlackWebhook { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the SimpleMonitor
+        /// Any tags to assign to the SimpleMonitor.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The monitoring target of the simple monitor. This must be IP address or FQDN
+        /// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
         /// </summary>
         [Output("target")]
         public Output<string> Target { get; private set; } = null!;
@@ -89,7 +137,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public SimpleMonitor(string name, SimpleMonitorArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/simpleMonitor:SimpleMonitor", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/simpleMonitor:SimpleMonitor", name, args ?? new SimpleMonitorArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -127,58 +175,61 @@ namespace Pulumi.SakuraCloud
     public sealed class SimpleMonitorArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]
+        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
         /// </summary>
         [Input("delayLoop")]
         public Input<int>? DelayLoop { get; set; }
 
         /// <summary>
-        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable monitoring by the simple monitor
+        /// The flag to enable monitoring by the simple monitor. Default:`true`.
         /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Input("healthCheck", required: true)]
         public Input<Inputs.SimpleMonitorHealthCheckArgs> HealthCheck { get; set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the SimpleMonitor
+        /// The icon id to attach to the SimpleMonitor.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to enable notification by email
+        /// The flag to enable notification by email. Default:`true`.
         /// </summary>
         [Input("notifyEmailEnabled")]
         public Input<bool>? NotifyEmailEnabled { get; set; }
 
         /// <summary>
-        /// The flag to enable HTML format instead of text format
+        /// The flag to enable HTML format instead of text format.
         /// </summary>
         [Input("notifyEmailHtml")]
         public Input<bool>? NotifyEmailHtml { get; set; }
 
         /// <summary>
-        /// The interval in hours between notification. This must be in the range [`1`-`72`]
+        /// The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
         /// </summary>
         [Input("notifyInterval")]
         public Input<int>? NotifyInterval { get; set; }
 
         /// <summary>
-        /// The flag to enable notification by slack/discord
+        /// The flag to enable notification by slack/discord.
         /// </summary>
         [Input("notifySlackEnabled")]
         public Input<bool>? NotifySlackEnabled { get; set; }
 
         /// <summary>
-        /// The webhook URL for sending notification by slack/discord
+        /// The webhook URL for sending notification by slack/discord.
         /// </summary>
         [Input("notifySlackWebhook")]
         public Input<string>? NotifySlackWebhook { get; set; }
@@ -187,7 +238,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the SimpleMonitor
+        /// Any tags to assign to the SimpleMonitor.
         /// </summary>
         public InputList<string> Tags
         {
@@ -196,7 +247,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The monitoring target of the simple monitor. This must be IP address or FQDN
+        /// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
         /// </summary>
         [Input("target", required: true)]
         public Input<string> Target { get; set; } = null!;
@@ -209,58 +260,61 @@ namespace Pulumi.SakuraCloud
     public sealed class SimpleMonitorState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]
+        /// The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
         /// </summary>
         [Input("delayLoop")]
         public Input<int>? DelayLoop { get; set; }
 
         /// <summary>
-        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable monitoring by the simple monitor
+        /// The flag to enable monitoring by the simple monitor. Default:`true`.
         /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// A `health_check` block as defined below.
+        /// </summary>
         [Input("healthCheck")]
         public Input<Inputs.SimpleMonitorHealthCheckGetArgs>? HealthCheck { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the SimpleMonitor
+        /// The icon id to attach to the SimpleMonitor.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to enable notification by email
+        /// The flag to enable notification by email. Default:`true`.
         /// </summary>
         [Input("notifyEmailEnabled")]
         public Input<bool>? NotifyEmailEnabled { get; set; }
 
         /// <summary>
-        /// The flag to enable HTML format instead of text format
+        /// The flag to enable HTML format instead of text format.
         /// </summary>
         [Input("notifyEmailHtml")]
         public Input<bool>? NotifyEmailHtml { get; set; }
 
         /// <summary>
-        /// The interval in hours between notification. This must be in the range [`1`-`72`]
+        /// The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
         /// </summary>
         [Input("notifyInterval")]
         public Input<int>? NotifyInterval { get; set; }
 
         /// <summary>
-        /// The flag to enable notification by slack/discord
+        /// The flag to enable notification by slack/discord.
         /// </summary>
         [Input("notifySlackEnabled")]
         public Input<bool>? NotifySlackEnabled { get; set; }
 
         /// <summary>
-        /// The webhook URL for sending notification by slack/discord
+        /// The webhook URL for sending notification by slack/discord.
         /// </summary>
         [Input("notifySlackWebhook")]
         public Input<string>? NotifySlackWebhook { get; set; }
@@ -269,7 +323,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the SimpleMonitor
+        /// Any tags to assign to the SimpleMonitor.
         /// </summary>
         public InputList<string> Tags
         {
@@ -278,7 +332,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The monitoring target of the simple monitor. This must be IP address or FQDN
+        /// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
         /// </summary>
         [Input("target")]
         public Input<string>? Target { get; set; }
@@ -286,163 +340,5 @@ namespace Pulumi.SakuraCloud
         public SimpleMonitorState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class SimpleMonitorHealthCheckArgs : Pulumi.ResourceArgs
-    {
-        [Input("community")]
-        public Input<string>? Community { get; set; }
-
-        [Input("excepctedData")]
-        public Input<string>? ExcepctedData { get; set; }
-
-        [Input("hostHeader")]
-        public Input<string>? HostHeader { get; set; }
-
-        [Input("oid")]
-        public Input<string>? Oid { get; set; }
-
-        [Input("password")]
-        public Input<string>? Password { get; set; }
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("qname")]
-        public Input<string>? Qname { get; set; }
-
-        [Input("remainingDays")]
-        public Input<int>? RemainingDays { get; set; }
-
-        [Input("sni")]
-        public Input<bool>? Sni { get; set; }
-
-        [Input("snmpVersion")]
-        public Input<string>? SnmpVersion { get; set; }
-
-        [Input("status")]
-        public Input<int>? Status { get; set; }
-
-        [Input("username")]
-        public Input<string>? Username { get; set; }
-
-        public SimpleMonitorHealthCheckArgs()
-        {
-        }
-    }
-
-    public sealed class SimpleMonitorHealthCheckGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("community")]
-        public Input<string>? Community { get; set; }
-
-        [Input("excepctedData")]
-        public Input<string>? ExcepctedData { get; set; }
-
-        [Input("hostHeader")]
-        public Input<string>? HostHeader { get; set; }
-
-        [Input("oid")]
-        public Input<string>? Oid { get; set; }
-
-        [Input("password")]
-        public Input<string>? Password { get; set; }
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("qname")]
-        public Input<string>? Qname { get; set; }
-
-        [Input("remainingDays")]
-        public Input<int>? RemainingDays { get; set; }
-
-        [Input("sni")]
-        public Input<bool>? Sni { get; set; }
-
-        [Input("snmpVersion")]
-        public Input<string>? SnmpVersion { get; set; }
-
-        [Input("status")]
-        public Input<int>? Status { get; set; }
-
-        [Input("username")]
-        public Input<string>? Username { get; set; }
-
-        public SimpleMonitorHealthCheckGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class SimpleMonitorHealthCheck
-    {
-        public readonly string? Community;
-        public readonly string? ExcepctedData;
-        public readonly string? HostHeader;
-        public readonly string? Oid;
-        public readonly string? Password;
-        public readonly string? Path;
-        public readonly int Port;
-        public readonly string Protocol;
-        public readonly string? Qname;
-        public readonly int? RemainingDays;
-        public readonly bool? Sni;
-        public readonly string? SnmpVersion;
-        public readonly int? Status;
-        public readonly string? Username;
-
-        [OutputConstructor]
-        private SimpleMonitorHealthCheck(
-            string? community,
-            string? excepctedData,
-            string? hostHeader,
-            string? oid,
-            string? password,
-            string? path,
-            int port,
-            string protocol,
-            string? qname,
-            int? remainingDays,
-            bool? sni,
-            string? snmpVersion,
-            int? status,
-            string? username)
-        {
-            Community = community;
-            ExcepctedData = excepctedData;
-            HostHeader = hostHeader;
-            Oid = oid;
-            Password = password;
-            Path = path;
-            Port = port;
-            Protocol = protocol;
-            Qname = qname;
-            RemainingDays = remainingDays;
-            Sni = sni;
-            SnmpVersion = snmpVersion;
-            Status = status;
-            Username = username;
-        }
-    }
     }
 }

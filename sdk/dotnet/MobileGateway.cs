@@ -7,81 +7,163 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Mobile Gateway.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var zone = Output.Create(Sakuracloud.GetZone.InvokeAsync());
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var foobarMobileGateway = new Sakuracloud.MobileGateway("foobarMobileGateway", new Sakuracloud.MobileGatewayArgs
+    ///         {
+    ///             InternetConnection = true,
+    ///             DnsServers = zone.Apply(zone =&gt; zone.DnsServers),
+    ///             PrivateNetworkInterface = new Sakuracloud.Inputs.MobileGatewayPrivateNetworkInterfaceArgs
+    ///             {
+    ///                 SwitchId = foobarSwitch.Id,
+    ///                 IpAddress = "192.168.11.101",
+    ///                 Netmask = 24,
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             TrafficControl = new Sakuracloud.Inputs.MobileGatewayTrafficControlArgs
+    ///             {
+    ///                 Quota = 256,
+    ///                 BandWidthLimit = 64,
+    ///                 EnableEmail = true,
+    ///                 EnableSlack = true,
+    ///                 SlackWebhook = "https://hooks.slack.com/services/xxx/xxx/xxx",
+    ///                 AutoTrafficShaping = true,
+    ///             },
+    ///             StaticRoutes = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.MobileGatewayStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "192.168.10.0/24",
+    ///                     NextHop = "192.168.11.1",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.MobileGatewayStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "192.168.10.0/25",
+    ///                     NextHop = "192.168.11.2",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.MobileGatewayStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "192.168.10.0/26",
+    ///                     NextHop = "192.168.11.3",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/mobileGateway:MobileGateway")]
     public partial class MobileGateway : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
+        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// A list of IP address used by each connected devices
+        /// A list of IP address used by each connected devices.
         /// </summary>
         [Output("dnsServers")]
         public Output<ImmutableArray<string>> DnsServers { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the MobileGateway
+        /// The icon id to attach to the MobileGateway.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to allow communication between each connected devices
+        /// The flag to allow communication between each connected devices.
         /// </summary>
         [Output("interDeviceCommunication")]
         public Output<bool?> InterDeviceCommunication { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable connect to the Internet
+        /// The flag to enable connect to the Internet.
         /// </summary>
         [Output("internetConnection")]
         public Output<bool?> InternetConnection { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
+        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `private_network_interface` block as defined below.
+        /// </summary>
         [Output("privateNetworkInterface")]
         public Output<Outputs.MobileGatewayPrivateNetworkInterface?> PrivateNetworkInterface { get; private set; } = null!;
 
         /// <summary>
-        /// The public IP address assigned to the MobileGateway
+        /// The public IP address assigned to the MobileGateway.
         /// </summary>
         [Output("publicIp")]
         public Output<string> PublicIp { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet assigned to the MobileGateway
+        /// The bit length of the subnet assigned to the MobileGateway.
         /// </summary>
         [Output("publicNetmask")]
         public Output<int> PublicNetmask { get; private set; } = null!;
 
-        [Output("sims")]
-        public Output<ImmutableArray<Outputs.MobileGatewaySims>> Sims { get; private set; } = null!;
-
+        /// <summary>
+        /// One or more `sim_route` blocks as defined below.
+        /// </summary>
         [Output("simRoutes")]
-        public Output<ImmutableArray<Outputs.MobileGatewaySimRoutes>> SimRoutes { get; private set; } = null!;
-
-        [Output("staticRoutes")]
-        public Output<ImmutableArray<Outputs.MobileGatewayStaticRoutes>> StaticRoutes { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.MobileGatewaySimRoute>> SimRoutes { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the MobileGateway
+        /// One or more `sim` blocks as defined below.
+        /// </summary>
+        [Output("sims")]
+        public Output<ImmutableArray<Outputs.MobileGatewaySim>> Sims { get; private set; } = null!;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        [Output("staticRoutes")]
+        public Output<ImmutableArray<Outputs.MobileGatewayStaticRoute>> StaticRoutes { get; private set; } = null!;
+
+        /// <summary>
+        /// Any tags to assign to the MobileGateway.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// A `traffic_control` block as defined below.
+        /// </summary>
         [Output("trafficControl")]
         public Output<Outputs.MobileGatewayTrafficControl?> TrafficControl { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -95,7 +177,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public MobileGateway(string name, MobileGatewayArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/mobileGateway:MobileGateway", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/mobileGateway:MobileGateway", name, args ?? new MobileGatewayArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -133,7 +215,7 @@ namespace Pulumi.SakuraCloud
     public sealed class MobileGatewayArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
+        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -142,7 +224,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _dnsServers;
 
         /// <summary>
-        /// A list of IP address used by each connected devices
+        /// A list of IP address used by each connected devices.
         /// </summary>
         public InputList<string> DnsServers
         {
@@ -151,53 +233,68 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The icon id to attach to the MobileGateway
+        /// The icon id to attach to the MobileGateway.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to allow communication between each connected devices
+        /// The flag to allow communication between each connected devices.
         /// </summary>
         [Input("interDeviceCommunication")]
         public Input<bool>? InterDeviceCommunication { get; set; }
 
         /// <summary>
-        /// The flag to enable connect to the Internet
+        /// The flag to enable connect to the Internet.
         /// </summary>
         [Input("internetConnection")]
         public Input<bool>? InternetConnection { get; set; }
 
         /// <summary>
-        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
+        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `private_network_interface` block as defined below.
+        /// </summary>
         [Input("privateNetworkInterface")]
         public Input<Inputs.MobileGatewayPrivateNetworkInterfaceArgs>? PrivateNetworkInterface { get; set; }
 
-        [Input("sims")]
-        private InputList<Inputs.MobileGatewaySimsArgs>? _sims;
-        public InputList<Inputs.MobileGatewaySimsArgs> Sims
-        {
-            get => _sims ?? (_sims = new InputList<Inputs.MobileGatewaySimsArgs>());
-            set => _sims = value;
-        }
-
         [Input("simRoutes")]
-        private InputList<Inputs.MobileGatewaySimRoutesArgs>? _simRoutes;
-        public InputList<Inputs.MobileGatewaySimRoutesArgs> SimRoutes
+        private InputList<Inputs.MobileGatewaySimRouteArgs>? _simRoutes;
+
+        /// <summary>
+        /// One or more `sim_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewaySimRouteArgs> SimRoutes
         {
-            get => _simRoutes ?? (_simRoutes = new InputList<Inputs.MobileGatewaySimRoutesArgs>());
+            get => _simRoutes ?? (_simRoutes = new InputList<Inputs.MobileGatewaySimRouteArgs>());
             set => _simRoutes = value;
         }
 
-        [Input("staticRoutes")]
-        private InputList<Inputs.MobileGatewayStaticRoutesArgs>? _staticRoutes;
-        public InputList<Inputs.MobileGatewayStaticRoutesArgs> StaticRoutes
+        [Input("sims")]
+        private InputList<Inputs.MobileGatewaySimArgs>? _sims;
+
+        /// <summary>
+        /// One or more `sim` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewaySimArgs> Sims
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.MobileGatewayStaticRoutesArgs>());
+            get => _sims ?? (_sims = new InputList<Inputs.MobileGatewaySimArgs>());
+            set => _sims = value;
+        }
+
+        [Input("staticRoutes")]
+        private InputList<Inputs.MobileGatewayStaticRouteArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewayStaticRouteArgs> StaticRoutes
+        {
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.MobileGatewayStaticRouteArgs>());
             set => _staticRoutes = value;
         }
 
@@ -205,7 +302,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the MobileGateway
+        /// Any tags to assign to the MobileGateway.
         /// </summary>
         public InputList<string> Tags
         {
@@ -213,11 +310,14 @@ namespace Pulumi.SakuraCloud
             set => _tags = value;
         }
 
+        /// <summary>
+        /// A `traffic_control` block as defined below.
+        /// </summary>
         [Input("trafficControl")]
         public Input<Inputs.MobileGatewayTrafficControlArgs>? TrafficControl { get; set; }
 
         /// <summary>
-        /// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -230,7 +330,7 @@ namespace Pulumi.SakuraCloud
     public sealed class MobileGatewayState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`]
+        /// The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -239,7 +339,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _dnsServers;
 
         /// <summary>
-        /// A list of IP address used by each connected devices
+        /// A list of IP address used by each connected devices.
         /// </summary>
         public InputList<string> DnsServers
         {
@@ -248,65 +348,80 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The icon id to attach to the MobileGateway
+        /// The icon id to attach to the MobileGateway.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The flag to allow communication between each connected devices
+        /// The flag to allow communication between each connected devices.
         /// </summary>
         [Input("interDeviceCommunication")]
         public Input<bool>? InterDeviceCommunication { get; set; }
 
         /// <summary>
-        /// The flag to enable connect to the Internet
+        /// The flag to enable connect to the Internet.
         /// </summary>
         [Input("internetConnection")]
         public Input<bool>? InternetConnection { get; set; }
 
         /// <summary>
-        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`]
+        /// The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `private_network_interface` block as defined below.
+        /// </summary>
         [Input("privateNetworkInterface")]
         public Input<Inputs.MobileGatewayPrivateNetworkInterfaceGetArgs>? PrivateNetworkInterface { get; set; }
 
         /// <summary>
-        /// The public IP address assigned to the MobileGateway
+        /// The public IP address assigned to the MobileGateway.
         /// </summary>
         [Input("publicIp")]
         public Input<string>? PublicIp { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet assigned to the MobileGateway
+        /// The bit length of the subnet assigned to the MobileGateway.
         /// </summary>
         [Input("publicNetmask")]
         public Input<int>? PublicNetmask { get; set; }
 
-        [Input("sims")]
-        private InputList<Inputs.MobileGatewaySimsGetArgs>? _sims;
-        public InputList<Inputs.MobileGatewaySimsGetArgs> Sims
-        {
-            get => _sims ?? (_sims = new InputList<Inputs.MobileGatewaySimsGetArgs>());
-            set => _sims = value;
-        }
-
         [Input("simRoutes")]
-        private InputList<Inputs.MobileGatewaySimRoutesGetArgs>? _simRoutes;
-        public InputList<Inputs.MobileGatewaySimRoutesGetArgs> SimRoutes
+        private InputList<Inputs.MobileGatewaySimRouteGetArgs>? _simRoutes;
+
+        /// <summary>
+        /// One or more `sim_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewaySimRouteGetArgs> SimRoutes
         {
-            get => _simRoutes ?? (_simRoutes = new InputList<Inputs.MobileGatewaySimRoutesGetArgs>());
+            get => _simRoutes ?? (_simRoutes = new InputList<Inputs.MobileGatewaySimRouteGetArgs>());
             set => _simRoutes = value;
         }
 
-        [Input("staticRoutes")]
-        private InputList<Inputs.MobileGatewayStaticRoutesGetArgs>? _staticRoutes;
-        public InputList<Inputs.MobileGatewayStaticRoutesGetArgs> StaticRoutes
+        [Input("sims")]
+        private InputList<Inputs.MobileGatewaySimGetArgs>? _sims;
+
+        /// <summary>
+        /// One or more `sim` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewaySimGetArgs> Sims
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.MobileGatewayStaticRoutesGetArgs>());
+            get => _sims ?? (_sims = new InputList<Inputs.MobileGatewaySimGetArgs>());
+            set => _sims = value;
+        }
+
+        [Input("staticRoutes")]
+        private InputList<Inputs.MobileGatewayStaticRouteGetArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.MobileGatewayStaticRouteGetArgs> StaticRoutes
+        {
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.MobileGatewayStaticRouteGetArgs>());
             set => _staticRoutes = value;
         }
 
@@ -314,7 +429,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the MobileGateway
+        /// Any tags to assign to the MobileGateway.
         /// </summary>
         public InputList<string> Tags
         {
@@ -322,11 +437,14 @@ namespace Pulumi.SakuraCloud
             set => _tags = value;
         }
 
+        /// <summary>
+        /// A `traffic_control` block as defined below.
+        /// </summary>
         [Input("trafficControl")]
         public Input<Inputs.MobileGatewayTrafficControlGetArgs>? TrafficControl { get; set; }
 
         /// <summary>
-        /// The name of zone that the MobileGateway will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -334,268 +452,5 @@ namespace Pulumi.SakuraCloud
         public MobileGatewayState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class MobileGatewayPrivateNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public MobileGatewayPrivateNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewayPrivateNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public MobileGatewayPrivateNetworkInterfaceGetArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewaySimRoutesArgs : Pulumi.ResourceArgs
-    {
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        [Input("simId", required: true)]
-        public Input<string> SimId { get; set; } = null!;
-
-        public MobileGatewaySimRoutesArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewaySimRoutesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        [Input("simId", required: true)]
-        public Input<string> SimId { get; set; } = null!;
-
-        public MobileGatewaySimRoutesGetArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewaySimsArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("simId", required: true)]
-        public Input<string> SimId { get; set; } = null!;
-
-        public MobileGatewaySimsArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewaySimsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("simId", required: true)]
-        public Input<string> SimId { get; set; } = null!;
-
-        public MobileGatewaySimsGetArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewayStaticRoutesArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public MobileGatewayStaticRoutesArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewayStaticRoutesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public MobileGatewayStaticRoutesGetArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewayTrafficControlArgs : Pulumi.ResourceArgs
-    {
-        [Input("autoTrafficShaping")]
-        public Input<bool>? AutoTrafficShaping { get; set; }
-
-        [Input("bandWidthLimit")]
-        public Input<int>? BandWidthLimit { get; set; }
-
-        [Input("enableEmail")]
-        public Input<bool>? EnableEmail { get; set; }
-
-        [Input("enableSlack")]
-        public Input<bool>? EnableSlack { get; set; }
-
-        [Input("quota", required: true)]
-        public Input<int> Quota { get; set; } = null!;
-
-        [Input("slackWebhook")]
-        public Input<string>? SlackWebhook { get; set; }
-
-        public MobileGatewayTrafficControlArgs()
-        {
-        }
-    }
-
-    public sealed class MobileGatewayTrafficControlGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("autoTrafficShaping")]
-        public Input<bool>? AutoTrafficShaping { get; set; }
-
-        [Input("bandWidthLimit")]
-        public Input<int>? BandWidthLimit { get; set; }
-
-        [Input("enableEmail")]
-        public Input<bool>? EnableEmail { get; set; }
-
-        [Input("enableSlack")]
-        public Input<bool>? EnableSlack { get; set; }
-
-        [Input("quota", required: true)]
-        public Input<int> Quota { get; set; } = null!;
-
-        [Input("slackWebhook")]
-        public Input<string>? SlackWebhook { get; set; }
-
-        public MobileGatewayTrafficControlGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class MobileGatewayPrivateNetworkInterface
-    {
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private MobileGatewayPrivateNetworkInterface(
-            string ipAddress,
-            int netmask,
-            string switchId)
-        {
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            SwitchId = switchId;
-        }
-    }
-
-    [OutputType]
-    public sealed class MobileGatewaySimRoutes
-    {
-        public readonly string Prefix;
-        public readonly string SimId;
-
-        [OutputConstructor]
-        private MobileGatewaySimRoutes(
-            string prefix,
-            string simId)
-        {
-            Prefix = prefix;
-            SimId = simId;
-        }
-    }
-
-    [OutputType]
-    public sealed class MobileGatewaySims
-    {
-        public readonly string IpAddress;
-        public readonly string SimId;
-
-        [OutputConstructor]
-        private MobileGatewaySims(
-            string ipAddress,
-            string simId)
-        {
-            IpAddress = ipAddress;
-            SimId = simId;
-        }
-    }
-
-    [OutputType]
-    public sealed class MobileGatewayStaticRoutes
-    {
-        public readonly string NextHop;
-        public readonly string Prefix;
-
-        [OutputConstructor]
-        private MobileGatewayStaticRoutes(
-            string nextHop,
-            string prefix)
-        {
-            NextHop = nextHop;
-            Prefix = prefix;
-        }
-    }
-
-    [OutputType]
-    public sealed class MobileGatewayTrafficControl
-    {
-        public readonly bool? AutoTrafficShaping;
-        public readonly int? BandWidthLimit;
-        public readonly bool? EnableEmail;
-        public readonly bool? EnableSlack;
-        public readonly int Quota;
-        public readonly string? SlackWebhook;
-
-        [OutputConstructor]
-        private MobileGatewayTrafficControl(
-            bool? autoTrafficShaping,
-            int? bandWidthLimit,
-            bool? enableEmail,
-            bool? enableSlack,
-            int quota,
-            string? slackWebhook)
-        {
-            AutoTrafficShaping = autoTrafficShaping;
-            BandWidthLimit = bandWidthLimit;
-            EnableEmail = enableEmail;
-            EnableSlack = enableSlack;
-            Quota = quota;
-            SlackWebhook = slackWebhook;
-        }
-    }
     }
 }

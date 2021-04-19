@@ -7,22 +7,72 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetArchive
     {
-        public static Task<GetArchiveResult> GetArchive(GetArchiveArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetArchiveResult>("sakuracloud:index/getArchive:getArchive", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Archive.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetArchive.InvokeAsync(new Sakuracloud.GetArchiveArgs
+        ///         {
+        ///             OsType = "centos8",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetArchiveResult> InvokeAsync(GetArchiveArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetArchiveResult>("sakuracloud:index/getArchive:getArchive", args ?? new GetArchiveArgs(), options.WithVersion());
     }
+
 
     public sealed class GetArchiveArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetArchiveFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The criteria used to filter SakuraCloud archives. This must be one of following:  
+        /// - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`/`centos6`]
+        /// - **Ubuntu**: [`ubuntu`/`ubuntu2004`/`ubuntu1804`/`ubuntu1604`]
+        /// - **Debian**: [`debian`/`debian10`/`debian9`]
+        /// - **CoreOS/ContainerLinux**: `coreos`
+        /// - **RancherOS**: `rancheros`
+        /// - **k3OS**: `k3os`
+        /// - **FreeBSD**: `freebsd`
+        /// - **Kusanagi**: `kusanagi`
+        /// - **Windows2016**: [`windows2016`/`windows2016-rds`/`windows2016-rds-office`]
+        /// - **Windows2016+SQLServer**:  [`windows2016-sql-web`/`windows2016-sql-standard`/`windows2016-sql-standard-all`]
+        /// - **Windows2016+SQLServer2017**: [`windows2016-sql2017-standard`/`windows2016-sql2017-enterprise`/`windows2016-sql2017-standard-all`]
+        /// - **Windows2019**: [`windows2019`/`windows2019-rds`/`windows2019-rds-office2016`/`windows2019-rds-office2019`]
+        /// - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
+        /// - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
+        /// </summary>
         [Input("osType")]
         public string? OsType { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -31,141 +81,67 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetArchiveResult
     {
+        /// <summary>
+        /// The description of the Archive.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetArchiveFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly string? OsType;
-        public readonly int Size;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the Archive.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Archive.
+        /// </summary>
+        public readonly string Name;
+        public readonly string? OsType;
+        /// <summary>
+        /// The size of Archive in GiB.
+        /// </summary>
+        public readonly int Size;
+        /// <summary>
+        /// Any tags assigned to the Archive.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetArchiveResult(
             string description,
+
             Outputs.GetArchiveFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
+
             string? osType,
+
             int size,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             OsType = osType;
             Size = size;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetArchiveFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetArchiveFilterConditionsArgs>? _conditions;
-        public List<GetArchiveFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetArchiveFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetArchiveFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetArchiveFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetArchiveFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetArchiveFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetArchiveFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetArchiveFilterResult
-    {
-        public readonly ImmutableArray<GetArchiveFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetArchiveFilterResult(
-            ImmutableArray<GetArchiveFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

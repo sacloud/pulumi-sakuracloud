@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetPacketFilter
     {
-        public static Task<GetPacketFilterResult> GetPacketFilter(GetPacketFilterArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPacketFilterResult>("sakuracloud:index/getPacketFilter:getPacketFilter", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Packet Filter.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetPacketFilter.InvokeAsync(new Sakuracloud.GetPacketFilterArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetPacketFilterFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetPacketFilterResult> InvokeAsync(GetPacketFilterArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPacketFilterResult>("sakuracloud:index/getPacketFilter:getPacketFilter", args ?? new GetPacketFilterArgs(), options.WithVersion());
     }
+
 
     public sealed class GetPacketFilterArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetPacketFilterFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,149 +67,49 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetPacketFilterResult
     {
-        public readonly string Description;
-        public readonly ImmutableArray<Outputs.GetPacketFilterExpressionsResult> Expressions;
-        public readonly Outputs.GetPacketFilterFilterResult? Filter;
-        public readonly string Name;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The description of the expression.
+        /// </summary>
+        public readonly string Description;
+        /// <summary>
+        /// One or more `expression` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetPacketFilterExpressionResult> Expressions;
+        public readonly Outputs.GetPacketFilterFilterResult? Filter;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the PacketFilter.
+        /// </summary>
+        public readonly string Name;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetPacketFilterResult(
             string description,
-            ImmutableArray<Outputs.GetPacketFilterExpressionsResult> expressions,
+
+            ImmutableArray<Outputs.GetPacketFilterExpressionResult> expressions,
+
             Outputs.GetPacketFilterFilterResult? filter,
+
+            string id,
+
             string name,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             Expressions = expressions;
             Filter = filter;
+            Id = id;
             Name = name;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetPacketFilterFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetPacketFilterFilterConditionsArgs>? _conditions;
-        public List<GetPacketFilterFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetPacketFilterFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        public GetPacketFilterFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetPacketFilterFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetPacketFilterFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetPacketFilterExpressionsResult
-    {
-        public readonly bool Allow;
-        public readonly string Description;
-        public readonly string DestinationPort;
-        public readonly string Protocol;
-        public readonly string SourceNetwork;
-        public readonly string SourcePort;
-
-        [OutputConstructor]
-        private GetPacketFilterExpressionsResult(
-            bool allow,
-            string description,
-            string destinationPort,
-            string protocol,
-            string sourceNetwork,
-            string sourcePort)
-        {
-            Allow = allow;
-            Description = description;
-            DestinationPort = destinationPort;
-            Protocol = protocol;
-            SourceNetwork = sourceNetwork;
-            SourcePort = sourcePort;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetPacketFilterFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetPacketFilterFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetPacketFilterFilterResult
-    {
-        public readonly ImmutableArray<GetPacketFilterFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-
-        [OutputConstructor]
-        private GetPacketFilterFilterResult(
-            ImmutableArray<GetPacketFilterFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-        }
-    }
     }
 }

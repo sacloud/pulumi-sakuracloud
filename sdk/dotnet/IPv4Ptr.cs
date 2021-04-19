@@ -7,36 +7,72 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud IPv4 PTR.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var server = new Sakuracloud.Server("server", new Sakuracloud.ServerArgs
+    ///         {
+    ///             NetworkInterfaces = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.ServerNetworkInterfaceArgs
+    ///                 {
+    ///                     Upstream = "shared",
+    ///                 },
+    ///             },
+    ///         });
+    ///         var foobar = new Sakuracloud.IPv4Ptr("foobar", new Sakuracloud.IPv4PtrArgs
+    ///         {
+    ///             IpAddress = server.IpAddress,
+    ///             Hostname = "www.example.com",
+    ///             RetryMax = 30,
+    ///             RetryInterval = 10,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/iPv4Ptr:IPv4Ptr")]
     public partial class IPv4Ptr : Pulumi.CustomResource
     {
         /// <summary>
-        /// The value of the PTR record. This must be FQDN
+        /// The value of the PTR record. This must be FQDN.
         /// </summary>
         [Output("hostname")]
         public Output<string> Hostname { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address to which the PTR record is set
+        /// The IP address to which the PTR record is set.
         /// </summary>
         [Output("ipAddress")]
         public Output<string> IpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
         /// </summary>
         [Output("retryInterval")]
         public Output<int?> RetryInterval { get; private set; } = null!;
 
         /// <summary>
-        /// The maximum number of API call retries used when SakuraCloud API returns any errors
+        /// The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
         /// </summary>
         [Output("retryMax")]
         public Output<int?> RetryMax { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -50,7 +86,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public IPv4Ptr(string name, IPv4PtrArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/iPv4Ptr:IPv4Ptr", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/iPv4Ptr:IPv4Ptr", name, args ?? new IPv4PtrArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -88,31 +124,31 @@ namespace Pulumi.SakuraCloud
     public sealed class IPv4PtrArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The value of the PTR record. This must be FQDN
+        /// The value of the PTR record. This must be FQDN.
         /// </summary>
         [Input("hostname", required: true)]
         public Input<string> Hostname { get; set; } = null!;
 
         /// <summary>
-        /// The IP address to which the PTR record is set
+        /// The IP address to which the PTR record is set.
         /// </summary>
         [Input("ipAddress", required: true)]
         public Input<string> IpAddress { get; set; } = null!;
 
         /// <summary>
-        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
         /// </summary>
         [Input("retryInterval")]
         public Input<int>? RetryInterval { get; set; }
 
         /// <summary>
-        /// The maximum number of API call retries used when SakuraCloud API returns any errors
+        /// The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
         /// </summary>
         [Input("retryMax")]
         public Input<int>? RetryMax { get; set; }
 
         /// <summary>
-        /// The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -125,31 +161,31 @@ namespace Pulumi.SakuraCloud
     public sealed class IPv4PtrState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The value of the PTR record. This must be FQDN
+        /// The value of the PTR record. This must be FQDN.
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
 
         /// <summary>
-        /// The IP address to which the PTR record is set
+        /// The IP address to which the PTR record is set.
         /// </summary>
         [Input("ipAddress")]
         public Input<string>? IpAddress { get; set; }
 
         /// <summary>
-        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors
+        /// The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
         /// </summary>
         [Input("retryInterval")]
         public Input<int>? RetryInterval { get; set; }
 
         /// <summary>
-        /// The maximum number of API call retries used when SakuraCloud API returns any errors
+        /// The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
         /// </summary>
         [Input("retryMax")]
         public Input<int>? RetryMax { get; set; }
 
         /// <summary>
-        /// The name of zone that the IPv4 PTR will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

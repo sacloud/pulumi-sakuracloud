@@ -7,58 +7,64 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Container Registry.
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/containerRegistry:ContainerRegistry")]
     public partial class ContainerRegistry : Pulumi.CustomResource
     {
         /// <summary>
-        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
         /// </summary>
         [Output("accessLevel")]
         public Output<string> AccessLevel { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`
+        /// The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`.
         /// </summary>
         [Output("fqdn")]
         public Output<string> Fqdn { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Container Registry
+        /// The icon id to attach to the Container Registry.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in
-        /// the range [`1`-`64`]
+        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("subdomainLabel")]
         public Output<string> SubdomainLabel { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Container Registry
+        /// Any tags to assign to the Container Registry.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
         [Output("users")]
-        public Output<ImmutableArray<Outputs.ContainerRegistryUsers>> Users { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.ContainerRegistryUser>> Users { get; private set; } = null!;
 
         /// <summary>
-        /// The alias for accessing the container registry
+        /// The alias for accessing the container registry.
         /// </summary>
         [Output("virtualDomain")]
         public Output<string?> VirtualDomain { get; private set; } = null!;
@@ -72,7 +78,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public ContainerRegistry(string name, ContainerRegistryArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/containerRegistry:ContainerRegistry", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/containerRegistry:ContainerRegistry", name, args ?? new ContainerRegistryArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -110,32 +116,31 @@ namespace Pulumi.SakuraCloud
     public sealed class ContainerRegistryArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
         /// </summary>
         [Input("accessLevel", required: true)]
         public Input<string> AccessLevel { get; set; } = null!;
 
         /// <summary>
-        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Container Registry
+        /// The icon id to attach to the Container Registry.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in
-        /// the range [`1`-`64`]
+        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("subdomainLabel", required: true)]
         public Input<string> SubdomainLabel { get; set; } = null!;
@@ -144,7 +149,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Container Registry
+        /// Any tags to assign to the Container Registry.
         /// </summary>
         public InputList<string> Tags
         {
@@ -153,15 +158,19 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("users")]
-        private InputList<Inputs.ContainerRegistryUsersArgs>? _users;
-        public InputList<Inputs.ContainerRegistryUsersArgs> Users
+        private InputList<Inputs.ContainerRegistryUserArgs>? _users;
+
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.ContainerRegistryUserArgs> Users
         {
-            get => _users ?? (_users = new InputList<Inputs.ContainerRegistryUsersArgs>());
+            get => _users ?? (_users = new InputList<Inputs.ContainerRegistryUserArgs>());
             set => _users = value;
         }
 
         /// <summary>
-        /// The alias for accessing the container registry
+        /// The alias for accessing the container registry.
         /// </summary>
         [Input("virtualDomain")]
         public Input<string>? VirtualDomain { get; set; }
@@ -174,38 +183,37 @@ namespace Pulumi.SakuraCloud
     public sealed class ContainerRegistryState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+        /// The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
         /// </summary>
         [Input("accessLevel")]
         public Input<string>? AccessLevel { get; set; }
 
         /// <summary>
-        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`
+        /// The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`.
         /// </summary>
         [Input("fqdn")]
         public Input<string>? Fqdn { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Container Registry
+        /// The icon id to attach to the Container Registry.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in
-        /// the range [`1`-`64`]
+        /// The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("subdomainLabel")]
         public Input<string>? SubdomainLabel { get; set; }
@@ -214,7 +222,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Container Registry
+        /// Any tags to assign to the Container Registry.
         /// </summary>
         public InputList<string> Tags
         {
@@ -223,15 +231,19 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("users")]
-        private InputList<Inputs.ContainerRegistryUsersGetArgs>? _users;
-        public InputList<Inputs.ContainerRegistryUsersGetArgs> Users
+        private InputList<Inputs.ContainerRegistryUserGetArgs>? _users;
+
+        /// <summary>
+        /// One or more `user` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.ContainerRegistryUserGetArgs> Users
         {
-            get => _users ?? (_users = new InputList<Inputs.ContainerRegistryUsersGetArgs>());
+            get => _users ?? (_users = new InputList<Inputs.ContainerRegistryUserGetArgs>());
             set => _users = value;
         }
 
         /// <summary>
-        /// The alias for accessing the container registry
+        /// The alias for accessing the container registry.
         /// </summary>
         [Input("virtualDomain")]
         public Input<string>? VirtualDomain { get; set; }
@@ -239,64 +251,5 @@ namespace Pulumi.SakuraCloud
         public ContainerRegistryState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class ContainerRegistryUsersArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
-
-        [Input("permission", required: true)]
-        public Input<string> Permission { get; set; } = null!;
-
-        public ContainerRegistryUsersArgs()
-        {
-        }
-    }
-
-    public sealed class ContainerRegistryUsersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
-
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
-
-        [Input("permission", required: true)]
-        public Input<string> Permission { get; set; } = null!;
-
-        public ContainerRegistryUsersGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class ContainerRegistryUsers
-    {
-        public readonly string Name;
-        public readonly string Password;
-        public readonly string Permission;
-
-        [OutputConstructor]
-        private ContainerRegistryUsers(
-            string name,
-            string password,
-            string permission)
-        {
-            Name = name;
-            Password = password;
-            Permission = permission;
-        }
-    }
     }
 }

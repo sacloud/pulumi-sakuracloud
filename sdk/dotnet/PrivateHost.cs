@@ -7,60 +7,88 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Private Host.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.PrivateHost("foobar", new Sakuracloud.PrivateHostArgs
+    ///         {
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/privateHost:PrivateHost")]
     public partial class PrivateHost : Pulumi.CustomResource
     {
         /// <summary>
-        /// The total number of CPUs assigned to servers on the private host
+        /// The total number of CPUs assigned to servers on the private host.
         /// </summary>
         [Output("assignedCore")]
         public Output<int> AssignedCore { get; private set; } = null!;
 
         /// <summary>
-        /// The total size of memory assigned to servers on the private host
+        /// The total size of memory assigned to servers on the private host.
         /// </summary>
         [Output("assignedMemory")]
         public Output<int> AssignedMemory { get; private set; } = null!;
 
         /// <summary>
-        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]. Default:`dynamic`.
         /// </summary>
         [Output("class")]
         public Output<string?> Class { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The hostname of the private host
+        /// The hostname of the private host.
         /// </summary>
         [Output("hostname")]
         public Output<string> Hostname { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the PrivateHost
+        /// The icon id to attach to the PrivateHost.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the PrivateHost
+        /// Any tags to assign to the PrivateHost.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -74,7 +102,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public PrivateHost(string name, PrivateHostArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/privateHost:PrivateHost", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/privateHost:PrivateHost", name, args ?? new PrivateHostArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -112,25 +140,25 @@ namespace Pulumi.SakuraCloud
     public sealed class PrivateHostArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]. Default:`dynamic`.
         /// </summary>
         [Input("class")]
         public Input<string>? Class { get; set; }
 
         /// <summary>
-        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the PrivateHost
+        /// The icon id to attach to the PrivateHost.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -139,7 +167,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the PrivateHost
+        /// Any tags to assign to the PrivateHost.
         /// </summary>
         public InputList<string> Tags
         {
@@ -148,7 +176,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -161,43 +189,43 @@ namespace Pulumi.SakuraCloud
     public sealed class PrivateHostState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The total number of CPUs assigned to servers on the private host
+        /// The total number of CPUs assigned to servers on the private host.
         /// </summary>
         [Input("assignedCore")]
         public Input<int>? AssignedCore { get; set; }
 
         /// <summary>
-        /// The total size of memory assigned to servers on the private host
+        /// The total size of memory assigned to servers on the private host.
         /// </summary>
         [Input("assignedMemory")]
         public Input<int>? AssignedMemory { get; set; }
 
         /// <summary>
-        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]. Default:`dynamic`.
         /// </summary>
         [Input("class")]
         public Input<string>? Class { get; set; }
 
         /// <summary>
-        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+        /// The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The hostname of the private host
+        /// The hostname of the private host.
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the PrivateHost
+        /// The icon id to attach to the PrivateHost.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+        /// The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -206,7 +234,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the PrivateHost
+        /// Any tags to assign to the PrivateHost.
         /// </summary>
         public InputList<string> Tags
         {
@@ -215,7 +243,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

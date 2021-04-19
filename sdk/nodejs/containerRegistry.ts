@@ -2,10 +2,50 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Container Registry.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const config = new pulumi.Config();
+ * const users = config.getObject("users") || [
+ *     {
+ *         name: "user1",
+ *         password: "password1",
+ *         permission: "all",
+ *     },
+ *     {
+ *         name: "user2",
+ *         password: "password2",
+ *         permission: "readwrite",
+ *     },
+ * ];
+ * const foobar = new sakuracloud.ContainerRegistry("foobar", {
+ *     subdomainLabel: "your-subdomain-label",
+ *     accessLevel: "readwrite",
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ *     dynamic: [{
+ *         forEach: users,
+ *         content: [{
+ *             name: user.value.name,
+ *             password: user.value.password,
+ *             permission: user.value.permission,
+ *         }],
+ *     }],
+ * });
+ * ```
+ */
 export class ContainerRegistry extends pulumi.CustomResource {
     /**
      * Get an existing ContainerRegistry resource's state with the given name, ID, and optional extra
@@ -14,6 +54,7 @@ export class ContainerRegistry extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ContainerRegistryState, opts?: pulumi.CustomResourceOptions): ContainerRegistry {
         return new ContainerRegistry(name, <any>state, { ...opts, id: id });
@@ -34,37 +75,39 @@ export class ContainerRegistry extends pulumi.CustomResource {
     }
 
     /**
-     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
      */
     public readonly accessLevel!: pulumi.Output<string>;
     /**
-     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`
+     * The FQDN for accessing the Container Registry. FQDN is built from `subdomainLabel` + `.sakuracr.jp`.
      */
     public /*out*/ readonly fqdn!: pulumi.Output<string>;
     /**
-     * The icon id to attach to the Container Registry
+     * The icon id to attach to the Container Registry.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range
-     * [`1`-`64`]
+     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     public readonly subdomainLabel!: pulumi.Output<string>;
     /**
-     * Any tags to assign to the Container Registry
+     * Any tags to assign to the Container Registry.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     public readonly users!: pulumi.Output<outputs.ContainerRegistryUser[] | undefined>;
     /**
-     * The alias for accessing the container registry
+     * The alias for accessing the container registry.
      */
     public readonly virtualDomain!: pulumi.Output<string | undefined>;
 
@@ -78,7 +121,8 @@ export class ContainerRegistry extends pulumi.CustomResource {
     constructor(name: string, args: ContainerRegistryArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ContainerRegistryArgs | ContainerRegistryState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as ContainerRegistryState | undefined;
             inputs["accessLevel"] = state ? state.accessLevel : undefined;
             inputs["description"] = state ? state.description : undefined;
@@ -91,10 +135,10 @@ export class ContainerRegistry extends pulumi.CustomResource {
             inputs["virtualDomain"] = state ? state.virtualDomain : undefined;
         } else {
             const args = argsOrState as ContainerRegistryArgs | undefined;
-            if (!args || args.accessLevel === undefined) {
+            if ((!args || args.accessLevel === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'accessLevel'");
             }
-            if (!args || args.subdomainLabel === undefined) {
+            if ((!args || args.subdomainLabel === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'subdomainLabel'");
             }
             inputs["accessLevel"] = args ? args.accessLevel : undefined;
@@ -107,12 +151,8 @@ export class ContainerRegistry extends pulumi.CustomResource {
             inputs["virtualDomain"] = args ? args.virtualDomain : undefined;
             inputs["fqdn"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(ContainerRegistry.__pulumiType, name, inputs, opts);
     }
@@ -123,37 +163,39 @@ export class ContainerRegistry extends pulumi.CustomResource {
  */
 export interface ContainerRegistryState {
     /**
-     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
      */
     readonly accessLevel?: pulumi.Input<string>;
     /**
-     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`
+     * The FQDN for accessing the Container Registry. FQDN is built from `subdomainLabel` + `.sakuracr.jp`.
      */
     readonly fqdn?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Container Registry
+     * The icon id to attach to the Container Registry.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range
-     * [`1`-`64`]
+     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     readonly subdomainLabel?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Container Registry
+     * Any tags to assign to the Container Registry.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
     /**
-     * The alias for accessing the container registry
+     * The alias for accessing the container registry.
      */
     readonly virtualDomain?: pulumi.Input<string>;
 }
@@ -163,33 +205,35 @@ export interface ContainerRegistryState {
  */
 export interface ContainerRegistryArgs {
     /**
-     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`]
+     * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
      */
     readonly accessLevel: pulumi.Input<string>;
     /**
-     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`]
+     * The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Container Registry
+     * The icon id to attach to the Container Registry.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`]
+     * The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range
-     * [`1`-`64`]
+     * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
     readonly subdomainLabel: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Container Registry
+     * Any tags to assign to the Container Registry.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
     /**
-     * The alias for accessing the container registry
+     * The alias for accessing the container registry.
      */
     readonly virtualDomain?: pulumi.Input<string>;
 }

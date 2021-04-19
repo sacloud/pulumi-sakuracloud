@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetPrivateHost
     {
-        public static Task<GetPrivateHostResult> GetPrivateHost(GetPrivateHostArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPrivateHostResult>("sakuracloud:index/getPrivateHost:getPrivateHost", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Private Host.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetPrivateHost.InvokeAsync(new Sakuracloud.GetPrivateHostArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetPrivateHostFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetPrivateHostResult> InvokeAsync(GetPrivateHostArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetPrivateHostResult>("sakuracloud:index/getPrivateHost:getPrivateHost", args ?? new GetPrivateHostArgs(), options.WithVersion());
     }
+
 
     public sealed class GetPrivateHostArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetPrivateHostFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,37 +67,72 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetPrivateHostResult
     {
+        /// <summary>
+        /// The total number of CPUs assigned to servers on the private host.
+        /// </summary>
         public readonly int AssignedCore;
+        /// <summary>
+        /// The total size of memory assigned to servers on the private host.
+        /// </summary>
         public readonly int AssignedMemory;
+        /// <summary>
+        /// The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`].
+        /// </summary>
         public readonly string Class;
+        /// <summary>
+        /// The description of the PrivateHost.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetPrivateHostFilterResult? Filter;
-        public readonly string Hostname;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The hostname of the private host.
+        /// </summary>
+        public readonly string Hostname;
+        /// <summary>
+        /// The icon id attached to the PrivateHost.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the PrivateHost.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// Any tags assigned to the PrivateHost.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetPrivateHostResult(
             int assignedCore,
+
             int assignedMemory,
+
             string @class,
+
             string description,
+
             Outputs.GetPrivateHostFilterResult? filter,
+
             string hostname,
+
             string iconId,
+
+            string id,
+
             string name,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             AssignedCore = assignedCore;
             AssignedMemory = assignedMemory;
@@ -67,108 +141,10 @@ namespace Pulumi.SakuraCloud
             Filter = filter;
             Hostname = hostname;
             IconId = iconId;
+            Id = id;
             Name = name;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetPrivateHostFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetPrivateHostFilterConditionsArgs>? _conditions;
-        public List<GetPrivateHostFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetPrivateHostFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetPrivateHostFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetPrivateHostFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetPrivateHostFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetPrivateHostFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetPrivateHostFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetPrivateHostFilterResult
-    {
-        public readonly ImmutableArray<GetPrivateHostFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetPrivateHostFilterResult(
-            ImmutableArray<GetPrivateHostFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

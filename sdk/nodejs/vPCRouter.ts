@@ -2,10 +2,134 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud VPC Router.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const standard = new sakuracloud.VPCRouter("standard", {
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ *     internetConnection: true,
+ * });
+ * const foobarInternet = new sakuracloud.Internet("foobarInternet", {});
+ * const foobarSwitch = new sakuracloud.Switch("foobarSwitch", {});
+ * const premium = new sakuracloud.VPCRouter("premium", {
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ *     plan: "premium",
+ *     internetConnection: true,
+ *     publicNetworkInterface: {
+ *         switchId: foobarInternet.switchId,
+ *         vip: foobarInternet.ipAddresses[0],
+ *         ipAddresses: [
+ *             foobarInternet.ipAddresses[1],
+ *             foobarInternet.ipAddresses[2],
+ *         ],
+ *         aliases: [foobarInternet.ipAddresses[3]],
+ *         vrid: 1,
+ *     },
+ *     privateNetworkInterfaces: [{
+ *         index: 1,
+ *         switchId: foobarSwitch.id,
+ *         vip: "192.168.11.1",
+ *         ipAddresses: [
+ *             "192.168.11.2",
+ *             "192.168.11.3",
+ *         ],
+ *         netmask: 24,
+ *     }],
+ *     dhcpServers: [{
+ *         interfaceIndex: 1,
+ *         rangeStart: "192.168.11.11",
+ *         rangeStop: "192.168.11.20",
+ *         dnsServers: [
+ *             "8.8.8.8",
+ *             "8.8.4.4",
+ *         ],
+ *     }],
+ *     dhcpStaticMappings: [{
+ *         ipAddress: "192.168.11.10",
+ *         macAddress: "aa:bb:cc:aa:bb:cc",
+ *     }],
+ *     firewalls: [{
+ *         interfaceIndex: 1,
+ *         direction: "send",
+ *         expressions: [
+ *             {
+ *                 protocol: "tcp",
+ *                 sourceNetwork: "",
+ *                 sourcePort: "80",
+ *                 destinationNetwork: "",
+ *                 destinationPort: "",
+ *                 allow: true,
+ *                 logging: true,
+ *                 description: "desc",
+ *             },
+ *             {
+ *                 protocol: "ip",
+ *                 sourceNetwork: "",
+ *                 sourcePort: "",
+ *                 destinationNetwork: "",
+ *                 destinationPort: "",
+ *                 allow: false,
+ *                 logging: true,
+ *                 description: "desc",
+ *             },
+ *         ],
+ *     }],
+ *     l2tp: {
+ *         preSharedSecret: "example",
+ *         rangeStart: "192.168.11.21",
+ *         rangeStop: "192.168.11.30",
+ *     },
+ *     portForwardings: [{
+ *         protocol: "udp",
+ *         publicPort: 10022,
+ *         privateIp: "192.168.11.11",
+ *         privatePort: 22,
+ *         description: "desc",
+ *     }],
+ *     pptp: {
+ *         rangeStart: "192.168.11.31",
+ *         rangeStop: "192.168.11.40",
+ *     },
+ *     siteToSiteVpns: [{
+ *         peer: "10.0.0.1",
+ *         remoteId: "10.0.0.1",
+ *         preSharedSecret: "example",
+ *         routes: ["10.0.0.0/8"],
+ *         localPrefixes: ["192.168.21.0/24"],
+ *     }],
+ *     staticNats: [{
+ *         publicIp: foobarInternet.ipAddresses[3],
+ *         privateIp: "192.168.11.12",
+ *         description: "desc",
+ *     }],
+ *     staticRoutes: [{
+ *         prefix: "172.16.0.0/16",
+ *         nextHop: "192.168.11.99",
+ *     }],
+ *     users: [{
+ *         name: "username",
+ *         password: "password",
+ *     }],
+ * });
+ * ```
+ */
 export class VPCRouter extends pulumi.CustomResource {
     /**
      * Get an existing VPCRouter resource's state with the given name, ID, and optional extra
@@ -14,6 +138,7 @@ export class VPCRouter extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: VPCRouterState, opts?: pulumi.CustomResourceOptions): VPCRouter {
         return new VPCRouter(name, <any>state, { ...opts, id: id });
@@ -34,58 +159,95 @@ export class VPCRouter extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression. The length of this value must be in the range [`0`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * One or more `dhcpServer` blocks as defined below.
+     */
     public readonly dhcpServers!: pulumi.Output<outputs.VPCRouterDhcpServer[] | undefined>;
+    /**
+     * One or more `dhcpStaticMapping` blocks as defined below.
+     */
     public readonly dhcpStaticMappings!: pulumi.Output<outputs.VPCRouterDhcpStaticMapping[] | undefined>;
+    /**
+     * One or more `firewall` blocks as defined below.
+     */
     public readonly firewalls!: pulumi.Output<outputs.VPCRouterFirewall[] | undefined>;
     /**
-     * The icon id to attach to the VPCRouter
+     * The icon id to attach to the VPCRouter.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The flag to enable connecting to the Internet from the VPC Router
+     * The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
      */
     public readonly internetConnection!: pulumi.Output<boolean | undefined>;
+    /**
+     * A `l2tp` block as defined below.
+     */
     public readonly l2tp!: pulumi.Output<outputs.VPCRouterL2tp | undefined>;
     /**
-     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
      */
     public readonly plan!: pulumi.Output<string | undefined>;
+    /**
+     * One or more `portForwarding` blocks as defined below.
+     */
     public readonly portForwardings!: pulumi.Output<outputs.VPCRouterPortForwarding[] | undefined>;
+    /**
+     * A `pptp` block as defined below.
+     */
     public readonly pptp!: pulumi.Output<outputs.VPCRouterPptp | undefined>;
     /**
-     * A list of additional network interface setting. This doesn't include primary network interface setting
+     * A list of additional network interface setting. This doesn't include primary network interface setting.
      */
     public readonly privateNetworkInterfaces!: pulumi.Output<outputs.VPCRouterPrivateNetworkInterface[] | undefined>;
     /**
-     * The public ip address of the VPC Router
+     * The public IP address used for the static NAT.
      */
     public /*out*/ readonly publicIp!: pulumi.Output<string>;
     /**
-     * The bit length of the subnet to assign to the public network interface
+     * The bit length of the subnet to assign to the public network interface.
      */
     public /*out*/ readonly publicNetmask!: pulumi.Output<number>;
+    /**
+     * An `publicNetworkInterface` block as defined below. This block is required when `plan` is not `standard`.
+     */
     public readonly publicNetworkInterface!: pulumi.Output<outputs.VPCRouterPublicNetworkInterface | undefined>;
+    /**
+     * One or more `siteToSiteVpn` blocks as defined below.
+     */
     public readonly siteToSiteVpns!: pulumi.Output<outputs.VPCRouterSiteToSiteVpn[] | undefined>;
+    /**
+     * One or more `staticNat` blocks as defined below.
+     */
     public readonly staticNats!: pulumi.Output<outputs.VPCRouterStaticNat[] | undefined>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     public readonly staticRoutes!: pulumi.Output<outputs.VPCRouterStaticRoute[] | undefined>;
     /**
-     * The ip address of the syslog host to which the VPC Router sends logs
+     * The ip address of the syslog host to which the VPC Router sends logs.
      */
     public readonly syslogHost!: pulumi.Output<string | undefined>;
     /**
-     * Any tags to assign to the VPCRouter
+     * Any tags to assign to the VPCRouter.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     public readonly users!: pulumi.Output<outputs.VPCRouterUser[] | undefined>;
     /**
-     * The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+     * The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+     */
+    public readonly version!: pulumi.Output<number | undefined>;
+    /**
+     * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -99,7 +261,8 @@ export class VPCRouter extends pulumi.CustomResource {
     constructor(name: string, args?: VPCRouterArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: VPCRouterArgs | VPCRouterState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as VPCRouterState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["dhcpServers"] = state ? state.dhcpServers : undefined;
@@ -122,6 +285,7 @@ export class VPCRouter extends pulumi.CustomResource {
             inputs["syslogHost"] = state ? state.syslogHost : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["users"] = state ? state.users : undefined;
+            inputs["version"] = state ? state.version : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as VPCRouterArgs | undefined;
@@ -144,16 +308,13 @@ export class VPCRouter extends pulumi.CustomResource {
             inputs["syslogHost"] = args ? args.syslogHost : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["users"] = args ? args.users : undefined;
+            inputs["version"] = args ? args.version : undefined;
             inputs["zone"] = args ? args.zone : undefined;
             inputs["publicIp"] = undefined /*out*/;
             inputs["publicNetmask"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(VPCRouter.__pulumiType, name, inputs, opts);
     }
@@ -164,58 +325,95 @@ export class VPCRouter extends pulumi.CustomResource {
  */
 export interface VPCRouterState {
     /**
-     * The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression. The length of this value must be in the range [`0`-`512`].
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * One or more `dhcpServer` blocks as defined below.
+     */
     readonly dhcpServers?: pulumi.Input<pulumi.Input<inputs.VPCRouterDhcpServer>[]>;
+    /**
+     * One or more `dhcpStaticMapping` blocks as defined below.
+     */
     readonly dhcpStaticMappings?: pulumi.Input<pulumi.Input<inputs.VPCRouterDhcpStaticMapping>[]>;
+    /**
+     * One or more `firewall` blocks as defined below.
+     */
     readonly firewalls?: pulumi.Input<pulumi.Input<inputs.VPCRouterFirewall>[]>;
     /**
-     * The icon id to attach to the VPCRouter
+     * The icon id to attach to the VPCRouter.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag to enable connecting to the Internet from the VPC Router
+     * The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
      */
     readonly internetConnection?: pulumi.Input<boolean>;
+    /**
+     * A `l2tp` block as defined below.
+     */
     readonly l2tp?: pulumi.Input<inputs.VPCRouterL2tp>;
     /**
-     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
      */
     readonly plan?: pulumi.Input<string>;
+    /**
+     * One or more `portForwarding` blocks as defined below.
+     */
     readonly portForwardings?: pulumi.Input<pulumi.Input<inputs.VPCRouterPortForwarding>[]>;
+    /**
+     * A `pptp` block as defined below.
+     */
     readonly pptp?: pulumi.Input<inputs.VPCRouterPptp>;
     /**
-     * A list of additional network interface setting. This doesn't include primary network interface setting
+     * A list of additional network interface setting. This doesn't include primary network interface setting.
      */
     readonly privateNetworkInterfaces?: pulumi.Input<pulumi.Input<inputs.VPCRouterPrivateNetworkInterface>[]>;
     /**
-     * The public ip address of the VPC Router
+     * The public IP address used for the static NAT.
      */
     readonly publicIp?: pulumi.Input<string>;
     /**
-     * The bit length of the subnet to assign to the public network interface
+     * The bit length of the subnet to assign to the public network interface.
      */
     readonly publicNetmask?: pulumi.Input<number>;
+    /**
+     * An `publicNetworkInterface` block as defined below. This block is required when `plan` is not `standard`.
+     */
     readonly publicNetworkInterface?: pulumi.Input<inputs.VPCRouterPublicNetworkInterface>;
+    /**
+     * One or more `siteToSiteVpn` blocks as defined below.
+     */
     readonly siteToSiteVpns?: pulumi.Input<pulumi.Input<inputs.VPCRouterSiteToSiteVpn>[]>;
+    /**
+     * One or more `staticNat` blocks as defined below.
+     */
     readonly staticNats?: pulumi.Input<pulumi.Input<inputs.VPCRouterStaticNat>[]>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.VPCRouterStaticRoute>[]>;
     /**
-     * The ip address of the syslog host to which the VPC Router sends logs
+     * The ip address of the syslog host to which the VPC Router sends logs.
      */
     readonly syslogHost?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the VPCRouter
+     * Any tags to assign to the VPCRouter.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     readonly users?: pulumi.Input<pulumi.Input<inputs.VPCRouterUser>[]>;
     /**
-     * The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+     * The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+     */
+    readonly version?: pulumi.Input<number>;
+    /**
+     * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -225,50 +423,87 @@ export interface VPCRouterState {
  */
 export interface VPCRouterArgs {
     /**
-     * The description of the VPCRouter. The length of this value must be in the range [`1`-`512`]
+     * The description of the expression. The length of this value must be in the range [`0`-`512`].
      */
     readonly description?: pulumi.Input<string>;
+    /**
+     * One or more `dhcpServer` blocks as defined below.
+     */
     readonly dhcpServers?: pulumi.Input<pulumi.Input<inputs.VPCRouterDhcpServer>[]>;
+    /**
+     * One or more `dhcpStaticMapping` blocks as defined below.
+     */
     readonly dhcpStaticMappings?: pulumi.Input<pulumi.Input<inputs.VPCRouterDhcpStaticMapping>[]>;
+    /**
+     * One or more `firewall` blocks as defined below.
+     */
     readonly firewalls?: pulumi.Input<pulumi.Input<inputs.VPCRouterFirewall>[]>;
     /**
-     * The icon id to attach to the VPCRouter
+     * The icon id to attach to the VPCRouter.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The flag to enable connecting to the Internet from the VPC Router
+     * The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
      */
     readonly internetConnection?: pulumi.Input<boolean>;
+    /**
+     * A `l2tp` block as defined below.
+     */
     readonly l2tp?: pulumi.Input<inputs.VPCRouterL2tp>;
     /**
-     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`]
+     * The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]
+     * The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
      */
     readonly plan?: pulumi.Input<string>;
+    /**
+     * One or more `portForwarding` blocks as defined below.
+     */
     readonly portForwardings?: pulumi.Input<pulumi.Input<inputs.VPCRouterPortForwarding>[]>;
+    /**
+     * A `pptp` block as defined below.
+     */
     readonly pptp?: pulumi.Input<inputs.VPCRouterPptp>;
     /**
-     * A list of additional network interface setting. This doesn't include primary network interface setting
+     * A list of additional network interface setting. This doesn't include primary network interface setting.
      */
     readonly privateNetworkInterfaces?: pulumi.Input<pulumi.Input<inputs.VPCRouterPrivateNetworkInterface>[]>;
+    /**
+     * An `publicNetworkInterface` block as defined below. This block is required when `plan` is not `standard`.
+     */
     readonly publicNetworkInterface?: pulumi.Input<inputs.VPCRouterPublicNetworkInterface>;
+    /**
+     * One or more `siteToSiteVpn` blocks as defined below.
+     */
     readonly siteToSiteVpns?: pulumi.Input<pulumi.Input<inputs.VPCRouterSiteToSiteVpn>[]>;
+    /**
+     * One or more `staticNat` blocks as defined below.
+     */
     readonly staticNats?: pulumi.Input<pulumi.Input<inputs.VPCRouterStaticNat>[]>;
+    /**
+     * One or more `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.VPCRouterStaticRoute>[]>;
     /**
-     * The ip address of the syslog host to which the VPC Router sends logs
+     * The ip address of the syslog host to which the VPC Router sends logs.
      */
     readonly syslogHost?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the VPCRouter
+     * Any tags to assign to the VPCRouter.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * One or more `user` blocks as defined below.
+     */
     readonly users?: pulumi.Input<pulumi.Input<inputs.VPCRouterUser>[]>;
     /**
-     * The name of zone that the VPCRouter will be created (e.g. `is1a`, `tk1a`)
+     * The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+     */
+    readonly version?: pulumi.Input<number>;
+    /**
+     * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

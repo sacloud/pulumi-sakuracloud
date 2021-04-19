@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getIcon(args?: GetIconArgs, opts?: pulumi.InvokeOptions): Promise<GetIconResult> & GetIconResult {
+/**
+ * Get information about an existing Icon.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getIcon({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getIcon(args?: GetIconArgs, opts?: pulumi.InvokeOptions): Promise<GetIconResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getIcon(args?: GetIconArgs, opts?: pulumi.InvokeOptions): Promis
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetIconResult> = pulumi.runtime.invoke("sakuracloud:index/getIcon:getIcon", {
+    return pulumi.runtime.invoke("sakuracloud:index/getIcon:getIcon", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getIcon.
  */
 export interface GetIconArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetIconFilter;
 }
 
@@ -35,10 +51,19 @@ export interface GetIconArgs {
 export interface GetIconResult {
     readonly filter?: outputs.GetIconFilter;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the Icon.
+     */
     readonly name: string;
+    /**
+     * Any tags assigned to the Icon.
+     */
     readonly tags: string[];
+    /**
+     * The URL for getting the icon's raw data.
+     */
     readonly url: string;
 }

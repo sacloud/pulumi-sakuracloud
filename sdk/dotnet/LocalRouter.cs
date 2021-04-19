@@ -7,48 +7,140 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Local Router.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var peer = Output.Create(Sakuracloud.GetLocalRouter.InvokeAsync(new Sakuracloud.GetLocalRouterArgs
+    ///         {
+    ///             Filter = new Sakuracloud.Inputs.GetLocalRouterFilterArgs
+    ///             {
+    ///                 Names = 
+    ///                 {
+    ///                     "peer",
+    ///                 },
+    ///             },
+    ///         }));
+    ///         var foobarLocalRouter = new Sakuracloud.LocalRouter("foobarLocalRouter", new Sakuracloud.LocalRouterArgs
+    ///         {
+    ///             Description = "descriptio",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Switch = new Sakuracloud.Inputs.LocalRouterSwitchArgs
+    ///             {
+    ///                 Code = foobarSwitch.Id,
+    ///                 Category = "cloud",
+    ///                 ZoneId = "is1a",
+    ///             },
+    ///             NetworkInterface = new Sakuracloud.Inputs.LocalRouterNetworkInterfaceArgs
+    ///             {
+    ///                 Vip = "192.168.11.1",
+    ///                 IpAddresses = 
+    ///                 {
+    ///                     "192.168.11.11",
+    ///                     "192.168.11.12",
+    ///                 },
+    ///                 Netmask = 24,
+    ///                 Vrid = 101,
+    ///             },
+    ///             StaticRoutes = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.LocalRouterStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "10.0.0.0/24",
+    ///                     NextHop = "192.168.11.2",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.LocalRouterStaticRouteArgs
+    ///                 {
+    ///                     Prefix = "172.16.0.0/16",
+    ///                     NextHop = "192.168.11.3",
+    ///                 },
+    ///             },
+    ///             Peers = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.LocalRouterPeerArgs
+    ///                 {
+    ///                     PeerId = peer.Apply(peer =&gt; peer.Id),
+    ///                     SecretKey = peer.Apply(peer =&gt; peer.SecretKeys[0]),
+    ///                     Description = "description",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/localRouter:LocalRouter")]
     public partial class LocalRouter : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the LocalRouter
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Output("networkInterface")]
         public Output<Outputs.LocalRouterNetworkInterface> NetworkInterface { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `peer` blocks as defined below.
+        /// </summary>
         [Output("peers")]
-        public Output<ImmutableArray<Outputs.LocalRouterPeers>> Peers { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.LocalRouterPeer>> Peers { get; private set; } = null!;
 
         /// <summary>
-        /// A list of secret key used for peering from other LocalRouters
+        /// A list of secret key used for peering from other LocalRouters.
         /// </summary>
         [Output("secretKeys")]
         public Output<ImmutableArray<string>> SecretKeys { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
         [Output("staticRoutes")]
-        public Output<ImmutableArray<Outputs.LocalRouterStaticRoutes>> StaticRoutes { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.LocalRouterStaticRoute>> StaticRoutes { get; private set; } = null!;
 
+        /// <summary>
+        /// A `switch` block as defined below.
+        /// </summary>
         [Output("switch")]
         public Output<Outputs.LocalRouterSwitch> Switch { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the LocalRouter
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
@@ -62,7 +154,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public LocalRouter(string name, LocalRouterArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/localRouter:LocalRouter", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/localRouter:LocalRouter", name, args ?? new LocalRouterArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -100,42 +192,56 @@ namespace Pulumi.SakuraCloud
     public sealed class LocalRouterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the LocalRouter
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface", required: true)]
         public Input<Inputs.LocalRouterNetworkInterfaceArgs> NetworkInterface { get; set; } = null!;
 
         [Input("peers")]
-        private InputList<Inputs.LocalRouterPeersArgs>? _peers;
-        public InputList<Inputs.LocalRouterPeersArgs> Peers
+        private InputList<Inputs.LocalRouterPeerArgs>? _peers;
+
+        /// <summary>
+        /// One or more `peer` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LocalRouterPeerArgs> Peers
         {
-            get => _peers ?? (_peers = new InputList<Inputs.LocalRouterPeersArgs>());
+            get => _peers ?? (_peers = new InputList<Inputs.LocalRouterPeerArgs>());
             set => _peers = value;
         }
 
         [Input("staticRoutes")]
-        private InputList<Inputs.LocalRouterStaticRoutesArgs>? _staticRoutes;
-        public InputList<Inputs.LocalRouterStaticRoutesArgs> StaticRoutes
+        private InputList<Inputs.LocalRouterStaticRouteArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LocalRouterStaticRouteArgs> StaticRoutes
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.LocalRouterStaticRoutesArgs>());
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.LocalRouterStaticRouteArgs>());
             set => _staticRoutes = value;
         }
 
+        /// <summary>
+        /// A `switch` block as defined below.
+        /// </summary>
         [Input("switch", required: true)]
         public Input<Inputs.LocalRouterSwitchArgs> Switch { get; set; } = null!;
 
@@ -143,7 +249,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the LocalRouter
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         public InputList<string> Tags
         {
@@ -159,31 +265,38 @@ namespace Pulumi.SakuraCloud
     public sealed class LocalRouterState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the LocalRouter
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface")]
         public Input<Inputs.LocalRouterNetworkInterfaceGetArgs>? NetworkInterface { get; set; }
 
         [Input("peers")]
-        private InputList<Inputs.LocalRouterPeersGetArgs>? _peers;
-        public InputList<Inputs.LocalRouterPeersGetArgs> Peers
+        private InputList<Inputs.LocalRouterPeerGetArgs>? _peers;
+
+        /// <summary>
+        /// One or more `peer` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LocalRouterPeerGetArgs> Peers
         {
-            get => _peers ?? (_peers = new InputList<Inputs.LocalRouterPeersGetArgs>());
+            get => _peers ?? (_peers = new InputList<Inputs.LocalRouterPeerGetArgs>());
             set => _peers = value;
         }
 
@@ -191,7 +304,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _secretKeys;
 
         /// <summary>
-        /// A list of secret key used for peering from other LocalRouters
+        /// A list of secret key used for peering from other LocalRouters.
         /// </summary>
         public InputList<string> SecretKeys
         {
@@ -200,13 +313,20 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("staticRoutes")]
-        private InputList<Inputs.LocalRouterStaticRoutesGetArgs>? _staticRoutes;
-        public InputList<Inputs.LocalRouterStaticRoutesGetArgs> StaticRoutes
+        private InputList<Inputs.LocalRouterStaticRouteGetArgs>? _staticRoutes;
+
+        /// <summary>
+        /// One or more `static_route` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LocalRouterStaticRouteGetArgs> StaticRoutes
         {
-            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.LocalRouterStaticRoutesGetArgs>());
+            get => _staticRoutes ?? (_staticRoutes = new InputList<Inputs.LocalRouterStaticRouteGetArgs>());
             set => _staticRoutes = value;
         }
 
+        /// <summary>
+        /// A `switch` block as defined below.
+        /// </summary>
         [Input("switch")]
         public Input<Inputs.LocalRouterSwitchGetArgs>? Switch { get; set; }
 
@@ -214,7 +334,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the LocalRouter
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         public InputList<string> Tags
         {
@@ -225,236 +345,5 @@ namespace Pulumi.SakuraCloud
         public LocalRouterState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class LocalRouterNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("vip", required: true)]
-        public Input<string> Vip { get; set; } = null!;
-
-        [Input("vrid", required: true)]
-        public Input<int> Vrid { get; set; } = null!;
-
-        public LocalRouterNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("vip", required: true)]
-        public Input<string> Vip { get; set; } = null!;
-
-        [Input("vrid", required: true)]
-        public Input<int> Vrid { get; set; } = null!;
-
-        public LocalRouterNetworkInterfaceGetArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterPeersArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("peerId", required: true)]
-        public Input<string> PeerId { get; set; } = null!;
-
-        [Input("secretKey", required: true)]
-        public Input<string> SecretKey { get; set; } = null!;
-
-        public LocalRouterPeersArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterPeersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("peerId", required: true)]
-        public Input<string> PeerId { get; set; } = null!;
-
-        [Input("secretKey", required: true)]
-        public Input<string> SecretKey { get; set; } = null!;
-
-        public LocalRouterPeersGetArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterStaticRoutesArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public LocalRouterStaticRoutesArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterStaticRoutesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("nextHop", required: true)]
-        public Input<string> NextHop { get; set; } = null!;
-
-        [Input("prefix", required: true)]
-        public Input<string> Prefix { get; set; } = null!;
-
-        public LocalRouterStaticRoutesGetArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterSwitchArgs : Pulumi.ResourceArgs
-    {
-        [Input("category")]
-        public Input<string>? Category { get; set; }
-
-        [Input("code", required: true)]
-        public Input<string> Code { get; set; } = null!;
-
-        [Input("zoneId", required: true)]
-        public Input<string> ZoneId { get; set; } = null!;
-
-        public LocalRouterSwitchArgs()
-        {
-        }
-    }
-
-    public sealed class LocalRouterSwitchGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("category")]
-        public Input<string>? Category { get; set; }
-
-        [Input("code", required: true)]
-        public Input<string> Code { get; set; } = null!;
-
-        [Input("zoneId", required: true)]
-        public Input<string> ZoneId { get; set; } = null!;
-
-        public LocalRouterSwitchGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class LocalRouterNetworkInterface
-    {
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly int Netmask;
-        public readonly string Vip;
-        public readonly int Vrid;
-
-        [OutputConstructor]
-        private LocalRouterNetworkInterface(
-            ImmutableArray<string> ipAddresses,
-            int netmask,
-            string vip,
-            int vrid)
-        {
-            IpAddresses = ipAddresses;
-            Netmask = netmask;
-            Vip = vip;
-            Vrid = vrid;
-        }
-    }
-
-    [OutputType]
-    public sealed class LocalRouterPeers
-    {
-        public readonly string? Description;
-        public readonly bool? Enabled;
-        public readonly string PeerId;
-        public readonly string SecretKey;
-
-        [OutputConstructor]
-        private LocalRouterPeers(
-            string? description,
-            bool? enabled,
-            string peerId,
-            string secretKey)
-        {
-            Description = description;
-            Enabled = enabled;
-            PeerId = peerId;
-            SecretKey = secretKey;
-        }
-    }
-
-    [OutputType]
-    public sealed class LocalRouterStaticRoutes
-    {
-        public readonly string NextHop;
-        public readonly string Prefix;
-
-        [OutputConstructor]
-        private LocalRouterStaticRoutes(
-            string nextHop,
-            string prefix)
-        {
-            NextHop = nextHop;
-            Prefix = prefix;
-        }
-    }
-
-    [OutputType]
-    public sealed class LocalRouterSwitch
-    {
-        public readonly string? Category;
-        public readonly string Code;
-        public readonly string ZoneId;
-
-        [OutputConstructor]
-        private LocalRouterSwitch(
-            string? category,
-            string code,
-            string zoneId)
-        {
-            Category = category;
-            Code = code;
-            ZoneId = zoneId;
-        }
-    }
     }
 }

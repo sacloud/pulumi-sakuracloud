@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetVPCRouterResult> & GetVPCRouterResult {
+/**
+ * Get information about an existing VPC Router.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getVPCRouter({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetVPCRouterResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOption
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetVPCRouterResult> = pulumi.runtime.invoke("sakuracloud:index/getVPCRouter:getVPCRouter", {
+    return pulumi.runtime.invoke("sakuracloud:index/getVPCRouter:getVPCRouter", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getVPCRouter.
  */
 export interface GetVPCRouterArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetVPCRouterFilter;
+    /**
+     * The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,31 +54,98 @@ export interface GetVPCRouterArgs {
  * A collection of values returned by getVPCRouter.
  */
 export interface GetVPCRouterResult {
+    /**
+     * The description of the static NAT.
+     */
     readonly description: string;
+    /**
+     * A list of `dhcpServer` blocks as defined below.
+     */
     readonly dhcpServers: outputs.GetVPCRouterDhcpServer[];
+    /**
+     * A list of `dhcpStaticMapping` blocks as defined below.
+     */
     readonly dhcpStaticMappings: outputs.GetVPCRouterDhcpStaticMapping[];
     readonly filter?: outputs.GetVPCRouterFilter;
+    /**
+     * A list of `firewall` blocks as defined below.
+     */
     readonly firewalls: outputs.GetVPCRouterFirewall[];
+    /**
+     * The icon id attached to the VPCRouter.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The flag to enable connecting to the Internet from the VPC Router.
+     */
     readonly internetConnection: boolean;
+    /**
+     * A list of `l2tp` blocks as defined below.
+     */
     readonly l2tps: outputs.GetVPCRouterL2tp[];
+    /**
+     * The user name used to authenticate remote access.
+     */
     readonly name: string;
+    /**
+     * The plan name of the VPCRouter. This will be one of [`standard`/`premium`/`highspec`/`highspec4000`].
+     */
     readonly plan: string;
+    /**
+     * A list of `portForwarding` blocks as defined below. This represents a `Reverse NAT`.
+     */
     readonly portForwardings: outputs.GetVPCRouterPortForwarding[];
+    /**
+     * A list of `pptp` blocks as defined below.
+     */
     readonly pptps: outputs.GetVPCRouterPptp[];
+    /**
+     * A list of additional network interface setting. This doesn't include primary network interface setting.
+     */
     readonly privateNetworkInterfaces: outputs.GetVPCRouterPrivateNetworkInterface[];
+    /**
+     * The public IP address used for the static NAT.
+     */
     readonly publicIp: string;
+    /**
+     * The bit length of the subnet to assign to the public network interface.
+     */
     readonly publicNetmask: number;
+    /**
+     * A list of additional network interface setting. This doesn't include primary network interface setting.
+     */
     readonly publicNetworkInterfaces: outputs.GetVPCRouterPublicNetworkInterface[];
+    /**
+     * A list of `siteToSiteVpn` blocks as defined below.
+     */
     readonly siteToSiteVpns: outputs.GetVPCRouterSiteToSiteVpn[];
+    /**
+     * A list of `staticNat` blocks as defined below. This represents a `1:1 NAT`, doing static mapping to both send/receive to/from the Internet. This is only used when `plan` is not `standard`.
+     */
     readonly staticNats: outputs.GetVPCRouterStaticNat[];
+    /**
+     * A list of `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes: outputs.GetVPCRouterStaticRoute[];
+    /**
+     * The ip address of the syslog host to which the VPC Router sends logs.
+     */
     readonly syslogHost: string;
+    /**
+     * Any tags assigned to the VPCRouter.
+     */
     readonly tags: string[];
+    /**
+     * A list of `user` blocks as defined below.
+     */
     readonly users: outputs.GetVPCRouterUser[];
+    /**
+     * The version of the VPC Router.
+     */
+    readonly version: number;
     readonly zone: string;
 }

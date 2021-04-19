@@ -7,78 +7,114 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Disk.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var ubuntu = Output.Create(Sakuracloud.GetArchive.InvokeAsync(new Sakuracloud.GetArchiveArgs
+    ///         {
+    ///             OsType = "ubuntu2004",
+    ///         }));
+    ///         var foobar = new Sakuracloud.Disk("foobar", new Sakuracloud.DiskArgs
+    ///         {
+    ///             Plan = "ssd",
+    ///             Connector = "virtio",
+    ///             Size = 20,
+    ///             SourceArchiveId = ubuntu.Apply(ubuntu =&gt; ubuntu.Id),
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/disk:Disk")]
     public partial class Disk : Pulumi.CustomResource
     {
         /// <summary>
-        /// The name of the disk connector. This must be one of [`virtio`/`ide`]
+        /// The name of the disk connector. This must be one of [`virtio`/`ide`]. Changing this forces a new resource to be created. Default:`virtio`.
         /// </summary>
         [Output("connector")]
         public Output<string?> Connector { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the disk. The length of this value must be in the range [`1`-`512`]
+        /// The description of the disk. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// A list of disk id. The disk will be located to different storage from these disks
+        /// A list of disk id. The disk will be located to different storage from these disks. Changing this forces a new resource to be created.
         /// </summary>
         [Output("distantFroms")]
         public Output<ImmutableArray<string>> DistantFroms { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the disk
+        /// The icon id to attach to the disk.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the disk. The length of this value must be in the range [`1`-`64`]
+        /// The name of the disk. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]
+        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]. Changing this forces a new resource to be created. Default:`ssd`.
         /// </summary>
         [Output("plan")]
         public Output<string?> Plan { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the Server connected to the disk
+        /// The id of the Server connected to the disk.
         /// </summary>
         [Output("serverId")]
         public Output<string> ServerId { get; private set; } = null!;
 
         /// <summary>
-        /// The size of disk in GiB
+        /// The size of disk in GiB. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Output("size")]
         public Output<int?> Size { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceArchiveId")]
         public Output<string?> SourceArchiveId { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("sourceDiskId")]
         public Output<string?> SourceDiskId { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the disk
+        /// Any tags to assign to the disk.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the disk will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -92,7 +128,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Disk(string name, DiskArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/disk:Disk", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/disk:Disk", name, args ?? new DiskArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -130,13 +166,13 @@ namespace Pulumi.SakuraCloud
     public sealed class DiskArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the disk connector. This must be one of [`virtio`/`ide`]
+        /// The name of the disk connector. This must be one of [`virtio`/`ide`]. Changing this forces a new resource to be created. Default:`virtio`.
         /// </summary>
         [Input("connector")]
         public Input<string>? Connector { get; set; }
 
         /// <summary>
-        /// The description of the disk. The length of this value must be in the range [`1`-`512`]
+        /// The description of the disk. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -145,7 +181,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _distantFroms;
 
         /// <summary>
-        /// A list of disk id. The disk will be located to different storage from these disks
+        /// A list of disk id. The disk will be located to different storage from these disks. Changing this forces a new resource to be created.
         /// </summary>
         public InputList<string> DistantFroms
         {
@@ -154,37 +190,37 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The icon id to attach to the disk
+        /// The icon id to attach to the disk.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the disk. The length of this value must be in the range [`1`-`64`]
+        /// The name of the disk. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]
+        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]. Changing this forces a new resource to be created. Default:`ssd`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The size of disk in GiB
+        /// The size of disk in GiB. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveId")]
         public Input<string>? SourceArchiveId { get; set; }
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceDiskId")]
         public Input<string>? SourceDiskId { get; set; }
@@ -193,7 +229,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the disk
+        /// Any tags to assign to the disk.
         /// </summary>
         public InputList<string> Tags
         {
@@ -202,7 +238,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the disk will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -215,13 +251,13 @@ namespace Pulumi.SakuraCloud
     public sealed class DiskState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the disk connector. This must be one of [`virtio`/`ide`]
+        /// The name of the disk connector. This must be one of [`virtio`/`ide`]. Changing this forces a new resource to be created. Default:`virtio`.
         /// </summary>
         [Input("connector")]
         public Input<string>? Connector { get; set; }
 
         /// <summary>
-        /// The description of the disk. The length of this value must be in the range [`1`-`512`]
+        /// The description of the disk. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -230,7 +266,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _distantFroms;
 
         /// <summary>
-        /// A list of disk id. The disk will be located to different storage from these disks
+        /// A list of disk id. The disk will be located to different storage from these disks. Changing this forces a new resource to be created.
         /// </summary>
         public InputList<string> DistantFroms
         {
@@ -239,43 +275,43 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The icon id to attach to the disk
+        /// The icon id to attach to the disk.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the disk. The length of this value must be in the range [`1`-`64`]
+        /// The name of the disk. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]
+        /// The plan name of the disk. This must be one of [`ssd`/`hdd`]. Changing this forces a new resource to be created. Default:`ssd`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The id of the Server connected to the disk
+        /// The id of the Server connected to the disk.
         /// </summary>
         [Input("serverId")]
         public Input<string>? ServerId { get; set; }
 
         /// <summary>
-        /// The size of disk in GiB
+        /// The size of disk in GiB. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// The id of the source archive. This conflicts with [`source_disk_id`]
+        /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceArchiveId")]
         public Input<string>? SourceArchiveId { get; set; }
 
         /// <summary>
-        /// The id of the source disk. This conflicts with [`source_archive_id`]
+        /// The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("sourceDiskId")]
         public Input<string>? SourceDiskId { get; set; }
@@ -284,7 +320,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the disk
+        /// Any tags to assign to the disk.
         /// </summary>
         public InputList<string> Tags
         {
@@ -293,7 +329,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the disk will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the disk will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

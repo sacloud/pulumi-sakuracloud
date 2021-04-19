@@ -2,11 +2,29 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Promise<GetCDROMResult> & GetCDROMResult {
+/**
+ * Get information about an existing CD-ROM.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getCDROM({
+ *     filter: {
+ *         conditions: [{
+ *             name: "Name",
+ *             values: ["Parted Magic 2013_08_01"],
+ *         }],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Promise<GetCDROMResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +33,23 @@ export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Prom
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetCDROMResult> = pulumi.runtime.invoke("sakuracloud:index/getCDROM:getCDROM", {
+    return pulumi.runtime.invoke("sakuracloud:index/getCDROM:getCDROM", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getCDROM.
  */
 export interface GetCDROMArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetCDROMFilter;
+    /**
+     * The name of zone that the CD-ROM is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,15 +57,30 @@ export interface GetCDROMArgs {
  * A collection of values returned by getCDROM.
  */
 export interface GetCDROMResult {
+    /**
+     * The description of the CD-ROM.
+     */
     readonly description: string;
     readonly filter?: outputs.GetCDROMFilter;
+    /**
+     * The icon id attached to the CD-ROM.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the CD-ROM.
+     */
     readonly name: string;
+    /**
+     * The size of CD-ROM in GiB.
+     */
     readonly size: number;
+    /**
+     * Any tags assigned to the CD-ROM.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

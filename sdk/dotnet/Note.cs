@@ -7,42 +7,66 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Note.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.Note("foobar", new Sakuracloud.NoteArgs
+    ///         {
+    ///             Content = File.ReadAllText("startup-script.sh"),
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/note:Note")]
     public partial class Note : Pulumi.CustomResource
     {
         /// <summary>
-        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
         /// </summary>
         [Output("class")]
         public Output<string?> Class { get; private set; } = null!;
 
         /// <summary>
-        /// The content of the Note. This must be specified as a shell script or as a cloud-config
+        /// The content of the Note. This must be specified as a shell script or as a cloud-config.
         /// </summary>
         [Output("content")]
         public Output<string> Content { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Note. This will be computed from special tags within body of `content`
+        /// The description of the Note. This will be computed from special tags within body of `content`.
         /// </summary>
         [Output("description")]
         public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Note
+        /// The icon id to attach to the Note.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Note. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Note. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Note
+        /// Any tags to assign to the Note.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
@@ -56,7 +80,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Note(string name, NoteArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/note:Note", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/note:Note", name, args ?? new NoteArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -94,25 +118,25 @@ namespace Pulumi.SakuraCloud
     public sealed class NoteArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
         /// </summary>
         [Input("class")]
         public Input<string>? Class { get; set; }
 
         /// <summary>
-        /// The content of the Note. This must be specified as a shell script or as a cloud-config
+        /// The content of the Note. This must be specified as a shell script or as a cloud-config.
         /// </summary>
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Note
+        /// The icon id to attach to the Note.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Note. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Note. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -121,7 +145,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Note
+        /// Any tags to assign to the Note.
         /// </summary>
         public InputList<string> Tags
         {
@@ -137,31 +161,31 @@ namespace Pulumi.SakuraCloud
     public sealed class NoteState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+        /// The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
         /// </summary>
         [Input("class")]
         public Input<string>? Class { get; set; }
 
         /// <summary>
-        /// The content of the Note. This must be specified as a shell script or as a cloud-config
+        /// The content of the Note. This must be specified as a shell script or as a cloud-config.
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The description of the Note. This will be computed from special tags within body of `content`
+        /// The description of the Note. This will be computed from special tags within body of `content`.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Note
+        /// The icon id to attach to the Note.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Note. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Note. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -170,7 +194,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Note
+        /// Any tags to assign to the Note.
         /// </summary>
         public InputList<string> Tags
         {

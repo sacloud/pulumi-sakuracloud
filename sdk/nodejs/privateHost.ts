@@ -4,6 +4,24 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Private Host.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = new sakuracloud.PrivateHost("foobar", {
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ * });
+ * ```
+ */
 export class PrivateHost extends pulumi.CustomResource {
     /**
      * Get an existing PrivateHost resource's state with the given name, ID, and optional extra
@@ -12,6 +30,7 @@ export class PrivateHost extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: PrivateHostState, opts?: pulumi.CustomResourceOptions): PrivateHost {
         return new PrivateHost(name, <any>state, { ...opts, id: id });
@@ -32,39 +51,39 @@ export class PrivateHost extends pulumi.CustomResource {
     }
 
     /**
-     * The total number of CPUs assigned to servers on the private host
+     * The total number of CPUs assigned to servers on the private host.
      */
     public /*out*/ readonly assignedCore!: pulumi.Output<number>;
     /**
-     * The total size of memory assigned to servers on the private host
+     * The total size of memory assigned to servers on the private host.
      */
     public /*out*/ readonly assignedMemory!: pulumi.Output<number>;
     /**
-     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`]. Default:`dynamic`.
      */
     public readonly class!: pulumi.Output<string | undefined>;
     /**
-     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The hostname of the private host
+     * The hostname of the private host.
      */
     public /*out*/ readonly hostname!: pulumi.Output<string>;
     /**
-     * The icon id to attach to the PrivateHost
+     * The icon id to attach to the PrivateHost.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Any tags to assign to the PrivateHost
+     * Any tags to assign to the PrivateHost.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -78,7 +97,8 @@ export class PrivateHost extends pulumi.CustomResource {
     constructor(name: string, args?: PrivateHostArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: PrivateHostArgs | PrivateHostState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as PrivateHostState | undefined;
             inputs["assignedCore"] = state ? state.assignedCore : undefined;
             inputs["assignedMemory"] = state ? state.assignedMemory : undefined;
@@ -101,12 +121,8 @@ export class PrivateHost extends pulumi.CustomResource {
             inputs["assignedMemory"] = undefined /*out*/;
             inputs["hostname"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(PrivateHost.__pulumiType, name, inputs, opts);
     }
@@ -117,39 +133,39 @@ export class PrivateHost extends pulumi.CustomResource {
  */
 export interface PrivateHostState {
     /**
-     * The total number of CPUs assigned to servers on the private host
+     * The total number of CPUs assigned to servers on the private host.
      */
     readonly assignedCore?: pulumi.Input<number>;
     /**
-     * The total size of memory assigned to servers on the private host
+     * The total size of memory assigned to servers on the private host.
      */
     readonly assignedMemory?: pulumi.Input<number>;
     /**
-     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`]. Default:`dynamic`.
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The hostname of the private host
+     * The hostname of the private host.
      */
     readonly hostname?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the PrivateHost
+     * The icon id to attach to the PrivateHost.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the PrivateHost
+     * Any tags to assign to the PrivateHost.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -159,27 +175,27 @@ export interface PrivateHostState {
  */
 export interface PrivateHostArgs {
     /**
-     * The class of the PrivateHost. This will be one of [`dynamic`/`ms_windows`]
+     * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`]. Default:`dynamic`.
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`]
+     * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the PrivateHost
+     * The icon id to attach to the PrivateHost.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`]
+     * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the PrivateHost
+     * Any tags to assign to the PrivateHost.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the PrivateHost will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

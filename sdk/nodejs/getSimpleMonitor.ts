@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getSimpleMonitor(args?: GetSimpleMonitorArgs, opts?: pulumi.InvokeOptions): Promise<GetSimpleMonitorResult> & GetSimpleMonitorResult {
+/**
+ * Get information about an existing Simple Monitor.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getSimpleMonitor({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getSimpleMonitor(args?: GetSimpleMonitorArgs, opts?: pulumi.InvokeOptions): Promise<GetSimpleMonitorResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getSimpleMonitor(args?: GetSimpleMonitorArgs, opts?: pulumi.Invo
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetSimpleMonitorResult> = pulumi.runtime.invoke("sakuracloud:index/getSimpleMonitor:getSimpleMonitor", {
+    return pulumi.runtime.invoke("sakuracloud:index/getSimpleMonitor:getSimpleMonitor", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getSimpleMonitor.
  */
 export interface GetSimpleMonitorArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetSimpleMonitorFilter;
 }
 
@@ -33,21 +49,57 @@ export interface GetSimpleMonitorArgs {
  * A collection of values returned by getSimpleMonitor.
  */
 export interface GetSimpleMonitorResult {
+    /**
+     * The interval in seconds between checks.
+     */
     readonly delayLoop: number;
+    /**
+     * The description of the SimpleMonitor.
+     */
     readonly description: string;
+    /**
+     * The flag to enable monitoring by the simple monitor.
+     */
     readonly enabled: boolean;
     readonly filter?: outputs.GetSimpleMonitorFilter;
+    /**
+     * A list of `healthCheck` blocks as defined below.
+     */
     readonly healthChecks: outputs.GetSimpleMonitorHealthCheck[];
+    /**
+     * The icon id attached to the SimpleMonitor.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The flag to enable notification by email.
+     */
     readonly notifyEmailEnabled: boolean;
+    /**
+     * The flag to enable HTML format instead of text format.
+     */
     readonly notifyEmailHtml: boolean;
+    /**
+     * The interval in hours between notification.
+     */
     readonly notifyInterval: number;
+    /**
+     * The flag to enable notification by slack/discord.
+     */
     readonly notifySlackEnabled: boolean;
+    /**
+     * The webhook URL for sending notification by slack/discord.
+     */
     readonly notifySlackWebhook: string;
+    /**
+     * Any tags assigned to the SimpleMonitor.
+     */
     readonly tags: string[];
+    /**
+     * The monitoring target of the simple monitor. This will be IP address or FQDN.
+     */
     readonly target: string;
 }

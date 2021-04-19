@@ -7,72 +7,109 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud SIM.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.SIM("foobar", new Sakuracloud.SIMArgs
+    ///         {
+    ///             Carriers = 
+    ///             {
+    ///                 "softbank",
+    ///                 "docomo",
+    ///                 "kddi",
+    ///             },
+    ///             Description = "description",
+    ///             Enabled = true,
+    ///             Iccid = "your-iccid",
+    ///             Passcode = "your-password",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/sIM:SIM")]
     public partial class SIM : Pulumi.CustomResource
     {
         /// <summary>
-        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
+        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
         /// </summary>
         [Output("carriers")]
         public Output<ImmutableArray<string>> Carriers { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the SIM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SIM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable the SIM
+        /// The flag to enable the SIM. Default:`true`.
         /// </summary>
         [Output("enabled")]
         public Output<bool?> Enabled { get; private set; } = null!;
 
         /// <summary>
-        /// ICCID(Integrated Circuit Card ID) assigned to the SIM
+        /// ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Output("iccid")]
         public Output<string> Iccid { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the SIM
+        /// The icon id to attach to the SIM.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the device to restrict devices that can use the SIM
+        /// The id of the device to restrict devices that can use the SIM.
         /// </summary>
         [Output("imei")]
         public Output<string?> Imei { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address assigned to the SIM
+        /// The IP address assigned to the SIM.
         /// </summary>
         [Output("ipAddress")]
         public Output<string> IpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the MobileGateway which the SIM is assigned
+        /// The id of the MobileGateway which the SIM is assigned.
         /// </summary>
         [Output("mobileGatewayId")]
         public Output<string> MobileGatewayId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the SIM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SIM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The passcord to authenticate the SIM
+        /// The passcord to authenticate the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Output("passcode")]
         public Output<string> Passcode { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the SIM
+        /// Any tags to assign to the SIM.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
@@ -86,7 +123,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public SIM(string name, SIMArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/sIM:SIM", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/sIM:SIM", name, args ?? new SIMArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -127,7 +164,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _carriers;
 
         /// <summary>
-        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
+        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
         /// </summary>
         public InputList<string> Carriers
         {
@@ -136,43 +173,43 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The description of the SIM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SIM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable the SIM
+        /// The flag to enable the SIM. Default:`true`.
         /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
         /// <summary>
-        /// ICCID(Integrated Circuit Card ID) assigned to the SIM
+        /// ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Input("iccid", required: true)]
         public Input<string> Iccid { get; set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the SIM
+        /// The icon id to attach to the SIM.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The id of the device to restrict devices that can use the SIM
+        /// The id of the device to restrict devices that can use the SIM.
         /// </summary>
         [Input("imei")]
         public Input<string>? Imei { get; set; }
 
         /// <summary>
-        /// The name of the SIM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SIM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The passcord to authenticate the SIM
+        /// The passcord to authenticate the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Input("passcode", required: true)]
         public Input<string> Passcode { get; set; } = null!;
@@ -181,7 +218,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the SIM
+        /// Any tags to assign to the SIM.
         /// </summary>
         public InputList<string> Tags
         {
@@ -200,7 +237,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _carriers;
 
         /// <summary>
-        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`
+        /// A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
         /// </summary>
         public InputList<string> Carriers
         {
@@ -209,55 +246,55 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The description of the SIM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the SIM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable the SIM
+        /// The flag to enable the SIM. Default:`true`.
         /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
         /// <summary>
-        /// ICCID(Integrated Circuit Card ID) assigned to the SIM
+        /// ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Input("iccid")]
         public Input<string>? Iccid { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the SIM
+        /// The icon id to attach to the SIM.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The id of the device to restrict devices that can use the SIM
+        /// The id of the device to restrict devices that can use the SIM.
         /// </summary>
         [Input("imei")]
         public Input<string>? Imei { get; set; }
 
         /// <summary>
-        /// The IP address assigned to the SIM
+        /// The IP address assigned to the SIM.
         /// </summary>
         [Input("ipAddress")]
         public Input<string>? IpAddress { get; set; }
 
         /// <summary>
-        /// The id of the MobileGateway which the SIM is assigned
+        /// The id of the MobileGateway which the SIM is assigned.
         /// </summary>
         [Input("mobileGatewayId")]
         public Input<string>? MobileGatewayId { get; set; }
 
         /// <summary>
-        /// The name of the SIM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the SIM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The passcord to authenticate the SIM
+        /// The passcord to authenticate the SIM. Changing this forces a new resource to be created.
         /// </summary>
         [Input("passcode")]
         public Input<string>? Passcode { get; set; }
@@ -266,7 +303,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the SIM
+        /// Any tags to assign to the SIM.
         /// </summary>
         public InputList<string> Tags
         {

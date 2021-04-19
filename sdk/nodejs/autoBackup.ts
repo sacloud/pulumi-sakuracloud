@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Auto Backup.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobarDisk = new sakuracloud.Disk("foobarDisk", {});
+ * const foobarAutoBackup = new sakuracloud.AutoBackup("foobarAutoBackup", {
+ *     diskId: foobarDisk.id,
+ *     weekdays: [
+ *         "mon",
+ *         "tue",
+ *         "wed",
+ *         "thu",
+ *         "fri",
+ *         "sat",
+ *         "sun",
+ *     ],
+ *     maxBackupNum: 5,
+ *     description: "description",
+ *     tags: [
+ *         "tag1",
+ *         "tag2",
+ *     ],
+ * });
+ * ```
+ */
 export class AutoBackup extends pulumi.CustomResource {
     /**
      * Get an existing AutoBackup resource's state with the given name, ID, and optional extra
@@ -12,6 +42,7 @@ export class AutoBackup extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: AutoBackupState, opts?: pulumi.CustomResourceOptions): AutoBackup {
         return new AutoBackup(name, <any>state, { ...opts, id: id });
@@ -32,35 +63,35 @@ export class AutoBackup extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The disk id to backed up
+     * The disk id to backed up. Changing this forces a new resource to be created.
      */
     public readonly diskId!: pulumi.Output<string>;
     /**
-     * The icon id to attach to the AutoBackup
+     * The icon id to attach to the AutoBackup.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The number backup files to keep. This must be in the range [`1`-`10`]
+     * The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
      */
     public readonly maxBackupNum!: pulumi.Output<number | undefined>;
     /**
-     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Any tags to assign to the AutoBackup
+     * Any tags to assign to the AutoBackup.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
-     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
      */
     public readonly weekdays!: pulumi.Output<string[]>;
     /**
-     * The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -74,7 +105,8 @@ export class AutoBackup extends pulumi.CustomResource {
     constructor(name: string, args: AutoBackupArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: AutoBackupArgs | AutoBackupState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as AutoBackupState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["diskId"] = state ? state.diskId : undefined;
@@ -86,10 +118,10 @@ export class AutoBackup extends pulumi.CustomResource {
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as AutoBackupArgs | undefined;
-            if (!args || args.diskId === undefined) {
+            if ((!args || args.diskId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'diskId'");
             }
-            if (!args || args.weekdays === undefined) {
+            if ((!args || args.weekdays === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'weekdays'");
             }
             inputs["description"] = args ? args.description : undefined;
@@ -101,12 +133,8 @@ export class AutoBackup extends pulumi.CustomResource {
             inputs["weekdays"] = args ? args.weekdays : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(AutoBackup.__pulumiType, name, inputs, opts);
     }
@@ -117,35 +145,35 @@ export class AutoBackup extends pulumi.CustomResource {
  */
 export interface AutoBackupState {
     /**
-     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The disk id to backed up
+     * The disk id to backed up. Changing this forces a new resource to be created.
      */
     readonly diskId?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the AutoBackup
+     * The icon id to attach to the AutoBackup.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The number backup files to keep. This must be in the range [`1`-`10`]
+     * The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
      */
     readonly maxBackupNum?: pulumi.Input<number>;
     /**
-     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the AutoBackup
+     * Any tags to assign to the AutoBackup.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
      */
     readonly weekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -155,35 +183,35 @@ export interface AutoBackupState {
  */
 export interface AutoBackupArgs {
     /**
-     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+     * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The disk id to backed up
+     * The disk id to backed up. Changing this forces a new resource to be created.
      */
     readonly diskId: pulumi.Input<string>;
     /**
-     * The icon id to attach to the AutoBackup
+     * The icon id to attach to the AutoBackup.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The number backup files to keep. This must be in the range [`1`-`10`]
+     * The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
      */
     readonly maxBackupNum?: pulumi.Input<number>;
     /**
-     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+     * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the AutoBackup
+     * Any tags to assign to the AutoBackup.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
      */
     readonly weekdays: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

@@ -7,54 +7,89 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud DNS Record.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.DNS("foobar", new Sakuracloud.DNSArgs
+    ///         {
+    ///             Zone = "example.com",
+    ///         });
+    ///         var record1 = new Sakuracloud.DNSRecord("record1", new Sakuracloud.DNSRecordArgs
+    ///         {
+    ///             DnsId = foobar.Id,
+    ///             Type = "A",
+    ///             Value = "192.168.0.1",
+    ///         });
+    ///         var record2 = new Sakuracloud.DNSRecord("record2", new Sakuracloud.DNSRecordArgs
+    ///         {
+    ///             DnsId = foobar.Id,
+    ///             Type = "A",
+    ///             Value = "192.168.0.2",
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/dNSRecord:DNSRecord")]
     public partial class DNSRecord : Pulumi.CustomResource
     {
         /// <summary>
-        /// The id of the DNS resource
+        /// The id of the DNS resource. Changing this forces a new resource to be created.
         /// </summary>
         [Output("dnsId")]
         public Output<string> DnsId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the DNS Record resource
+        /// The name of the DNS Record resource. Changing this forces a new resource to be created.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The number of port. This must be in the range [`1`-`65535`]
+        /// The number of port. This must be in the range [`1`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("priority")]
         public Output<int?> Priority { get; private set; } = null!;
 
         /// <summary>
-        /// The number of the TTL
+        /// The number of the TTL. Changing this forces a new resource to be created. Default:`3600`.
         /// </summary>
         [Output("ttl")]
         public Output<int?> Ttl { get; private set; } = null!;
 
         /// <summary>
-        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
+        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
-        /// The value of the DNS Record
+        /// The value of the DNS Record. Changing this forces a new resource to be created.
         /// </summary>
         [Output("value")]
         public Output<string> Value { get; private set; } = null!;
 
         /// <summary>
-        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("weight")]
         public Output<int?> Weight { get; private set; } = null!;
@@ -68,7 +103,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public DNSRecord(string name, DNSRecordArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/dNSRecord:DNSRecord", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/dNSRecord:DNSRecord", name, args ?? new DNSRecordArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -106,49 +141,49 @@ namespace Pulumi.SakuraCloud
     public sealed class DNSRecordArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the DNS resource
+        /// The id of the DNS resource. Changing this forces a new resource to be created.
         /// </summary>
         [Input("dnsId", required: true)]
         public Input<string> DnsId { get; set; } = null!;
 
         /// <summary>
-        /// The name of the DNS Record resource
+        /// The name of the DNS Record resource. Changing this forces a new resource to be created.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The number of port. This must be in the range [`1`-`65535`]
+        /// The number of port. This must be in the range [`1`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("priority")]
         public Input<int>? Priority { get; set; }
 
         /// <summary>
-        /// The number of the TTL
+        /// The number of the TTL. Changing this forces a new resource to be created. Default:`3600`.
         /// </summary>
         [Input("ttl")]
         public Input<int>? Ttl { get; set; }
 
         /// <summary>
-        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
+        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 
         /// <summary>
-        /// The value of the DNS Record
+        /// The value of the DNS Record. Changing this forces a new resource to be created.
         /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
         /// <summary>
-        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }
@@ -161,49 +196,49 @@ namespace Pulumi.SakuraCloud
     public sealed class DNSRecordState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the DNS resource
+        /// The id of the DNS resource. Changing this forces a new resource to be created.
         /// </summary>
         [Input("dnsId")]
         public Input<string>? DnsId { get; set; }
 
         /// <summary>
-        /// The name of the DNS Record resource
+        /// The name of the DNS Record resource. Changing this forces a new resource to be created.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The number of port. This must be in the range [`1`-`65535`]
+        /// The number of port. This must be in the range [`1`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The priority of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("priority")]
         public Input<int>? Priority { get; set; }
 
         /// <summary>
-        /// The number of the TTL
+        /// The number of the TTL. Changing this forces a new resource to be created. Default:`3600`.
         /// </summary>
         [Input("ttl")]
         public Input<int>? Ttl { get; set; }
 
         /// <summary>
-        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]
+        /// The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// The value of the DNS Record
+        /// The value of the DNS Record. Changing this forces a new resource to be created.
         /// </summary>
         [Input("value")]
         public Input<string>? Value { get; set; }
 
         /// <summary>
-        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]
+        /// The weight of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }

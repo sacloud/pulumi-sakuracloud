@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetContainerRegistry
     {
-        public static Task<GetContainerRegistryResult> GetContainerRegistry(GetContainerRegistryArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetContainerRegistryResult>("sakuracloud:index/getContainerRegistry:getContainerRegistry", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Container Registry.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetContainerRegistry.InvokeAsync(new Sakuracloud.GetContainerRegistryArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetContainerRegistryFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetContainerRegistryResult> InvokeAsync(GetContainerRegistryArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetContainerRegistryResult>("sakuracloud:index/getContainerRegistry:getContainerRegistry", args ?? new GetContainerRegistryArgs(), options.WithVersion());
     }
+
 
     public sealed class GetContainerRegistryArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetContainerRegistryFilterArgs? Filter { get; set; }
 
@@ -25,163 +61,87 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetContainerRegistryResult
     {
+        /// <summary>
+        /// The level of access that allow to users. This will be one of [`readwrite`/`readonly`/`none`].
+        /// </summary>
         public readonly string AccessLevel;
+        /// <summary>
+        /// The description of the ContainerRegistry.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetContainerRegistryFilterResult? Filter;
-        public readonly string Fqdn;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly string SubdomainLabel;
-        public readonly ImmutableArray<string> Tags;
-        public readonly ImmutableArray<Outputs.GetContainerRegistryUsersResult> Users;
-        public readonly string VirtualDomain;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The FQDN for accessing the container registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`.
+        /// </summary>
+        public readonly string Fqdn;
+        /// <summary>
+        /// The icon id attached to the ContainerRegistry.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The user name used to authenticate remote access.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The label at the lowest of the FQDN used when be accessed from users.
+        /// </summary>
+        public readonly string SubdomainLabel;
+        /// <summary>
+        /// Any tags assigned to the ContainerRegistry.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// A list of `user` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetContainerRegistryUserResult> Users;
+        /// <summary>
+        /// The alias for accessing the container registry.
+        /// </summary>
+        public readonly string VirtualDomain;
 
         [OutputConstructor]
         private GetContainerRegistryResult(
             string accessLevel,
+
             string description,
+
             Outputs.GetContainerRegistryFilterResult? filter,
+
             string fqdn,
+
             string iconId,
+
+            string id,
+
             string name,
+
             string subdomainLabel,
+
             ImmutableArray<string> tags,
-            ImmutableArray<Outputs.GetContainerRegistryUsersResult> users,
-            string virtualDomain,
-            string id)
+
+            ImmutableArray<Outputs.GetContainerRegistryUserResult> users,
+
+            string virtualDomain)
         {
             AccessLevel = accessLevel;
             Description = description;
             Filter = filter;
             Fqdn = fqdn;
             IconId = iconId;
+            Id = id;
             Name = name;
             SubdomainLabel = subdomainLabel;
             Tags = tags;
             Users = users;
             VirtualDomain = virtualDomain;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetContainerRegistryFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetContainerRegistryFilterConditionsArgs>? _conditions;
-        public List<GetContainerRegistryFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetContainerRegistryFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetContainerRegistryFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetContainerRegistryFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetContainerRegistryFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetContainerRegistryFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetContainerRegistryFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetContainerRegistryFilterResult
-    {
-        public readonly ImmutableArray<GetContainerRegistryFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetContainerRegistryFilterResult(
-            ImmutableArray<GetContainerRegistryFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetContainerRegistryUsersResult
-    {
-        public readonly string Name;
-        public readonly string Permission;
-
-        [OutputConstructor]
-        private GetContainerRegistryUsersResult(
-            string name,
-            string permission)
-        {
-            Name = name;
-            Permission = permission;
-        }
-    }
     }
 }

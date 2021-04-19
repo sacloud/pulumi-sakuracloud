@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetDatabase
     {
-        public static Task<GetDatabaseResult> GetDatabase(GetDatabaseArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseResult>("sakuracloud:index/getDatabase:getDatabase", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Database.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetDatabase.InvokeAsync(new Sakuracloud.GetDatabaseArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetDatabaseFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetDatabaseResult> InvokeAsync(GetDatabaseArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseResult>("sakuracloud:index/getDatabase:getDatabase", args ?? new GetDatabaseArgs(), options.WithVersion());
     }
+
 
     public sealed class GetDatabaseArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetDatabaseFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Database is in (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,53 +67,112 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetDatabaseResult
     {
-        public readonly ImmutableArray<Outputs.GetDatabaseBackupsResult> Backups;
+        /// <summary>
+        /// A list of `backup` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetDatabaseBackupResult> Backups;
+        /// <summary>
+        /// The type of the database. This will be one of [`mariadb`/`postgres`].
+        /// </summary>
         public readonly string DatabaseType;
+        /// <summary>
+        /// The description of the Database.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetDatabaseFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<Outputs.GetDatabaseNetworkInterfacesResult> NetworkInterfaces;
-        public readonly string Password;
-        public readonly string Plan;
-        public readonly string ReplicaPassword;
-        public readonly string ReplicaUser;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Username;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the Database.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Database.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// A list of `network_interface` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetDatabaseNetworkInterfaceResult> NetworkInterfaces;
+        /// <summary>
+        /// The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+        /// </summary>
+        public readonly ImmutableDictionary<string, string> Parameters;
+        /// <summary>
+        /// The password of default user on the database.
+        /// </summary>
+        public readonly string Password;
+        /// <summary>
+        /// The plan name of the Database. This will be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`].
+        /// </summary>
+        public readonly string Plan;
+        /// <summary>
+        /// The password of user that processing a replication.
+        /// </summary>
+        public readonly string ReplicaPassword;
+        /// <summary>
+        /// The name of user that processing a replication.
+        /// </summary>
+        public readonly string ReplicaUser;
+        /// <summary>
+        /// Any tags assigned to the Database.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The name of default user on the database.
+        /// </summary>
+        public readonly string Username;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetDatabaseResult(
-            ImmutableArray<Outputs.GetDatabaseBackupsResult> backups,
+            ImmutableArray<Outputs.GetDatabaseBackupResult> backups,
+
             string databaseType,
+
             string description,
+
             Outputs.GetDatabaseFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
-            ImmutableArray<Outputs.GetDatabaseNetworkInterfacesResult> networkInterfaces,
+
+            ImmutableArray<Outputs.GetDatabaseNetworkInterfaceResult> networkInterfaces,
+
+            ImmutableDictionary<string, string> parameters,
+
             string password,
+
             string plan,
+
             string replicaPassword,
+
             string replicaUser,
+
             ImmutableArray<string> tags,
+
             string username,
-            string zone,
-            string id)
+
+            string zone)
         {
             Backups = backups;
             DatabaseType = databaseType;
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             NetworkInterfaces = networkInterfaces;
+            Parameters = parameters;
             Password = password;
             Plan = plan;
             ReplicaPassword = replicaPassword;
@@ -82,149 +180,6 @@ namespace Pulumi.SakuraCloud
             Tags = tags;
             Username = username;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetDatabaseFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetDatabaseFilterConditionsArgs>? _conditions;
-        public List<GetDatabaseFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetDatabaseFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetDatabaseFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetDatabaseFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetDatabaseFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetDatabaseBackupsResult
-    {
-        public readonly string Time;
-        public readonly ImmutableArray<string> Weekdays;
-
-        [OutputConstructor]
-        private GetDatabaseBackupsResult(
-            string time,
-            ImmutableArray<string> weekdays)
-        {
-            Time = time;
-            Weekdays = weekdays;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDatabaseFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetDatabaseFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDatabaseFilterResult
-    {
-        public readonly ImmutableArray<GetDatabaseFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetDatabaseFilterResult(
-            ImmutableArray<GetDatabaseFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDatabaseNetworkInterfacesResult
-    {
-        public readonly string Gateway;
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly int Port;
-        public readonly ImmutableArray<string> SourceRanges;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private GetDatabaseNetworkInterfacesResult(
-            string gateway,
-            string ipAddress,
-            int netmask,
-            int port,
-            ImmutableArray<string> sourceRanges,
-            string switchId)
-        {
-            Gateway = gateway;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            Port = port;
-            SourceRanges = sourceRanges;
-            SwitchId = switchId;
-        }
-    }
     }
 }

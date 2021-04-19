@@ -7,34 +7,72 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud ProxyLB ACME Setting.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarProxyLBACME = new Sakuracloud.ProxyLBACME("foobarProxyLBACME", new Sakuracloud.ProxyLBACMEArgs
+    ///         {
+    ///             ProxylbId = sakuracloud_proxylb.Foobar.Id,
+    ///             AcceptTos = true,
+    ///             CommonName = "www.example.com",
+    ///             UpdateDelaySec = 120,
+    ///         });
+    ///         var foobarProxyLB = Output.Create(Sakuracloud.GetProxyLB.InvokeAsync(new Sakuracloud.GetProxyLBArgs
+    ///         {
+    ///             Filter = new Sakuracloud.Inputs.GetProxyLBFilterArgs
+    ///             {
+    ///                 Names = 
+    ///                 {
+    ///                     "foobar",
+    ///                 },
+    ///             },
+    ///         }));
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/proxyLBACME:ProxyLBACME")]
     public partial class ProxyLBACME : Pulumi.CustomResource
     {
         /// <summary>
-        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/).
-        /// This must be set `true` explicitly
+        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
         /// </summary>
         [Output("acceptTos")]
         public Output<bool> AcceptTos { get; private set; } = null!;
 
+        /// <summary>
+        /// A list of `certificate` blocks as defined below.
+        /// </summary>
         [Output("certificates")]
-        public Output<ImmutableArray<Outputs.ProxyLBACMECertificates>> Certificates { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.ProxyLBACMECertificate>> Certificates { get; private set; } = null!;
 
         /// <summary>
-        /// The FQDN used by ACME. This must set resolvable value
+        /// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         /// </summary>
         [Output("commonName")]
         public Output<string> CommonName { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the ProxyLB that set ACME settings to
+        /// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
         /// </summary>
         [Output("proxylbId")]
         public Output<string> ProxylbId { get; private set; } = null!;
 
         /// <summary>
-        /// The wait time in seconds. This typically used for waiting for a DNS propagation
+        /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         /// </summary>
         [Output("updateDelaySec")]
         public Output<int?> UpdateDelaySec { get; private set; } = null!;
@@ -48,7 +86,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public ProxyLBACME(string name, ProxyLBACMEArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/proxyLBACME:ProxyLBACME", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/proxyLBACME:ProxyLBACME", name, args ?? new ProxyLBACMEArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -86,26 +124,25 @@ namespace Pulumi.SakuraCloud
     public sealed class ProxyLBACMEArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/).
-        /// This must be set `true` explicitly
+        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
         /// </summary>
         [Input("acceptTos", required: true)]
         public Input<bool> AcceptTos { get; set; } = null!;
 
         /// <summary>
-        /// The FQDN used by ACME. This must set resolvable value
+        /// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         /// </summary>
         [Input("commonName", required: true)]
         public Input<string> CommonName { get; set; } = null!;
 
         /// <summary>
-        /// The id of the ProxyLB that set ACME settings to
+        /// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
         /// </summary>
         [Input("proxylbId", required: true)]
         public Input<string> ProxylbId { get; set; } = null!;
 
         /// <summary>
-        /// The wait time in seconds. This typically used for waiting for a DNS propagation
+        /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         /// </summary>
         [Input("updateDelaySec")]
         public Input<int>? UpdateDelaySec { get; set; }
@@ -118,34 +155,37 @@ namespace Pulumi.SakuraCloud
     public sealed class ProxyLBACMEState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/).
-        /// This must be set `true` explicitly
+        /// The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
         /// </summary>
         [Input("acceptTos")]
         public Input<bool>? AcceptTos { get; set; }
 
         [Input("certificates")]
-        private InputList<Inputs.ProxyLBACMECertificatesGetArgs>? _certificates;
-        public InputList<Inputs.ProxyLBACMECertificatesGetArgs> Certificates
+        private InputList<Inputs.ProxyLBACMECertificateGetArgs>? _certificates;
+
+        /// <summary>
+        /// A list of `certificate` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.ProxyLBACMECertificateGetArgs> Certificates
         {
-            get => _certificates ?? (_certificates = new InputList<Inputs.ProxyLBACMECertificatesGetArgs>());
+            get => _certificates ?? (_certificates = new InputList<Inputs.ProxyLBACMECertificateGetArgs>());
             set => _certificates = value;
         }
 
         /// <summary>
-        /// The FQDN used by ACME. This must set resolvable value
+        /// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         /// </summary>
         [Input("commonName")]
         public Input<string>? CommonName { get; set; }
 
         /// <summary>
-        /// The id of the ProxyLB that set ACME settings to
+        /// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
         /// </summary>
         [Input("proxylbId")]
         public Input<string>? ProxylbId { get; set; }
 
         /// <summary>
-        /// The wait time in seconds. This typically used for waiting for a DNS propagation
+        /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         /// </summary>
         [Input("updateDelaySec")]
         public Input<int>? UpdateDelaySec { get; set; }
@@ -153,94 +193,5 @@ namespace Pulumi.SakuraCloud
         public ProxyLBACMEState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class ProxyLBACMECertificatesAdditionalCertificatesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("intermediateCert")]
-        public Input<string>? IntermediateCert { get; set; }
-
-        [Input("privateKey")]
-        public Input<string>? PrivateKey { get; set; }
-
-        [Input("serverCert")]
-        public Input<string>? ServerCert { get; set; }
-
-        public ProxyLBACMECertificatesAdditionalCertificatesGetArgs()
-        {
-        }
-    }
-
-    public sealed class ProxyLBACMECertificatesGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("additionalCertificates")]
-        private InputList<ProxyLBACMECertificatesAdditionalCertificatesGetArgs>? _additionalCertificates;
-        public InputList<ProxyLBACMECertificatesAdditionalCertificatesGetArgs> AdditionalCertificates
-        {
-            get => _additionalCertificates ?? (_additionalCertificates = new InputList<ProxyLBACMECertificatesAdditionalCertificatesGetArgs>());
-            set => _additionalCertificates = value;
-        }
-
-        [Input("intermediateCert")]
-        public Input<string>? IntermediateCert { get; set; }
-
-        [Input("privateKey")]
-        public Input<string>? PrivateKey { get; set; }
-
-        [Input("serverCert")]
-        public Input<string>? ServerCert { get; set; }
-
-        public ProxyLBACMECertificatesGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class ProxyLBACMECertificates
-    {
-        public readonly ImmutableArray<ProxyLBACMECertificatesAdditionalCertificates> AdditionalCertificates;
-        public readonly string IntermediateCert;
-        public readonly string PrivateKey;
-        public readonly string ServerCert;
-
-        [OutputConstructor]
-        private ProxyLBACMECertificates(
-            ImmutableArray<ProxyLBACMECertificatesAdditionalCertificates> additionalCertificates,
-            string intermediateCert,
-            string privateKey,
-            string serverCert)
-        {
-            AdditionalCertificates = additionalCertificates;
-            IntermediateCert = intermediateCert;
-            PrivateKey = privateKey;
-            ServerCert = serverCert;
-        }
-    }
-
-    [OutputType]
-    public sealed class ProxyLBACMECertificatesAdditionalCertificates
-    {
-        public readonly string IntermediateCert;
-        public readonly string PrivateKey;
-        public readonly string ServerCert;
-
-        [OutputConstructor]
-        private ProxyLBACMECertificatesAdditionalCertificates(
-            string intermediateCert,
-            string privateKey,
-            string serverCert)
-        {
-            IntermediateCert = intermediateCert;
-            PrivateKey = privateKey;
-            ServerCert = serverCert;
-        }
-    }
     }
 }

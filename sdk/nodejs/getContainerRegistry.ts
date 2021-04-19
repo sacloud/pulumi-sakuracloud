@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getContainerRegistry(args?: GetContainerRegistryArgs, opts?: pulumi.InvokeOptions): Promise<GetContainerRegistryResult> & GetContainerRegistryResult {
+/**
+ * Get information about an existing Container Registry.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getContainerRegistry({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getContainerRegistry(args?: GetContainerRegistryArgs, opts?: pulumi.InvokeOptions): Promise<GetContainerRegistryResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getContainerRegistry(args?: GetContainerRegistryArgs, opts?: pul
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetContainerRegistryResult> = pulumi.runtime.invoke("sakuracloud:index/getContainerRegistry:getContainerRegistry", {
+    return pulumi.runtime.invoke("sakuracloud:index/getContainerRegistry:getContainerRegistry", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getContainerRegistry.
  */
 export interface GetContainerRegistryArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetContainerRegistryFilter;
 }
 
@@ -33,18 +49,45 @@ export interface GetContainerRegistryArgs {
  * A collection of values returned by getContainerRegistry.
  */
 export interface GetContainerRegistryResult {
+    /**
+     * The level of access that allow to users. This will be one of [`readwrite`/`readonly`/`none`].
+     */
     readonly accessLevel: string;
+    /**
+     * The description of the ContainerRegistry.
+     */
     readonly description: string;
     readonly filter?: outputs.GetContainerRegistryFilter;
+    /**
+     * The FQDN for accessing the container registry. FQDN is built from `subdomainLabel` + `.sakuracr.jp`.
+     */
     readonly fqdn: string;
+    /**
+     * The icon id attached to the ContainerRegistry.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The user name used to authenticate remote access.
+     */
     readonly name: string;
+    /**
+     * The label at the lowest of the FQDN used when be accessed from users.
+     */
     readonly subdomainLabel: string;
+    /**
+     * Any tags assigned to the ContainerRegistry.
+     */
     readonly tags: string[];
+    /**
+     * A list of `user` blocks as defined below.
+     */
     readonly users: outputs.GetContainerRegistryUser[];
+    /**
+     * The alias for accessing the container registry.
+     */
     readonly virtualDomain: string;
 }

@@ -7,60 +7,87 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Subnet.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarInternet = new Sakuracloud.Internet("foobarInternet", new Sakuracloud.InternetArgs
+    ///         {
+    ///         });
+    ///         var foobarSubnet = new Sakuracloud.Subnet("foobarSubnet", new Sakuracloud.SubnetArgs
+    ///         {
+    ///             InternetId = foobarInternet.Id,
+    ///             NextHop = foobarInternet.MinIpAddress,
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/subnet:Subnet")]
     public partial class Subnet : Pulumi.CustomResource
     {
         /// <summary>
-        /// The id of the switch+router resource that the subnet belongs
+        /// The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
         /// </summary>
         [Output("internetId")]
         public Output<string> InternetId { get; private set; } = null!;
 
         /// <summary>
-        /// A list of assigned global address to the subnet
+        /// A list of assigned global address to the subnet.
         /// </summary>
         [Output("ipAddresses")]
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum IP address in assigned global addresses to the subnet
+        /// Maximum IP address in assigned global addresses to the subnet.
         /// </summary>
         [Output("maxIpAddress")]
         public Output<string> MaxIpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// Minimum IP address in assigned global addresses to the subnet
+        /// Minimum IP address in assigned global addresses to the subnet.
         /// </summary>
         [Output("minIpAddress")]
         public Output<string> MinIpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Output("netmask")]
         public Output<int?> Netmask { get; private set; } = null!;
 
         /// <summary>
-        /// The IPv4 network address assigned to the Subnet
+        /// The IPv4 network address assigned to the Subnet.
         /// </summary>
         [Output("networkAddress")]
         public Output<string> NetworkAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The ip address of the next-hop at the subnet
+        /// The ip address of the next-hop at the subnet.
         /// </summary>
         [Output("nextHop")]
         public Output<string> NextHop { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the switch connected from the Subnet
+        /// The id of the switch connected from the Subnet.
         /// </summary>
         [Output("switchId")]
         public Output<string> SwitchId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -74,7 +101,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Subnet(string name, SubnetArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/subnet:Subnet", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/subnet:Subnet", name, args ?? new SubnetArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -112,25 +139,25 @@ namespace Pulumi.SakuraCloud
     public sealed class SubnetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the switch+router resource that the subnet belongs
+        /// The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
         /// </summary>
         [Input("internetId", required: true)]
         public Input<string> InternetId { get; set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
         /// <summary>
-        /// The ip address of the next-hop at the subnet
+        /// The ip address of the next-hop at the subnet.
         /// </summary>
         [Input("nextHop", required: true)]
         public Input<string> NextHop { get; set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -143,7 +170,7 @@ namespace Pulumi.SakuraCloud
     public sealed class SubnetState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The id of the switch+router resource that the subnet belongs
+        /// The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
         /// </summary>
         [Input("internetId")]
         public Input<string>? InternetId { get; set; }
@@ -152,7 +179,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// A list of assigned global address to the subnet
+        /// A list of assigned global address to the subnet.
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -161,43 +188,43 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// Maximum IP address in assigned global addresses to the subnet
+        /// Maximum IP address in assigned global addresses to the subnet.
         /// </summary>
         [Input("maxIpAddress")]
         public Input<string>? MaxIpAddress { get; set; }
 
         /// <summary>
-        /// Minimum IP address in assigned global addresses to the subnet
+        /// Minimum IP address in assigned global addresses to the subnet.
         /// </summary>
         [Input("minIpAddress")]
         public Input<string>? MinIpAddress { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]
+        /// The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
         /// <summary>
-        /// The IPv4 network address assigned to the Subnet
+        /// The IPv4 network address assigned to the Subnet.
         /// </summary>
         [Input("networkAddress")]
         public Input<string>? NetworkAddress { get; set; }
 
         /// <summary>
-        /// The ip address of the next-hop at the subnet
+        /// The ip address of the next-hop at the subnet.
         /// </summary>
         [Input("nextHop")]
         public Input<string>? NextHop { get; set; }
 
         /// <summary>
-        /// The id of the switch connected from the Subnet
+        /// The id of the switch connected from the Subnet.
         /// </summary>
         [Input("switchId")]
         public Input<string>? SwitchId { get; set; }
 
         /// <summary>
-        /// The name of zone that the Subnet will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

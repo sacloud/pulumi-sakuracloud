@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Bridge.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = new sakuracloud.Bridge("foobar", {description: "description"});
+ * const is1a = new sakuracloud.Switch("is1a", {
+ *     description: "description",
+ *     bridgeId: foobar.id,
+ *     zone: "is1a",
+ * });
+ * const is1b = new sakuracloud.Switch("is1b", {
+ *     description: "description",
+ *     bridgeId: foobar.id,
+ *     zone: "is1b",
+ * });
+ * ```
+ */
 export class Bridge extends pulumi.CustomResource {
     /**
      * Get an existing Bridge resource's state with the given name, ID, and optional extra
@@ -12,6 +34,7 @@ export class Bridge extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: BridgeState, opts?: pulumi.CustomResourceOptions): Bridge {
         return new Bridge(name, <any>state, { ...opts, id: id });
@@ -32,15 +55,15 @@ export class Bridge extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
 
@@ -54,7 +77,8 @@ export class Bridge extends pulumi.CustomResource {
     constructor(name: string, args?: BridgeArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: BridgeArgs | BridgeState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as BridgeState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["name"] = state ? state.name : undefined;
@@ -65,12 +89,8 @@ export class Bridge extends pulumi.CustomResource {
             inputs["name"] = args ? args.name : undefined;
             inputs["zone"] = args ? args.zone : undefined;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Bridge.__pulumiType, name, inputs, opts);
     }
@@ -81,15 +101,15 @@ export class Bridge extends pulumi.CustomResource {
  */
 export interface BridgeState {
     /**
-     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }
@@ -99,15 +119,15 @@ export interface BridgeState {
  */
 export interface BridgeArgs {
     /**
-     * The description of the Bridge. The length of this value must be in the range [`1`-`512`]
+     * The description of the Bridge. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the Bridge. The length of this value must be in the range [`1`-`64`]
+     * The name of the Bridge. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The name of zone that the Bridge will be created (e.g. `is1a`, `tk1a`)
+     * The name of zone that the Bridge will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
 }

@@ -7,78 +7,156 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Database.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var config = new Config();
+    ///         var username = config.RequireObject&lt;dynamic&gt;("username");
+    ///         var password = config.RequireObject&lt;dynamic&gt;("password");
+    ///         var replicaPassword = config.RequireObject&lt;dynamic&gt;("replicaPassword");
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var foobarDatabase = new Sakuracloud.Database("foobarDatabase", new Sakuracloud.DatabaseArgs
+    ///         {
+    ///             DatabaseType = "mariadb",
+    ///             Plan = "30g",
+    ///             Username = username,
+    ///             Password = password,
+    ///             ReplicaPassword = replicaPassword,
+    ///             NetworkInterface = new Sakuracloud.Inputs.DatabaseNetworkInterfaceArgs
+    ///             {
+    ///                 SwitchId = foobarSwitch.Id,
+    ///                 IpAddress = "192.168.11.11",
+    ///                 Netmask = 24,
+    ///                 Gateway = "192.168.11.1",
+    ///                 Port = 3306,
+    ///                 SourceRanges = 
+    ///                 {
+    ///                     "192.168.11.0/24",
+    ///                     "192.168.12.0/24",
+    ///                 },
+    ///             },
+    ///             Backup = new Sakuracloud.Inputs.DatabaseBackupArgs
+    ///             {
+    ///                 Time = "00:00",
+    ///                 Weekdays = 
+    ///                 {
+    ///                     "mon",
+    ///                     "tue",
+    ///                 },
+    ///             },
+    ///             Parameters = 
+    ///             {
+    ///                 { "max_connections", "100" },
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/database:Database")]
     public partial class Database : Pulumi.CustomResource
     {
+        /// <summary>
+        /// A `backup` block as defined below.
+        /// </summary>
         [Output("backup")]
         public Output<Outputs.DatabaseBackup?> Backup { get; private set; } = null!;
 
         /// <summary>
-        /// The type of the database. This must be one of [`mariadb`/`postgres`]
+        /// The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
         /// </summary>
         [Output("databaseType")]
         public Output<string?> DatabaseType { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Database
+        /// The icon id to attach to the Database.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Output("networkInterface")]
         public Output<Outputs.DatabaseNetworkInterface> NetworkInterface { get; private set; } = null!;
 
         /// <summary>
-        /// The password of default user on the database
+        /// The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+        /// </summary>
+        [Output("parameters")]
+        public Output<ImmutableDictionary<string, string>?> Parameters { get; private set; } = null!;
+
+        /// <summary>
+        /// The password of default user on the database.
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
-        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
         /// </summary>
         [Output("plan")]
         public Output<string?> Plan { get; private set; } = null!;
 
         /// <summary>
-        /// The password of user that processing a replication
+        /// The password of user that processing a replication.
         /// </summary>
         [Output("replicaPassword")]
         public Output<string?> ReplicaPassword { get; private set; } = null!;
 
         /// <summary>
-        /// The name of user that processing a replication
+        /// The name of user that processing a replication. Default:`replica`.
         /// </summary>
         [Output("replicaUser")]
         public Output<string?> ReplicaUser { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Database
+        /// Any tags to assign to the Database.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("username")]
         public Output<string> Username { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -92,7 +170,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Database(string name, DatabaseArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/database:Database", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/database:Database", name, args ?? new DatabaseArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -129,56 +207,74 @@ namespace Pulumi.SakuraCloud
 
     public sealed class DatabaseArgs : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A `backup` block as defined below.
+        /// </summary>
         [Input("backup")]
         public Input<Inputs.DatabaseBackupArgs>? Backup { get; set; }
 
         /// <summary>
-        /// The type of the database. This must be one of [`mariadb`/`postgres`]
+        /// The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
         /// </summary>
         [Input("databaseType")]
         public Input<string>? DatabaseType { get; set; }
 
         /// <summary>
-        /// The description of the Database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Database
+        /// The icon id to attach to the Database.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface", required: true)]
         public Input<Inputs.DatabaseNetworkInterfaceArgs> NetworkInterface { get; set; } = null!;
 
+        [Input("parameters")]
+        private InputMap<string>? _parameters;
+
         /// <summary>
-        /// The password of default user on the database
+        /// The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+        /// </summary>
+        public InputMap<string> Parameters
+        {
+            get => _parameters ?? (_parameters = new InputMap<string>());
+            set => _parameters = value;
+        }
+
+        /// <summary>
+        /// The password of default user on the database.
         /// </summary>
         [Input("password", required: true)]
         public Input<string> Password { get; set; } = null!;
 
         /// <summary>
-        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The password of user that processing a replication
+        /// The password of user that processing a replication.
         /// </summary>
         [Input("replicaPassword")]
         public Input<string>? ReplicaPassword { get; set; }
 
         /// <summary>
-        /// The name of user that processing a replication
+        /// The name of user that processing a replication. Default:`replica`.
         /// </summary>
         [Input("replicaUser")]
         public Input<string>? ReplicaUser { get; set; }
@@ -187,7 +283,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Database
+        /// Any tags to assign to the Database.
         /// </summary>
         public InputList<string> Tags
         {
@@ -196,13 +292,13 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("username", required: true)]
         public Input<string> Username { get; set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -214,56 +310,74 @@ namespace Pulumi.SakuraCloud
 
     public sealed class DatabaseState : Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// A `backup` block as defined below.
+        /// </summary>
         [Input("backup")]
         public Input<Inputs.DatabaseBackupGetArgs>? Backup { get; set; }
 
         /// <summary>
-        /// The type of the database. This must be one of [`mariadb`/`postgres`]
+        /// The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
         /// </summary>
         [Input("databaseType")]
         public Input<string>? DatabaseType { get; set; }
 
         /// <summary>
-        /// The description of the Database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Database
+        /// The icon id to attach to the Database.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface")]
         public Input<Inputs.DatabaseNetworkInterfaceGetArgs>? NetworkInterface { get; set; }
 
+        [Input("parameters")]
+        private InputMap<string>? _parameters;
+
         /// <summary>
-        /// The password of default user on the database
+        /// The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+        /// </summary>
+        public InputMap<string> Parameters
+        {
+            get => _parameters ?? (_parameters = new InputMap<string>());
+            set => _parameters = value;
+        }
+
+        /// <summary>
+        /// The password of default user on the database.
         /// </summary>
         [Input("password")]
         public Input<string>? Password { get; set; }
 
         /// <summary>
-        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]
+        /// The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
 
         /// <summary>
-        /// The password of user that processing a replication
+        /// The password of user that processing a replication.
         /// </summary>
         [Input("replicaPassword")]
         public Input<string>? ReplicaPassword { get; set; }
 
         /// <summary>
-        /// The name of user that processing a replication
+        /// The name of user that processing a replication. Default:`replica`.
         /// </summary>
         [Input("replicaUser")]
         public Input<string>? ReplicaUser { get; set; }
@@ -272,7 +386,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Database
+        /// Any tags to assign to the Database.
         /// </summary>
         public InputList<string> Tags
         {
@@ -281,13 +395,13 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]
+        /// The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("username")]
         public Input<string>? Username { get; set; }
 
         /// <summary>
-        /// The name of zone that the Database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -295,153 +409,5 @@ namespace Pulumi.SakuraCloud
         public DatabaseState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class DatabaseBackupArgs : Pulumi.ResourceArgs
-    {
-        [Input("time")]
-        public Input<string>? Time { get; set; }
-
-        [Input("weekdays")]
-        private InputList<string>? _weekdays;
-        public InputList<string> Weekdays
-        {
-            get => _weekdays ?? (_weekdays = new InputList<string>());
-            set => _weekdays = value;
-        }
-
-        public DatabaseBackupArgs()
-        {
-        }
-    }
-
-    public sealed class DatabaseBackupGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("time")]
-        public Input<string>? Time { get; set; }
-
-        [Input("weekdays")]
-        private InputList<string>? _weekdays;
-        public InputList<string> Weekdays
-        {
-            get => _weekdays ?? (_weekdays = new InputList<string>());
-            set => _weekdays = value;
-        }
-
-        public DatabaseBackupGetArgs()
-        {
-        }
-    }
-
-    public sealed class DatabaseNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway", required: true)]
-        public Input<string> Gateway { get; set; } = null!;
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("sourceRanges")]
-        private InputList<string>? _sourceRanges;
-        public InputList<string> SourceRanges
-        {
-            get => _sourceRanges ?? (_sourceRanges = new InputList<string>());
-            set => _sourceRanges = value;
-        }
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public DatabaseNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class DatabaseNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway", required: true)]
-        public Input<string> Gateway { get; set; } = null!;
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("port")]
-        public Input<int>? Port { get; set; }
-
-        [Input("sourceRanges")]
-        private InputList<string>? _sourceRanges;
-        public InputList<string> SourceRanges
-        {
-            get => _sourceRanges ?? (_sourceRanges = new InputList<string>());
-            set => _sourceRanges = value;
-        }
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        public DatabaseNetworkInterfaceGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class DatabaseBackup
-    {
-        public readonly string? Time;
-        public readonly ImmutableArray<string> Weekdays;
-
-        [OutputConstructor]
-        private DatabaseBackup(
-            string? time,
-            ImmutableArray<string> weekdays)
-        {
-            Time = time;
-            Weekdays = weekdays;
-        }
-    }
-
-    [OutputType]
-    public sealed class DatabaseNetworkInterface
-    {
-        public readonly string Gateway;
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly int? Port;
-        public readonly ImmutableArray<string> SourceRanges;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private DatabaseNetworkInterface(
-            string gateway,
-            string ipAddress,
-            int netmask,
-            int? port,
-            ImmutableArray<string> sourceRanges,
-            string switchId)
-        {
-            Gateway = gateway;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            Port = port;
-            SourceRanges = sourceRanges;
-            SwitchId = switchId;
-        }
-    }
     }
 }

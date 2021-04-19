@@ -7,19 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetServerVNCInfo
     {
-        public static Task<GetServerVNCInfoResult> GetServerVNCInfo(GetServerVNCInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServerVNCInfoResult>("sakuracloud:index/getServerVNCInfo:getServerVNCInfo", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about VNC for connecting to an existing Server.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetServerVNCInfo.InvokeAsync(new Sakuracloud.GetServerVNCInfoArgs
+        ///         {
+        ///             ServerId = sakuracloud_server.Foobar.Id,
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetServerVNCInfoResult> InvokeAsync(GetServerVNCInfoArgs args, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetServerVNCInfoResult>("sakuracloud:index/getServerVNCInfo:getServerVNCInfo", args ?? new GetServerVNCInfoArgs(), options.WithVersion());
     }
+
 
     public sealed class GetServerVNCInfoArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The id of the Server.
+        /// </summary>
         [Input("serverId", required: true)]
         public string ServerId { get; set; } = null!;
 
+        /// <summary>
+        /// The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,34 +61,49 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetServerVNCInfoResult
     {
+        /// <summary>
+        /// The host name for connecting by VNC.
+        /// </summary>
         public readonly string Host;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
+        /// </summary>
+        public readonly string Id;
+        /// <summary>
+        /// The password for connecting by VNC.
+        /// </summary>
         public readonly string Password;
+        /// <summary>
+        /// The port number for connecting by VNC.
+        /// </summary>
         public readonly int Port;
         public readonly string ServerId;
         public readonly string Zone;
-        /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
-        /// </summary>
-        public readonly string Id;
 
         [OutputConstructor]
         private GetServerVNCInfoResult(
             string host,
+
+            string id,
+
             string password,
+
             int port,
+
             string serverId,
-            string zone,
-            string id)
+
+            string zone)
         {
             Host = host;
+            Id = id;
             Password = password;
             Port = port;
             ServerId = serverId;
             Zone = zone;
-            Id = id;
         }
     }
 }

@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getProxyLB(args?: GetProxyLBArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyLBResult> & GetProxyLBResult {
+/**
+ * Get information about an existing ProxyLB.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getProxyLB({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getProxyLB(args?: GetProxyLBArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyLBResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getProxyLB(args?: GetProxyLBArgs, opts?: pulumi.InvokeOptions): 
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetProxyLBResult> = pulumi.runtime.invoke("sakuracloud:index/getProxyLB:getProxyLB", {
+    return pulumi.runtime.invoke("sakuracloud:index/getProxyLB:getProxyLB", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getProxyLB.
  */
 export interface GetProxyLBArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetProxyLBFilter;
 }
 
@@ -33,27 +49,85 @@ export interface GetProxyLBArgs {
  * A collection of values returned by getProxyLB.
  */
 export interface GetProxyLBResult {
+    /**
+     * A list of `bindPort` blocks as defined below.
+     */
     readonly bindPorts: outputs.GetProxyLBBindPort[];
+    /**
+     * A list of `certificate` blocks as defined below.
+     */
     readonly certificates: outputs.GetProxyLBCertificate[];
+    /**
+     * The description of the ProxyLB.
+     */
     readonly description: string;
     readonly filter?: outputs.GetProxyLBFilter;
+    /**
+     * The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
+     */
     readonly fqdn: string;
+    /**
+     * The flag to enable gzip compression.
+     */
+    readonly gzip: boolean;
+    /**
+     * A list of `healthCheck` blocks as defined below.
+     */
     readonly healthChecks: outputs.GetProxyLBHealthCheck[];
+    /**
+     * The icon id attached to the ProxyLB.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the ProxyLB.
+     */
     readonly name: string;
+    /**
+     * The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+     */
     readonly plan: number;
+    /**
+     * A list of CIDR block used by the ProxyLB to access the server.
+     */
     readonly proxyNetworks: string[];
+    /**
+     * The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
+     */
     readonly region: string;
+    /**
+     * A list of `rule` blocks as defined below.
+     */
     readonly rules: outputs.GetProxyLBRule[];
+    /**
+     * A list of `server` blocks as defined below.
+     */
     readonly servers: outputs.GetProxyLBServer[];
+    /**
+     * A list of `sorryServer` blocks as defined below.
+     */
     readonly sorryServers: outputs.GetProxyLBSorryServer[];
+    /**
+     * The flag to enable sticky session.
+     */
     readonly stickySession: boolean;
+    /**
+     * Any tags assigned to the ProxyLB.
+     */
     readonly tags: string[];
+    /**
+     * The timeout duration in seconds.
+     */
     readonly timeout: number;
+    /**
+     * The virtual IP address assigned to the ProxyLB.
+     */
     readonly vip: string;
+    /**
+     * The flag to enable VIP fail-over.
+     */
     readonly vipFailover: boolean;
 }

@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetNFS
     {
-        public static Task<GetNFSResult> GetNFS(GetNFSArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNFSResult>("sakuracloud:index/getNFS:getNFS", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing NFS.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetNFS.InvokeAsync(new Sakuracloud.GetNFSArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetNFSFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetNFSResult> InvokeAsync(GetNFSArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetNFSResult>("sakuracloud:index/getNFS:getNFS", args ?? new GetNFSArgs(), options.WithVersion());
     }
+
 
     public sealed class GetNFSArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetNFSFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the NFS is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,166 +67,77 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetNFSResult
     {
+        /// <summary>
+        /// The description of the NFS.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetNFSFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<Outputs.GetNFSNetworkInterfacesResult> NetworkInterfaces;
-        public readonly string Plan;
-        public readonly int Size;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the NFS.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the NFS.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// A list of `network_interface` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetNFSNetworkInterfaceResult> NetworkInterfaces;
+        /// <summary>
+        /// The plan name of the NFS. This will be one of [`hdd`/`ssd`].
+        /// </summary>
+        public readonly string Plan;
+        /// <summary>
+        /// The size of NFS in GiB.
+        /// </summary>
+        public readonly int Size;
+        /// <summary>
+        /// Any tags assigned to the NFS.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetNFSResult(
             string description,
+
             Outputs.GetNFSFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
-            ImmutableArray<Outputs.GetNFSNetworkInterfacesResult> networkInterfaces,
+
+            ImmutableArray<Outputs.GetNFSNetworkInterfaceResult> networkInterfaces,
+
             string plan,
+
             int size,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             NetworkInterfaces = networkInterfaces;
             Plan = plan;
             Size = size;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetNFSFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetNFSFilterConditionsArgs>? _conditions;
-        public List<GetNFSFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetNFSFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetNFSFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetNFSFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetNFSFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetNFSFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetNFSFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetNFSFilterResult
-    {
-        public readonly ImmutableArray<GetNFSFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetNFSFilterResult(
-            ImmutableArray<GetNFSFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetNFSNetworkInterfacesResult
-    {
-        public readonly string Gateway;
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private GetNFSNetworkInterfacesResult(
-            string gateway,
-            string ipAddress,
-            int netmask,
-            string switchId)
-        {
-            Gateway = gateway;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            SwitchId = switchId;
-        }
-    }
     }
 }

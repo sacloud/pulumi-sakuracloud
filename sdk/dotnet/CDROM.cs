@@ -7,67 +7,96 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud CD-ROM.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.CDROM("foobar", new Sakuracloud.CDROMArgs
+    ///         {
+    ///             Description = "description",
+    ///             IsoImageFile = "example.iso",
+    ///             Size = 5,
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/cDROM:CDROM")]
     public partial class CDROM : Pulumi.CustomResource
     {
         /// <summary>
-        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
+        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
         /// </summary>
         [Output("content")]
         public Output<string?> Content { get; private set; } = null!;
 
         /// <summary>
-        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This
-        /// conflicts with [`iso_image_file`]
+        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
         /// </summary>
         [Output("contentFileName")]
         public Output<string?> ContentFileName { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body.
         /// </summary>
         [Output("hash")]
         public Output<string> Hash { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the CD-ROM
+        /// The icon id to attach to the CD-ROM.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The file path to upload to as the CD-ROM. This conflicts with [`content`]
+        /// The file path to upload to as the CD-ROM. This conflicts with [`content`].
         /// </summary>
         [Output("isoImageFile")]
         public Output<string?> IsoImageFile { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]
+        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
         /// </summary>
         [Output("size")]
         public Output<int?> Size { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the CD-ROM
+        /// Any tags to assign to the CD-ROM.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -81,7 +110,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public CDROM(string name, CDROMArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/cDROM:CDROM", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/cDROM:CDROM", name, args ?? new CDROMArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -119,50 +148,49 @@ namespace Pulumi.SakuraCloud
     public sealed class CDROMArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
+        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This
-        /// conflicts with [`iso_image_file`]
+        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
         /// </summary>
         [Input("contentFileName")]
         public Input<string>? ContentFileName { get; set; }
 
         /// <summary>
-        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body.
         /// </summary>
         [Input("hash")]
         public Input<string>? Hash { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the CD-ROM
+        /// The icon id to attach to the CD-ROM.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The file path to upload to as the CD-ROM. This conflicts with [`content`]
+        /// The file path to upload to as the CD-ROM. This conflicts with [`content`].
         /// </summary>
         [Input("isoImageFile")]
         public Input<string>? IsoImageFile { get; set; }
 
         /// <summary>
-        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]
+        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
@@ -171,7 +199,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the CD-ROM
+        /// Any tags to assign to the CD-ROM.
         /// </summary>
         public InputList<string> Tags
         {
@@ -180,7 +208,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -193,50 +221,49 @@ namespace Pulumi.SakuraCloud
     public sealed class CDROMState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`]
+        /// The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This
-        /// conflicts with [`iso_image_file`]
+        /// The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
         /// </summary>
         [Input("contentFileName")]
         public Input<string>? ContentFileName { get; set; }
 
         /// <summary>
-        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`]
+        /// The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The md5 checksum calculated from the base64 encoded file body
+        /// The md5 checksum calculated from the base64 encoded file body.
         /// </summary>
         [Input("hash")]
         public Input<string>? Hash { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the CD-ROM
+        /// The icon id to attach to the CD-ROM.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The file path to upload to as the CD-ROM. This conflicts with [`content`]
+        /// The file path to upload to as the CD-ROM. This conflicts with [`content`].
         /// </summary>
         [Input("isoImageFile")]
         public Input<string>? IsoImageFile { get; set; }
 
         /// <summary>
-        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`]
+        /// The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]
+        /// The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
@@ -245,7 +272,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the CD-ROM
+        /// Any tags to assign to the CD-ROM.
         /// </summary>
         public InputList<string> Tags
         {
@@ -254,7 +281,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the CD-ROM will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

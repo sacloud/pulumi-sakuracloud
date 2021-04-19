@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetIcon
     {
-        public static Task<GetIconResult> GetIcon(GetIconArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIconResult>("sakuracloud:index/getIcon:getIcon", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Icon.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetIcon.InvokeAsync(new Sakuracloud.GetIconArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetIconFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetIconResult> InvokeAsync(GetIconArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetIconResult>("sakuracloud:index/getIcon:getIcon", args ?? new GetIconArgs(), options.WithVersion());
     }
+
 
     public sealed class GetIconArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetIconFilterArgs? Filter { get; set; }
 
@@ -25,129 +61,45 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetIconResult
     {
         public readonly Outputs.GetIconFilterResult? Filter;
-        public readonly string Name;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Url;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Icon.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// Any tags assigned to the Icon.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The URL for getting the icon's raw data.
+        /// </summary>
+        public readonly string Url;
 
         [OutputConstructor]
         private GetIconResult(
             Outputs.GetIconFilterResult? filter,
+
+            string id,
+
             string name,
+
             ImmutableArray<string> tags,
-            string url,
-            string id)
+
+            string url)
         {
             Filter = filter;
+            Id = id;
             Name = name;
             Tags = tags;
             Url = url;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetIconFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetIconFilterConditionsArgs>? _conditions;
-        public List<GetIconFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetIconFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetIconFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetIconFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetIconFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetIconFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetIconFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetIconFilterResult
-    {
-        public readonly ImmutableArray<GetIconFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetIconFilterResult(
-            ImmutableArray<GetIconFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

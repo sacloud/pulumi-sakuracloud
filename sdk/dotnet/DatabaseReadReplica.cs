@@ -7,45 +7,91 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Database Read Replica.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var master = Output.Create(Sakuracloud.GetDatabase.InvokeAsync(new Sakuracloud.GetDatabaseArgs
+    ///         {
+    ///             Filter = new Sakuracloud.Inputs.GetDatabaseFilterArgs
+    ///             {
+    ///                 Names = 
+    ///                 {
+    ///                     "master-database-name",
+    ///                 },
+    ///             },
+    ///         }));
+    ///         var foobar = new Sakuracloud.DatabaseReadReplica("foobar", new Sakuracloud.DatabaseReadReplicaArgs
+    ///         {
+    ///             MasterId = master.Apply(master =&gt; master.Id),
+    ///             NetworkInterface = new Sakuracloud.Inputs.DatabaseReadReplicaNetworkInterfaceArgs
+    ///             {
+    ///                 IpAddress = "192.168.11.111",
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/databaseReadReplica:DatabaseReadReplica")]
     public partial class DatabaseReadReplica : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the read-replica database
+        /// The icon id to attach to the read-replica database.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the replication master database
+        /// The id of the replication master database. Changing this forces a new resource to be created.
         /// </summary>
         [Output("masterId")]
         public Output<string> MasterId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Output("networkInterface")]
         public Output<Outputs.DatabaseReadReplicaNetworkInterface> NetworkInterface { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the read-replica database
+        /// Any tags to assign to the read-replica database.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -59,7 +105,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public DatabaseReadReplica(string name, DatabaseReadReplicaArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/databaseReadReplica:DatabaseReadReplica", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/databaseReadReplica:DatabaseReadReplica", name, args ?? new DatabaseReadReplicaArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -97,29 +143,32 @@ namespace Pulumi.SakuraCloud
     public sealed class DatabaseReadReplicaArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the read-replica database
+        /// The icon id to attach to the read-replica database.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The id of the replication master database
+        /// The id of the replication master database. Changing this forces a new resource to be created.
         /// </summary>
         [Input("masterId", required: true)]
         public Input<string> MasterId { get; set; } = null!;
 
         /// <summary>
-        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface", required: true)]
         public Input<Inputs.DatabaseReadReplicaNetworkInterfaceArgs> NetworkInterface { get; set; } = null!;
 
@@ -127,7 +176,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the read-replica database
+        /// Any tags to assign to the read-replica database.
         /// </summary>
         public InputList<string> Tags
         {
@@ -136,7 +185,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -149,29 +198,32 @@ namespace Pulumi.SakuraCloud
     public sealed class DatabaseReadReplicaState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`]
+        /// The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the read-replica database
+        /// The icon id to attach to the read-replica database.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The id of the replication master database
+        /// The id of the replication master database. Changing this forces a new resource to be created.
         /// </summary>
         [Input("masterId")]
         public Input<string>? MasterId { get; set; }
 
         /// <summary>
-        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`]
+        /// The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface")]
         public Input<Inputs.DatabaseReadReplicaNetworkInterfaceGetArgs>? NetworkInterface { get; set; }
 
@@ -179,7 +231,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the read-replica database
+        /// Any tags to assign to the read-replica database.
         /// </summary>
         public InputList<string> Tags
         {
@@ -188,7 +240,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the read-replica database will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -196,92 +248,5 @@ namespace Pulumi.SakuraCloud
         public DatabaseReadReplicaState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class DatabaseReadReplicaNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask")]
-        public Input<int>? Netmask { get; set; }
-
-        [Input("sourceRanges")]
-        private InputList<string>? _sourceRanges;
-        public InputList<string> SourceRanges
-        {
-            get => _sourceRanges ?? (_sourceRanges = new InputList<string>());
-            set => _sourceRanges = value;
-        }
-
-        [Input("switchId")]
-        public Input<string>? SwitchId { get; set; }
-
-        public DatabaseReadReplicaNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class DatabaseReadReplicaNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("netmask")]
-        public Input<int>? Netmask { get; set; }
-
-        [Input("sourceRanges")]
-        private InputList<string>? _sourceRanges;
-        public InputList<string> SourceRanges
-        {
-            get => _sourceRanges ?? (_sourceRanges = new InputList<string>());
-            set => _sourceRanges = value;
-        }
-
-        [Input("switchId")]
-        public Input<string>? SwitchId { get; set; }
-
-        public DatabaseReadReplicaNetworkInterfaceGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class DatabaseReadReplicaNetworkInterface
-    {
-        public readonly string Gateway;
-        public readonly string IpAddress;
-        public readonly int Netmask;
-        public readonly ImmutableArray<string> SourceRanges;
-        public readonly string SwitchId;
-
-        [OutputConstructor]
-        private DatabaseReadReplicaNetworkInterface(
-            string gateway,
-            string ipAddress,
-            int netmask,
-            ImmutableArray<string> sourceRanges,
-            string switchId)
-        {
-            Gateway = gateway;
-            IpAddress = ipAddress;
-            Netmask = netmask;
-            SourceRanges = sourceRanges;
-            SwitchId = switchId;
-        }
-    }
     }
 }

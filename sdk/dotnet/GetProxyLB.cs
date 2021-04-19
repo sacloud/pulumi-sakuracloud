@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetProxyLB
     {
-        public static Task<GetProxyLBResult> GetProxyLB(GetProxyLBArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyLBResult>("sakuracloud:index/getProxyLB:getProxyLB", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing ProxyLB.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetProxyLB.InvokeAsync(new Sakuracloud.GetProxyLBArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetProxyLBFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetProxyLBResult> InvokeAsync(GetProxyLBArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyLBResult>("sakuracloud:index/getProxyLB:getProxyLB", args ?? new GetProxyLBArgs(), options.WithVersion());
     }
+
 
     public sealed class GetProxyLBArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetProxyLBFilterArgs? Filter { get; set; }
 
@@ -25,63 +61,145 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetProxyLBResult
     {
-        public readonly ImmutableArray<Outputs.GetProxyLBBindPortsResult> BindPorts;
-        public readonly ImmutableArray<Outputs.GetProxyLBCertificatesResult> Certificates;
+        /// <summary>
+        /// A list of `bind_port` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBBindPortResult> BindPorts;
+        /// <summary>
+        /// A list of `certificate` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBCertificateResult> Certificates;
+        /// <summary>
+        /// The description of the ProxyLB.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetProxyLBFilterResult? Filter;
-        public readonly string Fqdn;
-        public readonly ImmutableArray<Outputs.GetProxyLBHealthChecksResult> HealthChecks;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly int Plan;
-        public readonly ImmutableArray<string> ProxyNetworks;
-        public readonly string Region;
-        public readonly ImmutableArray<Outputs.GetProxyLBRulesResult> Rules;
-        public readonly ImmutableArray<Outputs.GetProxyLBServersResult> Servers;
-        public readonly ImmutableArray<Outputs.GetProxyLBSorryServersResult> SorryServers;
-        public readonly bool StickySession;
-        public readonly ImmutableArray<string> Tags;
-        public readonly int Timeout;
-        public readonly string Vip;
-        public readonly bool VipFailover;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
+        /// </summary>
+        public readonly string Fqdn;
+        /// <summary>
+        /// The flag to enable gzip compression.
+        /// </summary>
+        public readonly bool Gzip;
+        /// <summary>
+        /// A list of `health_check` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBHealthCheckResult> HealthChecks;
+        /// <summary>
+        /// The icon id attached to the ProxyLB.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the ProxyLB.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+        /// </summary>
+        public readonly int Plan;
+        /// <summary>
+        /// A list of CIDR block used by the ProxyLB to access the server.
+        /// </summary>
+        public readonly ImmutableArray<string> ProxyNetworks;
+        /// <summary>
+        /// The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
+        /// </summary>
+        public readonly string Region;
+        /// <summary>
+        /// A list of `rule` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBRuleResult> Rules;
+        /// <summary>
+        /// A list of `server` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBServerResult> Servers;
+        /// <summary>
+        /// A list of `sorry_server` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBSorryServerResult> SorryServers;
+        /// <summary>
+        /// The flag to enable sticky session.
+        /// </summary>
+        public readonly bool StickySession;
+        /// <summary>
+        /// Any tags assigned to the ProxyLB.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The timeout duration in seconds.
+        /// </summary>
+        public readonly int Timeout;
+        /// <summary>
+        /// The virtual IP address assigned to the ProxyLB.
+        /// </summary>
+        public readonly string Vip;
+        /// <summary>
+        /// The flag to enable VIP fail-over.
+        /// </summary>
+        public readonly bool VipFailover;
 
         [OutputConstructor]
         private GetProxyLBResult(
-            ImmutableArray<Outputs.GetProxyLBBindPortsResult> bindPorts,
-            ImmutableArray<Outputs.GetProxyLBCertificatesResult> certificates,
+            ImmutableArray<Outputs.GetProxyLBBindPortResult> bindPorts,
+
+            ImmutableArray<Outputs.GetProxyLBCertificateResult> certificates,
+
             string description,
+
             Outputs.GetProxyLBFilterResult? filter,
+
             string fqdn,
-            ImmutableArray<Outputs.GetProxyLBHealthChecksResult> healthChecks,
+
+            bool gzip,
+
+            ImmutableArray<Outputs.GetProxyLBHealthCheckResult> healthChecks,
+
             string iconId,
+
+            string id,
+
             string name,
+
             int plan,
+
             ImmutableArray<string> proxyNetworks,
+
             string region,
-            ImmutableArray<Outputs.GetProxyLBRulesResult> rules,
-            ImmutableArray<Outputs.GetProxyLBServersResult> servers,
-            ImmutableArray<Outputs.GetProxyLBSorryServersResult> sorryServers,
+
+            ImmutableArray<Outputs.GetProxyLBRuleResult> rules,
+
+            ImmutableArray<Outputs.GetProxyLBServerResult> servers,
+
+            ImmutableArray<Outputs.GetProxyLBSorryServerResult> sorryServers,
+
             bool stickySession,
+
             ImmutableArray<string> tags,
+
             int timeout,
+
             string vip,
-            bool vipFailover,
-            string id)
+
+            bool vipFailover)
         {
             BindPorts = bindPorts;
             Certificates = certificates;
             Description = description;
             Filter = filter;
             Fqdn = fqdn;
+            Gzip = gzip;
             HealthChecks = healthChecks;
             IconId = iconId;
+            Id = id;
             Name = name;
             Plan = plan;
             ProxyNetworks = proxyNetworks;
@@ -94,269 +212,6 @@ namespace Pulumi.SakuraCloud
             Timeout = timeout;
             Vip = vip;
             VipFailover = vipFailover;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetProxyLBFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetProxyLBFilterConditionsArgs>? _conditions;
-        public List<GetProxyLBFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetProxyLBFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetProxyLBFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetProxyLBFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetProxyLBFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetProxyLBBindPortsResponseHeadersResult
-    {
-        public readonly string Header;
-        public readonly string Value;
-
-        [OutputConstructor]
-        private GetProxyLBBindPortsResponseHeadersResult(
-            string header,
-            string value)
-        {
-            Header = header;
-            Value = value;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBBindPortsResult
-    {
-        public readonly int Port;
-        public readonly string ProxyMode;
-        public readonly bool RedirectToHttps;
-        public readonly ImmutableArray<GetProxyLBBindPortsResponseHeadersResult> ResponseHeaders;
-        public readonly bool SupportHttp2;
-
-        [OutputConstructor]
-        private GetProxyLBBindPortsResult(
-            int port,
-            string proxyMode,
-            bool redirectToHttps,
-            ImmutableArray<GetProxyLBBindPortsResponseHeadersResult> responseHeaders,
-            bool supportHttp2)
-        {
-            Port = port;
-            ProxyMode = proxyMode;
-            RedirectToHttps = redirectToHttps;
-            ResponseHeaders = responseHeaders;
-            SupportHttp2 = supportHttp2;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBCertificatesAdditionalCertificatesResult
-    {
-        public readonly string IntermediateCert;
-        public readonly string PrivateKey;
-        public readonly string ServerCert;
-
-        [OutputConstructor]
-        private GetProxyLBCertificatesAdditionalCertificatesResult(
-            string intermediateCert,
-            string privateKey,
-            string serverCert)
-        {
-            IntermediateCert = intermediateCert;
-            PrivateKey = privateKey;
-            ServerCert = serverCert;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBCertificatesResult
-    {
-        public readonly ImmutableArray<GetProxyLBCertificatesAdditionalCertificatesResult> AdditionalCertificates;
-        public readonly string IntermediateCert;
-        public readonly string PrivateKey;
-        public readonly string ServerCert;
-
-        [OutputConstructor]
-        private GetProxyLBCertificatesResult(
-            ImmutableArray<GetProxyLBCertificatesAdditionalCertificatesResult> additionalCertificates,
-            string intermediateCert,
-            string privateKey,
-            string serverCert)
-        {
-            AdditionalCertificates = additionalCertificates;
-            IntermediateCert = intermediateCert;
-            PrivateKey = privateKey;
-            ServerCert = serverCert;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetProxyLBFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBFilterResult
-    {
-        public readonly ImmutableArray<GetProxyLBFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetProxyLBFilterResult(
-            ImmutableArray<GetProxyLBFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBHealthChecksResult
-    {
-        public readonly int DelayLoop;
-        public readonly string HostHeader;
-        public readonly string Path;
-        public readonly int Port;
-        public readonly string Protocol;
-
-        [OutputConstructor]
-        private GetProxyLBHealthChecksResult(
-            int delayLoop,
-            string hostHeader,
-            string path,
-            int port,
-            string protocol)
-        {
-            DelayLoop = delayLoop;
-            HostHeader = hostHeader;
-            Path = path;
-            Port = port;
-            Protocol = protocol;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBRulesResult
-    {
-        public readonly string Group;
-        public readonly string Host;
-        public readonly string Path;
-
-        [OutputConstructor]
-        private GetProxyLBRulesResult(
-            string group,
-            string host,
-            string path)
-        {
-            Group = group;
-            Host = host;
-            Path = path;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBServersResult
-    {
-        public readonly bool Enabled;
-        public readonly string Group;
-        public readonly string IpAddress;
-        public readonly int Port;
-
-        [OutputConstructor]
-        private GetProxyLBServersResult(
-            bool enabled,
-            string group,
-            string ipAddress,
-            int port)
-        {
-            Enabled = enabled;
-            Group = group;
-            IpAddress = ipAddress;
-            Port = port;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetProxyLBSorryServersResult
-    {
-        public readonly string IpAddress;
-        public readonly int Port;
-
-        [OutputConstructor]
-        private GetProxyLBSorryServersResult(
-            string ipAddress,
-            int port)
-        {
-            IpAddress = ipAddress;
-            Port = port;
-        }
-    }
     }
 }

@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promise<GetNoteResult> & GetNoteResult {
+/**
+ * Get information about an existing Note.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getNote({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promise<GetNoteResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promis
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetNoteResult> = pulumi.runtime.invoke("sakuracloud:index/getNote:getNote", {
+    return pulumi.runtime.invoke("sakuracloud:index/getNote:getNote", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getNote.
  */
 export interface GetNoteArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetNoteFilter;
 }
 
@@ -33,15 +49,33 @@ export interface GetNoteArgs {
  * A collection of values returned by getNote.
  */
 export interface GetNoteResult {
+    /**
+     * The class of the Note. This will be one of [`shell`/`yamlCloudConfig`].
+     */
     readonly class: string;
+    /**
+     * The content of the Note.
+     */
     readonly content: string;
+    /**
+     * The description of the Note.
+     */
     readonly description: string;
     readonly filter?: outputs.GetNoteFilter;
+    /**
+     * The icon id attached to the Note.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the Note.
+     */
     readonly name: string;
+    /**
+     * Any tags assigned to the Note.
+     */
     readonly tags: string[];
 }

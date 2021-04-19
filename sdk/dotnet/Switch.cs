@@ -7,48 +7,76 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Switch.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.Switch("foobar", new Sakuracloud.SwitchArgs
+    ///         {
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/switch:Switch")]
     public partial class Switch : Pulumi.CustomResource
     {
         /// <summary>
-        /// The bridge id attached to the Switch
+        /// The bridge id attached to the Switch.
         /// </summary>
         [Output("bridgeId")]
         public Output<string?> BridgeId { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Switch. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Switch
+        /// The icon id to attach to the Switch.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Switch. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// A list of server id connected to the switch
+        /// A list of server id connected to the switch.
         /// </summary>
         [Output("serverIds")]
         public Output<ImmutableArray<string>> ServerIds { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Switch
+        /// Any tags to assign to the Switch.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -62,7 +90,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Switch(string name, SwitchArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/switch:Switch", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/switch:Switch", name, args ?? new SwitchArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -100,25 +128,25 @@ namespace Pulumi.SakuraCloud
     public sealed class SwitchArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The bridge id attached to the Switch
+        /// The bridge id attached to the Switch.
         /// </summary>
         [Input("bridgeId")]
         public Input<string>? BridgeId { get; set; }
 
         /// <summary>
-        /// The description of the Switch. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Switch
+        /// The icon id to attach to the Switch.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Switch. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -127,7 +155,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Switch
+        /// Any tags to assign to the Switch.
         /// </summary>
         public InputList<string> Tags
         {
@@ -136,7 +164,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -149,25 +177,25 @@ namespace Pulumi.SakuraCloud
     public sealed class SwitchState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The bridge id attached to the Switch
+        /// The bridge id attached to the Switch.
         /// </summary>
         [Input("bridgeId")]
         public Input<string>? BridgeId { get; set; }
 
         /// <summary>
-        /// The description of the Switch. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Switch
+        /// The icon id to attach to the Switch.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Switch. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -176,7 +204,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _serverIds;
 
         /// <summary>
-        /// A list of server id connected to the switch
+        /// A list of server id connected to the switch.
         /// </summary>
         public InputList<string> ServerIds
         {
@@ -188,7 +216,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Switch
+        /// Any tags to assign to the Switch.
         /// </summary>
         public InputList<string> Tags
         {
@@ -197,7 +225,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Switch will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

@@ -7,55 +7,97 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Auto Backup.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarDisk = new Sakuracloud.Disk("foobarDisk", new Sakuracloud.DiskArgs
+    ///         {
+    ///         });
+    ///         var foobarAutoBackup = new Sakuracloud.AutoBackup("foobarAutoBackup", new Sakuracloud.AutoBackupArgs
+    ///         {
+    ///             DiskId = foobarDisk.Id,
+    ///             Weekdays = 
+    ///             {
+    ///                 "mon",
+    ///                 "tue",
+    ///                 "wed",
+    ///                 "thu",
+    ///                 "fri",
+    ///                 "sat",
+    ///                 "sun",
+    ///             },
+    ///             MaxBackupNum = 5,
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/autoBackup:AutoBackup")]
     public partial class AutoBackup : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The disk id to backed up
+        /// The disk id to backed up. Changing this forces a new resource to be created.
         /// </summary>
         [Output("diskId")]
         public Output<string> DiskId { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the AutoBackup
+        /// The icon id to attach to the AutoBackup.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The number backup files to keep. This must be in the range [`1`-`10`]
+        /// The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
         /// </summary>
         [Output("maxBackupNum")]
         public Output<int?> MaxBackupNum { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the AutoBackup
+        /// Any tags to assign to the AutoBackup.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// A list of weekdays to backed up. The values in the list must be in
-        /// [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+        /// A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
         /// </summary>
         [Output("weekdays")]
         public Output<ImmutableArray<string>> Weekdays { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -69,7 +111,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public AutoBackup(string name, AutoBackupArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/autoBackup:AutoBackup", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/autoBackup:AutoBackup", name, args ?? new AutoBackupArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -107,31 +149,31 @@ namespace Pulumi.SakuraCloud
     public sealed class AutoBackupArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The disk id to backed up
+        /// The disk id to backed up. Changing this forces a new resource to be created.
         /// </summary>
         [Input("diskId", required: true)]
         public Input<string> DiskId { get; set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the AutoBackup
+        /// The icon id to attach to the AutoBackup.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The number backup files to keep. This must be in the range [`1`-`10`]
+        /// The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
         /// </summary>
         [Input("maxBackupNum")]
         public Input<int>? MaxBackupNum { get; set; }
 
         /// <summary>
-        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -140,7 +182,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the AutoBackup
+        /// Any tags to assign to the AutoBackup.
         /// </summary>
         public InputList<string> Tags
         {
@@ -152,8 +194,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _weekdays;
 
         /// <summary>
-        /// A list of weekdays to backed up. The values in the list must be in
-        /// [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+        /// A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
         /// </summary>
         public InputList<string> Weekdays
         {
@@ -162,7 +203,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -175,31 +216,31 @@ namespace Pulumi.SakuraCloud
     public sealed class AutoBackupState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`]
+        /// The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The disk id to backed up
+        /// The disk id to backed up. Changing this forces a new resource to be created.
         /// </summary>
         [Input("diskId")]
         public Input<string>? DiskId { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the AutoBackup
+        /// The icon id to attach to the AutoBackup.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The number backup files to keep. This must be in the range [`1`-`10`]
+        /// The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
         /// </summary>
         [Input("maxBackupNum")]
         public Input<int>? MaxBackupNum { get; set; }
 
         /// <summary>
-        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`]
+        /// The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -208,7 +249,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the AutoBackup
+        /// Any tags to assign to the AutoBackup.
         /// </summary>
         public InputList<string> Tags
         {
@@ -220,8 +261,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _weekdays;
 
         /// <summary>
-        /// A list of weekdays to backed up. The values in the list must be in
-        /// [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`]
+        /// A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
         /// </summary>
         public InputList<string> Weekdays
         {
@@ -230,7 +270,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the AutoBackup will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

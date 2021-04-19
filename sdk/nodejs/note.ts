@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Note.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * from "fs";
+ *
+ * const foobar = new sakuracloud.Note("foobar", {content: fs.readFileSync("startup-script.sh")});
+ * ```
+ */
 export class Note extends pulumi.CustomResource {
     /**
      * Get an existing Note resource's state with the given name, ID, and optional extra
@@ -12,6 +25,7 @@ export class Note extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: NoteState, opts?: pulumi.CustomResourceOptions): Note {
         return new Note(name, <any>state, { ...opts, id: id });
@@ -32,27 +46,27 @@ export class Note extends pulumi.CustomResource {
     }
 
     /**
-     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+     * The class of the Note. This must be one of `shell`/`yamlCloudConfig`. Default:`shell`.
      */
     public readonly class!: pulumi.Output<string | undefined>;
     /**
-     * The content of the Note. This must be specified as a shell script or as a cloud-config
+     * The content of the Note. This must be specified as a shell script or as a cloud-config.
      */
     public readonly content!: pulumi.Output<string>;
     /**
-     * The description of the Note. This will be computed from special tags within body of `content`
+     * The description of the Note. This will be computed from special tags within body of `content`.
      */
     public /*out*/ readonly description!: pulumi.Output<string>;
     /**
-     * The icon id to attach to the Note
+     * The icon id to attach to the Note.
      */
     public readonly iconId!: pulumi.Output<string | undefined>;
     /**
-     * The name of the Note. The length of this value must be in the range [`1`-`64`]
+     * The name of the Note. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Any tags to assign to the Note
+     * Any tags to assign to the Note.
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
 
@@ -66,7 +80,8 @@ export class Note extends pulumi.CustomResource {
     constructor(name: string, args: NoteArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: NoteArgs | NoteState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as NoteState | undefined;
             inputs["class"] = state ? state.class : undefined;
             inputs["content"] = state ? state.content : undefined;
@@ -76,7 +91,7 @@ export class Note extends pulumi.CustomResource {
             inputs["tags"] = state ? state.tags : undefined;
         } else {
             const args = argsOrState as NoteArgs | undefined;
-            if (!args || args.content === undefined) {
+            if ((!args || args.content === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'content'");
             }
             inputs["class"] = args ? args.class : undefined;
@@ -86,12 +101,8 @@ export class Note extends pulumi.CustomResource {
             inputs["tags"] = args ? args.tags : undefined;
             inputs["description"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(Note.__pulumiType, name, inputs, opts);
     }
@@ -102,27 +113,27 @@ export class Note extends pulumi.CustomResource {
  */
 export interface NoteState {
     /**
-     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+     * The class of the Note. This must be one of `shell`/`yamlCloudConfig`. Default:`shell`.
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The content of the Note. This must be specified as a shell script or as a cloud-config
+     * The content of the Note. This must be specified as a shell script or as a cloud-config.
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * The description of the Note. This will be computed from special tags within body of `content`
+     * The description of the Note. This will be computed from special tags within body of `content`.
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Note
+     * The icon id to attach to the Note.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Note. The length of this value must be in the range [`1`-`64`]
+     * The name of the Note. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Note
+     * Any tags to assign to the Note.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -132,23 +143,23 @@ export interface NoteState {
  */
 export interface NoteArgs {
     /**
-     * The class of the Note. This must be one of `shell`/`yaml_cloud_config`
+     * The class of the Note. This must be one of `shell`/`yamlCloudConfig`. Default:`shell`.
      */
     readonly class?: pulumi.Input<string>;
     /**
-     * The content of the Note. This must be specified as a shell script or as a cloud-config
+     * The content of the Note. This must be specified as a shell script or as a cloud-config.
      */
     readonly content: pulumi.Input<string>;
     /**
-     * The icon id to attach to the Note
+     * The icon id to attach to the Note.
      */
     readonly iconId?: pulumi.Input<string>;
     /**
-     * The name of the Note. The length of this value must be in the range [`1`-`64`]
+     * The name of the Note. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * Any tags to assign to the Note
+     * Any tags to assign to the Note.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

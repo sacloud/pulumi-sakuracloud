@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetVPCRouter
     {
-        public static Task<GetVPCRouterResult> GetVPCRouter(GetVPCRouterArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVPCRouterResult>("sakuracloud:index/getVPCRouter:getVPCRouter", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing VPC Router.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetVPCRouter.InvokeAsync(new Sakuracloud.GetVPCRouterArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetVPCRouterFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetVPCRouterResult> InvokeAsync(GetVPCRouterArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetVPCRouterResult>("sakuracloud:index/getVPCRouter:getVPCRouter", args ?? new GetVPCRouterArgs(), options.WithVersion());
     }
+
 
     public sealed class GetVPCRouterArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetVPCRouterFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,63 +67,156 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetVPCRouterResult
     {
-        public readonly string Description;
-        public readonly ImmutableArray<Outputs.GetVPCRouterDhcpServersResult> DhcpServers;
-        public readonly ImmutableArray<Outputs.GetVPCRouterDhcpStaticMappingsResult> DhcpStaticMappings;
-        public readonly Outputs.GetVPCRouterFilterResult? Filter;
-        public readonly ImmutableArray<Outputs.GetVPCRouterFirewallsResult> Firewalls;
-        public readonly string IconId;
-        public readonly bool InternetConnection;
-        public readonly ImmutableArray<Outputs.GetVPCRouterL2tpsResult> L2tps;
-        public readonly string Name;
-        public readonly string Plan;
-        public readonly ImmutableArray<Outputs.GetVPCRouterPortForwardingsResult> PortForwardings;
-        public readonly ImmutableArray<Outputs.GetVPCRouterPptpsResult> Pptps;
-        public readonly ImmutableArray<Outputs.GetVPCRouterPrivateNetworkInterfacesResult> PrivateNetworkInterfaces;
-        public readonly string PublicIp;
-        public readonly int PublicNetmask;
-        public readonly ImmutableArray<Outputs.GetVPCRouterPublicNetworkInterfacesResult> PublicNetworkInterfaces;
-        public readonly ImmutableArray<Outputs.GetVPCRouterSiteToSiteVpnsResult> SiteToSiteVpns;
-        public readonly ImmutableArray<Outputs.GetVPCRouterStaticNatsResult> StaticNats;
-        public readonly ImmutableArray<Outputs.GetVPCRouterStaticRoutesResult> StaticRoutes;
-        public readonly string SyslogHost;
-        public readonly ImmutableArray<string> Tags;
-        public readonly ImmutableArray<Outputs.GetVPCRouterUsersResult> Users;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The description of the static NAT.
+        /// </summary>
+        public readonly string Description;
+        /// <summary>
+        /// A list of `dhcp_server` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterDhcpServerResult> DhcpServers;
+        /// <summary>
+        /// A list of `dhcp_static_mapping` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterDhcpStaticMappingResult> DhcpStaticMappings;
+        public readonly Outputs.GetVPCRouterFilterResult? Filter;
+        /// <summary>
+        /// A list of `firewall` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterFirewallResult> Firewalls;
+        /// <summary>
+        /// The icon id attached to the VPCRouter.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The flag to enable connecting to the Internet from the VPC Router.
+        /// </summary>
+        public readonly bool InternetConnection;
+        /// <summary>
+        /// A list of `l2tp` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterL2tpResult> L2tps;
+        /// <summary>
+        /// The user name used to authenticate remote access.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The plan name of the VPCRouter. This will be one of [`standard`/`premium`/`highspec`/`highspec4000`].
+        /// </summary>
+        public readonly string Plan;
+        /// <summary>
+        /// A list of `port_forwarding` blocks as defined below. This represents a `Reverse NAT`.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterPortForwardingResult> PortForwardings;
+        /// <summary>
+        /// A list of `pptp` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterPptpResult> Pptps;
+        /// <summary>
+        /// A list of additional network interface setting. This doesn't include primary network interface setting.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterPrivateNetworkInterfaceResult> PrivateNetworkInterfaces;
+        /// <summary>
+        /// The public IP address used for the static NAT.
+        /// </summary>
+        public readonly string PublicIp;
+        /// <summary>
+        /// The bit length of the subnet to assign to the public network interface.
+        /// </summary>
+        public readonly int PublicNetmask;
+        /// <summary>
+        /// A list of additional network interface setting. This doesn't include primary network interface setting.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterPublicNetworkInterfaceResult> PublicNetworkInterfaces;
+        /// <summary>
+        /// A list of `site_to_site_vpn` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterSiteToSiteVpnResult> SiteToSiteVpns;
+        /// <summary>
+        /// A list of `static_nat` blocks as defined below. This represents a `1:1 NAT`, doing static mapping to both send/receive to/from the Internet. This is only used when `plan` is not `standard`.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterStaticNatResult> StaticNats;
+        /// <summary>
+        /// A list of `static_route` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterStaticRouteResult> StaticRoutes;
+        /// <summary>
+        /// The ip address of the syslog host to which the VPC Router sends logs.
+        /// </summary>
+        public readonly string SyslogHost;
+        /// <summary>
+        /// Any tags assigned to the VPCRouter.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// A list of `user` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterUserResult> Users;
+        /// <summary>
+        /// The version of the VPC Router.
+        /// </summary>
+        public readonly int Version;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetVPCRouterResult(
             string description,
-            ImmutableArray<Outputs.GetVPCRouterDhcpServersResult> dhcpServers,
-            ImmutableArray<Outputs.GetVPCRouterDhcpStaticMappingsResult> dhcpStaticMappings,
+
+            ImmutableArray<Outputs.GetVPCRouterDhcpServerResult> dhcpServers,
+
+            ImmutableArray<Outputs.GetVPCRouterDhcpStaticMappingResult> dhcpStaticMappings,
+
             Outputs.GetVPCRouterFilterResult? filter,
-            ImmutableArray<Outputs.GetVPCRouterFirewallsResult> firewalls,
+
+            ImmutableArray<Outputs.GetVPCRouterFirewallResult> firewalls,
+
             string iconId,
+
+            string id,
+
             bool internetConnection,
-            ImmutableArray<Outputs.GetVPCRouterL2tpsResult> l2tps,
+
+            ImmutableArray<Outputs.GetVPCRouterL2tpResult> l2tps,
+
             string name,
+
             string plan,
-            ImmutableArray<Outputs.GetVPCRouterPortForwardingsResult> portForwardings,
-            ImmutableArray<Outputs.GetVPCRouterPptpsResult> pptps,
-            ImmutableArray<Outputs.GetVPCRouterPrivateNetworkInterfacesResult> privateNetworkInterfaces,
+
+            ImmutableArray<Outputs.GetVPCRouterPortForwardingResult> portForwardings,
+
+            ImmutableArray<Outputs.GetVPCRouterPptpResult> pptps,
+
+            ImmutableArray<Outputs.GetVPCRouterPrivateNetworkInterfaceResult> privateNetworkInterfaces,
+
             string publicIp,
+
             int publicNetmask,
-            ImmutableArray<Outputs.GetVPCRouterPublicNetworkInterfacesResult> publicNetworkInterfaces,
-            ImmutableArray<Outputs.GetVPCRouterSiteToSiteVpnsResult> siteToSiteVpns,
-            ImmutableArray<Outputs.GetVPCRouterStaticNatsResult> staticNats,
-            ImmutableArray<Outputs.GetVPCRouterStaticRoutesResult> staticRoutes,
+
+            ImmutableArray<Outputs.GetVPCRouterPublicNetworkInterfaceResult> publicNetworkInterfaces,
+
+            ImmutableArray<Outputs.GetVPCRouterSiteToSiteVpnResult> siteToSiteVpns,
+
+            ImmutableArray<Outputs.GetVPCRouterStaticNatResult> staticNats,
+
+            ImmutableArray<Outputs.GetVPCRouterStaticRouteResult> staticRoutes,
+
             string syslogHost,
+
             ImmutableArray<string> tags,
-            ImmutableArray<Outputs.GetVPCRouterUsersResult> users,
-            string zone,
-            string id)
+
+            ImmutableArray<Outputs.GetVPCRouterUserResult> users,
+
+            int version,
+
+            string zone)
         {
             Description = description;
             DhcpServers = dhcpServers;
@@ -92,6 +224,7 @@ namespace Pulumi.SakuraCloud
             Filter = filter;
             Firewalls = firewalls;
             IconId = iconId;
+            Id = id;
             InternetConnection = internetConnection;
             L2tps = l2tps;
             Name = name;
@@ -108,383 +241,8 @@ namespace Pulumi.SakuraCloud
             SyslogHost = syslogHost;
             Tags = tags;
             Users = users;
+            Version = version;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetVPCRouterFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetVPCRouterFilterConditionsArgs>? _conditions;
-        public List<GetVPCRouterFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetVPCRouterFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetVPCRouterFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetVPCRouterFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetVPCRouterFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetVPCRouterDhcpServersResult
-    {
-        public readonly ImmutableArray<string> DnsServers;
-        public readonly int InterfaceIndex;
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private GetVPCRouterDhcpServersResult(
-            ImmutableArray<string> dnsServers,
-            int interfaceIndex,
-            string rangeStart,
-            string rangeStop)
-        {
-            DnsServers = dnsServers;
-            InterfaceIndex = interfaceIndex;
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterDhcpStaticMappingsResult
-    {
-        public readonly string IpAddress;
-        public readonly string MacAddress;
-
-        [OutputConstructor]
-        private GetVPCRouterDhcpStaticMappingsResult(
-            string ipAddress,
-            string macAddress)
-        {
-            IpAddress = ipAddress;
-            MacAddress = macAddress;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetVPCRouterFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterFilterResult
-    {
-        public readonly ImmutableArray<GetVPCRouterFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetVPCRouterFilterResult(
-            ImmutableArray<GetVPCRouterFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterFirewallsExpressionsResult
-    {
-        public readonly bool Allow;
-        public readonly string Description;
-        public readonly string DestinationNetwork;
-        public readonly string DestinationPort;
-        public readonly bool Logging;
-        public readonly string Protocol;
-        public readonly string SourceNetwork;
-        public readonly string SourcePort;
-
-        [OutputConstructor]
-        private GetVPCRouterFirewallsExpressionsResult(
-            bool allow,
-            string description,
-            string destinationNetwork,
-            string destinationPort,
-            bool logging,
-            string protocol,
-            string sourceNetwork,
-            string sourcePort)
-        {
-            Allow = allow;
-            Description = description;
-            DestinationNetwork = destinationNetwork;
-            DestinationPort = destinationPort;
-            Logging = logging;
-            Protocol = protocol;
-            SourceNetwork = sourceNetwork;
-            SourcePort = sourcePort;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterFirewallsResult
-    {
-        public readonly string Direction;
-        public readonly ImmutableArray<GetVPCRouterFirewallsExpressionsResult> Expressions;
-        public readonly int InterfaceIndex;
-
-        [OutputConstructor]
-        private GetVPCRouterFirewallsResult(
-            string direction,
-            ImmutableArray<GetVPCRouterFirewallsExpressionsResult> expressions,
-            int interfaceIndex)
-        {
-            Direction = direction;
-            Expressions = expressions;
-            InterfaceIndex = interfaceIndex;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterL2tpsResult
-    {
-        public readonly string PreSharedSecret;
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private GetVPCRouterL2tpsResult(
-            string preSharedSecret,
-            string rangeStart,
-            string rangeStop)
-        {
-            PreSharedSecret = preSharedSecret;
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterPortForwardingsResult
-    {
-        public readonly string Description;
-        public readonly string PrivateIp;
-        public readonly int PrivatePort;
-        public readonly string Protocol;
-        public readonly int PublicPort;
-
-        [OutputConstructor]
-        private GetVPCRouterPortForwardingsResult(
-            string description,
-            string privateIp,
-            int privatePort,
-            string protocol,
-            int publicPort)
-        {
-            Description = description;
-            PrivateIp = privateIp;
-            PrivatePort = privatePort;
-            Protocol = protocol;
-            PublicPort = publicPort;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterPptpsResult
-    {
-        public readonly string RangeStart;
-        public readonly string RangeStop;
-
-        [OutputConstructor]
-        private GetVPCRouterPptpsResult(
-            string rangeStart,
-            string rangeStop)
-        {
-            RangeStart = rangeStart;
-            RangeStop = rangeStop;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterPrivateNetworkInterfacesResult
-    {
-        public readonly int Index;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-        public readonly string Vip;
-
-        [OutputConstructor]
-        private GetVPCRouterPrivateNetworkInterfacesResult(
-            int index,
-            ImmutableArray<string> ipAddresses,
-            int netmask,
-            string switchId,
-            string vip)
-        {
-            Index = index;
-            IpAddresses = ipAddresses;
-            Netmask = netmask;
-            SwitchId = switchId;
-            Vip = vip;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterPublicNetworkInterfacesResult
-    {
-        public readonly ImmutableArray<string> Aliases;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly string SwitchId;
-        public readonly string Vip;
-        public readonly int Vrid;
-
-        [OutputConstructor]
-        private GetVPCRouterPublicNetworkInterfacesResult(
-            ImmutableArray<string> aliases,
-            ImmutableArray<string> ipAddresses,
-            string switchId,
-            string vip,
-            int vrid)
-        {
-            Aliases = aliases;
-            IpAddresses = ipAddresses;
-            SwitchId = switchId;
-            Vip = vip;
-            Vrid = vrid;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterSiteToSiteVpnsResult
-    {
-        public readonly ImmutableArray<string> LocalPrefixes;
-        public readonly string Peer;
-        public readonly string PreSharedSecret;
-        public readonly string RemoteId;
-        public readonly ImmutableArray<string> Routes;
-
-        [OutputConstructor]
-        private GetVPCRouterSiteToSiteVpnsResult(
-            ImmutableArray<string> localPrefixes,
-            string peer,
-            string preSharedSecret,
-            string remoteId,
-            ImmutableArray<string> routes)
-        {
-            LocalPrefixes = localPrefixes;
-            Peer = peer;
-            PreSharedSecret = preSharedSecret;
-            RemoteId = remoteId;
-            Routes = routes;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterStaticNatsResult
-    {
-        public readonly string Description;
-        public readonly string PrivateIp;
-        public readonly string PublicIp;
-
-        [OutputConstructor]
-        private GetVPCRouterStaticNatsResult(
-            string description,
-            string privateIp,
-            string publicIp)
-        {
-            Description = description;
-            PrivateIp = privateIp;
-            PublicIp = publicIp;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterStaticRoutesResult
-    {
-        public readonly string NextHop;
-        public readonly string Prefix;
-
-        [OutputConstructor]
-        private GetVPCRouterStaticRoutesResult(
-            string nextHop,
-            string prefix)
-        {
-            NextHop = nextHop;
-            Prefix = prefix;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetVPCRouterUsersResult
-    {
-        public readonly string Name;
-        public readonly string Password;
-
-        [OutputConstructor]
-        private GetVPCRouterUsersResult(
-            string name,
-            string password)
-        {
-            Name = name;
-            Password = password;
-        }
-    }
     }
 }

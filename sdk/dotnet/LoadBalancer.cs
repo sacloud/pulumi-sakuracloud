@@ -7,48 +7,124 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Load Balancer.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobarSwitch = new Sakuracloud.Switch("foobarSwitch", new Sakuracloud.SwitchArgs
+    ///         {
+    ///         });
+    ///         var foobarLoadBalancer = new Sakuracloud.LoadBalancer("foobarLoadBalancer", new Sakuracloud.LoadBalancerArgs
+    ///         {
+    ///             Plan = "standard",
+    ///             NetworkInterface = new Sakuracloud.Inputs.LoadBalancerNetworkInterfaceArgs
+    ///             {
+    ///                 SwitchId = foobarSwitch.Id,
+    ///                 Vrid = 1,
+    ///                 IpAddresses = 
+    ///                 {
+    ///                     "192.168.11.101",
+    ///                 },
+    ///                 Netmask = 24,
+    ///                 Gateway = "192.168.11.1",
+    ///             },
+    ///             Description = "description",
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Vips = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.LoadBalancerVipArgs
+    ///                 {
+    ///                     Vip = "192.168.11.201",
+    ///                     Port = 80,
+    ///                     DelayLoop = 10,
+    ///                     SorryServer = "192.168.11.21",
+    ///                     Servers = 
+    ///                     {
+    ///                         new Sakuracloud.Inputs.LoadBalancerVipServerArgs
+    ///                         {
+    ///                             IpAddress = "192.168.11.51",
+    ///                             Protocol = "http",
+    ///                             Path = "/health",
+    ///                             Status = "200",
+    ///                         },
+    ///                         new Sakuracloud.Inputs.LoadBalancerVipServerArgs
+    ///                         {
+    ///                             IpAddress = "192.168.11.52",
+    ///                             Protocol = "http",
+    ///                             Path = "/health",
+    ///                             Status = "200",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/loadBalancer:LoadBalancer")]
     public partial class LoadBalancer : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
+        /// The description of the VIP. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the LoadBalancer
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Output("networkInterface")]
         public Output<Outputs.LoadBalancerNetworkInterface> NetworkInterface { get; private set; } = null!;
 
         /// <summary>
-        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
+        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Output("plan")]
         public Output<string?> Plan { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the LoadBalancer
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `vip` blocks as defined below.
+        /// </summary>
         [Output("vips")]
-        public Output<ImmutableArray<Outputs.LoadBalancerVips>> Vips { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.LoadBalancerVip>> Vips { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the LoadBalancer will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -62,7 +138,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public LoadBalancer(string name, LoadBalancerArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/loadBalancer:LoadBalancer", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/loadBalancer:LoadBalancer", name, args ?? new LoadBalancerArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -100,28 +176,31 @@ namespace Pulumi.SakuraCloud
     public sealed class LoadBalancerArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
+        /// The description of the VIP. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the LoadBalancer
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface", required: true)]
         public Input<Inputs.LoadBalancerNetworkInterfaceArgs> NetworkInterface { get; set; } = null!;
 
         /// <summary>
-        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
+        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
@@ -130,7 +209,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the LoadBalancer
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         public InputList<string> Tags
         {
@@ -139,15 +218,19 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("vips")]
-        private InputList<Inputs.LoadBalancerVipsArgs>? _vips;
-        public InputList<Inputs.LoadBalancerVipsArgs> Vips
+        private InputList<Inputs.LoadBalancerVipArgs>? _vips;
+
+        /// <summary>
+        /// One or more `vip` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LoadBalancerVipArgs> Vips
         {
-            get => _vips ?? (_vips = new InputList<Inputs.LoadBalancerVipsArgs>());
+            get => _vips ?? (_vips = new InputList<Inputs.LoadBalancerVipArgs>());
             set => _vips = value;
         }
 
         /// <summary>
-        /// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the LoadBalancer will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -160,28 +243,31 @@ namespace Pulumi.SakuraCloud
     public sealed class LoadBalancerState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the LoadBalancer. The length of this value must be in the range [`1`-`512`]
+        /// The description of the VIP. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the LoadBalancer
+        /// The icon id to attach to the LoadBalancer.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`]
+        /// The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// An `network_interface` block as defined below.
+        /// </summary>
         [Input("networkInterface")]
         public Input<Inputs.LoadBalancerNetworkInterfaceGetArgs>? NetworkInterface { get; set; }
 
         /// <summary>
-        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]
+        /// The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]. Changing this forces a new resource to be created. Default:`standard`.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }
@@ -190,7 +276,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the LoadBalancer
+        /// Any tags to assign to the LoadBalancer.
         /// </summary>
         public InputList<string> Tags
         {
@@ -199,15 +285,19 @@ namespace Pulumi.SakuraCloud
         }
 
         [Input("vips")]
-        private InputList<Inputs.LoadBalancerVipsGetArgs>? _vips;
-        public InputList<Inputs.LoadBalancerVipsGetArgs> Vips
+        private InputList<Inputs.LoadBalancerVipGetArgs>? _vips;
+
+        /// <summary>
+        /// One or more `vip` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.LoadBalancerVipGetArgs> Vips
         {
-            get => _vips ?? (_vips = new InputList<Inputs.LoadBalancerVipsGetArgs>());
+            get => _vips ?? (_vips = new InputList<Inputs.LoadBalancerVipGetArgs>());
             set => _vips = value;
         }
 
         /// <summary>
-        /// The name of zone that the LoadBalancer will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the LoadBalancer will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -215,249 +305,5 @@ namespace Pulumi.SakuraCloud
         public LoadBalancerState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class LoadBalancerNetworkInterfaceArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        [Input("vrid", required: true)]
-        public Input<int> Vrid { get; set; } = null!;
-
-        public LoadBalancerNetworkInterfaceArgs()
-        {
-        }
-    }
-
-    public sealed class LoadBalancerNetworkInterfaceGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("gateway")]
-        public Input<string>? Gateway { get; set; }
-
-        [Input("ipAddresses", required: true)]
-        private InputList<string>? _ipAddresses;
-        public InputList<string> IpAddresses
-        {
-            get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
-            set => _ipAddresses = value;
-        }
-
-        [Input("netmask", required: true)]
-        public Input<int> Netmask { get; set; } = null!;
-
-        [Input("switchId", required: true)]
-        public Input<string> SwitchId { get; set; } = null!;
-
-        [Input("vrid", required: true)]
-        public Input<int> Vrid { get; set; } = null!;
-
-        public LoadBalancerNetworkInterfaceGetArgs()
-        {
-        }
-    }
-
-    public sealed class LoadBalancerVipsArgs : Pulumi.ResourceArgs
-    {
-        [Input("delayLoop")]
-        public Input<int>? DelayLoop { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("port", required: true)]
-        public Input<int> Port { get; set; } = null!;
-
-        [Input("servers")]
-        private InputList<LoadBalancerVipsServersArgs>? _servers;
-        public InputList<LoadBalancerVipsServersArgs> Servers
-        {
-            get => _servers ?? (_servers = new InputList<LoadBalancerVipsServersArgs>());
-            set => _servers = value;
-        }
-
-        [Input("sorryServer")]
-        public Input<string>? SorryServer { get; set; }
-
-        [Input("vip", required: true)]
-        public Input<string> Vip { get; set; } = null!;
-
-        public LoadBalancerVipsArgs()
-        {
-        }
-    }
-
-    public sealed class LoadBalancerVipsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("delayLoop")]
-        public Input<int>? DelayLoop { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("port", required: true)]
-        public Input<int> Port { get; set; } = null!;
-
-        [Input("servers")]
-        private InputList<LoadBalancerVipsServersGetArgs>? _servers;
-        public InputList<LoadBalancerVipsServersGetArgs> Servers
-        {
-            get => _servers ?? (_servers = new InputList<LoadBalancerVipsServersGetArgs>());
-            set => _servers = value;
-        }
-
-        [Input("sorryServer")]
-        public Input<string>? SorryServer { get; set; }
-
-        [Input("vip", required: true)]
-        public Input<string> Vip { get; set; } = null!;
-
-        public LoadBalancerVipsGetArgs()
-        {
-        }
-    }
-
-    public sealed class LoadBalancerVipsServersArgs : Pulumi.ResourceArgs
-    {
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("status")]
-        public Input<string>? Status { get; set; }
-
-        public LoadBalancerVipsServersArgs()
-        {
-        }
-    }
-
-    public sealed class LoadBalancerVipsServersGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("enabled")]
-        public Input<bool>? Enabled { get; set; }
-
-        [Input("ipAddress", required: true)]
-        public Input<string> IpAddress { get; set; } = null!;
-
-        [Input("path")]
-        public Input<string>? Path { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("status")]
-        public Input<string>? Status { get; set; }
-
-        public LoadBalancerVipsServersGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class LoadBalancerNetworkInterface
-    {
-        public readonly string? Gateway;
-        public readonly ImmutableArray<string> IpAddresses;
-        public readonly int Netmask;
-        public readonly string SwitchId;
-        public readonly int Vrid;
-
-        [OutputConstructor]
-        private LoadBalancerNetworkInterface(
-            string? gateway,
-            ImmutableArray<string> ipAddresses,
-            int netmask,
-            string switchId,
-            int vrid)
-        {
-            Gateway = gateway;
-            IpAddresses = ipAddresses;
-            Netmask = netmask;
-            SwitchId = switchId;
-            Vrid = vrid;
-        }
-    }
-
-    [OutputType]
-    public sealed class LoadBalancerVips
-    {
-        public readonly int? DelayLoop;
-        public readonly string? Description;
-        public readonly int Port;
-        public readonly ImmutableArray<LoadBalancerVipsServers> Servers;
-        public readonly string? SorryServer;
-        public readonly string Vip;
-
-        [OutputConstructor]
-        private LoadBalancerVips(
-            int? delayLoop,
-            string? description,
-            int port,
-            ImmutableArray<LoadBalancerVipsServers> servers,
-            string? sorryServer,
-            string vip)
-        {
-            DelayLoop = delayLoop;
-            Description = description;
-            Port = port;
-            Servers = servers;
-            SorryServer = sorryServer;
-            Vip = vip;
-        }
-    }
-
-    [OutputType]
-    public sealed class LoadBalancerVipsServers
-    {
-        public readonly bool? Enabled;
-        public readonly string IpAddress;
-        public readonly string? Path;
-        public readonly string Protocol;
-        public readonly string? Status;
-
-        [OutputConstructor]
-        private LoadBalancerVipsServers(
-            bool? enabled,
-            string ipAddress,
-            string? path,
-            string protocol,
-            string? status)
-        {
-            Enabled = enabled;
-            IpAddress = ipAddress;
-            Path = path;
-            Protocol = protocol;
-            Status = status;
-        }
-    }
     }
 }

@@ -7,102 +7,128 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Bucket Object.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.BucketObject("foobar", new Sakuracloud.BucketObjectArgs
+    ///         {
+    ///             Bucket = "foobar",
+    ///             Key = "example.txt",
+    ///             Content = File.ReadAllText("example.txt"),
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/bucketObject:BucketObject")]
     public partial class BucketObject : Pulumi.CustomResource
     {
         /// <summary>
-        /// The access key for using SakuraCloud Object Storage API
+        /// The access key for using SakuraCloud Object Storage API.
         /// </summary>
         [Output("accessKey")]
         public Output<string> AccessKey { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the bucket
+        /// The name of the bucket. Changing this forces a new resource to be created.
         /// </summary>
         [Output("bucket")]
         public Output<string> Bucket { get; private set; } = null!;
 
         /// <summary>
-        /// The content to upload to as the bucket object. This conflicts with [`source`]
+        /// The content to upload to as the bucket object. This conflicts with [`source`].
         /// </summary>
         [Output("content")]
         public Output<string?> Content { get; private set; } = null!;
 
         /// <summary>
-        /// The content-type of the bucket object
+        /// The content-type of the bucket object.
         /// </summary>
         [Output("contentType")]
         public Output<string> ContentType { get; private set; } = null!;
 
         /// <summary>
-        /// The etag of the bucket object
+        /// The etag of the bucket object.
         /// </summary>
         [Output("etag")]
         public Output<string> Etag { get; private set; } = null!;
 
         /// <summary>
-        /// The URL for cached access to the bucket object via HTTP
+        /// The URL for cached access to the bucket object via HTTP.
         /// </summary>
         [Output("httpCacheUrl")]
         public Output<string> HttpCacheUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The URL with path-format for accessing the bucket object via HTTP
+        /// The URL with path-format for accessing the bucket object via HTTP.
         /// </summary>
         [Output("httpPathUrl")]
         public Output<string> HttpPathUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The URL for accessing the bucket object via HTTP
+        /// The URL for accessing the bucket object via HTTP.
         /// </summary>
         [Output("httpUrl")]
         public Output<string> HttpUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The URL for cached access to the bucket object via HTTPS
+        /// The URL for cached access to the bucket object via HTTPS.
         /// </summary>
         [Output("httpsCacheUrl")]
         public Output<string> HttpsCacheUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The URL with path-format for accessing the bucket object via HTTPS
+        /// The URL with path-format for accessing the bucket object via HTTPS.
         /// </summary>
         [Output("httpsPathUrl")]
         public Output<string> HttpsPathUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The URL for accessing the bucket object via HTTPS
+        /// The URL for accessing the bucket object via HTTPS.
         /// </summary>
         [Output("httpsUrl")]
         public Output<string> HttpsUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the bucket object
+        /// The name of the bucket object. Changing this forces a new resource to be created.
         /// </summary>
         [Output("key")]
         public Output<string> Key { get; private set; } = null!;
 
         /// <summary>
-        /// The time when the bucket object last modified
+        /// The time when the bucket object last modified.
         /// </summary>
         [Output("lastModified")]
         public Output<string> LastModified { get; private set; } = null!;
 
         /// <summary>
-        /// The secret key for using SakuraCloud Object Storage API
+        /// The secret key for using SakuraCloud Object Storage API.
         /// </summary>
         [Output("secretKey")]
         public Output<string> SecretKey { get; private set; } = null!;
 
         /// <summary>
-        /// The size of the bucket object in bytes
+        /// The size of the bucket object in bytes.
         /// </summary>
         [Output("size")]
         public Output<int> Size { get; private set; } = null!;
 
         /// <summary>
-        /// The file path to upload to as the bucket object. This conflicts with [`content`]
+        /// The file path to upload to as the bucket object. This conflicts with [`content`].
         /// </summary>
         [Output("source")]
         public Output<string?> Source { get; private set; } = null!;
@@ -116,7 +142,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public BucketObject(string name, BucketObjectArgs args, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/bucketObject:BucketObject", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/bucketObject:BucketObject", name, args ?? new BucketObjectArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -154,49 +180,49 @@ namespace Pulumi.SakuraCloud
     public sealed class BucketObjectArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The access key for using SakuraCloud Object Storage API
+        /// The access key for using SakuraCloud Object Storage API.
         /// </summary>
         [Input("accessKey", required: true)]
         public Input<string> AccessKey { get; set; } = null!;
 
         /// <summary>
-        /// The name of the bucket
+        /// The name of the bucket. Changing this forces a new resource to be created.
         /// </summary>
         [Input("bucket", required: true)]
         public Input<string> Bucket { get; set; } = null!;
 
         /// <summary>
-        /// The content to upload to as the bucket object. This conflicts with [`source`]
+        /// The content to upload to as the bucket object. This conflicts with [`source`].
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The content-type of the bucket object
+        /// The content-type of the bucket object.
         /// </summary>
         [Input("contentType")]
         public Input<string>? ContentType { get; set; }
 
         /// <summary>
-        /// The etag of the bucket object
+        /// The etag of the bucket object.
         /// </summary>
         [Input("etag")]
         public Input<string>? Etag { get; set; }
 
         /// <summary>
-        /// The name of the bucket object
+        /// The name of the bucket object. Changing this forces a new resource to be created.
         /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
         /// <summary>
-        /// The secret key for using SakuraCloud Object Storage API
+        /// The secret key for using SakuraCloud Object Storage API.
         /// </summary>
         [Input("secretKey", required: true)]
         public Input<string> SecretKey { get; set; } = null!;
 
         /// <summary>
-        /// The file path to upload to as the bucket object. This conflicts with [`content`]
+        /// The file path to upload to as the bucket object. This conflicts with [`content`].
         /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }
@@ -209,97 +235,97 @@ namespace Pulumi.SakuraCloud
     public sealed class BucketObjectState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The access key for using SakuraCloud Object Storage API
+        /// The access key for using SakuraCloud Object Storage API.
         /// </summary>
         [Input("accessKey")]
         public Input<string>? AccessKey { get; set; }
 
         /// <summary>
-        /// The name of the bucket
+        /// The name of the bucket. Changing this forces a new resource to be created.
         /// </summary>
         [Input("bucket")]
         public Input<string>? Bucket { get; set; }
 
         /// <summary>
-        /// The content to upload to as the bucket object. This conflicts with [`source`]
+        /// The content to upload to as the bucket object. This conflicts with [`source`].
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
 
         /// <summary>
-        /// The content-type of the bucket object
+        /// The content-type of the bucket object.
         /// </summary>
         [Input("contentType")]
         public Input<string>? ContentType { get; set; }
 
         /// <summary>
-        /// The etag of the bucket object
+        /// The etag of the bucket object.
         /// </summary>
         [Input("etag")]
         public Input<string>? Etag { get; set; }
 
         /// <summary>
-        /// The URL for cached access to the bucket object via HTTP
+        /// The URL for cached access to the bucket object via HTTP.
         /// </summary>
         [Input("httpCacheUrl")]
         public Input<string>? HttpCacheUrl { get; set; }
 
         /// <summary>
-        /// The URL with path-format for accessing the bucket object via HTTP
+        /// The URL with path-format for accessing the bucket object via HTTP.
         /// </summary>
         [Input("httpPathUrl")]
         public Input<string>? HttpPathUrl { get; set; }
 
         /// <summary>
-        /// The URL for accessing the bucket object via HTTP
+        /// The URL for accessing the bucket object via HTTP.
         /// </summary>
         [Input("httpUrl")]
         public Input<string>? HttpUrl { get; set; }
 
         /// <summary>
-        /// The URL for cached access to the bucket object via HTTPS
+        /// The URL for cached access to the bucket object via HTTPS.
         /// </summary>
         [Input("httpsCacheUrl")]
         public Input<string>? HttpsCacheUrl { get; set; }
 
         /// <summary>
-        /// The URL with path-format for accessing the bucket object via HTTPS
+        /// The URL with path-format for accessing the bucket object via HTTPS.
         /// </summary>
         [Input("httpsPathUrl")]
         public Input<string>? HttpsPathUrl { get; set; }
 
         /// <summary>
-        /// The URL for accessing the bucket object via HTTPS
+        /// The URL for accessing the bucket object via HTTPS.
         /// </summary>
         [Input("httpsUrl")]
         public Input<string>? HttpsUrl { get; set; }
 
         /// <summary>
-        /// The name of the bucket object
+        /// The name of the bucket object. Changing this forces a new resource to be created.
         /// </summary>
         [Input("key")]
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// The time when the bucket object last modified
+        /// The time when the bucket object last modified.
         /// </summary>
         [Input("lastModified")]
         public Input<string>? LastModified { get; set; }
 
         /// <summary>
-        /// The secret key for using SakuraCloud Object Storage API
+        /// The secret key for using SakuraCloud Object Storage API.
         /// </summary>
         [Input("secretKey")]
         public Input<string>? SecretKey { get; set; }
 
         /// <summary>
-        /// The size of the bucket object in bytes
+        /// The size of the bucket object in bytes.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// The file path to upload to as the bucket object. This conflicts with [`content`]
+        /// The file path to upload to as the bucket object. This conflicts with [`content`].
         /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }

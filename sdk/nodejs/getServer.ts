@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getServer(args?: GetServerArgs, opts?: pulumi.InvokeOptions): Promise<GetServerResult> & GetServerResult {
+/**
+ * Get information about an existing Server.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getServer({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getServer(args?: GetServerArgs, opts?: pulumi.InvokeOptions): Promise<GetServerResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,19 +30,23 @@ export function getServer(args?: GetServerArgs, opts?: pulumi.InvokeOptions): Pr
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetServerResult> = pulumi.runtime.invoke("sakuracloud:index/getServer:getServer", {
+    return pulumi.runtime.invoke("sakuracloud:index/getServer:getServer", {
         "filter": args.filter,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getServer.
  */
 export interface GetServerArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetServerFilter;
+    /**
+     * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -35,29 +54,86 @@ export interface GetServerArgs {
  * A collection of values returned by getServer.
  */
 export interface GetServerResult {
+    /**
+     * The id of the CD-ROM attached to the server.
+     */
     readonly cdromId: string;
+    /**
+     * The policy of how to allocate virtual CPUs to the server. This will be one of [`standard`/`dedicatedcpu`].
+     */
     readonly commitment: string;
+    /**
+     * The number of virtual CPUs.
+     */
     readonly core: number;
+    /**
+     * The description of the Server.
+     */
     readonly description: string;
+    /**
+     * A list of disk id connected to the server.
+     */
     readonly disks: string[];
+    /**
+     * A list of IP address of DNS server in the zone.
+     */
     readonly dnsServers: string[];
     readonly filter?: outputs.GetServerFilter;
+    /**
+     * The IP address of the gateway used by Server.
+     */
     readonly gateway: string;
+    /**
+     * The hostname of the Server.
+     */
     readonly hostname: string;
+    /**
+     * The icon id attached to the Server.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The driver name of network interface. This will be one of [`virtio`/`e1000`].
+     */
     readonly interfaceDriver: string;
+    /**
+     * The IP address assigned to the Server.
+     */
     readonly ipAddress: string;
+    /**
+     * The size of memory in GiB.
+     */
     readonly memory: number;
+    /**
+     * The name of the Server.
+     */
     readonly name: string;
+    /**
+     * The bit length of the subnet assigned to the Server.
+     */
     readonly netmask: number;
+    /**
+     * The network address which the `ipAddress` belongs.
+     */
     readonly networkAddress: string;
+    /**
+     * A list of `networkInterface` blocks as defined below.
+     */
     readonly networkInterfaces: outputs.GetServerNetworkInterface[];
+    /**
+     * The id of the private host which the server is assigned.
+     */
     readonly privateHostId: string;
+    /**
+     * The name of the private host which the server is assigned.
+     */
     readonly privateHostName: string;
+    /**
+     * Any tags assigned to the Server.
+     */
     readonly tags: string[];
     readonly zone: string;
 }

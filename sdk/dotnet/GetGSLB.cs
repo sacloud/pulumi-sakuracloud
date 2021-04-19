@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetGSLB
     {
-        public static Task<GetGSLBResult> GetGSLB(GetGSLBArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGSLBResult>("sakuracloud:index/getGSLB:getGSLB", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing GSLB.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetGSLB.InvokeAsync(new Sakuracloud.GetGSLBArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetGSLBFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetGSLBResult> InvokeAsync(GetGSLBArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetGSLBResult>("sakuracloud:index/getGSLB:getGSLB", args ?? new GetGSLBArgs(), options.WithVersion());
     }
+
 
     public sealed class GetGSLBArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetGSLBFilterArgs? Filter { get; set; }
 
@@ -25,194 +61,87 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetGSLBResult
     {
+        /// <summary>
+        /// The description of the GSLB.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetGSLBFilterResult? Filter;
-        public readonly string Fqdn;
-        public readonly ImmutableArray<Outputs.GetGSLBHealthChecksResult> HealthChecks;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly ImmutableArray<Outputs.GetGSLBServersResult> Servers;
-        public readonly string SorryServer;
-        public readonly ImmutableArray<string> Tags;
-        public readonly bool Weighted;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
+        /// </summary>
+        public readonly string Fqdn;
+        /// <summary>
+        /// A list of `health_check` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetGSLBHealthCheckResult> HealthChecks;
+        /// <summary>
+        /// The icon id attached to the GSLB.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the GSLB.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// A list of `server` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetGSLBServerResult> Servers;
+        /// <summary>
+        /// The IP address of the SorryServer. This will be used when all servers are down.
+        /// </summary>
+        public readonly string SorryServer;
+        /// <summary>
+        /// Any tags assigned to the GSLB.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The flag to enable weighted load-balancing.
+        /// </summary>
+        public readonly bool Weighted;
 
         [OutputConstructor]
         private GetGSLBResult(
             string description,
+
             Outputs.GetGSLBFilterResult? filter,
+
             string fqdn,
-            ImmutableArray<Outputs.GetGSLBHealthChecksResult> healthChecks,
+
+            ImmutableArray<Outputs.GetGSLBHealthCheckResult> healthChecks,
+
             string iconId,
+
+            string id,
+
             string name,
-            ImmutableArray<Outputs.GetGSLBServersResult> servers,
+
+            ImmutableArray<Outputs.GetGSLBServerResult> servers,
+
             string sorryServer,
+
             ImmutableArray<string> tags,
-            bool weighted,
-            string id)
+
+            bool weighted)
         {
             Description = description;
             Filter = filter;
             Fqdn = fqdn;
             HealthChecks = healthChecks;
             IconId = iconId;
+            Id = id;
             Name = name;
             Servers = servers;
             SorryServer = sorryServer;
             Tags = tags;
             Weighted = weighted;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetGSLBFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetGSLBFilterConditionsArgs>? _conditions;
-        public List<GetGSLBFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetGSLBFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetGSLBFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetGSLBFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetGSLBFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetGSLBFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetGSLBFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetGSLBFilterResult
-    {
-        public readonly ImmutableArray<GetGSLBFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetGSLBFilterResult(
-            ImmutableArray<GetGSLBFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetGSLBHealthChecksResult
-    {
-        public readonly int DelayLoop;
-        public readonly string HostHeader;
-        public readonly string Path;
-        public readonly int Port;
-        public readonly string Protocol;
-        public readonly string Status;
-
-        [OutputConstructor]
-        private GetGSLBHealthChecksResult(
-            int delayLoop,
-            string hostHeader,
-            string path,
-            int port,
-            string protocol,
-            string status)
-        {
-            DelayLoop = delayLoop;
-            HostHeader = hostHeader;
-            Path = path;
-            Port = port;
-            Protocol = protocol;
-            Status = status;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetGSLBServersResult
-    {
-        public readonly bool Enabled;
-        public readonly string IpAddress;
-        public readonly int Weight;
-
-        [OutputConstructor]
-        private GetGSLBServersResult(
-            bool enabled,
-            string ipAddress,
-            int weight)
-        {
-            Enabled = enabled;
-            IpAddress = ipAddress;
-            Weight = weight;
-        }
-    }
     }
 }

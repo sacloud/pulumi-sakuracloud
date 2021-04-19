@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.16
 MAINTAINER Kazumichi Yamamoto <yamamoto.febc@gmail.com>
 
 RUN  apt-get update && apt-get -y install \

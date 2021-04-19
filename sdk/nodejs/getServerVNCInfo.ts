@@ -2,11 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getServerVNCInfo(args: GetServerVNCInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetServerVNCInfoResult> & GetServerVNCInfoResult {
+/**
+ * Get information about VNC for connecting to an existing Server.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = sakuracloud.getServerVNCInfo({
+ *     serverId: sakuracloud_server.foobar.id,
+ * });
+ * ```
+ */
+export function getServerVNCInfo(args: GetServerVNCInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetServerVNCInfoResult> {
     if (!opts) {
         opts = {}
     }
@@ -14,19 +27,23 @@ export function getServerVNCInfo(args: GetServerVNCInfoArgs, opts?: pulumi.Invok
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetServerVNCInfoResult> = pulumi.runtime.invoke("sakuracloud:index/getServerVNCInfo:getServerVNCInfo", {
+    return pulumi.runtime.invoke("sakuracloud:index/getServerVNCInfo:getServerVNCInfo", {
         "serverId": args.serverId,
         "zone": args.zone,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getServerVNCInfo.
  */
 export interface GetServerVNCInfoArgs {
+    /**
+     * The id of the Server.
+     */
     readonly serverId: string;
+    /**
+     * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+     */
     readonly zone?: string;
 }
 
@@ -34,12 +51,21 @@ export interface GetServerVNCInfoArgs {
  * A collection of values returned by getServerVNCInfo.
  */
 export interface GetServerVNCInfoResult {
+    /**
+     * The host name for connecting by VNC.
+     */
     readonly host: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The password for connecting by VNC.
+     */
     readonly password: string;
+    /**
+     * The port number for connecting by VNC.
+     */
     readonly port: number;
     readonly serverId: string;
     readonly zone: string;

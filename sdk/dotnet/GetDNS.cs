@@ -7,16 +7,52 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetDNS
     {
-        public static Task<GetDNSResult> GetDNS(GetDNSArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDNSResult>("sakuracloud:index/getDNS:getDNS", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing DNS.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetDNS.InvokeAsync(new Sakuracloud.GetDNSArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetDNSFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetDNSResult> InvokeAsync(GetDNSArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetDNSResult>("sakuracloud:index/getDNS:getDNS", args ?? new GetDNSArgs(), options.WithVersion());
     }
+
 
     public sealed class GetDNSArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetDNSFilterArgs? Filter { get; set; }
 
@@ -25,169 +61,66 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetDNSResult
     {
+        /// <summary>
+        /// The description of the DNS.
+        /// </summary>
         public readonly string Description;
+        /// <summary>
+        /// A list of IP address of DNS server that manage this zone.
+        /// </summary>
         public readonly ImmutableArray<string> DnsServers;
         public readonly Outputs.GetDNSFilterResult? Filter;
-        public readonly string IconId;
-        public readonly ImmutableArray<Outputs.GetDNSRecordsResult> Records;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the DNS.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// A list of `record` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetDNSRecordResult> Records;
+        /// <summary>
+        /// Any tags assigned to the DNS.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        /// <summary>
+        /// The name of managed domain.
+        /// </summary>
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetDNSResult(
             string description,
+
             ImmutableArray<string> dnsServers,
+
             Outputs.GetDNSFilterResult? filter,
+
             string iconId,
-            ImmutableArray<Outputs.GetDNSRecordsResult> records,
+
+            string id,
+
+            ImmutableArray<Outputs.GetDNSRecordResult> records,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             Description = description;
             DnsServers = dnsServers;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Records = records;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetDNSFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetDNSFilterConditionsArgs>? _conditions;
-        public List<GetDNSFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetDNSFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetDNSFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetDNSFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetDNSFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetDNSFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetDNSFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDNSFilterResult
-    {
-        public readonly ImmutableArray<GetDNSFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetDNSFilterResult(
-            ImmutableArray<GetDNSFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDNSRecordsResult
-    {
-        public readonly string Name;
-        public readonly int Port;
-        public readonly int Priority;
-        public readonly int Ttl;
-        public readonly string Type;
-        public readonly string Value;
-        public readonly int Weight;
-
-        [OutputConstructor]
-        private GetDNSRecordsResult(
-            string name,
-            int port,
-            int priority,
-            int ttl,
-            string type,
-            string value,
-            int weight)
-        {
-            Name = name;
-            Port = port;
-            Priority = priority;
-            Ttl = ttl;
-            Type = type;
-            Value = value;
-            Weight = weight;
-        }
-    }
     }
 }

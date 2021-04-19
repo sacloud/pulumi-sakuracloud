@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud SSH Key.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * from "fs";
+ *
+ * const foobar = new sakuracloud.SSHKey("foobar", {publicKey: fs.readFileSync("~/.ssh/id_rsa.pub")});
+ * ```
+ */
 export class SSHKey extends pulumi.CustomResource {
     /**
      * Get an existing SSHKey resource's state with the given name, ID, and optional extra
@@ -12,6 +25,7 @@ export class SSHKey extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: SSHKeyState, opts?: pulumi.CustomResourceOptions): SSHKey {
         return new SSHKey(name, <any>state, { ...opts, id: id });
@@ -32,19 +46,19 @@ export class SSHKey extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The fingerprint of the public key
+     * The fingerprint of the public key.
      */
     public /*out*/ readonly fingerprint!: pulumi.Output<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The body of the public key
+     * The body of the public key. Changing this forces a new resource to be created.
      */
     public readonly publicKey!: pulumi.Output<string>;
 
@@ -58,7 +72,8 @@ export class SSHKey extends pulumi.CustomResource {
     constructor(name: string, args: SSHKeyArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: SSHKeyArgs | SSHKeyState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as SSHKeyState | undefined;
             inputs["description"] = state ? state.description : undefined;
             inputs["fingerprint"] = state ? state.fingerprint : undefined;
@@ -66,7 +81,7 @@ export class SSHKey extends pulumi.CustomResource {
             inputs["publicKey"] = state ? state.publicKey : undefined;
         } else {
             const args = argsOrState as SSHKeyArgs | undefined;
-            if (!args || args.publicKey === undefined) {
+            if ((!args || args.publicKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'publicKey'");
             }
             inputs["description"] = args ? args.description : undefined;
@@ -74,12 +89,8 @@ export class SSHKey extends pulumi.CustomResource {
             inputs["publicKey"] = args ? args.publicKey : undefined;
             inputs["fingerprint"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(SSHKey.__pulumiType, name, inputs, opts);
     }
@@ -90,19 +101,19 @@ export class SSHKey extends pulumi.CustomResource {
  */
 export interface SSHKeyState {
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The fingerprint of the public key
+     * The fingerprint of the public key.
      */
     readonly fingerprint?: pulumi.Input<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The body of the public key
+     * The body of the public key. Changing this forces a new resource to be created.
      */
     readonly publicKey?: pulumi.Input<string>;
 }
@@ -112,15 +123,15 @@ export interface SSHKeyState {
  */
 export interface SSHKeyArgs {
     /**
-     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]
+     * The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]
+     * The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
      */
     readonly name?: pulumi.Input<string>;
     /**
-     * The body of the public key
+     * The body of the public key. Changing this forces a new resource to be created.
      */
     readonly publicKey: pulumi.Input<string>;
 }

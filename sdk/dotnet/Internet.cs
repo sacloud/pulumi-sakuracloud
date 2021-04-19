@@ -7,115 +7,146 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Switch+Router.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.Internet("foobar", new Sakuracloud.InternetArgs
+    ///         {
+    ///             BandWidth = 100,
+    ///             Description = "description",
+    ///             EnableIpv6 = false,
+    ///             Netmask = 28,
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/internet:Internet")]
     public partial class Internet : Pulumi.CustomResource
     {
         /// <summary>
-        /// The bandwidth of the network connected to the Internet in Mbps.
-        /// `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
+        /// The bandwidth of the network connected to the Internet in Mbps. This must be one of [`100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`3500`/`4000`/`4500`/`5000`]. 
+        /// If zone is `tk1b`, the following values can also be specified [`5500`/`6000`/`6500`/`7000`/`7500`/`8000`/`8500`/`9000`/`9500`/`10000`]. Default:`100`.
         /// </summary>
         [Output("bandWidth")]
         public Output<int?> BandWidth { get; private set; } = null!;
 
         /// <summary>
-        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The flag to enable IPv6
+        /// The flag to enable IPv6.
         /// </summary>
         [Output("enableIpv6")]
         public Output<bool?> EnableIpv6 { get; private set; } = null!;
 
         /// <summary>
-        /// The IP address of the gateway used by the Switch+Router
+        /// The IP address of the gateway used by the Switch+Router.
         /// </summary>
         [Output("gateway")]
         public Output<string> Gateway { get; private set; } = null!;
 
         /// <summary>
-        /// The icon id to attach to the Switch+Router
+        /// The icon id to attach to the Switch+Router.
         /// </summary>
         [Output("iconId")]
         public Output<string?> IconId { get; private set; } = null!;
 
         /// <summary>
-        /// A list of assigned global address to the Switch+Router
+        /// A list of assigned global address to the Switch+Router.
         /// </summary>
         [Output("ipAddresses")]
         public Output<ImmutableArray<string>> IpAddresses { get; private set; } = null!;
 
         /// <summary>
-        /// The IPv6 network address assigned to the Switch+Router
+        /// The IPv6 network address assigned to the Switch+Router.
         /// </summary>
         [Output("ipv6NetworkAddress")]
         public Output<string> Ipv6NetworkAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The network prefix of assigned IPv6 addresses to the Switch+Router
+        /// The network prefix of assigned IPv6 addresses to the Switch+Router.
         /// </summary>
         [Output("ipv6Prefix")]
         public Output<string> Ipv6Prefix { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of IPv6 network prefix
+        /// The bit length of IPv6 network prefix.
         /// </summary>
         [Output("ipv6PrefixLen")]
         public Output<int> Ipv6PrefixLen { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum IP address in assigned global addresses to the Switch+Router
+        /// Maximum IP address in assigned global addresses to the Switch+Router.
         /// </summary>
         [Output("maxIpAddress")]
         public Output<string> MaxIpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// Minimum IP address in assigned global addresses to the Switch+Router
+        /// Minimum IP address in assigned global addresses to the Switch+Router.
         /// </summary>
         [Output("minIpAddress")]
         public Output<string> MinIpAddress { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
+        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Output("netmask")]
         public Output<int?> Netmask { get; private set; } = null!;
 
         /// <summary>
-        /// The IPv4 network address assigned to the Switch+Router
+        /// The IPv4 network address assigned to the Switch+Router.
         /// </summary>
         [Output("networkAddress")]
         public Output<string> NetworkAddress { get; private set; } = null!;
 
         /// <summary>
-        /// A list of the ID of Servers connected to the Switch+Router
+        /// A list of the ID of Servers connected to the Switch+Router.
         /// </summary>
         [Output("serverIds")]
         public Output<ImmutableArray<string>> ServerIds { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the switch
+        /// The id of the switch.
         /// </summary>
         [Output("switchId")]
         public Output<string> SwitchId { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Switch+Router
+        /// Any tags to assign to the Switch+Router.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch+Router will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -129,7 +160,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Internet(string name, InternetArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/internet:Internet", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/internet:Internet", name, args ?? new InternetArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -167,38 +198,38 @@ namespace Pulumi.SakuraCloud
     public sealed class InternetArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The bandwidth of the network connected to the Internet in Mbps.
-        /// `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
+        /// The bandwidth of the network connected to the Internet in Mbps. This must be one of [`100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`3500`/`4000`/`4500`/`5000`]. 
+        /// If zone is `tk1b`, the following values can also be specified [`5500`/`6000`/`6500`/`7000`/`7500`/`8000`/`8500`/`9000`/`9500`/`10000`]. Default:`100`.
         /// </summary>
         [Input("bandWidth")]
         public Input<int>? BandWidth { get; set; }
 
         /// <summary>
-        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable IPv6
+        /// The flag to enable IPv6.
         /// </summary>
         [Input("enableIpv6")]
         public Input<bool>? EnableIpv6 { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Switch+Router
+        /// The icon id to attach to the Switch+Router.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
 
         /// <summary>
-        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
+        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
@@ -207,7 +238,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Switch+Router
+        /// Any tags to assign to the Switch+Router.
         /// </summary>
         public InputList<string> Tags
         {
@@ -216,7 +247,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch+Router will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -229,32 +260,32 @@ namespace Pulumi.SakuraCloud
     public sealed class InternetState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The bandwidth of the network connected to the Internet in Mbps.
-        /// `100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`5000`
+        /// The bandwidth of the network connected to the Internet in Mbps. This must be one of [`100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`3500`/`4000`/`4500`/`5000`]. 
+        /// If zone is `tk1b`, the following values can also be specified [`5500`/`6000`/`6500`/`7000`/`7500`/`8000`/`8500`/`9000`/`9500`/`10000`]. Default:`100`.
         /// </summary>
         [Input("bandWidth")]
         public Input<int>? BandWidth { get; set; }
 
         /// <summary>
-        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`]
+        /// The description of the Switch+Router. The length of this value must be in the range [`1`-`512`].
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The flag to enable IPv6
+        /// The flag to enable IPv6.
         /// </summary>
         [Input("enableIpv6")]
         public Input<bool>? EnableIpv6 { get; set; }
 
         /// <summary>
-        /// The IP address of the gateway used by the Switch+Router
+        /// The IP address of the gateway used by the Switch+Router.
         /// </summary>
         [Input("gateway")]
         public Input<string>? Gateway { get; set; }
 
         /// <summary>
-        /// The icon id to attach to the Switch+Router
+        /// The icon id to attach to the Switch+Router.
         /// </summary>
         [Input("iconId")]
         public Input<string>? IconId { get; set; }
@@ -263,7 +294,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _ipAddresses;
 
         /// <summary>
-        /// A list of assigned global address to the Switch+Router
+        /// A list of assigned global address to the Switch+Router.
         /// </summary>
         public InputList<string> IpAddresses
         {
@@ -272,49 +303,49 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The IPv6 network address assigned to the Switch+Router
+        /// The IPv6 network address assigned to the Switch+Router.
         /// </summary>
         [Input("ipv6NetworkAddress")]
         public Input<string>? Ipv6NetworkAddress { get; set; }
 
         /// <summary>
-        /// The network prefix of assigned IPv6 addresses to the Switch+Router
+        /// The network prefix of assigned IPv6 addresses to the Switch+Router.
         /// </summary>
         [Input("ipv6Prefix")]
         public Input<string>? Ipv6Prefix { get; set; }
 
         /// <summary>
-        /// The bit length of IPv6 network prefix
+        /// The bit length of IPv6 network prefix.
         /// </summary>
         [Input("ipv6PrefixLen")]
         public Input<int>? Ipv6PrefixLen { get; set; }
 
         /// <summary>
-        /// Maximum IP address in assigned global addresses to the Switch+Router
+        /// Maximum IP address in assigned global addresses to the Switch+Router.
         /// </summary>
         [Input("maxIpAddress")]
         public Input<string>? MaxIpAddress { get; set; }
 
         /// <summary>
-        /// Minimum IP address in assigned global addresses to the Switch+Router
+        /// Minimum IP address in assigned global addresses to the Switch+Router.
         /// </summary>
         [Input("minIpAddress")]
         public Input<string>? MinIpAddress { get; set; }
 
         /// <summary>
-        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Switch+Router. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`
+        /// The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`. Changing this forces a new resource to be created. Default:`28`.
         /// </summary>
         [Input("netmask")]
         public Input<int>? Netmask { get; set; }
 
         /// <summary>
-        /// The IPv4 network address assigned to the Switch+Router
+        /// The IPv4 network address assigned to the Switch+Router.
         /// </summary>
         [Input("networkAddress")]
         public Input<string>? NetworkAddress { get; set; }
@@ -323,7 +354,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _serverIds;
 
         /// <summary>
-        /// A list of the ID of Servers connected to the Switch+Router
+        /// A list of the ID of Servers connected to the Switch+Router.
         /// </summary>
         public InputList<string> ServerIds
         {
@@ -332,7 +363,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The id of the switch
+        /// The id of the switch.
         /// </summary>
         [Input("switchId")]
         public Input<string>? SwitchId { get; set; }
@@ -341,7 +372,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Switch+Router
+        /// Any tags to assign to the Switch+Router.
         /// </summary>
         public InputList<string> Tags
         {
@@ -350,7 +381,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The name of zone that the Switch+Router will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the Switch+Router will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }

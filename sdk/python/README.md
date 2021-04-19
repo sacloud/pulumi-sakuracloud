@@ -46,3 +46,20 @@ The following configuration points are available for the `sakuracloud` provider:
 - `sakuracloud:secret` (environment: `SAKURACLOUD_ACCESS_TOKEN_SECRET`) - the API secret for `sakuracloud`
 - `sakuracloud:zone` (environment: `SAKURACLOUD_ZONE`) - the default zone in which to deploy resources
 
+
+## Development
+
+### Add dependencies
+
+In order to properly build the sdks, the following tools are expected:
+- `pulumictl` (See the project's README for installation instructions: https://github.com/pulumi/pulumictl)
+
+In the root of the repository, run:
+
+- `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
+- `(cd provider && go get github.com/sacloud/terraform-provider-sakuracloud)`
+- `(cd provider && go mod download)`
+
+### Build the provider:
+
+- `make build_sdks`

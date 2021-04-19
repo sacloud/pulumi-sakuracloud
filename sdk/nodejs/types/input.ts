@@ -2,624 +2,1676 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "../types/input";
-import * as outputs from "../types/output";
+import { input as inputs, output as outputs } from "../types";
 
 export interface ContainerRegistryUser {
+    /**
+     * The user name used to authenticate remote access.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The password used to authenticate remote access.
+     */
     password: pulumi.Input<string>;
+    /**
+     * The level of access that allow to the user. This must be one of [`all`/`readwrite`/`readonly`].
+     */
     permission: pulumi.Input<string>;
 }
 
 export interface DNSRecord {
+    /**
+     * The name of the DNS Record. The length of this value must be in the range [`1`-`64`].
+     */
     name: pulumi.Input<string>;
+    /**
+     * The number of port. This must be in the range [`1`-`65535`].
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The priority of target DNS Record. This must be in the range [`0`-`65535`].
+     */
     priority?: pulumi.Input<number>;
+    /**
+     * The number of the TTL.
+     */
     ttl?: pulumi.Input<number>;
+    /**
+     * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`].
+     */
     type: pulumi.Input<string>;
+    /**
+     * The value of the DNS Record.
+     */
     value: pulumi.Input<string>;
+    /**
+     * The weight of target DNS Record. This must be in the range [`0`-`65535`].
+     */
     weight?: pulumi.Input<number>;
 }
 
 export interface DatabaseBackup {
+    /**
+     * The time to take backup. This must be formatted with `HH:mm`.
+     */
     time?: pulumi.Input<string>;
+    /**
+     * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
+     */
     weekdays?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface DatabaseNetworkInterface {
+    /**
+     * The IP address of the gateway used by Database.
+     */
     gateway: pulumi.Input<string>;
+    /**
+     * The IP address to assign to the Database.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The bit length of the subnet to assign to the Database. This must be in the range [`8`-`29`].
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The number of the listening port. This must be in the range [`1024`-`65535`].
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The range of source IP addresses that allow to access to the Database via network.
+     */
     sourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The id of the switch to which the Database connects.
+     */
     switchId: pulumi.Input<string>;
 }
 
 export interface DatabaseReadReplicaNetworkInterface {
+    /**
+     * The IP address of the gateway used by read-replica database. If `gateway` isn't specified, it will be set to the same value of the master database.
+     */
     gateway?: pulumi.Input<string>;
+    /**
+     * The IP address to assign to the read-replica database.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The bit length of the subnet to assign to the read-replica database. This must be in the range [`8`-`29`]. If `netmask` isn't specified, it will be set to the same value of the master database.
+     */
     netmask?: pulumi.Input<number>;
+    /**
+     * The range of source IP addresses that allow to access to the read-replica database via network.
+     */
     sourceRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The id of the switch to which the read-replica database connects. If `switchId` isn't specified, it will be set to the same value of the master database.
+     */
     switchId?: pulumi.Input<string>;
 }
 
 export interface GSLBHealthCheck {
+    /**
+     * The interval in seconds between checks. This must be in the range [`10`-`60`].
+     */
     delayLoop?: pulumi.Input<number>;
+    /**
+     * The value of host header send when checking by HTTP/HTTPS.
+     */
     hostHeader?: pulumi.Input<string>;
+    /**
+     * The path used when checking by HTTP/HTTPS.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * The port number used when checking by TCP.
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The protocol used for health checks. This must be one of [`http`/`https`/`tcp`/`ping`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * The response-code to expect when checking by HTTP/HTTPS.
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface GSLBServer {
+    /**
+     * The flag to enable as destination of load balancing.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The IP address of the server.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The weight used when weighted load balancing is enabled. This must be in the range [`1`-`10000`].
+     */
     weight?: pulumi.Input<number>;
 }
 
 export interface GetArchiveFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetArchiveFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetArchiveFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetBridgeFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetBridgeFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
 }
 
 export interface GetBridgeFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetCDROMFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetCDROMFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetCDROMFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetContainerRegistryFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetContainerRegistryFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetContainerRegistryFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetDNSFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetDNSFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetDNSFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetDatabaseFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetDatabaseFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetDatabaseFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetDiskFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetDiskFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetDiskFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: string[];
+}
+
+export interface GetESMEFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: inputs.GetESMEFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    tags?: string[];
+}
+
+export interface GetESMEFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetGSLBFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetGSLBFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetGSLBFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetIconFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetIconFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetIconFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetInternetFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetInternetFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetInternetFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetLoadBalancerFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetLoadBalancerFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetLoadBalancerFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetLocalRouterFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetLocalRouterFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetLocalRouterFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetNFSFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetNFSFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetNFSFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetNoteFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetNoteFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetNoteFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetPacketFilterFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetPacketFilterFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
 }
 
 export interface GetPacketFilterFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetPrivateHostFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetPrivateHostFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetPrivateHostFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetProxyLBFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetProxyLBFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetProxyLBFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetSSHKeyFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetSSHKeyFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
 }
 
 export interface GetSSHKeyFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetServerFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetServerFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetServerFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetSimpleMonitorFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetSimpleMonitorFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetSimpleMonitorFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetSwitchFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetSwitchFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetSwitchFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface GetVPCRouterFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
     conditions?: inputs.GetVPCRouterFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
     id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
     tags?: string[];
 }
 
 export interface GetVPCRouterFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
     name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
     values: string[];
 }
 
 export interface LoadBalancerNetworkInterface {
+    /**
+     * The IP address of the gateway used by LoadBalancer.
+     */
     gateway?: pulumi.Input<string>;
+    /**
+     * A list of IP address to assign to the LoadBalancer. .
+     */
     ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The bit length of the subnet assigned to the LoadBalancer. This must be in the range [`8`-`29`].
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The id of the switch to which the LoadBalancer connects.
+     */
     switchId: pulumi.Input<string>;
+    /**
+     * The Virtual Router Identifier.
+     */
     vrid: pulumi.Input<number>;
 }
 
 export interface LoadBalancerVip {
+    /**
+     * The interval in seconds between checks. This must be in the range [`10`-`2147483647`].
+     */
     delayLoop?: pulumi.Input<number>;
+    /**
+     * The description of the VIP. The length of this value must be in the range [`1`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The target port number for load-balancing. This must be in the range [`1`-`65535`].
+     */
     port: pulumi.Input<number>;
+    /**
+     * One or more `server` blocks as defined below.
+     */
     servers?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVipServer>[]>;
+    /**
+     * The IP address of the SorryServer. This will be used when all servers under this VIP are down.
+     */
     sorryServer?: pulumi.Input<string>;
+    /**
+     * The virtual IP address.
+     */
     vip: pulumi.Input<string>;
 }
 
 export interface LoadBalancerVipServer {
+    /**
+     * The flag to enable as destination of load balancing.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The IP address of the destination server.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The path used when checking by HTTP/HTTPS.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * The protocol used for health checks. This must be one of [`http`/`https`/`tcp`/`ping`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * The response code to expect when checking by HTTP/HTTPS.
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface LocalRouterNetworkInterface {
+    /**
+     * A list of IP address to assign to the LocalRouter.
+     */
     ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The bit length of the subnet assigned to the LocalRouter. This must be in the range [`8`-`29`].
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The virtual IP address.
+     */
     vip: pulumi.Input<string>;
+    /**
+     * The Virtual Router Identifier.
+     */
     vrid: pulumi.Input<number>;
 }
 
 export interface LocalRouterPeer {
+    /**
+     * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The flag to enable the LocalRouter.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The ID of the peer LocalRouter.
+     */
     peerId: pulumi.Input<string>;
+    /**
+     * The secret key of the peer LocalRouter.
+     */
     secretKey: pulumi.Input<string>;
 }
 
 export interface LocalRouterStaticRoute {
+    /**
+     * The IP address of the next hop.
+     */
     nextHop: pulumi.Input<string>;
+    /**
+     * The CIDR block of destination.
+     */
     prefix: pulumi.Input<string>;
 }
 
 export interface LocalRouterSwitch {
+    /**
+     * The category name of connected services (e.g. `cloud`, `vps`).
+     */
     category?: pulumi.Input<string>;
+    /**
+     * The resource ID of the Switch.
+     */
     code: pulumi.Input<string>;
+    /**
+     * The id of the Zone.
+     */
     zoneId: pulumi.Input<string>;
 }
 
 export interface MobileGatewayPrivateNetworkInterface {
+    /**
+     * The IP address to assign to the MobileGateway.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The bit length of the subnet to assign to the MobileGateway. This must be in the range [`8`-`29`].
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The id of the switch to which the MobileGateway connects.
+     */
     switchId: pulumi.Input<string>;
 }
 
 export interface MobileGatewaySim {
+    /**
+     * The IP address to assign to the SIM.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The id of the Switch connected to the MobileGateway.
+     */
     simId: pulumi.Input<string>;
 }
 
 export interface MobileGatewaySimRoute {
+    /**
+     * The destination network prefix used by the sim routing. This must be specified by CIDR block formatted string.
+     */
     prefix: pulumi.Input<string>;
+    /**
+     * The id of the routing destination SIM.
+     */
     simId: pulumi.Input<string>;
 }
 
 export interface MobileGatewayStaticRoute {
+    /**
+     * The IP address of next hop.
+     */
     nextHop: pulumi.Input<string>;
+    /**
+     * The destination network prefix used by static routing. This must be specified by CIDR block formatted string.
+     */
     prefix: pulumi.Input<string>;
 }
 
 export interface MobileGatewayTrafficControl {
+    /**
+     * The flag to enable the traffic shaping.
+     */
     autoTrafficShaping?: pulumi.Input<boolean>;
+    /**
+     * The bandwidth allowed when the traffic shaping is enabled.
+     */
     bandWidthLimit?: pulumi.Input<number>;
+    /**
+     * The flag to enable email notification when the traffic shaping is enabled.
+     */
     enableEmail?: pulumi.Input<boolean>;
+    /**
+     * The flag to enable slack notification when the traffic shaping is enabled.
+     */
     enableSlack?: pulumi.Input<boolean>;
+    /**
+     * The threshold of monthly traffic usage to enable to the traffic shaping.
+     */
     quota: pulumi.Input<number>;
+    /**
+     * The webhook URL used when sends notification. It will only used when `enableSlack` is set `true`.
+     */
     slackWebhook?: pulumi.Input<string>;
 }
 
 export interface NFSNetworkInterface {
+    /**
+     * The IP address of the gateway used by NFS.
+     */
     gateway?: pulumi.Input<string>;
+    /**
+     * The IP address to assign to the NFS.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The bit length of the subnet to assign to the NFS. This must be in the range [`8`-`29`].
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The id of the switch to which the NFS connects.
+     */
     switchId: pulumi.Input<string>;
 }
 
 export interface PacketFilterExpression {
+    /**
+     * The flag to allow the packet through the filter.
+     */
     allow?: pulumi.Input<boolean>;
+    /**
+     * The description of the packetFilter. The length of this value must be in the range [`1`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * A destination port number or port range used for filtering (e.g. `1024`, `1024-2048`).
+     */
     destinationPort?: pulumi.Input<string>;
+    /**
+     * The protocol used for filtering. This must be one of [`http`/`https`/`tcp`/`udp`/`icmp`/`fragment`/`ip`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * A source IP address or CIDR block used for filtering (e.g. `192.0.2.1`, `192.0.2.0/24`).
+     */
     sourceNetwork?: pulumi.Input<string>;
+    /**
+     * A source port number or port range used for filtering (e.g. `1024`, `1024-2048`).
+     */
     sourcePort?: pulumi.Input<string>;
 }
 
 export interface PacketFilterRuleExpression {
+    /**
+     * The flag to allow the packet through the filter.
+     */
     allow?: pulumi.Input<boolean>;
+    /**
+     * The description of the expression.
+     */
     description?: pulumi.Input<string>;
+    /**
+     * A destination port number or port range used for filtering (e.g. `1024`, `1024-2048`).
+     */
     destinationPort?: pulumi.Input<string>;
+    /**
+     * The protocol used for filtering. This must be one of [`http`/`https`/`tcp`/`udp`/`icmp`/`fragment`/`ip`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * A source IP address or CIDR block used for filtering (e.g. `192.0.2.1`, `192.0.2.0/24`).
+     */
     sourceNetwork?: pulumi.Input<string>;
+    /**
+     * A source port number or port range used for filtering (e.g. `1024`, `1024-2048`).
+     */
     sourcePort?: pulumi.Input<string>;
 }
 
 export interface ProxyLBACMECertificate {
+    /**
+     * A list of `additionalCertificate` blocks as defined below.
+     */
     additionalCertificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBACMECertificateAdditionalCertificate>[]>;
+    /**
+     * The intermediate certificate for a server.
+     */
     intermediateCert?: pulumi.Input<string>;
+    /**
+     * The private key for a server.
+     */
     privateKey?: pulumi.Input<string>;
+    /**
+     * The certificate for a server.
+     */
     serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBACMECertificateAdditionalCertificate {
+    /**
+     * The intermediate certificate for a server.
+     */
     intermediateCert?: pulumi.Input<string>;
+    /**
+     * The private key for a server.
+     */
     privateKey?: pulumi.Input<string>;
+    /**
+     * The certificate for a server.
+     */
     serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBBindPort {
+    /**
+     * The number of listening port.
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The proxy mode. This must be one of [`http`/`https`/`tcp`].
+     */
     proxyMode: pulumi.Input<string>;
+    /**
+     * The flag to enable redirection from http to https. This flag is used only when `proxyMode` is `http`.
+     */
     redirectToHttps?: pulumi.Input<boolean>;
+    /**
+     * One or more `responseHeader` blocks as defined below.
+     */
     responseHeaders?: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPortResponseHeader>[]>;
+    /**
+     * The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
+     */
     supportHttp2?: pulumi.Input<boolean>;
 }
 
 export interface ProxyLBBindPortResponseHeader {
+    /**
+     * The field name of HTTP header added to response by the ProxyLB.
+     */
     header: pulumi.Input<string>;
+    /**
+     * The field value of HTTP header added to response by the ProxyLB.
+     */
     value: pulumi.Input<string>;
 }
 
 export interface ProxyLBCertificate {
+    /**
+     * One or more `additionalCertificate` blocks as defined below.
+     */
     additionalCertificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBCertificateAdditionalCertificate>[]>;
+    /**
+     * The intermediate certificate for a server.
+     */
     intermediateCert?: pulumi.Input<string>;
+    /**
+     * The private key for a server.
+     */
     privateKey?: pulumi.Input<string>;
+    /**
+     * The certificate for a server.
+     */
     serverCert?: pulumi.Input<string>;
 }
 
 export interface ProxyLBCertificateAdditionalCertificate {
+    /**
+     * The intermediate certificate for a server.
+     */
     intermediateCert?: pulumi.Input<string>;
+    /**
+     * The private key for a server.
+     */
     privateKey: pulumi.Input<string>;
+    /**
+     * The certificate for a server.
+     */
     serverCert: pulumi.Input<string>;
 }
 
 export interface ProxyLBHealthCheck {
+    /**
+     * The interval in seconds between checks. This must be in the range [`10`-`60`].
+     */
     delayLoop?: pulumi.Input<number>;
+    /**
+     * The value of host header send when checking by HTTP.
+     */
     hostHeader?: pulumi.Input<string>;
+    /**
+     * The path used when checking by HTTP.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * The port number used when checking by TCP.
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The protocol used for health checks. This must be one of [`http`/`tcp`].
+     */
     protocol: pulumi.Input<string>;
 }
 
 export interface ProxyLBRule {
+    /**
+     * The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
+     */
     group?: pulumi.Input<string>;
+    /**
+     * The value of HTTP host header that is used as condition of rule-based balancing.
+     */
     host?: pulumi.Input<string>;
+    /**
+     * The request path that is used as condition of rule-based balancing.
+     */
     path?: pulumi.Input<string>;
 }
 
 export interface ProxyLBServer {
+    /**
+     * The flag to enable as destination of load balancing.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * The name of load balancing group. This is used when using rule-based load balancing. The length of this value must be in the range [`1`-`10`].
+     */
     group?: pulumi.Input<string>;
+    /**
+     * The IP address of the destination server.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The port number of the destination server. This must be in the range [`1`-`65535`].
+     */
     port: pulumi.Input<number>;
 }
 
 export interface ProxyLBSorryServer {
+    /**
+     * The IP address of the SorryServer. This will be used when all servers are down.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The port number of the SorryServer. This will be used when all servers are down.
+     */
     port?: pulumi.Input<number>;
 }
 
 export interface ServerDiskEditParameter {
+    /**
+     * The flag to change partition uuid.
+     */
     changePartitionUuid?: pulumi.Input<boolean>;
+    /**
+     * The flag to disable password authentication.
+     */
     disablePwAuth?: pulumi.Input<boolean>;
+    /**
+     * The flag to enable DHCP client.
+     */
     enableDhcp?: pulumi.Input<boolean>;
+    /**
+     * The gateway address used by the Server.
+     */
     gateway?: pulumi.Input<string>;
+    /**
+     * The hostname of the Server. The length of this value must be in the range [`1`-`64`].
+     */
     hostname?: pulumi.Input<string>;
+    /**
+     * The IP address to assign to the Server.
+     */
     ipAddress?: pulumi.Input<string>;
+    /**
+     * The bit length of the subnet to assign to the Server.
+     */
     netmask?: pulumi.Input<number>;
     /**
+     * A list of the Note id.  
+     * Note: **The `noteIds` will be removed in a future version. Please use the `note` instead**
+     *
      * @deprecated The note_ids field will be removed in a future version. Please use the note field instead
      */
     noteIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of the `note` block as defined below.
+     */
     notes?: pulumi.Input<pulumi.Input<inputs.ServerDiskEditParameterNote>[]>;
+    /**
+     * The password of default user. The length of this value must be in the range [`8`-`64`].
+     */
     password?: pulumi.Input<string>;
+    /**
+     * A list of the SSHKey id.
+     */
     sshKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of the SSHKey text.
+     */
+    sshKeys?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ServerDiskEditParameterNote {
+    /**
+     * The id of the API key to be injected into the Note/StartupScript when editing the disk.
+     */
     apiKeyId?: pulumi.Input<string>;
+    /**
+     * The id of the Note/StartupScript.
+     */
     id: pulumi.Input<string>;
+    /**
+     * The value of the variable that be injected into the Note/StartupScript when editing the disk.
+     */
     variables?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
 }
 
 export interface ServerNetworkInterface {
+    /**
+     * The MAC address.
+     */
     macAddress?: pulumi.Input<string>;
+    /**
+     * The id of the packet filter to attach to the network interface.
+     */
     packetFilterId?: pulumi.Input<string>;
+    /**
+     * The upstream type or upstream switch id. This must be one of [`shared`/`disconnect`/`<switch id>`].
+     */
     upstream: pulumi.Input<string>;
+    /**
+     * The IP address for only display. This value doesn't affect actual NIC settings.
+     */
     userIpAddress?: pulumi.Input<string>;
 }
 
 export interface SimpleMonitorHealthCheck {
+    /**
+     * The SNMP community string used when checking by SNMP.
+     */
     community?: pulumi.Input<string>;
+    /**
+     * The string that should be included in the response body when checking for HTTP/HTTPS.
+     */
+    containsString?: pulumi.Input<string>;
+    /**
+     * The expected value used when checking by DNS.
+     */
     excepctedData?: pulumi.Input<string>;
+    /**
+     * The value of host header send when checking by HTTP/HTTPS.
+     */
     hostHeader?: pulumi.Input<string>;
+    /**
+     * The flag to enable HTTP/2 when checking by HTTPS.
+     */
+    http2?: pulumi.Input<boolean>;
+    /**
+     * The SNMP OID used when checking by SNMP.
+     */
     oid?: pulumi.Input<string>;
+    /**
+     * The password for basic auth used when checking by HTTP/HTTPS.
+     */
     password?: pulumi.Input<string>;
+    /**
+     * The path used when checking by HTTP/HTTPS.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * The target port number.
+     */
     port?: pulumi.Input<number>;
+    /**
+     * The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * The FQDN used when checking by DNS.
+     */
     qname?: pulumi.Input<string>;
+    /**
+     * The number of remaining days until certificate expiration used when checking SSL certificates. This must be in the range [`1`-`9999`].
+     */
     remainingDays?: pulumi.Input<number>;
+    /**
+     * The flag to enable SNI when checking by HTTP/HTTPS.
+     */
     sni?: pulumi.Input<boolean>;
+    /**
+     * The SNMP version used when checking by SNMP. This must be one of `1`/`2c`.
+     */
     snmpVersion?: pulumi.Input<string>;
+    /**
+     * The response-code to expect when checking by HTTP/HTTPS.
+     */
     status?: pulumi.Input<number>;
+    /**
+     * The user name for basic auth used when checking by HTTP/HTTPS.
+     */
     username?: pulumi.Input<string>;
 }
 
 export interface VPCRouterDhcpServer {
+    /**
+     * A list of IP address of DNS server to assign to DHCP client.
+     */
     dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The index of the network interface on which to enable the DHCP service. This must be in the range [`1`-`7`].
+     */
     interfaceIndex: pulumi.Input<number>;
+    /**
+     * The start value of IP address range to assign to DHCP client.
+     */
     rangeStart: pulumi.Input<string>;
+    /**
+     * The end value of IP address range to assign to DHCP client.
+     */
     rangeStop: pulumi.Input<string>;
 }
 
 export interface VPCRouterDhcpStaticMapping {
+    /**
+     * The static IP address to assign to DHCP client.
+     */
     ipAddress: pulumi.Input<string>;
+    /**
+     * The source MAC address of static mapping.
+     */
     macAddress: pulumi.Input<string>;
 }
 
 export interface VPCRouterFirewall {
+    /**
+     * The direction to apply the firewall. This must be one of [`send`/`receive`].
+     */
     direction: pulumi.Input<string>;
+    /**
+     * One or more `expression` blocks as defined below.
+     */
     expressions: pulumi.Input<pulumi.Input<inputs.VPCRouterFirewallExpression>[]>;
+    /**
+     * The index of the network interface on which to enable filtering. This must be in the range [`0`-`7`].
+     */
     interfaceIndex?: pulumi.Input<number>;
 }
 
 export interface VPCRouterFirewallExpression {
+    /**
+     * The flag to allow the packet through the filter.
+     */
     allow: pulumi.Input<boolean>;
+    /**
+     * The description of the expression. The length of this value must be in the range [`0`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * A destination IP address or CIDR block used for filtering (e.g. `192.0.2.1`, `192.0.2.0/24`).
+     */
     destinationNetwork?: pulumi.Input<string>;
+    /**
+     * A destination port number or port range used for filtering (e.g. `1024`, `1024-2048`). This is only used when `protocol` is `tcp` or `udp`.
+     */
     destinationPort?: pulumi.Input<string>;
+    /**
+     * The flag to enable packet logging when matching the expression.
+     */
     logging?: pulumi.Input<boolean>;
+    /**
+     * The protocol used for filtering. This must be one of [`tcp`/`udp`/`icmp`/`ip`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * A source IP address or CIDR block used for filtering (e.g. `192.0.2.1`, `192.0.2.0/24`).
+     */
     sourceNetwork?: pulumi.Input<string>;
+    /**
+     * A source port number or port range used for filtering (e.g. `1024`, `1024-2048`). This is only used when `protocol` is `tcp` or `udp`.
+     */
     sourcePort?: pulumi.Input<string>;
 }
 
 export interface VPCRouterL2tp {
+    /**
+     * The pre shared secret for the VPN. The length of this value must be in the range [`0`-`40`].
+     */
     preSharedSecret: pulumi.Input<string>;
+    /**
+     * The start value of IP address range to assign to DHCP client.
+     */
     rangeStart: pulumi.Input<string>;
+    /**
+     * The end value of IP address range to assign to DHCP client.
+     */
     rangeStop: pulumi.Input<string>;
 }
 
 export interface VPCRouterPortForwarding {
+    /**
+     * The description of the port forwarding. The length of this value must be in the range [`0`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The destination ip address of the port forwarding.
+     */
     privateIp: pulumi.Input<string>;
+    /**
+     * The destination port number of the port forwarding. This will be a port number on a private network.
+     */
     privatePort: pulumi.Input<number>;
+    /**
+     * The protocol used for port forwarding. This must be one of [`tcp`/`udp`].
+     */
     protocol: pulumi.Input<string>;
+    /**
+     * The source port number of the port forwarding. This must be a port number on a public network.
+     */
     publicPort: pulumi.Input<number>;
 }
 
 export interface VPCRouterPptp {
+    /**
+     * The start value of IP address range to assign to PPTP client.
+     */
     rangeStart: pulumi.Input<string>;
+    /**
+     * The end value of IP address range to assign to PPTP client.
+     */
     rangeStop: pulumi.Input<string>;
 }
 
 export interface VPCRouterPrivateNetworkInterface {
+    /**
+     * The index of the network interface. This must be in the range [`1`-`7`].
+     */
     index: pulumi.Input<number>;
+    /**
+     * A list of ip address to assign to the network interface. This is required only one value when `plan` is `standard`, two values otherwise.
+     */
     ipAddresses: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The bit length of the subnet to assign to the network interface.
+     */
     netmask: pulumi.Input<number>;
+    /**
+     * The id of the connected switch.
+     */
     switchId: pulumi.Input<string>;
+    /**
+     * The virtual IP address to assign to the network interface. This is only required when `plan` is not `standard`.
+     */
     vip?: pulumi.Input<string>;
 }
 
 export interface VPCRouterPublicNetworkInterface {
+    /**
+     * A list of ip alias to assign to the VPC Router. This can only be specified if `plan` is not `standard`.
+     */
     aliases?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The list of the IP address to assign to the VPC Router. This is required only one value when `plan` is `standard`, two values otherwise.
+     */
     ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The id of the switch to connect. This is only required when when `plan` is not `standard`.
+     */
     switchId?: pulumi.Input<string>;
+    /**
+     * The virtual IP address of the VPC Router. This is only required when `plan` is not `standard`.
+     */
     vip?: pulumi.Input<string>;
+    /**
+     * The Virtual Router Identifier. This is only required when `plan` is not `standard`.
+     */
     vrid?: pulumi.Input<number>;
 }
 
 export interface VPCRouterSiteToSiteVpn {
+    /**
+     * A list of CIDR block of the network under the VPC Router.
+     */
     localPrefixes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The IP address of the opposing appliance connected to the VPC Router.
+     */
     peer: pulumi.Input<string>;
+    /**
+     * The pre shared secret for the VPN. The length of this value must be in the range [`0`-`40`].
+     */
     preSharedSecret: pulumi.Input<string>;
+    /**
+     * The id of the opposing appliance connected to the VPC Router. This is typically set same as value of `peer`.
+     */
     remoteId: pulumi.Input<string>;
+    /**
+     * A list of CIDR block of VPN connected networks.
+     */
     routes: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface VPCRouterStaticNat {
+    /**
+     * The description of the static nat. The length of this value must be in the range [`0`-`512`].
+     */
     description?: pulumi.Input<string>;
+    /**
+     * The private IP address used for the static NAT.
+     */
     privateIp: pulumi.Input<string>;
+    /**
+     * The public IP address used for the static NAT.
+     */
     publicIp: pulumi.Input<string>;
 }
 
 export interface VPCRouterStaticRoute {
+    /**
+     * The IP address of the next hop.
+     */
     nextHop: pulumi.Input<string>;
+    /**
+     * The CIDR block of destination.
+     */
     prefix: pulumi.Input<string>;
 }
 
 export interface VPCRouterUser {
+    /**
+     * The user name used to authenticate remote access.
+     */
     name: pulumi.Input<string>;
+    /**
+     * The password used to authenticate remote access.
+     */
     password: pulumi.Input<string>;
 }

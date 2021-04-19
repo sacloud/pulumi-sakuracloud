@@ -2,11 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
+import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-export function getLocalRouter(args?: GetLocalRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetLocalRouterResult> & GetLocalRouterResult {
+/**
+ * Get information about an existing Local Router.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ *
+ * const foobar = pulumi.output(sakuracloud.getLocalRouter({
+ *     filter: {
+ *         names: ["foobar"],
+ *     },
+ * }, { async: true }));
+ * ```
+ */
+export function getLocalRouter(args?: GetLocalRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetLocalRouterResult> {
     args = args || {};
     if (!opts) {
         opts = {}
@@ -15,17 +30,18 @@ export function getLocalRouter(args?: GetLocalRouterArgs, opts?: pulumi.InvokeOp
     if (!opts.version) {
         opts.version = utilities.getVersion();
     }
-    const promise: Promise<GetLocalRouterResult> = pulumi.runtime.invoke("sakuracloud:index/getLocalRouter:getLocalRouter", {
+    return pulumi.runtime.invoke("sakuracloud:index/getLocalRouter:getLocalRouter", {
         "filter": args.filter,
     }, opts);
-
-    return pulumi.utils.liftProperties(promise, opts);
 }
 
 /**
  * A collection of arguments for invoking getLocalRouter.
  */
 export interface GetLocalRouterArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
     readonly filter?: inputs.GetLocalRouterFilter;
 }
 
@@ -33,18 +49,45 @@ export interface GetLocalRouterArgs {
  * A collection of values returned by getLocalRouter.
  */
 export interface GetLocalRouterResult {
+    /**
+     * The description of the LocalRouter.
+     */
     readonly description: string;
     readonly filter?: outputs.GetLocalRouterFilter;
+    /**
+     * The icon id attached to the LocalRouter.
+     */
     readonly iconId: string;
     /**
-     * id is the provider-assigned unique ID for this managed resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The name of the LocalRouter.
+     */
     readonly name: string;
+    /**
+     * A list of `networkInterface` blocks as defined below.
+     */
     readonly networkInterfaces: outputs.GetLocalRouterNetworkInterface[];
+    /**
+     * A list of `peer` blocks as defined below.
+     */
     readonly peers: outputs.GetLocalRouterPeer[];
+    /**
+     * A list of secret key used for peering from other LocalRouters.
+     */
     readonly secretKeys: string[];
+    /**
+     * A list of `staticRoute` blocks as defined below.
+     */
     readonly staticRoutes: outputs.GetLocalRouterStaticRoute[];
+    /**
+     * A list of `switch` blocks as defined below.
+     */
     readonly switches: outputs.GetLocalRouterSwitch[];
+    /**
+     * Any tags assigned to the LocalRouter.
+     */
     readonly tags: string[];
 }

@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manages a SakuraCloud Bucket Object.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as sakuracloud from "@pulumi/sakuracloud";
+ * import * from "fs";
+ *
+ * const foobar = new sakuracloud.BucketObject("foobar", {
+ *     bucket: "foobar",
+ *     key: "example.txt",
+ *     content: fs.readFileSync("example.txt"),
+ * });
+ * ```
+ */
 export class BucketObject extends pulumi.CustomResource {
     /**
      * Get an existing BucketObject resource's state with the given name, ID, and optional extra
@@ -12,6 +29,7 @@ export class BucketObject extends pulumi.CustomResource {
      * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: BucketObjectState, opts?: pulumi.CustomResourceOptions): BucketObject {
         return new BucketObject(name, <any>state, { ...opts, id: id });
@@ -32,67 +50,67 @@ export class BucketObject extends pulumi.CustomResource {
     }
 
     /**
-     * The access key for using SakuraCloud Object Storage API
+     * The access key for using SakuraCloud Object Storage API.
      */
     public readonly accessKey!: pulumi.Output<string>;
     /**
-     * The name of the bucket
+     * The name of the bucket. Changing this forces a new resource to be created.
      */
     public readonly bucket!: pulumi.Output<string>;
     /**
-     * The content to upload to as the bucket object. This conflicts with [`source`]
+     * The content to upload to as the bucket object. This conflicts with [`source`].
      */
     public readonly content!: pulumi.Output<string | undefined>;
     /**
-     * The content-type of the bucket object
+     * The content-type of the bucket object.
      */
     public readonly contentType!: pulumi.Output<string>;
     /**
-     * The etag of the bucket object
+     * The etag of the bucket object.
      */
     public readonly etag!: pulumi.Output<string>;
     /**
-     * The URL for cached access to the bucket object via HTTP
+     * The URL for cached access to the bucket object via HTTP.
      */
     public /*out*/ readonly httpCacheUrl!: pulumi.Output<string>;
     /**
-     * The URL with path-format for accessing the bucket object via HTTP
+     * The URL with path-format for accessing the bucket object via HTTP.
      */
     public /*out*/ readonly httpPathUrl!: pulumi.Output<string>;
     /**
-     * The URL for accessing the bucket object via HTTP
+     * The URL for accessing the bucket object via HTTP.
      */
     public /*out*/ readonly httpUrl!: pulumi.Output<string>;
     /**
-     * The URL for cached access to the bucket object via HTTPS
+     * The URL for cached access to the bucket object via HTTPS.
      */
     public /*out*/ readonly httpsCacheUrl!: pulumi.Output<string>;
     /**
-     * The URL with path-format for accessing the bucket object via HTTPS
+     * The URL with path-format for accessing the bucket object via HTTPS.
      */
     public /*out*/ readonly httpsPathUrl!: pulumi.Output<string>;
     /**
-     * The URL for accessing the bucket object via HTTPS
+     * The URL for accessing the bucket object via HTTPS.
      */
     public /*out*/ readonly httpsUrl!: pulumi.Output<string>;
     /**
-     * The name of the bucket object
+     * The name of the bucket object. Changing this forces a new resource to be created.
      */
     public readonly key!: pulumi.Output<string>;
     /**
-     * The time when the bucket object last modified
+     * The time when the bucket object last modified.
      */
     public /*out*/ readonly lastModified!: pulumi.Output<string>;
     /**
-     * The secret key for using SakuraCloud Object Storage API
+     * The secret key for using SakuraCloud Object Storage API.
      */
     public readonly secretKey!: pulumi.Output<string>;
     /**
-     * The size of the bucket object in bytes
+     * The size of the bucket object in bytes.
      */
     public /*out*/ readonly size!: pulumi.Output<number>;
     /**
-     * The file path to upload to as the bucket object. This conflicts with [`content`]
+     * The file path to upload to as the bucket object. This conflicts with [`content`].
      */
     public readonly source!: pulumi.Output<string | undefined>;
 
@@ -106,7 +124,8 @@ export class BucketObject extends pulumi.CustomResource {
     constructor(name: string, args: BucketObjectArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: BucketObjectArgs | BucketObjectState, opts?: pulumi.CustomResourceOptions) {
         let inputs: pulumi.Inputs = {};
-        if (opts && opts.id) {
+        opts = opts || {};
+        if (opts.id) {
             const state = argsOrState as BucketObjectState | undefined;
             inputs["accessKey"] = state ? state.accessKey : undefined;
             inputs["bucket"] = state ? state.bucket : undefined;
@@ -126,16 +145,16 @@ export class BucketObject extends pulumi.CustomResource {
             inputs["source"] = state ? state.source : undefined;
         } else {
             const args = argsOrState as BucketObjectArgs | undefined;
-            if (!args || args.accessKey === undefined) {
+            if ((!args || args.accessKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'accessKey'");
             }
-            if (!args || args.bucket === undefined) {
+            if ((!args || args.bucket === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'bucket'");
             }
-            if (!args || args.key === undefined) {
+            if ((!args || args.key === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'key'");
             }
-            if (!args || args.secretKey === undefined) {
+            if ((!args || args.secretKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'secretKey'");
             }
             inputs["accessKey"] = args ? args.accessKey : undefined;
@@ -155,12 +174,8 @@ export class BucketObject extends pulumi.CustomResource {
             inputs["lastModified"] = undefined /*out*/;
             inputs["size"] = undefined /*out*/;
         }
-        if (!opts) {
-            opts = {}
-        }
-
         if (!opts.version) {
-            opts.version = utilities.getVersion();
+            opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
         }
         super(BucketObject.__pulumiType, name, inputs, opts);
     }
@@ -171,67 +186,67 @@ export class BucketObject extends pulumi.CustomResource {
  */
 export interface BucketObjectState {
     /**
-     * The access key for using SakuraCloud Object Storage API
+     * The access key for using SakuraCloud Object Storage API.
      */
     readonly accessKey?: pulumi.Input<string>;
     /**
-     * The name of the bucket
+     * The name of the bucket. Changing this forces a new resource to be created.
      */
     readonly bucket?: pulumi.Input<string>;
     /**
-     * The content to upload to as the bucket object. This conflicts with [`source`]
+     * The content to upload to as the bucket object. This conflicts with [`source`].
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * The content-type of the bucket object
+     * The content-type of the bucket object.
      */
     readonly contentType?: pulumi.Input<string>;
     /**
-     * The etag of the bucket object
+     * The etag of the bucket object.
      */
     readonly etag?: pulumi.Input<string>;
     /**
-     * The URL for cached access to the bucket object via HTTP
+     * The URL for cached access to the bucket object via HTTP.
      */
     readonly httpCacheUrl?: pulumi.Input<string>;
     /**
-     * The URL with path-format for accessing the bucket object via HTTP
+     * The URL with path-format for accessing the bucket object via HTTP.
      */
     readonly httpPathUrl?: pulumi.Input<string>;
     /**
-     * The URL for accessing the bucket object via HTTP
+     * The URL for accessing the bucket object via HTTP.
      */
     readonly httpUrl?: pulumi.Input<string>;
     /**
-     * The URL for cached access to the bucket object via HTTPS
+     * The URL for cached access to the bucket object via HTTPS.
      */
     readonly httpsCacheUrl?: pulumi.Input<string>;
     /**
-     * The URL with path-format for accessing the bucket object via HTTPS
+     * The URL with path-format for accessing the bucket object via HTTPS.
      */
     readonly httpsPathUrl?: pulumi.Input<string>;
     /**
-     * The URL for accessing the bucket object via HTTPS
+     * The URL for accessing the bucket object via HTTPS.
      */
     readonly httpsUrl?: pulumi.Input<string>;
     /**
-     * The name of the bucket object
+     * The name of the bucket object. Changing this forces a new resource to be created.
      */
     readonly key?: pulumi.Input<string>;
     /**
-     * The time when the bucket object last modified
+     * The time when the bucket object last modified.
      */
     readonly lastModified?: pulumi.Input<string>;
     /**
-     * The secret key for using SakuraCloud Object Storage API
+     * The secret key for using SakuraCloud Object Storage API.
      */
     readonly secretKey?: pulumi.Input<string>;
     /**
-     * The size of the bucket object in bytes
+     * The size of the bucket object in bytes.
      */
     readonly size?: pulumi.Input<number>;
     /**
-     * The file path to upload to as the bucket object. This conflicts with [`content`]
+     * The file path to upload to as the bucket object. This conflicts with [`content`].
      */
     readonly source?: pulumi.Input<string>;
 }
@@ -241,35 +256,35 @@ export interface BucketObjectState {
  */
 export interface BucketObjectArgs {
     /**
-     * The access key for using SakuraCloud Object Storage API
+     * The access key for using SakuraCloud Object Storage API.
      */
     readonly accessKey: pulumi.Input<string>;
     /**
-     * The name of the bucket
+     * The name of the bucket. Changing this forces a new resource to be created.
      */
     readonly bucket: pulumi.Input<string>;
     /**
-     * The content to upload to as the bucket object. This conflicts with [`source`]
+     * The content to upload to as the bucket object. This conflicts with [`source`].
      */
     readonly content?: pulumi.Input<string>;
     /**
-     * The content-type of the bucket object
+     * The content-type of the bucket object.
      */
     readonly contentType?: pulumi.Input<string>;
     /**
-     * The etag of the bucket object
+     * The etag of the bucket object.
      */
     readonly etag?: pulumi.Input<string>;
     /**
-     * The name of the bucket object
+     * The name of the bucket object. Changing this forces a new resource to be created.
      */
     readonly key: pulumi.Input<string>;
     /**
-     * The secret key for using SakuraCloud Object Storage API
+     * The secret key for using SakuraCloud Object Storage API.
      */
     readonly secretKey: pulumi.Input<string>;
     /**
-     * The file path to upload to as the bucket object. This conflicts with [`content`]
+     * The file path to upload to as the bucket object. This conflicts with [`content`].
      */
     readonly source?: pulumi.Input<string>;
 }

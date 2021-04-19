@@ -7,19 +7,58 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetDisk
     {
-        public static Task<GetDiskResult> GetDisk(GetDiskArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiskResult>("sakuracloud:index/getDisk:getDisk", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Disk.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var foobar = Output.Create(Sakuracloud.GetDisk.InvokeAsync(new Sakuracloud.GetDiskArgs
+        ///         {
+        ///             Filter = new Sakuracloud.Inputs.GetDiskFilterArgs
+        ///             {
+        ///                 Names = 
+        ///                 {
+        ///                     "foobar",
+        ///                 },
+        ///             },
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetDiskResult> InvokeAsync(GetDiskArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetDiskResult>("sakuracloud:index/getDisk:getDisk", args ?? new GetDiskArgs(), options.WithVersion());
     }
+
 
     public sealed class GetDiskArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// One or more values used for filtering, as defined below.
+        /// </summary>
         [Input("filter")]
         public Inputs.GetDiskFilterArgs? Filter { get; set; }
 
+        /// <summary>
+        /// The name of zone that the Disk is in (e.g. `is1a`, `tk1a`).
+        /// </summary>
         [Input("zone")]
         public string? Zone { get; set; }
 
@@ -28,46 +67,90 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetDiskResult
     {
+        /// <summary>
+        /// The name of the disk connector. This will be one of [`virtio`/`ide`].
+        /// </summary>
         public readonly string Connector;
+        /// <summary>
+        /// The description of the Disk.
+        /// </summary>
         public readonly string Description;
         public readonly Outputs.GetDiskFilterResult? Filter;
-        public readonly string IconId;
-        public readonly string Name;
-        public readonly string Plan;
-        public readonly string ServerId;
-        public readonly int Size;
-        public readonly string SourceArchiveId;
-        public readonly string SourceDiskId;
-        public readonly ImmutableArray<string> Tags;
-        public readonly string Zone;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The icon id attached to the Disk.
+        /// </summary>
+        public readonly string IconId;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The name of the Disk.
+        /// </summary>
+        public readonly string Name;
+        /// <summary>
+        /// The plan name of the Disk. This will be one of [`ssd`/`hdd`].
+        /// </summary>
+        public readonly string Plan;
+        /// <summary>
+        /// The id of the Server connected to the Disk.
+        /// </summary>
+        public readonly string ServerId;
+        /// <summary>
+        /// The size of Disk in GiB.
+        /// </summary>
+        public readonly int Size;
+        /// <summary>
+        /// The id of the source archive.
+        /// </summary>
+        public readonly string SourceArchiveId;
+        /// <summary>
+        /// The id of the source disk.
+        /// </summary>
+        public readonly string SourceDiskId;
+        /// <summary>
+        /// Any tags assigned to the Disk.
+        /// </summary>
+        public readonly ImmutableArray<string> Tags;
+        public readonly string Zone;
 
         [OutputConstructor]
         private GetDiskResult(
             string connector,
+
             string description,
+
             Outputs.GetDiskFilterResult? filter,
+
             string iconId,
+
+            string id,
+
             string name,
+
             string plan,
+
             string serverId,
+
             int size,
+
             string sourceArchiveId,
+
             string sourceDiskId,
+
             ImmutableArray<string> tags,
-            string zone,
-            string id)
+
+            string zone)
         {
             Connector = connector;
             Description = description;
             Filter = filter;
             IconId = iconId;
+            Id = id;
             Name = name;
             Plan = plan;
             ServerId = serverId;
@@ -76,105 +159,6 @@ namespace Pulumi.SakuraCloud
             SourceDiskId = sourceDiskId;
             Tags = tags;
             Zone = zone;
-            Id = id;
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class GetDiskFilterArgs : Pulumi.InvokeArgs
-    {
-        [Input("conditions")]
-        private List<GetDiskFilterConditionsArgs>? _conditions;
-        public List<GetDiskFilterConditionsArgs> Conditions
-        {
-            get => _conditions ?? (_conditions = new List<GetDiskFilterConditionsArgs>());
-            set => _conditions = value;
-        }
-
-        [Input("id")]
-        public string? Id { get; set; }
-
-        [Input("names")]
-        private List<string>? _names;
-        public List<string> Names
-        {
-            get => _names ?? (_names = new List<string>());
-            set => _names = value;
-        }
-
-        [Input("tags")]
-        private List<string>? _tags;
-        public List<string> Tags
-        {
-            get => _tags ?? (_tags = new List<string>());
-            set => _tags = value;
-        }
-
-        public GetDiskFilterArgs()
-        {
-        }
-    }
-
-    public sealed class GetDiskFilterConditionsArgs : Pulumi.InvokeArgs
-    {
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
-
-        [Input("values", required: true)]
-        private List<string>? _values;
-        public List<string> Values
-        {
-            get => _values ?? (_values = new List<string>());
-            set => _values = value;
-        }
-
-        public GetDiskFilterConditionsArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class GetDiskFilterConditionsResult
-    {
-        public readonly string Name;
-        public readonly ImmutableArray<string> Values;
-
-        [OutputConstructor]
-        private GetDiskFilterConditionsResult(
-            string name,
-            ImmutableArray<string> values)
-        {
-            Name = name;
-            Values = values;
-        }
-    }
-
-    [OutputType]
-    public sealed class GetDiskFilterResult
-    {
-        public readonly ImmutableArray<GetDiskFilterConditionsResult> Conditions;
-        public readonly string? Id;
-        public readonly ImmutableArray<string> Names;
-        public readonly ImmutableArray<string> Tags;
-
-        [OutputConstructor]
-        private GetDiskFilterResult(
-            ImmutableArray<GetDiskFilterConditionsResult> conditions,
-            string? id,
-            ImmutableArray<string> names,
-            ImmutableArray<string> tags)
-        {
-            Conditions = conditions;
-            Id = id;
-            Names = names;
-            Tags = tags;
-        }
-    }
     }
 }

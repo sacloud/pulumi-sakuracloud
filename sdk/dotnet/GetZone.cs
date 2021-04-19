@@ -7,16 +7,47 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
-    public static partial class Invokes
+    public static class GetZone
     {
-        public static Task<GetZoneResult> GetZone(GetZoneArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("sakuracloud:index/getZone:getZone", args ?? InvokeArgs.Empty, options.WithVersion());
+        /// <summary>
+        /// Get information about an existing Zone.
+        /// 
+        /// {{% examples %}}
+        /// ## Example Usage
+        /// {{% example %}}
+        /// 
+        /// ```csharp
+        /// using Pulumi;
+        /// using Sakuracloud = Pulumi.Sakuracloud;
+        /// 
+        /// class MyStack : Stack
+        /// {
+        ///     public MyStack()
+        ///     {
+        ///         var current = Output.Create(Sakuracloud.GetZone.InvokeAsync());
+        ///         var is1a = Output.Create(Sakuracloud.GetZone.InvokeAsync(new Sakuracloud.GetZoneArgs
+        ///         {
+        ///             Name = "is1a",
+        ///         }));
+        ///     }
+        /// 
+        /// }
+        /// ```
+        /// {{% /example %}}
+        /// {{% /examples %}}
+        /// </summary>
+        public static Task<GetZoneResult> InvokeAsync(GetZoneArgs? args = null, InvokeOptions? options = null)
+            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneResult>("sakuracloud:index/getZone:getZone", args ?? new GetZoneArgs(), options.WithVersion());
     }
+
 
     public sealed class GetZoneArgs : Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// The name of the zone (e.g. `is1a`,`tk1a`).
+        /// </summary>
         [Input("name")]
         public string? Name { get; set; }
 
@@ -25,37 +56,59 @@ namespace Pulumi.SakuraCloud
         }
     }
 
+
     [OutputType]
     public sealed class GetZoneResult
     {
-        public readonly string Description;
-        public readonly ImmutableArray<string> DnsServers;
-        public readonly string Name;
-        public readonly string RegionId;
-        public readonly string RegionName;
-        public readonly string ZoneId;
         /// <summary>
-        /// id is the provider-assigned unique ID for this managed resource.
+        /// The description of the zone.
+        /// </summary>
+        public readonly string Description;
+        /// <summary>
+        /// A list of IP address of DNS server in the zone.
+        /// </summary>
+        public readonly ImmutableArray<string> DnsServers;
+        /// <summary>
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        public readonly string Name;
+        /// <summary>
+        /// The id of the region that the zone belongs.
+        /// </summary>
+        public readonly string RegionId;
+        /// <summary>
+        /// The name of the region that the zone belongs.
+        /// </summary>
+        public readonly string RegionName;
+        /// <summary>
+        /// The id of the zone.
+        /// </summary>
+        public readonly string ZoneId;
 
         [OutputConstructor]
         private GetZoneResult(
             string description,
+
             ImmutableArray<string> dnsServers,
+
+            string id,
+
             string name,
+
             string regionId,
+
             string regionName,
-            string zoneId,
-            string id)
+
+            string zoneId)
         {
             Description = description;
             DnsServers = dnsServers;
+            Id = id;
             Name = name;
             RegionId = regionId;
             RegionName = regionName;
             ZoneId = zoneId;
-            Id = id;
         }
     }
 }

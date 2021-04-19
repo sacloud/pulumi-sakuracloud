@@ -7,27 +7,100 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Packet Filter.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.PacketFilter("foobar", new Sakuracloud.PacketFilterArgs
+    ///         {
+    ///             Description = "description",
+    ///             Expressions = 
+    ///             {
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     DestinationPort = "22",
+    ///                     Protocol = "tcp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     DestinationPort = "80",
+    ///                     Protocol = "tcp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     DestinationPort = "443",
+    ///                     Protocol = "tcp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     Protocol = "icmp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     Protocol = "fragment",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     Protocol = "udp",
+    ///                     SourcePort = "123",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     DestinationPort = "32768-61000",
+    ///                     Protocol = "tcp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     DestinationPort = "32768-61000",
+    ///                     Protocol = "udp",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.PacketFilterExpressionArgs
+    ///                 {
+    ///                     Allow = false,
+    ///                     Description = "Deny ALL",
+    ///                     Protocol = "ip",
+    ///                 },
+    ///             },
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/packetFilter:PacketFilter")]
     public partial class PacketFilter : Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
+        /// <summary>
+        /// One or more `expression` blocks as defined below.
+        /// </summary>
         [Output("expressions")]
-        public Output<ImmutableArray<Outputs.PacketFilterExpressions>> Expressions { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.PacketFilterExpression>> Expressions { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Output("zone")]
         public Output<string> Zone { get; private set; } = null!;
@@ -41,7 +114,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public PacketFilter(string name, PacketFilterArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/packetFilter:PacketFilter", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/packetFilter:PacketFilter", name, args ?? new PacketFilterArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -79,27 +152,31 @@ namespace Pulumi.SakuraCloud
     public sealed class PacketFilterArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("expressions")]
-        private InputList<Inputs.PacketFilterExpressionsArgs>? _expressions;
-        public InputList<Inputs.PacketFilterExpressionsArgs> Expressions
+        private InputList<Inputs.PacketFilterExpressionArgs>? _expressions;
+
+        /// <summary>
+        /// One or more `expression` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.PacketFilterExpressionArgs> Expressions
         {
-            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterExpressionsArgs>());
+            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterExpressionArgs>());
             set => _expressions = value;
         }
 
         /// <summary>
-        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -112,27 +189,31 @@ namespace Pulumi.SakuraCloud
     public sealed class PacketFilterState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the packetFilter. The length of this value must be in the range [`1`-`512`]
+        /// The description of the expression.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         [Input("expressions")]
-        private InputList<Inputs.PacketFilterExpressionsGetArgs>? _expressions;
-        public InputList<Inputs.PacketFilterExpressionsGetArgs> Expressions
+        private InputList<Inputs.PacketFilterExpressionGetArgs>? _expressions;
+
+        /// <summary>
+        /// One or more `expression` blocks as defined below.
+        /// </summary>
+        public InputList<Inputs.PacketFilterExpressionGetArgs> Expressions
         {
-            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterExpressionsGetArgs>());
+            get => _expressions ?? (_expressions = new InputList<Inputs.PacketFilterExpressionGetArgs>());
             set => _expressions = value;
         }
 
         /// <summary>
-        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`]
+        /// The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The name of zone that the packetFilter will be created (e.g. `is1a`, `tk1a`)
+        /// The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
         public Input<string>? Zone { get; set; }
@@ -140,91 +221,5 @@ namespace Pulumi.SakuraCloud
         public PacketFilterState()
         {
         }
-    }
-
-    namespace Inputs
-    {
-
-    public sealed class PacketFilterExpressionsArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow")]
-        public Input<bool>? Allow { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public PacketFilterExpressionsArgs()
-        {
-        }
-    }
-
-    public sealed class PacketFilterExpressionsGetArgs : Pulumi.ResourceArgs
-    {
-        [Input("allow")]
-        public Input<bool>? Allow { get; set; }
-
-        [Input("description")]
-        public Input<string>? Description { get; set; }
-
-        [Input("destinationPort")]
-        public Input<string>? DestinationPort { get; set; }
-
-        [Input("protocol", required: true)]
-        public Input<string> Protocol { get; set; } = null!;
-
-        [Input("sourceNetwork")]
-        public Input<string>? SourceNetwork { get; set; }
-
-        [Input("sourcePort")]
-        public Input<string>? SourcePort { get; set; }
-
-        public PacketFilterExpressionsGetArgs()
-        {
-        }
-    }
-    }
-
-    namespace Outputs
-    {
-
-    [OutputType]
-    public sealed class PacketFilterExpressions
-    {
-        public readonly bool? Allow;
-        public readonly string? Description;
-        public readonly string? DestinationPort;
-        public readonly string Protocol;
-        public readonly string? SourceNetwork;
-        public readonly string? SourcePort;
-
-        [OutputConstructor]
-        private PacketFilterExpressions(
-            bool? allow,
-            string? description,
-            string? destinationPort,
-            string protocol,
-            string? sourceNetwork,
-            string? sourcePort)
-        {
-            Allow = allow;
-            Description = description;
-            DestinationPort = destinationPort;
-            Protocol = protocol;
-            SourceNetwork = sourceNetwork;
-            SourcePort = sourcePort;
-        }
-    }
     }
 }

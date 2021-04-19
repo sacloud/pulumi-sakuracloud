@@ -7,36 +7,40 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.SakuraCloud
+namespace Pulumi.Sakuracloud
 {
+    /// <summary>
+    /// Manages a SakuraCloud Icon.
+    /// </summary>
+    [SakuracloudResourceType("sakuracloud:index/icon:Icon")]
     public partial class Icon : Pulumi.CustomResource
     {
         /// <summary>
-        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
+        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("base64content")]
         public Output<string?> Base64content { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Icon. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Icon. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The file path to upload to as the Icon. This conflicts with [`base64content`]
+        /// The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
         /// </summary>
         [Output("source")]
         public Output<string?> Source { get; private set; } = null!;
 
         /// <summary>
-        /// Any tags to assign to the Icon
+        /// Any tags to assign to the Icon.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The URL for getting the icon's raw data
+        /// The URL for getting the icon's raw data.
         /// </summary>
         [Output("url")]
         public Output<string> Url { get; private set; } = null!;
@@ -50,7 +54,7 @@ namespace Pulumi.SakuraCloud
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Icon(string name, IconArgs? args = null, CustomResourceOptions? options = null)
-            : base("sakuracloud:index/icon:Icon", name, args ?? ResourceArgs.Empty, MakeResourceOptions(options, ""))
+            : base("sakuracloud:index/icon:Icon", name, args ?? new IconArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -88,19 +92,19 @@ namespace Pulumi.SakuraCloud
     public sealed class IconArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
+        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("base64content")]
         public Input<string>? Base64content { get; set; }
 
         /// <summary>
-        /// The name of the Icon. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Icon. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The file path to upload to as the Icon. This conflicts with [`base64content`]
+        /// The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }
@@ -109,7 +113,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Icon
+        /// Any tags to assign to the Icon.
         /// </summary>
         public InputList<string> Tags
         {
@@ -125,19 +129,19 @@ namespace Pulumi.SakuraCloud
     public sealed class IconState : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]
+        /// The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("base64content")]
         public Input<string>? Base64content { get; set; }
 
         /// <summary>
-        /// The name of the Icon. The length of this value must be in the range [`1`-`64`]
+        /// The name of the Icon. The length of this value must be in the range [`1`-`64`].
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The file path to upload to as the Icon. This conflicts with [`base64content`]
+        /// The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
         /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }
@@ -146,7 +150,7 @@ namespace Pulumi.SakuraCloud
         private InputList<string>? _tags;
 
         /// <summary>
-        /// Any tags to assign to the Icon
+        /// Any tags to assign to the Icon.
         /// </summary>
         public InputList<string> Tags
         {
@@ -155,7 +159,7 @@ namespace Pulumi.SakuraCloud
         }
 
         /// <summary>
-        /// The URL for getting the icon's raw data
+        /// The URL for getting the icon's raw data.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }
