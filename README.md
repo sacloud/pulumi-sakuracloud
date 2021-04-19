@@ -2,9 +2,9 @@
 
 ## Compatibility with Pulumi
 
-- Pulumi v3.x -> 0.6+ (Unreleased)
-- Pulumi v2.x -> 0.4  (Unreleased)
-- Pulumi v1.x -> 0.3-
+- Pulumi v3.x ->  0.6+ (Unreleased)
+- Pulumi v2.x ->  0.5  (Unreleased)
+- Pulumi v1.x -> ~0.4
 
 
 ## Installing
