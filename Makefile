@@ -128,12 +128,12 @@ test::
 
 .PHONY: publish_npm
 publish_npm:
-	cd ${PACKDIR}/nodejs/bin && \
+	cd $(WORKING_DIR)/sdk/nodejs/bin && \
 	npm publish --access public
 
 .PHONY: publish_pypi
 publish_pypi:
-	cd ${PACKDIR}/python/bin && \
+	cd $(WORKING_DIR)/sdk/python/bin && \
 	twine upload --repository pypi dist/*
 
 # .PHONY: prepare_docker_build
