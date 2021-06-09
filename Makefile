@@ -127,13 +127,13 @@ build_tgz: tfgen install_plugins
 	rm -r $(WORKING_DIR)/bin; \
 	(cd provider && \
 		GOOS=linux GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
-		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-linux-amd64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-linux-amd64.tar.gz ${PROVIDER}; rm ${PROVIDER}); \
 		GOOS=darwin GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
-		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-amd64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-amd64.tar.gz ${PROVIDER}; rm ${PROVIDER}); \
 		GOOS=darwin GOARCH=arm64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
-		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-arm64.tar.tz ${PROVIDER}; rm ${PROVIDER}); \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-darwin-arm64.tar.gz ${PROVIDER}; rm ${PROVIDER}); \
 		GOOS=windows GOARCH=amd64 go build -a -o $(WORKING_DIR)/bin/${PROVIDER}.exe -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER}; \
-		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-windows-amd64.tar.tz ${PROVIDER}.exe; rm ${PROVIDER}.exe); \
+		(cd $(WORKING_DIR)/bin; tar zcvf ${PROVIDER}-v${VERSION}-windows-amd64.tar.gz ${PROVIDER}.exe; rm ${PROVIDER}.exe); \
 	)
 
 .PHONY: publish_npm
