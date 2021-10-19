@@ -18,7 +18,7 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly ImmutableArray<string> LocalPrefixes;
         /// <summary>
-        /// The IP address of the opposing appliance connected to the VPC Router.
+        /// A list of `peer` blocks as defined below.
         /// </summary>
         public readonly string Peer;
         /// <summary>

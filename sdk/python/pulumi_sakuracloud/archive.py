@@ -213,7 +213,7 @@ class Archive(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def size(self) -> pulumi.Output[Optional[int]]:
+    def size(self) -> pulumi.Output[int]:
         """
         The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
         """

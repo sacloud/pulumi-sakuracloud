@@ -28,10 +28,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r, err = NewAutoBackup(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/bridge:Bridge":
 		r, err = NewBridge(ctx, name, nil, pulumi.URN_(urn))
-	case "sakuracloud:index/bucketObject:BucketObject":
-		r, err = NewBucketObject(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/cDROM:CDROM":
 		r, err = NewCDROM(ctx, name, nil, pulumi.URN_(urn))
+	case "sakuracloud:index/certificateAuthority:CertificateAuthority":
+		r, err = NewCertificateAuthority(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/containerRegistry:ContainerRegistry":
 		r, err = NewContainerRegistry(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/dNS:DNS":
@@ -46,6 +46,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r, err = NewDisk(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/eSME:ESME":
 		r, err = NewESME(ctx, name, nil, pulumi.URN_(urn))
+	case "sakuracloud:index/enhancedDB:EnhancedDB":
+		r, err = NewEnhancedDB(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/gSLB:GSLB":
 		r, err = NewGSLB(ctx, name, nil, pulumi.URN_(urn))
 	case "sakuracloud:index/iPv4Ptr:IPv4Ptr":
@@ -142,12 +144,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"sakuracloud",
-		"index/bucketObject",
+		"index/cDROM",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"sakuracloud",
-		"index/cDROM",
+		"index/certificateAuthority",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -183,6 +185,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"sakuracloud",
 		"index/eSME",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"sakuracloud",
+		"index/enhancedDB",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

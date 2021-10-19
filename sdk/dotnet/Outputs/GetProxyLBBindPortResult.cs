@@ -14,7 +14,7 @@ namespace Pulumi.Sakuracloud.Outputs
     public sealed class GetProxyLBBindPortResult
     {
         /// <summary>
-        /// The port number of the SorryServer. This will be used when all servers are down.
+        /// The number of syslog port.
         /// </summary>
         public readonly int Port;
         /// <summary>
@@ -29,6 +29,7 @@ namespace Pulumi.Sakuracloud.Outputs
         /// A list of `response_header` blocks as defined below.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetProxyLBBindPortResponseHeaderResult> ResponseHeaders;
+        public readonly string SslPolicy;
         /// <summary>
         /// The flag to enable HTTP/2. This flag is used only when `proxy_mode` is `https`.
         /// </summary>
@@ -44,12 +45,15 @@ namespace Pulumi.Sakuracloud.Outputs
 
             ImmutableArray<Outputs.GetProxyLBBindPortResponseHeaderResult> responseHeaders,
 
+            string sslPolicy,
+
             bool supportHttp2)
         {
             Port = port;
             ProxyMode = proxyMode;
             RedirectToHttps = redirectToHttps;
             ResponseHeaders = responseHeaders;
+            SslPolicy = sslPolicy;
             SupportHttp2 = supportHttp2;
         }
     }

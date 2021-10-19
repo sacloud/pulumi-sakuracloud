@@ -79,4 +79,6 @@ type LookupSimpleMonitorResult struct {
 	Tags []string `pulumi:"tags"`
 	// The monitoring target of the simple monitor. This will be IP address or FQDN.
 	Target string `pulumi:"target"`
+	// The timeout in seconds for monitoring.
+	Timeout int `pulumi:"timeout"`
 }

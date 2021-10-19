@@ -4,6 +4,169 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
+export interface CertificateAuthorityClient {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate?: pulumi.Input<string>;
+    /**
+     * Input for issuing a certificate.
+     */
+    csr?: pulumi.Input<string>;
+    /**
+     * Input for issuing a certificate.
+     */
+    email?: pulumi.Input<string>;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold?: pulumi.Input<boolean>;
+    /**
+     * The id of the certificate.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Current state of the certificate.
+     */
+    issueState?: pulumi.Input<string>;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter?: pulumi.Input<string>;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore?: pulumi.Input<string>;
+    /**
+     * Input for issuing a certificate.
+     */
+    publicKey?: pulumi.Input<string>;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber?: pulumi.Input<string>;
+    /**
+     * A `subject` block as defined below.
+     */
+    subject: pulumi.Input<inputs.CertificateAuthorityClientSubject>;
+    /**
+     * The URL for issuing the certificate.
+     */
+    url?: pulumi.Input<string>;
+    /**
+     * The number of hours after initial issuing that the certificate will become invalid.
+     */
+    validityPeriodHours: pulumi.Input<number>;
+}
+
+export interface CertificateAuthorityClientSubject {
+    /**
+     * .
+     */
+    commonName: pulumi.Input<string>;
+    /**
+     * .
+     */
+    country: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organization: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organizationUnits?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface CertificateAuthorityServer {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate?: pulumi.Input<string>;
+    /**
+     * Input for issuing a certificate.
+     */
+    csr?: pulumi.Input<string>;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold?: pulumi.Input<boolean>;
+    /**
+     * The id of the certificate.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Current state of the certificate.
+     */
+    issueState?: pulumi.Input<string>;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter?: pulumi.Input<string>;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore?: pulumi.Input<string>;
+    /**
+     * Input for issuing a certificate.
+     */
+    publicKey?: pulumi.Input<string>;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber?: pulumi.Input<string>;
+    /**
+     * A `subject` block as defined below.
+     */
+    subject: pulumi.Input<inputs.CertificateAuthorityServerSubject>;
+    /**
+     * .
+     */
+    subjectAlternativeNames?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The number of hours after initial issuing that the certificate will become invalid.
+     */
+    validityPeriodHours: pulumi.Input<number>;
+}
+
+export interface CertificateAuthorityServerSubject {
+    /**
+     * .
+     */
+    commonName: pulumi.Input<string>;
+    /**
+     * .
+     */
+    country: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organization: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organizationUnits?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface CertificateAuthoritySubject {
+    /**
+     * .
+     */
+    commonName: pulumi.Input<string>;
+    /**
+     * .
+     */
+    country: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organization: pulumi.Input<string>;
+    /**
+     * .
+     */
+    organizationUnits?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface ContainerRegistryUser {
     /**
      * The user name used to authenticate remote access.
@@ -239,6 +402,36 @@ export interface GetCDROMFilterCondition {
     values: string[];
 }
 
+export interface GetCertificateAuthorityFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: inputs.GetCertificateAuthorityFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: string[];
+}
+
+export interface GetCertificateAuthorityFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: string[];
+}
+
 export interface GetContainerRegistryFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -385,6 +578,36 @@ export interface GetESMEFilterCondition {
     name: string;
     /**
      * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
+    values: string[];
+}
+
+export interface GetEnhancedDBFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: inputs.GetEnhancedDBFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: string[];
+}
+
+export interface GetEnhancedDBFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
 }
@@ -1122,6 +1345,10 @@ export interface ProxyLBACMECertificate {
      */
     additionalCertificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBACMECertificateAdditionalCertificate>[]>;
     /**
+     * The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+     */
+    commonName?: pulumi.Input<string>;
+    /**
      * The intermediate certificate for a server.
      */
     intermediateCert?: pulumi.Input<string>;
@@ -1133,6 +1360,10 @@ export interface ProxyLBACMECertificate {
      * The certificate for a server.
      */
     serverCert?: pulumi.Input<string>;
+    /**
+     * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+     */
+    subjectAltNames?: pulumi.Input<string>;
 }
 
 export interface ProxyLBACMECertificateAdditionalCertificate {
@@ -1168,6 +1399,10 @@ export interface ProxyLBBindPort {
      */
     responseHeaders?: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPortResponseHeader>[]>;
     /**
+     * The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+     */
+    sslPolicy?: pulumi.Input<string>;
+    /**
      * The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
      */
     supportHttp2?: pulumi.Input<boolean>;
@@ -1190,6 +1425,10 @@ export interface ProxyLBCertificate {
      */
     additionalCertificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBCertificateAdditionalCertificate>[]>;
     /**
+     * The common name of the certificate.
+     */
+    commonName?: pulumi.Input<string>;
+    /**
      * The intermediate certificate for a server.
      */
     intermediateCert?: pulumi.Input<string>;
@@ -1201,6 +1440,10 @@ export interface ProxyLBCertificate {
      * The certificate for a server.
      */
     serverCert?: pulumi.Input<string>;
+    /**
+     * The subject alternative names of the certificate.
+     */
+    subjectAltNames?: pulumi.Input<string>;
 }
 
 export interface ProxyLBCertificateAdditionalCertificate {
@@ -1243,6 +1486,22 @@ export interface ProxyLBHealthCheck {
 
 export interface ProxyLBRule {
     /**
+     * The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+     */
+    action?: pulumi.Input<string>;
+    /**
+     * Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+     */
+    fixedContentType?: pulumi.Input<string>;
+    /**
+     * Content body for fixed response sent when requests matches the rule.
+     */
+    fixedMessageBody?: pulumi.Input<string>;
+    /**
+     * HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+     */
+    fixedStatusCode?: pulumi.Input<string>;
+    /**
      * The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
      */
     group?: pulumi.Input<string>;
@@ -1254,6 +1513,14 @@ export interface ProxyLBRule {
      * The request path that is used as condition of rule-based balancing.
      */
     path?: pulumi.Input<string>;
+    /**
+     * The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+     */
+    redirectLocation?: pulumi.Input<string>;
+    /**
+     * HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+     */
+    redirectStatusCode?: pulumi.Input<string>;
 }
 
 export interface ProxyLBServer {
@@ -1284,6 +1551,17 @@ export interface ProxyLBSorryServer {
      * The port number of the SorryServer. This will be used when all servers are down.
      */
     port?: pulumi.Input<number>;
+}
+
+export interface ProxyLBSyslog {
+    /**
+     * The number of syslog port.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * The address of syslog server.
+     */
+    server?: pulumi.Input<string>;
 }
 
 export interface ServerDiskEditParameter {
@@ -1388,6 +1666,10 @@ export interface SimpleMonitorHealthCheck {
      */
     excepctedData?: pulumi.Input<string>;
     /**
+     * The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+     */
+    ftps?: pulumi.Input<string>;
+    /**
      * The value of host header send when checking by HTTP/HTTPS.
      */
     hostHeader?: pulumi.Input<string>;
@@ -1412,7 +1694,7 @@ export interface SimpleMonitorHealthCheck {
      */
     port?: pulumi.Input<number>;
     /**
-     * The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+     * The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
      */
     protocol: pulumi.Input<string>;
     /**
@@ -1674,4 +1956,34 @@ export interface VPCRouterUser {
      * The password used to authenticate remote access.
      */
     password: pulumi.Input<string>;
+}
+
+export interface VPCRouterWireGuard {
+    /**
+     * The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+     */
+    ipAddress: pulumi.Input<string>;
+    /**
+     * One or more `peer` blocks as defined below.
+     */
+    peers?: pulumi.Input<pulumi.Input<inputs.VPCRouterWireGuardPeer>[]>;
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey?: pulumi.Input<string>;
+}
+
+export interface VPCRouterWireGuardPeer {
+    /**
+     * The IP address for peer.
+     */
+    ipAddress: pulumi.Input<string>;
+    /**
+     * the of the peer.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey: pulumi.Input<string>;
 }

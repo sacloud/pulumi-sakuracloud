@@ -40,6 +40,20 @@ import * as utilities from "./utilities";
  *         disablePwAuth: true,
  *     },
  * });
+ * // user_data = join("\n", [
+ * //   "#cloud-config",
+ * //   yamlencode({
+ * //     hostname: "hostname",
+ * //     password: "password",
+ * //     chpasswd: {
+ * //       expire: false,
+ * //     }
+ * //     ssh_pwauth: false,
+ * //     ssh_authorized_keys: [
+ * //       file("~/.ssh/id_rsa.pub"),
+ * //     ],
+ * //   }),
+ * // ])
  * ```
  */
 export class Server extends pulumi.CustomResource {
@@ -87,7 +101,7 @@ export class Server extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * A `diskEditParameter` block as defined below.
+     * A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
      */
     public readonly diskEditParameter!: pulumi.Output<outputs.ServerDiskEditParameter | undefined>;
     /**
@@ -106,6 +120,10 @@ export class Server extends pulumi.CustomResource {
      * The gateway address used by the Server.
      */
     public /*out*/ readonly gateway!: pulumi.Output<string>;
+    /**
+     * The number of GPUs.
+     */
+    public readonly gpu!: pulumi.Output<number | undefined>;
     /**
      * The hostname of the Server. The length of this value must be in the range [`1`-`64`].
      */
@@ -155,6 +173,10 @@ export class Server extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<string[] | undefined>;
     /**
+     * A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+     */
+    public readonly userData!: pulumi.Output<string | undefined>;
+    /**
      * The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
@@ -181,6 +203,7 @@ export class Server extends pulumi.CustomResource {
             inputs["dnsServers"] = state ? state.dnsServers : undefined;
             inputs["forceShutdown"] = state ? state.forceShutdown : undefined;
             inputs["gateway"] = state ? state.gateway : undefined;
+            inputs["gpu"] = state ? state.gpu : undefined;
             inputs["hostname"] = state ? state.hostname : undefined;
             inputs["iconId"] = state ? state.iconId : undefined;
             inputs["interfaceDriver"] = state ? state.interfaceDriver : undefined;
@@ -193,6 +216,7 @@ export class Server extends pulumi.CustomResource {
             inputs["privateHostId"] = state ? state.privateHostId : undefined;
             inputs["privateHostName"] = state ? state.privateHostName : undefined;
             inputs["tags"] = state ? state.tags : undefined;
+            inputs["userData"] = state ? state.userData : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as ServerArgs | undefined;
@@ -203,6 +227,7 @@ export class Server extends pulumi.CustomResource {
             inputs["diskEditParameter"] = args ? args.diskEditParameter : undefined;
             inputs["disks"] = args ? args.disks : undefined;
             inputs["forceShutdown"] = args ? args.forceShutdown : undefined;
+            inputs["gpu"] = args ? args.gpu : undefined;
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["interfaceDriver"] = args ? args.interfaceDriver : undefined;
             inputs["memory"] = args ? args.memory : undefined;
@@ -210,6 +235,7 @@ export class Server extends pulumi.CustomResource {
             inputs["networkInterfaces"] = args ? args.networkInterfaces : undefined;
             inputs["privateHostId"] = args ? args.privateHostId : undefined;
             inputs["tags"] = args ? args.tags : undefined;
+            inputs["userData"] = args ? args.userData : undefined;
             inputs["zone"] = args ? args.zone : undefined;
             inputs["dnsServers"] = undefined /*out*/;
             inputs["gateway"] = undefined /*out*/;
@@ -247,7 +273,7 @@ export interface ServerState {
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * A `diskEditParameter` block as defined below.
+     * A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
      */
     readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
@@ -266,6 +292,10 @@ export interface ServerState {
      * The gateway address used by the Server.
      */
     readonly gateway?: pulumi.Input<string>;
+    /**
+     * The number of GPUs.
+     */
+    readonly gpu?: pulumi.Input<number>;
     /**
      * The hostname of the Server. The length of this value must be in the range [`1`-`64`].
      */
@@ -315,6 +345,10 @@ export interface ServerState {
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+     */
+    readonly userData?: pulumi.Input<string>;
+    /**
      * The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
@@ -341,7 +375,7 @@ export interface ServerArgs {
      */
     readonly description?: pulumi.Input<string>;
     /**
-     * A `diskEditParameter` block as defined below.
+     * A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
      */
     readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
@@ -352,6 +386,10 @@ export interface ServerArgs {
      * The flag to use force shutdown when need to reboot/shutdown while applying.
      */
     readonly forceShutdown?: pulumi.Input<boolean>;
+    /**
+     * The number of GPUs.
+     */
+    readonly gpu?: pulumi.Input<number>;
     /**
      * The icon id to attach to the Server.
      */
@@ -380,6 +418,10 @@ export interface ServerArgs {
      * Any tags to assign to the Server.
      */
     readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+     */
+    readonly userData?: pulumi.Input<string>;
     /**
      * The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */

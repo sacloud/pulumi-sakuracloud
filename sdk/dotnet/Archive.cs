@@ -99,7 +99,7 @@ namespace Pulumi.Sakuracloud
         /// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
         /// </summary>
         [Output("size")]
-        public Output<int?> Size { get; private set; } = null!;
+        public Output<int> Size { get; private set; } = null!;
 
         /// <summary>
         /// The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.

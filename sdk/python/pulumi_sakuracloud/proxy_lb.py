@@ -25,11 +25,13 @@ class ProxyLB(pulumi.CustomResource):
                  icon_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  plan: Optional[pulumi.Input[int]] = None,
+                 proxy_protocol: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBRuleArgs']]]]] = None,
                  servers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBServerArgs']]]]] = None,
                  sorry_server: Optional[pulumi.Input[pulumi.InputType['ProxyLBSorryServerArgs']]] = None,
                  sticky_session: Optional[pulumi.Input[bool]] = None,
+                 syslog: Optional[pulumi.Input[pulumi.InputType['ProxyLBSyslogArgs']]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  timeout: Optional[pulumi.Input[int]] = None,
                  vip_failover: Optional[pulumi.Input[bool]] = None,
@@ -53,6 +55,7 @@ class ProxyLB(pulumi.CustomResource):
             vip_failover=True,
             sticky_session=True,
             gzip=True,
+            proxy_protocol=True,
             timeout=10,
             region="is1",
             health_check=sakuracloud.ProxyLBHealthCheckArgs(
@@ -64,6 +67,10 @@ class ProxyLB(pulumi.CustomResource):
             sorry_server=sakuracloud.ProxyLBSorryServerArgs(
                 ip_address="192.0.2.1",
                 port=80,
+            ),
+            syslog=sakuracloud.ProxyLBSyslogArgs(
+                server="192.0.2.1",
+                port=514,
             ),
             bind_ports=[sakuracloud.ProxyLBBindPortArgs(
                 proxy_mode="http",
@@ -78,11 +85,31 @@ class ProxyLB(pulumi.CustomResource):
                 port=80,
                 group="group1",
             )],
-            rules=[sakuracloud.ProxyLBRuleArgs(
-                host="www.example.com",
-                path="/",
-                group="group1",
-            )],
+            rules=[
+                sakuracloud.ProxyLBRuleArgs(
+                    action="forward",
+                    host="www.example.com",
+                    path="/",
+                    group="group1",
+                ),
+                sakuracloud.ProxyLBRuleArgs(
+                    action="redirect",
+                    host="www2.example.com",
+                    path="/",
+                    group="group1",
+                    redirect_location="https://redirect.example.com",
+                    redirect_status_code="301",
+                ),
+                sakuracloud.ProxyLBRuleArgs(
+                    action="fixed",
+                    host="www3.example.com",
+                    path="/",
+                    group="group1",
+                    fixed_status_code="200",
+                    fixed_content_type="text/plain",
+                    fixed_message_body="body",
+                ),
+            ],
             description="description",
             tags=[
                 "tag1",
@@ -96,16 +123,17 @@ class ProxyLB(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ProxyLBCertificateArgs']] certificate: An `certificate` block as defined below.
         :param pulumi.Input[str] description: The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
         :param pulumi.Input[bool] gzip: The flag to enable gzip compression.
-               ---
         :param pulumi.Input[pulumi.InputType['ProxyLBHealthCheckArgs']] health_check: A `health_check` block as defined below.
         :param pulumi.Input[str] icon_id: The icon id to attach to the ProxyLB.
         :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`].
         :param pulumi.Input[int] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
+        :param pulumi.Input[bool] proxy_protocol: The flag to enable proxy protocol v2.
         :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBRuleArgs']]]] rules: One or more `rule` blocks as defined below.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBServerArgs']]]] servers: One or more `server` blocks as defined below.
         :param pulumi.Input[pulumi.InputType['ProxyLBSorryServerArgs']] sorry_server: A `sorry_server` block as defined below.
         :param pulumi.Input[bool] sticky_session: The flag to enable sticky session.
+        :param pulumi.Input[pulumi.InputType['ProxyLBSyslogArgs']] syslog: A `syslog` block as defined below.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the ProxyLB.
         :param pulumi.Input[int] timeout: The timeout duration in seconds. Default:`10`.
         :param pulumi.Input[bool] vip_failover: The flag to enable VIP fail-over. Changing this forces a new resource to be created.
@@ -139,11 +167,13 @@ class ProxyLB(pulumi.CustomResource):
             __props__['icon_id'] = icon_id
             __props__['name'] = name
             __props__['plan'] = plan
+            __props__['proxy_protocol'] = proxy_protocol
             __props__['region'] = region
             __props__['rules'] = rules
             __props__['servers'] = servers
             __props__['sorry_server'] = sorry_server
             __props__['sticky_session'] = sticky_session
+            __props__['syslog'] = syslog
             __props__['tags'] = tags
             __props__['timeout'] = timeout
             __props__['vip_failover'] = vip_failover
@@ -170,11 +200,13 @@ class ProxyLB(pulumi.CustomResource):
             name: Optional[pulumi.Input[str]] = None,
             plan: Optional[pulumi.Input[int]] = None,
             proxy_networks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            proxy_protocol: Optional[pulumi.Input[bool]] = None,
             region: Optional[pulumi.Input[str]] = None,
             rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBRuleArgs']]]]] = None,
             servers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBServerArgs']]]]] = None,
             sorry_server: Optional[pulumi.Input[pulumi.InputType['ProxyLBSorryServerArgs']]] = None,
             sticky_session: Optional[pulumi.Input[bool]] = None,
+            syslog: Optional[pulumi.Input[pulumi.InputType['ProxyLBSyslogArgs']]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             timeout: Optional[pulumi.Input[int]] = None,
             vip: Optional[pulumi.Input[str]] = None,
@@ -191,17 +223,18 @@ class ProxyLB(pulumi.CustomResource):
         :param pulumi.Input[str] description: The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
         :param pulumi.Input[str] fqdn: The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
         :param pulumi.Input[bool] gzip: The flag to enable gzip compression.
-               ---
         :param pulumi.Input[pulumi.InputType['ProxyLBHealthCheckArgs']] health_check: A `health_check` block as defined below.
         :param pulumi.Input[str] icon_id: The icon id to attach to the ProxyLB.
         :param pulumi.Input[str] name: The name of the ProxyLB. The length of this value must be in the range [`1`-`64`].
         :param pulumi.Input[int] plan: The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] proxy_networks: A list of CIDR block used by the ProxyLB to access the server.
+        :param pulumi.Input[bool] proxy_protocol: The flag to enable proxy protocol v2.
         :param pulumi.Input[str] region: The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBRuleArgs']]]] rules: One or more `rule` blocks as defined below.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBServerArgs']]]] servers: One or more `server` blocks as defined below.
         :param pulumi.Input[pulumi.InputType['ProxyLBSorryServerArgs']] sorry_server: A `sorry_server` block as defined below.
         :param pulumi.Input[bool] sticky_session: The flag to enable sticky session.
+        :param pulumi.Input[pulumi.InputType['ProxyLBSyslogArgs']] syslog: A `syslog` block as defined below.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the ProxyLB.
         :param pulumi.Input[int] timeout: The timeout duration in seconds. Default:`10`.
         :param pulumi.Input[str] vip: The virtual IP address assigned to the ProxyLB.
@@ -221,11 +254,13 @@ class ProxyLB(pulumi.CustomResource):
         __props__["name"] = name
         __props__["plan"] = plan
         __props__["proxy_networks"] = proxy_networks
+        __props__["proxy_protocol"] = proxy_protocol
         __props__["region"] = region
         __props__["rules"] = rules
         __props__["servers"] = servers
         __props__["sorry_server"] = sorry_server
         __props__["sticky_session"] = sticky_session
+        __props__["syslog"] = syslog
         __props__["tags"] = tags
         __props__["timeout"] = timeout
         __props__["vip"] = vip
@@ -269,7 +304,6 @@ class ProxyLB(pulumi.CustomResource):
     def gzip(self) -> pulumi.Output[Optional[bool]]:
         """
         The flag to enable gzip compression.
-        ---
         """
         return pulumi.get(self, "gzip")
 
@@ -314,6 +348,14 @@ class ProxyLB(pulumi.CustomResource):
         return pulumi.get(self, "proxy_networks")
 
     @property
+    @pulumi.getter(name="proxyProtocol")
+    def proxy_protocol(self) -> pulumi.Output[Optional[bool]]:
+        """
+        The flag to enable proxy protocol v2.
+        """
+        return pulumi.get(self, "proxy_protocol")
+
+    @property
     @pulumi.getter
     def region(self) -> pulumi.Output[Optional[str]]:
         """
@@ -352,6 +394,14 @@ class ProxyLB(pulumi.CustomResource):
         The flag to enable sticky session.
         """
         return pulumi.get(self, "sticky_session")
+
+    @property
+    @pulumi.getter
+    def syslog(self) -> pulumi.Output['outputs.ProxyLBSyslog']:
+        """
+        A `syslog` block as defined below.
+        """
+        return pulumi.get(self, "syslog")
 
     @property
     @pulumi.getter

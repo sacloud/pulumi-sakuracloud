@@ -7,23 +7,25 @@ from .archive import *
 from .archive_share import *
 from .auto_backup import *
 from .bridge import *
-from .bucket_object import *
 from .cdrom import *
+from .certificate_authority import *
 from .container_registry import *
 from .database import *
 from .database_read_replica import *
 from .disk import *
 from .dns import *
 from .dns_record import *
+from .enhanced_db import *
 from .esme import *
 from .get_archive import *
 from .get_bridge import *
-from .get_bucket_object import *
 from .get_cdrom import *
+from .get_certificate_authority import *
 from .get_container_registry import *
 from .get_database import *
 from .get_disk import *
 from .get_dns import *
+from .get_enhanced_db import *
 from .get_esme import *
 from .get_gslb import *
 from .get_icon import *
@@ -96,10 +98,10 @@ def _register_module():
                 return AutoBackup(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/bridge:Bridge":
                 return Bridge(name, pulumi.ResourceOptions(urn=urn))
-            elif typ == "sakuracloud:index/bucketObject:BucketObject":
-                return BucketObject(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/cDROM:CDROM":
                 return CDROM(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "sakuracloud:index/certificateAuthority:CertificateAuthority":
+                return CertificateAuthority(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/containerRegistry:ContainerRegistry":
                 return ContainerRegistry(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/dNS:DNS":
@@ -114,6 +116,8 @@ def _register_module():
                 return Disk(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/eSME:ESME":
                 return ESME(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "sakuracloud:index/enhancedDB:EnhancedDB":
+                return EnhancedDB(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/gSLB:GSLB":
                 return GSLB(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "sakuracloud:index/iPv4Ptr:IPv4Ptr":
@@ -169,8 +173,8 @@ def _register_module():
     pulumi.runtime.register_resource_module("sakuracloud", "index/archiveShare", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/autoBackup", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/bridge", _module_instance)
-    pulumi.runtime.register_resource_module("sakuracloud", "index/bucketObject", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/cDROM", _module_instance)
+    pulumi.runtime.register_resource_module("sakuracloud", "index/certificateAuthority", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/containerRegistry", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/dNS", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/dNSRecord", _module_instance)
@@ -178,6 +182,7 @@ def _register_module():
     pulumi.runtime.register_resource_module("sakuracloud", "index/databaseReadReplica", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/disk", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/eSME", _module_instance)
+    pulumi.runtime.register_resource_module("sakuracloud", "index/enhancedDB", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/gSLB", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/iPv4Ptr", _module_instance)
     pulumi.runtime.register_resource_module("sakuracloud", "index/icon", _module_instance)

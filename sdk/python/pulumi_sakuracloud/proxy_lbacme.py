@@ -20,6 +20,7 @@ class ProxyLBACME(pulumi.CustomResource):
                  accept_tos: Optional[pulumi.Input[bool]] = None,
                  common_name: Optional[pulumi.Input[str]] = None,
                  proxylb_id: Optional[pulumi.Input[str]] = None,
+                 subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  update_delay_sec: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
@@ -37,6 +38,7 @@ class ProxyLBACME(pulumi.CustomResource):
             proxylb_id=sakuracloud_proxylb["foobar"]["id"],
             accept_tos=True,
             common_name="www.example.com",
+            subject_alt_names=["www1.example.com"],
             update_delay_sec=120)
         foobar_proxy_lb = sakuracloud.get_proxy_lb(filter=sakuracloud.GetProxyLBFilterArgs(
             names=["foobar"],
@@ -48,6 +50,7 @@ class ProxyLBACME(pulumi.CustomResource):
         :param pulumi.Input[bool] accept_tos: The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
         :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
         :param pulumi.Input[int] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         """
         if __name__ is not None:
@@ -76,6 +79,7 @@ class ProxyLBACME(pulumi.CustomResource):
             if proxylb_id is None and not opts.urn:
                 raise TypeError("Missing required property 'proxylb_id'")
             __props__['proxylb_id'] = proxylb_id
+            __props__['subject_alt_names'] = subject_alt_names
             __props__['update_delay_sec'] = update_delay_sec
             __props__['certificates'] = None
         super(ProxyLBACME, __self__).__init__(
@@ -92,6 +96,7 @@ class ProxyLBACME(pulumi.CustomResource):
             certificates: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBACMECertificateArgs']]]]] = None,
             common_name: Optional[pulumi.Input[str]] = None,
             proxylb_id: Optional[pulumi.Input[str]] = None,
+            subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             update_delay_sec: Optional[pulumi.Input[int]] = None) -> 'ProxyLBACME':
         """
         Get an existing ProxyLBACME resource's state with the given name, id, and optional extra
@@ -104,6 +109,7 @@ class ProxyLBACME(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ProxyLBACMECertificateArgs']]]] certificates: A list of `certificate` blocks as defined below.
         :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
         :param pulumi.Input[int] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -114,6 +120,7 @@ class ProxyLBACME(pulumi.CustomResource):
         __props__["certificates"] = certificates
         __props__["common_name"] = common_name
         __props__["proxylb_id"] = proxylb_id
+        __props__["subject_alt_names"] = subject_alt_names
         __props__["update_delay_sec"] = update_delay_sec
         return ProxyLBACME(resource_name, opts=opts, __props__=__props__)
 
@@ -148,6 +155,14 @@ class ProxyLBACME(pulumi.CustomResource):
         The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "proxylb_id")
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject_alt_names")
 
     @property
     @pulumi.getter(name="updateDelaySec")

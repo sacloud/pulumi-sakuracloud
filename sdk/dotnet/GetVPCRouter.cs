@@ -105,7 +105,7 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         public readonly ImmutableArray<Outputs.GetVPCRouterL2tpResult> L2tps;
         /// <summary>
-        /// The user name used to authenticate remote access.
+        /// the name of the peer.
         /// </summary>
         public readonly string Name;
         /// <summary>
@@ -164,6 +164,10 @@ namespace Pulumi.Sakuracloud
         /// The version of the VPC Router.
         /// </summary>
         public readonly int Version;
+        /// <summary>
+        /// A list of `wire_guard` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetVPCRouterWireGuardResult> WireGuards;
         public readonly string Zone;
 
         [OutputConstructor]
@@ -216,6 +220,8 @@ namespace Pulumi.Sakuracloud
 
             int version,
 
+            ImmutableArray<Outputs.GetVPCRouterWireGuardResult> wireGuards,
+
             string zone)
         {
             Description = description;
@@ -242,6 +248,7 @@ namespace Pulumi.Sakuracloud
             Tags = tags;
             Users = users;
             Version = version;
+            WireGuards = wireGuards;
             Zone = zone;
         }
     }

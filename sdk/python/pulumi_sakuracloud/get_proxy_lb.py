@@ -21,7 +21,7 @@ class GetProxyLBResult:
     """
     A collection of values returned by getProxyLB.
     """
-    def __init__(__self__, bind_ports=None, certificates=None, description=None, filter=None, fqdn=None, gzip=None, health_checks=None, icon_id=None, id=None, name=None, plan=None, proxy_networks=None, region=None, rules=None, servers=None, sorry_servers=None, sticky_session=None, tags=None, timeout=None, vip=None, vip_failover=None):
+    def __init__(__self__, bind_ports=None, certificates=None, description=None, filter=None, fqdn=None, gzip=None, health_checks=None, icon_id=None, id=None, name=None, plan=None, proxy_networks=None, proxy_protocol=None, region=None, rules=None, servers=None, sorry_servers=None, sticky_session=None, syslogs=None, tags=None, timeout=None, vip=None, vip_failover=None):
         if bind_ports and not isinstance(bind_ports, list):
             raise TypeError("Expected argument 'bind_ports' to be a list")
         pulumi.set(__self__, "bind_ports", bind_ports)
@@ -58,6 +58,9 @@ class GetProxyLBResult:
         if proxy_networks and not isinstance(proxy_networks, list):
             raise TypeError("Expected argument 'proxy_networks' to be a list")
         pulumi.set(__self__, "proxy_networks", proxy_networks)
+        if proxy_protocol and not isinstance(proxy_protocol, bool):
+            raise TypeError("Expected argument 'proxy_protocol' to be a bool")
+        pulumi.set(__self__, "proxy_protocol", proxy_protocol)
         if region and not isinstance(region, str):
             raise TypeError("Expected argument 'region' to be a str")
         pulumi.set(__self__, "region", region)
@@ -73,6 +76,9 @@ class GetProxyLBResult:
         if sticky_session and not isinstance(sticky_session, bool):
             raise TypeError("Expected argument 'sticky_session' to be a bool")
         pulumi.set(__self__, "sticky_session", sticky_session)
+        if syslogs and not isinstance(syslogs, list):
+            raise TypeError("Expected argument 'syslogs' to be a list")
+        pulumi.set(__self__, "syslogs", syslogs)
         if tags and not isinstance(tags, list):
             raise TypeError("Expected argument 'tags' to be a list")
         pulumi.set(__self__, "tags", tags)
@@ -167,7 +173,7 @@ class GetProxyLBResult:
     @pulumi.getter
     def plan(self) -> int:
         """
-        The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+        The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`/`400000`].
         """
         return pulumi.get(self, "plan")
 
@@ -178,6 +184,14 @@ class GetProxyLBResult:
         A list of CIDR block used by the ProxyLB to access the server.
         """
         return pulumi.get(self, "proxy_networks")
+
+    @property
+    @pulumi.getter(name="proxyProtocol")
+    def proxy_protocol(self) -> bool:
+        """
+        The flag to enable proxy protocol v2.
+        """
+        return pulumi.get(self, "proxy_protocol")
 
     @property
     @pulumi.getter
@@ -199,7 +213,7 @@ class GetProxyLBResult:
     @pulumi.getter
     def servers(self) -> Sequence['outputs.GetProxyLBServerResult']:
         """
-        A list of `server` blocks as defined below.
+        The address of syslog server.
         """
         return pulumi.get(self, "servers")
 
@@ -218,6 +232,14 @@ class GetProxyLBResult:
         The flag to enable sticky session.
         """
         return pulumi.get(self, "sticky_session")
+
+    @property
+    @pulumi.getter
+    def syslogs(self) -> Sequence['outputs.GetProxyLBSyslogResult']:
+        """
+        A list of `syslog` blocks as defined below.
+        """
+        return pulumi.get(self, "syslogs")
 
     @property
     @pulumi.getter
@@ -270,11 +292,13 @@ class AwaitableGetProxyLBResult(GetProxyLBResult):
             name=self.name,
             plan=self.plan,
             proxy_networks=self.proxy_networks,
+            proxy_protocol=self.proxy_protocol,
             region=self.region,
             rules=self.rules,
             servers=self.servers,
             sorry_servers=self.sorry_servers,
             sticky_session=self.sticky_session,
+            syslogs=self.syslogs,
             tags=self.tags,
             timeout=self.timeout,
             vip=self.vip,
@@ -321,11 +345,13 @@ def get_proxy_lb(filter: Optional[pulumi.InputType['GetProxyLBFilterArgs']] = No
         name=__ret__.name,
         plan=__ret__.plan,
         proxy_networks=__ret__.proxy_networks,
+        proxy_protocol=__ret__.proxy_protocol,
         region=__ret__.region,
         rules=__ret__.rules,
         servers=__ret__.servers,
         sorry_servers=__ret__.sorry_servers,
         sticky_session=__ret__.sticky_session,
+        syslogs=__ret__.syslogs,
         tags=__ret__.tags,
         timeout=__ret__.timeout,
         vip=__ret__.vip,

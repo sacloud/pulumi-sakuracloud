@@ -26,7 +26,7 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly string IpAddress;
         /// <summary>
-        /// The port number of the SorryServer. This will be used when all servers are down.
+        /// The number of syslog port.
         /// </summary>
         public readonly int Port;
 

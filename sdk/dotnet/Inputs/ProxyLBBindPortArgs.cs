@@ -43,6 +43,12 @@ namespace Pulumi.Sakuracloud.Inputs
         }
 
         /// <summary>
+        /// The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+        /// </summary>
+        [Input("sslPolicy")]
+        public Input<string>? SslPolicy { get; set; }
+
+        /// <summary>
         /// The flag to enable HTTP/2. This flag is used only when `proxy_mode` is `https`.
         /// </summary>
         [Input("supportHttp2")]

@@ -71,7 +71,7 @@ type LookupVPCRouterResult struct {
 	InternetConnection bool `pulumi:"internetConnection"`
 	// A list of `l2tp` blocks as defined below.
 	L2tps []GetVPCRouterL2tp `pulumi:"l2tps"`
-	// The user name used to authenticate remote access.
+	// the name of the peer.
 	Name string `pulumi:"name"`
 	// The plan name of the VPCRouter. This will be one of [`standard`/`premium`/`highspec`/`highspec4000`].
 	Plan string `pulumi:"plan"`
@@ -100,6 +100,8 @@ type LookupVPCRouterResult struct {
 	// A list of `user` blocks as defined below.
 	Users []GetVPCRouterUser `pulumi:"users"`
 	// The version of the VPC Router.
-	Version int    `pulumi:"version"`
-	Zone    string `pulumi:"zone"`
+	Version int `pulumi:"version"`
+	// A list of `wireGuard` blocks as defined below.
+	WireGuards []GetVPCRouterWireGuard `pulumi:"wireGuards"`
+	Zone       string                  `pulumi:"zone"`
 }

@@ -22,6 +22,7 @@ import * as utilities from "./utilities";
  *     vipFailover: true,
  *     stickySession: true,
  *     gzip: true,
+ *     proxyProtocol: true,
  *     timeout: 10,
  *     region: "is1",
  *     healthCheck: {
@@ -33,6 +34,10 @@ import * as utilities from "./utilities";
  *     sorryServer: {
  *         ipAddress: "192.0.2.1",
  *         port: 80,
+ *     },
+ *     syslog: {
+ *         server: "192.0.2.1",
+ *         port: 514,
  *     },
  *     bindPorts: [{
  *         proxyMode: "http",
@@ -47,11 +52,31 @@ import * as utilities from "./utilities";
  *         port: 80,
  *         group: "group1",
  *     }],
- *     rules: [{
- *         host: "www.example.com",
- *         path: "/",
- *         group: "group1",
- *     }],
+ *     rules: [
+ *         {
+ *             action: "forward",
+ *             host: "www.example.com",
+ *             path: "/",
+ *             group: "group1",
+ *         },
+ *         {
+ *             action: "redirect",
+ *             host: "www2.example.com",
+ *             path: "/",
+ *             group: "group1",
+ *             redirectLocation: "https://redirect.example.com",
+ *             redirectStatusCode: "301",
+ *         },
+ *         {
+ *             action: "fixed",
+ *             host: "www3.example.com",
+ *             path: "/",
+ *             group: "group1",
+ *             fixedStatusCode: "200",
+ *             fixedContentType: "text/plain",
+ *             fixedMessageBody: "body",
+ *         },
+ *     ],
  *     description: "description",
  *     tags: [
  *         "tag1",
@@ -106,7 +131,6 @@ export class ProxyLB extends pulumi.CustomResource {
     public /*out*/ readonly fqdn!: pulumi.Output<string>;
     /**
      * The flag to enable gzip compression.
-     * ---
      */
     public readonly gzip!: pulumi.Output<boolean | undefined>;
     /**
@@ -130,6 +154,10 @@ export class ProxyLB extends pulumi.CustomResource {
      */
     public /*out*/ readonly proxyNetworks!: pulumi.Output<string[]>;
     /**
+     * The flag to enable proxy protocol v2.
+     */
+    public readonly proxyProtocol!: pulumi.Output<boolean | undefined>;
+    /**
      * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
      */
     public readonly region!: pulumi.Output<string | undefined>;
@@ -149,6 +177,10 @@ export class ProxyLB extends pulumi.CustomResource {
      * The flag to enable sticky session.
      */
     public readonly stickySession!: pulumi.Output<boolean | undefined>;
+    /**
+     * A `syslog` block as defined below.
+     */
+    public readonly syslog!: pulumi.Output<outputs.ProxyLBSyslog>;
     /**
      * Any tags to assign to the ProxyLB.
      */
@@ -189,11 +221,13 @@ export class ProxyLB extends pulumi.CustomResource {
             inputs["name"] = state ? state.name : undefined;
             inputs["plan"] = state ? state.plan : undefined;
             inputs["proxyNetworks"] = state ? state.proxyNetworks : undefined;
+            inputs["proxyProtocol"] = state ? state.proxyProtocol : undefined;
             inputs["region"] = state ? state.region : undefined;
             inputs["rules"] = state ? state.rules : undefined;
             inputs["servers"] = state ? state.servers : undefined;
             inputs["sorryServer"] = state ? state.sorryServer : undefined;
             inputs["stickySession"] = state ? state.stickySession : undefined;
+            inputs["syslog"] = state ? state.syslog : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["timeout"] = state ? state.timeout : undefined;
             inputs["vip"] = state ? state.vip : undefined;
@@ -214,11 +248,13 @@ export class ProxyLB extends pulumi.CustomResource {
             inputs["iconId"] = args ? args.iconId : undefined;
             inputs["name"] = args ? args.name : undefined;
             inputs["plan"] = args ? args.plan : undefined;
+            inputs["proxyProtocol"] = args ? args.proxyProtocol : undefined;
             inputs["region"] = args ? args.region : undefined;
             inputs["rules"] = args ? args.rules : undefined;
             inputs["servers"] = args ? args.servers : undefined;
             inputs["sorryServer"] = args ? args.sorryServer : undefined;
             inputs["stickySession"] = args ? args.stickySession : undefined;
+            inputs["syslog"] = args ? args.syslog : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["timeout"] = args ? args.timeout : undefined;
             inputs["vipFailover"] = args ? args.vipFailover : undefined;
@@ -255,7 +291,6 @@ export interface ProxyLBState {
     readonly fqdn?: pulumi.Input<string>;
     /**
      * The flag to enable gzip compression.
-     * ---
      */
     readonly gzip?: pulumi.Input<boolean>;
     /**
@@ -279,6 +314,10 @@ export interface ProxyLBState {
      */
     readonly proxyNetworks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * The flag to enable proxy protocol v2.
+     */
+    readonly proxyProtocol?: pulumi.Input<boolean>;
+    /**
      * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
      */
     readonly region?: pulumi.Input<string>;
@@ -298,6 +337,10 @@ export interface ProxyLBState {
      * The flag to enable sticky session.
      */
     readonly stickySession?: pulumi.Input<boolean>;
+    /**
+     * A `syslog` block as defined below.
+     */
+    readonly syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
     /**
      * Any tags to assign to the ProxyLB.
      */
@@ -334,7 +377,6 @@ export interface ProxyLBArgs {
     readonly description?: pulumi.Input<string>;
     /**
      * The flag to enable gzip compression.
-     * ---
      */
     readonly gzip?: pulumi.Input<boolean>;
     /**
@@ -353,6 +395,10 @@ export interface ProxyLBArgs {
      * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
      */
     readonly plan?: pulumi.Input<number>;
+    /**
+     * The flag to enable proxy protocol v2.
+     */
+    readonly proxyProtocol?: pulumi.Input<boolean>;
     /**
      * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
      */
@@ -373,6 +419,10 @@ export interface ProxyLBArgs {
      * The flag to enable sticky session.
      */
     readonly stickySession?: pulumi.Input<boolean>;
+    /**
+     * A `syslog` block as defined below.
+     */
+    readonly syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
     /**
      * Any tags to assign to the ProxyLB.
      */

@@ -67,6 +67,20 @@ namespace Pulumi.Sakuracloud
     ///                 DisablePwAuth = true,
     ///             },
     ///         });
+    ///         // user_data = join("\n", [
+    ///         //   "#cloud-config",
+    ///         //   yamlencode({
+    ///         //     hostname: "hostname",
+    ///         //     password: "password",
+    ///         //     chpasswd: {
+    ///         //       expire: false,
+    ///         //     }
+    ///         //     ssh_pwauth: false,
+    ///         //     ssh_authorized_keys: [
+    ///         //       file("~/.ssh/id_rsa.pub"),
+    ///         //     ],
+    ///         //   }),
+    ///         // ])
     ///     }
     /// 
     /// }
@@ -100,7 +114,7 @@ namespace Pulumi.Sakuracloud
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// A `disk_edit_parameter` block as defined below.
+        /// A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         /// </summary>
         [Output("diskEditParameter")]
         public Output<Outputs.ServerDiskEditParameter?> DiskEditParameter { get; private set; } = null!;
@@ -128,6 +142,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("gateway")]
         public Output<string> Gateway { get; private set; } = null!;
+
+        /// <summary>
+        /// The number of GPUs.
+        /// </summary>
+        [Output("gpu")]
+        public Output<int?> Gpu { get; private set; } = null!;
 
         /// <summary>
         /// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
@@ -200,6 +220,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<string>> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        /// </summary>
+        [Output("userData")]
+        public Output<string?> UserData { get; private set; } = null!;
 
         /// <summary>
         /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
@@ -278,7 +304,7 @@ namespace Pulumi.Sakuracloud
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// A `disk_edit_parameter` block as defined below.
+        /// A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         /// </summary>
         [Input("diskEditParameter")]
         public Input<Inputs.ServerDiskEditParameterArgs>? DiskEditParameter { get; set; }
@@ -300,6 +326,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("forceShutdown")]
         public Input<bool>? ForceShutdown { get; set; }
+
+        /// <summary>
+        /// The number of GPUs.
+        /// </summary>
+        [Input("gpu")]
+        public Input<int>? Gpu { get; set; }
 
         /// <summary>
         /// The icon id to attach to the Server.
@@ -356,6 +388,12 @@ namespace Pulumi.Sakuracloud
         }
 
         /// <summary>
+        /// A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        /// </summary>
+        [Input("userData")]
+        public Input<string>? UserData { get; set; }
+
+        /// <summary>
         /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
@@ -393,7 +431,7 @@ namespace Pulumi.Sakuracloud
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// A `disk_edit_parameter` block as defined below.
+        /// A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         /// </summary>
         [Input("diskEditParameter")]
         public Input<Inputs.ServerDiskEditParameterGetArgs>? DiskEditParameter { get; set; }
@@ -433,6 +471,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("gateway")]
         public Input<string>? Gateway { get; set; }
+
+        /// <summary>
+        /// The number of GPUs.
+        /// </summary>
+        [Input("gpu")]
+        public Input<int>? Gpu { get; set; }
 
         /// <summary>
         /// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
@@ -517,6 +561,12 @@ namespace Pulumi.Sakuracloud
             get => _tags ?? (_tags = new InputList<string>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        /// </summary>
+        [Input("userData")]
+        public Input<string>? UserData { get; set; }
 
         /// <summary>
         /// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.

@@ -6,7 +6,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk v1.9.1 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/v2 v2.22.1
 	github.com/pulumi/pulumi/sdk/v2 v2.23.2
-	github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20210412034539-4063b51a35a8
+	github.com/sacloud/terraform-provider-sakuracloud v1.21.2-0.20211018023032-6c12edc62816
 )
 
 replace (

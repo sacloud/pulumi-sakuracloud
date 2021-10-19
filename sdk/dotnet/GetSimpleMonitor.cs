@@ -118,6 +118,10 @@ namespace Pulumi.Sakuracloud
         /// The monitoring target of the simple monitor. This will be IP address or FQDN.
         /// </summary>
         public readonly string Target;
+        /// <summary>
+        /// The timeout in seconds for monitoring.
+        /// </summary>
+        public readonly int Timeout;
 
         [OutputConstructor]
         private GetSimpleMonitorResult(
@@ -147,7 +151,9 @@ namespace Pulumi.Sakuracloud
 
             ImmutableArray<string> tags,
 
-            string target)
+            string target,
+
+            int timeout)
         {
             DelayLoop = delayLoop;
             Description = description;
@@ -163,6 +169,7 @@ namespace Pulumi.Sakuracloud
             NotifySlackWebhook = notifySlackWebhook;
             Tags = tags;
             Target = target;
+            Timeout = timeout;
         }
     }
 }

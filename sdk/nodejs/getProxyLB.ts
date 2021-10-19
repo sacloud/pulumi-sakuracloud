@@ -87,13 +87,17 @@ export interface GetProxyLBResult {
      */
     readonly name: string;
     /**
-     * The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+     * The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`/`400000`].
      */
     readonly plan: number;
     /**
      * A list of CIDR block used by the ProxyLB to access the server.
      */
     readonly proxyNetworks: string[];
+    /**
+     * The flag to enable proxy protocol v2.
+     */
+    readonly proxyProtocol: boolean;
     /**
      * The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
      */
@@ -103,7 +107,7 @@ export interface GetProxyLBResult {
      */
     readonly rules: outputs.GetProxyLBRule[];
     /**
-     * A list of `server` blocks as defined below.
+     * The address of syslog server.
      */
     readonly servers: outputs.GetProxyLBServer[];
     /**
@@ -114,6 +118,10 @@ export interface GetProxyLBResult {
      * The flag to enable sticky session.
      */
     readonly stickySession: boolean;
+    /**
+     * A list of `syslog` blocks as defined below.
+     */
+    readonly syslogs: outputs.GetProxyLBSyslog[];
     /**
      * Any tags assigned to the ProxyLB.
      */

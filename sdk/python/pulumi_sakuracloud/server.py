@@ -24,6 +24,7 @@ class Server(pulumi.CustomResource):
                  disk_edit_parameter: Optional[pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']]] = None,
                  disks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  force_shutdown: Optional[pulumi.Input[bool]] = None,
+                 gpu: Optional[pulumi.Input[int]] = None,
                  icon_id: Optional[pulumi.Input[str]] = None,
                  interface_driver: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
@@ -31,6 +32,7 @@ class Server(pulumi.CustomResource):
                  network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServerNetworkInterfaceArgs']]]]] = None,
                  private_host_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 user_data: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None,
                  __name__=None,
@@ -65,6 +67,20 @@ class Server(pulumi.CustomResource):
                 password="password",
                 disable_pw_auth=True,
             ))
+        # user_data = join("\n", [
+        #   "#cloud-config",
+        #   yamlencode({
+        #     hostname: "hostname",
+        #     password: "password",
+        #     chpasswd: {
+        #       expire: false,
+        #     }
+        #     ssh_pwauth: false,
+        #     ssh_authorized_keys: [
+        #       file("~/.ssh/id_rsa.pub"),
+        #     ],
+        #   }),
+        # ])
         ```
 
         :param str resource_name: The name of the resource.
@@ -73,9 +89,10 @@ class Server(pulumi.CustomResource):
         :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
         :param pulumi.Input[int] core: The number of virtual CPUs. Default:`1`.
         :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`].
-        :param pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']] disk_edit_parameter: A `disk_edit_parameter` block as defined below.
+        :param pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']] disk_edit_parameter: A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         :param pulumi.Input[Sequence[pulumi.Input[str]]] disks: A list of disk id connected to the server.
         :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying.
+        :param pulumi.Input[int] gpu: The number of GPUs.
         :param pulumi.Input[str] icon_id: The icon id to attach to the Server.
         :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
         :param pulumi.Input[int] memory: The size of memory in GiB. Default:`1`.
@@ -83,6 +100,7 @@ class Server(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServerNetworkInterfaceArgs']]]] network_interfaces: One or more `network_interface` blocks as defined below.
         :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Server.
+        :param pulumi.Input[str] user_data: A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
         :param pulumi.Input[str] zone: The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         if __name__ is not None:
@@ -109,6 +127,7 @@ class Server(pulumi.CustomResource):
             __props__['disk_edit_parameter'] = disk_edit_parameter
             __props__['disks'] = disks
             __props__['force_shutdown'] = force_shutdown
+            __props__['gpu'] = gpu
             __props__['icon_id'] = icon_id
             __props__['interface_driver'] = interface_driver
             __props__['memory'] = memory
@@ -116,6 +135,7 @@ class Server(pulumi.CustomResource):
             __props__['network_interfaces'] = network_interfaces
             __props__['private_host_id'] = private_host_id
             __props__['tags'] = tags
+            __props__['user_data'] = user_data
             __props__['zone'] = zone
             __props__['dns_servers'] = None
             __props__['gateway'] = None
@@ -143,6 +163,7 @@ class Server(pulumi.CustomResource):
             dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             force_shutdown: Optional[pulumi.Input[bool]] = None,
             gateway: Optional[pulumi.Input[str]] = None,
+            gpu: Optional[pulumi.Input[int]] = None,
             hostname: Optional[pulumi.Input[str]] = None,
             icon_id: Optional[pulumi.Input[str]] = None,
             interface_driver: Optional[pulumi.Input[str]] = None,
@@ -155,6 +176,7 @@ class Server(pulumi.CustomResource):
             private_host_id: Optional[pulumi.Input[str]] = None,
             private_host_name: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            user_data: Optional[pulumi.Input[str]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'Server':
         """
         Get an existing Server resource's state with the given name, id, and optional extra
@@ -167,11 +189,12 @@ class Server(pulumi.CustomResource):
         :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
         :param pulumi.Input[int] core: The number of virtual CPUs. Default:`1`.
         :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`].
-        :param pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']] disk_edit_parameter: A `disk_edit_parameter` block as defined below.
+        :param pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']] disk_edit_parameter: A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         :param pulumi.Input[Sequence[pulumi.Input[str]]] disks: A list of disk id connected to the server.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: A list of IP address of DNS server in the zone.
         :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying.
         :param pulumi.Input[str] gateway: The gateway address used by the Server.
+        :param pulumi.Input[int] gpu: The number of GPUs.
         :param pulumi.Input[str] hostname: The hostname of the Server. The length of this value must be in the range [`1`-`64`].
         :param pulumi.Input[str] icon_id: The icon id to attach to the Server.
         :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
@@ -184,6 +207,7 @@ class Server(pulumi.CustomResource):
         :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned.
         :param pulumi.Input[str] private_host_name: The id of the PrivateHost which the Server is assigned.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Server.
+        :param pulumi.Input[str] user_data: A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
         :param pulumi.Input[str] zone: The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -199,6 +223,7 @@ class Server(pulumi.CustomResource):
         __props__["dns_servers"] = dns_servers
         __props__["force_shutdown"] = force_shutdown
         __props__["gateway"] = gateway
+        __props__["gpu"] = gpu
         __props__["hostname"] = hostname
         __props__["icon_id"] = icon_id
         __props__["interface_driver"] = interface_driver
@@ -211,6 +236,7 @@ class Server(pulumi.CustomResource):
         __props__["private_host_id"] = private_host_id
         __props__["private_host_name"] = private_host_name
         __props__["tags"] = tags
+        __props__["user_data"] = user_data
         __props__["zone"] = zone
         return Server(resource_name, opts=opts, __props__=__props__)
 
@@ -250,7 +276,7 @@ class Server(pulumi.CustomResource):
     @pulumi.getter(name="diskEditParameter")
     def disk_edit_parameter(self) -> pulumi.Output[Optional['outputs.ServerDiskEditParameter']]:
         """
-        A `disk_edit_parameter` block as defined below.
+        A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
         """
         return pulumi.get(self, "disk_edit_parameter")
 
@@ -285,6 +311,14 @@ class Server(pulumi.CustomResource):
         The gateway address used by the Server.
         """
         return pulumi.get(self, "gateway")
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> pulumi.Output[Optional[int]]:
+        """
+        The number of GPUs.
+        """
+        return pulumi.get(self, "gpu")
 
     @property
     @pulumi.getter
@@ -381,6 +415,14 @@ class Server(pulumi.CustomResource):
         Any tags to assign to the Server.
         """
         return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="userData")
+    def user_data(self) -> pulumi.Output[Optional[str]]:
+        """
+        A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        """
+        return pulumi.get(self, "user_data")
 
     @property
     @pulumi.getter

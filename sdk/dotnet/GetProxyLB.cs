@@ -103,13 +103,17 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+        /// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`/`400000`].
         /// </summary>
         public readonly int Plan;
         /// <summary>
         /// A list of CIDR block used by the ProxyLB to access the server.
         /// </summary>
         public readonly ImmutableArray<string> ProxyNetworks;
+        /// <summary>
+        /// The flag to enable proxy protocol v2.
+        /// </summary>
+        public readonly bool ProxyProtocol;
         /// <summary>
         /// The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
         /// </summary>
@@ -119,7 +123,7 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         public readonly ImmutableArray<Outputs.GetProxyLBRuleResult> Rules;
         /// <summary>
-        /// A list of `server` blocks as defined below.
+        /// The address of syslog server.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetProxyLBServerResult> Servers;
         /// <summary>
@@ -130,6 +134,10 @@ namespace Pulumi.Sakuracloud
         /// The flag to enable sticky session.
         /// </summary>
         public readonly bool StickySession;
+        /// <summary>
+        /// A list of `syslog` blocks as defined below.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetProxyLBSyslogResult> Syslogs;
         /// <summary>
         /// Any tags assigned to the ProxyLB.
         /// </summary>
@@ -173,6 +181,8 @@ namespace Pulumi.Sakuracloud
 
             ImmutableArray<string> proxyNetworks,
 
+            bool proxyProtocol,
+
             string region,
 
             ImmutableArray<Outputs.GetProxyLBRuleResult> rules,
@@ -182,6 +192,8 @@ namespace Pulumi.Sakuracloud
             ImmutableArray<Outputs.GetProxyLBSorryServerResult> sorryServers,
 
             bool stickySession,
+
+            ImmutableArray<Outputs.GetProxyLBSyslogResult> syslogs,
 
             ImmutableArray<string> tags,
 
@@ -203,11 +215,13 @@ namespace Pulumi.Sakuracloud
             Name = name;
             Plan = plan;
             ProxyNetworks = proxyNetworks;
+            ProxyProtocol = proxyProtocol;
             Region = region;
             Rules = rules;
             Servers = servers;
             SorryServers = sorryServers;
             StickySession = stickySession;
+            Syslogs = syslogs;
             Tags = tags;
             Timeout = timeout;
             Vip = vip;

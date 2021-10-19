@@ -30,6 +30,10 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProxyLBBindPortResponseHeader> ResponseHeaders;
         /// <summary>
+        /// The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+        /// </summary>
+        public readonly string? SslPolicy;
+        /// <summary>
         /// The flag to enable HTTP/2. This flag is used only when `proxy_mode` is `https`.
         /// </summary>
         public readonly bool? SupportHttp2;
@@ -44,12 +48,15 @@ namespace Pulumi.Sakuracloud.Outputs
 
             ImmutableArray<Outputs.ProxyLBBindPortResponseHeader> responseHeaders,
 
+            string? sslPolicy,
+
             bool? supportHttp2)
         {
             Port = port;
             ProxyMode = proxyMode;
             RedirectToHttps = redirectToHttps;
             ResponseHeaders = responseHeaders;
+            SslPolicy = sslPolicy;
             SupportHttp2 = supportHttp2;
         }
     }

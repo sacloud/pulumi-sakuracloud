@@ -77,7 +77,7 @@ type Archive struct {
 	// The name of the archive. The length of this value must be in the range [`1`-`64`].
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
-	Size pulumi.IntPtrOutput `pulumi:"size"`
+	Size pulumi.IntOutput `pulumi:"size"`
 	// The id of the source archive. This conflicts with [`sourceDiskId`]. Changing this forces a new resource to be created.
 	SourceArchiveId pulumi.StringPtrOutput `pulumi:"sourceArchiveId"`
 	// The share key of source shared archive. Changing this forces a new resource to be created.

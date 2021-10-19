@@ -21,7 +21,7 @@ class GetServerResult:
     """
     A collection of values returned by getServer.
     """
-    def __init__(__self__, cdrom_id=None, commitment=None, core=None, description=None, disks=None, dns_servers=None, filter=None, gateway=None, hostname=None, icon_id=None, id=None, interface_driver=None, ip_address=None, memory=None, name=None, netmask=None, network_address=None, network_interfaces=None, private_host_id=None, private_host_name=None, tags=None, zone=None):
+    def __init__(__self__, cdrom_id=None, commitment=None, core=None, description=None, disks=None, dns_servers=None, filter=None, gateway=None, gpu=None, hostname=None, icon_id=None, id=None, interface_driver=None, ip_address=None, memory=None, name=None, netmask=None, network_address=None, network_interfaces=None, private_host_id=None, private_host_name=None, tags=None, zone=None):
         if cdrom_id and not isinstance(cdrom_id, str):
             raise TypeError("Expected argument 'cdrom_id' to be a str")
         pulumi.set(__self__, "cdrom_id", cdrom_id)
@@ -46,6 +46,9 @@ class GetServerResult:
         if gateway and not isinstance(gateway, str):
             raise TypeError("Expected argument 'gateway' to be a str")
         pulumi.set(__self__, "gateway", gateway)
+        if gpu and not isinstance(gpu, int):
+            raise TypeError("Expected argument 'gpu' to be a int")
+        pulumi.set(__self__, "gpu", gpu)
         if hostname and not isinstance(hostname, str):
             raise TypeError("Expected argument 'hostname' to be a str")
         pulumi.set(__self__, "hostname", hostname)
@@ -149,6 +152,14 @@ class GetServerResult:
         The IP address of the gateway used by Server.
         """
         return pulumi.get(self, "gateway")
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> int:
+        """
+        The number of GPUs.
+        """
+        return pulumi.get(self, "gpu")
 
     @property
     @pulumi.getter
@@ -274,6 +285,7 @@ class AwaitableGetServerResult(GetServerResult):
             dns_servers=self.dns_servers,
             filter=self.filter,
             gateway=self.gateway,
+            gpu=self.gpu,
             hostname=self.hostname,
             icon_id=self.icon_id,
             id=self.id,
@@ -329,6 +341,7 @@ def get_server(filter: Optional[pulumi.InputType['GetServerFilterArgs']] = None,
         dns_servers=__ret__.dns_servers,
         filter=__ret__.filter,
         gateway=__ret__.gateway,
+        gpu=__ret__.gpu,
         hostname=__ret__.hostname,
         icon_id=__ret__.icon_id,
         id=__ret__.id,

@@ -26,9 +26,12 @@ import (
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := sakuracloud.NewProxyLBACME(ctx, "foobarProxyLBACME", &sakuracloud.ProxyLBACMEArgs{
-// 			ProxylbId:      pulumi.Any(sakuracloud_proxylb.Foobar.Id),
-// 			AcceptTos:      pulumi.Bool(true),
-// 			CommonName:     pulumi.String("www.example.com"),
+// 			ProxylbId:  pulumi.Any(sakuracloud_proxylb.Foobar.Id),
+// 			AcceptTos:  pulumi.Bool(true),
+// 			CommonName: pulumi.String("www.example.com"),
+// 			SubjectAltNames: pulumi.StringArray{
+// 				pulumi.String("www1.example.com"),
+// 			},
 // 			UpdateDelaySec: pulumi.Int(120),
 // 		})
 // 		if err != nil {
@@ -59,6 +62,8 @@ type ProxyLBACME struct {
 	CommonName pulumi.StringOutput `pulumi:"commonName"`
 	// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
 	ProxylbId pulumi.StringOutput `pulumi:"proxylbId"`
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames pulumi.StringArrayOutput `pulumi:"subjectAltNames"`
 	// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
 	UpdateDelaySec pulumi.IntPtrOutput `pulumi:"updateDelaySec"`
 }
@@ -109,6 +114,8 @@ type proxyLBACMEState struct {
 	CommonName *string `pulumi:"commonName"`
 	// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
 	ProxylbId *string `pulumi:"proxylbId"`
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames []string `pulumi:"subjectAltNames"`
 	// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
 	UpdateDelaySec *int `pulumi:"updateDelaySec"`
 }
@@ -122,6 +129,8 @@ type ProxyLBACMEState struct {
 	CommonName pulumi.StringPtrInput
 	// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
 	ProxylbId pulumi.StringPtrInput
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames pulumi.StringArrayInput
 	// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
 	UpdateDelaySec pulumi.IntPtrInput
 }
@@ -137,6 +146,8 @@ type proxyLBACMEArgs struct {
 	CommonName string `pulumi:"commonName"`
 	// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
 	ProxylbId string `pulumi:"proxylbId"`
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames []string `pulumi:"subjectAltNames"`
 	// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
 	UpdateDelaySec *int `pulumi:"updateDelaySec"`
 }
@@ -149,6 +160,8 @@ type ProxyLBACMEArgs struct {
 	CommonName pulumi.StringInput
 	// The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
 	ProxylbId pulumi.StringInput
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames pulumi.StringArrayInput
 	// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
 	UpdateDelaySec pulumi.IntPtrInput
 }

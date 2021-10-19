@@ -71,20 +71,24 @@ type LookupProxyLBResult struct {
 	Id string `pulumi:"id"`
 	// The name of the ProxyLB.
 	Name string `pulumi:"name"`
-	// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`].
+	// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`/`400000`].
 	Plan int `pulumi:"plan"`
 	// A list of CIDR block used by the ProxyLB to access the server.
 	ProxyNetworks []string `pulumi:"proxyNetworks"`
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol bool `pulumi:"proxyProtocol"`
 	// The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
 	Region string `pulumi:"region"`
 	// A list of `rule` blocks as defined below.
 	Rules []GetProxyLBRule `pulumi:"rules"`
-	// A list of `server` blocks as defined below.
+	// The address of syslog server.
 	Servers []GetProxyLBServer `pulumi:"servers"`
 	// A list of `sorryServer` blocks as defined below.
 	SorryServers []GetProxyLBSorryServer `pulumi:"sorryServers"`
 	// The flag to enable sticky session.
 	StickySession bool `pulumi:"stickySession"`
+	// A list of `syslog` blocks as defined below.
+	Syslogs []GetProxyLBSyslog `pulumi:"syslogs"`
 	// Any tags assigned to the ProxyLB.
 	Tags []string `pulumi:"tags"`
 	// The timeout duration in seconds.

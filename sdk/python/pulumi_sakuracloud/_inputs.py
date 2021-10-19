@@ -9,6 +9,11 @@ from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 
 __all__ = [
+    'CertificateAuthorityClientArgs',
+    'CertificateAuthorityClientSubjectArgs',
+    'CertificateAuthorityServerArgs',
+    'CertificateAuthorityServerSubjectArgs',
+    'CertificateAuthoritySubjectArgs',
     'ContainerRegistryUserArgs',
     'DNSRecordArgs',
     'DatabaseBackupArgs',
@@ -41,6 +46,7 @@ __all__ = [
     'ProxyLBRuleArgs',
     'ProxyLBServerArgs',
     'ProxyLBSorryServerArgs',
+    'ProxyLBSyslogArgs',
     'ServerDiskEditParameterArgs',
     'ServerDiskEditParameterNoteArgs',
     'ServerNetworkInterfaceArgs',
@@ -58,12 +64,16 @@ __all__ = [
     'VPCRouterStaticNatArgs',
     'VPCRouterStaticRouteArgs',
     'VPCRouterUserArgs',
+    'VPCRouterWireGuardArgs',
+    'VPCRouterWireGuardPeerArgs',
     'GetArchiveFilterArgs',
     'GetArchiveFilterConditionArgs',
     'GetBridgeFilterArgs',
     'GetBridgeFilterConditionArgs',
     'GetCDROMFilterArgs',
     'GetCDROMFilterConditionArgs',
+    'GetCertificateAuthorityFilterArgs',
+    'GetCertificateAuthorityFilterConditionArgs',
     'GetContainerRegistryFilterArgs',
     'GetContainerRegistryFilterConditionArgs',
     'GetDNSFilterArgs',
@@ -74,6 +84,8 @@ __all__ = [
     'GetDiskFilterConditionArgs',
     'GetESMEFilterArgs',
     'GetESMEFilterConditionArgs',
+    'GetEnhancedDBFilterArgs',
+    'GetEnhancedDBFilterConditionArgs',
     'GetGSLBFilterArgs',
     'GetGSLBFilterConditionArgs',
     'GetIconFilterArgs',
@@ -105,6 +117,620 @@ __all__ = [
     'GetVPCRouterFilterArgs',
     'GetVPCRouterFilterConditionArgs',
 ]
+
+@pulumi.input_type
+class CertificateAuthorityClientArgs:
+    def __init__(__self__, *,
+                 subject: pulumi.Input['CertificateAuthorityClientSubjectArgs'],
+                 validity_period_hours: pulumi.Input[int],
+                 certificate: Optional[pulumi.Input[str]] = None,
+                 csr: Optional[pulumi.Input[str]] = None,
+                 email: Optional[pulumi.Input[str]] = None,
+                 hold: Optional[pulumi.Input[bool]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 issue_state: Optional[pulumi.Input[str]] = None,
+                 not_after: Optional[pulumi.Input[str]] = None,
+                 not_before: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 serial_number: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['CertificateAuthorityClientSubjectArgs'] subject: A `subject` block as defined below.
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the certificate will become invalid.
+        :param pulumi.Input[str] certificate: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[str] csr: Input for issuing a certificate.
+        :param pulumi.Input[str] email: Input for issuing a certificate.
+        :param pulumi.Input[bool] hold: Flag to suspend/hold the certificate.
+        :param pulumi.Input[str] id: The id of the certificate.
+        :param pulumi.Input[str] issue_state: Current state of the certificate.
+        :param pulumi.Input[str] not_after: The date on which the certificate validity period ends, in RFC3339 format.
+        :param pulumi.Input[str] not_before: The date on which the certificate validity period begins, in RFC3339 format.
+        :param pulumi.Input[str] public_key: Input for issuing a certificate.
+        :param pulumi.Input[str] serial_number: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[str] url: The URL for issuing the certificate.
+        """
+        pulumi.set(__self__, "subject", subject)
+        pulumi.set(__self__, "validity_period_hours", validity_period_hours)
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
+        if csr is not None:
+            pulumi.set(__self__, "csr", csr)
+        if email is not None:
+            pulumi.set(__self__, "email", email)
+        if hold is not None:
+            pulumi.set(__self__, "hold", hold)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if issue_state is not None:
+            pulumi.set(__self__, "issue_state", issue_state)
+        if not_after is not None:
+            pulumi.set(__self__, "not_after", not_after)
+        if not_before is not None:
+            pulumi.set(__self__, "not_before", not_before)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+        if serial_number is not None:
+            pulumi.set(__self__, "serial_number", serial_number)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def subject(self) -> pulumi.Input['CertificateAuthorityClientSubjectArgs']:
+        """
+        A `subject` block as defined below.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: pulumi.Input['CertificateAuthorityClientSubjectArgs']):
+        pulumi.set(self, "subject", value)
+
+    @property
+    @pulumi.getter(name="validityPeriodHours")
+    def validity_period_hours(self) -> pulumi.Input[int]:
+        """
+        The number of hours after initial issuing that the certificate will become invalid.
+        """
+        return pulumi.get(self, "validity_period_hours")
+
+    @validity_period_hours.setter
+    def validity_period_hours(self, value: pulumi.Input[int]):
+        pulumi.set(self, "validity_period_hours", value)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate", value)
+
+    @property
+    @pulumi.getter
+    def csr(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input for issuing a certificate.
+        """
+        return pulumi.get(self, "csr")
+
+    @csr.setter
+    def csr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "csr", value)
+
+    @property
+    @pulumi.getter
+    def email(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input for issuing a certificate.
+        """
+        return pulumi.get(self, "email")
+
+    @email.setter
+    def email(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "email", value)
+
+    @property
+    @pulumi.getter
+    def hold(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Flag to suspend/hold the certificate.
+        """
+        return pulumi.get(self, "hold")
+
+    @hold.setter
+    def hold(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "hold", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the certificate.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="issueState")
+    def issue_state(self) -> Optional[pulumi.Input[str]]:
+        """
+        Current state of the certificate.
+        """
+        return pulumi.get(self, "issue_state")
+
+    @issue_state.setter
+    def issue_state(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "issue_state", value)
+
+    @property
+    @pulumi.getter(name="notAfter")
+    def not_after(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period ends, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_after")
+
+    @not_after.setter
+    def not_after(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_after", value)
+
+    @property
+    @pulumi.getter(name="notBefore")
+    def not_before(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period begins, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_before")
+
+    @not_before.setter
+    def not_before(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_before", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input for issuing a certificate.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter(name="serialNumber")
+    def serial_number(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "serial_number")
+
+    @serial_number.setter
+    def serial_number(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serial_number", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL for issuing the certificate.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+
+@pulumi.input_type
+class CertificateAuthorityClientSubjectArgs:
+    def __init__(__self__, *,
+                 common_name: pulumi.Input[str],
+                 country: pulumi.Input[str],
+                 organization: pulumi.Input[str],
+                 organization_units: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] common_name: .
+        :param pulumi.Input[str] country: .
+        :param pulumi.Input[str] organization: .
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] organization_units: .
+        """
+        pulumi.set(__self__, "common_name", common_name)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "organization", organization)
+        if organization_units is not None:
+            pulumi.set(__self__, "organization_units", organization_units)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter
+    def country(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "country")
+
+    @country.setter
+    def country(self, value: pulumi.Input[str]):
+        pulumi.set(self, "country", value)
+
+    @property
+    @pulumi.getter
+    def organization(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization")
+
+    @organization.setter
+    def organization(self, value: pulumi.Input[str]):
+        pulumi.set(self, "organization", value)
+
+    @property
+    @pulumi.getter(name="organizationUnits")
+    def organization_units(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization_units")
+
+    @organization_units.setter
+    def organization_units(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "organization_units", value)
+
+
+@pulumi.input_type
+class CertificateAuthorityServerArgs:
+    def __init__(__self__, *,
+                 subject: pulumi.Input['CertificateAuthorityServerSubjectArgs'],
+                 validity_period_hours: pulumi.Input[int],
+                 certificate: Optional[pulumi.Input[str]] = None,
+                 csr: Optional[pulumi.Input[str]] = None,
+                 hold: Optional[pulumi.Input[bool]] = None,
+                 id: Optional[pulumi.Input[str]] = None,
+                 issue_state: Optional[pulumi.Input[str]] = None,
+                 not_after: Optional[pulumi.Input[str]] = None,
+                 not_before: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 serial_number: Optional[pulumi.Input[str]] = None,
+                 subject_alternative_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input['CertificateAuthorityServerSubjectArgs'] subject: A `subject` block as defined below.
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the certificate will become invalid.
+        :param pulumi.Input[str] certificate: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[str] csr: Input for issuing a certificate.
+        :param pulumi.Input[bool] hold: Flag to suspend/hold the certificate.
+        :param pulumi.Input[str] id: The id of the certificate.
+        :param pulumi.Input[str] issue_state: Current state of the certificate.
+        :param pulumi.Input[str] not_after: The date on which the certificate validity period ends, in RFC3339 format.
+        :param pulumi.Input[str] not_before: The date on which the certificate validity period begins, in RFC3339 format.
+        :param pulumi.Input[str] public_key: Input for issuing a certificate.
+        :param pulumi.Input[str] serial_number: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alternative_names: .
+        """
+        pulumi.set(__self__, "subject", subject)
+        pulumi.set(__self__, "validity_period_hours", validity_period_hours)
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
+        if csr is not None:
+            pulumi.set(__self__, "csr", csr)
+        if hold is not None:
+            pulumi.set(__self__, "hold", hold)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if issue_state is not None:
+            pulumi.set(__self__, "issue_state", issue_state)
+        if not_after is not None:
+            pulumi.set(__self__, "not_after", not_after)
+        if not_before is not None:
+            pulumi.set(__self__, "not_before", not_before)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+        if serial_number is not None:
+            pulumi.set(__self__, "serial_number", serial_number)
+        if subject_alternative_names is not None:
+            pulumi.set(__self__, "subject_alternative_names", subject_alternative_names)
+
+    @property
+    @pulumi.getter
+    def subject(self) -> pulumi.Input['CertificateAuthorityServerSubjectArgs']:
+        """
+        A `subject` block as defined below.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: pulumi.Input['CertificateAuthorityServerSubjectArgs']):
+        pulumi.set(self, "subject", value)
+
+    @property
+    @pulumi.getter(name="validityPeriodHours")
+    def validity_period_hours(self) -> pulumi.Input[int]:
+        """
+        The number of hours after initial issuing that the certificate will become invalid.
+        """
+        return pulumi.get(self, "validity_period_hours")
+
+    @validity_period_hours.setter
+    def validity_period_hours(self, value: pulumi.Input[int]):
+        pulumi.set(self, "validity_period_hours", value)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate", value)
+
+    @property
+    @pulumi.getter
+    def csr(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input for issuing a certificate.
+        """
+        return pulumi.get(self, "csr")
+
+    @csr.setter
+    def csr(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "csr", value)
+
+    @property
+    @pulumi.getter
+    def hold(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Flag to suspend/hold the certificate.
+        """
+        return pulumi.get(self, "hold")
+
+    @hold.setter
+    def hold(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "hold", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the certificate.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="issueState")
+    def issue_state(self) -> Optional[pulumi.Input[str]]:
+        """
+        Current state of the certificate.
+        """
+        return pulumi.get(self, "issue_state")
+
+    @issue_state.setter
+    def issue_state(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "issue_state", value)
+
+    @property
+    @pulumi.getter(name="notAfter")
+    def not_after(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period ends, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_after")
+
+    @not_after.setter
+    def not_after(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_after", value)
+
+    @property
+    @pulumi.getter(name="notBefore")
+    def not_before(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period begins, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_before")
+
+    @not_before.setter
+    def not_before(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_before", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Input for issuing a certificate.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter(name="serialNumber")
+    def serial_number(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "serial_number")
+
+    @serial_number.setter
+    def serial_number(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serial_number", value)
+
+    @property
+    @pulumi.getter(name="subjectAlternativeNames")
+    def subject_alternative_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        .
+        """
+        return pulumi.get(self, "subject_alternative_names")
+
+    @subject_alternative_names.setter
+    def subject_alternative_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "subject_alternative_names", value)
+
+
+@pulumi.input_type
+class CertificateAuthorityServerSubjectArgs:
+    def __init__(__self__, *,
+                 common_name: pulumi.Input[str],
+                 country: pulumi.Input[str],
+                 organization: pulumi.Input[str],
+                 organization_units: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] common_name: .
+        :param pulumi.Input[str] country: .
+        :param pulumi.Input[str] organization: .
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] organization_units: .
+        """
+        pulumi.set(__self__, "common_name", common_name)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "organization", organization)
+        if organization_units is not None:
+            pulumi.set(__self__, "organization_units", organization_units)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter
+    def country(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "country")
+
+    @country.setter
+    def country(self, value: pulumi.Input[str]):
+        pulumi.set(self, "country", value)
+
+    @property
+    @pulumi.getter
+    def organization(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization")
+
+    @organization.setter
+    def organization(self, value: pulumi.Input[str]):
+        pulumi.set(self, "organization", value)
+
+    @property
+    @pulumi.getter(name="organizationUnits")
+    def organization_units(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization_units")
+
+    @organization_units.setter
+    def organization_units(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "organization_units", value)
+
+
+@pulumi.input_type
+class CertificateAuthoritySubjectArgs:
+    def __init__(__self__, *,
+                 common_name: pulumi.Input[str],
+                 country: pulumi.Input[str],
+                 organization: pulumi.Input[str],
+                 organization_units: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] common_name: .
+        :param pulumi.Input[str] country: .
+        :param pulumi.Input[str] organization: .
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] organization_units: .
+        """
+        pulumi.set(__self__, "common_name", common_name)
+        pulumi.set(__self__, "country", country)
+        pulumi.set(__self__, "organization", organization)
+        if organization_units is not None:
+            pulumi.set(__self__, "organization_units", organization_units)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter
+    def country(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "country")
+
+    @country.setter
+    def country(self, value: pulumi.Input[str]):
+        pulumi.set(self, "country", value)
+
+    @property
+    @pulumi.getter
+    def organization(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization")
+
+    @organization.setter
+    def organization(self, value: pulumi.Input[str]):
+        pulumi.set(self, "organization", value)
+
+    @property
+    @pulumi.getter(name="organizationUnits")
+    def organization_units(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        .
+        """
+        return pulumi.get(self, "organization_units")
+
+    @organization_units.setter
+    def organization_units(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "organization_units", value)
+
 
 @pulumi.input_type
 class ContainerRegistryUserArgs:
@@ -1690,23 +2316,31 @@ class PacketFilterRuleExpressionArgs:
 class ProxyLBACMECertificateArgs:
     def __init__(__self__, *,
                  additional_certificates: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateAdditionalCertificateArgs']]]] = None,
+                 common_name: Optional[pulumi.Input[str]] = None,
                  intermediate_cert: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
-                 server_cert: Optional[pulumi.Input[str]] = None):
+                 server_cert: Optional[pulumi.Input[str]] = None,
+                 subject_alt_names: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateAdditionalCertificateArgs']]] additional_certificates: A list of `additional_certificate` blocks as defined below.
+        :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
         :param pulumi.Input[str] intermediate_cert: The intermediate certificate for a server.
         :param pulumi.Input[str] private_key: The private key for a server.
         :param pulumi.Input[str] server_cert: The certificate for a server.
+        :param pulumi.Input[str] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
         """
         if additional_certificates is not None:
             pulumi.set(__self__, "additional_certificates", additional_certificates)
+        if common_name is not None:
+            pulumi.set(__self__, "common_name", common_name)
         if intermediate_cert is not None:
             pulumi.set(__self__, "intermediate_cert", intermediate_cert)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
         if server_cert is not None:
             pulumi.set(__self__, "server_cert", server_cert)
+        if subject_alt_names is not None:
+            pulumi.set(__self__, "subject_alt_names", subject_alt_names)
 
     @property
     @pulumi.getter(name="additionalCertificates")
@@ -1719,6 +2353,18 @@ class ProxyLBACMECertificateArgs:
     @additional_certificates.setter
     def additional_certificates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateAdditionalCertificateArgs']]]]):
         pulumi.set(self, "additional_certificates", value)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "common_name", value)
 
     @property
     @pulumi.getter(name="intermediateCert")
@@ -1755,6 +2401,18 @@ class ProxyLBACMECertificateArgs:
     @server_cert.setter
     def server_cert(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "server_cert", value)
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject_alt_names")
+
+    @subject_alt_names.setter
+    def subject_alt_names(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subject_alt_names", value)
 
 
 @pulumi.input_type
@@ -1819,12 +2477,14 @@ class ProxyLBBindPortArgs:
                  port: Optional[pulumi.Input[int]] = None,
                  redirect_to_https: Optional[pulumi.Input[bool]] = None,
                  response_headers: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBBindPortResponseHeaderArgs']]]] = None,
+                 ssl_policy: Optional[pulumi.Input[str]] = None,
                  support_http2: Optional[pulumi.Input[bool]] = None):
         """
         :param pulumi.Input[str] proxy_mode: The proxy mode. This must be one of [`http`/`https`/`tcp`].
         :param pulumi.Input[int] port: The number of listening port.
         :param pulumi.Input[bool] redirect_to_https: The flag to enable redirection from http to https. This flag is used only when `proxy_mode` is `http`.
         :param pulumi.Input[Sequence[pulumi.Input['ProxyLBBindPortResponseHeaderArgs']]] response_headers: One or more `response_header` blocks as defined below.
+        :param pulumi.Input[str] ssl_policy: The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
         :param pulumi.Input[bool] support_http2: The flag to enable HTTP/2. This flag is used only when `proxy_mode` is `https`.
         """
         pulumi.set(__self__, "proxy_mode", proxy_mode)
@@ -1834,6 +2494,8 @@ class ProxyLBBindPortArgs:
             pulumi.set(__self__, "redirect_to_https", redirect_to_https)
         if response_headers is not None:
             pulumi.set(__self__, "response_headers", response_headers)
+        if ssl_policy is not None:
+            pulumi.set(__self__, "ssl_policy", ssl_policy)
         if support_http2 is not None:
             pulumi.set(__self__, "support_http2", support_http2)
 
@@ -1884,6 +2546,18 @@ class ProxyLBBindPortArgs:
     @response_headers.setter
     def response_headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBBindPortResponseHeaderArgs']]]]):
         pulumi.set(self, "response_headers", value)
+
+    @property
+    @pulumi.getter(name="sslPolicy")
+    def ssl_policy(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+        """
+        return pulumi.get(self, "ssl_policy")
+
+    @ssl_policy.setter
+    def ssl_policy(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ssl_policy", value)
 
     @property
     @pulumi.getter(name="supportHttp2")
@@ -1939,23 +2613,31 @@ class ProxyLBBindPortResponseHeaderArgs:
 class ProxyLBCertificateArgs:
     def __init__(__self__, *,
                  additional_certificates: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBCertificateAdditionalCertificateArgs']]]] = None,
+                 common_name: Optional[pulumi.Input[str]] = None,
                  intermediate_cert: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
-                 server_cert: Optional[pulumi.Input[str]] = None):
+                 server_cert: Optional[pulumi.Input[str]] = None,
+                 subject_alt_names: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input['ProxyLBCertificateAdditionalCertificateArgs']]] additional_certificates: One or more `additional_certificate` blocks as defined below.
+        :param pulumi.Input[str] common_name: The common name of the certificate.
         :param pulumi.Input[str] intermediate_cert: The intermediate certificate for a server.
         :param pulumi.Input[str] private_key: The private key for a server.
         :param pulumi.Input[str] server_cert: The certificate for a server.
+        :param pulumi.Input[str] subject_alt_names: The subject alternative names of the certificate.
         """
         if additional_certificates is not None:
             pulumi.set(__self__, "additional_certificates", additional_certificates)
+        if common_name is not None:
+            pulumi.set(__self__, "common_name", common_name)
         if intermediate_cert is not None:
             pulumi.set(__self__, "intermediate_cert", intermediate_cert)
         if private_key is not None:
             pulumi.set(__self__, "private_key", private_key)
         if server_cert is not None:
             pulumi.set(__self__, "server_cert", server_cert)
+        if subject_alt_names is not None:
+            pulumi.set(__self__, "subject_alt_names", subject_alt_names)
 
     @property
     @pulumi.getter(name="additionalCertificates")
@@ -1968,6 +2650,18 @@ class ProxyLBCertificateArgs:
     @additional_certificates.setter
     def additional_certificates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBCertificateAdditionalCertificateArgs']]]]):
         pulumi.set(self, "additional_certificates", value)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The common name of the certificate.
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "common_name", value)
 
     @property
     @pulumi.getter(name="intermediateCert")
@@ -2004,6 +2698,18 @@ class ProxyLBCertificateArgs:
     @server_cert.setter
     def server_cert(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "server_cert", value)
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> Optional[pulumi.Input[str]]:
+        """
+        The subject alternative names of the certificate.
+        """
+        return pulumi.get(self, "subject_alt_names")
+
+    @subject_alt_names.setter
+    def subject_alt_names(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subject_alt_names", value)
 
 
 @pulumi.input_type
@@ -2148,20 +2854,92 @@ class ProxyLBHealthCheckArgs:
 @pulumi.input_type
 class ProxyLBRuleArgs:
     def __init__(__self__, *,
+                 action: Optional[pulumi.Input[str]] = None,
+                 fixed_content_type: Optional[pulumi.Input[str]] = None,
+                 fixed_message_body: Optional[pulumi.Input[str]] = None,
+                 fixed_status_code: Optional[pulumi.Input[str]] = None,
                  group: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
-                 path: Optional[pulumi.Input[str]] = None):
+                 path: Optional[pulumi.Input[str]] = None,
+                 redirect_location: Optional[pulumi.Input[str]] = None,
+                 redirect_status_code: Optional[pulumi.Input[str]] = None):
         """
+        :param pulumi.Input[str] action: The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+        :param pulumi.Input[str] fixed_content_type: Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+        :param pulumi.Input[str] fixed_message_body: Content body for fixed response sent when requests matches the rule.
+        :param pulumi.Input[str] fixed_status_code: HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
         :param pulumi.Input[str] group: The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
         :param pulumi.Input[str] host: The value of HTTP host header that is used as condition of rule-based balancing.
         :param pulumi.Input[str] path: The request path that is used as condition of rule-based balancing.
+        :param pulumi.Input[str] redirect_location: The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+        :param pulumi.Input[str] redirect_status_code: HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
         """
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if fixed_content_type is not None:
+            pulumi.set(__self__, "fixed_content_type", fixed_content_type)
+        if fixed_message_body is not None:
+            pulumi.set(__self__, "fixed_message_body", fixed_message_body)
+        if fixed_status_code is not None:
+            pulumi.set(__self__, "fixed_status_code", fixed_status_code)
         if group is not None:
             pulumi.set(__self__, "group", group)
         if host is not None:
             pulumi.set(__self__, "host", host)
         if path is not None:
             pulumi.set(__self__, "path", path)
+        if redirect_location is not None:
+            pulumi.set(__self__, "redirect_location", redirect_location)
+        if redirect_status_code is not None:
+            pulumi.set(__self__, "redirect_status_code", redirect_status_code)
+
+    @property
+    @pulumi.getter
+    def action(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="fixedContentType")
+    def fixed_content_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+        """
+        return pulumi.get(self, "fixed_content_type")
+
+    @fixed_content_type.setter
+    def fixed_content_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fixed_content_type", value)
+
+    @property
+    @pulumi.getter(name="fixedMessageBody")
+    def fixed_message_body(self) -> Optional[pulumi.Input[str]]:
+        """
+        Content body for fixed response sent when requests matches the rule.
+        """
+        return pulumi.get(self, "fixed_message_body")
+
+    @fixed_message_body.setter
+    def fixed_message_body(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fixed_message_body", value)
+
+    @property
+    @pulumi.getter(name="fixedStatusCode")
+    def fixed_status_code(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+        """
+        return pulumi.get(self, "fixed_status_code")
+
+    @fixed_status_code.setter
+    def fixed_status_code(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fixed_status_code", value)
 
     @property
     @pulumi.getter
@@ -2198,6 +2976,30 @@ class ProxyLBRuleArgs:
     @path.setter
     def path(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter(name="redirectLocation")
+    def redirect_location(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+        """
+        return pulumi.get(self, "redirect_location")
+
+    @redirect_location.setter
+    def redirect_location(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "redirect_location", value)
+
+    @property
+    @pulumi.getter(name="redirectStatusCode")
+    def redirect_status_code(self) -> Optional[pulumi.Input[str]]:
+        """
+        HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+        """
+        return pulumi.get(self, "redirect_status_code")
+
+    @redirect_status_code.setter
+    def redirect_status_code(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "redirect_status_code", value)
 
 
 @pulumi.input_type
@@ -2305,6 +3107,45 @@ class ProxyLBSorryServerArgs:
     @port.setter
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class ProxyLBSyslogArgs:
+    def __init__(__self__, *,
+                 port: Optional[pulumi.Input[int]] = None,
+                 server: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] port: The number of syslog port.
+        :param pulumi.Input[str] server: The address of syslog server.
+        """
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if server is not None:
+            pulumi.set(__self__, "server", server)
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of syslog port.
+        """
+        return pulumi.get(self, "port")
+
+    @port.setter
+    def port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "port", value)
+
+    @property
+    @pulumi.getter
+    def server(self) -> Optional[pulumi.Input[str]]:
+        """
+        The address of syslog server.
+        """
+        return pulumi.get(self, "server")
+
+    @server.setter
+    def server(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "server", value)
 
 
 @pulumi.input_type
@@ -2642,6 +3483,7 @@ class SimpleMonitorHealthCheckArgs:
                  community: Optional[pulumi.Input[str]] = None,
                  contains_string: Optional[pulumi.Input[str]] = None,
                  excepcted_data: Optional[pulumi.Input[str]] = None,
+                 ftps: Optional[pulumi.Input[str]] = None,
                  host_header: Optional[pulumi.Input[str]] = None,
                  http2: Optional[pulumi.Input[bool]] = None,
                  oid: Optional[pulumi.Input[str]] = None,
@@ -2655,10 +3497,11 @@ class SimpleMonitorHealthCheckArgs:
                  status: Optional[pulumi.Input[int]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] protocol: The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+        :param pulumi.Input[str] protocol: The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
         :param pulumi.Input[str] community: The SNMP community string used when checking by SNMP.
         :param pulumi.Input[str] contains_string: The string that should be included in the response body when checking for HTTP/HTTPS.
         :param pulumi.Input[str] excepcted_data: The expected value used when checking by DNS.
+        :param pulumi.Input[str] ftps: The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
         :param pulumi.Input[str] host_header: The value of host header send when checking by HTTP/HTTPS.
         :param pulumi.Input[bool] http2: The flag to enable HTTP/2 when checking by HTTPS.
         :param pulumi.Input[str] oid: The SNMP OID used when checking by SNMP.
@@ -2679,6 +3522,8 @@ class SimpleMonitorHealthCheckArgs:
             pulumi.set(__self__, "contains_string", contains_string)
         if excepcted_data is not None:
             pulumi.set(__self__, "excepcted_data", excepcted_data)
+        if ftps is not None:
+            pulumi.set(__self__, "ftps", ftps)
         if host_header is not None:
             pulumi.set(__self__, "host_header", host_header)
         if http2 is not None:
@@ -2708,7 +3553,7 @@ class SimpleMonitorHealthCheckArgs:
     @pulumi.getter
     def protocol(self) -> pulumi.Input[str]:
         """
-        The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+        The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
         """
         return pulumi.get(self, "protocol")
 
@@ -2751,6 +3596,18 @@ class SimpleMonitorHealthCheckArgs:
     @excepcted_data.setter
     def excepcted_data(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "excepcted_data", value)
+
+    @property
+    @pulumi.getter
+    def ftps(self) -> Optional[pulumi.Input[str]]:
+        """
+        The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+        """
+        return pulumi.get(self, "ftps")
+
+    @ftps.setter
+    def ftps(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ftps", value)
 
     @property
     @pulumi.getter(name="hostHeader")
@@ -3740,6 +4597,112 @@ class VPCRouterUserArgs:
 
 
 @pulumi.input_type
+class VPCRouterWireGuardArgs:
+    def __init__(__self__, *,
+                 ip_address: pulumi.Input[str],
+                 peers: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterWireGuardPeerArgs']]]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] ip_address: The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterWireGuardPeerArgs']]] peers: One or more `peer` blocks as defined below.
+        :param pulumi.Input[str] public_key: the public key of the WireGuard client.
+        """
+        pulumi.set(__self__, "ip_address", ip_address)
+        if peers is not None:
+            pulumi.set(__self__, "peers", peers)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> pulumi.Input[str]:
+        """
+        The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @ip_address.setter
+    def ip_address(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip_address", value)
+
+    @property
+    @pulumi.getter
+    def peers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterWireGuardPeerArgs']]]]:
+        """
+        One or more `peer` blocks as defined below.
+        """
+        return pulumi.get(self, "peers")
+
+    @peers.setter
+    def peers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterWireGuardPeerArgs']]]]):
+        pulumi.set(self, "peers", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        the public key of the WireGuard client.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
+
+
+@pulumi.input_type
+class VPCRouterWireGuardPeerArgs:
+    def __init__(__self__, *,
+                 ip_address: pulumi.Input[str],
+                 name: pulumi.Input[str],
+                 public_key: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] ip_address: The IP address for peer.
+        :param pulumi.Input[str] name: the of the peer.
+        :param pulumi.Input[str] public_key: the public key of the WireGuard client.
+        """
+        pulumi.set(__self__, "ip_address", ip_address)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "public_key", public_key)
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> pulumi.Input[str]:
+        """
+        The IP address for peer.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @ip_address.setter
+    def ip_address(self, value: pulumi.Input[str]):
+        pulumi.set(self, "ip_address", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        the of the peer.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> pulumi.Input[str]:
+        """
+        the public key of the WireGuard client.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "public_key", value)
+
+
+@pulumi.input_type
 class GetArchiveFilterArgs:
     def __init__(__self__, *,
                  conditions: Optional[Sequence['GetArchiveFilterConditionArgs']] = None,
@@ -4012,6 +4975,114 @@ class GetCDROMFilterArgs:
 
 @pulumi.input_type
 class GetCDROMFilterConditionArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The name of the target field. This value is case-sensitive.
+        :param Sequence[str] values: The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the target field. This value is case-sensitive.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetCertificateAuthorityFilterArgs:
+    def __init__(__self__, *,
+                 conditions: Optional[Sequence['GetCertificateAuthorityFilterConditionArgs']] = None,
+                 id: Optional[str] = None,
+                 names: Optional[Sequence[str]] = None,
+                 tags: Optional[Sequence[str]] = None):
+        """
+        :param Sequence['GetCertificateAuthorityFilterConditionArgs'] conditions: One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+        :param str id: The resource id on SakuraCloud used for filtering.
+        :param Sequence[str] names: The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        :param Sequence[str] tags: The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if names is not None:
+            pulumi.set(__self__, "names", names)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[Sequence['GetCertificateAuthorityFilterConditionArgs']]:
+        """
+        One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+        """
+        return pulumi.get(self, "conditions")
+
+    @conditions.setter
+    def conditions(self, value: Optional[Sequence['GetCertificateAuthorityFilterConditionArgs']]):
+        pulumi.set(self, "conditions", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        The resource id on SakuraCloud used for filtering.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[str]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def names(self) -> Optional[Sequence[str]]:
+        """
+        The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "names")
+
+    @names.setter
+    def names(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "names", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[Sequence[str]]:
+        """
+        The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class GetCertificateAuthorityFilterConditionArgs:
     def __init__(__self__, *,
                  name: str,
                  values: Sequence[str]):
@@ -4579,6 +5650,114 @@ class GetESMEFilterConditionArgs:
     def values(self) -> Sequence[str]:
         """
         The values of the condition. If multiple values are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetEnhancedDBFilterArgs:
+    def __init__(__self__, *,
+                 conditions: Optional[Sequence['GetEnhancedDBFilterConditionArgs']] = None,
+                 id: Optional[str] = None,
+                 names: Optional[Sequence[str]] = None,
+                 tags: Optional[Sequence[str]] = None):
+        """
+        :param Sequence['GetEnhancedDBFilterConditionArgs'] conditions: One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+        :param str id: The resource id on SakuraCloud used for filtering.
+        :param Sequence[str] names: The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        :param Sequence[str] tags: The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if names is not None:
+            pulumi.set(__self__, "names", names)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[Sequence['GetEnhancedDBFilterConditionArgs']]:
+        """
+        One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+        """
+        return pulumi.get(self, "conditions")
+
+    @conditions.setter
+    def conditions(self, value: Optional[Sequence['GetEnhancedDBFilterConditionArgs']]):
+        pulumi.set(self, "conditions", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        """
+        The resource id on SakuraCloud used for filtering.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: Optional[str]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def names(self) -> Optional[Sequence[str]]:
+        """
+        The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "names")
+
+    @names.setter
+    def names(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "names", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[Sequence[str]]:
+        """
+        The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class GetEnhancedDBFilterConditionArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The name of the target field. This value is case-sensitive.
+        :param Sequence[str] values: The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the target field. This value is case-sensitive.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The values of the condition. If multiple values ​​are specified, they combined as AND condition.
         """
         return pulumi.get(self, "values")
 
