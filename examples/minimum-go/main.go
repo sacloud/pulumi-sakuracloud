@@ -8,9 +8,9 @@ import (
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		sw, err := sakuracloud.NewSwitch(ctx, "from-pulumi-with-go", &sakuracloud.SwitchArgs{
-			Name:        "from-pulumi-with-go",
-			Description: "this resource was created by pulumi",
-			Tags:        []string{"tag1", "tag2"},
+			Name:        pulumi.StringPtr("from-pulumi-with-go"),
+			Description: pulumi.StringPtr("this resource was created by pulumi"),
+			Tags:        pulumi.ToStringArray([]string{"tag1", "tag2"}),
 		})
 		if err != nil {
 			return err
