@@ -159,39 +159,39 @@ export interface GSLBState {
     /**
      * The description of the GSLB. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
      */
-    readonly fqdn?: pulumi.Input<string>;
+    fqdn?: pulumi.Input<string>;
     /**
      * A `healthCheck` block as defined below.
      */
-    readonly healthCheck?: pulumi.Input<inputs.GSLBHealthCheck>;
+    healthCheck?: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
      * The icon id to attach to the GSLB.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the GSLB. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
      * The IP address of the SorryServer. This will be used when all servers are down.
      */
-    readonly sorryServer?: pulumi.Input<string>;
+    sorryServer?: pulumi.Input<string>;
     /**
      * Any tags to assign to the GSLB.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The flag to enable weighted load-balancing.
      */
-    readonly weighted?: pulumi.Input<boolean>;
+    weighted?: pulumi.Input<boolean>;
 }
 
 /**
@@ -201,33 +201,33 @@ export interface GSLBArgs {
     /**
      * The description of the GSLB. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A `healthCheck` block as defined below.
      */
-    readonly healthCheck: pulumi.Input<inputs.GSLBHealthCheck>;
+    healthCheck: pulumi.Input<inputs.GSLBHealthCheck>;
     /**
      * The icon id to attach to the GSLB.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the GSLB. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.GSLBServer>[]>;
     /**
      * The IP address of the SorryServer. This will be used when all servers are down.
      */
-    readonly sorryServer?: pulumi.Input<string>;
+    sorryServer?: pulumi.Input<string>;
     /**
      * Any tags to assign to the GSLB.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The flag to enable weighted load-balancing.
      */
-    readonly weighted?: pulumi.Input<boolean>;
+    weighted?: pulumi.Input<boolean>;
 }

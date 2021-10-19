@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing sakuracloud_certificate_authority.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupCertificateAuthority(ctx, &sakuracloud.LookupCertificateAuthorityArgs{
-// 			Filter: sakuracloud.GetCertificateAuthorityFilter{
+// 		_, err := sakuracloud.LookupCertificateAuthority(ctx, &GetCertificateAuthorityArgs{
+// 			Filter: GetCertificateAuthorityFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -79,4 +82,111 @@ type LookupCertificateAuthorityResult struct {
 	SubjectString string `pulumi:"subjectString"`
 	// Any tags assigned to the CertificateAuthority.
 	Tags []string `pulumi:"tags"`
+}
+
+func LookupCertificateAuthorityOutput(ctx *pulumi.Context, args LookupCertificateAuthorityOutputArgs, opts ...pulumi.InvokeOption) LookupCertificateAuthorityResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupCertificateAuthorityResult, error) {
+			args := v.(LookupCertificateAuthorityArgs)
+			r, err := LookupCertificateAuthority(ctx, &args, opts...)
+			return *r, err
+		}).(LookupCertificateAuthorityResultOutput)
+}
+
+// A collection of arguments for invoking getCertificateAuthority.
+type LookupCertificateAuthorityOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetCertificateAuthorityFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupCertificateAuthorityOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupCertificateAuthorityArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getCertificateAuthority.
+type LookupCertificateAuthorityResultOutput struct{ *pulumi.OutputState }
+
+func (LookupCertificateAuthorityResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupCertificateAuthorityResult)(nil)).Elem()
+}
+
+func (o LookupCertificateAuthorityResultOutput) ToLookupCertificateAuthorityResultOutput() LookupCertificateAuthorityResultOutput {
+	return o
+}
+
+func (o LookupCertificateAuthorityResultOutput) ToLookupCertificateAuthorityResultOutputWithContext(ctx context.Context) LookupCertificateAuthorityResultOutput {
+	return o
+}
+
+// The body of the CA's certificate in PEM format.
+func (o LookupCertificateAuthorityResultOutput) Certificate() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.Certificate }).(pulumi.StringOutput)
+}
+
+// A list of `client` blocks as defined below.
+func (o LookupCertificateAuthorityResultOutput) Clients() GetCertificateAuthorityClientArrayOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) []GetCertificateAuthorityClient { return v.Clients }).(GetCertificateAuthorityClientArrayOutput)
+}
+
+// The URL of the CRL.
+func (o LookupCertificateAuthorityResultOutput) CrlUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.CrlUrl }).(pulumi.StringOutput)
+}
+
+// The description of the CertificateAuthority.
+func (o LookupCertificateAuthorityResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupCertificateAuthorityResultOutput) Filter() GetCertificateAuthorityFilterPtrOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) *GetCertificateAuthorityFilter { return v.Filter }).(GetCertificateAuthorityFilterPtrOutput)
+}
+
+// The icon id attached to the CertificateAuthority.
+func (o LookupCertificateAuthorityResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupCertificateAuthorityResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the CertificateAuthority.
+func (o LookupCertificateAuthorityResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period ends, in RFC3339 format.
+func (o LookupCertificateAuthorityResultOutput) NotAfter() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.NotAfter }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period begins, in RFC3339 format.
+func (o LookupCertificateAuthorityResultOutput) NotBefore() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.NotBefore }).(pulumi.StringOutput)
+}
+
+// The body of the CA's certificate in PEM format.
+func (o LookupCertificateAuthorityResultOutput) SerialNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.SerialNumber }).(pulumi.StringOutput)
+}
+
+// A list of `server` blocks as defined below.
+func (o LookupCertificateAuthorityResultOutput) Servers() GetCertificateAuthorityServerArrayOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) []GetCertificateAuthorityServer { return v.Servers }).(GetCertificateAuthorityServerArrayOutput)
+}
+
+// .
+func (o LookupCertificateAuthorityResultOutput) SubjectString() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) string { return v.SubjectString }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the CertificateAuthority.
+func (o LookupCertificateAuthorityResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupCertificateAuthorityResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupCertificateAuthorityResultOutput{})
 }

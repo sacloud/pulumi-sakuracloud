@@ -11,6 +11,36 @@ namespace Pulumi.Sakuracloud
 {
     /// <summary>
     /// Manages a SakuraCloud Icon.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System;
+    /// using System.IO;
+    /// using Pulumi;
+    /// using Sakuracloud = Pulumi.Sakuracloud;
+    /// 
+    /// class MyStack : Stack
+    /// {
+    /// 	private static string ReadFileBase64(string path) {
+    /// 		return Convert.ToBase64String(System.Text.UTF8.GetBytes(File.ReadAllText(path)))
+    /// 	}
+    /// 
+    ///     public MyStack()
+    ///     {
+    ///         var foobar = new Sakuracloud.Icon("foobar", new Sakuracloud.IconArgs
+    ///         {
+    ///             Tags = 
+    ///             {
+    ///                 "tag1",
+    ///                 "tag2",
+    ///             },
+    ///             Base64content = ReadFileBase64("example.icon"),
+    ///         });
+    ///     }
+    /// 
+    /// }
+    /// ```
     /// </summary>
     [SakuracloudResourceType("sakuracloud:index/icon:Icon")]
     public partial class Icon : Pulumi.CustomResource

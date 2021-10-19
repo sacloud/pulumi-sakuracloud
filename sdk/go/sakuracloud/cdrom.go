@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud CD-ROM.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -256,7 +256,7 @@ type CDROMArrayInput interface {
 type CDROMArray []CDROMInput
 
 func (CDROMArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*CDROM)(nil))
+	return reflect.TypeOf((*[]*CDROM)(nil)).Elem()
 }
 
 func (i CDROMArray) ToCDROMArrayOutput() CDROMArrayOutput {
@@ -281,7 +281,7 @@ type CDROMMapInput interface {
 type CDROMMap map[string]CDROMInput
 
 func (CDROMMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*CDROM)(nil))
+	return reflect.TypeOf((*map[string]*CDROM)(nil)).Elem()
 }
 
 func (i CDROMMap) ToCDROMMapOutput() CDROMMapOutput {
@@ -292,9 +292,7 @@ func (i CDROMMap) ToCDROMMapOutputWithContext(ctx context.Context) CDROMMapOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(CDROMMapOutput)
 }
 
-type CDROMOutput struct {
-	*pulumi.OutputState
-}
+type CDROMOutput struct{ *pulumi.OutputState }
 
 func (CDROMOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*CDROM)(nil))
@@ -313,14 +311,12 @@ func (o CDROMOutput) ToCDROMPtrOutput() CDROMPtrOutput {
 }
 
 func (o CDROMOutput) ToCDROMPtrOutputWithContext(ctx context.Context) CDROMPtrOutput {
-	return o.ApplyT(func(v CDROM) *CDROM {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CDROM) *CDROM {
 		return &v
 	}).(CDROMPtrOutput)
 }
 
-type CDROMPtrOutput struct {
-	*pulumi.OutputState
-}
+type CDROMPtrOutput struct{ *pulumi.OutputState }
 
 func (CDROMPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**CDROM)(nil))
@@ -332,6 +328,16 @@ func (o CDROMPtrOutput) ToCDROMPtrOutput() CDROMPtrOutput {
 
 func (o CDROMPtrOutput) ToCDROMPtrOutputWithContext(ctx context.Context) CDROMPtrOutput {
 	return o
+}
+
+func (o CDROMPtrOutput) Elem() CDROMOutput {
+	return o.ApplyT(func(v *CDROM) CDROM {
+		if v != nil {
+			return *v
+		}
+		var ret CDROM
+		return ret
+	}).(CDROMOutput)
 }
 
 type CDROMArrayOutput struct{ *pulumi.OutputState }
@@ -375,6 +381,10 @@ func (o CDROMMapOutput) MapIndex(k pulumi.StringInput) CDROMOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CDROMInput)(nil)).Elem(), &CDROM{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CDROMPtrInput)(nil)).Elem(), &CDROM{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CDROMArrayInput)(nil)).Elem(), CDROMArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CDROMMapInput)(nil)).Elem(), CDROMMap{})
 	pulumi.RegisterOutputType(CDROMOutput{})
 	pulumi.RegisterOutputType(CDROMPtrOutput{})
 	pulumi.RegisterOutputType(CDROMArrayOutput{})

@@ -276,87 +276,87 @@ export interface ProxyLBState {
     /**
      * One or more `bindPort` blocks as defined below.
      */
-    readonly bindPorts?: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
+    bindPorts?: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
     /**
      * An `certificate` block as defined below.
      */
-    readonly certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
+    certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
     /**
      * The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
      */
-    readonly fqdn?: pulumi.Input<string>;
+    fqdn?: pulumi.Input<string>;
     /**
      * The flag to enable gzip compression.
      */
-    readonly gzip?: pulumi.Input<boolean>;
+    gzip?: pulumi.Input<boolean>;
     /**
      * A `healthCheck` block as defined below.
      */
-    readonly healthCheck?: pulumi.Input<inputs.ProxyLBHealthCheck>;
+    healthCheck?: pulumi.Input<inputs.ProxyLBHealthCheck>;
     /**
      * The icon id to attach to the ProxyLB.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the ProxyLB. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
      */
-    readonly plan?: pulumi.Input<number>;
+    plan?: pulumi.Input<number>;
     /**
      * A list of CIDR block used by the ProxyLB to access the server.
      */
-    readonly proxyNetworks?: pulumi.Input<pulumi.Input<string>[]>;
+    proxyNetworks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The flag to enable proxy protocol v2.
      */
-    readonly proxyProtocol?: pulumi.Input<boolean>;
+    proxyProtocol?: pulumi.Input<boolean>;
     /**
      * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
      */
-    readonly region?: pulumi.Input<string>;
+    region?: pulumi.Input<string>;
     /**
      * One or more `rule` blocks as defined below.
      */
-    readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
     /**
      * A `sorryServer` block as defined below.
      */
-    readonly sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
+    sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
     /**
      * The flag to enable sticky session.
      */
-    readonly stickySession?: pulumi.Input<boolean>;
+    stickySession?: pulumi.Input<boolean>;
     /**
      * A `syslog` block as defined below.
      */
-    readonly syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
+    syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
     /**
      * Any tags to assign to the ProxyLB.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The timeout duration in seconds. Default:`10`.
      */
-    readonly timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number>;
     /**
      * The virtual IP address assigned to the ProxyLB.
      */
-    readonly vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string>;
     /**
      * The flag to enable VIP fail-over. Changing this forces a new resource to be created.
      */
-    readonly vipFailover?: pulumi.Input<boolean>;
+    vipFailover?: pulumi.Input<boolean>;
 }
 
 /**
@@ -366,73 +366,73 @@ export interface ProxyLBArgs {
     /**
      * One or more `bindPort` blocks as defined below.
      */
-    readonly bindPorts: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
+    bindPorts: pulumi.Input<pulumi.Input<inputs.ProxyLBBindPort>[]>;
     /**
      * An `certificate` block as defined below.
      */
-    readonly certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
+    certificate?: pulumi.Input<inputs.ProxyLBCertificate>;
     /**
      * The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The flag to enable gzip compression.
      */
-    readonly gzip?: pulumi.Input<boolean>;
+    gzip?: pulumi.Input<boolean>;
     /**
      * A `healthCheck` block as defined below.
      */
-    readonly healthCheck: pulumi.Input<inputs.ProxyLBHealthCheck>;
+    healthCheck: pulumi.Input<inputs.ProxyLBHealthCheck>;
     /**
      * The icon id to attach to the ProxyLB.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the ProxyLB. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
      */
-    readonly plan?: pulumi.Input<number>;
+    plan?: pulumi.Input<number>;
     /**
      * The flag to enable proxy protocol v2.
      */
-    readonly proxyProtocol?: pulumi.Input<boolean>;
+    proxyProtocol?: pulumi.Input<boolean>;
     /**
      * The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
      */
-    readonly region?: pulumi.Input<string>;
+    region?: pulumi.Input<string>;
     /**
      * One or more `rule` blocks as defined below.
      */
-    readonly rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.ProxyLBRule>[]>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.ProxyLBServer>[]>;
     /**
      * A `sorryServer` block as defined below.
      */
-    readonly sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
+    sorryServer?: pulumi.Input<inputs.ProxyLBSorryServer>;
     /**
      * The flag to enable sticky session.
      */
-    readonly stickySession?: pulumi.Input<boolean>;
+    stickySession?: pulumi.Input<boolean>;
     /**
      * A `syslog` block as defined below.
      */
-    readonly syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
+    syslog?: pulumi.Input<inputs.ProxyLBSyslog>;
     /**
      * Any tags to assign to the ProxyLB.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The timeout duration in seconds. Default:`10`.
      */
-    readonly timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number>;
     /**
      * The flag to enable VIP fail-over. Changing this forces a new resource to be created.
      */
-    readonly vipFailover?: pulumi.Input<boolean>;
+    vipFailover?: pulumi.Input<boolean>;
 }

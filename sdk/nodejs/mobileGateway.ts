@@ -206,63 +206,63 @@ export interface MobileGatewayState {
     /**
      * The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A list of IP address used by each connected devices.
      */
-    readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The icon id to attach to the MobileGateway.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The flag to allow communication between each connected devices.
      */
-    readonly interDeviceCommunication?: pulumi.Input<boolean>;
+    interDeviceCommunication?: pulumi.Input<boolean>;
     /**
      * The flag to enable connect to the Internet.
      */
-    readonly internetConnection?: pulumi.Input<boolean>;
+    internetConnection?: pulumi.Input<boolean>;
     /**
      * The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `privateNetworkInterface` block as defined below.
      */
-    readonly privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
+    privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
     /**
      * The public IP address assigned to the MobileGateway.
      */
-    readonly publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string>;
     /**
      * The bit length of the subnet assigned to the MobileGateway.
      */
-    readonly publicNetmask?: pulumi.Input<number>;
+    publicNetmask?: pulumi.Input<number>;
     /**
      * One or more `simRoute` blocks as defined below.
      */
-    readonly simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
+    simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
     /**
      * One or more `sim` blocks as defined below.
      */
-    readonly sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
+    sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
     /**
      * One or more `staticRoute` blocks as defined below.
      */
-    readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
+    staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
     /**
      * Any tags to assign to the MobileGateway.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A `trafficControl` block as defined below.
      */
-    readonly trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
+    trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
     /**
      * The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -272,53 +272,53 @@ export interface MobileGatewayArgs {
     /**
      * The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A list of IP address used by each connected devices.
      */
-    readonly dnsServers: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The icon id to attach to the MobileGateway.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The flag to allow communication between each connected devices.
      */
-    readonly interDeviceCommunication?: pulumi.Input<boolean>;
+    interDeviceCommunication?: pulumi.Input<boolean>;
     /**
      * The flag to enable connect to the Internet.
      */
-    readonly internetConnection?: pulumi.Input<boolean>;
+    internetConnection?: pulumi.Input<boolean>;
     /**
      * The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `privateNetworkInterface` block as defined below.
      */
-    readonly privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
+    privateNetworkInterface?: pulumi.Input<inputs.MobileGatewayPrivateNetworkInterface>;
     /**
      * One or more `simRoute` blocks as defined below.
      */
-    readonly simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
+    simRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySimRoute>[]>;
     /**
      * One or more `sim` blocks as defined below.
      */
-    readonly sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
+    sims?: pulumi.Input<pulumi.Input<inputs.MobileGatewaySim>[]>;
     /**
      * One or more `staticRoute` blocks as defined below.
      */
-    readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
+    staticRoutes?: pulumi.Input<pulumi.Input<inputs.MobileGatewayStaticRoute>[]>;
     /**
      * Any tags to assign to the MobileGateway.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A `trafficControl` block as defined below.
      */
-    readonly trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
+    trafficControl?: pulumi.Input<inputs.MobileGatewayTrafficControl>;
     /**
      * The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

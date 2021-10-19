@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Disk.
@@ -19,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		opt0 := "ubuntu2004"
-// 		ubuntu, err := sakuracloud.LookupArchive(ctx, &sakuracloud.LookupArchiveArgs{
+// 		ubuntu, err := sakuracloud.LookupArchive(ctx, &GetArchiveArgs{
 // 			OsType: &opt0,
 // 		}, nil)
 // 		if err != nil {
@@ -281,7 +281,7 @@ type DiskArrayInput interface {
 type DiskArray []DiskInput
 
 func (DiskArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Disk)(nil))
+	return reflect.TypeOf((*[]*Disk)(nil)).Elem()
 }
 
 func (i DiskArray) ToDiskArrayOutput() DiskArrayOutput {
@@ -306,7 +306,7 @@ type DiskMapInput interface {
 type DiskMap map[string]DiskInput
 
 func (DiskMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Disk)(nil))
+	return reflect.TypeOf((*map[string]*Disk)(nil)).Elem()
 }
 
 func (i DiskMap) ToDiskMapOutput() DiskMapOutput {
@@ -317,9 +317,7 @@ func (i DiskMap) ToDiskMapOutputWithContext(ctx context.Context) DiskMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(DiskMapOutput)
 }
 
-type DiskOutput struct {
-	*pulumi.OutputState
-}
+type DiskOutput struct{ *pulumi.OutputState }
 
 func (DiskOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Disk)(nil))
@@ -338,14 +336,12 @@ func (o DiskOutput) ToDiskPtrOutput() DiskPtrOutput {
 }
 
 func (o DiskOutput) ToDiskPtrOutputWithContext(ctx context.Context) DiskPtrOutput {
-	return o.ApplyT(func(v Disk) *Disk {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Disk) *Disk {
 		return &v
 	}).(DiskPtrOutput)
 }
 
-type DiskPtrOutput struct {
-	*pulumi.OutputState
-}
+type DiskPtrOutput struct{ *pulumi.OutputState }
 
 func (DiskPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Disk)(nil))
@@ -357,6 +353,16 @@ func (o DiskPtrOutput) ToDiskPtrOutput() DiskPtrOutput {
 
 func (o DiskPtrOutput) ToDiskPtrOutputWithContext(ctx context.Context) DiskPtrOutput {
 	return o
+}
+
+func (o DiskPtrOutput) Elem() DiskOutput {
+	return o.ApplyT(func(v *Disk) Disk {
+		if v != nil {
+			return *v
+		}
+		var ret Disk
+		return ret
+	}).(DiskOutput)
 }
 
 type DiskArrayOutput struct{ *pulumi.OutputState }
@@ -400,6 +406,10 @@ func (o DiskMapOutput) MapIndex(k pulumi.StringInput) DiskOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskInput)(nil)).Elem(), &Disk{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskPtrInput)(nil)).Elem(), &Disk{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskArrayInput)(nil)).Elem(), DiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DiskMapInput)(nil)).Elem(), DiskMap{})
 	pulumi.RegisterOutputType(DiskOutput{})
 	pulumi.RegisterOutputType(DiskPtrOutput{})
 	pulumi.RegisterOutputType(DiskArrayOutput{})

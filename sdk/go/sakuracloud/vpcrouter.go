@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud VPC Router.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -51,7 +51,7 @@ import (
 // 			},
 // 			Plan:               pulumi.String("premium"),
 // 			InternetConnection: pulumi.Bool(true),
-// 			PublicNetworkInterface: &sakuracloud.VPCRouterPublicNetworkInterfaceArgs{
+// 			PublicNetworkInterface: &VPCRouterPublicNetworkInterfaceArgs{
 // 				SwitchId: foobarInternet.SwitchId,
 // 				Vip: foobarInternet.IpAddresses.ApplyT(func(ipAddresses []string) (string, error) {
 // 					return ipAddresses[0], nil
@@ -71,8 +71,8 @@ import (
 // 				},
 // 				Vrid: pulumi.Int(1),
 // 			},
-// 			PrivateNetworkInterfaces: sakuracloud.VPCRouterPrivateNetworkInterfaceArray{
-// 				&sakuracloud.VPCRouterPrivateNetworkInterfaceArgs{
+// 			PrivateNetworkInterfaces: VPCRouterPrivateNetworkInterfaceArray{
+// 				&VPCRouterPrivateNetworkInterfaceArgs{
 // 					Index:    pulumi.Int(1),
 // 					SwitchId: foobarSwitch.ID(),
 // 					Vip:      pulumi.String("192.168.11.1"),
@@ -83,8 +83,8 @@ import (
 // 					Netmask: pulumi.Int(24),
 // 				},
 // 			},
-// 			DhcpServers: sakuracloud.VPCRouterDhcpServerArray{
-// 				&sakuracloud.VPCRouterDhcpServerArgs{
+// 			DhcpServers: VPCRouterDhcpServerArray{
+// 				&VPCRouterDhcpServerArgs{
 // 					InterfaceIndex: pulumi.Int(1),
 // 					RangeStart:     pulumi.String("192.168.11.11"),
 // 					RangeStop:      pulumi.String("192.168.11.20"),
@@ -94,18 +94,18 @@ import (
 // 					},
 // 				},
 // 			},
-// 			DhcpStaticMappings: sakuracloud.VPCRouterDhcpStaticMappingArray{
-// 				&sakuracloud.VPCRouterDhcpStaticMappingArgs{
+// 			DhcpStaticMappings: VPCRouterDhcpStaticMappingArray{
+// 				&VPCRouterDhcpStaticMappingArgs{
 // 					IpAddress:  pulumi.String("192.168.11.10"),
 // 					MacAddress: pulumi.String("aa:bb:cc:aa:bb:cc"),
 // 				},
 // 			},
-// 			Firewalls: sakuracloud.VPCRouterFirewallArray{
-// 				&sakuracloud.VPCRouterFirewallArgs{
+// 			Firewalls: VPCRouterFirewallArray{
+// 				&VPCRouterFirewallArgs{
 // 					InterfaceIndex: pulumi.Int(1),
 // 					Direction:      pulumi.String("send"),
-// 					Expressions: sakuracloud.VPCRouterFirewallExpressionArray{
-// 						&sakuracloud.VPCRouterFirewallExpressionArgs{
+// 					Expressions: VPCRouterFirewallExpressionArray{
+// 						&VPCRouterFirewallExpressionArgs{
 // 							Protocol:           pulumi.String("tcp"),
 // 							SourceNetwork:      pulumi.String(""),
 // 							SourcePort:         pulumi.String("80"),
@@ -115,7 +115,7 @@ import (
 // 							Logging:            pulumi.Bool(true),
 // 							Description:        pulumi.String("desc"),
 // 						},
-// 						&sakuracloud.VPCRouterFirewallExpressionArgs{
+// 						&VPCRouterFirewallExpressionArgs{
 // 							Protocol:           pulumi.String("ip"),
 // 							SourceNetwork:      pulumi.String(""),
 // 							SourcePort:         pulumi.String(""),
@@ -128,13 +128,13 @@ import (
 // 					},
 // 				},
 // 			},
-// 			L2tp: &sakuracloud.VPCRouterL2tpArgs{
+// 			L2tp: &VPCRouterL2tpArgs{
 // 				PreSharedSecret: pulumi.String("example"),
 // 				RangeStart:      pulumi.String("192.168.11.21"),
 // 				RangeStop:       pulumi.String("192.168.11.30"),
 // 			},
-// 			PortForwardings: sakuracloud.VPCRouterPortForwardingArray{
-// 				&sakuracloud.VPCRouterPortForwardingArgs{
+// 			PortForwardings: VPCRouterPortForwardingArray{
+// 				&VPCRouterPortForwardingArgs{
 // 					Protocol:    pulumi.String("udp"),
 // 					PublicPort:  pulumi.Int(10022),
 // 					PrivateIp:   pulumi.String("192.168.11.11"),
@@ -142,22 +142,22 @@ import (
 // 					Description: pulumi.String("desc"),
 // 				},
 // 			},
-// 			Pptp: &sakuracloud.VPCRouterPptpArgs{
+// 			Pptp: &VPCRouterPptpArgs{
 // 				RangeStart: pulumi.String("192.168.11.31"),
 // 				RangeStop:  pulumi.String("192.168.11.40"),
 // 			},
-// 			WireGuard: &sakuracloud.VPCRouterWireGuardArgs{
+// 			WireGuard: &VPCRouterWireGuardArgs{
 // 				IpAddress: pulumi.String("192.168.31.1/24"),
-// 				Peers: sakuracloud.VPCRouterWireGuardPeerArray{
-// 					&sakuracloud.VPCRouterWireGuardPeerArgs{
+// 				Peers: VPCRouterWireGuardPeerArray{
+// 					&VPCRouterWireGuardPeerArgs{
 // 						Name:      pulumi.String("example"),
 // 						IpAddress: pulumi.String("192.168.31.11"),
 // 						PublicKey: pulumi.String("<your-public-key>"),
 // 					},
 // 				},
 // 			},
-// 			SiteToSiteVpns: sakuracloud.VPCRouterSiteToSiteVpnArray{
-// 				&sakuracloud.VPCRouterSiteToSiteVpnArgs{
+// 			SiteToSiteVpns: VPCRouterSiteToSiteVpnArray{
+// 				&VPCRouterSiteToSiteVpnArgs{
 // 					Peer:            pulumi.String("10.0.0.1"),
 // 					RemoteId:        pulumi.String("10.0.0.1"),
 // 					PreSharedSecret: pulumi.String("example"),
@@ -169,8 +169,8 @@ import (
 // 					},
 // 				},
 // 			},
-// 			StaticNats: sakuracloud.VPCRouterStaticNatArray{
-// 				&sakuracloud.VPCRouterStaticNatArgs{
+// 			StaticNats: VPCRouterStaticNatArray{
+// 				&VPCRouterStaticNatArgs{
 // 					PublicIp: foobarInternet.IpAddresses.ApplyT(func(ipAddresses []string) (string, error) {
 // 						return ipAddresses[3], nil
 // 					}).(pulumi.StringOutput),
@@ -178,14 +178,14 @@ import (
 // 					Description: pulumi.String("desc"),
 // 				},
 // 			},
-// 			StaticRoutes: sakuracloud.VPCRouterStaticRouteArray{
-// 				&sakuracloud.VPCRouterStaticRouteArgs{
+// 			StaticRoutes: VPCRouterStaticRouteArray{
+// 				&VPCRouterStaticRouteArgs{
 // 					Prefix:  pulumi.String("172.16.0.0/16"),
 // 					NextHop: pulumi.String("192.168.11.99"),
 // 				},
 // 			},
-// 			Users: sakuracloud.VPCRouterUserArray{
-// 				&sakuracloud.VPCRouterUserArgs{
+// 			Users: VPCRouterUserArray{
+// 				&VPCRouterUserArgs{
 // 					Name:     pulumi.String("username"),
 // 					Password: pulumi.String("password"),
 // 				},
@@ -546,7 +546,7 @@ type VPCRouterArrayInput interface {
 type VPCRouterArray []VPCRouterInput
 
 func (VPCRouterArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*VPCRouter)(nil))
+	return reflect.TypeOf((*[]*VPCRouter)(nil)).Elem()
 }
 
 func (i VPCRouterArray) ToVPCRouterArrayOutput() VPCRouterArrayOutput {
@@ -571,7 +571,7 @@ type VPCRouterMapInput interface {
 type VPCRouterMap map[string]VPCRouterInput
 
 func (VPCRouterMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*VPCRouter)(nil))
+	return reflect.TypeOf((*map[string]*VPCRouter)(nil)).Elem()
 }
 
 func (i VPCRouterMap) ToVPCRouterMapOutput() VPCRouterMapOutput {
@@ -582,9 +582,7 @@ func (i VPCRouterMap) ToVPCRouterMapOutputWithContext(ctx context.Context) VPCRo
 	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterMapOutput)
 }
 
-type VPCRouterOutput struct {
-	*pulumi.OutputState
-}
+type VPCRouterOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*VPCRouter)(nil))
@@ -603,14 +601,12 @@ func (o VPCRouterOutput) ToVPCRouterPtrOutput() VPCRouterPtrOutput {
 }
 
 func (o VPCRouterOutput) ToVPCRouterPtrOutputWithContext(ctx context.Context) VPCRouterPtrOutput {
-	return o.ApplyT(func(v VPCRouter) *VPCRouter {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VPCRouter) *VPCRouter {
 		return &v
 	}).(VPCRouterPtrOutput)
 }
 
-type VPCRouterPtrOutput struct {
-	*pulumi.OutputState
-}
+type VPCRouterPtrOutput struct{ *pulumi.OutputState }
 
 func (VPCRouterPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**VPCRouter)(nil))
@@ -622,6 +618,16 @@ func (o VPCRouterPtrOutput) ToVPCRouterPtrOutput() VPCRouterPtrOutput {
 
 func (o VPCRouterPtrOutput) ToVPCRouterPtrOutputWithContext(ctx context.Context) VPCRouterPtrOutput {
 	return o
+}
+
+func (o VPCRouterPtrOutput) Elem() VPCRouterOutput {
+	return o.ApplyT(func(v *VPCRouter) VPCRouter {
+		if v != nil {
+			return *v
+		}
+		var ret VPCRouter
+		return ret
+	}).(VPCRouterOutput)
 }
 
 type VPCRouterArrayOutput struct{ *pulumi.OutputState }
@@ -665,6 +671,10 @@ func (o VPCRouterMapOutput) MapIndex(k pulumi.StringInput) VPCRouterOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterInput)(nil)).Elem(), &VPCRouter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPtrInput)(nil)).Elem(), &VPCRouter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterArrayInput)(nil)).Elem(), VPCRouterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterMapInput)(nil)).Elem(), VPCRouterMap{})
 	pulumi.RegisterOutputType(VPCRouterOutput{})
 	pulumi.RegisterOutputType(VPCRouterPtrOutput{})
 	pulumi.RegisterOutputType(VPCRouterArrayOutput{})

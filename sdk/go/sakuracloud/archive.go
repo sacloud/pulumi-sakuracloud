@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Archive.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -299,7 +299,7 @@ type ArchiveArrayInput interface {
 type ArchiveArray []ArchiveInput
 
 func (ArchiveArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Archive)(nil))
+	return reflect.TypeOf((*[]*Archive)(nil)).Elem()
 }
 
 func (i ArchiveArray) ToArchiveArrayOutput() ArchiveArrayOutput {
@@ -324,7 +324,7 @@ type ArchiveMapInput interface {
 type ArchiveMap map[string]ArchiveInput
 
 func (ArchiveMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Archive)(nil))
+	return reflect.TypeOf((*map[string]*Archive)(nil)).Elem()
 }
 
 func (i ArchiveMap) ToArchiveMapOutput() ArchiveMapOutput {
@@ -335,9 +335,7 @@ func (i ArchiveMap) ToArchiveMapOutputWithContext(ctx context.Context) ArchiveMa
 	return pulumi.ToOutputWithContext(ctx, i).(ArchiveMapOutput)
 }
 
-type ArchiveOutput struct {
-	*pulumi.OutputState
-}
+type ArchiveOutput struct{ *pulumi.OutputState }
 
 func (ArchiveOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Archive)(nil))
@@ -356,14 +354,12 @@ func (o ArchiveOutput) ToArchivePtrOutput() ArchivePtrOutput {
 }
 
 func (o ArchiveOutput) ToArchivePtrOutputWithContext(ctx context.Context) ArchivePtrOutput {
-	return o.ApplyT(func(v Archive) *Archive {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Archive) *Archive {
 		return &v
 	}).(ArchivePtrOutput)
 }
 
-type ArchivePtrOutput struct {
-	*pulumi.OutputState
-}
+type ArchivePtrOutput struct{ *pulumi.OutputState }
 
 func (ArchivePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Archive)(nil))
@@ -375,6 +371,16 @@ func (o ArchivePtrOutput) ToArchivePtrOutput() ArchivePtrOutput {
 
 func (o ArchivePtrOutput) ToArchivePtrOutputWithContext(ctx context.Context) ArchivePtrOutput {
 	return o
+}
+
+func (o ArchivePtrOutput) Elem() ArchiveOutput {
+	return o.ApplyT(func(v *Archive) Archive {
+		if v != nil {
+			return *v
+		}
+		var ret Archive
+		return ret
+	}).(ArchiveOutput)
 }
 
 type ArchiveArrayOutput struct{ *pulumi.OutputState }
@@ -418,6 +424,10 @@ func (o ArchiveMapOutput) MapIndex(k pulumi.StringInput) ArchiveOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveInput)(nil)).Elem(), &Archive{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchivePtrInput)(nil)).Elem(), &Archive{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveArrayInput)(nil)).Elem(), ArchiveArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveMapInput)(nil)).Elem(), ArchiveMap{})
 	pulumi.RegisterOutputType(ArchiveOutput{})
 	pulumi.RegisterOutputType(ArchivePtrOutput{})
 	pulumi.RegisterOutputType(ArchiveArrayOutput{})

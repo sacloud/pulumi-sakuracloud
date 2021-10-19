@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetVPCRouterResult',
     'AwaitableGetVPCRouterResult',
     'get_vpc_router',
+    'get_vpc_router_output',
 ]
 
 @pulumi.output_type
@@ -395,3 +396,28 @@ def get_vpc_router(filter: Optional[pulumi.InputType['GetVPCRouterFilterArgs']] 
         version=__ret__.version,
         wire_guards=__ret__.wire_guards,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_vpc_router)
+def get_vpc_router_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetVPCRouterFilterArgs']]]] = None,
+                          zone: Optional[pulumi.Input[Optional[str]]] = None,
+                          opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetVPCRouterResult]:
+    """
+    Get information about an existing VPC Router.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_vpc_router(filter=sakuracloud.GetVPCRouterFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetVPCRouterFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // The provider type for the sakuracloud package. By default, resources use package-wide configuration
@@ -16,6 +16,37 @@ import (
 // [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
 type Provider struct {
 	pulumi.ProviderResourceState
+
+	// The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+	// `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+	AcceptLanguage pulumi.StringPtrOutput `pulumi:"acceptLanguage"`
+	// The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+	// via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+	ApiRootUrl pulumi.StringPtrOutput `pulumi:"apiRootUrl"`
+	// The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+	// `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+	DefaultZone pulumi.StringPtrOutput `pulumi:"defaultZone"`
+	// The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+	// from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+	FakeMode pulumi.StringPtrOutput `pulumi:"fakeMode"`
+	// The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+	// provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+	// `profile` is specified
+	FakeStorePath pulumi.StringPtrOutput `pulumi:"fakeStorePath"`
+	// The profile name of your SakuraCloud account. Default:`default`
+	Profile pulumi.StringPtrOutput `pulumi:"profile"`
+	// The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+	// `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+	Secret pulumi.StringPtrOutput `pulumi:"secret"`
+	// The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+	// `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+	Token pulumi.StringPtrOutput `pulumi:"token"`
+	// The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+	// shared credentials file if `profile` is specified
+	Trace pulumi.StringPtrOutput `pulumi:"trace"`
+	// The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+	// environment variables, or via a shared credentials file if `profile` is specified
+	Zone pulumi.StringPtrOutput `pulumi:"zone"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -206,9 +237,7 @@ func (i *providerPtrType) ToProviderPtrOutputWithContext(ctx context.Context) Pr
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderPtrOutput)
 }
 
-type ProviderOutput struct {
-	*pulumi.OutputState
-}
+type ProviderOutput struct{ *pulumi.OutputState }
 
 func (ProviderOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Provider)(nil))
@@ -227,14 +256,12 @@ func (o ProviderOutput) ToProviderPtrOutput() ProviderPtrOutput {
 }
 
 func (o ProviderOutput) ToProviderPtrOutputWithContext(ctx context.Context) ProviderPtrOutput {
-	return o.ApplyT(func(v Provider) *Provider {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Provider) *Provider {
 		return &v
 	}).(ProviderPtrOutput)
 }
 
-type ProviderPtrOutput struct {
-	*pulumi.OutputState
-}
+type ProviderPtrOutput struct{ *pulumi.OutputState }
 
 func (ProviderPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Provider)(nil))
@@ -248,7 +275,19 @@ func (o ProviderPtrOutput) ToProviderPtrOutputWithContext(ctx context.Context) P
 	return o
 }
 
+func (o ProviderPtrOutput) Elem() ProviderOutput {
+	return o.ApplyT(func(v *Provider) Provider {
+		if v != nil {
+			return *v
+		}
+		var ret Provider
+		return ret
+	}).(ProviderOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderInput)(nil)).Elem(), &Provider{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderPtrInput)(nil)).Elem(), &Provider{})
 	pulumi.RegisterOutputType(ProviderOutput{})
 	pulumi.RegisterOutputType(ProviderPtrOutput{})
 }

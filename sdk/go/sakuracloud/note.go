@@ -8,10 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Note.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"io/ioutil"
+//
+// 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func readFileOrPanic(path string) pulumi.StringPtrInput {
+// 	data, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+// 	return pulumi.String(string(data))
+// }
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := sakuracloud.NewNote(ctx, "foobar", &sakuracloud.NoteArgs{
+// 			Content: readFileOrPanic("startup-script.sh"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Note struct {
 	pulumi.CustomResourceState
 
@@ -187,7 +220,7 @@ type NoteArrayInput interface {
 type NoteArray []NoteInput
 
 func (NoteArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Note)(nil))
+	return reflect.TypeOf((*[]*Note)(nil)).Elem()
 }
 
 func (i NoteArray) ToNoteArrayOutput() NoteArrayOutput {
@@ -212,7 +245,7 @@ type NoteMapInput interface {
 type NoteMap map[string]NoteInput
 
 func (NoteMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Note)(nil))
+	return reflect.TypeOf((*map[string]*Note)(nil)).Elem()
 }
 
 func (i NoteMap) ToNoteMapOutput() NoteMapOutput {
@@ -223,9 +256,7 @@ func (i NoteMap) ToNoteMapOutputWithContext(ctx context.Context) NoteMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(NoteMapOutput)
 }
 
-type NoteOutput struct {
-	*pulumi.OutputState
-}
+type NoteOutput struct{ *pulumi.OutputState }
 
 func (NoteOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Note)(nil))
@@ -244,14 +275,12 @@ func (o NoteOutput) ToNotePtrOutput() NotePtrOutput {
 }
 
 func (o NoteOutput) ToNotePtrOutputWithContext(ctx context.Context) NotePtrOutput {
-	return o.ApplyT(func(v Note) *Note {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Note) *Note {
 		return &v
 	}).(NotePtrOutput)
 }
 
-type NotePtrOutput struct {
-	*pulumi.OutputState
-}
+type NotePtrOutput struct{ *pulumi.OutputState }
 
 func (NotePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Note)(nil))
@@ -263,6 +292,16 @@ func (o NotePtrOutput) ToNotePtrOutput() NotePtrOutput {
 
 func (o NotePtrOutput) ToNotePtrOutputWithContext(ctx context.Context) NotePtrOutput {
 	return o
+}
+
+func (o NotePtrOutput) Elem() NoteOutput {
+	return o.ApplyT(func(v *Note) Note {
+		if v != nil {
+			return *v
+		}
+		var ret Note
+		return ret
+	}).(NoteOutput)
 }
 
 type NoteArrayOutput struct{ *pulumi.OutputState }
@@ -306,6 +345,10 @@ func (o NoteMapOutput) MapIndex(k pulumi.StringInput) NoteOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*NoteInput)(nil)).Elem(), &Note{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NotePtrInput)(nil)).Elem(), &Note{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoteArrayInput)(nil)).Elem(), NoteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoteMapInput)(nil)).Elem(), NoteMap{})
 	pulumi.RegisterOutputType(NoteOutput{})
 	pulumi.RegisterOutputType(NotePtrOutput{})
 	pulumi.RegisterOutputType(NoteArrayOutput{})

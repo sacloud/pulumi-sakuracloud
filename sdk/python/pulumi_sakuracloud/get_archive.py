@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetArchiveResult',
     'AwaitableGetArchiveResult',
     'get_archive',
+    'get_archive_output',
 ]
 
 @pulumi.output_type
@@ -187,3 +188,43 @@ def get_archive(filter: Optional[pulumi.InputType['GetArchiveFilterArgs']] = Non
         size=__ret__.size,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_archive)
+def get_archive_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetArchiveFilterArgs']]]] = None,
+                       os_type: Optional[pulumi.Input[Optional[str]]] = None,
+                       zone: Optional[pulumi.Input[Optional[str]]] = None,
+                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetArchiveResult]:
+    """
+    Get information about an existing Archive.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_archive(os_type="centos8")
+    ```
+
+
+    :param pulumi.InputType['GetArchiveFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str os_type: The criteria used to filter SakuraCloud archives. This must be one of following:  
+           - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`]
+           - **Alt RHEL/CentOS**: [`almalinux`/`rockylinux`/`miracle`/`miraclelinux`]
+           - **Ubuntu**: [`ubuntu`/`ubuntu2004`/`ubuntu1804`]
+           - **Debian**: [`debian`/`debian10`/`debian11`]
+           - **CoreOS/ContainerLinux**: `coreos`
+           - **RancherOS**: `rancheros`
+           - **k3OS**: `k3os`
+           - **FreeBSD**: `freebsd`
+           - **Kusanagi**: `kusanagi`
+           - **Windows2016**: [`windows2016`/`windows2016-rds`/`windows2016-rds-office`]
+           - **Windows2016+SQLServer**:  [`windows2016-sql-web`/`windows2016-sql-standard`/`windows2016-sql-standard-all`]
+           - **Windows2016+SQLServer2017**: [`windows2016-sql2017-standard`/`windows2016-sql2017-enterprise`/`windows2016-sql2017-standard-all`]
+           - **Windows2019**: [`windows2019`/`windows2019-rds`/`windows2019-rds-office2016`/`windows2019-rds-office2019`]
+           - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
+           - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
+    :param str zone: The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Enhanced Database.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupEnhancedDB(ctx, &sakuracloud.LookupEnhancedDBArgs{
-// 			Filter: sakuracloud.GetEnhancedDBFilter{
+// 		_, err := sakuracloud.LookupEnhancedDB(ctx, &GetEnhancedDBArgs{
+// 			Filter: GetEnhancedDBFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -73,4 +76,96 @@ type LookupEnhancedDBResult struct {
 	Region string `pulumi:"region"`
 	// Any tags assigned to the EnhancedDB.
 	Tags []string `pulumi:"tags"`
+}
+
+func LookupEnhancedDBOutput(ctx *pulumi.Context, args LookupEnhancedDBOutputArgs, opts ...pulumi.InvokeOption) LookupEnhancedDBResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupEnhancedDBResult, error) {
+			args := v.(LookupEnhancedDBArgs)
+			r, err := LookupEnhancedDB(ctx, &args, opts...)
+			return *r, err
+		}).(LookupEnhancedDBResultOutput)
+}
+
+// A collection of arguments for invoking getEnhancedDB.
+type LookupEnhancedDBOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetEnhancedDBFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupEnhancedDBOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupEnhancedDBArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getEnhancedDB.
+type LookupEnhancedDBResultOutput struct{ *pulumi.OutputState }
+
+func (LookupEnhancedDBResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupEnhancedDBResult)(nil)).Elem()
+}
+
+func (o LookupEnhancedDBResultOutput) ToLookupEnhancedDBResultOutput() LookupEnhancedDBResultOutput {
+	return o
+}
+
+func (o LookupEnhancedDBResultOutput) ToLookupEnhancedDBResultOutputWithContext(ctx context.Context) LookupEnhancedDBResultOutput {
+	return o
+}
+
+// The name of database.
+func (o LookupEnhancedDBResultOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// The type of database.
+func (o LookupEnhancedDBResultOutput) DatabaseType() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.DatabaseType }).(pulumi.StringOutput)
+}
+
+// The description of the EnhancedDB.
+func (o LookupEnhancedDBResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupEnhancedDBResultOutput) Filter() GetEnhancedDBFilterPtrOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) *GetEnhancedDBFilter { return v.Filter }).(GetEnhancedDBFilterPtrOutput)
+}
+
+// The name of database host. This will be built from `databaseName` + `tidb-is1.db.sakurausercontent.com`.
+func (o LookupEnhancedDBResultOutput) Hostname() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.Hostname }).(pulumi.StringOutput)
+}
+
+// The icon id attached to the EnhancedDB.
+func (o LookupEnhancedDBResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupEnhancedDBResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The value of max connections setting.
+func (o LookupEnhancedDBResultOutput) MaxConnections() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) int { return v.MaxConnections }).(pulumi.IntOutput)
+}
+
+// The name of the EnhancedDB.
+func (o LookupEnhancedDBResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The region name.
+func (o LookupEnhancedDBResultOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the EnhancedDB.
+func (o LookupEnhancedDBResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupEnhancedDBResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupEnhancedDBResultOutput{})
 }

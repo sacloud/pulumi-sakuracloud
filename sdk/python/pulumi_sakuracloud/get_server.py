@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetServerResult',
     'AwaitableGetServerResult',
     'get_server',
+    'get_server_output',
 ]
 
 @pulumi.output_type
@@ -356,3 +357,28 @@ def get_server(filter: Optional[pulumi.InputType['GetServerFilterArgs']] = None,
         private_host_name=__ret__.private_host_name,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_server)
+def get_server_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetServerFilterArgs']]]] = None,
+                      zone: Optional[pulumi.Input[Optional[str]]] = None,
+                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetServerResult]:
+    """
+    Get information about an existing Server.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_server(filter=sakuracloud.GetServerFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetServerFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

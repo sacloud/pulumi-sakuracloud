@@ -5,13 +5,14 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
 __all__ = [
     'GetSubnetResult',
     'AwaitableGetSubnetResult',
     'get_subnet',
+    'get_subnet_output',
 ]
 
 @pulumi.output_type
@@ -199,3 +200,31 @@ def get_subnet(index: Optional[int] = None,
         next_hop=__ret__.next_hop,
         switch_id=__ret__.switch_id,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_subnet)
+def get_subnet_output(index: Optional[pulumi.Input[int]] = None,
+                      internet_id: Optional[pulumi.Input[str]] = None,
+                      zone: Optional[pulumi.Input[Optional[str]]] = None,
+                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSubnetResult]:
+    """
+    Get information about an existing Subnet.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    config = pulumi.Config()
+    internet_id = config.require_object("internetId")
+    foobar = sakuracloud.get_subnet(internet_id=internet_id,
+        index=1)
+    ```
+
+
+    :param int index: The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
+    :param str internet_id: The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
+    :param str zone: The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

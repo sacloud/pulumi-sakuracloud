@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud SSH Key Gen.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -198,7 +198,7 @@ type SSHKeyGenArrayInput interface {
 type SSHKeyGenArray []SSHKeyGenInput
 
 func (SSHKeyGenArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*SSHKeyGen)(nil))
+	return reflect.TypeOf((*[]*SSHKeyGen)(nil)).Elem()
 }
 
 func (i SSHKeyGenArray) ToSSHKeyGenArrayOutput() SSHKeyGenArrayOutput {
@@ -223,7 +223,7 @@ type SSHKeyGenMapInput interface {
 type SSHKeyGenMap map[string]SSHKeyGenInput
 
 func (SSHKeyGenMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*SSHKeyGen)(nil))
+	return reflect.TypeOf((*map[string]*SSHKeyGen)(nil)).Elem()
 }
 
 func (i SSHKeyGenMap) ToSSHKeyGenMapOutput() SSHKeyGenMapOutput {
@@ -234,9 +234,7 @@ func (i SSHKeyGenMap) ToSSHKeyGenMapOutputWithContext(ctx context.Context) SSHKe
 	return pulumi.ToOutputWithContext(ctx, i).(SSHKeyGenMapOutput)
 }
 
-type SSHKeyGenOutput struct {
-	*pulumi.OutputState
-}
+type SSHKeyGenOutput struct{ *pulumi.OutputState }
 
 func (SSHKeyGenOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*SSHKeyGen)(nil))
@@ -255,14 +253,12 @@ func (o SSHKeyGenOutput) ToSSHKeyGenPtrOutput() SSHKeyGenPtrOutput {
 }
 
 func (o SSHKeyGenOutput) ToSSHKeyGenPtrOutputWithContext(ctx context.Context) SSHKeyGenPtrOutput {
-	return o.ApplyT(func(v SSHKeyGen) *SSHKeyGen {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SSHKeyGen) *SSHKeyGen {
 		return &v
 	}).(SSHKeyGenPtrOutput)
 }
 
-type SSHKeyGenPtrOutput struct {
-	*pulumi.OutputState
-}
+type SSHKeyGenPtrOutput struct{ *pulumi.OutputState }
 
 func (SSHKeyGenPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**SSHKeyGen)(nil))
@@ -274,6 +270,16 @@ func (o SSHKeyGenPtrOutput) ToSSHKeyGenPtrOutput() SSHKeyGenPtrOutput {
 
 func (o SSHKeyGenPtrOutput) ToSSHKeyGenPtrOutputWithContext(ctx context.Context) SSHKeyGenPtrOutput {
 	return o
+}
+
+func (o SSHKeyGenPtrOutput) Elem() SSHKeyGenOutput {
+	return o.ApplyT(func(v *SSHKeyGen) SSHKeyGen {
+		if v != nil {
+			return *v
+		}
+		var ret SSHKeyGen
+		return ret
+	}).(SSHKeyGenOutput)
 }
 
 type SSHKeyGenArrayOutput struct{ *pulumi.OutputState }
@@ -317,6 +323,10 @@ func (o SSHKeyGenMapOutput) MapIndex(k pulumi.StringInput) SSHKeyGenOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SSHKeyGenInput)(nil)).Elem(), &SSHKeyGen{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SSHKeyGenPtrInput)(nil)).Elem(), &SSHKeyGen{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SSHKeyGenArrayInput)(nil)).Elem(), SSHKeyGenArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SSHKeyGenMapInput)(nil)).Elem(), SSHKeyGenMap{})
 	pulumi.RegisterOutputType(SSHKeyGenOutput{})
 	pulumi.RegisterOutputType(SSHKeyGenPtrOutput{})
 	pulumi.RegisterOutputType(SSHKeyGenArrayOutput{})

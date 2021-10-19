@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Container Registry.
@@ -220,7 +220,7 @@ type ContainerRegistryArrayInput interface {
 type ContainerRegistryArray []ContainerRegistryInput
 
 func (ContainerRegistryArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ContainerRegistry)(nil))
+	return reflect.TypeOf((*[]*ContainerRegistry)(nil)).Elem()
 }
 
 func (i ContainerRegistryArray) ToContainerRegistryArrayOutput() ContainerRegistryArrayOutput {
@@ -245,7 +245,7 @@ type ContainerRegistryMapInput interface {
 type ContainerRegistryMap map[string]ContainerRegistryInput
 
 func (ContainerRegistryMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ContainerRegistry)(nil))
+	return reflect.TypeOf((*map[string]*ContainerRegistry)(nil)).Elem()
 }
 
 func (i ContainerRegistryMap) ToContainerRegistryMapOutput() ContainerRegistryMapOutput {
@@ -256,9 +256,7 @@ func (i ContainerRegistryMap) ToContainerRegistryMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerRegistryMapOutput)
 }
 
-type ContainerRegistryOutput struct {
-	*pulumi.OutputState
-}
+type ContainerRegistryOutput struct{ *pulumi.OutputState }
 
 func (ContainerRegistryOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ContainerRegistry)(nil))
@@ -277,14 +275,12 @@ func (o ContainerRegistryOutput) ToContainerRegistryPtrOutput() ContainerRegistr
 }
 
 func (o ContainerRegistryOutput) ToContainerRegistryPtrOutputWithContext(ctx context.Context) ContainerRegistryPtrOutput {
-	return o.ApplyT(func(v ContainerRegistry) *ContainerRegistry {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ContainerRegistry) *ContainerRegistry {
 		return &v
 	}).(ContainerRegistryPtrOutput)
 }
 
-type ContainerRegistryPtrOutput struct {
-	*pulumi.OutputState
-}
+type ContainerRegistryPtrOutput struct{ *pulumi.OutputState }
 
 func (ContainerRegistryPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ContainerRegistry)(nil))
@@ -296,6 +292,16 @@ func (o ContainerRegistryPtrOutput) ToContainerRegistryPtrOutput() ContainerRegi
 
 func (o ContainerRegistryPtrOutput) ToContainerRegistryPtrOutputWithContext(ctx context.Context) ContainerRegistryPtrOutput {
 	return o
+}
+
+func (o ContainerRegistryPtrOutput) Elem() ContainerRegistryOutput {
+	return o.ApplyT(func(v *ContainerRegistry) ContainerRegistry {
+		if v != nil {
+			return *v
+		}
+		var ret ContainerRegistry
+		return ret
+	}).(ContainerRegistryOutput)
 }
 
 type ContainerRegistryArrayOutput struct{ *pulumi.OutputState }
@@ -339,6 +345,10 @@ func (o ContainerRegistryMapOutput) MapIndex(k pulumi.StringInput) ContainerRegi
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryInput)(nil)).Elem(), &ContainerRegistry{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryPtrInput)(nil)).Elem(), &ContainerRegistry{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryArrayInput)(nil)).Elem(), ContainerRegistryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryMapInput)(nil)).Elem(), ContainerRegistryMap{})
 	pulumi.RegisterOutputType(ContainerRegistryOutput{})
 	pulumi.RegisterOutputType(ContainerRegistryPtrOutput{})
 	pulumi.RegisterOutputType(ContainerRegistryArrayOutput{})

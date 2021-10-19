@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -44,15 +43,15 @@ export interface GetSubnetArgs {
     /**
      * The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
      */
-    readonly index: number;
+    index: number;
     /**
      * The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
      */
-    readonly internetId: string;
+    internetId: string;
     /**
      * The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -94,4 +93,26 @@ export interface GetSubnetResult {
      */
     readonly switchId: string;
     readonly zone: string;
+}
+
+export function getSubnetOutput(args: GetSubnetOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSubnetResult> {
+    return pulumi.output(args).apply(a => getSubnet(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getSubnet.
+ */
+export interface GetSubnetOutputArgs {
+    /**
+     * The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
+     */
+    index: pulumi.Input<number>;
+    /**
+     * The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
+     */
+    internetId: pulumi.Input<string>;
+    /**
+     * The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

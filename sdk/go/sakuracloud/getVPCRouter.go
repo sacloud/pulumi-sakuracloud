@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing VPC Router.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupVPCRouter(ctx, &sakuracloud.LookupVPCRouterArgs{
-// 			Filter: sakuracloud.GetVPCRouterFilter{
+// 		_, err := sakuracloud.LookupVPCRouter(ctx, &GetVPCRouterArgs{
+// 			Filter: GetVPCRouterFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -104,4 +107,172 @@ type LookupVPCRouterResult struct {
 	// A list of `wireGuard` blocks as defined below.
 	WireGuards []GetVPCRouterWireGuard `pulumi:"wireGuards"`
 	Zone       string                  `pulumi:"zone"`
+}
+
+func LookupVPCRouterOutput(ctx *pulumi.Context, args LookupVPCRouterOutputArgs, opts ...pulumi.InvokeOption) LookupVPCRouterResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupVPCRouterResult, error) {
+			args := v.(LookupVPCRouterArgs)
+			r, err := LookupVPCRouter(ctx, &args, opts...)
+			return *r, err
+		}).(LookupVPCRouterResultOutput)
+}
+
+// A collection of arguments for invoking getVPCRouter.
+type LookupVPCRouterOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetVPCRouterFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupVPCRouterOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupVPCRouterArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getVPCRouter.
+type LookupVPCRouterResultOutput struct{ *pulumi.OutputState }
+
+func (LookupVPCRouterResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupVPCRouterResult)(nil)).Elem()
+}
+
+func (o LookupVPCRouterResultOutput) ToLookupVPCRouterResultOutput() LookupVPCRouterResultOutput {
+	return o
+}
+
+func (o LookupVPCRouterResultOutput) ToLookupVPCRouterResultOutputWithContext(ctx context.Context) LookupVPCRouterResultOutput {
+	return o
+}
+
+// The description of the static NAT.
+func (o LookupVPCRouterResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// A list of `dhcpServer` blocks as defined below.
+func (o LookupVPCRouterResultOutput) DhcpServers() GetVPCRouterDhcpServerArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterDhcpServer { return v.DhcpServers }).(GetVPCRouterDhcpServerArrayOutput)
+}
+
+// A list of `dhcpStaticMapping` blocks as defined below.
+func (o LookupVPCRouterResultOutput) DhcpStaticMappings() GetVPCRouterDhcpStaticMappingArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterDhcpStaticMapping { return v.DhcpStaticMappings }).(GetVPCRouterDhcpStaticMappingArrayOutput)
+}
+
+func (o LookupVPCRouterResultOutput) Filter() GetVPCRouterFilterPtrOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) *GetVPCRouterFilter { return v.Filter }).(GetVPCRouterFilterPtrOutput)
+}
+
+// A list of `firewall` blocks as defined below.
+func (o LookupVPCRouterResultOutput) Firewalls() GetVPCRouterFirewallArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterFirewall { return v.Firewalls }).(GetVPCRouterFirewallArrayOutput)
+}
+
+// The icon id attached to the VPCRouter.
+func (o LookupVPCRouterResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupVPCRouterResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The flag to enable connecting to the Internet from the VPC Router.
+func (o LookupVPCRouterResultOutput) InternetConnection() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) bool { return v.InternetConnection }).(pulumi.BoolOutput)
+}
+
+// A list of `l2tp` blocks as defined below.
+func (o LookupVPCRouterResultOutput) L2tps() GetVPCRouterL2tpArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterL2tp { return v.L2tps }).(GetVPCRouterL2tpArrayOutput)
+}
+
+// the name of the peer.
+func (o LookupVPCRouterResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The plan name of the VPCRouter. This will be one of [`standard`/`premium`/`highspec`/`highspec4000`].
+func (o LookupVPCRouterResultOutput) Plan() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.Plan }).(pulumi.StringOutput)
+}
+
+// A list of `portForwarding` blocks as defined below. This represents a `Reverse NAT`.
+func (o LookupVPCRouterResultOutput) PortForwardings() GetVPCRouterPortForwardingArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterPortForwarding { return v.PortForwardings }).(GetVPCRouterPortForwardingArrayOutput)
+}
+
+// A list of `pptp` blocks as defined below.
+func (o LookupVPCRouterResultOutput) Pptps() GetVPCRouterPptpArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterPptp { return v.Pptps }).(GetVPCRouterPptpArrayOutput)
+}
+
+// A list of additional network interface setting. This doesn't include primary network interface setting.
+func (o LookupVPCRouterResultOutput) PrivateNetworkInterfaces() GetVPCRouterPrivateNetworkInterfaceArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterPrivateNetworkInterface { return v.PrivateNetworkInterfaces }).(GetVPCRouterPrivateNetworkInterfaceArrayOutput)
+}
+
+// The public IP address used for the static NAT.
+func (o LookupVPCRouterResultOutput) PublicIp() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.PublicIp }).(pulumi.StringOutput)
+}
+
+// The bit length of the subnet to assign to the public network interface.
+func (o LookupVPCRouterResultOutput) PublicNetmask() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) int { return v.PublicNetmask }).(pulumi.IntOutput)
+}
+
+// A list of additional network interface setting. This doesn't include primary network interface setting.
+func (o LookupVPCRouterResultOutput) PublicNetworkInterfaces() GetVPCRouterPublicNetworkInterfaceArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterPublicNetworkInterface { return v.PublicNetworkInterfaces }).(GetVPCRouterPublicNetworkInterfaceArrayOutput)
+}
+
+// A list of `siteToSiteVpn` blocks as defined below.
+func (o LookupVPCRouterResultOutput) SiteToSiteVpns() GetVPCRouterSiteToSiteVpnArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterSiteToSiteVpn { return v.SiteToSiteVpns }).(GetVPCRouterSiteToSiteVpnArrayOutput)
+}
+
+// A list of `staticNat` blocks as defined below. This represents a `1:1 NAT`, doing static mapping to both send/receive to/from the Internet. This is only used when `plan` is not `standard`.
+func (o LookupVPCRouterResultOutput) StaticNats() GetVPCRouterStaticNatArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterStaticNat { return v.StaticNats }).(GetVPCRouterStaticNatArrayOutput)
+}
+
+// A list of `staticRoute` blocks as defined below.
+func (o LookupVPCRouterResultOutput) StaticRoutes() GetVPCRouterStaticRouteArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterStaticRoute { return v.StaticRoutes }).(GetVPCRouterStaticRouteArrayOutput)
+}
+
+// The ip address of the syslog host to which the VPC Router sends logs.
+func (o LookupVPCRouterResultOutput) SyslogHost() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.SyslogHost }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the VPCRouter.
+func (o LookupVPCRouterResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// A list of `user` blocks as defined below.
+func (o LookupVPCRouterResultOutput) Users() GetVPCRouterUserArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterUser { return v.Users }).(GetVPCRouterUserArrayOutput)
+}
+
+// The version of the VPC Router.
+func (o LookupVPCRouterResultOutput) Version() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) int { return v.Version }).(pulumi.IntOutput)
+}
+
+// A list of `wireGuard` blocks as defined below.
+func (o LookupVPCRouterResultOutput) WireGuards() GetVPCRouterWireGuardArrayOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) []GetVPCRouterWireGuard { return v.WireGuards }).(GetVPCRouterWireGuardArrayOutput)
+}
+
+func (o LookupVPCRouterResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupVPCRouterResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupVPCRouterResultOutput{})
 }

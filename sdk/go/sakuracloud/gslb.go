@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud GSLB.
@@ -20,27 +20,27 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := sakuracloud.NewGSLB(ctx, "foobar", &sakuracloud.GSLBArgs{
 // 			Description: pulumi.String("description"),
-// 			HealthCheck: &sakuracloud.GSLBHealthCheckArgs{
+// 			HealthCheck: &GSLBHealthCheckArgs{
 // 				DelayLoop:  pulumi.Int(10),
 // 				HostHeader: pulumi.String("example.com"),
 // 				Path:       pulumi.String("/"),
 // 				Protocol:   pulumi.String("http"),
 // 				Status:     pulumi.String("200"),
 // 			},
-// 			Servers: sakuracloud.GSLBServerArray{
-// 				&sakuracloud.GSLBServerArgs{
+// 			Servers: GSLBServerArray{
+// 				&GSLBServerArgs{
 // 					Enabled:   pulumi.Bool(true),
 // 					IpAddress: pulumi.String("192.2.0.11"),
 // 					Weight:    pulumi.Int(1),
 // 				},
-// 				&sakuracloud.GSLBServerArgs{
+// 				&GSLBServerArgs{
 // 					Enabled:   pulumi.Bool(true),
 // 					IpAddress: pulumi.String("192.2.0.12"),
 // 					Weight:    pulumi.Int(1),
@@ -264,7 +264,7 @@ type GSLBArrayInput interface {
 type GSLBArray []GSLBInput
 
 func (GSLBArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*GSLB)(nil))
+	return reflect.TypeOf((*[]*GSLB)(nil)).Elem()
 }
 
 func (i GSLBArray) ToGSLBArrayOutput() GSLBArrayOutput {
@@ -289,7 +289,7 @@ type GSLBMapInput interface {
 type GSLBMap map[string]GSLBInput
 
 func (GSLBMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*GSLB)(nil))
+	return reflect.TypeOf((*map[string]*GSLB)(nil)).Elem()
 }
 
 func (i GSLBMap) ToGSLBMapOutput() GSLBMapOutput {
@@ -300,9 +300,7 @@ func (i GSLBMap) ToGSLBMapOutputWithContext(ctx context.Context) GSLBMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(GSLBMapOutput)
 }
 
-type GSLBOutput struct {
-	*pulumi.OutputState
-}
+type GSLBOutput struct{ *pulumi.OutputState }
 
 func (GSLBOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*GSLB)(nil))
@@ -321,14 +319,12 @@ func (o GSLBOutput) ToGSLBPtrOutput() GSLBPtrOutput {
 }
 
 func (o GSLBOutput) ToGSLBPtrOutputWithContext(ctx context.Context) GSLBPtrOutput {
-	return o.ApplyT(func(v GSLB) *GSLB {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GSLB) *GSLB {
 		return &v
 	}).(GSLBPtrOutput)
 }
 
-type GSLBPtrOutput struct {
-	*pulumi.OutputState
-}
+type GSLBPtrOutput struct{ *pulumi.OutputState }
 
 func (GSLBPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**GSLB)(nil))
@@ -340,6 +336,16 @@ func (o GSLBPtrOutput) ToGSLBPtrOutput() GSLBPtrOutput {
 
 func (o GSLBPtrOutput) ToGSLBPtrOutputWithContext(ctx context.Context) GSLBPtrOutput {
 	return o
+}
+
+func (o GSLBPtrOutput) Elem() GSLBOutput {
+	return o.ApplyT(func(v *GSLB) GSLB {
+		if v != nil {
+			return *v
+		}
+		var ret GSLB
+		return ret
+	}).(GSLBOutput)
 }
 
 type GSLBArrayOutput struct{ *pulumi.OutputState }
@@ -383,6 +389,10 @@ func (o GSLBMapOutput) MapIndex(k pulumi.StringInput) GSLBOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBInput)(nil)).Elem(), &GSLB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBPtrInput)(nil)).Elem(), &GSLB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBArrayInput)(nil)).Elem(), GSLBArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBMapInput)(nil)).Elem(), GSLBMap{})
 	pulumi.RegisterOutputType(GSLBOutput{})
 	pulumi.RegisterOutputType(GSLBPtrOutput{})
 	pulumi.RegisterOutputType(GSLBArrayOutput{})

@@ -117,27 +117,27 @@ export interface ESMEState {
     /**
      * The description of the ESME. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the ESME.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the ESME. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The API URL for send SMS with generated OTP.
      */
-    readonly sendMessageWithGeneratedOtpApiUrl?: pulumi.Input<string>;
+    sendMessageWithGeneratedOtpApiUrl?: pulumi.Input<string>;
     /**
      * The API URL for send SMS with inputted OTP.
      */
-    readonly sendMessageWithInputtedOtpApiUrl?: pulumi.Input<string>;
+    sendMessageWithInputtedOtpApiUrl?: pulumi.Input<string>;
     /**
      * Any tags to assign to the ESME.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -147,17 +147,17 @@ export interface ESMEArgs {
     /**
      * The description of the ESME. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the ESME.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the ESME. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the ESME.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

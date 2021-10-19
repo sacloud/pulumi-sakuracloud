@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getSSHKey(args?: GetSSHKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetSSHKeyResult> {
@@ -42,7 +42,7 @@ export interface GetSSHKeyArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetSSHKeyFilter;
+    filter?: inputs.GetSSHKeyFilter;
 }
 
 /**
@@ -70,4 +70,18 @@ export interface GetSSHKeyResult {
      * The value of public key.
      */
     readonly publicKey: string;
+}
+
+export function getSSHKeyOutput(args?: GetSSHKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSSHKeyResult> {
+    return pulumi.output(args).apply(a => getSSHKey(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getSSHKey.
+ */
+export interface GetSSHKeyOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetSSHKeyFilterArgs>;
 }

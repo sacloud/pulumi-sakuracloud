@@ -5,13 +5,413 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['Archive']
+__all__ = ['ArchiveArgs', 'Archive']
+
+@pulumi.input_type
+class ArchiveArgs:
+    def __init__(__self__, *,
+                 archive_file: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 source_archive_id: Optional[pulumi.Input[str]] = None,
+                 source_archive_zone: Optional[pulumi.Input[str]] = None,
+                 source_disk_id: Optional[pulumi.Input[str]] = None,
+                 source_shared_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a Archive resource.
+        :param pulumi.Input[str] archive_file: The file path to upload to the SakuraCloud.
+        :param pulumi.Input[str] description: The description of the archive. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the archive.
+        :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[int] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
+        :param pulumi.Input[str] source_archive_id: The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_archive_zone: The share key of source shared archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_disk_id: The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_shared_key: The share key of source shared archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the archive.
+        :param pulumi.Input[str] zone: The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if archive_file is not None:
+            pulumi.set(__self__, "archive_file", archive_file)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hash is not None:
+            pulumi.set(__self__, "hash", hash)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if source_archive_id is not None:
+            pulumi.set(__self__, "source_archive_id", source_archive_id)
+        if source_archive_zone is not None:
+            pulumi.set(__self__, "source_archive_zone", source_archive_zone)
+        if source_disk_id is not None:
+            pulumi.set(__self__, "source_disk_id", source_disk_id)
+        if source_shared_key is not None:
+            pulumi.set(__self__, "source_shared_key", source_shared_key)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="archiveFile")
+    def archive_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to the SakuraCloud.
+        """
+        return pulumi.get(self, "archive_file")
+
+    @archive_file.setter
+    def archive_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "archive_file", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the archive. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "hash")
+
+    @hash.setter
+    def hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the archive.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the archive. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
+        """
+        return pulumi.get(self, "size")
+
+    @size.setter
+    def size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter(name="sourceArchiveId")
+    def source_archive_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_archive_id")
+
+    @source_archive_id.setter
+    def source_archive_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_archive_id", value)
+
+    @property
+    @pulumi.getter(name="sourceArchiveZone")
+    def source_archive_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The share key of source shared archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_archive_zone")
+
+    @source_archive_zone.setter
+    def source_archive_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_archive_zone", value)
+
+    @property
+    @pulumi.getter(name="sourceDiskId")
+    def source_disk_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_disk_id")
+
+    @source_disk_id.setter
+    def source_disk_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_disk_id", value)
+
+    @property
+    @pulumi.getter(name="sourceSharedKey")
+    def source_shared_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The share key of source shared archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_shared_key")
+
+    @source_shared_key.setter
+    def source_shared_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_shared_key", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the archive.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _ArchiveState:
+    def __init__(__self__, *,
+                 archive_file: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 source_archive_id: Optional[pulumi.Input[str]] = None,
+                 source_archive_zone: Optional[pulumi.Input[str]] = None,
+                 source_disk_id: Optional[pulumi.Input[str]] = None,
+                 source_shared_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Archive resources.
+        :param pulumi.Input[str] archive_file: The file path to upload to the SakuraCloud.
+        :param pulumi.Input[str] description: The description of the archive. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the archive.
+        :param pulumi.Input[str] name: The name of the archive. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[int] size: The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
+        :param pulumi.Input[str] source_archive_id: The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_archive_zone: The share key of source shared archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_disk_id: The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] source_shared_key: The share key of source shared archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the archive.
+        :param pulumi.Input[str] zone: The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if archive_file is not None:
+            pulumi.set(__self__, "archive_file", archive_file)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hash is not None:
+            pulumi.set(__self__, "hash", hash)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if source_archive_id is not None:
+            pulumi.set(__self__, "source_archive_id", source_archive_id)
+        if source_archive_zone is not None:
+            pulumi.set(__self__, "source_archive_zone", source_archive_zone)
+        if source_disk_id is not None:
+            pulumi.set(__self__, "source_disk_id", source_disk_id)
+        if source_shared_key is not None:
+            pulumi.set(__self__, "source_shared_key", source_shared_key)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="archiveFile")
+    def archive_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to the SakuraCloud.
+        """
+        return pulumi.get(self, "archive_file")
+
+    @archive_file.setter
+    def archive_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "archive_file", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the archive. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "hash")
+
+    @hash.setter
+    def hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the archive.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the archive. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
+        """
+        return pulumi.get(self, "size")
+
+    @size.setter
+    def size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter(name="sourceArchiveId")
+    def source_archive_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the source archive. This conflicts with [`source_disk_id`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_archive_id")
+
+    @source_archive_id.setter
+    def source_archive_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_archive_id", value)
+
+    @property
+    @pulumi.getter(name="sourceArchiveZone")
+    def source_archive_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The share key of source shared archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_archive_zone")
+
+    @source_archive_zone.setter
+    def source_archive_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_archive_zone", value)
+
+    @property
+    @pulumi.getter(name="sourceDiskId")
+    def source_disk_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the source disk. This conflicts with [`source_archive_id`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_disk_id")
+
+    @source_disk_id.setter
+    def source_disk_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_disk_id", value)
+
+    @property
+    @pulumi.getter(name="sourceSharedKey")
+    def source_shared_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The share key of source shared archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source_shared_key")
+
+    @source_shared_key.setter
+    def source_shared_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_shared_key", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the archive.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class Archive(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -27,9 +427,7 @@ class Archive(pulumi.CustomResource):
                  source_shared_key: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Archive.
 
@@ -82,12 +480,77 @@ class Archive(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the archive.
         :param pulumi.Input[str] zone: The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[ArchiveArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Archive.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        # from archive/disk
+        from_archive_or_disk = sakuracloud.Archive("from-archive-or-disk",
+            description="description",
+            source_archive_id="123456789012",
+            source_archive_zone="tk1a",
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        # from shared archive
+        from_shared_archive = sakuracloud.Archive("from-shared-archive",
+            description="description",
+            source_shared_key="is1a:123456789012:xxx",
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        # from local file
+        foobar = sakuracloud.Archive("foobar",
+            archive_file="test/dummy.raw",
+            description="description",
+            size=20,
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param ArchiveArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ArchiveArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 archive_file: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 source_archive_id: Optional[pulumi.Input[str]] = None,
+                 source_archive_zone: Optional[pulumi.Input[str]] = None,
+                 source_disk_id: Optional[pulumi.Input[str]] = None,
+                 source_shared_key: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -97,20 +560,20 @@ class Archive(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ArchiveArgs.__new__(ArchiveArgs)
 
-            __props__['archive_file'] = archive_file
-            __props__['description'] = description
-            __props__['hash'] = hash
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
-            __props__['size'] = size
-            __props__['source_archive_id'] = source_archive_id
-            __props__['source_archive_zone'] = source_archive_zone
-            __props__['source_disk_id'] = source_disk_id
-            __props__['source_shared_key'] = source_shared_key
-            __props__['tags'] = tags
-            __props__['zone'] = zone
+            __props__.__dict__["archive_file"] = archive_file
+            __props__.__dict__["description"] = description
+            __props__.__dict__["hash"] = hash
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
+            __props__.__dict__["size"] = size
+            __props__.__dict__["source_archive_id"] = source_archive_id
+            __props__.__dict__["source_archive_zone"] = source_archive_zone
+            __props__.__dict__["source_disk_id"] = source_disk_id
+            __props__.__dict__["source_shared_key"] = source_shared_key
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["zone"] = zone
         super(Archive, __self__).__init__(
             'sakuracloud:index/archive:Archive',
             resource_name,
@@ -155,20 +618,20 @@ class Archive(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ArchiveState.__new__(_ArchiveState)
 
-        __props__["archive_file"] = archive_file
-        __props__["description"] = description
-        __props__["hash"] = hash
-        __props__["icon_id"] = icon_id
-        __props__["name"] = name
-        __props__["size"] = size
-        __props__["source_archive_id"] = source_archive_id
-        __props__["source_archive_zone"] = source_archive_zone
-        __props__["source_disk_id"] = source_disk_id
-        __props__["source_shared_key"] = source_shared_key
-        __props__["tags"] = tags
-        __props__["zone"] = zone
+        __props__.__dict__["archive_file"] = archive_file
+        __props__.__dict__["description"] = description
+        __props__.__dict__["hash"] = hash
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["size"] = size
+        __props__.__dict__["source_archive_id"] = source_archive_id
+        __props__.__dict__["source_archive_zone"] = source_archive_zone
+        __props__.__dict__["source_disk_id"] = source_disk_id
+        __props__.__dict__["source_shared_key"] = source_shared_key
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["zone"] = zone
         return Archive(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -266,10 +729,4 @@ class Archive(pulumi.CustomResource):
         The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

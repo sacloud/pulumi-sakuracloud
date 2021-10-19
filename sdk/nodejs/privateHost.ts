@@ -135,39 +135,39 @@ export interface PrivateHostState {
     /**
      * The total number of CPUs assigned to servers on the private host.
      */
-    readonly assignedCore?: pulumi.Input<number>;
+    assignedCore?: pulumi.Input<number>;
     /**
      * The total size of memory assigned to servers on the private host.
      */
-    readonly assignedMemory?: pulumi.Input<number>;
+    assignedMemory?: pulumi.Input<number>;
     /**
      * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`]. Default:`dynamic`.
      */
-    readonly class?: pulumi.Input<string>;
+    class?: pulumi.Input<string>;
     /**
      * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The hostname of the private host.
      */
-    readonly hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string>;
     /**
      * The icon id to attach to the PrivateHost.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the PrivateHost.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -177,25 +177,25 @@ export interface PrivateHostArgs {
     /**
      * The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`]. Default:`dynamic`.
      */
-    readonly class?: pulumi.Input<string>;
+    class?: pulumi.Input<string>;
     /**
      * The description of the PrivateHost. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the PrivateHost.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the PrivateHost. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the PrivateHost.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the PrivateHost will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

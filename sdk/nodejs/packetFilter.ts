@@ -139,19 +139,19 @@ export interface PacketFilterState {
     /**
      * The description of the expression.
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * One or more `expression` blocks as defined below.
      */
-    readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
+    expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
      * The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -161,17 +161,17 @@ export interface PacketFilterArgs {
     /**
      * The description of the expression.
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * One or more `expression` blocks as defined below.
      */
-    readonly expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
+    expressions?: pulumi.Input<pulumi.Input<inputs.PacketFilterExpression>[]>;
     /**
      * The name of the packetFilter. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The name of zone that the packetFilter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

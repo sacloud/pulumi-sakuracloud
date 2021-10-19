@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetNoteResult',
     'AwaitableGetNoteResult',
     'get_note',
+    'get_note_output',
 ]
 
 @pulumi.output_type
@@ -161,3 +162,26 @@ def get_note(filter: Optional[pulumi.InputType['GetNoteFilterArgs']] = None,
         id=__ret__.id,
         name=__ret__.name,
         tags=__ret__.tags)
+
+
+@_utilities.lift_output_func(get_note)
+def get_note_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetNoteFilterArgs']]]] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetNoteResult]:
+    """
+    Get information about an existing Note.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_note(filter=sakuracloud.GetNoteFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetNoteFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

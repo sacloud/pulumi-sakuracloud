@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Archive.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		opt0 := "centos8"
-// 		_, err := sakuracloud.LookupArchive(ctx, &sakuracloud.LookupArchiveArgs{
+// 		_, err := sakuracloud.LookupArchive(ctx, &GetArchiveArgs{
 // 			OsType: &opt0,
 // 		}, nil)
 // 		if err != nil {
@@ -83,4 +86,103 @@ type LookupArchiveResult struct {
 	// Any tags assigned to the Archive.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupArchiveOutput(ctx *pulumi.Context, args LookupArchiveOutputArgs, opts ...pulumi.InvokeOption) LookupArchiveResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupArchiveResult, error) {
+			args := v.(LookupArchiveArgs)
+			r, err := LookupArchive(ctx, &args, opts...)
+			return *r, err
+		}).(LookupArchiveResultOutput)
+}
+
+// A collection of arguments for invoking getArchive.
+type LookupArchiveOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetArchiveFilterPtrInput `pulumi:"filter"`
+	// The criteria used to filter SakuraCloud archives. This must be one of following:
+	// - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`]
+	// - **Alt RHEL/CentOS**: [`almalinux`/`rockylinux`/`miracle`/`miraclelinux`]
+	// - **Ubuntu**: [`ubuntu`/`ubuntu2004`/`ubuntu1804`]
+	// - **Debian**: [`debian`/`debian10`/`debian11`]
+	// - **CoreOS/ContainerLinux**: `coreos`
+	// - **RancherOS**: `rancheros`
+	// - **k3OS**: `k3os`
+	// - **FreeBSD**: `freebsd`
+	// - **Kusanagi**: `kusanagi`
+	// - **Windows2016**: [`windows2016`/`windows2016-rds`/`windows2016-rds-office`]
+	// - **Windows2016+SQLServer**:  [`windows2016-sql-web`/`windows2016-sql-standard`/`windows2016-sql-standard-all`]
+	// - **Windows2016+SQLServer2017**: [`windows2016-sql2017-standard`/`windows2016-sql2017-enterprise`/`windows2016-sql2017-standard-all`]
+	// - **Windows2019**: [`windows2019`/`windows2019-rds`/`windows2019-rds-office2016`/`windows2019-rds-office2019`]
+	// - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
+	// - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
+	OsType pulumi.StringPtrInput `pulumi:"osType"`
+	// The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupArchiveOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupArchiveArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getArchive.
+type LookupArchiveResultOutput struct{ *pulumi.OutputState }
+
+func (LookupArchiveResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupArchiveResult)(nil)).Elem()
+}
+
+func (o LookupArchiveResultOutput) ToLookupArchiveResultOutput() LookupArchiveResultOutput {
+	return o
+}
+
+func (o LookupArchiveResultOutput) ToLookupArchiveResultOutputWithContext(ctx context.Context) LookupArchiveResultOutput {
+	return o
+}
+
+// The description of the Archive.
+func (o LookupArchiveResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupArchiveResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupArchiveResultOutput) Filter() GetArchiveFilterPtrOutput {
+	return o.ApplyT(func(v LookupArchiveResult) *GetArchiveFilter { return v.Filter }).(GetArchiveFilterPtrOutput)
+}
+
+// The icon id attached to the Archive.
+func (o LookupArchiveResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupArchiveResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupArchiveResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupArchiveResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Archive.
+func (o LookupArchiveResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupArchiveResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o LookupArchiveResultOutput) OsType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupArchiveResult) *string { return v.OsType }).(pulumi.StringPtrOutput)
+}
+
+// The size of Archive in GiB.
+func (o LookupArchiveResultOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupArchiveResult) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Any tags assigned to the Archive.
+func (o LookupArchiveResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupArchiveResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupArchiveResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupArchiveResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupArchiveResultOutput{})
 }

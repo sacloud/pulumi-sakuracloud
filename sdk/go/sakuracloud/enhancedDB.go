@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud sakuracloud_enhanced_db.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -247,7 +247,7 @@ type EnhancedDBArrayInput interface {
 type EnhancedDBArray []EnhancedDBInput
 
 func (EnhancedDBArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*EnhancedDB)(nil))
+	return reflect.TypeOf((*[]*EnhancedDB)(nil)).Elem()
 }
 
 func (i EnhancedDBArray) ToEnhancedDBArrayOutput() EnhancedDBArrayOutput {
@@ -272,7 +272,7 @@ type EnhancedDBMapInput interface {
 type EnhancedDBMap map[string]EnhancedDBInput
 
 func (EnhancedDBMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*EnhancedDB)(nil))
+	return reflect.TypeOf((*map[string]*EnhancedDB)(nil)).Elem()
 }
 
 func (i EnhancedDBMap) ToEnhancedDBMapOutput() EnhancedDBMapOutput {
@@ -283,9 +283,7 @@ func (i EnhancedDBMap) ToEnhancedDBMapOutputWithContext(ctx context.Context) Enh
 	return pulumi.ToOutputWithContext(ctx, i).(EnhancedDBMapOutput)
 }
 
-type EnhancedDBOutput struct {
-	*pulumi.OutputState
-}
+type EnhancedDBOutput struct{ *pulumi.OutputState }
 
 func (EnhancedDBOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*EnhancedDB)(nil))
@@ -304,14 +302,12 @@ func (o EnhancedDBOutput) ToEnhancedDBPtrOutput() EnhancedDBPtrOutput {
 }
 
 func (o EnhancedDBOutput) ToEnhancedDBPtrOutputWithContext(ctx context.Context) EnhancedDBPtrOutput {
-	return o.ApplyT(func(v EnhancedDB) *EnhancedDB {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v EnhancedDB) *EnhancedDB {
 		return &v
 	}).(EnhancedDBPtrOutput)
 }
 
-type EnhancedDBPtrOutput struct {
-	*pulumi.OutputState
-}
+type EnhancedDBPtrOutput struct{ *pulumi.OutputState }
 
 func (EnhancedDBPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**EnhancedDB)(nil))
@@ -323,6 +319,16 @@ func (o EnhancedDBPtrOutput) ToEnhancedDBPtrOutput() EnhancedDBPtrOutput {
 
 func (o EnhancedDBPtrOutput) ToEnhancedDBPtrOutputWithContext(ctx context.Context) EnhancedDBPtrOutput {
 	return o
+}
+
+func (o EnhancedDBPtrOutput) Elem() EnhancedDBOutput {
+	return o.ApplyT(func(v *EnhancedDB) EnhancedDB {
+		if v != nil {
+			return *v
+		}
+		var ret EnhancedDB
+		return ret
+	}).(EnhancedDBOutput)
 }
 
 type EnhancedDBArrayOutput struct{ *pulumi.OutputState }
@@ -366,6 +372,10 @@ func (o EnhancedDBMapOutput) MapIndex(k pulumi.StringInput) EnhancedDBOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*EnhancedDBInput)(nil)).Elem(), &EnhancedDB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EnhancedDBPtrInput)(nil)).Elem(), &EnhancedDB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EnhancedDBArrayInput)(nil)).Elem(), EnhancedDBArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*EnhancedDBMapInput)(nil)).Elem(), EnhancedDBMap{})
 	pulumi.RegisterOutputType(EnhancedDBOutput{})
 	pulumi.RegisterOutputType(EnhancedDBPtrOutput{})
 	pulumi.RegisterOutputType(EnhancedDBArrayOutput{})

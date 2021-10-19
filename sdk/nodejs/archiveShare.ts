@@ -100,15 +100,15 @@ export interface ArchiveShareState {
     /**
      * The id of the archive. Changing this forces a new resource to be created.
      */
-    readonly archiveId?: pulumi.Input<string>;
+    archiveId?: pulumi.Input<string>;
     /**
      * The key to use sharing the Archive.
      */
-    readonly shareKey?: pulumi.Input<string>;
+    shareKey?: pulumi.Input<string>;
     /**
      * The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -118,9 +118,9 @@ export interface ArchiveShareArgs {
     /**
      * The id of the archive. Changing this forces a new resource to be created.
      */
-    readonly archiveId: pulumi.Input<string>;
+    archiveId: pulumi.Input<string>;
     /**
      * The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

@@ -119,23 +119,23 @@ export interface IPv4PtrState {
     /**
      * The value of the PTR record. This must be FQDN.
      */
-    readonly hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string>;
     /**
      * The IP address to which the PTR record is set.
      */
-    readonly ipAddress?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string>;
     /**
      * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
      */
-    readonly retryInterval?: pulumi.Input<number>;
+    retryInterval?: pulumi.Input<number>;
     /**
      * The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
      */
-    readonly retryMax?: pulumi.Input<number>;
+    retryMax?: pulumi.Input<number>;
     /**
      * The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -145,21 +145,21 @@ export interface IPv4PtrArgs {
     /**
      * The value of the PTR record. This must be FQDN.
      */
-    readonly hostname: pulumi.Input<string>;
+    hostname: pulumi.Input<string>;
     /**
      * The IP address to which the PTR record is set.
      */
-    readonly ipAddress: pulumi.Input<string>;
+    ipAddress: pulumi.Input<string>;
     /**
      * The wait interval(in seconds) for retrying API call used when SakuraCloud API returns any errors. Default:`10`.
      */
-    readonly retryInterval?: pulumi.Input<number>;
+    retryInterval?: pulumi.Input<number>;
     /**
      * The maximum number of API call retries used when SakuraCloud API returns any errors. Default:`30`.
      */
-    readonly retryMax?: pulumi.Input<number>;
+    retryMax?: pulumi.Input<number>;
     /**
      * The name of zone that the IPv4 PTR will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

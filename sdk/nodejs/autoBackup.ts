@@ -147,35 +147,35 @@ export interface AutoBackupState {
     /**
      * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The disk id to backed up. Changing this forces a new resource to be created.
      */
-    readonly diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string>;
     /**
      * The icon id to attach to the AutoBackup.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
      */
-    readonly maxBackupNum?: pulumi.Input<number>;
+    maxBackupNum?: pulumi.Input<number>;
     /**
      * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the AutoBackup.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
      */
-    readonly weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -185,33 +185,33 @@ export interface AutoBackupArgs {
     /**
      * The description of the AutoBackup. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The disk id to backed up. Changing this forces a new resource to be created.
      */
-    readonly diskId: pulumi.Input<string>;
+    diskId: pulumi.Input<string>;
     /**
      * The icon id to attach to the AutoBackup.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The number backup files to keep. This must be in the range [`1`-`10`]. Default:`1`.
      */
-    readonly maxBackupNum?: pulumi.Input<number>;
+    maxBackupNum?: pulumi.Input<number>;
     /**
      * The name of the AutoBackup. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the AutoBackup.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A list of weekdays to backed up. The values in the list must be in [`sun`/`mon`/`tue`/`wed`/`thu`/`fri`/`sat`].
      */
-    readonly weekdays: pulumi.Input<pulumi.Input<string>[]>;
+    weekdays: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the AutoBackup will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

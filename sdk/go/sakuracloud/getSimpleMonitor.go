@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Simple Monitor.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupSimpleMonitor(ctx, &sakuracloud.LookupSimpleMonitorArgs{
-// 			Filter: sakuracloud.GetSimpleMonitorFilter{
+// 		_, err := sakuracloud.LookupSimpleMonitor(ctx, &GetSimpleMonitorArgs{
+// 			Filter: GetSimpleMonitorFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -81,4 +84,116 @@ type LookupSimpleMonitorResult struct {
 	Target string `pulumi:"target"`
 	// The timeout in seconds for monitoring.
 	Timeout int `pulumi:"timeout"`
+}
+
+func LookupSimpleMonitorOutput(ctx *pulumi.Context, args LookupSimpleMonitorOutputArgs, opts ...pulumi.InvokeOption) LookupSimpleMonitorResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupSimpleMonitorResult, error) {
+			args := v.(LookupSimpleMonitorArgs)
+			r, err := LookupSimpleMonitor(ctx, &args, opts...)
+			return *r, err
+		}).(LookupSimpleMonitorResultOutput)
+}
+
+// A collection of arguments for invoking getSimpleMonitor.
+type LookupSimpleMonitorOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetSimpleMonitorFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupSimpleMonitorOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSimpleMonitorArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getSimpleMonitor.
+type LookupSimpleMonitorResultOutput struct{ *pulumi.OutputState }
+
+func (LookupSimpleMonitorResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSimpleMonitorResult)(nil)).Elem()
+}
+
+func (o LookupSimpleMonitorResultOutput) ToLookupSimpleMonitorResultOutput() LookupSimpleMonitorResultOutput {
+	return o
+}
+
+func (o LookupSimpleMonitorResultOutput) ToLookupSimpleMonitorResultOutputWithContext(ctx context.Context) LookupSimpleMonitorResultOutput {
+	return o
+}
+
+// The interval in seconds between checks.
+func (o LookupSimpleMonitorResultOutput) DelayLoop() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) int { return v.DelayLoop }).(pulumi.IntOutput)
+}
+
+// The description of the SimpleMonitor.
+func (o LookupSimpleMonitorResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The flag to enable monitoring by the simple monitor.
+func (o LookupSimpleMonitorResultOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+func (o LookupSimpleMonitorResultOutput) Filter() GetSimpleMonitorFilterPtrOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) *GetSimpleMonitorFilter { return v.Filter }).(GetSimpleMonitorFilterPtrOutput)
+}
+
+// A list of `healthCheck` blocks as defined below.
+func (o LookupSimpleMonitorResultOutput) HealthChecks() GetSimpleMonitorHealthCheckArrayOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) []GetSimpleMonitorHealthCheck { return v.HealthChecks }).(GetSimpleMonitorHealthCheckArrayOutput)
+}
+
+// The icon id attached to the SimpleMonitor.
+func (o LookupSimpleMonitorResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupSimpleMonitorResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The flag to enable notification by email.
+func (o LookupSimpleMonitorResultOutput) NotifyEmailEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) bool { return v.NotifyEmailEnabled }).(pulumi.BoolOutput)
+}
+
+// The flag to enable HTML format instead of text format.
+func (o LookupSimpleMonitorResultOutput) NotifyEmailHtml() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) bool { return v.NotifyEmailHtml }).(pulumi.BoolOutput)
+}
+
+// The interval in hours between notification.
+func (o LookupSimpleMonitorResultOutput) NotifyInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) int { return v.NotifyInterval }).(pulumi.IntOutput)
+}
+
+// The flag to enable notification by slack/discord.
+func (o LookupSimpleMonitorResultOutput) NotifySlackEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) bool { return v.NotifySlackEnabled }).(pulumi.BoolOutput)
+}
+
+// The webhook URL for sending notification by slack/discord.
+func (o LookupSimpleMonitorResultOutput) NotifySlackWebhook() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) string { return v.NotifySlackWebhook }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the SimpleMonitor.
+func (o LookupSimpleMonitorResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The monitoring target of the simple monitor. This will be IP address or FQDN.
+func (o LookupSimpleMonitorResultOutput) Target() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) string { return v.Target }).(pulumi.StringOutput)
+}
+
+// The timeout in seconds for monitoring.
+func (o LookupSimpleMonitorResultOutput) Timeout() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSimpleMonitorResult) int { return v.Timeout }).(pulumi.IntOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupSimpleMonitorResultOutput{})
 }

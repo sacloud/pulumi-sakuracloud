@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetPrivateHostResult',
     'AwaitableGetPrivateHostResult',
     'get_private_host',
+    'get_private_host_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,28 @@ def get_private_host(filter: Optional[pulumi.InputType['GetPrivateHostFilterArgs
         name=__ret__.name,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_private_host)
+def get_private_host_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetPrivateHostFilterArgs']]]] = None,
+                            zone: Optional[pulumi.Input[Optional[str]]] = None,
+                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPrivateHostResult]:
+    """
+    Get information about an existing Private Host.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_private_host(filter=sakuracloud.GetPrivateHostFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetPrivateHostFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

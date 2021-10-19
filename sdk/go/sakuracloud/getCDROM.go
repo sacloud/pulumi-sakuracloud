@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing CD-ROM.
@@ -16,15 +19,15 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupCDROM(ctx, &sakuracloud.LookupCDROMArgs{
-// 			Filter: sakuracloud.GetCDROMFilter{
-// 				Conditions: []sakuracloud.GetCDROMFilterCondition{
-// 					sakuracloud.GetCDROMFilterCondition{
+// 		_, err := sakuracloud.LookupCDROM(ctx, &GetCDROMArgs{
+// 			Filter: GetCDROMFilter{
+// 				Conditions: []GetCDROMFilterCondition{
+// 					GetCDROMFilterCondition{
 // 						Name: "Name",
 // 						Values: []string{
 // 							"Parted Magic 2013_08_01",
@@ -73,4 +76,82 @@ type LookupCDROMResult struct {
 	// Any tags assigned to the CD-ROM.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupCDROMOutput(ctx *pulumi.Context, args LookupCDROMOutputArgs, opts ...pulumi.InvokeOption) LookupCDROMResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupCDROMResult, error) {
+			args := v.(LookupCDROMArgs)
+			r, err := LookupCDROM(ctx, &args, opts...)
+			return *r, err
+		}).(LookupCDROMResultOutput)
+}
+
+// A collection of arguments for invoking getCDROM.
+type LookupCDROMOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetCDROMFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the CD-ROM is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupCDROMOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupCDROMArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getCDROM.
+type LookupCDROMResultOutput struct{ *pulumi.OutputState }
+
+func (LookupCDROMResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupCDROMResult)(nil)).Elem()
+}
+
+func (o LookupCDROMResultOutput) ToLookupCDROMResultOutput() LookupCDROMResultOutput {
+	return o
+}
+
+func (o LookupCDROMResultOutput) ToLookupCDROMResultOutputWithContext(ctx context.Context) LookupCDROMResultOutput {
+	return o
+}
+
+// The description of the CD-ROM.
+func (o LookupCDROMResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCDROMResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupCDROMResultOutput) Filter() GetCDROMFilterPtrOutput {
+	return o.ApplyT(func(v LookupCDROMResult) *GetCDROMFilter { return v.Filter }).(GetCDROMFilterPtrOutput)
+}
+
+// The icon id attached to the CD-ROM.
+func (o LookupCDROMResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCDROMResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupCDROMResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCDROMResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the CD-ROM.
+func (o LookupCDROMResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCDROMResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The size of CD-ROM in GiB.
+func (o LookupCDROMResultOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupCDROMResult) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// Any tags assigned to the CD-ROM.
+func (o LookupCDROMResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupCDROMResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupCDROMResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupCDROMResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupCDROMResultOutput{})
 }

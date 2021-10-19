@@ -139,31 +139,31 @@ export interface DatabaseReadReplicaState {
     /**
      * The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the read-replica database.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The id of the replication master database. Changing this forces a new resource to be created.
      */
-    readonly masterId?: pulumi.Input<string>;
+    masterId?: pulumi.Input<string>;
     /**
      * The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface?: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
+    networkInterface?: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
     /**
      * Any tags to assign to the read-replica database.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -173,29 +173,29 @@ export interface DatabaseReadReplicaArgs {
     /**
      * The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the read-replica database.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The id of the replication master database. Changing this forces a new resource to be created.
      */
-    readonly masterId: pulumi.Input<string>;
+    masterId: pulumi.Input<string>;
     /**
      * The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
+    networkInterface: pulumi.Input<inputs.DatabaseReadReplicaNetworkInterface>;
     /**
      * Any tags to assign to the read-replica database.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

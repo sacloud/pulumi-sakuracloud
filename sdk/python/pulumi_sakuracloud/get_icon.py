@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetIconResult',
     'AwaitableGetIconResult',
     'get_icon',
+    'get_icon_output',
 ]
 
 @pulumi.output_type
@@ -122,3 +123,26 @@ def get_icon(filter: Optional[pulumi.InputType['GetIconFilterArgs']] = None,
         name=__ret__.name,
         tags=__ret__.tags,
         url=__ret__.url)
+
+
+@_utilities.lift_output_func(get_icon)
+def get_icon_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetIconFilterArgs']]]] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetIconResult]:
+    """
+    Get information about an existing Icon.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_icon(filter=sakuracloud.GetIconFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetIconFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

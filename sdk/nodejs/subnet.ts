@@ -139,39 +139,39 @@ export interface SubnetState {
     /**
      * The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
      */
-    readonly internetId?: pulumi.Input<string>;
+    internetId?: pulumi.Input<string>;
     /**
      * A list of assigned global address to the subnet.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Maximum IP address in assigned global addresses to the subnet.
      */
-    readonly maxIpAddress?: pulumi.Input<string>;
+    maxIpAddress?: pulumi.Input<string>;
     /**
      * Minimum IP address in assigned global addresses to the subnet.
      */
-    readonly minIpAddress?: pulumi.Input<string>;
+    minIpAddress?: pulumi.Input<string>;
     /**
      * The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
      */
-    readonly netmask?: pulumi.Input<number>;
+    netmask?: pulumi.Input<number>;
     /**
      * The IPv4 network address assigned to the Subnet.
      */
-    readonly networkAddress?: pulumi.Input<string>;
+    networkAddress?: pulumi.Input<string>;
     /**
      * The ip address of the next-hop at the subnet.
      */
-    readonly nextHop?: pulumi.Input<string>;
+    nextHop?: pulumi.Input<string>;
     /**
      * The id of the switch connected from the Subnet.
      */
-    readonly switchId?: pulumi.Input<string>;
+    switchId?: pulumi.Input<string>;
     /**
      * The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -181,17 +181,17 @@ export interface SubnetArgs {
     /**
      * The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
      */
-    readonly internetId: pulumi.Input<string>;
+    internetId: pulumi.Input<string>;
     /**
      * The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
      */
-    readonly netmask?: pulumi.Input<number>;
+    netmask?: pulumi.Input<number>;
     /**
      * The ip address of the next-hop at the subnet.
      */
-    readonly nextHop: pulumi.Input<string>;
+    nextHop: pulumi.Input<string>;
     /**
      * The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

@@ -103,19 +103,19 @@ export interface SSHKeyState {
     /**
      * The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The fingerprint of the public key.
      */
-    readonly fingerprint?: pulumi.Input<string>;
+    fingerprint?: pulumi.Input<string>;
     /**
      * The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The body of the public key. Changing this forces a new resource to be created.
      */
-    readonly publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string>;
 }
 
 /**
@@ -125,13 +125,13 @@ export interface SSHKeyArgs {
     /**
      * The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The body of the public key. Changing this forces a new resource to be created.
      */
-    readonly publicKey: pulumi.Input<string>;
+    publicKey: pulumi.Input<string>;
 }

@@ -5,15 +5,445 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['SimpleMonitor']
+__all__ = ['SimpleMonitorArgs', 'SimpleMonitor']
+
+@pulumi.input_type
+class SimpleMonitorArgs:
+    def __init__(__self__, *,
+                 health_check: pulumi.Input['SimpleMonitorHealthCheckArgs'],
+                 target: pulumi.Input[str],
+                 delay_loop: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 notify_email_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_email_html: Optional[pulumi.Input[bool]] = None,
+                 notify_interval: Optional[pulumi.Input[int]] = None,
+                 notify_slack_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_slack_webhook: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None):
+        """
+        The set of arguments for constructing a SimpleMonitor resource.
+        :param pulumi.Input['SimpleMonitorHealthCheckArgs'] health_check: A `health_check` block as defined below.
+        :param pulumi.Input[str] target: The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] delay_loop: The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
+        :param pulumi.Input[str] description: The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[bool] enabled: The flag to enable monitoring by the simple monitor. Default:`true`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SimpleMonitor.
+        :param pulumi.Input[bool] notify_email_enabled: The flag to enable notification by email. Default:`true`.
+        :param pulumi.Input[bool] notify_email_html: The flag to enable HTML format instead of text format.
+        :param pulumi.Input[int] notify_interval: The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
+        :param pulumi.Input[bool] notify_slack_enabled: The flag to enable notification by slack/discord.
+        :param pulumi.Input[str] notify_slack_webhook: The webhook URL for sending notification by slack/discord.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SimpleMonitor.
+        :param pulumi.Input[int] timeout: The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        """
+        pulumi.set(__self__, "health_check", health_check)
+        pulumi.set(__self__, "target", target)
+        if delay_loop is not None:
+            pulumi.set(__self__, "delay_loop", delay_loop)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if notify_email_enabled is not None:
+            pulumi.set(__self__, "notify_email_enabled", notify_email_enabled)
+        if notify_email_html is not None:
+            pulumi.set(__self__, "notify_email_html", notify_email_html)
+        if notify_interval is not None:
+            pulumi.set(__self__, "notify_interval", notify_interval)
+        if notify_slack_enabled is not None:
+            pulumi.set(__self__, "notify_slack_enabled", notify_slack_enabled)
+        if notify_slack_webhook is not None:
+            pulumi.set(__self__, "notify_slack_webhook", notify_slack_webhook)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
+
+    @property
+    @pulumi.getter(name="healthCheck")
+    def health_check(self) -> pulumi.Input['SimpleMonitorHealthCheckArgs']:
+        """
+        A `health_check` block as defined below.
+        """
+        return pulumi.get(self, "health_check")
+
+    @health_check.setter
+    def health_check(self, value: pulumi.Input['SimpleMonitorHealthCheckArgs']):
+        pulumi.set(self, "health_check", value)
+
+    @property
+    @pulumi.getter
+    def target(self) -> pulumi.Input[str]:
+        """
+        The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "target")
+
+    @target.setter
+    def target(self, value: pulumi.Input[str]):
+        pulumi.set(self, "target", value)
+
+    @property
+    @pulumi.getter(name="delayLoop")
+    def delay_loop(self) -> Optional[pulumi.Input[int]]:
+        """
+        The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
+        """
+        return pulumi.get(self, "delay_loop")
+
+    @delay_loop.setter
+    def delay_loop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "delay_loop", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable monitoring by the simple monitor. Default:`true`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the SimpleMonitor.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="notifyEmailEnabled")
+    def notify_email_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable notification by email. Default:`true`.
+        """
+        return pulumi.get(self, "notify_email_enabled")
+
+    @notify_email_enabled.setter
+    def notify_email_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_email_enabled", value)
+
+    @property
+    @pulumi.getter(name="notifyEmailHtml")
+    def notify_email_html(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable HTML format instead of text format.
+        """
+        return pulumi.get(self, "notify_email_html")
+
+    @notify_email_html.setter
+    def notify_email_html(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_email_html", value)
+
+    @property
+    @pulumi.getter(name="notifyInterval")
+    def notify_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
+        """
+        return pulumi.get(self, "notify_interval")
+
+    @notify_interval.setter
+    def notify_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "notify_interval", value)
+
+    @property
+    @pulumi.getter(name="notifySlackEnabled")
+    def notify_slack_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable notification by slack/discord.
+        """
+        return pulumi.get(self, "notify_slack_enabled")
+
+    @notify_slack_enabled.setter
+    def notify_slack_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_slack_enabled", value)
+
+    @property
+    @pulumi.getter(name="notifySlackWebhook")
+    def notify_slack_webhook(self) -> Optional[pulumi.Input[str]]:
+        """
+        The webhook URL for sending notification by slack/discord.
+        """
+        return pulumi.get(self, "notify_slack_webhook")
+
+    @notify_slack_webhook.setter
+    def notify_slack_webhook(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_slack_webhook", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the SimpleMonitor.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        """
+        return pulumi.get(self, "timeout")
+
+    @timeout.setter
+    def timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "timeout", value)
+
+
+@pulumi.input_type
+class _SimpleMonitorState:
+    def __init__(__self__, *,
+                 delay_loop: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 health_check: Optional[pulumi.Input['SimpleMonitorHealthCheckArgs']] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 notify_email_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_email_html: Optional[pulumi.Input[bool]] = None,
+                 notify_interval: Optional[pulumi.Input[int]] = None,
+                 notify_slack_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_slack_webhook: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 target: Optional[pulumi.Input[str]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering SimpleMonitor resources.
+        :param pulumi.Input[int] delay_loop: The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
+        :param pulumi.Input[str] description: The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[bool] enabled: The flag to enable monitoring by the simple monitor. Default:`true`.
+        :param pulumi.Input['SimpleMonitorHealthCheckArgs'] health_check: A `health_check` block as defined below.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SimpleMonitor.
+        :param pulumi.Input[bool] notify_email_enabled: The flag to enable notification by email. Default:`true`.
+        :param pulumi.Input[bool] notify_email_html: The flag to enable HTML format instead of text format.
+        :param pulumi.Input[int] notify_interval: The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
+        :param pulumi.Input[bool] notify_slack_enabled: The flag to enable notification by slack/discord.
+        :param pulumi.Input[str] notify_slack_webhook: The webhook URL for sending notification by slack/discord.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SimpleMonitor.
+        :param pulumi.Input[str] target: The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] timeout: The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        """
+        if delay_loop is not None:
+            pulumi.set(__self__, "delay_loop", delay_loop)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if health_check is not None:
+            pulumi.set(__self__, "health_check", health_check)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if notify_email_enabled is not None:
+            pulumi.set(__self__, "notify_email_enabled", notify_email_enabled)
+        if notify_email_html is not None:
+            pulumi.set(__self__, "notify_email_html", notify_email_html)
+        if notify_interval is not None:
+            pulumi.set(__self__, "notify_interval", notify_interval)
+        if notify_slack_enabled is not None:
+            pulumi.set(__self__, "notify_slack_enabled", notify_slack_enabled)
+        if notify_slack_webhook is not None:
+            pulumi.set(__self__, "notify_slack_webhook", notify_slack_webhook)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if target is not None:
+            pulumi.set(__self__, "target", target)
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
+
+    @property
+    @pulumi.getter(name="delayLoop")
+    def delay_loop(self) -> Optional[pulumi.Input[int]]:
+        """
+        The interval in seconds between checks. This must be in the range [`60`-`3600`]. Default:`60`.
+        """
+        return pulumi.get(self, "delay_loop")
+
+    @delay_loop.setter
+    def delay_loop(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "delay_loop", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SimpleMonitor. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable monitoring by the simple monitor. Default:`true`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="healthCheck")
+    def health_check(self) -> Optional[pulumi.Input['SimpleMonitorHealthCheckArgs']]:
+        """
+        A `health_check` block as defined below.
+        """
+        return pulumi.get(self, "health_check")
+
+    @health_check.setter
+    def health_check(self, value: Optional[pulumi.Input['SimpleMonitorHealthCheckArgs']]):
+        pulumi.set(self, "health_check", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the SimpleMonitor.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="notifyEmailEnabled")
+    def notify_email_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable notification by email. Default:`true`.
+        """
+        return pulumi.get(self, "notify_email_enabled")
+
+    @notify_email_enabled.setter
+    def notify_email_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_email_enabled", value)
+
+    @property
+    @pulumi.getter(name="notifyEmailHtml")
+    def notify_email_html(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable HTML format instead of text format.
+        """
+        return pulumi.get(self, "notify_email_html")
+
+    @notify_email_html.setter
+    def notify_email_html(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_email_html", value)
+
+    @property
+    @pulumi.getter(name="notifyInterval")
+    def notify_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        The interval in hours between notification. This must be in the range [`1`-`72`]. Default:`2`.
+        """
+        return pulumi.get(self, "notify_interval")
+
+    @notify_interval.setter
+    def notify_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "notify_interval", value)
+
+    @property
+    @pulumi.getter(name="notifySlackEnabled")
+    def notify_slack_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable notification by slack/discord.
+        """
+        return pulumi.get(self, "notify_slack_enabled")
+
+    @notify_slack_enabled.setter
+    def notify_slack_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "notify_slack_enabled", value)
+
+    @property
+    @pulumi.getter(name="notifySlackWebhook")
+    def notify_slack_webhook(self) -> Optional[pulumi.Input[str]]:
+        """
+        The webhook URL for sending notification by slack/discord.
+        """
+        return pulumi.get(self, "notify_slack_webhook")
+
+    @notify_slack_webhook.setter
+    def notify_slack_webhook(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notify_slack_webhook", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the SimpleMonitor.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def target(self) -> Optional[pulumi.Input[str]]:
+        """
+        The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "target")
+
+    @target.setter
+    def target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target", value)
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        """
+        return pulumi.get(self, "timeout")
+
+    @timeout.setter
+    def timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "timeout", value)
 
 
 class SimpleMonitor(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -30,9 +460,7 @@ class SimpleMonitor(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  target: Optional[pulumi.Input[str]] = None,
                  timeout: Optional[pulumi.Input[int]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Simple Monitor.
 
@@ -83,12 +511,75 @@ class SimpleMonitor(pulumi.CustomResource):
         :param pulumi.Input[str] target: The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
         :param pulumi.Input[int] timeout: The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: SimpleMonitorArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Simple Monitor.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.SimpleMonitor("foobar",
+            delay_loop=60,
+            description="description",
+            health_check=sakuracloud.SimpleMonitorHealthCheckArgs(
+                contains_string="ok",
+                host_header="example.com",
+                http2=True,
+                path="/",
+                port=443,
+                protocol="https",
+                sni=True,
+                status=200,
+            ),
+            notify_email_enabled=True,
+            notify_email_html=True,
+            notify_slack_enabled=True,
+            notify_slack_webhook="https://hooks.slack.com/services/xxx/xxx/xxx",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            target="www.example.com",
+            timeout=10)
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param SimpleMonitorArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(SimpleMonitorArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 delay_loop: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 health_check: Optional[pulumi.Input[pulumi.InputType['SimpleMonitorHealthCheckArgs']]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 notify_email_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_email_html: Optional[pulumi.Input[bool]] = None,
+                 notify_interval: Optional[pulumi.Input[int]] = None,
+                 notify_slack_enabled: Optional[pulumi.Input[bool]] = None,
+                 notify_slack_webhook: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 target: Optional[pulumi.Input[str]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -98,25 +589,25 @@ class SimpleMonitor(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SimpleMonitorArgs.__new__(SimpleMonitorArgs)
 
-            __props__['delay_loop'] = delay_loop
-            __props__['description'] = description
-            __props__['enabled'] = enabled
+            __props__.__dict__["delay_loop"] = delay_loop
+            __props__.__dict__["description"] = description
+            __props__.__dict__["enabled"] = enabled
             if health_check is None and not opts.urn:
                 raise TypeError("Missing required property 'health_check'")
-            __props__['health_check'] = health_check
-            __props__['icon_id'] = icon_id
-            __props__['notify_email_enabled'] = notify_email_enabled
-            __props__['notify_email_html'] = notify_email_html
-            __props__['notify_interval'] = notify_interval
-            __props__['notify_slack_enabled'] = notify_slack_enabled
-            __props__['notify_slack_webhook'] = notify_slack_webhook
-            __props__['tags'] = tags
+            __props__.__dict__["health_check"] = health_check
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["notify_email_enabled"] = notify_email_enabled
+            __props__.__dict__["notify_email_html"] = notify_email_html
+            __props__.__dict__["notify_interval"] = notify_interval
+            __props__.__dict__["notify_slack_enabled"] = notify_slack_enabled
+            __props__.__dict__["notify_slack_webhook"] = notify_slack_webhook
+            __props__.__dict__["tags"] = tags
             if target is None and not opts.urn:
                 raise TypeError("Missing required property 'target'")
-            __props__['target'] = target
-            __props__['timeout'] = timeout
+            __props__.__dict__["target"] = target
+            __props__.__dict__["timeout"] = timeout
         super(SimpleMonitor, __self__).__init__(
             'sakuracloud:index/simpleMonitor:SimpleMonitor',
             resource_name,
@@ -163,21 +654,21 @@ class SimpleMonitor(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SimpleMonitorState.__new__(_SimpleMonitorState)
 
-        __props__["delay_loop"] = delay_loop
-        __props__["description"] = description
-        __props__["enabled"] = enabled
-        __props__["health_check"] = health_check
-        __props__["icon_id"] = icon_id
-        __props__["notify_email_enabled"] = notify_email_enabled
-        __props__["notify_email_html"] = notify_email_html
-        __props__["notify_interval"] = notify_interval
-        __props__["notify_slack_enabled"] = notify_slack_enabled
-        __props__["notify_slack_webhook"] = notify_slack_webhook
-        __props__["tags"] = tags
-        __props__["target"] = target
-        __props__["timeout"] = timeout
+        __props__.__dict__["delay_loop"] = delay_loop
+        __props__.__dict__["description"] = description
+        __props__.__dict__["enabled"] = enabled
+        __props__.__dict__["health_check"] = health_check
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["notify_email_enabled"] = notify_email_enabled
+        __props__.__dict__["notify_email_html"] = notify_email_html
+        __props__.__dict__["notify_interval"] = notify_interval
+        __props__.__dict__["notify_slack_enabled"] = notify_slack_enabled
+        __props__.__dict__["notify_slack_webhook"] = notify_slack_webhook
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["target"] = target
+        __props__.__dict__["timeout"] = timeout
         return SimpleMonitor(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -283,10 +774,4 @@ class SimpleMonitor(pulumi.CustomResource):
         The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
         """
         return pulumi.get(self, "timeout")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

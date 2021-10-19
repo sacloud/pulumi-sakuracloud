@@ -5,15 +5,302 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['GSLB']
+__all__ = ['GSLBArgs', 'GSLB']
+
+@pulumi.input_type
+class GSLBArgs:
+    def __init__(__self__, *,
+                 health_check: pulumi.Input['GSLBHealthCheckArgs'],
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]] = None,
+                 sorry_server: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 weighted: Optional[pulumi.Input[bool]] = None):
+        """
+        The set of arguments for constructing a GSLB resource.
+        :param pulumi.Input['GSLBHealthCheckArgs'] health_check: A `health_check` block as defined below.
+        :param pulumi.Input[str] description: The description of the GSLB. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the GSLB.
+        :param pulumi.Input[str] name: The name of the GSLB. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]] servers: One or more `server` blocks as defined below.
+        :param pulumi.Input[str] sorry_server: The IP address of the SorryServer. This will be used when all servers are down.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the GSLB.
+        :param pulumi.Input[bool] weighted: The flag to enable weighted load-balancing.
+        """
+        pulumi.set(__self__, "health_check", health_check)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if servers is not None:
+            pulumi.set(__self__, "servers", servers)
+        if sorry_server is not None:
+            pulumi.set(__self__, "sorry_server", sorry_server)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if weighted is not None:
+            pulumi.set(__self__, "weighted", weighted)
+
+    @property
+    @pulumi.getter(name="healthCheck")
+    def health_check(self) -> pulumi.Input['GSLBHealthCheckArgs']:
+        """
+        A `health_check` block as defined below.
+        """
+        return pulumi.get(self, "health_check")
+
+    @health_check.setter
+    def health_check(self, value: pulumi.Input['GSLBHealthCheckArgs']):
+        pulumi.set(self, "health_check", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the GSLB. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the GSLB.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the GSLB. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]]:
+        """
+        One or more `server` blocks as defined below.
+        """
+        return pulumi.get(self, "servers")
+
+    @servers.setter
+    def servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]]):
+        pulumi.set(self, "servers", value)
+
+    @property
+    @pulumi.getter(name="sorryServer")
+    def sorry_server(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IP address of the SorryServer. This will be used when all servers are down.
+        """
+        return pulumi.get(self, "sorry_server")
+
+    @sorry_server.setter
+    def sorry_server(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sorry_server", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the GSLB.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def weighted(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable weighted load-balancing.
+        """
+        return pulumi.get(self, "weighted")
+
+    @weighted.setter
+    def weighted(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "weighted", value)
+
+
+@pulumi.input_type
+class _GSLBState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fqdn: Optional[pulumi.Input[str]] = None,
+                 health_check: Optional[pulumi.Input['GSLBHealthCheckArgs']] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]] = None,
+                 sorry_server: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 weighted: Optional[pulumi.Input[bool]] = None):
+        """
+        Input properties used for looking up and filtering GSLB resources.
+        :param pulumi.Input[str] description: The description of the GSLB. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] fqdn: The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
+        :param pulumi.Input['GSLBHealthCheckArgs'] health_check: A `health_check` block as defined below.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the GSLB.
+        :param pulumi.Input[str] name: The name of the GSLB. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]] servers: One or more `server` blocks as defined below.
+        :param pulumi.Input[str] sorry_server: The IP address of the SorryServer. This will be used when all servers are down.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the GSLB.
+        :param pulumi.Input[bool] weighted: The flag to enable weighted load-balancing.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if health_check is not None:
+            pulumi.set(__self__, "health_check", health_check)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if servers is not None:
+            pulumi.set(__self__, "servers", servers)
+        if sorry_server is not None:
+            pulumi.set(__self__, "sorry_server", sorry_server)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if weighted is not None:
+            pulumi.set(__self__, "weighted", weighted)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the GSLB. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[pulumi.Input[str]]:
+        """
+        The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
+        """
+        return pulumi.get(self, "fqdn")
+
+    @fqdn.setter
+    def fqdn(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fqdn", value)
+
+    @property
+    @pulumi.getter(name="healthCheck")
+    def health_check(self) -> Optional[pulumi.Input['GSLBHealthCheckArgs']]:
+        """
+        A `health_check` block as defined below.
+        """
+        return pulumi.get(self, "health_check")
+
+    @health_check.setter
+    def health_check(self, value: Optional[pulumi.Input['GSLBHealthCheckArgs']]):
+        pulumi.set(self, "health_check", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the GSLB.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the GSLB. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]]:
+        """
+        One or more `server` blocks as defined below.
+        """
+        return pulumi.get(self, "servers")
+
+    @servers.setter
+    def servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['GSLBServerArgs']]]]):
+        pulumi.set(self, "servers", value)
+
+    @property
+    @pulumi.getter(name="sorryServer")
+    def sorry_server(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IP address of the SorryServer. This will be used when all servers are down.
+        """
+        return pulumi.get(self, "sorry_server")
+
+    @sorry_server.setter
+    def sorry_server(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sorry_server", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the GSLB.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def weighted(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable weighted load-balancing.
+        """
+        return pulumi.get(self, "weighted")
+
+    @weighted.setter
+    def weighted(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "weighted", value)
 
 
 class GSLB(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -25,9 +312,7 @@ class GSLB(pulumi.CustomResource):
                  sorry_server: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  weighted: Optional[pulumi.Input[bool]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud GSLB.
 
@@ -76,12 +361,73 @@ class GSLB(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the GSLB.
         :param pulumi.Input[bool] weighted: The flag to enable weighted load-balancing.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: GSLBArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud GSLB.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.GSLB("foobar",
+            description="description",
+            health_check=sakuracloud.GSLBHealthCheckArgs(
+                delay_loop=10,
+                host_header="example.com",
+                path="/",
+                protocol="http",
+                status="200",
+            ),
+            servers=[
+                sakuracloud.GSLBServerArgs(
+                    enabled=True,
+                    ip_address="192.2.0.11",
+                    weight=1,
+                ),
+                sakuracloud.GSLBServerArgs(
+                    enabled=True,
+                    ip_address="192.2.0.12",
+                    weight=1,
+                ),
+            ],
+            sorry_server="192.2.0.1",
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param GSLBArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(GSLBArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 health_check: Optional[pulumi.Input[pulumi.InputType['GSLBHealthCheckArgs']]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['GSLBServerArgs']]]]] = None,
+                 sorry_server: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 weighted: Optional[pulumi.Input[bool]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -91,19 +437,19 @@ class GSLB(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = GSLBArgs.__new__(GSLBArgs)
 
-            __props__['description'] = description
+            __props__.__dict__["description"] = description
             if health_check is None and not opts.urn:
                 raise TypeError("Missing required property 'health_check'")
-            __props__['health_check'] = health_check
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
-            __props__['servers'] = servers
-            __props__['sorry_server'] = sorry_server
-            __props__['tags'] = tags
-            __props__['weighted'] = weighted
-            __props__['fqdn'] = None
+            __props__.__dict__["health_check"] = health_check
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
+            __props__.__dict__["servers"] = servers
+            __props__.__dict__["sorry_server"] = sorry_server
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["weighted"] = weighted
+            __props__.__dict__["fqdn"] = None
         super(GSLB, __self__).__init__(
             'sakuracloud:index/gSLB:GSLB',
             resource_name,
@@ -142,17 +488,17 @@ class GSLB(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _GSLBState.__new__(_GSLBState)
 
-        __props__["description"] = description
-        __props__["fqdn"] = fqdn
-        __props__["health_check"] = health_check
-        __props__["icon_id"] = icon_id
-        __props__["name"] = name
-        __props__["servers"] = servers
-        __props__["sorry_server"] = sorry_server
-        __props__["tags"] = tags
-        __props__["weighted"] = weighted
+        __props__.__dict__["description"] = description
+        __props__.__dict__["fqdn"] = fqdn
+        __props__.__dict__["health_check"] = health_check
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["servers"] = servers
+        __props__.__dict__["sorry_server"] = sorry_server
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["weighted"] = weighted
         return GSLB(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -226,10 +572,4 @@ class GSLB(pulumi.CustomResource):
         The flag to enable weighted load-balancing.
         """
         return pulumi.get(self, "weighted")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

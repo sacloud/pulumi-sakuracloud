@@ -16,7 +16,7 @@ import * as utilities from "./utilities";
  *
  * const foobar = pulumi.output(sakuracloud.getArchive({
  *     osType: "centos8",
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getArchive(args?: GetArchiveArgs, opts?: pulumi.InvokeOptions): Promise<GetArchiveResult> {
@@ -42,7 +42,7 @@ export interface GetArchiveArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetArchiveFilter;
+    filter?: inputs.GetArchiveFilter;
     /**
      * The criteria used to filter SakuraCloud archives. This must be one of following:  
      * - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`]
@@ -61,11 +61,11 @@ export interface GetArchiveArgs {
      * - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
      * - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
      */
-    readonly osType?: string;
+    osType?: string;
     /**
      * The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -99,4 +99,41 @@ export interface GetArchiveResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getArchiveOutput(args?: GetArchiveOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetArchiveResult> {
+    return pulumi.output(args).apply(a => getArchive(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getArchive.
+ */
+export interface GetArchiveOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetArchiveFilterArgs>;
+    /**
+     * The criteria used to filter SakuraCloud archives. This must be one of following:  
+     * - **CentOS**: [`centos`/`centos8`/`centos8stream`/`centos7`]
+     * - **Alt RHEL/CentOS**: [`almalinux`/`rockylinux`/`miracle`/`miraclelinux`]
+     * - **Ubuntu**: [`ubuntu`/`ubuntu2004`/`ubuntu1804`]
+     * - **Debian**: [`debian`/`debian10`/`debian11`]
+     * - **CoreOS/ContainerLinux**: `coreos`
+     * - **RancherOS**: `rancheros`
+     * - **k3OS**: `k3os`
+     * - **FreeBSD**: `freebsd`
+     * - **Kusanagi**: `kusanagi`
+     * - **Windows2016**: [`windows2016`/`windows2016-rds`/`windows2016-rds-office`]
+     * - **Windows2016+SQLServer**:  [`windows2016-sql-web`/`windows2016-sql-standard`/`windows2016-sql-standard-all`]
+     * - **Windows2016+SQLServer2017**: [`windows2016-sql2017-standard`/`windows2016-sql2017-enterprise`/`windows2016-sql2017-standard-all`]
+     * - **Windows2019**: [`windows2019`/`windows2019-rds`/`windows2019-rds-office2016`/`windows2019-rds-office2019`]
+     * - **Windows2019+SQLServer2017**: [`windows2019-sql2017-web`/`windows2019-sql2017-standard`/`windows2019-sql2017-enterprise`/`windows2019-sql2017-standard-all`]
+     * - **Windows2019+SQLServer2019**: [`windows2019-sql2019-web`/`windows2019-sql2019-standard`/`windows2019-sql2019-enterprise`/`windows2019-sql2019-standard-all`]
+     */
+    osType?: pulumi.Input<string>;
+    /**
+     * The name of zone that the Archive is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

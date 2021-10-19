@@ -114,27 +114,27 @@ export interface SSHKeyGenState {
     /**
      * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The fingerprint of the public key.
      */
-    readonly fingerprint?: pulumi.Input<string>;
+    fingerprint?: pulumi.Input<string>;
     /**
      * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly passPhrase?: pulumi.Input<string>;
+    passPhrase?: pulumi.Input<string>;
     /**
      * The body of the private key.
      */
-    readonly privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string>;
     /**
      * The body of the public key.
      */
-    readonly publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string>;
 }
 
 /**
@@ -144,13 +144,13 @@ export interface SSHKeyGenArgs {
     /**
      * The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly passPhrase?: pulumi.Input<string>;
+    passPhrase?: pulumi.Input<string>;
 }

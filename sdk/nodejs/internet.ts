@@ -194,75 +194,75 @@ export interface InternetState {
      * The bandwidth of the network connected to the Internet in Mbps. This must be one of [`100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`3500`/`4000`/`4500`/`5000`]. 
      * If zone is `tk1b`, the following values can also be specified [`5500`/`6000`/`6500`/`7000`/`7500`/`8000`/`8500`/`9000`/`9500`/`10000`]. Default:`100`.
      */
-    readonly bandWidth?: pulumi.Input<number>;
+    bandWidth?: pulumi.Input<number>;
     /**
      * The description of the Switch+Router. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The flag to enable IPv6.
      */
-    readonly enableIpv6?: pulumi.Input<boolean>;
+    enableIpv6?: pulumi.Input<boolean>;
     /**
      * The IP address of the gateway used by the Switch+Router.
      */
-    readonly gateway?: pulumi.Input<string>;
+    gateway?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Switch+Router.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * A list of assigned global address to the Switch+Router.
      */
-    readonly ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The IPv6 network address assigned to the Switch+Router.
      */
-    readonly ipv6NetworkAddress?: pulumi.Input<string>;
+    ipv6NetworkAddress?: pulumi.Input<string>;
     /**
      * The network prefix of assigned IPv6 addresses to the Switch+Router.
      */
-    readonly ipv6Prefix?: pulumi.Input<string>;
+    ipv6Prefix?: pulumi.Input<string>;
     /**
      * The bit length of IPv6 network prefix.
      */
-    readonly ipv6PrefixLen?: pulumi.Input<number>;
+    ipv6PrefixLen?: pulumi.Input<number>;
     /**
      * Maximum IP address in assigned global addresses to the Switch+Router.
      */
-    readonly maxIpAddress?: pulumi.Input<string>;
+    maxIpAddress?: pulumi.Input<string>;
     /**
      * Minimum IP address in assigned global addresses to the Switch+Router.
      */
-    readonly minIpAddress?: pulumi.Input<string>;
+    minIpAddress?: pulumi.Input<string>;
     /**
      * The name of the Switch+Router. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`. Changing this forces a new resource to be created. Default:`28`.
      */
-    readonly netmask?: pulumi.Input<number>;
+    netmask?: pulumi.Input<number>;
     /**
      * The IPv4 network address assigned to the Switch+Router.
      */
-    readonly networkAddress?: pulumi.Input<string>;
+    networkAddress?: pulumi.Input<string>;
     /**
      * A list of the ID of Servers connected to the Switch+Router.
      */
-    readonly serverIds?: pulumi.Input<pulumi.Input<string>[]>;
+    serverIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The id of the switch.
      */
-    readonly switchId?: pulumi.Input<string>;
+    switchId?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Switch+Router.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the Switch+Router will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -273,33 +273,33 @@ export interface InternetArgs {
      * The bandwidth of the network connected to the Internet in Mbps. This must be one of [`100`/`250`/`500`/`1000`/`1500`/`2000`/`2500`/`3000`/`3500`/`4000`/`4500`/`5000`]. 
      * If zone is `tk1b`, the following values can also be specified [`5500`/`6000`/`6500`/`7000`/`7500`/`8000`/`8500`/`9000`/`9500`/`10000`]. Default:`100`.
      */
-    readonly bandWidth?: pulumi.Input<number>;
+    bandWidth?: pulumi.Input<number>;
     /**
      * The description of the Switch+Router. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The flag to enable IPv6.
      */
-    readonly enableIpv6?: pulumi.Input<boolean>;
+    enableIpv6?: pulumi.Input<boolean>;
     /**
      * The icon id to attach to the Switch+Router.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Switch+Router. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The bit length of the subnet assigned to the Switch+Router. `26`/`27`/`28`. Changing this forces a new resource to be created. Default:`28`.
      */
-    readonly netmask?: pulumi.Input<number>;
+    netmask?: pulumi.Input<number>;
     /**
      * Any tags to assign to the Switch+Router.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the Switch+Router will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

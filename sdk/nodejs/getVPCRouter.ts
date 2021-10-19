@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getVPCRouter(args?: GetVPCRouterArgs, opts?: pulumi.InvokeOptions): Promise<GetVPCRouterResult> {
@@ -43,11 +43,11 @@ export interface GetVPCRouterArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetVPCRouterFilter;
+    filter?: inputs.GetVPCRouterFilter;
     /**
      * The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -152,4 +152,22 @@ export interface GetVPCRouterResult {
      */
     readonly wireGuards: outputs.GetVPCRouterWireGuard[];
     readonly zone: string;
+}
+
+export function getVPCRouterOutput(args?: GetVPCRouterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVPCRouterResult> {
+    return pulumi.output(args).apply(a => getVPCRouter(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getVPCRouter.
+ */
+export interface GetVPCRouterOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetVPCRouterFilterArgs>;
+    /**
+     * The name of zone that the VPC Router is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

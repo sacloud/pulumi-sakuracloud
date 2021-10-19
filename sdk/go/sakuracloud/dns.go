@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud DNS.
@@ -20,20 +20,20 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := sakuracloud.NewDNS(ctx, "foobar", &sakuracloud.DNSArgs{
 // 			Description: pulumi.String("description"),
-// 			Records: sakuracloud.DNSRecordArray{
-// 				&sakuracloud.DNSRecordArgs{
+// 			Records: DNSRecordArray{
+// 				&DNSRecordArgs{
 // 					Name:  pulumi.String("www"),
 // 					Type:  pulumi.String("A"),
 // 					Value: pulumi.String("192.168.11.1"),
 // 				},
-// 				&sakuracloud.DNSRecordArgs{
+// 				&DNSRecordArgs{
 // 					Name:  pulumi.String("www"),
 // 					Type:  pulumi.String("A"),
 // 					Value: pulumi.String("192.168.11.2"),
@@ -227,7 +227,7 @@ type DNSArrayInput interface {
 type DNSArray []DNSInput
 
 func (DNSArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*DNS)(nil))
+	return reflect.TypeOf((*[]*DNS)(nil)).Elem()
 }
 
 func (i DNSArray) ToDNSArrayOutput() DNSArrayOutput {
@@ -252,7 +252,7 @@ type DNSMapInput interface {
 type DNSMap map[string]DNSInput
 
 func (DNSMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*DNS)(nil))
+	return reflect.TypeOf((*map[string]*DNS)(nil)).Elem()
 }
 
 func (i DNSMap) ToDNSMapOutput() DNSMapOutput {
@@ -263,9 +263,7 @@ func (i DNSMap) ToDNSMapOutputWithContext(ctx context.Context) DNSMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(DNSMapOutput)
 }
 
-type DNSOutput struct {
-	*pulumi.OutputState
-}
+type DNSOutput struct{ *pulumi.OutputState }
 
 func (DNSOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DNS)(nil))
@@ -284,14 +282,12 @@ func (o DNSOutput) ToDNSPtrOutput() DNSPtrOutput {
 }
 
 func (o DNSOutput) ToDNSPtrOutputWithContext(ctx context.Context) DNSPtrOutput {
-	return o.ApplyT(func(v DNS) *DNS {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DNS) *DNS {
 		return &v
 	}).(DNSPtrOutput)
 }
 
-type DNSPtrOutput struct {
-	*pulumi.OutputState
-}
+type DNSPtrOutput struct{ *pulumi.OutputState }
 
 func (DNSPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**DNS)(nil))
@@ -303,6 +299,16 @@ func (o DNSPtrOutput) ToDNSPtrOutput() DNSPtrOutput {
 
 func (o DNSPtrOutput) ToDNSPtrOutputWithContext(ctx context.Context) DNSPtrOutput {
 	return o
+}
+
+func (o DNSPtrOutput) Elem() DNSOutput {
+	return o.ApplyT(func(v *DNS) DNS {
+		if v != nil {
+			return *v
+		}
+		var ret DNS
+		return ret
+	}).(DNSOutput)
 }
 
 type DNSArrayOutput struct{ *pulumi.OutputState }
@@ -346,6 +352,10 @@ func (o DNSMapOutput) MapIndex(k pulumi.StringInput) DNSOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSInput)(nil)).Elem(), &DNS{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSPtrInput)(nil)).Elem(), &DNS{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSArrayInput)(nil)).Elem(), DNSArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSMapInput)(nil)).Elem(), DNSMap{})
 	pulumi.RegisterOutputType(DNSOutput{})
 	pulumi.RegisterOutputType(DNSPtrOutput{})
 	pulumi.RegisterOutputType(DNSArrayOutput{})

@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getGSLB(args?: GetGSLBArgs, opts?: pulumi.InvokeOptions): Promise<GetGSLBResult> {
@@ -42,7 +42,7 @@ export interface GetGSLBArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetGSLBFilter;
+    filter?: inputs.GetGSLBFilter;
 }
 
 /**
@@ -90,4 +90,18 @@ export interface GetGSLBResult {
      * The flag to enable weighted load-balancing.
      */
     readonly weighted: boolean;
+}
+
+export function getGSLBOutput(args?: GetGSLBOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGSLBResult> {
+    return pulumi.output(args).apply(a => getGSLB(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getGSLB.
+ */
+export interface GetGSLBOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetGSLBFilterArgs>;
 }

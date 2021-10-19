@@ -52,7 +52,7 @@ import * as utilities from "./utilities";
  *     ],
  *     peers: [{
  *         peerId: peer.then(peer => peer.id),
- *         secretKey: peer.then(peer => peer.secretKeys[0]),
+ *         secretKey: peer.then(peer => peer.secretKeys?[0]),
  *         description: "description",
  *     }],
  * });
@@ -177,39 +177,39 @@ export interface LocalRouterState {
     /**
      * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the LoadBalancer.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface?: pulumi.Input<inputs.LocalRouterNetworkInterface>;
+    networkInterface?: pulumi.Input<inputs.LocalRouterNetworkInterface>;
     /**
      * One or more `peer` blocks as defined below.
      */
-    readonly peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
+    peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
     /**
      * A list of secret key used for peering from other LocalRouters.
      */
-    readonly secretKeys?: pulumi.Input<pulumi.Input<string>[]>;
+    secretKeys?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * One or more `staticRoute` blocks as defined below.
      */
-    readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
+    staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
     /**
      * A `switch` block as defined below.
      */
-    readonly switch?: pulumi.Input<inputs.LocalRouterSwitch>;
+    switch?: pulumi.Input<inputs.LocalRouterSwitch>;
     /**
      * Any tags to assign to the LoadBalancer.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -219,33 +219,33 @@ export interface LocalRouterArgs {
     /**
      * The description of the LocalRouter. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the LoadBalancer.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the LocalRouter. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface: pulumi.Input<inputs.LocalRouterNetworkInterface>;
+    networkInterface: pulumi.Input<inputs.LocalRouterNetworkInterface>;
     /**
      * One or more `peer` blocks as defined below.
      */
-    readonly peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
+    peers?: pulumi.Input<pulumi.Input<inputs.LocalRouterPeer>[]>;
     /**
      * One or more `staticRoute` blocks as defined below.
      */
-    readonly staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
+    staticRoutes?: pulumi.Input<pulumi.Input<inputs.LocalRouterStaticRoute>[]>;
     /**
      * A `switch` block as defined below.
      */
-    readonly switch: pulumi.Input<inputs.LocalRouterSwitch>;
+    switch: pulumi.Input<inputs.LocalRouterSwitch>;
     /**
      * Any tags to assign to the LoadBalancer.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

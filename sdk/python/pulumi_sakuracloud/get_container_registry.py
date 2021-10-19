@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetContainerRegistryResult',
     'AwaitableGetContainerRegistryResult',
     'get_container_registry',
+    'get_container_registry_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,26 @@ def get_container_registry(filter: Optional[pulumi.InputType['GetContainerRegist
         tags=__ret__.tags,
         users=__ret__.users,
         virtual_domain=__ret__.virtual_domain)
+
+
+@_utilities.lift_output_func(get_container_registry)
+def get_container_registry_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetContainerRegistryFilterArgs']]]] = None,
+                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetContainerRegistryResult]:
+    """
+    Get information about an existing Container Registry.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_container_registry(filter=sakuracloud.GetContainerRegistryFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetContainerRegistryFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

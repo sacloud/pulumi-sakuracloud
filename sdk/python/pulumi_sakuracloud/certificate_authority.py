@@ -5,15 +5,365 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['CertificateAuthority']
+__all__ = ['CertificateAuthorityArgs', 'CertificateAuthority']
+
+@pulumi.input_type
+class CertificateAuthorityArgs:
+    def __init__(__self__, *,
+                 subject: pulumi.Input['CertificateAuthoritySubjectArgs'],
+                 validity_period_hours: pulumi.Input[int],
+                 clients: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a CertificateAuthority resource.
+        :param pulumi.Input['CertificateAuthoritySubjectArgs'] subject: A `subject` block as defined below. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]] clients: One or more `client` blocks as defined below.
+        :param pulumi.Input[str] description: The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Certificate Authority.
+        :param pulumi.Input[str] name: The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]] servers: One or more `server` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Certificate Authority.
+        """
+        pulumi.set(__self__, "subject", subject)
+        pulumi.set(__self__, "validity_period_hours", validity_period_hours)
+        if clients is not None:
+            pulumi.set(__self__, "clients", clients)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if servers is not None:
+            pulumi.set(__self__, "servers", servers)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def subject(self) -> pulumi.Input['CertificateAuthoritySubjectArgs']:
+        """
+        A `subject` block as defined below. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: pulumi.Input['CertificateAuthoritySubjectArgs']):
+        pulumi.set(self, "subject", value)
+
+    @property
+    @pulumi.getter(name="validityPeriodHours")
+    def validity_period_hours(self) -> pulumi.Input[int]:
+        """
+        The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "validity_period_hours")
+
+    @validity_period_hours.setter
+    def validity_period_hours(self, value: pulumi.Input[int]):
+        pulumi.set(self, "validity_period_hours", value)
+
+    @property
+    @pulumi.getter
+    def clients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]]:
+        """
+        One or more `client` blocks as defined below.
+        """
+        return pulumi.get(self, "clients")
+
+    @clients.setter
+    def clients(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]]):
+        pulumi.set(self, "clients", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Certificate Authority.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]]:
+        """
+        One or more `server` blocks as defined below.
+        """
+        return pulumi.get(self, "servers")
+
+    @servers.setter
+    def servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]]):
+        pulumi.set(self, "servers", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Certificate Authority.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class _CertificateAuthorityState:
+    def __init__(__self__, *,
+                 certificate: Optional[pulumi.Input[str]] = None,
+                 clients: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]] = None,
+                 crl_url: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 not_after: Optional[pulumi.Input[str]] = None,
+                 not_before: Optional[pulumi.Input[str]] = None,
+                 serial_number: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]] = None,
+                 subject: Optional[pulumi.Input['CertificateAuthoritySubjectArgs']] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 validity_period_hours: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering CertificateAuthority resources.
+        :param pulumi.Input[str] certificate: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]] clients: One or more `client` blocks as defined below.
+        :param pulumi.Input[str] crl_url: The URL of the CRL.
+        :param pulumi.Input[str] description: The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Certificate Authority.
+        :param pulumi.Input[str] name: The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] not_after: The date on which the certificate validity period ends, in RFC3339 format.
+        :param pulumi.Input[str] not_before: The date on which the certificate validity period begins, in RFC3339 format.
+        :param pulumi.Input[str] serial_number: The body of the CA's certificate in PEM format.
+        :param pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]] servers: One or more `server` blocks as defined below.
+        :param pulumi.Input['CertificateAuthoritySubjectArgs'] subject: A `subject` block as defined below. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Certificate Authority.
+        :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
+        """
+        if certificate is not None:
+            pulumi.set(__self__, "certificate", certificate)
+        if clients is not None:
+            pulumi.set(__self__, "clients", clients)
+        if crl_url is not None:
+            pulumi.set(__self__, "crl_url", crl_url)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if not_after is not None:
+            pulumi.set(__self__, "not_after", not_after)
+        if not_before is not None:
+            pulumi.set(__self__, "not_before", not_before)
+        if serial_number is not None:
+            pulumi.set(__self__, "serial_number", serial_number)
+        if servers is not None:
+            pulumi.set(__self__, "servers", servers)
+        if subject is not None:
+            pulumi.set(__self__, "subject", subject)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if validity_period_hours is not None:
+            pulumi.set(__self__, "validity_period_hours", validity_period_hours)
+
+    @property
+    @pulumi.getter
+    def certificate(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "certificate")
+
+    @certificate.setter
+    def certificate(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate", value)
+
+    @property
+    @pulumi.getter
+    def clients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]]:
+        """
+        One or more `client` blocks as defined below.
+        """
+        return pulumi.get(self, "clients")
+
+    @clients.setter
+    def clients(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityClientArgs']]]]):
+        pulumi.set(self, "clients", value)
+
+    @property
+    @pulumi.getter(name="crlUrl")
+    def crl_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL of the CRL.
+        """
+        return pulumi.get(self, "crl_url")
+
+    @crl_url.setter
+    def crl_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "crl_url", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Certificate Authority.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="notAfter")
+    def not_after(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period ends, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_after")
+
+    @not_after.setter
+    def not_after(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_after", value)
+
+    @property
+    @pulumi.getter(name="notBefore")
+    def not_before(self) -> Optional[pulumi.Input[str]]:
+        """
+        The date on which the certificate validity period begins, in RFC3339 format.
+        """
+        return pulumi.get(self, "not_before")
+
+    @not_before.setter
+    def not_before(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_before", value)
+
+    @property
+    @pulumi.getter(name="serialNumber")
+    def serial_number(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the CA's certificate in PEM format.
+        """
+        return pulumi.get(self, "serial_number")
+
+    @serial_number.setter
+    def serial_number(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serial_number", value)
+
+    @property
+    @pulumi.getter
+    def servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]]:
+        """
+        One or more `server` blocks as defined below.
+        """
+        return pulumi.get(self, "servers")
+
+    @servers.setter
+    def servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CertificateAuthorityServerArgs']]]]):
+        pulumi.set(self, "servers", value)
+
+    @property
+    @pulumi.getter
+    def subject(self) -> Optional[pulumi.Input['CertificateAuthoritySubjectArgs']]:
+        """
+        A `subject` block as defined below. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject")
+
+    @subject.setter
+    def subject(self, value: Optional[pulumi.Input['CertificateAuthoritySubjectArgs']]):
+        pulumi.set(self, "subject", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Certificate Authority.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="validityPeriodHours")
+    def validity_period_hours(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "validity_period_hours")
+
+    @validity_period_hours.setter
+    def validity_period_hours(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "validity_period_hours", value)
 
 
 class CertificateAuthority(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -25,9 +375,7 @@ class CertificateAuthority(pulumi.CustomResource):
                  subject: Optional[pulumi.Input[pulumi.InputType['CertificateAuthoritySubjectArgs']]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  validity_period_hours: Optional[pulumi.Input[int]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud sakuracloud_certificate_authority.
 
@@ -42,12 +390,39 @@ class CertificateAuthority(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Certificate Authority.
         :param pulumi.Input[int] validity_period_hours: The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: CertificateAuthorityArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud sakuracloud_certificate_authority.
+
+        :param str resource_name: The name of the resource.
+        :param CertificateAuthorityArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(CertificateAuthorityArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 clients: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertificateAuthorityClientArgs']]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 servers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CertificateAuthorityServerArgs']]]]] = None,
+                 subject: Optional[pulumi.Input[pulumi.InputType['CertificateAuthoritySubjectArgs']]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 validity_period_hours: Optional[pulumi.Input[int]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -57,25 +432,25 @@ class CertificateAuthority(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = CertificateAuthorityArgs.__new__(CertificateAuthorityArgs)
 
-            __props__['clients'] = clients
-            __props__['description'] = description
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
-            __props__['servers'] = servers
+            __props__.__dict__["clients"] = clients
+            __props__.__dict__["description"] = description
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
+            __props__.__dict__["servers"] = servers
             if subject is None and not opts.urn:
                 raise TypeError("Missing required property 'subject'")
-            __props__['subject'] = subject
-            __props__['tags'] = tags
+            __props__.__dict__["subject"] = subject
+            __props__.__dict__["tags"] = tags
             if validity_period_hours is None and not opts.urn:
                 raise TypeError("Missing required property 'validity_period_hours'")
-            __props__['validity_period_hours'] = validity_period_hours
-            __props__['certificate'] = None
-            __props__['crl_url'] = None
-            __props__['not_after'] = None
-            __props__['not_before'] = None
-            __props__['serial_number'] = None
+            __props__.__dict__["validity_period_hours"] = validity_period_hours
+            __props__.__dict__["certificate"] = None
+            __props__.__dict__["crl_url"] = None
+            __props__.__dict__["not_after"] = None
+            __props__.__dict__["not_before"] = None
+            __props__.__dict__["serial_number"] = None
         super(CertificateAuthority, __self__).__init__(
             'sakuracloud:index/certificateAuthority:CertificateAuthority',
             resource_name,
@@ -122,21 +497,21 @@ class CertificateAuthority(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _CertificateAuthorityState.__new__(_CertificateAuthorityState)
 
-        __props__["certificate"] = certificate
-        __props__["clients"] = clients
-        __props__["crl_url"] = crl_url
-        __props__["description"] = description
-        __props__["icon_id"] = icon_id
-        __props__["name"] = name
-        __props__["not_after"] = not_after
-        __props__["not_before"] = not_before
-        __props__["serial_number"] = serial_number
-        __props__["servers"] = servers
-        __props__["subject"] = subject
-        __props__["tags"] = tags
-        __props__["validity_period_hours"] = validity_period_hours
+        __props__.__dict__["certificate"] = certificate
+        __props__.__dict__["clients"] = clients
+        __props__.__dict__["crl_url"] = crl_url
+        __props__.__dict__["description"] = description
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["not_after"] = not_after
+        __props__.__dict__["not_before"] = not_before
+        __props__.__dict__["serial_number"] = serial_number
+        __props__.__dict__["servers"] = servers
+        __props__.__dict__["subject"] = subject
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["validity_period_hours"] = validity_period_hours
         return CertificateAuthority(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -242,10 +617,4 @@ class CertificateAuthority(pulumi.CustomResource):
         The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "validity_period_hours")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

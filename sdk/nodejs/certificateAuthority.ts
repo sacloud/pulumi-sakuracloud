@@ -151,55 +151,55 @@ export interface CertificateAuthorityState {
     /**
      * The body of the CA's certificate in PEM format.
      */
-    readonly certificate?: pulumi.Input<string>;
+    certificate?: pulumi.Input<string>;
     /**
      * One or more `client` blocks as defined below.
      */
-    readonly clients?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityClient>[]>;
+    clients?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityClient>[]>;
     /**
      * The URL of the CRL.
      */
-    readonly crlUrl?: pulumi.Input<string>;
+    crlUrl?: pulumi.Input<string>;
     /**
      * The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Certificate Authority.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The date on which the certificate validity period ends, in RFC3339 format.
      */
-    readonly notAfter?: pulumi.Input<string>;
+    notAfter?: pulumi.Input<string>;
     /**
      * The date on which the certificate validity period begins, in RFC3339 format.
      */
-    readonly notBefore?: pulumi.Input<string>;
+    notBefore?: pulumi.Input<string>;
     /**
      * The body of the CA's certificate in PEM format.
      */
-    readonly serialNumber?: pulumi.Input<string>;
+    serialNumber?: pulumi.Input<string>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityServer>[]>;
     /**
      * A `subject` block as defined below. Changing this forces a new resource to be created.
      */
-    readonly subject?: pulumi.Input<inputs.CertificateAuthoritySubject>;
+    subject?: pulumi.Input<inputs.CertificateAuthoritySubject>;
     /**
      * Any tags to assign to the Certificate Authority.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
      */
-    readonly validityPeriodHours?: pulumi.Input<number>;
+    validityPeriodHours?: pulumi.Input<number>;
 }
 
 /**
@@ -209,33 +209,33 @@ export interface CertificateAuthorityArgs {
     /**
      * One or more `client` blocks as defined below.
      */
-    readonly clients?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityClient>[]>;
+    clients?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityClient>[]>;
     /**
      * The description of the Certificate Authority. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Certificate Authority.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Certificate Authority. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * One or more `server` blocks as defined below.
      */
-    readonly servers?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityServer>[]>;
+    servers?: pulumi.Input<pulumi.Input<inputs.CertificateAuthorityServer>[]>;
     /**
      * A `subject` block as defined below. Changing this forces a new resource to be created.
      */
-    readonly subject: pulumi.Input<inputs.CertificateAuthoritySubject>;
+    subject: pulumi.Input<inputs.CertificateAuthoritySubject>;
     /**
      * Any tags to assign to the Certificate Authority.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The number of hours after initial issuing that the certificate will become invalid. Changing this forces a new resource to be created.
      */
-    readonly validityPeriodHours: pulumi.Input<number>;
+    validityPeriodHours: pulumi.Input<number>;
 }

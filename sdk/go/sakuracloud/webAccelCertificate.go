@@ -8,10 +8,52 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud sakuracloud_webaccel_certificate.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"io/ioutil"
+//
+// 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func readFileOrPanic(path string) pulumi.StringPtrInput {
+// 	data, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+// 	return pulumi.String(string(data))
+// }
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		opt0 := "your-site-name"
+// 		site, err := sakuracloud.GetWebAccel(ctx, &GetWebAccelArgs{
+// 			Name: &opt0,
+// 		}, nil)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = sakuracloud.NewWebAccelCertificate(ctx, "foobar", &sakuracloud.WebAccelCertificateArgs{
+// 			SiteId:           pulumi.String(site.Id),
+// 			CertificateChain: readFileOrPanic("path/to/your/certificate/chain"),
+// 			PrivateKey:       readFileOrPanic("path/to/your/private/key"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type WebAccelCertificate struct {
 	pulumi.CustomResourceState
 
@@ -209,7 +251,7 @@ type WebAccelCertificateArrayInput interface {
 type WebAccelCertificateArray []WebAccelCertificateInput
 
 func (WebAccelCertificateArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*WebAccelCertificate)(nil))
+	return reflect.TypeOf((*[]*WebAccelCertificate)(nil)).Elem()
 }
 
 func (i WebAccelCertificateArray) ToWebAccelCertificateArrayOutput() WebAccelCertificateArrayOutput {
@@ -234,7 +276,7 @@ type WebAccelCertificateMapInput interface {
 type WebAccelCertificateMap map[string]WebAccelCertificateInput
 
 func (WebAccelCertificateMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*WebAccelCertificate)(nil))
+	return reflect.TypeOf((*map[string]*WebAccelCertificate)(nil)).Elem()
 }
 
 func (i WebAccelCertificateMap) ToWebAccelCertificateMapOutput() WebAccelCertificateMapOutput {
@@ -245,9 +287,7 @@ func (i WebAccelCertificateMap) ToWebAccelCertificateMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(WebAccelCertificateMapOutput)
 }
 
-type WebAccelCertificateOutput struct {
-	*pulumi.OutputState
-}
+type WebAccelCertificateOutput struct{ *pulumi.OutputState }
 
 func (WebAccelCertificateOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*WebAccelCertificate)(nil))
@@ -266,14 +306,12 @@ func (o WebAccelCertificateOutput) ToWebAccelCertificatePtrOutput() WebAccelCert
 }
 
 func (o WebAccelCertificateOutput) ToWebAccelCertificatePtrOutputWithContext(ctx context.Context) WebAccelCertificatePtrOutput {
-	return o.ApplyT(func(v WebAccelCertificate) *WebAccelCertificate {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebAccelCertificate) *WebAccelCertificate {
 		return &v
 	}).(WebAccelCertificatePtrOutput)
 }
 
-type WebAccelCertificatePtrOutput struct {
-	*pulumi.OutputState
-}
+type WebAccelCertificatePtrOutput struct{ *pulumi.OutputState }
 
 func (WebAccelCertificatePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**WebAccelCertificate)(nil))
@@ -285,6 +323,16 @@ func (o WebAccelCertificatePtrOutput) ToWebAccelCertificatePtrOutput() WebAccelC
 
 func (o WebAccelCertificatePtrOutput) ToWebAccelCertificatePtrOutputWithContext(ctx context.Context) WebAccelCertificatePtrOutput {
 	return o
+}
+
+func (o WebAccelCertificatePtrOutput) Elem() WebAccelCertificateOutput {
+	return o.ApplyT(func(v *WebAccelCertificate) WebAccelCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret WebAccelCertificate
+		return ret
+	}).(WebAccelCertificateOutput)
 }
 
 type WebAccelCertificateArrayOutput struct{ *pulumi.OutputState }
@@ -328,6 +376,10 @@ func (o WebAccelCertificateMapOutput) MapIndex(k pulumi.StringInput) WebAccelCer
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*WebAccelCertificateInput)(nil)).Elem(), &WebAccelCertificate{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebAccelCertificatePtrInput)(nil)).Elem(), &WebAccelCertificate{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebAccelCertificateArrayInput)(nil)).Elem(), WebAccelCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebAccelCertificateMapInput)(nil)).Elem(), WebAccelCertificateMap{})
 	pulumi.RegisterOutputType(WebAccelCertificateOutput{})
 	pulumi.RegisterOutputType(WebAccelCertificatePtrOutput{})
 	pulumi.RegisterOutputType(WebAccelCertificateArrayOutput{})

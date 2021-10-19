@@ -5,15 +5,478 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['MobileGateway']
+__all__ = ['MobileGatewayArgs', 'MobileGateway']
+
+@pulumi.input_type
+class MobileGatewayArgs:
+    def __init__(__self__, *,
+                 dns_servers: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 inter_device_communication: Optional[pulumi.Input[bool]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 private_network_interface: Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']] = None,
+                 sim_routes: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]] = None,
+                 sims: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 traffic_control: Optional[pulumi.Input['MobileGatewayTrafficControlArgs']] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a MobileGateway resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: A list of IP address used by each connected devices.
+        :param pulumi.Input[str] description: The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the MobileGateway.
+        :param pulumi.Input[bool] inter_device_communication: The flag to allow communication between each connected devices.
+        :param pulumi.Input[bool] internet_connection: The flag to enable connect to the Internet.
+        :param pulumi.Input[str] name: The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs'] private_network_interface: An `private_network_interface` block as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]] sim_routes: One or more `sim_route` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]] sims: One or more `sim` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]] static_routes: One or more `static_route` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the MobileGateway.
+        :param pulumi.Input['MobileGatewayTrafficControlArgs'] traffic_control: A `traffic_control` block as defined below.
+        :param pulumi.Input[str] zone: The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "dns_servers", dns_servers)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if inter_device_communication is not None:
+            pulumi.set(__self__, "inter_device_communication", inter_device_communication)
+        if internet_connection is not None:
+            pulumi.set(__self__, "internet_connection", internet_connection)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if private_network_interface is not None:
+            pulumi.set(__self__, "private_network_interface", private_network_interface)
+        if sim_routes is not None:
+            pulumi.set(__self__, "sim_routes", sim_routes)
+        if sims is not None:
+            pulumi.set(__self__, "sims", sims)
+        if static_routes is not None:
+            pulumi.set(__self__, "static_routes", static_routes)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if traffic_control is not None:
+            pulumi.set(__self__, "traffic_control", traffic_control)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="dnsServers")
+    def dns_servers(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        A list of IP address used by each connected devices.
+        """
+        return pulumi.get(self, "dns_servers")
+
+    @dns_servers.setter
+    def dns_servers(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "dns_servers", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the MobileGateway.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="interDeviceCommunication")
+    def inter_device_communication(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to allow communication between each connected devices.
+        """
+        return pulumi.get(self, "inter_device_communication")
+
+    @inter_device_communication.setter
+    def inter_device_communication(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "inter_device_communication", value)
+
+    @property
+    @pulumi.getter(name="internetConnection")
+    def internet_connection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable connect to the Internet.
+        """
+        return pulumi.get(self, "internet_connection")
+
+    @internet_connection.setter
+    def internet_connection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "internet_connection", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="privateNetworkInterface")
+    def private_network_interface(self) -> Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']]:
+        """
+        An `private_network_interface` block as defined below.
+        """
+        return pulumi.get(self, "private_network_interface")
+
+    @private_network_interface.setter
+    def private_network_interface(self, value: Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']]):
+        pulumi.set(self, "private_network_interface", value)
+
+    @property
+    @pulumi.getter(name="simRoutes")
+    def sim_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]]:
+        """
+        One or more `sim_route` blocks as defined below.
+        """
+        return pulumi.get(self, "sim_routes")
+
+    @sim_routes.setter
+    def sim_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]]):
+        pulumi.set(self, "sim_routes", value)
+
+    @property
+    @pulumi.getter
+    def sims(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]]:
+        """
+        One or more `sim` blocks as defined below.
+        """
+        return pulumi.get(self, "sims")
+
+    @sims.setter
+    def sims(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]]):
+        pulumi.set(self, "sims", value)
+
+    @property
+    @pulumi.getter(name="staticRoutes")
+    def static_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]]:
+        """
+        One or more `static_route` blocks as defined below.
+        """
+        return pulumi.get(self, "static_routes")
+
+    @static_routes.setter
+    def static_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]]):
+        pulumi.set(self, "static_routes", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the MobileGateway.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="trafficControl")
+    def traffic_control(self) -> Optional[pulumi.Input['MobileGatewayTrafficControlArgs']]:
+        """
+        A `traffic_control` block as defined below.
+        """
+        return pulumi.get(self, "traffic_control")
+
+    @traffic_control.setter
+    def traffic_control(self, value: Optional[pulumi.Input['MobileGatewayTrafficControlArgs']]):
+        pulumi.set(self, "traffic_control", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _MobileGatewayState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 inter_device_communication: Optional[pulumi.Input[bool]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 private_network_interface: Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']] = None,
+                 public_ip: Optional[pulumi.Input[str]] = None,
+                 public_netmask: Optional[pulumi.Input[int]] = None,
+                 sim_routes: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]] = None,
+                 sims: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 traffic_control: Optional[pulumi.Input['MobileGatewayTrafficControlArgs']] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering MobileGateway resources.
+        :param pulumi.Input[str] description: The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: A list of IP address used by each connected devices.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the MobileGateway.
+        :param pulumi.Input[bool] inter_device_communication: The flag to allow communication between each connected devices.
+        :param pulumi.Input[bool] internet_connection: The flag to enable connect to the Internet.
+        :param pulumi.Input[str] name: The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs'] private_network_interface: An `private_network_interface` block as defined below.
+        :param pulumi.Input[str] public_ip: The public IP address assigned to the MobileGateway.
+        :param pulumi.Input[int] public_netmask: The bit length of the subnet assigned to the MobileGateway.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]] sim_routes: One or more `sim_route` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]] sims: One or more `sim` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]] static_routes: One or more `static_route` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the MobileGateway.
+        :param pulumi.Input['MobileGatewayTrafficControlArgs'] traffic_control: A `traffic_control` block as defined below.
+        :param pulumi.Input[str] zone: The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if dns_servers is not None:
+            pulumi.set(__self__, "dns_servers", dns_servers)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if inter_device_communication is not None:
+            pulumi.set(__self__, "inter_device_communication", inter_device_communication)
+        if internet_connection is not None:
+            pulumi.set(__self__, "internet_connection", internet_connection)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if private_network_interface is not None:
+            pulumi.set(__self__, "private_network_interface", private_network_interface)
+        if public_ip is not None:
+            pulumi.set(__self__, "public_ip", public_ip)
+        if public_netmask is not None:
+            pulumi.set(__self__, "public_netmask", public_netmask)
+        if sim_routes is not None:
+            pulumi.set(__self__, "sim_routes", sim_routes)
+        if sims is not None:
+            pulumi.set(__self__, "sims", sims)
+        if static_routes is not None:
+            pulumi.set(__self__, "static_routes", static_routes)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if traffic_control is not None:
+            pulumi.set(__self__, "traffic_control", traffic_control)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the MobileGateway. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="dnsServers")
+    def dns_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of IP address used by each connected devices.
+        """
+        return pulumi.get(self, "dns_servers")
+
+    @dns_servers.setter
+    def dns_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "dns_servers", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the MobileGateway.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="interDeviceCommunication")
+    def inter_device_communication(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to allow communication between each connected devices.
+        """
+        return pulumi.get(self, "inter_device_communication")
+
+    @inter_device_communication.setter
+    def inter_device_communication(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "inter_device_communication", value)
+
+    @property
+    @pulumi.getter(name="internetConnection")
+    def internet_connection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable connect to the Internet.
+        """
+        return pulumi.get(self, "internet_connection")
+
+    @internet_connection.setter
+    def internet_connection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "internet_connection", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the MobileGateway. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="privateNetworkInterface")
+    def private_network_interface(self) -> Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']]:
+        """
+        An `private_network_interface` block as defined below.
+        """
+        return pulumi.get(self, "private_network_interface")
+
+    @private_network_interface.setter
+    def private_network_interface(self, value: Optional[pulumi.Input['MobileGatewayPrivateNetworkInterfaceArgs']]):
+        pulumi.set(self, "private_network_interface", value)
+
+    @property
+    @pulumi.getter(name="publicIp")
+    def public_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The public IP address assigned to the MobileGateway.
+        """
+        return pulumi.get(self, "public_ip")
+
+    @public_ip.setter
+    def public_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_ip", value)
+
+    @property
+    @pulumi.getter(name="publicNetmask")
+    def public_netmask(self) -> Optional[pulumi.Input[int]]:
+        """
+        The bit length of the subnet assigned to the MobileGateway.
+        """
+        return pulumi.get(self, "public_netmask")
+
+    @public_netmask.setter
+    def public_netmask(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "public_netmask", value)
+
+    @property
+    @pulumi.getter(name="simRoutes")
+    def sim_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]]:
+        """
+        One or more `sim_route` blocks as defined below.
+        """
+        return pulumi.get(self, "sim_routes")
+
+    @sim_routes.setter
+    def sim_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimRouteArgs']]]]):
+        pulumi.set(self, "sim_routes", value)
+
+    @property
+    @pulumi.getter
+    def sims(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]]:
+        """
+        One or more `sim` blocks as defined below.
+        """
+        return pulumi.get(self, "sims")
+
+    @sims.setter
+    def sims(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewaySimArgs']]]]):
+        pulumi.set(self, "sims", value)
+
+    @property
+    @pulumi.getter(name="staticRoutes")
+    def static_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]]:
+        """
+        One or more `static_route` blocks as defined below.
+        """
+        return pulumi.get(self, "static_routes")
+
+    @static_routes.setter
+    def static_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['MobileGatewayStaticRouteArgs']]]]):
+        pulumi.set(self, "static_routes", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the MobileGateway.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="trafficControl")
+    def traffic_control(self) -> Optional[pulumi.Input['MobileGatewayTrafficControlArgs']]:
+        """
+        A `traffic_control` block as defined below.
+        """
+        return pulumi.get(self, "traffic_control")
+
+    @traffic_control.setter
+    def traffic_control(self, value: Optional[pulumi.Input['MobileGatewayTrafficControlArgs']]):
+        pulumi.set(self, "traffic_control", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class MobileGateway(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -30,9 +493,7 @@ class MobileGateway(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  traffic_control: Optional[pulumi.Input[pulumi.InputType['MobileGatewayTrafficControlArgs']]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Mobile Gateway.
 
@@ -97,12 +558,89 @@ class MobileGateway(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['MobileGatewayTrafficControlArgs']] traffic_control: A `traffic_control` block as defined below.
         :param pulumi.Input[str] zone: The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: MobileGatewayArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Mobile Gateway.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        zone = sakuracloud.get_zone()
+        foobar_switch = sakuracloud.Switch("foobarSwitch")
+        foobar_mobile_gateway = sakuracloud.MobileGateway("foobarMobileGateway",
+            internet_connection=True,
+            dns_servers=zone.dns_servers,
+            private_network_interface=sakuracloud.MobileGatewayPrivateNetworkInterfaceArgs(
+                switch_id=foobar_switch.id,
+                ip_address="192.168.11.101",
+                netmask=24,
+            ),
+            description="description",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            traffic_control=sakuracloud.MobileGatewayTrafficControlArgs(
+                quota=256,
+                band_width_limit=64,
+                enable_email=True,
+                enable_slack=True,
+                slack_webhook="https://hooks.slack.com/services/xxx/xxx/xxx",
+                auto_traffic_shaping=True,
+            ),
+            static_routes=[
+                sakuracloud.MobileGatewayStaticRouteArgs(
+                    prefix="192.168.10.0/24",
+                    next_hop="192.168.11.1",
+                ),
+                sakuracloud.MobileGatewayStaticRouteArgs(
+                    prefix="192.168.10.0/25",
+                    next_hop="192.168.11.2",
+                ),
+                sakuracloud.MobileGatewayStaticRouteArgs(
+                    prefix="192.168.10.0/26",
+                    next_hop="192.168.11.3",
+                ),
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param MobileGatewayArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(MobileGatewayArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 inter_device_communication: Optional[pulumi.Input[bool]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 private_network_interface: Optional[pulumi.Input[pulumi.InputType['MobileGatewayPrivateNetworkInterfaceArgs']]] = None,
+                 sim_routes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MobileGatewaySimRouteArgs']]]]] = None,
+                 sims: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MobileGatewaySimArgs']]]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['MobileGatewayStaticRouteArgs']]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 traffic_control: Optional[pulumi.Input[pulumi.InputType['MobileGatewayTrafficControlArgs']]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -112,25 +650,25 @@ class MobileGateway(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = MobileGatewayArgs.__new__(MobileGatewayArgs)
 
-            __props__['description'] = description
+            __props__.__dict__["description"] = description
             if dns_servers is None and not opts.urn:
                 raise TypeError("Missing required property 'dns_servers'")
-            __props__['dns_servers'] = dns_servers
-            __props__['icon_id'] = icon_id
-            __props__['inter_device_communication'] = inter_device_communication
-            __props__['internet_connection'] = internet_connection
-            __props__['name'] = name
-            __props__['private_network_interface'] = private_network_interface
-            __props__['sim_routes'] = sim_routes
-            __props__['sims'] = sims
-            __props__['static_routes'] = static_routes
-            __props__['tags'] = tags
-            __props__['traffic_control'] = traffic_control
-            __props__['zone'] = zone
-            __props__['public_ip'] = None
-            __props__['public_netmask'] = None
+            __props__.__dict__["dns_servers"] = dns_servers
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["inter_device_communication"] = inter_device_communication
+            __props__.__dict__["internet_connection"] = internet_connection
+            __props__.__dict__["name"] = name
+            __props__.__dict__["private_network_interface"] = private_network_interface
+            __props__.__dict__["sim_routes"] = sim_routes
+            __props__.__dict__["sims"] = sims
+            __props__.__dict__["static_routes"] = static_routes
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["traffic_control"] = traffic_control
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["public_ip"] = None
+            __props__.__dict__["public_netmask"] = None
         super(MobileGateway, __self__).__init__(
             'sakuracloud:index/mobileGateway:MobileGateway',
             resource_name,
@@ -181,23 +719,23 @@ class MobileGateway(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _MobileGatewayState.__new__(_MobileGatewayState)
 
-        __props__["description"] = description
-        __props__["dns_servers"] = dns_servers
-        __props__["icon_id"] = icon_id
-        __props__["inter_device_communication"] = inter_device_communication
-        __props__["internet_connection"] = internet_connection
-        __props__["name"] = name
-        __props__["private_network_interface"] = private_network_interface
-        __props__["public_ip"] = public_ip
-        __props__["public_netmask"] = public_netmask
-        __props__["sim_routes"] = sim_routes
-        __props__["sims"] = sims
-        __props__["static_routes"] = static_routes
-        __props__["tags"] = tags
-        __props__["traffic_control"] = traffic_control
-        __props__["zone"] = zone
+        __props__.__dict__["description"] = description
+        __props__.__dict__["dns_servers"] = dns_servers
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["inter_device_communication"] = inter_device_communication
+        __props__.__dict__["internet_connection"] = internet_connection
+        __props__.__dict__["name"] = name
+        __props__.__dict__["private_network_interface"] = private_network_interface
+        __props__.__dict__["public_ip"] = public_ip
+        __props__.__dict__["public_netmask"] = public_netmask
+        __props__.__dict__["sim_routes"] = sim_routes
+        __props__.__dict__["sims"] = sims
+        __props__.__dict__["static_routes"] = static_routes
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["traffic_control"] = traffic_control
+        __props__.__dict__["zone"] = zone
         return MobileGateway(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -319,10 +857,4 @@ class MobileGateway(pulumi.CustomResource):
         The name of zone that the MobileGateway will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

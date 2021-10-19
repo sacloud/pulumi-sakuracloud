@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getPrivateHost(args?: GetPrivateHostArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateHostResult> {
@@ -43,11 +43,11 @@ export interface GetPrivateHostArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetPrivateHostFilter;
+    filter?: inputs.GetPrivateHostFilter;
     /**
      * The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -92,4 +92,22 @@ export interface GetPrivateHostResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getPrivateHostOutput(args?: GetPrivateHostOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPrivateHostResult> {
+    return pulumi.output(args).apply(a => getPrivateHost(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getPrivateHost.
+ */
+export interface GetPrivateHostOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetPrivateHostFilterArgs>;
+    /**
+     * The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

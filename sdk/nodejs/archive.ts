@@ -175,51 +175,51 @@ export interface ArchiveState {
     /**
      * The file path to upload to the SakuraCloud.
      */
-    readonly archiveFile?: pulumi.Input<string>;
+    archiveFile?: pulumi.Input<string>;
     /**
      * The description of the archive. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
      */
-    readonly hash?: pulumi.Input<string>;
+    hash?: pulumi.Input<string>;
     /**
      * The icon id to attach to the archive.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the archive. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * The id of the source archive. This conflicts with [`sourceDiskId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveId?: pulumi.Input<string>;
+    sourceArchiveId?: pulumi.Input<string>;
     /**
      * The share key of source shared archive. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveZone?: pulumi.Input<string>;
+    sourceArchiveZone?: pulumi.Input<string>;
     /**
      * The id of the source disk. This conflicts with [`sourceArchiveId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceDiskId?: pulumi.Input<string>;
+    sourceDiskId?: pulumi.Input<string>;
     /**
      * The share key of source shared archive. Changing this forces a new resource to be created.
      */
-    readonly sourceSharedKey?: pulumi.Input<string>;
+    sourceSharedKey?: pulumi.Input<string>;
     /**
      * Any tags to assign to the archive.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -229,49 +229,49 @@ export interface ArchiveArgs {
     /**
      * The file path to upload to the SakuraCloud.
      */
-    readonly archiveFile?: pulumi.Input<string>;
+    archiveFile?: pulumi.Input<string>;
     /**
      * The description of the archive. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The md5 checksum calculated from the base64 encoded file body. Changing this forces a new resource to be created.
      */
-    readonly hash?: pulumi.Input<string>;
+    hash?: pulumi.Input<string>;
     /**
      * The icon id to attach to the archive.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the archive. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The size of archive in GiB. This must be one of [`20`/`40`/`60`/`80`/`100`/`250`/`500`/`750`/`1024`]. Changing this forces a new resource to be created. Default:`20`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * The id of the source archive. This conflicts with [`sourceDiskId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveId?: pulumi.Input<string>;
+    sourceArchiveId?: pulumi.Input<string>;
     /**
      * The share key of source shared archive. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveZone?: pulumi.Input<string>;
+    sourceArchiveZone?: pulumi.Input<string>;
     /**
      * The id of the source disk. This conflicts with [`sourceArchiveId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceDiskId?: pulumi.Input<string>;
+    sourceDiskId?: pulumi.Input<string>;
     /**
      * The share key of source shared archive. Changing this forces a new resource to be created.
      */
-    readonly sourceSharedKey?: pulumi.Input<string>;
+    sourceSharedKey?: pulumi.Input<string>;
     /**
      * Any tags to assign to the archive.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the archive will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Bridge.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupBridge(ctx, &sakuracloud.LookupBridgeArgs{
-// 			Filter: sakuracloud.GetBridgeFilter{
+// 		_, err := sakuracloud.LookupBridge(ctx, &GetBridgeArgs{
+// 			Filter: GetBridgeFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -62,4 +65,67 @@ type LookupBridgeResult struct {
 	// The name of the Bridge.
 	Name string `pulumi:"name"`
 	Zone string `pulumi:"zone"`
+}
+
+func LookupBridgeOutput(ctx *pulumi.Context, args LookupBridgeOutputArgs, opts ...pulumi.InvokeOption) LookupBridgeResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupBridgeResult, error) {
+			args := v.(LookupBridgeArgs)
+			r, err := LookupBridge(ctx, &args, opts...)
+			return *r, err
+		}).(LookupBridgeResultOutput)
+}
+
+// A collection of arguments for invoking getBridge.
+type LookupBridgeOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetBridgeFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the Bridge is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupBridgeOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupBridgeArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getBridge.
+type LookupBridgeResultOutput struct{ *pulumi.OutputState }
+
+func (LookupBridgeResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupBridgeResult)(nil)).Elem()
+}
+
+func (o LookupBridgeResultOutput) ToLookupBridgeResultOutput() LookupBridgeResultOutput {
+	return o
+}
+
+func (o LookupBridgeResultOutput) ToLookupBridgeResultOutputWithContext(ctx context.Context) LookupBridgeResultOutput {
+	return o
+}
+
+// The description of the Bridge.
+func (o LookupBridgeResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupBridgeResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupBridgeResultOutput) Filter() GetBridgeFilterPtrOutput {
+	return o.ApplyT(func(v LookupBridgeResult) *GetBridgeFilter { return v.Filter }).(GetBridgeFilterPtrOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupBridgeResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupBridgeResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Bridge.
+func (o LookupBridgeResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupBridgeResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o LookupBridgeResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupBridgeResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupBridgeResultOutput{})
 }

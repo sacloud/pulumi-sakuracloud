@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -30,11 +29,11 @@ export interface GetWebAccelArgs {
     /**
      * .
      */
-    readonly domain?: string;
+    domain?: string;
     /**
      * .
      */
-    readonly name?: string;
+    name?: string;
 }
 
 /**
@@ -83,4 +82,22 @@ export interface GetWebAccelResult {
      * .
      */
     readonly txtRecordValue: string;
+}
+
+export function getWebAccelOutput(args?: GetWebAccelOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWebAccelResult> {
+    return pulumi.output(args).apply(a => getWebAccel(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getWebAccel.
+ */
+export interface GetWebAccelOutputArgs {
+    /**
+     * .
+     */
+    domain?: pulumi.Input<string>;
+    /**
+     * .
+     */
+    name?: pulumi.Input<string>;
 }

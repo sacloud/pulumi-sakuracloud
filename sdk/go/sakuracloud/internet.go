@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Switch+Router.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -302,7 +302,7 @@ type InternetArrayInput interface {
 type InternetArray []InternetInput
 
 func (InternetArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Internet)(nil))
+	return reflect.TypeOf((*[]*Internet)(nil)).Elem()
 }
 
 func (i InternetArray) ToInternetArrayOutput() InternetArrayOutput {
@@ -327,7 +327,7 @@ type InternetMapInput interface {
 type InternetMap map[string]InternetInput
 
 func (InternetMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Internet)(nil))
+	return reflect.TypeOf((*map[string]*Internet)(nil)).Elem()
 }
 
 func (i InternetMap) ToInternetMapOutput() InternetMapOutput {
@@ -338,9 +338,7 @@ func (i InternetMap) ToInternetMapOutputWithContext(ctx context.Context) Interne
 	return pulumi.ToOutputWithContext(ctx, i).(InternetMapOutput)
 }
 
-type InternetOutput struct {
-	*pulumi.OutputState
-}
+type InternetOutput struct{ *pulumi.OutputState }
 
 func (InternetOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Internet)(nil))
@@ -359,14 +357,12 @@ func (o InternetOutput) ToInternetPtrOutput() InternetPtrOutput {
 }
 
 func (o InternetOutput) ToInternetPtrOutputWithContext(ctx context.Context) InternetPtrOutput {
-	return o.ApplyT(func(v Internet) *Internet {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Internet) *Internet {
 		return &v
 	}).(InternetPtrOutput)
 }
 
-type InternetPtrOutput struct {
-	*pulumi.OutputState
-}
+type InternetPtrOutput struct{ *pulumi.OutputState }
 
 func (InternetPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Internet)(nil))
@@ -378,6 +374,16 @@ func (o InternetPtrOutput) ToInternetPtrOutput() InternetPtrOutput {
 
 func (o InternetPtrOutput) ToInternetPtrOutputWithContext(ctx context.Context) InternetPtrOutput {
 	return o
+}
+
+func (o InternetPtrOutput) Elem() InternetOutput {
+	return o.ApplyT(func(v *Internet) Internet {
+		if v != nil {
+			return *v
+		}
+		var ret Internet
+		return ret
+	}).(InternetOutput)
 }
 
 type InternetArrayOutput struct{ *pulumi.OutputState }
@@ -421,6 +427,10 @@ func (o InternetMapOutput) MapIndex(k pulumi.StringInput) InternetOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InternetInput)(nil)).Elem(), &Internet{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InternetPtrInput)(nil)).Elem(), &Internet{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InternetArrayInput)(nil)).Elem(), InternetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InternetMapInput)(nil)).Elem(), InternetMap{})
 	pulumi.RegisterOutputType(InternetOutput{})
 	pulumi.RegisterOutputType(InternetPtrOutput{})
 	pulumi.RegisterOutputType(InternetArrayOutput{})

@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Note.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupNote(ctx, &sakuracloud.LookupNoteArgs{
-// 			Filter: sakuracloud.GetNoteFilter{
+// 		_, err := sakuracloud.LookupNote(ctx, &GetNoteArgs{
+// 			Filter: GetNoteFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -67,4 +70,81 @@ type LookupNoteResult struct {
 	Name string `pulumi:"name"`
 	// Any tags assigned to the Note.
 	Tags []string `pulumi:"tags"`
+}
+
+func LookupNoteOutput(ctx *pulumi.Context, args LookupNoteOutputArgs, opts ...pulumi.InvokeOption) LookupNoteResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupNoteResult, error) {
+			args := v.(LookupNoteArgs)
+			r, err := LookupNote(ctx, &args, opts...)
+			return *r, err
+		}).(LookupNoteResultOutput)
+}
+
+// A collection of arguments for invoking getNote.
+type LookupNoteOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetNoteFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupNoteOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupNoteArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getNote.
+type LookupNoteResultOutput struct{ *pulumi.OutputState }
+
+func (LookupNoteResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupNoteResult)(nil)).Elem()
+}
+
+func (o LookupNoteResultOutput) ToLookupNoteResultOutput() LookupNoteResultOutput {
+	return o
+}
+
+func (o LookupNoteResultOutput) ToLookupNoteResultOutputWithContext(ctx context.Context) LookupNoteResultOutput {
+	return o
+}
+
+// The class of the Note. This will be one of [`shell`/`yamlCloudConfig`].
+func (o LookupNoteResultOutput) Class() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.Class }).(pulumi.StringOutput)
+}
+
+// The content of the Note.
+func (o LookupNoteResultOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// The description of the Note.
+func (o LookupNoteResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupNoteResultOutput) Filter() GetNoteFilterPtrOutput {
+	return o.ApplyT(func(v LookupNoteResult) *GetNoteFilter { return v.Filter }).(GetNoteFilterPtrOutput)
+}
+
+// The icon id attached to the Note.
+func (o LookupNoteResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupNoteResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Note.
+func (o LookupNoteResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupNoteResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the Note.
+func (o LookupNoteResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupNoteResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupNoteResultOutput{})
 }

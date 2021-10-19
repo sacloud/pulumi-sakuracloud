@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud SIM.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -274,7 +274,7 @@ type SIMArrayInput interface {
 type SIMArray []SIMInput
 
 func (SIMArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*SIM)(nil))
+	return reflect.TypeOf((*[]*SIM)(nil)).Elem()
 }
 
 func (i SIMArray) ToSIMArrayOutput() SIMArrayOutput {
@@ -299,7 +299,7 @@ type SIMMapInput interface {
 type SIMMap map[string]SIMInput
 
 func (SIMMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*SIM)(nil))
+	return reflect.TypeOf((*map[string]*SIM)(nil)).Elem()
 }
 
 func (i SIMMap) ToSIMMapOutput() SIMMapOutput {
@@ -310,9 +310,7 @@ func (i SIMMap) ToSIMMapOutputWithContext(ctx context.Context) SIMMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SIMMapOutput)
 }
 
-type SIMOutput struct {
-	*pulumi.OutputState
-}
+type SIMOutput struct{ *pulumi.OutputState }
 
 func (SIMOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*SIM)(nil))
@@ -331,14 +329,12 @@ func (o SIMOutput) ToSIMPtrOutput() SIMPtrOutput {
 }
 
 func (o SIMOutput) ToSIMPtrOutputWithContext(ctx context.Context) SIMPtrOutput {
-	return o.ApplyT(func(v SIM) *SIM {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SIM) *SIM {
 		return &v
 	}).(SIMPtrOutput)
 }
 
-type SIMPtrOutput struct {
-	*pulumi.OutputState
-}
+type SIMPtrOutput struct{ *pulumi.OutputState }
 
 func (SIMPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**SIM)(nil))
@@ -350,6 +346,16 @@ func (o SIMPtrOutput) ToSIMPtrOutput() SIMPtrOutput {
 
 func (o SIMPtrOutput) ToSIMPtrOutputWithContext(ctx context.Context) SIMPtrOutput {
 	return o
+}
+
+func (o SIMPtrOutput) Elem() SIMOutput {
+	return o.ApplyT(func(v *SIM) SIM {
+		if v != nil {
+			return *v
+		}
+		var ret SIM
+		return ret
+	}).(SIMOutput)
 }
 
 type SIMArrayOutput struct{ *pulumi.OutputState }
@@ -393,6 +399,10 @@ func (o SIMMapOutput) MapIndex(k pulumi.StringInput) SIMOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SIMInput)(nil)).Elem(), &SIM{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SIMPtrInput)(nil)).Elem(), &SIM{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SIMArrayInput)(nil)).Elem(), SIMArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SIMMapInput)(nil)).Elem(), SIMMap{})
 	pulumi.RegisterOutputType(SIMOutput{})
 	pulumi.RegisterOutputType(SIMPtrOutput{})
 	pulumi.RegisterOutputType(SIMArrayOutput{})

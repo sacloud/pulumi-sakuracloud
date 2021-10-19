@@ -123,31 +123,31 @@ export interface SwitchState {
     /**
      * The bridge id attached to the Switch.
      */
-    readonly bridgeId?: pulumi.Input<string>;
+    bridgeId?: pulumi.Input<string>;
     /**
      * The description of the Switch. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Switch.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Switch. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * A list of server id connected to the switch.
      */
-    readonly serverIds?: pulumi.Input<pulumi.Input<string>[]>;
+    serverIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Any tags to assign to the Switch.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the Switch will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -157,25 +157,25 @@ export interface SwitchArgs {
     /**
      * The bridge id attached to the Switch.
      */
-    readonly bridgeId?: pulumi.Input<string>;
+    bridgeId?: pulumi.Input<string>;
     /**
      * The description of the Switch. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Switch.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Switch. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Switch.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the Switch will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

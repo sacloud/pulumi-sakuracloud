@@ -5,22 +5,180 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['SSHKeyGen']
+__all__ = ['SSHKeyGenArgs', 'SSHKeyGen']
+
+@pulumi.input_type
+class SSHKeyGenArgs:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 pass_phrase: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a SSHKeyGen resource.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] pass_phrase: The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if pass_phrase is not None:
+            pulumi.set(__self__, "pass_phrase", pass_phrase)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="passPhrase")
+    def pass_phrase(self) -> Optional[pulumi.Input[str]]:
+        """
+        The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "pass_phrase")
+
+    @pass_phrase.setter
+    def pass_phrase(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pass_phrase", value)
+
+
+@pulumi.input_type
+class _SSHKeyGenState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fingerprint: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 pass_phrase: Optional[pulumi.Input[str]] = None,
+                 private_key: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering SSHKeyGen resources.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] fingerprint: The fingerprint of the public key.
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] pass_phrase: The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] private_key: The body of the private key.
+        :param pulumi.Input[str] public_key: The body of the public key.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fingerprint is not None:
+            pulumi.set(__self__, "fingerprint", fingerprint)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if pass_phrase is not None:
+            pulumi.set(__self__, "pass_phrase", pass_phrase)
+        if private_key is not None:
+            pulumi.set(__self__, "private_key", private_key)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SSHKey. The length of this value must be in the range [`1`-`512`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def fingerprint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fingerprint of the public key.
+        """
+        return pulumi.get(self, "fingerprint")
+
+    @fingerprint.setter
+    def fingerprint(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fingerprint", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="passPhrase")
+    def pass_phrase(self) -> Optional[pulumi.Input[str]]:
+        """
+        The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "pass_phrase")
+
+    @pass_phrase.setter
+    def pass_phrase(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pass_phrase", value)
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the private key.
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_key", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the public key.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
 
 
 class SSHKeyGen(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  pass_phrase: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud SSH Key Gen.
 
@@ -39,12 +197,43 @@ class SSHKeyGen(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
         :param pulumi.Input[str] pass_phrase: The pass phrase of the private key. The length of this value must be in the range [`8`-`64`]. Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[SSHKeyGenArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud SSH Key Gen.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.SSHKeyGen("foobar", description="description")
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param SSHKeyGenArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(SSHKeyGenArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 pass_phrase: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -54,14 +243,14 @@ class SSHKeyGen(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SSHKeyGenArgs.__new__(SSHKeyGenArgs)
 
-            __props__['description'] = description
-            __props__['name'] = name
-            __props__['pass_phrase'] = pass_phrase
-            __props__['fingerprint'] = None
-            __props__['private_key'] = None
-            __props__['public_key'] = None
+            __props__.__dict__["description"] = description
+            __props__.__dict__["name"] = name
+            __props__.__dict__["pass_phrase"] = pass_phrase
+            __props__.__dict__["fingerprint"] = None
+            __props__.__dict__["private_key"] = None
+            __props__.__dict__["public_key"] = None
         super(SSHKeyGen, __self__).__init__(
             'sakuracloud:index/sSHKeyGen:SSHKeyGen',
             resource_name,
@@ -94,14 +283,14 @@ class SSHKeyGen(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SSHKeyGenState.__new__(_SSHKeyGenState)
 
-        __props__["description"] = description
-        __props__["fingerprint"] = fingerprint
-        __props__["name"] = name
-        __props__["pass_phrase"] = pass_phrase
-        __props__["private_key"] = private_key
-        __props__["public_key"] = public_key
+        __props__.__dict__["description"] = description
+        __props__.__dict__["fingerprint"] = fingerprint
+        __props__.__dict__["name"] = name
+        __props__.__dict__["pass_phrase"] = pass_phrase
+        __props__.__dict__["private_key"] = private_key
+        __props__.__dict__["public_key"] = public_key
         return SSHKeyGen(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -151,10 +340,4 @@ class SSHKeyGen(pulumi.CustomResource):
         The body of the public key.
         """
         return pulumi.get(self, "public_key")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

@@ -5,15 +5,301 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['ContainerRegistry']
+__all__ = ['ContainerRegistryArgs', 'ContainerRegistry']
+
+@pulumi.input_type
+class ContainerRegistryArgs:
+    def __init__(__self__, *,
+                 access_level: pulumi.Input[str],
+                 subdomain_label: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]] = None,
+                 virtual_domain: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a ContainerRegistry resource.
+        :param pulumi.Input[str] access_level: The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
+        :param pulumi.Input[str] subdomain_label: The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] description: The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Container Registry.
+        :param pulumi.Input[str] name: The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Container Registry.
+        :param pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]] users: One or more `user` blocks as defined below.
+        :param pulumi.Input[str] virtual_domain: The alias for accessing the container registry.
+        """
+        pulumi.set(__self__, "access_level", access_level)
+        pulumi.set(__self__, "subdomain_label", subdomain_label)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+        if virtual_domain is not None:
+            pulumi.set(__self__, "virtual_domain", virtual_domain)
+
+    @property
+    @pulumi.getter(name="accessLevel")
+    def access_level(self) -> pulumi.Input[str]:
+        """
+        The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
+        """
+        return pulumi.get(self, "access_level")
+
+    @access_level.setter
+    def access_level(self, value: pulumi.Input[str]):
+        pulumi.set(self, "access_level", value)
+
+    @property
+    @pulumi.getter(name="subdomainLabel")
+    def subdomain_label(self) -> pulumi.Input[str]:
+        """
+        The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subdomain_label")
+
+    @subdomain_label.setter
+    def subdomain_label(self, value: pulumi.Input[str]):
+        pulumi.set(self, "subdomain_label", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Container Registry.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Container Registry.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]]:
+        """
+        One or more `user` blocks as defined below.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]]):
+        pulumi.set(self, "users", value)
+
+    @property
+    @pulumi.getter(name="virtualDomain")
+    def virtual_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        The alias for accessing the container registry.
+        """
+        return pulumi.get(self, "virtual_domain")
+
+    @virtual_domain.setter
+    def virtual_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "virtual_domain", value)
+
+
+@pulumi.input_type
+class _ContainerRegistryState:
+    def __init__(__self__, *,
+                 access_level: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fqdn: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 subdomain_label: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]] = None,
+                 virtual_domain: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering ContainerRegistry resources.
+        :param pulumi.Input[str] access_level: The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
+        :param pulumi.Input[str] description: The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] fqdn: The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Container Registry.
+        :param pulumi.Input[str] name: The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] subdomain_label: The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Container Registry.
+        :param pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]] users: One or more `user` blocks as defined below.
+        :param pulumi.Input[str] virtual_domain: The alias for accessing the container registry.
+        """
+        if access_level is not None:
+            pulumi.set(__self__, "access_level", access_level)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if subdomain_label is not None:
+            pulumi.set(__self__, "subdomain_label", subdomain_label)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+        if virtual_domain is not None:
+            pulumi.set(__self__, "virtual_domain", virtual_domain)
+
+    @property
+    @pulumi.getter(name="accessLevel")
+    def access_level(self) -> Optional[pulumi.Input[str]]:
+        """
+        The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
+        """
+        return pulumi.get(self, "access_level")
+
+    @access_level.setter
+    def access_level(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_level", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[pulumi.Input[str]]:
+        """
+        The FQDN for accessing the Container Registry. FQDN is built from `subdomain_label` + `.sakuracr.jp`.
+        """
+        return pulumi.get(self, "fqdn")
+
+    @fqdn.setter
+    def fqdn(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fqdn", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Container Registry.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="subdomainLabel")
+    def subdomain_label(self) -> Optional[pulumi.Input[str]]:
+        """
+        The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subdomain_label")
+
+    @subdomain_label.setter
+    def subdomain_label(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subdomain_label", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Container Registry.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]]:
+        """
+        One or more `user` blocks as defined below.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ContainerRegistryUserArgs']]]]):
+        pulumi.set(self, "users", value)
+
+    @property
+    @pulumi.getter(name="virtualDomain")
+    def virtual_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        The alias for accessing the container registry.
+        """
+        return pulumi.get(self, "virtual_domain")
+
+    @virtual_domain.setter
+    def virtual_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "virtual_domain", value)
 
 
 class ContainerRegistry(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -25,9 +311,7 @@ class ContainerRegistry(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  users: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerRegistryUserArgs']]]]] = None,
                  virtual_domain: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Container Registry.
 
@@ -42,12 +326,39 @@ class ContainerRegistry(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerRegistryUserArgs']]]] users: One or more `user` blocks as defined below.
         :param pulumi.Input[str] virtual_domain: The alias for accessing the container registry.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ContainerRegistryArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Container Registry.
+
+        :param str resource_name: The name of the resource.
+        :param ContainerRegistryArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ContainerRegistryArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 access_level: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 subdomain_label: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ContainerRegistryUserArgs']]]]] = None,
+                 virtual_domain: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -57,21 +368,21 @@ class ContainerRegistry(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ContainerRegistryArgs.__new__(ContainerRegistryArgs)
 
             if access_level is None and not opts.urn:
                 raise TypeError("Missing required property 'access_level'")
-            __props__['access_level'] = access_level
-            __props__['description'] = description
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
+            __props__.__dict__["access_level"] = access_level
+            __props__.__dict__["description"] = description
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
             if subdomain_label is None and not opts.urn:
                 raise TypeError("Missing required property 'subdomain_label'")
-            __props__['subdomain_label'] = subdomain_label
-            __props__['tags'] = tags
-            __props__['users'] = users
-            __props__['virtual_domain'] = virtual_domain
-            __props__['fqdn'] = None
+            __props__.__dict__["subdomain_label"] = subdomain_label
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["users"] = users
+            __props__.__dict__["virtual_domain"] = virtual_domain
+            __props__.__dict__["fqdn"] = None
         super(ContainerRegistry, __self__).__init__(
             'sakuracloud:index/containerRegistry:ContainerRegistry',
             resource_name,
@@ -110,17 +421,17 @@ class ContainerRegistry(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ContainerRegistryState.__new__(_ContainerRegistryState)
 
-        __props__["access_level"] = access_level
-        __props__["description"] = description
-        __props__["fqdn"] = fqdn
-        __props__["icon_id"] = icon_id
-        __props__["name"] = name
-        __props__["subdomain_label"] = subdomain_label
-        __props__["tags"] = tags
-        __props__["users"] = users
-        __props__["virtual_domain"] = virtual_domain
+        __props__.__dict__["access_level"] = access_level
+        __props__.__dict__["description"] = description
+        __props__.__dict__["fqdn"] = fqdn
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["subdomain_label"] = subdomain_label
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["users"] = users
+        __props__.__dict__["virtual_domain"] = virtual_domain
         return ContainerRegistry(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -194,10 +505,4 @@ class ContainerRegistry(pulumi.CustomResource):
         The alias for accessing the container registry.
         """
         return pulumi.get(self, "virtual_domain")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

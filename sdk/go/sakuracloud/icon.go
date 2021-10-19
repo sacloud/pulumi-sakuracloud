@@ -7,10 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Icon.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+// 	"encoding/base64"
+// 	"io/ioutil"
+//
+// 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// )
+//
+// func filebase64OrPanic(path string) pulumi.StringPtrInput {
+// 	if fileData, err := ioutil.ReadFile(path); err == nil {
+// 		return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
+// 	} else {
+// 		panic(err.Error())
+// 	}
+// }
+//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := sakuracloud.NewIcon(ctx, "foobar", &sakuracloud.IconArgs{
+// 			Tags: pulumi.StringArray{
+// 				pulumi.String("tag1"),
+// 				pulumi.String("tag2"),
+// 			},
+// 			Base64content: filebase64OrPanic("example.icon"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
+// ```
 type Icon struct {
 	pulumi.CustomResourceState
 
@@ -173,7 +211,7 @@ type IconArrayInput interface {
 type IconArray []IconInput
 
 func (IconArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Icon)(nil))
+	return reflect.TypeOf((*[]*Icon)(nil)).Elem()
 }
 
 func (i IconArray) ToIconArrayOutput() IconArrayOutput {
@@ -198,7 +236,7 @@ type IconMapInput interface {
 type IconMap map[string]IconInput
 
 func (IconMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Icon)(nil))
+	return reflect.TypeOf((*map[string]*Icon)(nil)).Elem()
 }
 
 func (i IconMap) ToIconMapOutput() IconMapOutput {
@@ -209,9 +247,7 @@ func (i IconMap) ToIconMapOutputWithContext(ctx context.Context) IconMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(IconMapOutput)
 }
 
-type IconOutput struct {
-	*pulumi.OutputState
-}
+type IconOutput struct{ *pulumi.OutputState }
 
 func (IconOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Icon)(nil))
@@ -230,14 +266,12 @@ func (o IconOutput) ToIconPtrOutput() IconPtrOutput {
 }
 
 func (o IconOutput) ToIconPtrOutputWithContext(ctx context.Context) IconPtrOutput {
-	return o.ApplyT(func(v Icon) *Icon {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Icon) *Icon {
 		return &v
 	}).(IconPtrOutput)
 }
 
-type IconPtrOutput struct {
-	*pulumi.OutputState
-}
+type IconPtrOutput struct{ *pulumi.OutputState }
 
 func (IconPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Icon)(nil))
@@ -249,6 +283,16 @@ func (o IconPtrOutput) ToIconPtrOutput() IconPtrOutput {
 
 func (o IconPtrOutput) ToIconPtrOutputWithContext(ctx context.Context) IconPtrOutput {
 	return o
+}
+
+func (o IconPtrOutput) Elem() IconOutput {
+	return o.ApplyT(func(v *Icon) Icon {
+		if v != nil {
+			return *v
+		}
+		var ret Icon
+		return ret
+	}).(IconOutput)
 }
 
 type IconArrayOutput struct{ *pulumi.OutputState }
@@ -292,6 +336,10 @@ func (o IconMapOutput) MapIndex(k pulumi.StringInput) IconOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*IconInput)(nil)).Elem(), &Icon{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IconPtrInput)(nil)).Elem(), &Icon{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IconArrayInput)(nil)).Elem(), IconArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IconMapInput)(nil)).Elem(), IconMap{})
 	pulumi.RegisterOutputType(IconOutput{})
 	pulumi.RegisterOutputType(IconPtrOutput{})
 	pulumi.RegisterOutputType(IconArrayOutput{})

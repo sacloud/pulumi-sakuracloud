@@ -5,15 +5,204 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['ProxyLBACME']
+__all__ = ['ProxyLBACMEArgs', 'ProxyLBACME']
+
+@pulumi.input_type
+class ProxyLBACMEArgs:
+    def __init__(__self__, *,
+                 accept_tos: pulumi.Input[bool],
+                 common_name: pulumi.Input[str],
+                 proxylb_id: pulumi.Input[str],
+                 subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 update_delay_sec: Optional[pulumi.Input[int]] = None):
+        """
+        The set of arguments for constructing a ProxyLBACME resource.
+        :param pulumi.Input[bool] accept_tos: The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "accept_tos", accept_tos)
+        pulumi.set(__self__, "common_name", common_name)
+        pulumi.set(__self__, "proxylb_id", proxylb_id)
+        if subject_alt_names is not None:
+            pulumi.set(__self__, "subject_alt_names", subject_alt_names)
+        if update_delay_sec is not None:
+            pulumi.set(__self__, "update_delay_sec", update_delay_sec)
+
+    @property
+    @pulumi.getter(name="acceptTos")
+    def accept_tos(self) -> pulumi.Input[bool]:
+        """
+        The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "accept_tos")
+
+    @accept_tos.setter
+    def accept_tos(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "accept_tos", value)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> pulumi.Input[str]:
+        """
+        The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter(name="proxylbId")
+    def proxylb_id(self) -> pulumi.Input[str]:
+        """
+        The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "proxylb_id")
+
+    @proxylb_id.setter
+    def proxylb_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "proxylb_id", value)
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject_alt_names")
+
+    @subject_alt_names.setter
+    def subject_alt_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "subject_alt_names", value)
+
+    @property
+    @pulumi.getter(name="updateDelaySec")
+    def update_delay_sec(self) -> Optional[pulumi.Input[int]]:
+        """
+        The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "update_delay_sec")
+
+    @update_delay_sec.setter
+    def update_delay_sec(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "update_delay_sec", value)
+
+
+@pulumi.input_type
+class _ProxyLBACMEState:
+    def __init__(__self__, *,
+                 accept_tos: Optional[pulumi.Input[bool]] = None,
+                 certificates: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateArgs']]]] = None,
+                 common_name: Optional[pulumi.Input[str]] = None,
+                 proxylb_id: Optional[pulumi.Input[str]] = None,
+                 subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 update_delay_sec: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering ProxyLBACME resources.
+        :param pulumi.Input[bool] accept_tos: The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateArgs']]] certificates: A list of `certificate` blocks as defined below.
+        :param pulumi.Input[str] common_name: The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] proxylb_id: The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
+        """
+        if accept_tos is not None:
+            pulumi.set(__self__, "accept_tos", accept_tos)
+        if certificates is not None:
+            pulumi.set(__self__, "certificates", certificates)
+        if common_name is not None:
+            pulumi.set(__self__, "common_name", common_name)
+        if proxylb_id is not None:
+            pulumi.set(__self__, "proxylb_id", proxylb_id)
+        if subject_alt_names is not None:
+            pulumi.set(__self__, "subject_alt_names", subject_alt_names)
+        if update_delay_sec is not None:
+            pulumi.set(__self__, "update_delay_sec", update_delay_sec)
+
+    @property
+    @pulumi.getter(name="acceptTos")
+    def accept_tos(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "accept_tos")
+
+    @accept_tos.setter
+    def accept_tos(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "accept_tos", value)
+
+    @property
+    @pulumi.getter
+    def certificates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateArgs']]]]:
+        """
+        A list of `certificate` blocks as defined below.
+        """
+        return pulumi.get(self, "certificates")
+
+    @certificates.setter
+    def certificates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ProxyLBACMECertificateArgs']]]]):
+        pulumi.set(self, "certificates", value)
+
+    @property
+    @pulumi.getter(name="commonName")
+    def common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "common_name")
+
+    @common_name.setter
+    def common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "common_name", value)
+
+    @property
+    @pulumi.getter(name="proxylbId")
+    def proxylb_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "proxylb_id")
+
+    @proxylb_id.setter
+    def proxylb_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "proxylb_id", value)
+
+    @property
+    @pulumi.getter(name="subjectAltNames")
+    def subject_alt_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "subject_alt_names")
+
+    @subject_alt_names.setter
+    def subject_alt_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "subject_alt_names", value)
+
+    @property
+    @pulumi.getter(name="updateDelaySec")
+    def update_delay_sec(self) -> Optional[pulumi.Input[int]]:
+        """
+        The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "update_delay_sec")
+
+    @update_delay_sec.setter
+    def update_delay_sec(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "update_delay_sec", value)
 
 
 class ProxyLBACME(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -22,9 +211,7 @@ class ProxyLBACME(pulumi.CustomResource):
                  proxylb_id: Optional[pulumi.Input[str]] = None,
                  subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  update_delay_sec: Optional[pulumi.Input[int]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud ProxyLB ACME Setting.
 
@@ -53,12 +240,53 @@ class ProxyLBACME(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] subject_alt_names: The Subject alternative names used by ACME. Changing this forces a new resource to be created.
         :param pulumi.Input[int] update_delay_sec: The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ProxyLBACMEArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud ProxyLB ACME Setting.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar_proxy_lbacme = sakuracloud.ProxyLBACME("foobarProxyLBACME",
+            proxylb_id=sakuracloud_proxylb["foobar"]["id"],
+            accept_tos=True,
+            common_name="www.example.com",
+            subject_alt_names=["www1.example.com"],
+            update_delay_sec=120)
+        foobar_proxy_lb = sakuracloud.get_proxy_lb(filter=sakuracloud.GetProxyLBFilterArgs(
+            names=["foobar"],
+        ))
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param ProxyLBACMEArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ProxyLBACMEArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 accept_tos: Optional[pulumi.Input[bool]] = None,
+                 common_name: Optional[pulumi.Input[str]] = None,
+                 proxylb_id: Optional[pulumi.Input[str]] = None,
+                 subject_alt_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 update_delay_sec: Optional[pulumi.Input[int]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -68,20 +296,20 @@ class ProxyLBACME(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ProxyLBACMEArgs.__new__(ProxyLBACMEArgs)
 
             if accept_tos is None and not opts.urn:
                 raise TypeError("Missing required property 'accept_tos'")
-            __props__['accept_tos'] = accept_tos
+            __props__.__dict__["accept_tos"] = accept_tos
             if common_name is None and not opts.urn:
                 raise TypeError("Missing required property 'common_name'")
-            __props__['common_name'] = common_name
+            __props__.__dict__["common_name"] = common_name
             if proxylb_id is None and not opts.urn:
                 raise TypeError("Missing required property 'proxylb_id'")
-            __props__['proxylb_id'] = proxylb_id
-            __props__['subject_alt_names'] = subject_alt_names
-            __props__['update_delay_sec'] = update_delay_sec
-            __props__['certificates'] = None
+            __props__.__dict__["proxylb_id"] = proxylb_id
+            __props__.__dict__["subject_alt_names"] = subject_alt_names
+            __props__.__dict__["update_delay_sec"] = update_delay_sec
+            __props__.__dict__["certificates"] = None
         super(ProxyLBACME, __self__).__init__(
             'sakuracloud:index/proxyLBACME:ProxyLBACME',
             resource_name,
@@ -114,14 +342,14 @@ class ProxyLBACME(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ProxyLBACMEState.__new__(_ProxyLBACMEState)
 
-        __props__["accept_tos"] = accept_tos
-        __props__["certificates"] = certificates
-        __props__["common_name"] = common_name
-        __props__["proxylb_id"] = proxylb_id
-        __props__["subject_alt_names"] = subject_alt_names
-        __props__["update_delay_sec"] = update_delay_sec
+        __props__.__dict__["accept_tos"] = accept_tos
+        __props__.__dict__["certificates"] = certificates
+        __props__.__dict__["common_name"] = common_name
+        __props__.__dict__["proxylb_id"] = proxylb_id
+        __props__.__dict__["subject_alt_names"] = subject_alt_names
+        __props__.__dict__["update_delay_sec"] = update_delay_sec
         return ProxyLBACME(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -171,10 +399,4 @@ class ProxyLBACME(pulumi.CustomResource):
         The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "update_delay_sec")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

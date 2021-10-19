@@ -5,13 +5,173 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['Icon']
+__all__ = ['IconArgs', 'Icon']
+
+@pulumi.input_type
+class IconArgs:
+    def __init__(__self__, *,
+                 base64content: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 source: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a Icon resource.
+        :param pulumi.Input[str] base64content: The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] name: The name of the Icon. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] source: The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Icon.
+        """
+        if base64content is not None:
+            pulumi.set(__self__, "base64content", base64content)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def base64content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "base64content")
+
+    @base64content.setter
+    def base64content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base64content", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Icon. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Icon.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class _IconState:
+    def __init__(__self__, *,
+                 base64content: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 source: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 url: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Icon resources.
+        :param pulumi.Input[str] base64content: The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] name: The name of the Icon. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] source: The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Icon.
+        :param pulumi.Input[str] url: The URL for getting the icon's raw data.
+        """
+        if base64content is not None:
+            pulumi.set(__self__, "base64content", base64content)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def base64content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The base64 encoded content to upload to as the Icon. This conflicts with [`source`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "base64content")
+
+    @base64content.setter
+    def base64content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base64content", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Icon. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Icon.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL for getting the icon's raw data.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
 
 
 class Icon(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -19,11 +179,24 @@ class Icon(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  source: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Icon.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import base64
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.Icon("foobar",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            base64content=(lambda path: base64.b64encode(open(path).read().encode()).decode())("example.icon"))
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -32,12 +205,50 @@ class Icon(pulumi.CustomResource):
         :param pulumi.Input[str] source: The file path to upload to as the Icon. This conflicts with [`base64content`]. Changing this forces a new resource to be created.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Icon.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[IconArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Icon.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import base64
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.Icon("foobar",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            base64content=(lambda path: base64.b64encode(open(path).read().encode()).decode())("example.icon"))
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param IconArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(IconArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 base64content: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 source: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -47,13 +258,13 @@ class Icon(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = IconArgs.__new__(IconArgs)
 
-            __props__['base64content'] = base64content
-            __props__['name'] = name
-            __props__['source'] = source
-            __props__['tags'] = tags
-            __props__['url'] = None
+            __props__.__dict__["base64content"] = base64content
+            __props__.__dict__["name"] = name
+            __props__.__dict__["source"] = source
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["url"] = None
         super(Icon, __self__).__init__(
             'sakuracloud:index/icon:Icon',
             resource_name,
@@ -84,13 +295,13 @@ class Icon(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _IconState.__new__(_IconState)
 
-        __props__["base64content"] = base64content
-        __props__["name"] = name
-        __props__["source"] = source
-        __props__["tags"] = tags
-        __props__["url"] = url
+        __props__.__dict__["base64content"] = base64content
+        __props__.__dict__["name"] = name
+        __props__.__dict__["source"] = source
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["url"] = url
         return Icon(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -132,10 +343,4 @@ class Icon(pulumi.CustomResource):
         The URL for getting the icon's raw data.
         """
         return pulumi.get(self, "url")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

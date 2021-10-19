@@ -78,7 +78,7 @@ namespace Pulumi.Sakuracloud
     ///                 new Sakuracloud.Inputs.LocalRouterPeerArgs
     ///                 {
     ///                     PeerId = peer.Apply(peer =&gt; peer.Id),
-    ///                     SecretKey = peer.Apply(peer =&gt; peer.SecretKeys[0]),
+    ///                     SecretKey = peer.Apply(peer =&gt; peer.SecretKeys?[0]),
     ///                     Description = "description",
     ///                 },
     ///             },
