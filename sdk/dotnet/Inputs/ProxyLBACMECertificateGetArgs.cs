@@ -25,6 +25,12 @@ namespace Pulumi.Sakuracloud.Inputs
         }
 
         /// <summary>
+        /// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        /// </summary>
+        [Input("commonName")]
+        public Input<string>? CommonName { get; set; }
+
+        /// <summary>
         /// The intermediate certificate for a server.
         /// </summary>
         [Input("intermediateCert")]
@@ -41,6 +47,12 @@ namespace Pulumi.Sakuracloud.Inputs
         /// </summary>
         [Input("serverCert")]
         public Input<string>? ServerCert { get; set; }
+
+        /// <summary>
+        /// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        /// </summary>
+        [Input("subjectAltNames")]
+        public Input<string>? SubjectAltNames { get; set; }
 
         public ProxyLBACMECertificateGetArgs()
         {

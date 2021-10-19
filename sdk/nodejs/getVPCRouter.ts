@@ -88,7 +88,7 @@ export interface GetVPCRouterResult {
      */
     readonly l2tps: outputs.GetVPCRouterL2tp[];
     /**
-     * The user name used to authenticate remote access.
+     * the name of the peer.
      */
     readonly name: string;
     /**
@@ -147,5 +147,9 @@ export interface GetVPCRouterResult {
      * The version of the VPC Router.
      */
     readonly version: number;
+    /**
+     * A list of `wireGuard` blocks as defined below.
+     */
+    readonly wireGuards: outputs.GetVPCRouterWireGuard[];
     readonly zone: string;
 }

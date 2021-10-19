@@ -36,6 +36,7 @@ import * as utilities from "./utilities";
  *         "tag2",
  *     ],
  *     target: "www.example.com",
+ *     timeout: 10,
  * });
  * ```
  */
@@ -115,6 +116,10 @@ export class SimpleMonitor extends pulumi.CustomResource {
      * The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
      */
     public readonly target!: pulumi.Output<string>;
+    /**
+     * The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+     */
+    public readonly timeout!: pulumi.Output<number>;
 
     /**
      * Create a SimpleMonitor resource with the given unique name, arguments, and options.
@@ -141,6 +146,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
             inputs["notifySlackWebhook"] = state ? state.notifySlackWebhook : undefined;
             inputs["tags"] = state ? state.tags : undefined;
             inputs["target"] = state ? state.target : undefined;
+            inputs["timeout"] = state ? state.timeout : undefined;
         } else {
             const args = argsOrState as SimpleMonitorArgs | undefined;
             if ((!args || args.healthCheck === undefined) && !opts.urn) {
@@ -161,6 +167,7 @@ export class SimpleMonitor extends pulumi.CustomResource {
             inputs["notifySlackWebhook"] = args ? args.notifySlackWebhook : undefined;
             inputs["tags"] = args ? args.tags : undefined;
             inputs["target"] = args ? args.target : undefined;
+            inputs["timeout"] = args ? args.timeout : undefined;
         }
         if (!opts.version) {
             opts = pulumi.mergeOptions(opts, { version: utilities.getVersion()});
@@ -221,6 +228,10 @@ export interface SimpleMonitorState {
      * The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
      */
     readonly target?: pulumi.Input<string>;
+    /**
+     * The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+     */
+    readonly timeout?: pulumi.Input<number>;
 }
 
 /**
@@ -275,4 +286,8 @@ export interface SimpleMonitorArgs {
      * The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
      */
     readonly target: pulumi.Input<string>;
+    /**
+     * The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+     */
+    readonly timeout?: pulumi.Input<number>;
 }

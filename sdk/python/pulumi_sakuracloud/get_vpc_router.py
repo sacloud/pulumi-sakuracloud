@@ -21,7 +21,7 @@ class GetVPCRouterResult:
     """
     A collection of values returned by getVPCRouter.
     """
-    def __init__(__self__, description=None, dhcp_servers=None, dhcp_static_mappings=None, filter=None, firewalls=None, icon_id=None, id=None, internet_connection=None, l2tps=None, name=None, plan=None, port_forwardings=None, pptps=None, private_network_interfaces=None, public_ip=None, public_netmask=None, public_network_interfaces=None, site_to_site_vpns=None, static_nats=None, static_routes=None, syslog_host=None, tags=None, users=None, version=None, zone=None):
+    def __init__(__self__, description=None, dhcp_servers=None, dhcp_static_mappings=None, filter=None, firewalls=None, icon_id=None, id=None, internet_connection=None, l2tps=None, name=None, plan=None, port_forwardings=None, pptps=None, private_network_interfaces=None, public_ip=None, public_netmask=None, public_network_interfaces=None, site_to_site_vpns=None, static_nats=None, static_routes=None, syslog_host=None, tags=None, users=None, version=None, wire_guards=None, zone=None):
         if description and not isinstance(description, str):
             raise TypeError("Expected argument 'description' to be a str")
         pulumi.set(__self__, "description", description)
@@ -94,6 +94,9 @@ class GetVPCRouterResult:
         if version and not isinstance(version, int):
             raise TypeError("Expected argument 'version' to be a int")
         pulumi.set(__self__, "version", version)
+        if wire_guards and not isinstance(wire_guards, list):
+            raise TypeError("Expected argument 'wire_guards' to be a list")
+        pulumi.set(__self__, "wire_guards", wire_guards)
         if zone and not isinstance(zone, str):
             raise TypeError("Expected argument 'zone' to be a str")
         pulumi.set(__self__, "zone", zone)
@@ -171,7 +174,7 @@ class GetVPCRouterResult:
     @pulumi.getter
     def name(self) -> str:
         """
-        The user name used to authenticate remote access.
+        the name of the peer.
         """
         return pulumi.get(self, "name")
 
@@ -288,6 +291,14 @@ class GetVPCRouterResult:
         return pulumi.get(self, "version")
 
     @property
+    @pulumi.getter(name="wireGuards")
+    def wire_guards(self) -> Sequence['outputs.GetVPCRouterWireGuardResult']:
+        """
+        A list of `wire_guard` blocks as defined below.
+        """
+        return pulumi.get(self, "wire_guards")
+
+    @property
     @pulumi.getter
     def zone(self) -> str:
         return pulumi.get(self, "zone")
@@ -323,6 +334,7 @@ class AwaitableGetVPCRouterResult(GetVPCRouterResult):
             tags=self.tags,
             users=self.users,
             version=self.version,
+            wire_guards=self.wire_guards,
             zone=self.zone)
 
 
@@ -381,4 +393,5 @@ def get_vpc_router(filter: Optional[pulumi.InputType['GetVPCRouterFilterArgs']] 
         tags=__ret__.tags,
         users=__ret__.users,
         version=__ret__.version,
+        wire_guards=__ret__.wire_guards,
         zone=__ret__.zone)

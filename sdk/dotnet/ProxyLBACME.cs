@@ -27,6 +27,10 @@ namespace Pulumi.Sakuracloud
     ///             ProxylbId = sakuracloud_proxylb.Foobar.Id,
     ///             AcceptTos = true,
     ///             CommonName = "www.example.com",
+    ///             SubjectAltNames = 
+    ///             {
+    ///                 "www1.example.com",
+    ///             },
     ///             UpdateDelaySec = 120,
     ///         });
     ///         var foobarProxyLB = Output.Create(Sakuracloud.GetProxyLB.InvokeAsync(new Sakuracloud.GetProxyLBArgs
@@ -70,6 +74,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("proxylbId")]
         public Output<string> ProxylbId { get; private set; } = null!;
+
+        /// <summary>
+        /// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        /// </summary>
+        [Output("subjectAltNames")]
+        public Output<ImmutableArray<string>> SubjectAltNames { get; private set; } = null!;
 
         /// <summary>
         /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
@@ -141,6 +151,18 @@ namespace Pulumi.Sakuracloud
         [Input("proxylbId", required: true)]
         public Input<string> ProxylbId { get; set; } = null!;
 
+        [Input("subjectAltNames")]
+        private InputList<string>? _subjectAltNames;
+
+        /// <summary>
+        /// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        /// </summary>
+        public InputList<string> SubjectAltNames
+        {
+            get => _subjectAltNames ?? (_subjectAltNames = new InputList<string>());
+            set => _subjectAltNames = value;
+        }
+
         /// <summary>
         /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
         /// </summary>
@@ -183,6 +205,18 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("proxylbId")]
         public Input<string>? ProxylbId { get; set; }
+
+        [Input("subjectAltNames")]
+        private InputList<string>? _subjectAltNames;
+
+        /// <summary>
+        /// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        /// </summary>
+        public InputList<string> SubjectAltNames
+        {
+            get => _subjectAltNames ?? (_subjectAltNames = new InputList<string>());
+            set => _subjectAltNames = value;
+        }
 
         /// <summary>
         /// The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.

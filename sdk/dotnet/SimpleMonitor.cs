@@ -47,6 +47,7 @@ namespace Pulumi.Sakuracloud
     ///                 "tag2",
     ///             },
     ///             Target = "www.example.com",
+    ///             Timeout = 10,
     ///         });
     ///     }
     /// 
@@ -127,6 +128,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("target")]
         public Output<string> Target { get; private set; } = null!;
+
+        /// <summary>
+        /// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        /// </summary>
+        [Output("timeout")]
+        public Output<int> Timeout { get; private set; } = null!;
 
 
         /// <summary>
@@ -252,6 +259,12 @@ namespace Pulumi.Sakuracloud
         [Input("target", required: true)]
         public Input<string> Target { get; set; } = null!;
 
+        /// <summary>
+        /// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        /// </summary>
+        [Input("timeout")]
+        public Input<int>? Timeout { get; set; }
+
         public SimpleMonitorArgs()
         {
         }
@@ -336,6 +349,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("target")]
         public Input<string>? Target { get; set; }
+
+        /// <summary>
+        /// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        /// </summary>
+        [Input("timeout")]
+        public Input<int>? Timeout { get; set; }
 
         public SimpleMonitorState()
         {

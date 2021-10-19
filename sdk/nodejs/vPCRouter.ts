@@ -107,6 +107,14 @@ import * as utilities from "./utilities";
  *         rangeStart: "192.168.11.31",
  *         rangeStop: "192.168.11.40",
  *     },
+ *     wireGuard: {
+ *         ipAddress: "192.168.31.1/24",
+ *         peers: [{
+ *             name: "example",
+ *             ipAddress: "192.168.31.11",
+ *             publicKey: "<your-public-key>",
+ *         }],
+ *     },
  *     siteToSiteVpns: [{
  *         peer: "10.0.0.1",
  *         remoteId: "10.0.0.1",
@@ -247,6 +255,10 @@ export class VPCRouter extends pulumi.CustomResource {
      */
     public readonly version!: pulumi.Output<number | undefined>;
     /**
+     * A `wireGuard` block as defined below.
+     */
+    public readonly wireGuard!: pulumi.Output<outputs.VPCRouterWireGuard | undefined>;
+    /**
      * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     public readonly zone!: pulumi.Output<string>;
@@ -286,6 +298,7 @@ export class VPCRouter extends pulumi.CustomResource {
             inputs["tags"] = state ? state.tags : undefined;
             inputs["users"] = state ? state.users : undefined;
             inputs["version"] = state ? state.version : undefined;
+            inputs["wireGuard"] = state ? state.wireGuard : undefined;
             inputs["zone"] = state ? state.zone : undefined;
         } else {
             const args = argsOrState as VPCRouterArgs | undefined;
@@ -309,6 +322,7 @@ export class VPCRouter extends pulumi.CustomResource {
             inputs["tags"] = args ? args.tags : undefined;
             inputs["users"] = args ? args.users : undefined;
             inputs["version"] = args ? args.version : undefined;
+            inputs["wireGuard"] = args ? args.wireGuard : undefined;
             inputs["zone"] = args ? args.zone : undefined;
             inputs["publicIp"] = undefined /*out*/;
             inputs["publicNetmask"] = undefined /*out*/;
@@ -413,6 +427,10 @@ export interface VPCRouterState {
      */
     readonly version?: pulumi.Input<number>;
     /**
+     * A `wireGuard` block as defined below.
+     */
+    readonly wireGuard?: pulumi.Input<inputs.VPCRouterWireGuard>;
+    /**
      * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
     readonly zone?: pulumi.Input<string>;
@@ -502,6 +520,10 @@ export interface VPCRouterArgs {
      * The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
      */
     readonly version?: pulumi.Input<number>;
+    /**
+     * A `wireGuard` block as defined below.
+     */
+    readonly wireGuard?: pulumi.Input<inputs.VPCRouterWireGuard>;
     /**
      * The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */

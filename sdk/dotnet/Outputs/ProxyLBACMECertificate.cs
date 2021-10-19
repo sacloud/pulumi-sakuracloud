@@ -18,6 +18,10 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProxyLBACMECertificateAdditionalCertificate> AdditionalCertificates;
         /// <summary>
+        /// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+        /// </summary>
+        public readonly string? CommonName;
+        /// <summary>
         /// The intermediate certificate for a server.
         /// </summary>
         public readonly string? IntermediateCert;
@@ -29,21 +33,31 @@ namespace Pulumi.Sakuracloud.Outputs
         /// The certificate for a server.
         /// </summary>
         public readonly string? ServerCert;
+        /// <summary>
+        /// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+        /// </summary>
+        public readonly string? SubjectAltNames;
 
         [OutputConstructor]
         private ProxyLBACMECertificate(
             ImmutableArray<Outputs.ProxyLBACMECertificateAdditionalCertificate> additionalCertificates,
 
+            string? commonName,
+
             string? intermediateCert,
 
             string? privateKey,
 
-            string? serverCert)
+            string? serverCert,
+
+            string? subjectAltNames)
         {
             AdditionalCertificates = additionalCertificates;
+            CommonName = commonName;
             IntermediateCert = intermediateCert;
             PrivateKey = privateKey;
             ServerCert = serverCert;
+            SubjectAltNames = subjectAltNames;
         }
     }
 }

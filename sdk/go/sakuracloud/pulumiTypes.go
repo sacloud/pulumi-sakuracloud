@@ -10,6 +10,753 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
+type CertificateAuthorityClient struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate *string `pulumi:"certificate"`
+	// Input for issuing a certificate.
+	Csr *string `pulumi:"csr"`
+	// Input for issuing a certificate.
+	Email *string `pulumi:"email"`
+	// Flag to suspend/hold the certificate.
+	Hold *bool `pulumi:"hold"`
+	// The id of the certificate.
+	Id *string `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState *string `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter *string `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore *string `pulumi:"notBefore"`
+	// Input for issuing a certificate.
+	PublicKey *string `pulumi:"publicKey"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber *string `pulumi:"serialNumber"`
+	// A `subject` block as defined below.
+	Subject CertificateAuthorityClientSubject `pulumi:"subject"`
+	// The URL for issuing the certificate.
+	Url *string `pulumi:"url"`
+	// The number of hours after initial issuing that the certificate will become invalid.
+	ValidityPeriodHours int `pulumi:"validityPeriodHours"`
+}
+
+// CertificateAuthorityClientInput is an input type that accepts CertificateAuthorityClientArgs and CertificateAuthorityClientOutput values.
+// You can construct a concrete instance of `CertificateAuthorityClientInput` via:
+//
+//          CertificateAuthorityClientArgs{...}
+type CertificateAuthorityClientInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityClientOutput() CertificateAuthorityClientOutput
+	ToCertificateAuthorityClientOutputWithContext(context.Context) CertificateAuthorityClientOutput
+}
+
+type CertificateAuthorityClientArgs struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate pulumi.StringPtrInput `pulumi:"certificate"`
+	// Input for issuing a certificate.
+	Csr pulumi.StringPtrInput `pulumi:"csr"`
+	// Input for issuing a certificate.
+	Email pulumi.StringPtrInput `pulumi:"email"`
+	// Flag to suspend/hold the certificate.
+	Hold pulumi.BoolPtrInput `pulumi:"hold"`
+	// The id of the certificate.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState pulumi.StringPtrInput `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter pulumi.StringPtrInput `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore pulumi.StringPtrInput `pulumi:"notBefore"`
+	// Input for issuing a certificate.
+	PublicKey pulumi.StringPtrInput `pulumi:"publicKey"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
+	// A `subject` block as defined below.
+	Subject CertificateAuthorityClientSubjectInput `pulumi:"subject"`
+	// The URL for issuing the certificate.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+	// The number of hours after initial issuing that the certificate will become invalid.
+	ValidityPeriodHours pulumi.IntInput `pulumi:"validityPeriodHours"`
+}
+
+func (CertificateAuthorityClientArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityClient)(nil)).Elem()
+}
+
+func (i CertificateAuthorityClientArgs) ToCertificateAuthorityClientOutput() CertificateAuthorityClientOutput {
+	return i.ToCertificateAuthorityClientOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityClientArgs) ToCertificateAuthorityClientOutputWithContext(ctx context.Context) CertificateAuthorityClientOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityClientOutput)
+}
+
+// CertificateAuthorityClientArrayInput is an input type that accepts CertificateAuthorityClientArray and CertificateAuthorityClientArrayOutput values.
+// You can construct a concrete instance of `CertificateAuthorityClientArrayInput` via:
+//
+//          CertificateAuthorityClientArray{ CertificateAuthorityClientArgs{...} }
+type CertificateAuthorityClientArrayInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityClientArrayOutput() CertificateAuthorityClientArrayOutput
+	ToCertificateAuthorityClientArrayOutputWithContext(context.Context) CertificateAuthorityClientArrayOutput
+}
+
+type CertificateAuthorityClientArray []CertificateAuthorityClientInput
+
+func (CertificateAuthorityClientArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateAuthorityClient)(nil)).Elem()
+}
+
+func (i CertificateAuthorityClientArray) ToCertificateAuthorityClientArrayOutput() CertificateAuthorityClientArrayOutput {
+	return i.ToCertificateAuthorityClientArrayOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityClientArray) ToCertificateAuthorityClientArrayOutputWithContext(ctx context.Context) CertificateAuthorityClientArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityClientArrayOutput)
+}
+
+type CertificateAuthorityClientOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityClientOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityClient)(nil)).Elem()
+}
+
+func (o CertificateAuthorityClientOutput) ToCertificateAuthorityClientOutput() CertificateAuthorityClientOutput {
+	return o
+}
+
+func (o CertificateAuthorityClientOutput) ToCertificateAuthorityClientOutputWithContext(ctx context.Context) CertificateAuthorityClientOutput {
+	return o
+}
+
+// The body of the CA's certificate in PEM format.
+func (o CertificateAuthorityClientOutput) Certificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.Certificate }).(pulumi.StringPtrOutput)
+}
+
+// Input for issuing a certificate.
+func (o CertificateAuthorityClientOutput) Csr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.Csr }).(pulumi.StringPtrOutput)
+}
+
+// Input for issuing a certificate.
+func (o CertificateAuthorityClientOutput) Email() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.Email }).(pulumi.StringPtrOutput)
+}
+
+// Flag to suspend/hold the certificate.
+func (o CertificateAuthorityClientOutput) Hold() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *bool { return v.Hold }).(pulumi.BoolPtrOutput)
+}
+
+// The id of the certificate.
+func (o CertificateAuthorityClientOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Current state of the certificate.
+func (o CertificateAuthorityClientOutput) IssueState() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.IssueState }).(pulumi.StringPtrOutput)
+}
+
+// The date on which the certificate validity period ends, in RFC3339 format.
+func (o CertificateAuthorityClientOutput) NotAfter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.NotAfter }).(pulumi.StringPtrOutput)
+}
+
+// The date on which the certificate validity period begins, in RFC3339 format.
+func (o CertificateAuthorityClientOutput) NotBefore() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.NotBefore }).(pulumi.StringPtrOutput)
+}
+
+// Input for issuing a certificate.
+func (o CertificateAuthorityClientOutput) PublicKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.PublicKey }).(pulumi.StringPtrOutput)
+}
+
+// The body of the CA's certificate in PEM format.
+func (o CertificateAuthorityClientOutput) SerialNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
+}
+
+// A `subject` block as defined below.
+func (o CertificateAuthorityClientOutput) Subject() CertificateAuthorityClientSubjectOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) CertificateAuthorityClientSubject { return v.Subject }).(CertificateAuthorityClientSubjectOutput)
+}
+
+// The URL for issuing the certificate.
+func (o CertificateAuthorityClientOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+// The number of hours after initial issuing that the certificate will become invalid.
+func (o CertificateAuthorityClientOutput) ValidityPeriodHours() pulumi.IntOutput {
+	return o.ApplyT(func(v CertificateAuthorityClient) int { return v.ValidityPeriodHours }).(pulumi.IntOutput)
+}
+
+type CertificateAuthorityClientArrayOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityClientArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateAuthorityClient)(nil)).Elem()
+}
+
+func (o CertificateAuthorityClientArrayOutput) ToCertificateAuthorityClientArrayOutput() CertificateAuthorityClientArrayOutput {
+	return o
+}
+
+func (o CertificateAuthorityClientArrayOutput) ToCertificateAuthorityClientArrayOutputWithContext(ctx context.Context) CertificateAuthorityClientArrayOutput {
+	return o
+}
+
+func (o CertificateAuthorityClientArrayOutput) Index(i pulumi.IntInput) CertificateAuthorityClientOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertificateAuthorityClient {
+		return vs[0].([]CertificateAuthorityClient)[vs[1].(int)]
+	}).(CertificateAuthorityClientOutput)
+}
+
+type CertificateAuthorityClientSubject struct {
+	// .
+	CommonName string `pulumi:"commonName"`
+	// .
+	Country string `pulumi:"country"`
+	// .
+	Organization string `pulumi:"organization"`
+	// .
+	OrganizationUnits []string `pulumi:"organizationUnits"`
+}
+
+// CertificateAuthorityClientSubjectInput is an input type that accepts CertificateAuthorityClientSubjectArgs and CertificateAuthorityClientSubjectOutput values.
+// You can construct a concrete instance of `CertificateAuthorityClientSubjectInput` via:
+//
+//          CertificateAuthorityClientSubjectArgs{...}
+type CertificateAuthorityClientSubjectInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityClientSubjectOutput() CertificateAuthorityClientSubjectOutput
+	ToCertificateAuthorityClientSubjectOutputWithContext(context.Context) CertificateAuthorityClientSubjectOutput
+}
+
+type CertificateAuthorityClientSubjectArgs struct {
+	// .
+	CommonName pulumi.StringInput `pulumi:"commonName"`
+	// .
+	Country pulumi.StringInput `pulumi:"country"`
+	// .
+	Organization pulumi.StringInput `pulumi:"organization"`
+	// .
+	OrganizationUnits pulumi.StringArrayInput `pulumi:"organizationUnits"`
+}
+
+func (CertificateAuthorityClientSubjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityClientSubject)(nil)).Elem()
+}
+
+func (i CertificateAuthorityClientSubjectArgs) ToCertificateAuthorityClientSubjectOutput() CertificateAuthorityClientSubjectOutput {
+	return i.ToCertificateAuthorityClientSubjectOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityClientSubjectArgs) ToCertificateAuthorityClientSubjectOutputWithContext(ctx context.Context) CertificateAuthorityClientSubjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityClientSubjectOutput)
+}
+
+type CertificateAuthorityClientSubjectOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityClientSubjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityClientSubject)(nil)).Elem()
+}
+
+func (o CertificateAuthorityClientSubjectOutput) ToCertificateAuthorityClientSubjectOutput() CertificateAuthorityClientSubjectOutput {
+	return o
+}
+
+func (o CertificateAuthorityClientSubjectOutput) ToCertificateAuthorityClientSubjectOutputWithContext(ctx context.Context) CertificateAuthorityClientSubjectOutput {
+	return o
+}
+
+// .
+func (o CertificateAuthorityClientSubjectOutput) CommonName() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityClientSubject) string { return v.CommonName }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityClientSubjectOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityClientSubject) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityClientSubjectOutput) Organization() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityClientSubject) string { return v.Organization }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityClientSubjectOutput) OrganizationUnits() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CertificateAuthorityClientSubject) []string { return v.OrganizationUnits }).(pulumi.StringArrayOutput)
+}
+
+type CertificateAuthorityServer struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate *string `pulumi:"certificate"`
+	// Input for issuing a certificate.
+	Csr *string `pulumi:"csr"`
+	// Flag to suspend/hold the certificate.
+	Hold *bool `pulumi:"hold"`
+	// The id of the certificate.
+	Id *string `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState *string `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter *string `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore *string `pulumi:"notBefore"`
+	// Input for issuing a certificate.
+	PublicKey *string `pulumi:"publicKey"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber *string `pulumi:"serialNumber"`
+	// A `subject` block as defined below.
+	Subject CertificateAuthorityServerSubject `pulumi:"subject"`
+	// .
+	SubjectAlternativeNames []string `pulumi:"subjectAlternativeNames"`
+	// The number of hours after initial issuing that the certificate will become invalid.
+	ValidityPeriodHours int `pulumi:"validityPeriodHours"`
+}
+
+// CertificateAuthorityServerInput is an input type that accepts CertificateAuthorityServerArgs and CertificateAuthorityServerOutput values.
+// You can construct a concrete instance of `CertificateAuthorityServerInput` via:
+//
+//          CertificateAuthorityServerArgs{...}
+type CertificateAuthorityServerInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityServerOutput() CertificateAuthorityServerOutput
+	ToCertificateAuthorityServerOutputWithContext(context.Context) CertificateAuthorityServerOutput
+}
+
+type CertificateAuthorityServerArgs struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate pulumi.StringPtrInput `pulumi:"certificate"`
+	// Input for issuing a certificate.
+	Csr pulumi.StringPtrInput `pulumi:"csr"`
+	// Flag to suspend/hold the certificate.
+	Hold pulumi.BoolPtrInput `pulumi:"hold"`
+	// The id of the certificate.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState pulumi.StringPtrInput `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter pulumi.StringPtrInput `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore pulumi.StringPtrInput `pulumi:"notBefore"`
+	// Input for issuing a certificate.
+	PublicKey pulumi.StringPtrInput `pulumi:"publicKey"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber pulumi.StringPtrInput `pulumi:"serialNumber"`
+	// A `subject` block as defined below.
+	Subject CertificateAuthorityServerSubjectInput `pulumi:"subject"`
+	// .
+	SubjectAlternativeNames pulumi.StringArrayInput `pulumi:"subjectAlternativeNames"`
+	// The number of hours after initial issuing that the certificate will become invalid.
+	ValidityPeriodHours pulumi.IntInput `pulumi:"validityPeriodHours"`
+}
+
+func (CertificateAuthorityServerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityServer)(nil)).Elem()
+}
+
+func (i CertificateAuthorityServerArgs) ToCertificateAuthorityServerOutput() CertificateAuthorityServerOutput {
+	return i.ToCertificateAuthorityServerOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityServerArgs) ToCertificateAuthorityServerOutputWithContext(ctx context.Context) CertificateAuthorityServerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityServerOutput)
+}
+
+// CertificateAuthorityServerArrayInput is an input type that accepts CertificateAuthorityServerArray and CertificateAuthorityServerArrayOutput values.
+// You can construct a concrete instance of `CertificateAuthorityServerArrayInput` via:
+//
+//          CertificateAuthorityServerArray{ CertificateAuthorityServerArgs{...} }
+type CertificateAuthorityServerArrayInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityServerArrayOutput() CertificateAuthorityServerArrayOutput
+	ToCertificateAuthorityServerArrayOutputWithContext(context.Context) CertificateAuthorityServerArrayOutput
+}
+
+type CertificateAuthorityServerArray []CertificateAuthorityServerInput
+
+func (CertificateAuthorityServerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateAuthorityServer)(nil)).Elem()
+}
+
+func (i CertificateAuthorityServerArray) ToCertificateAuthorityServerArrayOutput() CertificateAuthorityServerArrayOutput {
+	return i.ToCertificateAuthorityServerArrayOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityServerArray) ToCertificateAuthorityServerArrayOutputWithContext(ctx context.Context) CertificateAuthorityServerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityServerArrayOutput)
+}
+
+type CertificateAuthorityServerOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityServerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityServer)(nil)).Elem()
+}
+
+func (o CertificateAuthorityServerOutput) ToCertificateAuthorityServerOutput() CertificateAuthorityServerOutput {
+	return o
+}
+
+func (o CertificateAuthorityServerOutput) ToCertificateAuthorityServerOutputWithContext(ctx context.Context) CertificateAuthorityServerOutput {
+	return o
+}
+
+// The body of the CA's certificate in PEM format.
+func (o CertificateAuthorityServerOutput) Certificate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.Certificate }).(pulumi.StringPtrOutput)
+}
+
+// Input for issuing a certificate.
+func (o CertificateAuthorityServerOutput) Csr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.Csr }).(pulumi.StringPtrOutput)
+}
+
+// Flag to suspend/hold the certificate.
+func (o CertificateAuthorityServerOutput) Hold() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *bool { return v.Hold }).(pulumi.BoolPtrOutput)
+}
+
+// The id of the certificate.
+func (o CertificateAuthorityServerOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Current state of the certificate.
+func (o CertificateAuthorityServerOutput) IssueState() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.IssueState }).(pulumi.StringPtrOutput)
+}
+
+// The date on which the certificate validity period ends, in RFC3339 format.
+func (o CertificateAuthorityServerOutput) NotAfter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.NotAfter }).(pulumi.StringPtrOutput)
+}
+
+// The date on which the certificate validity period begins, in RFC3339 format.
+func (o CertificateAuthorityServerOutput) NotBefore() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.NotBefore }).(pulumi.StringPtrOutput)
+}
+
+// Input for issuing a certificate.
+func (o CertificateAuthorityServerOutput) PublicKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.PublicKey }).(pulumi.StringPtrOutput)
+}
+
+// The body of the CA's certificate in PEM format.
+func (o CertificateAuthorityServerOutput) SerialNumber() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) *string { return v.SerialNumber }).(pulumi.StringPtrOutput)
+}
+
+// A `subject` block as defined below.
+func (o CertificateAuthorityServerOutput) Subject() CertificateAuthorityServerSubjectOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) CertificateAuthorityServerSubject { return v.Subject }).(CertificateAuthorityServerSubjectOutput)
+}
+
+// .
+func (o CertificateAuthorityServerOutput) SubjectAlternativeNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) []string { return v.SubjectAlternativeNames }).(pulumi.StringArrayOutput)
+}
+
+// The number of hours after initial issuing that the certificate will become invalid.
+func (o CertificateAuthorityServerOutput) ValidityPeriodHours() pulumi.IntOutput {
+	return o.ApplyT(func(v CertificateAuthorityServer) int { return v.ValidityPeriodHours }).(pulumi.IntOutput)
+}
+
+type CertificateAuthorityServerArrayOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityServerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CertificateAuthorityServer)(nil)).Elem()
+}
+
+func (o CertificateAuthorityServerArrayOutput) ToCertificateAuthorityServerArrayOutput() CertificateAuthorityServerArrayOutput {
+	return o
+}
+
+func (o CertificateAuthorityServerArrayOutput) ToCertificateAuthorityServerArrayOutputWithContext(ctx context.Context) CertificateAuthorityServerArrayOutput {
+	return o
+}
+
+func (o CertificateAuthorityServerArrayOutput) Index(i pulumi.IntInput) CertificateAuthorityServerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CertificateAuthorityServer {
+		return vs[0].([]CertificateAuthorityServer)[vs[1].(int)]
+	}).(CertificateAuthorityServerOutput)
+}
+
+type CertificateAuthorityServerSubject struct {
+	// .
+	CommonName string `pulumi:"commonName"`
+	// .
+	Country string `pulumi:"country"`
+	// .
+	Organization string `pulumi:"organization"`
+	// .
+	OrganizationUnits []string `pulumi:"organizationUnits"`
+}
+
+// CertificateAuthorityServerSubjectInput is an input type that accepts CertificateAuthorityServerSubjectArgs and CertificateAuthorityServerSubjectOutput values.
+// You can construct a concrete instance of `CertificateAuthorityServerSubjectInput` via:
+//
+//          CertificateAuthorityServerSubjectArgs{...}
+type CertificateAuthorityServerSubjectInput interface {
+	pulumi.Input
+
+	ToCertificateAuthorityServerSubjectOutput() CertificateAuthorityServerSubjectOutput
+	ToCertificateAuthorityServerSubjectOutputWithContext(context.Context) CertificateAuthorityServerSubjectOutput
+}
+
+type CertificateAuthorityServerSubjectArgs struct {
+	// .
+	CommonName pulumi.StringInput `pulumi:"commonName"`
+	// .
+	Country pulumi.StringInput `pulumi:"country"`
+	// .
+	Organization pulumi.StringInput `pulumi:"organization"`
+	// .
+	OrganizationUnits pulumi.StringArrayInput `pulumi:"organizationUnits"`
+}
+
+func (CertificateAuthorityServerSubjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityServerSubject)(nil)).Elem()
+}
+
+func (i CertificateAuthorityServerSubjectArgs) ToCertificateAuthorityServerSubjectOutput() CertificateAuthorityServerSubjectOutput {
+	return i.ToCertificateAuthorityServerSubjectOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthorityServerSubjectArgs) ToCertificateAuthorityServerSubjectOutputWithContext(ctx context.Context) CertificateAuthorityServerSubjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthorityServerSubjectOutput)
+}
+
+type CertificateAuthorityServerSubjectOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthorityServerSubjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthorityServerSubject)(nil)).Elem()
+}
+
+func (o CertificateAuthorityServerSubjectOutput) ToCertificateAuthorityServerSubjectOutput() CertificateAuthorityServerSubjectOutput {
+	return o
+}
+
+func (o CertificateAuthorityServerSubjectOutput) ToCertificateAuthorityServerSubjectOutputWithContext(ctx context.Context) CertificateAuthorityServerSubjectOutput {
+	return o
+}
+
+// .
+func (o CertificateAuthorityServerSubjectOutput) CommonName() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityServerSubject) string { return v.CommonName }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityServerSubjectOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityServerSubject) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityServerSubjectOutput) Organization() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthorityServerSubject) string { return v.Organization }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthorityServerSubjectOutput) OrganizationUnits() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CertificateAuthorityServerSubject) []string { return v.OrganizationUnits }).(pulumi.StringArrayOutput)
+}
+
+type CertificateAuthoritySubject struct {
+	// .
+	CommonName string `pulumi:"commonName"`
+	// .
+	Country string `pulumi:"country"`
+	// .
+	Organization string `pulumi:"organization"`
+	// .
+	OrganizationUnits []string `pulumi:"organizationUnits"`
+}
+
+// CertificateAuthoritySubjectInput is an input type that accepts CertificateAuthoritySubjectArgs and CertificateAuthoritySubjectOutput values.
+// You can construct a concrete instance of `CertificateAuthoritySubjectInput` via:
+//
+//          CertificateAuthoritySubjectArgs{...}
+type CertificateAuthoritySubjectInput interface {
+	pulumi.Input
+
+	ToCertificateAuthoritySubjectOutput() CertificateAuthoritySubjectOutput
+	ToCertificateAuthoritySubjectOutputWithContext(context.Context) CertificateAuthoritySubjectOutput
+}
+
+type CertificateAuthoritySubjectArgs struct {
+	// .
+	CommonName pulumi.StringInput `pulumi:"commonName"`
+	// .
+	Country pulumi.StringInput `pulumi:"country"`
+	// .
+	Organization pulumi.StringInput `pulumi:"organization"`
+	// .
+	OrganizationUnits pulumi.StringArrayInput `pulumi:"organizationUnits"`
+}
+
+func (CertificateAuthoritySubjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthoritySubject)(nil)).Elem()
+}
+
+func (i CertificateAuthoritySubjectArgs) ToCertificateAuthoritySubjectOutput() CertificateAuthoritySubjectOutput {
+	return i.ToCertificateAuthoritySubjectOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthoritySubjectArgs) ToCertificateAuthoritySubjectOutputWithContext(ctx context.Context) CertificateAuthoritySubjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthoritySubjectOutput)
+}
+
+func (i CertificateAuthoritySubjectArgs) ToCertificateAuthoritySubjectPtrOutput() CertificateAuthoritySubjectPtrOutput {
+	return i.ToCertificateAuthoritySubjectPtrOutputWithContext(context.Background())
+}
+
+func (i CertificateAuthoritySubjectArgs) ToCertificateAuthoritySubjectPtrOutputWithContext(ctx context.Context) CertificateAuthoritySubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthoritySubjectOutput).ToCertificateAuthoritySubjectPtrOutputWithContext(ctx)
+}
+
+// CertificateAuthoritySubjectPtrInput is an input type that accepts CertificateAuthoritySubjectArgs, CertificateAuthoritySubjectPtr and CertificateAuthoritySubjectPtrOutput values.
+// You can construct a concrete instance of `CertificateAuthoritySubjectPtrInput` via:
+//
+//          CertificateAuthoritySubjectArgs{...}
+//
+//  or:
+//
+//          nil
+type CertificateAuthoritySubjectPtrInput interface {
+	pulumi.Input
+
+	ToCertificateAuthoritySubjectPtrOutput() CertificateAuthoritySubjectPtrOutput
+	ToCertificateAuthoritySubjectPtrOutputWithContext(context.Context) CertificateAuthoritySubjectPtrOutput
+}
+
+type certificateAuthoritySubjectPtrType CertificateAuthoritySubjectArgs
+
+func CertificateAuthoritySubjectPtr(v *CertificateAuthoritySubjectArgs) CertificateAuthoritySubjectPtrInput {
+	return (*certificateAuthoritySubjectPtrType)(v)
+}
+
+func (*certificateAuthoritySubjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertificateAuthoritySubject)(nil)).Elem()
+}
+
+func (i *certificateAuthoritySubjectPtrType) ToCertificateAuthoritySubjectPtrOutput() CertificateAuthoritySubjectPtrOutput {
+	return i.ToCertificateAuthoritySubjectPtrOutputWithContext(context.Background())
+}
+
+func (i *certificateAuthoritySubjectPtrType) ToCertificateAuthoritySubjectPtrOutputWithContext(ctx context.Context) CertificateAuthoritySubjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CertificateAuthoritySubjectPtrOutput)
+}
+
+type CertificateAuthoritySubjectOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthoritySubjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CertificateAuthoritySubject)(nil)).Elem()
+}
+
+func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectOutput() CertificateAuthoritySubjectOutput {
+	return o
+}
+
+func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectOutputWithContext(ctx context.Context) CertificateAuthoritySubjectOutput {
+	return o
+}
+
+func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectPtrOutput() CertificateAuthoritySubjectPtrOutput {
+	return o.ToCertificateAuthoritySubjectPtrOutputWithContext(context.Background())
+}
+
+func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectPtrOutputWithContext(ctx context.Context) CertificateAuthoritySubjectPtrOutput {
+	return o.ApplyT(func(v CertificateAuthoritySubject) *CertificateAuthoritySubject {
+		return &v
+	}).(CertificateAuthoritySubjectPtrOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectOutput) CommonName() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthoritySubject) string { return v.CommonName }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectOutput) Country() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthoritySubject) string { return v.Country }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectOutput) Organization() pulumi.StringOutput {
+	return o.ApplyT(func(v CertificateAuthoritySubject) string { return v.Organization }).(pulumi.StringOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectOutput) OrganizationUnits() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CertificateAuthoritySubject) []string { return v.OrganizationUnits }).(pulumi.StringArrayOutput)
+}
+
+type CertificateAuthoritySubjectPtrOutput struct{ *pulumi.OutputState }
+
+func (CertificateAuthoritySubjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CertificateAuthoritySubject)(nil)).Elem()
+}
+
+func (o CertificateAuthoritySubjectPtrOutput) ToCertificateAuthoritySubjectPtrOutput() CertificateAuthoritySubjectPtrOutput {
+	return o
+}
+
+func (o CertificateAuthoritySubjectPtrOutput) ToCertificateAuthoritySubjectPtrOutputWithContext(ctx context.Context) CertificateAuthoritySubjectPtrOutput {
+	return o
+}
+
+func (o CertificateAuthoritySubjectPtrOutput) Elem() CertificateAuthoritySubjectOutput {
+	return o.ApplyT(func(v *CertificateAuthoritySubject) CertificateAuthoritySubject { return *v }).(CertificateAuthoritySubjectOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectPtrOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertificateAuthoritySubject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CommonName
+	}).(pulumi.StringPtrOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectPtrOutput) Country() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertificateAuthoritySubject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Country
+	}).(pulumi.StringPtrOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectPtrOutput) Organization() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CertificateAuthoritySubject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Organization
+	}).(pulumi.StringPtrOutput)
+}
+
+// .
+func (o CertificateAuthoritySubjectPtrOutput) OrganizationUnits() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CertificateAuthoritySubject) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OrganizationUnits
+	}).(pulumi.StringArrayOutput)
+}
+
 type ContainerRegistryUser struct {
 	// The user name used to authenticate remote access.
 	Name string `pulumi:"name"`
@@ -3457,12 +4204,16 @@ func (o PacketFilterRuleExpressionArrayOutput) Index(i pulumi.IntInput) PacketFi
 type ProxyLBACMECertificate struct {
 	// A list of `additionalCertificate` blocks as defined below.
 	AdditionalCertificates []ProxyLBACMECertificateAdditionalCertificate `pulumi:"additionalCertificates"`
+	// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+	CommonName *string `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert *string `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey *string `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert *string `pulumi:"serverCert"`
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames *string `pulumi:"subjectAltNames"`
 }
 
 // ProxyLBACMECertificateInput is an input type that accepts ProxyLBACMECertificateArgs and ProxyLBACMECertificateOutput values.
@@ -3479,12 +4230,16 @@ type ProxyLBACMECertificateInput interface {
 type ProxyLBACMECertificateArgs struct {
 	// A list of `additionalCertificate` blocks as defined below.
 	AdditionalCertificates ProxyLBACMECertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
+	// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert pulumi.StringPtrInput `pulumi:"serverCert"`
+	// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+	SubjectAltNames pulumi.StringPtrInput `pulumi:"subjectAltNames"`
 }
 
 func (ProxyLBACMECertificateArgs) ElementType() reflect.Type {
@@ -3545,6 +4300,11 @@ func (o ProxyLBACMECertificateOutput) AdditionalCertificates() ProxyLBACMECertif
 	}).(ProxyLBACMECertificateAdditionalCertificateArrayOutput)
 }
 
+// The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+func (o ProxyLBACMECertificateOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.CommonName }).(pulumi.StringPtrOutput)
+}
+
 // The intermediate certificate for a server.
 func (o ProxyLBACMECertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
@@ -3558,6 +4318,11 @@ func (o ProxyLBACMECertificateOutput) PrivateKey() pulumi.StringPtrOutput {
 // The certificate for a server.
 func (o ProxyLBACMECertificateOutput) ServerCert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+}
+
+// The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+func (o ProxyLBACMECertificateOutput) SubjectAltNames() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBACMECertificate) *string { return v.SubjectAltNames }).(pulumi.StringPtrOutput)
 }
 
 type ProxyLBACMECertificateArrayOutput struct{ *pulumi.OutputState }
@@ -3704,6 +4469,8 @@ type ProxyLBBindPort struct {
 	RedirectToHttps *bool `pulumi:"redirectToHttps"`
 	// One or more `responseHeader` blocks as defined below.
 	ResponseHeaders []ProxyLBBindPortResponseHeader `pulumi:"responseHeaders"`
+	// The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+	SslPolicy *string `pulumi:"sslPolicy"`
 	// The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
 	SupportHttp2 *bool `pulumi:"supportHttp2"`
 }
@@ -3728,6 +4495,8 @@ type ProxyLBBindPortArgs struct {
 	RedirectToHttps pulumi.BoolPtrInput `pulumi:"redirectToHttps"`
 	// One or more `responseHeader` blocks as defined below.
 	ResponseHeaders ProxyLBBindPortResponseHeaderArrayInput `pulumi:"responseHeaders"`
+	// The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+	SslPolicy pulumi.StringPtrInput `pulumi:"sslPolicy"`
 	// The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
 	SupportHttp2 pulumi.BoolPtrInput `pulumi:"supportHttp2"`
 }
@@ -3801,6 +4570,11 @@ func (o ProxyLBBindPortOutput) RedirectToHttps() pulumi.BoolPtrOutput {
 // One or more `responseHeader` blocks as defined below.
 func (o ProxyLBBindPortOutput) ResponseHeaders() ProxyLBBindPortResponseHeaderArrayOutput {
 	return o.ApplyT(func(v ProxyLBBindPort) []ProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(ProxyLBBindPortResponseHeaderArrayOutput)
+}
+
+// The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+func (o ProxyLBBindPortOutput) SslPolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBBindPort) *string { return v.SslPolicy }).(pulumi.StringPtrOutput)
 }
 
 // The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
@@ -3937,12 +4711,16 @@ func (o ProxyLBBindPortResponseHeaderArrayOutput) Index(i pulumi.IntInput) Proxy
 type ProxyLBCertificate struct {
 	// One or more `additionalCertificate` blocks as defined below.
 	AdditionalCertificates []ProxyLBCertificateAdditionalCertificate `pulumi:"additionalCertificates"`
+	// The common name of the certificate.
+	CommonName *string `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert *string `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey *string `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert *string `pulumi:"serverCert"`
+	// The subject alternative names of the certificate.
+	SubjectAltNames *string `pulumi:"subjectAltNames"`
 }
 
 // ProxyLBCertificateInput is an input type that accepts ProxyLBCertificateArgs and ProxyLBCertificateOutput values.
@@ -3959,12 +4737,16 @@ type ProxyLBCertificateInput interface {
 type ProxyLBCertificateArgs struct {
 	// One or more `additionalCertificate` blocks as defined below.
 	AdditionalCertificates ProxyLBCertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
+	// The common name of the certificate.
+	CommonName pulumi.StringPtrInput `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert pulumi.StringPtrInput `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert pulumi.StringPtrInput `pulumi:"serverCert"`
+	// The subject alternative names of the certificate.
+	SubjectAltNames pulumi.StringPtrInput `pulumi:"subjectAltNames"`
 }
 
 func (ProxyLBCertificateArgs) ElementType() reflect.Type {
@@ -4049,6 +4831,11 @@ func (o ProxyLBCertificateOutput) AdditionalCertificates() ProxyLBCertificateAdd
 	return o.ApplyT(func(v ProxyLBCertificate) []ProxyLBCertificateAdditionalCertificate { return v.AdditionalCertificates }).(ProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
+// The common name of the certificate.
+func (o ProxyLBCertificateOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.CommonName }).(pulumi.StringPtrOutput)
+}
+
 // The intermediate certificate for a server.
 func (o ProxyLBCertificateOutput) IntermediateCert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.IntermediateCert }).(pulumi.StringPtrOutput)
@@ -4062,6 +4849,11 @@ func (o ProxyLBCertificateOutput) PrivateKey() pulumi.StringPtrOutput {
 // The certificate for a server.
 func (o ProxyLBCertificateOutput) ServerCert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.ServerCert }).(pulumi.StringPtrOutput)
+}
+
+// The subject alternative names of the certificate.
+func (o ProxyLBCertificateOutput) SubjectAltNames() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBCertificate) *string { return v.SubjectAltNames }).(pulumi.StringPtrOutput)
 }
 
 type ProxyLBCertificatePtrOutput struct{ *pulumi.OutputState }
@@ -4092,6 +4884,16 @@ func (o ProxyLBCertificatePtrOutput) AdditionalCertificates() ProxyLBCertificate
 	}).(ProxyLBCertificateAdditionalCertificateArrayOutput)
 }
 
+// The common name of the certificate.
+func (o ProxyLBCertificatePtrOutput) CommonName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProxyLBCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CommonName
+	}).(pulumi.StringPtrOutput)
+}
+
 // The intermediate certificate for a server.
 func (o ProxyLBCertificatePtrOutput) IntermediateCert() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProxyLBCertificate) *string {
@@ -4119,6 +4921,16 @@ func (o ProxyLBCertificatePtrOutput) ServerCert() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.ServerCert
+	}).(pulumi.StringPtrOutput)
+}
+
+// The subject alternative names of the certificate.
+func (o ProxyLBCertificatePtrOutput) SubjectAltNames() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProxyLBCertificate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubjectAltNames
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4445,12 +5257,24 @@ func (o ProxyLBHealthCheckPtrOutput) Protocol() pulumi.StringPtrOutput {
 }
 
 type ProxyLBRule struct {
+	// The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+	Action *string `pulumi:"action"`
+	// Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+	FixedContentType *string `pulumi:"fixedContentType"`
+	// Content body for fixed response sent when requests matches the rule.
+	FixedMessageBody *string `pulumi:"fixedMessageBody"`
+	// HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+	FixedStatusCode *string `pulumi:"fixedStatusCode"`
 	// The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
 	Group *string `pulumi:"group"`
 	// The value of HTTP host header that is used as condition of rule-based balancing.
 	Host *string `pulumi:"host"`
 	// The request path that is used as condition of rule-based balancing.
 	Path *string `pulumi:"path"`
+	// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+	RedirectLocation *string `pulumi:"redirectLocation"`
+	// HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+	RedirectStatusCode *string `pulumi:"redirectStatusCode"`
 }
 
 // ProxyLBRuleInput is an input type that accepts ProxyLBRuleArgs and ProxyLBRuleOutput values.
@@ -4465,12 +5289,24 @@ type ProxyLBRuleInput interface {
 }
 
 type ProxyLBRuleArgs struct {
+	// The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+	FixedContentType pulumi.StringPtrInput `pulumi:"fixedContentType"`
+	// Content body for fixed response sent when requests matches the rule.
+	FixedMessageBody pulumi.StringPtrInput `pulumi:"fixedMessageBody"`
+	// HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+	FixedStatusCode pulumi.StringPtrInput `pulumi:"fixedStatusCode"`
 	// The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
 	Group pulumi.StringPtrInput `pulumi:"group"`
 	// The value of HTTP host header that is used as condition of rule-based balancing.
 	Host pulumi.StringPtrInput `pulumi:"host"`
 	// The request path that is used as condition of rule-based balancing.
 	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+	RedirectLocation pulumi.StringPtrInput `pulumi:"redirectLocation"`
+	// HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+	RedirectStatusCode pulumi.StringPtrInput `pulumi:"redirectStatusCode"`
 }
 
 func (ProxyLBRuleArgs) ElementType() reflect.Type {
@@ -4524,6 +5360,26 @@ func (o ProxyLBRuleOutput) ToProxyLBRuleOutputWithContext(ctx context.Context) P
 	return o
 }
 
+// The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+func (o ProxyLBRuleOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+func (o ProxyLBRuleOutput) FixedContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.FixedContentType }).(pulumi.StringPtrOutput)
+}
+
+// Content body for fixed response sent when requests matches the rule.
+func (o ProxyLBRuleOutput) FixedMessageBody() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.FixedMessageBody }).(pulumi.StringPtrOutput)
+}
+
+// HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+func (o ProxyLBRuleOutput) FixedStatusCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.FixedStatusCode }).(pulumi.StringPtrOutput)
+}
+
 // The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
 func (o ProxyLBRuleOutput) Group() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBRule) *string { return v.Group }).(pulumi.StringPtrOutput)
@@ -4537,6 +5393,16 @@ func (o ProxyLBRuleOutput) Host() pulumi.StringPtrOutput {
 // The request path that is used as condition of rule-based balancing.
 func (o ProxyLBRuleOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProxyLBRule) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+func (o ProxyLBRuleOutput) RedirectLocation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.RedirectLocation }).(pulumi.StringPtrOutput)
+}
+
+// HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+func (o ProxyLBRuleOutput) RedirectStatusCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBRule) *string { return v.RedirectStatusCode }).(pulumi.StringPtrOutput)
 }
 
 type ProxyLBRuleArrayOutput struct{ *pulumi.OutputState }
@@ -4831,6 +5697,156 @@ func (o ProxyLBSorryServerPtrOutput) Port() pulumi.IntPtrOutput {
 		}
 		return v.Port
 	}).(pulumi.IntPtrOutput)
+}
+
+type ProxyLBSyslog struct {
+	// The number of syslog port.
+	Port *int `pulumi:"port"`
+	// The address of syslog server.
+	Server *string `pulumi:"server"`
+}
+
+// ProxyLBSyslogInput is an input type that accepts ProxyLBSyslogArgs and ProxyLBSyslogOutput values.
+// You can construct a concrete instance of `ProxyLBSyslogInput` via:
+//
+//          ProxyLBSyslogArgs{...}
+type ProxyLBSyslogInput interface {
+	pulumi.Input
+
+	ToProxyLBSyslogOutput() ProxyLBSyslogOutput
+	ToProxyLBSyslogOutputWithContext(context.Context) ProxyLBSyslogOutput
+}
+
+type ProxyLBSyslogArgs struct {
+	// The number of syslog port.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// The address of syslog server.
+	Server pulumi.StringPtrInput `pulumi:"server"`
+}
+
+func (ProxyLBSyslogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyLBSyslog)(nil)).Elem()
+}
+
+func (i ProxyLBSyslogArgs) ToProxyLBSyslogOutput() ProxyLBSyslogOutput {
+	return i.ToProxyLBSyslogOutputWithContext(context.Background())
+}
+
+func (i ProxyLBSyslogArgs) ToProxyLBSyslogOutputWithContext(ctx context.Context) ProxyLBSyslogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBSyslogOutput)
+}
+
+func (i ProxyLBSyslogArgs) ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput {
+	return i.ToProxyLBSyslogPtrOutputWithContext(context.Background())
+}
+
+func (i ProxyLBSyslogArgs) ToProxyLBSyslogPtrOutputWithContext(ctx context.Context) ProxyLBSyslogPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBSyslogOutput).ToProxyLBSyslogPtrOutputWithContext(ctx)
+}
+
+// ProxyLBSyslogPtrInput is an input type that accepts ProxyLBSyslogArgs, ProxyLBSyslogPtr and ProxyLBSyslogPtrOutput values.
+// You can construct a concrete instance of `ProxyLBSyslogPtrInput` via:
+//
+//          ProxyLBSyslogArgs{...}
+//
+//  or:
+//
+//          nil
+type ProxyLBSyslogPtrInput interface {
+	pulumi.Input
+
+	ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput
+	ToProxyLBSyslogPtrOutputWithContext(context.Context) ProxyLBSyslogPtrOutput
+}
+
+type proxyLBSyslogPtrType ProxyLBSyslogArgs
+
+func ProxyLBSyslogPtr(v *ProxyLBSyslogArgs) ProxyLBSyslogPtrInput {
+	return (*proxyLBSyslogPtrType)(v)
+}
+
+func (*proxyLBSyslogPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProxyLBSyslog)(nil)).Elem()
+}
+
+func (i *proxyLBSyslogPtrType) ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput {
+	return i.ToProxyLBSyslogPtrOutputWithContext(context.Background())
+}
+
+func (i *proxyLBSyslogPtrType) ToProxyLBSyslogPtrOutputWithContext(ctx context.Context) ProxyLBSyslogPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBSyslogPtrOutput)
+}
+
+type ProxyLBSyslogOutput struct{ *pulumi.OutputState }
+
+func (ProxyLBSyslogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyLBSyslog)(nil)).Elem()
+}
+
+func (o ProxyLBSyslogOutput) ToProxyLBSyslogOutput() ProxyLBSyslogOutput {
+	return o
+}
+
+func (o ProxyLBSyslogOutput) ToProxyLBSyslogOutputWithContext(ctx context.Context) ProxyLBSyslogOutput {
+	return o
+}
+
+func (o ProxyLBSyslogOutput) ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput {
+	return o.ToProxyLBSyslogPtrOutputWithContext(context.Background())
+}
+
+func (o ProxyLBSyslogOutput) ToProxyLBSyslogPtrOutputWithContext(ctx context.Context) ProxyLBSyslogPtrOutput {
+	return o.ApplyT(func(v ProxyLBSyslog) *ProxyLBSyslog {
+		return &v
+	}).(ProxyLBSyslogPtrOutput)
+}
+
+// The number of syslog port.
+func (o ProxyLBSyslogOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ProxyLBSyslog) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// The address of syslog server.
+func (o ProxyLBSyslogOutput) Server() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProxyLBSyslog) *string { return v.Server }).(pulumi.StringPtrOutput)
+}
+
+type ProxyLBSyslogPtrOutput struct{ *pulumi.OutputState }
+
+func (ProxyLBSyslogPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProxyLBSyslog)(nil)).Elem()
+}
+
+func (o ProxyLBSyslogPtrOutput) ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput {
+	return o
+}
+
+func (o ProxyLBSyslogPtrOutput) ToProxyLBSyslogPtrOutputWithContext(ctx context.Context) ProxyLBSyslogPtrOutput {
+	return o
+}
+
+func (o ProxyLBSyslogPtrOutput) Elem() ProxyLBSyslogOutput {
+	return o.ApplyT(func(v *ProxyLBSyslog) ProxyLBSyslog { return *v }).(ProxyLBSyslogOutput)
+}
+
+// The number of syslog port.
+func (o ProxyLBSyslogPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ProxyLBSyslog) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// The address of syslog server.
+func (o ProxyLBSyslogPtrOutput) Server() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProxyLBSyslog) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Server
+	}).(pulumi.StringPtrOutput)
 }
 
 type ServerDiskEditParameter struct {
@@ -5431,6 +6447,8 @@ type SimpleMonitorHealthCheck struct {
 	ContainsString *string `pulumi:"containsString"`
 	// The expected value used when checking by DNS.
 	ExcepctedData *string `pulumi:"excepctedData"`
+	// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+	Ftps *string `pulumi:"ftps"`
 	// The value of host header send when checking by HTTP/HTTPS.
 	HostHeader *string `pulumi:"hostHeader"`
 	// The flag to enable HTTP/2 when checking by HTTPS.
@@ -5443,7 +6461,7 @@ type SimpleMonitorHealthCheck struct {
 	Path *string `pulumi:"path"`
 	// The target port number.
 	Port *int `pulumi:"port"`
-	// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+	// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 	Protocol string `pulumi:"protocol"`
 	// The FQDN used when checking by DNS.
 	Qname *string `pulumi:"qname"`
@@ -5477,6 +6495,8 @@ type SimpleMonitorHealthCheckArgs struct {
 	ContainsString pulumi.StringPtrInput `pulumi:"containsString"`
 	// The expected value used when checking by DNS.
 	ExcepctedData pulumi.StringPtrInput `pulumi:"excepctedData"`
+	// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+	Ftps pulumi.StringPtrInput `pulumi:"ftps"`
 	// The value of host header send when checking by HTTP/HTTPS.
 	HostHeader pulumi.StringPtrInput `pulumi:"hostHeader"`
 	// The flag to enable HTTP/2 when checking by HTTPS.
@@ -5489,7 +6509,7 @@ type SimpleMonitorHealthCheckArgs struct {
 	Path pulumi.StringPtrInput `pulumi:"path"`
 	// The target port number.
 	Port pulumi.IntPtrInput `pulumi:"port"`
-	// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+	// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 	Protocol pulumi.StringInput `pulumi:"protocol"`
 	// The FQDN used when checking by DNS.
 	Qname pulumi.StringPtrInput `pulumi:"qname"`
@@ -5597,6 +6617,11 @@ func (o SimpleMonitorHealthCheckOutput) ExcepctedData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.ExcepctedData }).(pulumi.StringPtrOutput)
 }
 
+// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+func (o SimpleMonitorHealthCheckOutput) Ftps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.Ftps }).(pulumi.StringPtrOutput)
+}
+
 // The value of host header send when checking by HTTP/HTTPS.
 func (o SimpleMonitorHealthCheckOutput) HostHeader() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SimpleMonitorHealthCheck) *string { return v.HostHeader }).(pulumi.StringPtrOutput)
@@ -5627,7 +6652,7 @@ func (o SimpleMonitorHealthCheckOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v SimpleMonitorHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
 }
 
-// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 func (o SimpleMonitorHealthCheckOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v SimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
@@ -5710,6 +6735,16 @@ func (o SimpleMonitorHealthCheckPtrOutput) ExcepctedData() pulumi.StringPtrOutpu
 	}).(pulumi.StringPtrOutput)
 }
 
+// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+func (o SimpleMonitorHealthCheckPtrOutput) Ftps() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SimpleMonitorHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Ftps
+	}).(pulumi.StringPtrOutput)
+}
+
 // The value of host header send when checking by HTTP/HTTPS.
 func (o SimpleMonitorHealthCheckPtrOutput) HostHeader() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SimpleMonitorHealthCheck) *string {
@@ -5770,7 +6805,7 @@ func (o SimpleMonitorHealthCheckPtrOutput) Port() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 func (o SimpleMonitorHealthCheckPtrOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SimpleMonitorHealthCheck) *string {
 		if v == nil {
@@ -7597,6 +8632,290 @@ func (o VPCRouterUserArrayOutput) Index(i pulumi.IntInput) VPCRouterUserOutput {
 	}).(VPCRouterUserOutput)
 }
 
+type VPCRouterWireGuard struct {
+	// The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+	IpAddress string `pulumi:"ipAddress"`
+	// One or more `peer` blocks as defined below.
+	Peers []VPCRouterWireGuardPeer `pulumi:"peers"`
+	// the public key of the WireGuard client.
+	PublicKey *string `pulumi:"publicKey"`
+}
+
+// VPCRouterWireGuardInput is an input type that accepts VPCRouterWireGuardArgs and VPCRouterWireGuardOutput values.
+// You can construct a concrete instance of `VPCRouterWireGuardInput` via:
+//
+//          VPCRouterWireGuardArgs{...}
+type VPCRouterWireGuardInput interface {
+	pulumi.Input
+
+	ToVPCRouterWireGuardOutput() VPCRouterWireGuardOutput
+	ToVPCRouterWireGuardOutputWithContext(context.Context) VPCRouterWireGuardOutput
+}
+
+type VPCRouterWireGuardArgs struct {
+	// The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// One or more `peer` blocks as defined below.
+	Peers VPCRouterWireGuardPeerArrayInput `pulumi:"peers"`
+	// the public key of the WireGuard client.
+	PublicKey pulumi.StringPtrInput `pulumi:"publicKey"`
+}
+
+func (VPCRouterWireGuardArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VPCRouterWireGuard)(nil)).Elem()
+}
+
+func (i VPCRouterWireGuardArgs) ToVPCRouterWireGuardOutput() VPCRouterWireGuardOutput {
+	return i.ToVPCRouterWireGuardOutputWithContext(context.Background())
+}
+
+func (i VPCRouterWireGuardArgs) ToVPCRouterWireGuardOutputWithContext(ctx context.Context) VPCRouterWireGuardOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterWireGuardOutput)
+}
+
+func (i VPCRouterWireGuardArgs) ToVPCRouterWireGuardPtrOutput() VPCRouterWireGuardPtrOutput {
+	return i.ToVPCRouterWireGuardPtrOutputWithContext(context.Background())
+}
+
+func (i VPCRouterWireGuardArgs) ToVPCRouterWireGuardPtrOutputWithContext(ctx context.Context) VPCRouterWireGuardPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterWireGuardOutput).ToVPCRouterWireGuardPtrOutputWithContext(ctx)
+}
+
+// VPCRouterWireGuardPtrInput is an input type that accepts VPCRouterWireGuardArgs, VPCRouterWireGuardPtr and VPCRouterWireGuardPtrOutput values.
+// You can construct a concrete instance of `VPCRouterWireGuardPtrInput` via:
+//
+//          VPCRouterWireGuardArgs{...}
+//
+//  or:
+//
+//          nil
+type VPCRouterWireGuardPtrInput interface {
+	pulumi.Input
+
+	ToVPCRouterWireGuardPtrOutput() VPCRouterWireGuardPtrOutput
+	ToVPCRouterWireGuardPtrOutputWithContext(context.Context) VPCRouterWireGuardPtrOutput
+}
+
+type vpcrouterWireGuardPtrType VPCRouterWireGuardArgs
+
+func VPCRouterWireGuardPtr(v *VPCRouterWireGuardArgs) VPCRouterWireGuardPtrInput {
+	return (*vpcrouterWireGuardPtrType)(v)
+}
+
+func (*vpcrouterWireGuardPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VPCRouterWireGuard)(nil)).Elem()
+}
+
+func (i *vpcrouterWireGuardPtrType) ToVPCRouterWireGuardPtrOutput() VPCRouterWireGuardPtrOutput {
+	return i.ToVPCRouterWireGuardPtrOutputWithContext(context.Background())
+}
+
+func (i *vpcrouterWireGuardPtrType) ToVPCRouterWireGuardPtrOutputWithContext(ctx context.Context) VPCRouterWireGuardPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterWireGuardPtrOutput)
+}
+
+type VPCRouterWireGuardOutput struct{ *pulumi.OutputState }
+
+func (VPCRouterWireGuardOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VPCRouterWireGuard)(nil)).Elem()
+}
+
+func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardOutput() VPCRouterWireGuardOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardOutputWithContext(ctx context.Context) VPCRouterWireGuardOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardPtrOutput() VPCRouterWireGuardPtrOutput {
+	return o.ToVPCRouterWireGuardPtrOutputWithContext(context.Background())
+}
+
+func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardPtrOutputWithContext(ctx context.Context) VPCRouterWireGuardPtrOutput {
+	return o.ApplyT(func(v VPCRouterWireGuard) *VPCRouterWireGuard {
+		return &v
+	}).(VPCRouterWireGuardPtrOutput)
+}
+
+// The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+func (o VPCRouterWireGuardOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v VPCRouterWireGuard) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// One or more `peer` blocks as defined below.
+func (o VPCRouterWireGuardOutput) Peers() VPCRouterWireGuardPeerArrayOutput {
+	return o.ApplyT(func(v VPCRouterWireGuard) []VPCRouterWireGuardPeer { return v.Peers }).(VPCRouterWireGuardPeerArrayOutput)
+}
+
+// the public key of the WireGuard client.
+func (o VPCRouterWireGuardOutput) PublicKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VPCRouterWireGuard) *string { return v.PublicKey }).(pulumi.StringPtrOutput)
+}
+
+type VPCRouterWireGuardPtrOutput struct{ *pulumi.OutputState }
+
+func (VPCRouterWireGuardPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VPCRouterWireGuard)(nil)).Elem()
+}
+
+func (o VPCRouterWireGuardPtrOutput) ToVPCRouterWireGuardPtrOutput() VPCRouterWireGuardPtrOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardPtrOutput) ToVPCRouterWireGuardPtrOutputWithContext(ctx context.Context) VPCRouterWireGuardPtrOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardPtrOutput) Elem() VPCRouterWireGuardOutput {
+	return o.ApplyT(func(v *VPCRouterWireGuard) VPCRouterWireGuard { return *v }).(VPCRouterWireGuardOutput)
+}
+
+// The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+func (o VPCRouterWireGuardPtrOutput) IpAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *VPCRouterWireGuard) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.IpAddress
+	}).(pulumi.StringPtrOutput)
+}
+
+// One or more `peer` blocks as defined below.
+func (o VPCRouterWireGuardPtrOutput) Peers() VPCRouterWireGuardPeerArrayOutput {
+	return o.ApplyT(func(v *VPCRouterWireGuard) []VPCRouterWireGuardPeer {
+		if v == nil {
+			return nil
+		}
+		return v.Peers
+	}).(VPCRouterWireGuardPeerArrayOutput)
+}
+
+// the public key of the WireGuard client.
+func (o VPCRouterWireGuardPtrOutput) PublicKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *VPCRouterWireGuard) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PublicKey
+	}).(pulumi.StringPtrOutput)
+}
+
+type VPCRouterWireGuardPeer struct {
+	// The IP address for peer.
+	IpAddress string `pulumi:"ipAddress"`
+	// the of the peer.
+	Name string `pulumi:"name"`
+	// the public key of the WireGuard client.
+	PublicKey string `pulumi:"publicKey"`
+}
+
+// VPCRouterWireGuardPeerInput is an input type that accepts VPCRouterWireGuardPeerArgs and VPCRouterWireGuardPeerOutput values.
+// You can construct a concrete instance of `VPCRouterWireGuardPeerInput` via:
+//
+//          VPCRouterWireGuardPeerArgs{...}
+type VPCRouterWireGuardPeerInput interface {
+	pulumi.Input
+
+	ToVPCRouterWireGuardPeerOutput() VPCRouterWireGuardPeerOutput
+	ToVPCRouterWireGuardPeerOutputWithContext(context.Context) VPCRouterWireGuardPeerOutput
+}
+
+type VPCRouterWireGuardPeerArgs struct {
+	// The IP address for peer.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// the of the peer.
+	Name pulumi.StringInput `pulumi:"name"`
+	// the public key of the WireGuard client.
+	PublicKey pulumi.StringInput `pulumi:"publicKey"`
+}
+
+func (VPCRouterWireGuardPeerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (i VPCRouterWireGuardPeerArgs) ToVPCRouterWireGuardPeerOutput() VPCRouterWireGuardPeerOutput {
+	return i.ToVPCRouterWireGuardPeerOutputWithContext(context.Background())
+}
+
+func (i VPCRouterWireGuardPeerArgs) ToVPCRouterWireGuardPeerOutputWithContext(ctx context.Context) VPCRouterWireGuardPeerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterWireGuardPeerOutput)
+}
+
+// VPCRouterWireGuardPeerArrayInput is an input type that accepts VPCRouterWireGuardPeerArray and VPCRouterWireGuardPeerArrayOutput values.
+// You can construct a concrete instance of `VPCRouterWireGuardPeerArrayInput` via:
+//
+//          VPCRouterWireGuardPeerArray{ VPCRouterWireGuardPeerArgs{...} }
+type VPCRouterWireGuardPeerArrayInput interface {
+	pulumi.Input
+
+	ToVPCRouterWireGuardPeerArrayOutput() VPCRouterWireGuardPeerArrayOutput
+	ToVPCRouterWireGuardPeerArrayOutputWithContext(context.Context) VPCRouterWireGuardPeerArrayOutput
+}
+
+type VPCRouterWireGuardPeerArray []VPCRouterWireGuardPeerInput
+
+func (VPCRouterWireGuardPeerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (i VPCRouterWireGuardPeerArray) ToVPCRouterWireGuardPeerArrayOutput() VPCRouterWireGuardPeerArrayOutput {
+	return i.ToVPCRouterWireGuardPeerArrayOutputWithContext(context.Background())
+}
+
+func (i VPCRouterWireGuardPeerArray) ToVPCRouterWireGuardPeerArrayOutputWithContext(ctx context.Context) VPCRouterWireGuardPeerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VPCRouterWireGuardPeerArrayOutput)
+}
+
+type VPCRouterWireGuardPeerOutput struct{ *pulumi.OutputState }
+
+func (VPCRouterWireGuardPeerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (o VPCRouterWireGuardPeerOutput) ToVPCRouterWireGuardPeerOutput() VPCRouterWireGuardPeerOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardPeerOutput) ToVPCRouterWireGuardPeerOutputWithContext(ctx context.Context) VPCRouterWireGuardPeerOutput {
+	return o
+}
+
+// The IP address for peer.
+func (o VPCRouterWireGuardPeerOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v VPCRouterWireGuardPeer) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// the of the peer.
+func (o VPCRouterWireGuardPeerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v VPCRouterWireGuardPeer) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// the public key of the WireGuard client.
+func (o VPCRouterWireGuardPeerOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v VPCRouterWireGuardPeer) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+type VPCRouterWireGuardPeerArrayOutput struct{ *pulumi.OutputState }
+
+func (VPCRouterWireGuardPeerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (o VPCRouterWireGuardPeerArrayOutput) ToVPCRouterWireGuardPeerArrayOutput() VPCRouterWireGuardPeerArrayOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardPeerArrayOutput) ToVPCRouterWireGuardPeerArrayOutputWithContext(ctx context.Context) VPCRouterWireGuardPeerArrayOutput {
+	return o
+}
+
+func (o VPCRouterWireGuardPeerArrayOutput) Index(i pulumi.IntInput) VPCRouterWireGuardPeerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VPCRouterWireGuardPeer {
+		return vs[0].([]VPCRouterWireGuardPeer)[vs[1].(int)]
+	}).(VPCRouterWireGuardPeerOutput)
+}
+
 type GetArchiveFilter struct {
 	// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
 	Conditions []GetArchiveFilterCondition `pulumi:"conditions"`
@@ -8141,6 +9460,529 @@ func (o GetCDROMFilterConditionArrayOutput) Index(i pulumi.IntInput) GetCDROMFil
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCDROMFilterCondition {
 		return vs[0].([]GetCDROMFilterCondition)[vs[1].(int)]
 	}).(GetCDROMFilterConditionOutput)
+}
+
+type GetCertificateAuthorityClient struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate string `pulumi:"certificate"`
+	// Flag to suspend/hold the certificate.
+	Hold bool `pulumi:"hold"`
+	// The resource id on SakuraCloud used for filtering.
+	Id string `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState string `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter string `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore string `pulumi:"notBefore"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber string `pulumi:"serialNumber"`
+	// .
+	SubjectString string `pulumi:"subjectString"`
+	// The URL for issuing the certificate.
+	Url string `pulumi:"url"`
+}
+
+// GetCertificateAuthorityClientInput is an input type that accepts GetCertificateAuthorityClientArgs and GetCertificateAuthorityClientOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityClientInput` via:
+//
+//          GetCertificateAuthorityClientArgs{...}
+type GetCertificateAuthorityClientInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityClientOutput() GetCertificateAuthorityClientOutput
+	ToGetCertificateAuthorityClientOutputWithContext(context.Context) GetCertificateAuthorityClientOutput
+}
+
+type GetCertificateAuthorityClientArgs struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate pulumi.StringInput `pulumi:"certificate"`
+	// Flag to suspend/hold the certificate.
+	Hold pulumi.BoolInput `pulumi:"hold"`
+	// The resource id on SakuraCloud used for filtering.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState pulumi.StringInput `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter pulumi.StringInput `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore pulumi.StringInput `pulumi:"notBefore"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber pulumi.StringInput `pulumi:"serialNumber"`
+	// .
+	SubjectString pulumi.StringInput `pulumi:"subjectString"`
+	// The URL for issuing the certificate.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetCertificateAuthorityClientArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityClient)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityClientArgs) ToGetCertificateAuthorityClientOutput() GetCertificateAuthorityClientOutput {
+	return i.ToGetCertificateAuthorityClientOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityClientArgs) ToGetCertificateAuthorityClientOutputWithContext(ctx context.Context) GetCertificateAuthorityClientOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityClientOutput)
+}
+
+// GetCertificateAuthorityClientArrayInput is an input type that accepts GetCertificateAuthorityClientArray and GetCertificateAuthorityClientArrayOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityClientArrayInput` via:
+//
+//          GetCertificateAuthorityClientArray{ GetCertificateAuthorityClientArgs{...} }
+type GetCertificateAuthorityClientArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityClientArrayOutput() GetCertificateAuthorityClientArrayOutput
+	ToGetCertificateAuthorityClientArrayOutputWithContext(context.Context) GetCertificateAuthorityClientArrayOutput
+}
+
+type GetCertificateAuthorityClientArray []GetCertificateAuthorityClientInput
+
+func (GetCertificateAuthorityClientArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityClient)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityClientArray) ToGetCertificateAuthorityClientArrayOutput() GetCertificateAuthorityClientArrayOutput {
+	return i.ToGetCertificateAuthorityClientArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityClientArray) ToGetCertificateAuthorityClientArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityClientArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityClientArrayOutput)
+}
+
+type GetCertificateAuthorityClientOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityClientOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityClient)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityClientOutput) ToGetCertificateAuthorityClientOutput() GetCertificateAuthorityClientOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityClientOutput) ToGetCertificateAuthorityClientOutputWithContext(ctx context.Context) GetCertificateAuthorityClientOutput {
+	return o
+}
+
+// The body of the CA's certificate in PEM format.
+func (o GetCertificateAuthorityClientOutput) Certificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.Certificate }).(pulumi.StringOutput)
+}
+
+// Flag to suspend/hold the certificate.
+func (o GetCertificateAuthorityClientOutput) Hold() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) bool { return v.Hold }).(pulumi.BoolOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetCertificateAuthorityClientOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Current state of the certificate.
+func (o GetCertificateAuthorityClientOutput) IssueState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.IssueState }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period ends, in RFC3339 format.
+func (o GetCertificateAuthorityClientOutput) NotAfter() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.NotAfter }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period begins, in RFC3339 format.
+func (o GetCertificateAuthorityClientOutput) NotBefore() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.NotBefore }).(pulumi.StringOutput)
+}
+
+// The body of the CA's certificate in PEM format.
+func (o GetCertificateAuthorityClientOutput) SerialNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.SerialNumber }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetCertificateAuthorityClientOutput) SubjectString() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.SubjectString }).(pulumi.StringOutput)
+}
+
+// The URL for issuing the certificate.
+func (o GetCertificateAuthorityClientOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityClient) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetCertificateAuthorityClientArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityClientArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityClient)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityClientArrayOutput) ToGetCertificateAuthorityClientArrayOutput() GetCertificateAuthorityClientArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityClientArrayOutput) ToGetCertificateAuthorityClientArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityClientArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityClientArrayOutput) Index(i pulumi.IntInput) GetCertificateAuthorityClientOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateAuthorityClient {
+		return vs[0].([]GetCertificateAuthorityClient)[vs[1].(int)]
+	}).(GetCertificateAuthorityClientOutput)
+}
+
+type GetCertificateAuthorityFilter struct {
+	// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+	Conditions []GetCertificateAuthorityFilterCondition `pulumi:"conditions"`
+	// The resource id on SakuraCloud used for filtering.
+	Id *string `pulumi:"id"`
+	// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Names []string `pulumi:"names"`
+	// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Tags []string `pulumi:"tags"`
+}
+
+// GetCertificateAuthorityFilterInput is an input type that accepts GetCertificateAuthorityFilterArgs and GetCertificateAuthorityFilterOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityFilterInput` via:
+//
+//          GetCertificateAuthorityFilterArgs{...}
+type GetCertificateAuthorityFilterInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityFilterOutput() GetCertificateAuthorityFilterOutput
+	ToGetCertificateAuthorityFilterOutputWithContext(context.Context) GetCertificateAuthorityFilterOutput
+}
+
+type GetCertificateAuthorityFilterArgs struct {
+	// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+	Conditions GetCertificateAuthorityFilterConditionArrayInput `pulumi:"conditions"`
+	// The resource id on SakuraCloud used for filtering.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Names pulumi.StringArrayInput `pulumi:"names"`
+	// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (GetCertificateAuthorityFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityFilter)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityFilterArgs) ToGetCertificateAuthorityFilterOutput() GetCertificateAuthorityFilterOutput {
+	return i.ToGetCertificateAuthorityFilterOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityFilterArgs) ToGetCertificateAuthorityFilterOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterOutput)
+}
+
+type GetCertificateAuthorityFilterOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityFilter)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterOutput() GetCertificateAuthorityFilterOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterOutput {
+	return o
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetCertificateAuthorityFilterOutput) Conditions() GetCertificateAuthorityFilterConditionArrayOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilter) []GetCertificateAuthorityFilterCondition { return v.Conditions }).(GetCertificateAuthorityFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetCertificateAuthorityFilterOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCertificateAuthorityFilterOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCertificateAuthorityFilterOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateAuthorityFilterCondition struct {
+	// The name of the target field. This value is case-sensitive.
+	Name string `pulumi:"name"`
+	// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+	Values []string `pulumi:"values"`
+}
+
+// GetCertificateAuthorityFilterConditionInput is an input type that accepts GetCertificateAuthorityFilterConditionArgs and GetCertificateAuthorityFilterConditionOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityFilterConditionInput` via:
+//
+//          GetCertificateAuthorityFilterConditionArgs{...}
+type GetCertificateAuthorityFilterConditionInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityFilterConditionOutput() GetCertificateAuthorityFilterConditionOutput
+	ToGetCertificateAuthorityFilterConditionOutputWithContext(context.Context) GetCertificateAuthorityFilterConditionOutput
+}
+
+type GetCertificateAuthorityFilterConditionArgs struct {
+	// The name of the target field. This value is case-sensitive.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetCertificateAuthorityFilterConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityFilterCondition)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityFilterConditionArgs) ToGetCertificateAuthorityFilterConditionOutput() GetCertificateAuthorityFilterConditionOutput {
+	return i.ToGetCertificateAuthorityFilterConditionOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityFilterConditionArgs) ToGetCertificateAuthorityFilterConditionOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterConditionOutput)
+}
+
+// GetCertificateAuthorityFilterConditionArrayInput is an input type that accepts GetCertificateAuthorityFilterConditionArray and GetCertificateAuthorityFilterConditionArrayOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityFilterConditionArrayInput` via:
+//
+//          GetCertificateAuthorityFilterConditionArray{ GetCertificateAuthorityFilterConditionArgs{...} }
+type GetCertificateAuthorityFilterConditionArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityFilterConditionArrayOutput() GetCertificateAuthorityFilterConditionArrayOutput
+	ToGetCertificateAuthorityFilterConditionArrayOutputWithContext(context.Context) GetCertificateAuthorityFilterConditionArrayOutput
+}
+
+type GetCertificateAuthorityFilterConditionArray []GetCertificateAuthorityFilterConditionInput
+
+func (GetCertificateAuthorityFilterConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityFilterCondition)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityFilterConditionArray) ToGetCertificateAuthorityFilterConditionArrayOutput() GetCertificateAuthorityFilterConditionArrayOutput {
+	return i.ToGetCertificateAuthorityFilterConditionArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityFilterConditionArray) ToGetCertificateAuthorityFilterConditionArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterConditionArrayOutput)
+}
+
+type GetCertificateAuthorityFilterConditionOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityFilterConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityFilterCondition)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityFilterConditionOutput) ToGetCertificateAuthorityFilterConditionOutput() GetCertificateAuthorityFilterConditionOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterConditionOutput) ToGetCertificateAuthorityFilterConditionOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterConditionOutput {
+	return o
+}
+
+// The name of the target field. This value is case-sensitive.
+func (o GetCertificateAuthorityFilterConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCertificateAuthorityFilterConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateAuthorityFilterConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityFilterConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityFilterCondition)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityFilterConditionArrayOutput) ToGetCertificateAuthorityFilterConditionArrayOutput() GetCertificateAuthorityFilterConditionArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterConditionArrayOutput) ToGetCertificateAuthorityFilterConditionArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterConditionArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterConditionArrayOutput) Index(i pulumi.IntInput) GetCertificateAuthorityFilterConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateAuthorityFilterCondition {
+		return vs[0].([]GetCertificateAuthorityFilterCondition)[vs[1].(int)]
+	}).(GetCertificateAuthorityFilterConditionOutput)
+}
+
+type GetCertificateAuthorityServer struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate string `pulumi:"certificate"`
+	// Flag to suspend/hold the certificate.
+	Hold *bool `pulumi:"hold"`
+	// The resource id on SakuraCloud used for filtering.
+	Id string `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState string `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter string `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore string `pulumi:"notBefore"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber string `pulumi:"serialNumber"`
+	// .
+	SubjectAlternativeNames []string `pulumi:"subjectAlternativeNames"`
+	// .
+	SubjectString string `pulumi:"subjectString"`
+}
+
+// GetCertificateAuthorityServerInput is an input type that accepts GetCertificateAuthorityServerArgs and GetCertificateAuthorityServerOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityServerInput` via:
+//
+//          GetCertificateAuthorityServerArgs{...}
+type GetCertificateAuthorityServerInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityServerOutput() GetCertificateAuthorityServerOutput
+	ToGetCertificateAuthorityServerOutputWithContext(context.Context) GetCertificateAuthorityServerOutput
+}
+
+type GetCertificateAuthorityServerArgs struct {
+	// The body of the CA's certificate in PEM format.
+	Certificate pulumi.StringInput `pulumi:"certificate"`
+	// Flag to suspend/hold the certificate.
+	Hold pulumi.BoolPtrInput `pulumi:"hold"`
+	// The resource id on SakuraCloud used for filtering.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Current state of the certificate.
+	IssueState pulumi.StringInput `pulumi:"issueState"`
+	// The date on which the certificate validity period ends, in RFC3339 format.
+	NotAfter pulumi.StringInput `pulumi:"notAfter"`
+	// The date on which the certificate validity period begins, in RFC3339 format.
+	NotBefore pulumi.StringInput `pulumi:"notBefore"`
+	// The body of the CA's certificate in PEM format.
+	SerialNumber pulumi.StringInput `pulumi:"serialNumber"`
+	// .
+	SubjectAlternativeNames pulumi.StringArrayInput `pulumi:"subjectAlternativeNames"`
+	// .
+	SubjectString pulumi.StringInput `pulumi:"subjectString"`
+}
+
+func (GetCertificateAuthorityServerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityServer)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityServerArgs) ToGetCertificateAuthorityServerOutput() GetCertificateAuthorityServerOutput {
+	return i.ToGetCertificateAuthorityServerOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityServerArgs) ToGetCertificateAuthorityServerOutputWithContext(ctx context.Context) GetCertificateAuthorityServerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityServerOutput)
+}
+
+// GetCertificateAuthorityServerArrayInput is an input type that accepts GetCertificateAuthorityServerArray and GetCertificateAuthorityServerArrayOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityServerArrayInput` via:
+//
+//          GetCertificateAuthorityServerArray{ GetCertificateAuthorityServerArgs{...} }
+type GetCertificateAuthorityServerArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityServerArrayOutput() GetCertificateAuthorityServerArrayOutput
+	ToGetCertificateAuthorityServerArrayOutputWithContext(context.Context) GetCertificateAuthorityServerArrayOutput
+}
+
+type GetCertificateAuthorityServerArray []GetCertificateAuthorityServerInput
+
+func (GetCertificateAuthorityServerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityServer)(nil)).Elem()
+}
+
+func (i GetCertificateAuthorityServerArray) ToGetCertificateAuthorityServerArrayOutput() GetCertificateAuthorityServerArrayOutput {
+	return i.ToGetCertificateAuthorityServerArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityServerArray) ToGetCertificateAuthorityServerArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityServerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityServerArrayOutput)
+}
+
+type GetCertificateAuthorityServerOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityServerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateAuthorityServer)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityServerOutput) ToGetCertificateAuthorityServerOutput() GetCertificateAuthorityServerOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityServerOutput) ToGetCertificateAuthorityServerOutputWithContext(ctx context.Context) GetCertificateAuthorityServerOutput {
+	return o
+}
+
+// The body of the CA's certificate in PEM format.
+func (o GetCertificateAuthorityServerOutput) Certificate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.Certificate }).(pulumi.StringOutput)
+}
+
+// Flag to suspend/hold the certificate.
+func (o GetCertificateAuthorityServerOutput) Hold() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) *bool { return v.Hold }).(pulumi.BoolPtrOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetCertificateAuthorityServerOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Current state of the certificate.
+func (o GetCertificateAuthorityServerOutput) IssueState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.IssueState }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period ends, in RFC3339 format.
+func (o GetCertificateAuthorityServerOutput) NotAfter() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.NotAfter }).(pulumi.StringOutput)
+}
+
+// The date on which the certificate validity period begins, in RFC3339 format.
+func (o GetCertificateAuthorityServerOutput) NotBefore() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.NotBefore }).(pulumi.StringOutput)
+}
+
+// The body of the CA's certificate in PEM format.
+func (o GetCertificateAuthorityServerOutput) SerialNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.SerialNumber }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetCertificateAuthorityServerOutput) SubjectAlternativeNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) []string { return v.SubjectAlternativeNames }).(pulumi.StringArrayOutput)
+}
+
+// .
+func (o GetCertificateAuthorityServerOutput) SubjectString() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateAuthorityServer) string { return v.SubjectString }).(pulumi.StringOutput)
+}
+
+type GetCertificateAuthorityServerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityServerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateAuthorityServer)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityServerArrayOutput) ToGetCertificateAuthorityServerArrayOutput() GetCertificateAuthorityServerArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityServerArrayOutput) ToGetCertificateAuthorityServerArrayOutputWithContext(ctx context.Context) GetCertificateAuthorityServerArrayOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityServerArrayOutput) Index(i pulumi.IntInput) GetCertificateAuthorityServerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateAuthorityServer {
+		return vs[0].([]GetCertificateAuthorityServer)[vs[1].(int)]
+	}).(GetCertificateAuthorityServerOutput)
 }
 
 type GetContainerRegistryFilter struct {
@@ -9571,6 +11413,191 @@ func (o GetESMEFilterConditionArrayOutput) Index(i pulumi.IntInput) GetESMEFilte
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetESMEFilterCondition {
 		return vs[0].([]GetESMEFilterCondition)[vs[1].(int)]
 	}).(GetESMEFilterConditionOutput)
+}
+
+type GetEnhancedDBFilter struct {
+	// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+	Conditions []GetEnhancedDBFilterCondition `pulumi:"conditions"`
+	// The resource id on SakuraCloud used for filtering.
+	Id *string `pulumi:"id"`
+	// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Names []string `pulumi:"names"`
+	// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Tags []string `pulumi:"tags"`
+}
+
+// GetEnhancedDBFilterInput is an input type that accepts GetEnhancedDBFilterArgs and GetEnhancedDBFilterOutput values.
+// You can construct a concrete instance of `GetEnhancedDBFilterInput` via:
+//
+//          GetEnhancedDBFilterArgs{...}
+type GetEnhancedDBFilterInput interface {
+	pulumi.Input
+
+	ToGetEnhancedDBFilterOutput() GetEnhancedDBFilterOutput
+	ToGetEnhancedDBFilterOutputWithContext(context.Context) GetEnhancedDBFilterOutput
+}
+
+type GetEnhancedDBFilterArgs struct {
+	// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+	Conditions GetEnhancedDBFilterConditionArrayInput `pulumi:"conditions"`
+	// The resource id on SakuraCloud used for filtering.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Names pulumi.StringArrayInput `pulumi:"names"`
+	// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (GetEnhancedDBFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnhancedDBFilter)(nil)).Elem()
+}
+
+func (i GetEnhancedDBFilterArgs) ToGetEnhancedDBFilterOutput() GetEnhancedDBFilterOutput {
+	return i.ToGetEnhancedDBFilterOutputWithContext(context.Background())
+}
+
+func (i GetEnhancedDBFilterArgs) ToGetEnhancedDBFilterOutputWithContext(ctx context.Context) GetEnhancedDBFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterOutput)
+}
+
+type GetEnhancedDBFilterOutput struct{ *pulumi.OutputState }
+
+func (GetEnhancedDBFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnhancedDBFilter)(nil)).Elem()
+}
+
+func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterOutput() GetEnhancedDBFilterOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterOutputWithContext(ctx context.Context) GetEnhancedDBFilterOutput {
+	return o
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetEnhancedDBFilterOutput) Conditions() GetEnhancedDBFilterConditionArrayOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilter) []GetEnhancedDBFilterCondition { return v.Conditions }).(GetEnhancedDBFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetEnhancedDBFilterOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilter) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetEnhancedDBFilterOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetEnhancedDBFilterOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetEnhancedDBFilterCondition struct {
+	// The name of the target field. This value is case-sensitive.
+	Name string `pulumi:"name"`
+	// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+	Values []string `pulumi:"values"`
+}
+
+// GetEnhancedDBFilterConditionInput is an input type that accepts GetEnhancedDBFilterConditionArgs and GetEnhancedDBFilterConditionOutput values.
+// You can construct a concrete instance of `GetEnhancedDBFilterConditionInput` via:
+//
+//          GetEnhancedDBFilterConditionArgs{...}
+type GetEnhancedDBFilterConditionInput interface {
+	pulumi.Input
+
+	ToGetEnhancedDBFilterConditionOutput() GetEnhancedDBFilterConditionOutput
+	ToGetEnhancedDBFilterConditionOutputWithContext(context.Context) GetEnhancedDBFilterConditionOutput
+}
+
+type GetEnhancedDBFilterConditionArgs struct {
+	// The name of the target field. This value is case-sensitive.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetEnhancedDBFilterConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnhancedDBFilterCondition)(nil)).Elem()
+}
+
+func (i GetEnhancedDBFilterConditionArgs) ToGetEnhancedDBFilterConditionOutput() GetEnhancedDBFilterConditionOutput {
+	return i.ToGetEnhancedDBFilterConditionOutputWithContext(context.Background())
+}
+
+func (i GetEnhancedDBFilterConditionArgs) ToGetEnhancedDBFilterConditionOutputWithContext(ctx context.Context) GetEnhancedDBFilterConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterConditionOutput)
+}
+
+// GetEnhancedDBFilterConditionArrayInput is an input type that accepts GetEnhancedDBFilterConditionArray and GetEnhancedDBFilterConditionArrayOutput values.
+// You can construct a concrete instance of `GetEnhancedDBFilterConditionArrayInput` via:
+//
+//          GetEnhancedDBFilterConditionArray{ GetEnhancedDBFilterConditionArgs{...} }
+type GetEnhancedDBFilterConditionArrayInput interface {
+	pulumi.Input
+
+	ToGetEnhancedDBFilterConditionArrayOutput() GetEnhancedDBFilterConditionArrayOutput
+	ToGetEnhancedDBFilterConditionArrayOutputWithContext(context.Context) GetEnhancedDBFilterConditionArrayOutput
+}
+
+type GetEnhancedDBFilterConditionArray []GetEnhancedDBFilterConditionInput
+
+func (GetEnhancedDBFilterConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEnhancedDBFilterCondition)(nil)).Elem()
+}
+
+func (i GetEnhancedDBFilterConditionArray) ToGetEnhancedDBFilterConditionArrayOutput() GetEnhancedDBFilterConditionArrayOutput {
+	return i.ToGetEnhancedDBFilterConditionArrayOutputWithContext(context.Background())
+}
+
+func (i GetEnhancedDBFilterConditionArray) ToGetEnhancedDBFilterConditionArrayOutputWithContext(ctx context.Context) GetEnhancedDBFilterConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterConditionArrayOutput)
+}
+
+type GetEnhancedDBFilterConditionOutput struct{ *pulumi.OutputState }
+
+func (GetEnhancedDBFilterConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnhancedDBFilterCondition)(nil)).Elem()
+}
+
+func (o GetEnhancedDBFilterConditionOutput) ToGetEnhancedDBFilterConditionOutput() GetEnhancedDBFilterConditionOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterConditionOutput) ToGetEnhancedDBFilterConditionOutputWithContext(ctx context.Context) GetEnhancedDBFilterConditionOutput {
+	return o
+}
+
+// The name of the target field. This value is case-sensitive.
+func (o GetEnhancedDBFilterConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilterCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+func (o GetEnhancedDBFilterConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEnhancedDBFilterCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetEnhancedDBFilterConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEnhancedDBFilterConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEnhancedDBFilterCondition)(nil)).Elem()
+}
+
+func (o GetEnhancedDBFilterConditionArrayOutput) ToGetEnhancedDBFilterConditionArrayOutput() GetEnhancedDBFilterConditionArrayOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterConditionArrayOutput) ToGetEnhancedDBFilterConditionArrayOutputWithContext(ctx context.Context) GetEnhancedDBFilterConditionArrayOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterConditionArrayOutput) Index(i pulumi.IntInput) GetEnhancedDBFilterConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEnhancedDBFilterCondition {
+		return vs[0].([]GetEnhancedDBFilterCondition)[vs[1].(int)]
+	}).(GetEnhancedDBFilterConditionOutput)
 }
 
 type GetGSLBFilter struct {
@@ -12630,7 +14657,7 @@ func (o GetPrivateHostFilterConditionArrayOutput) Index(i pulumi.IntInput) GetPr
 }
 
 type GetProxyLBBindPort struct {
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port int `pulumi:"port"`
 	// The proxy mode. This will be one of [`http`/`https`/`tcp`].
 	ProxyMode string `pulumi:"proxyMode"`
@@ -12638,6 +14665,7 @@ type GetProxyLBBindPort struct {
 	RedirectToHttps bool `pulumi:"redirectToHttps"`
 	// A list of `responseHeader` blocks as defined below.
 	ResponseHeaders []GetProxyLBBindPortResponseHeader `pulumi:"responseHeaders"`
+	SslPolicy       string                             `pulumi:"sslPolicy"`
 	// The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
 	SupportHttp2 bool `pulumi:"supportHttp2"`
 }
@@ -12654,7 +14682,7 @@ type GetProxyLBBindPortInput interface {
 }
 
 type GetProxyLBBindPortArgs struct {
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port pulumi.IntInput `pulumi:"port"`
 	// The proxy mode. This will be one of [`http`/`https`/`tcp`].
 	ProxyMode pulumi.StringInput `pulumi:"proxyMode"`
@@ -12662,6 +14690,7 @@ type GetProxyLBBindPortArgs struct {
 	RedirectToHttps pulumi.BoolInput `pulumi:"redirectToHttps"`
 	// A list of `responseHeader` blocks as defined below.
 	ResponseHeaders GetProxyLBBindPortResponseHeaderArrayInput `pulumi:"responseHeaders"`
+	SslPolicy       pulumi.StringInput                         `pulumi:"sslPolicy"`
 	// The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
 	SupportHttp2 pulumi.BoolInput `pulumi:"supportHttp2"`
 }
@@ -12717,7 +14746,7 @@ func (o GetProxyLBBindPortOutput) ToGetProxyLBBindPortOutputWithContext(ctx cont
 	return o
 }
 
-// The port number of the SorryServer. This will be used when all servers are down.
+// The number of syslog port.
 func (o GetProxyLBBindPortOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v GetProxyLBBindPort) int { return v.Port }).(pulumi.IntOutput)
 }
@@ -12735,6 +14764,10 @@ func (o GetProxyLBBindPortOutput) RedirectToHttps() pulumi.BoolOutput {
 // A list of `responseHeader` blocks as defined below.
 func (o GetProxyLBBindPortOutput) ResponseHeaders() GetProxyLBBindPortResponseHeaderArrayOutput {
 	return o.ApplyT(func(v GetProxyLBBindPort) []GetProxyLBBindPortResponseHeader { return v.ResponseHeaders }).(GetProxyLBBindPortResponseHeaderArrayOutput)
+}
+
+func (o GetProxyLBBindPortOutput) SslPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBBindPort) string { return v.SslPolicy }).(pulumi.StringOutput)
 }
 
 // The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
@@ -12869,13 +14902,18 @@ func (o GetProxyLBBindPortResponseHeaderArrayOutput) Index(i pulumi.IntInput) Ge
 }
 
 type GetProxyLBCertificate struct {
+	// A list of `additionalCertificate` blocks as defined below.
 	AdditionalCertificates []GetProxyLBCertificateAdditionalCertificate `pulumi:"additionalCertificates"`
+	// The common name of the certificate.
+	CommonName string `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert string `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey string `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert string `pulumi:"serverCert"`
+	// The subject alternative names of the certificate.
+	SubjectAltNames string `pulumi:"subjectAltNames"`
 }
 
 // GetProxyLBCertificateInput is an input type that accepts GetProxyLBCertificateArgs and GetProxyLBCertificateOutput values.
@@ -12890,13 +14928,18 @@ type GetProxyLBCertificateInput interface {
 }
 
 type GetProxyLBCertificateArgs struct {
+	// A list of `additionalCertificate` blocks as defined below.
 	AdditionalCertificates GetProxyLBCertificateAdditionalCertificateArrayInput `pulumi:"additionalCertificates"`
+	// The common name of the certificate.
+	CommonName pulumi.StringInput `pulumi:"commonName"`
 	// The intermediate certificate for a server.
 	IntermediateCert pulumi.StringInput `pulumi:"intermediateCert"`
 	// The private key for a server.
 	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
 	// The certificate for a server.
 	ServerCert pulumi.StringInput `pulumi:"serverCert"`
+	// The subject alternative names of the certificate.
+	SubjectAltNames pulumi.StringInput `pulumi:"subjectAltNames"`
 }
 
 func (GetProxyLBCertificateArgs) ElementType() reflect.Type {
@@ -12950,10 +14993,16 @@ func (o GetProxyLBCertificateOutput) ToGetProxyLBCertificateOutputWithContext(ct
 	return o
 }
 
+// A list of `additionalCertificate` blocks as defined below.
 func (o GetProxyLBCertificateOutput) AdditionalCertificates() GetProxyLBCertificateAdditionalCertificateArrayOutput {
 	return o.ApplyT(func(v GetProxyLBCertificate) []GetProxyLBCertificateAdditionalCertificate {
 		return v.AdditionalCertificates
 	}).(GetProxyLBCertificateAdditionalCertificateArrayOutput)
+}
+
+// The common name of the certificate.
+func (o GetProxyLBCertificateOutput) CommonName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.CommonName }).(pulumi.StringOutput)
 }
 
 // The intermediate certificate for a server.
@@ -12969,6 +15018,11 @@ func (o GetProxyLBCertificateOutput) PrivateKey() pulumi.StringOutput {
 // The certificate for a server.
 func (o GetProxyLBCertificateOutput) ServerCert() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.ServerCert }).(pulumi.StringOutput)
+}
+
+// The subject alternative names of the certificate.
+func (o GetProxyLBCertificateOutput) SubjectAltNames() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBCertificate) string { return v.SubjectAltNames }).(pulumi.StringOutput)
 }
 
 type GetProxyLBCertificateArrayOutput struct{ *pulumi.OutputState }
@@ -13298,7 +15352,7 @@ type GetProxyLBHealthCheck struct {
 	HostHeader string `pulumi:"hostHeader"`
 	// The request path that is used as condition of rule-based balancing.
 	Path string `pulumi:"path"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port int `pulumi:"port"`
 	// The protocol used for health checks. This will be one of [`http`/`tcp`].
 	Protocol string `pulumi:"protocol"`
@@ -13322,7 +15376,7 @@ type GetProxyLBHealthCheckArgs struct {
 	HostHeader pulumi.StringInput `pulumi:"hostHeader"`
 	// The request path that is used as condition of rule-based balancing.
 	Path pulumi.StringInput `pulumi:"path"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port pulumi.IntInput `pulumi:"port"`
 	// The protocol used for health checks. This will be one of [`http`/`tcp`].
 	Protocol pulumi.StringInput `pulumi:"protocol"`
@@ -13394,7 +15448,7 @@ func (o GetProxyLBHealthCheckOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBHealthCheck) string { return v.Path }).(pulumi.StringOutput)
 }
 
-// The port number of the SorryServer. This will be used when all servers are down.
+// The number of syslog port.
 func (o GetProxyLBHealthCheckOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v GetProxyLBHealthCheck) int { return v.Port }).(pulumi.IntOutput)
 }
@@ -13425,12 +15479,24 @@ func (o GetProxyLBHealthCheckArrayOutput) Index(i pulumi.IntInput) GetProxyLBHea
 }
 
 type GetProxyLBRule struct {
+	// The type of action to be performed when requests matches the rule. This will be one of [`forward`/`redirect`/`fixed`].
+	Action string `pulumi:"action"`
+	// Content-Type header value for fixed response sent when requests matches the rule. This will be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+	FixedContentType string `pulumi:"fixedContentType"`
+	// Content body for fixed response sent when requests matches the rule.
+	FixedMessageBody string `pulumi:"fixedMessageBody"`
+	// HTTP status code for fixed response sent when requests matches the rule. This will be one of [`200`/`403`/`503`].
+	FixedStatusCode string `pulumi:"fixedStatusCode"`
 	// The name of load balancing group. This is used when using rule-based load balancing.
 	Group string `pulumi:"group"`
 	// The value of HTTP host header that is used as condition of rule-based balancing.
 	Host string `pulumi:"host"`
 	// The request path that is used as condition of rule-based balancing.
 	Path string `pulumi:"path"`
+	// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+	RedirectLocation string `pulumi:"redirectLocation"`
+	// HTTP status code for redirects sent when requests matches the rule. This will be one of [`301`/`302`].
+	RedirectStatusCode string `pulumi:"redirectStatusCode"`
 }
 
 // GetProxyLBRuleInput is an input type that accepts GetProxyLBRuleArgs and GetProxyLBRuleOutput values.
@@ -13445,12 +15511,24 @@ type GetProxyLBRuleInput interface {
 }
 
 type GetProxyLBRuleArgs struct {
+	// The type of action to be performed when requests matches the rule. This will be one of [`forward`/`redirect`/`fixed`].
+	Action pulumi.StringInput `pulumi:"action"`
+	// Content-Type header value for fixed response sent when requests matches the rule. This will be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+	FixedContentType pulumi.StringInput `pulumi:"fixedContentType"`
+	// Content body for fixed response sent when requests matches the rule.
+	FixedMessageBody pulumi.StringInput `pulumi:"fixedMessageBody"`
+	// HTTP status code for fixed response sent when requests matches the rule. This will be one of [`200`/`403`/`503`].
+	FixedStatusCode pulumi.StringInput `pulumi:"fixedStatusCode"`
 	// The name of load balancing group. This is used when using rule-based load balancing.
 	Group pulumi.StringInput `pulumi:"group"`
 	// The value of HTTP host header that is used as condition of rule-based balancing.
 	Host pulumi.StringInput `pulumi:"host"`
 	// The request path that is used as condition of rule-based balancing.
 	Path pulumi.StringInput `pulumi:"path"`
+	// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+	RedirectLocation pulumi.StringInput `pulumi:"redirectLocation"`
+	// HTTP status code for redirects sent when requests matches the rule. This will be one of [`301`/`302`].
+	RedirectStatusCode pulumi.StringInput `pulumi:"redirectStatusCode"`
 }
 
 func (GetProxyLBRuleArgs) ElementType() reflect.Type {
@@ -13504,6 +15582,26 @@ func (o GetProxyLBRuleOutput) ToGetProxyLBRuleOutputWithContext(ctx context.Cont
 	return o
 }
 
+// The type of action to be performed when requests matches the rule. This will be one of [`forward`/`redirect`/`fixed`].
+func (o GetProxyLBRuleOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Content-Type header value for fixed response sent when requests matches the rule. This will be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+func (o GetProxyLBRuleOutput) FixedContentType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.FixedContentType }).(pulumi.StringOutput)
+}
+
+// Content body for fixed response sent when requests matches the rule.
+func (o GetProxyLBRuleOutput) FixedMessageBody() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.FixedMessageBody }).(pulumi.StringOutput)
+}
+
+// HTTP status code for fixed response sent when requests matches the rule. This will be one of [`200`/`403`/`503`].
+func (o GetProxyLBRuleOutput) FixedStatusCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.FixedStatusCode }).(pulumi.StringOutput)
+}
+
 // The name of load balancing group. This is used when using rule-based load balancing.
 func (o GetProxyLBRuleOutput) Group() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBRule) string { return v.Group }).(pulumi.StringOutput)
@@ -13517,6 +15615,16 @@ func (o GetProxyLBRuleOutput) Host() pulumi.StringOutput {
 // The request path that is used as condition of rule-based balancing.
 func (o GetProxyLBRuleOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBRule) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+func (o GetProxyLBRuleOutput) RedirectLocation() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.RedirectLocation }).(pulumi.StringOutput)
+}
+
+// HTTP status code for redirects sent when requests matches the rule. This will be one of [`301`/`302`].
+func (o GetProxyLBRuleOutput) RedirectStatusCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBRule) string { return v.RedirectStatusCode }).(pulumi.StringOutput)
 }
 
 type GetProxyLBRuleArrayOutput struct{ *pulumi.OutputState }
@@ -13546,7 +15654,7 @@ type GetProxyLBServer struct {
 	Group string `pulumi:"group"`
 	// The IP address of the SorryServer. This will be used when all servers are down.
 	IpAddress string `pulumi:"ipAddress"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port int `pulumi:"port"`
 }
 
@@ -13568,7 +15676,7 @@ type GetProxyLBServerArgs struct {
 	Group pulumi.StringInput `pulumi:"group"`
 	// The IP address of the SorryServer. This will be used when all servers are down.
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port pulumi.IntInput `pulumi:"port"`
 }
 
@@ -13638,7 +15746,7 @@ func (o GetProxyLBServerOutput) IpAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
-// The port number of the SorryServer. This will be used when all servers are down.
+// The number of syslog port.
 func (o GetProxyLBServerOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v GetProxyLBServer) int { return v.Port }).(pulumi.IntOutput)
 }
@@ -13666,7 +15774,7 @@ func (o GetProxyLBServerArrayOutput) Index(i pulumi.IntInput) GetProxyLBServerOu
 type GetProxyLBSorryServer struct {
 	// The IP address of the SorryServer. This will be used when all servers are down.
 	IpAddress string `pulumi:"ipAddress"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port int `pulumi:"port"`
 }
 
@@ -13684,7 +15792,7 @@ type GetProxyLBSorryServerInput interface {
 type GetProxyLBSorryServerArgs struct {
 	// The IP address of the SorryServer. This will be used when all servers are down.
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
-	// The port number of the SorryServer. This will be used when all servers are down.
+	// The number of syslog port.
 	Port pulumi.IntInput `pulumi:"port"`
 }
 
@@ -13744,7 +15852,7 @@ func (o GetProxyLBSorryServerOutput) IpAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProxyLBSorryServer) string { return v.IpAddress }).(pulumi.StringOutput)
 }
 
-// The port number of the SorryServer. This will be used when all servers are down.
+// The number of syslog port.
 func (o GetProxyLBSorryServerOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v GetProxyLBSorryServer) int { return v.Port }).(pulumi.IntOutput)
 }
@@ -13767,6 +15875,112 @@ func (o GetProxyLBSorryServerArrayOutput) Index(i pulumi.IntInput) GetProxyLBSor
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBSorryServer {
 		return vs[0].([]GetProxyLBSorryServer)[vs[1].(int)]
 	}).(GetProxyLBSorryServerOutput)
+}
+
+type GetProxyLBSyslog struct {
+	// The number of syslog port.
+	Port int `pulumi:"port"`
+	// The address of syslog server.
+	Server string `pulumi:"server"`
+}
+
+// GetProxyLBSyslogInput is an input type that accepts GetProxyLBSyslogArgs and GetProxyLBSyslogOutput values.
+// You can construct a concrete instance of `GetProxyLBSyslogInput` via:
+//
+//          GetProxyLBSyslogArgs{...}
+type GetProxyLBSyslogInput interface {
+	pulumi.Input
+
+	ToGetProxyLBSyslogOutput() GetProxyLBSyslogOutput
+	ToGetProxyLBSyslogOutputWithContext(context.Context) GetProxyLBSyslogOutput
+}
+
+type GetProxyLBSyslogArgs struct {
+	// The number of syslog port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// The address of syslog server.
+	Server pulumi.StringInput `pulumi:"server"`
+}
+
+func (GetProxyLBSyslogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyLBSyslog)(nil)).Elem()
+}
+
+func (i GetProxyLBSyslogArgs) ToGetProxyLBSyslogOutput() GetProxyLBSyslogOutput {
+	return i.ToGetProxyLBSyslogOutputWithContext(context.Background())
+}
+
+func (i GetProxyLBSyslogArgs) ToGetProxyLBSyslogOutputWithContext(ctx context.Context) GetProxyLBSyslogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBSyslogOutput)
+}
+
+// GetProxyLBSyslogArrayInput is an input type that accepts GetProxyLBSyslogArray and GetProxyLBSyslogArrayOutput values.
+// You can construct a concrete instance of `GetProxyLBSyslogArrayInput` via:
+//
+//          GetProxyLBSyslogArray{ GetProxyLBSyslogArgs{...} }
+type GetProxyLBSyslogArrayInput interface {
+	pulumi.Input
+
+	ToGetProxyLBSyslogArrayOutput() GetProxyLBSyslogArrayOutput
+	ToGetProxyLBSyslogArrayOutputWithContext(context.Context) GetProxyLBSyslogArrayOutput
+}
+
+type GetProxyLBSyslogArray []GetProxyLBSyslogInput
+
+func (GetProxyLBSyslogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyLBSyslog)(nil)).Elem()
+}
+
+func (i GetProxyLBSyslogArray) ToGetProxyLBSyslogArrayOutput() GetProxyLBSyslogArrayOutput {
+	return i.ToGetProxyLBSyslogArrayOutputWithContext(context.Background())
+}
+
+func (i GetProxyLBSyslogArray) ToGetProxyLBSyslogArrayOutputWithContext(ctx context.Context) GetProxyLBSyslogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBSyslogArrayOutput)
+}
+
+type GetProxyLBSyslogOutput struct{ *pulumi.OutputState }
+
+func (GetProxyLBSyslogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetProxyLBSyslog)(nil)).Elem()
+}
+
+func (o GetProxyLBSyslogOutput) ToGetProxyLBSyslogOutput() GetProxyLBSyslogOutput {
+	return o
+}
+
+func (o GetProxyLBSyslogOutput) ToGetProxyLBSyslogOutputWithContext(ctx context.Context) GetProxyLBSyslogOutput {
+	return o
+}
+
+// The number of syslog port.
+func (o GetProxyLBSyslogOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyLBSyslog) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// The address of syslog server.
+func (o GetProxyLBSyslogOutput) Server() pulumi.StringOutput {
+	return o.ApplyT(func(v GetProxyLBSyslog) string { return v.Server }).(pulumi.StringOutput)
+}
+
+type GetProxyLBSyslogArrayOutput struct{ *pulumi.OutputState }
+
+func (GetProxyLBSyslogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetProxyLBSyslog)(nil)).Elem()
+}
+
+func (o GetProxyLBSyslogArrayOutput) ToGetProxyLBSyslogArrayOutput() GetProxyLBSyslogArrayOutput {
+	return o
+}
+
+func (o GetProxyLBSyslogArrayOutput) ToGetProxyLBSyslogArrayOutputWithContext(ctx context.Context) GetProxyLBSyslogArrayOutput {
+	return o
+}
+
+func (o GetProxyLBSyslogArrayOutput) Index(i pulumi.IntInput) GetProxyLBSyslogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProxyLBSyslog {
+		return vs[0].([]GetProxyLBSyslog)[vs[1].(int)]
+	}).(GetProxyLBSyslogOutput)
 }
 
 type GetSSHKeyFilter struct {
@@ -14446,6 +16660,8 @@ type GetSimpleMonitorHealthCheck struct {
 	ContainsString string `pulumi:"containsString"`
 	// The expected value used when checking by DNS.
 	ExcepctedData string `pulumi:"excepctedData"`
+	// The methods of invoking security for monitoring with FTPS. This will be one of [``/`implicit`/`explicit`].
+	Ftps string `pulumi:"ftps"`
 	// The value of host header send when checking by HTTP/HTTPS.
 	HostHeader string `pulumi:"hostHeader"`
 	// The flag to enable HTTP/2 when checking by HTTPS.
@@ -14458,7 +16674,7 @@ type GetSimpleMonitorHealthCheck struct {
 	Path string `pulumi:"path"`
 	// The target port number.
 	Port int `pulumi:"port"`
-	// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+	// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 	Protocol string `pulumi:"protocol"`
 	// The FQDN used when checking by DNS.
 	Qname string `pulumi:"qname"`
@@ -14492,6 +16708,8 @@ type GetSimpleMonitorHealthCheckArgs struct {
 	ContainsString pulumi.StringInput `pulumi:"containsString"`
 	// The expected value used when checking by DNS.
 	ExcepctedData pulumi.StringInput `pulumi:"excepctedData"`
+	// The methods of invoking security for monitoring with FTPS. This will be one of [``/`implicit`/`explicit`].
+	Ftps pulumi.StringInput `pulumi:"ftps"`
 	// The value of host header send when checking by HTTP/HTTPS.
 	HostHeader pulumi.StringInput `pulumi:"hostHeader"`
 	// The flag to enable HTTP/2 when checking by HTTPS.
@@ -14504,7 +16722,7 @@ type GetSimpleMonitorHealthCheckArgs struct {
 	Path pulumi.StringInput `pulumi:"path"`
 	// The target port number.
 	Port pulumi.IntInput `pulumi:"port"`
-	// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+	// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 	Protocol pulumi.StringInput `pulumi:"protocol"`
 	// The FQDN used when checking by DNS.
 	Qname pulumi.StringInput `pulumi:"qname"`
@@ -14586,6 +16804,11 @@ func (o GetSimpleMonitorHealthCheckOutput) ExcepctedData() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.ExcepctedData }).(pulumi.StringOutput)
 }
 
+// The methods of invoking security for monitoring with FTPS. This will be one of [``/`implicit`/`explicit`].
+func (o GetSimpleMonitorHealthCheckOutput) Ftps() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Ftps }).(pulumi.StringOutput)
+}
+
 // The value of host header send when checking by HTTP/HTTPS.
 func (o GetSimpleMonitorHealthCheckOutput) HostHeader() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.HostHeader }).(pulumi.StringOutput)
@@ -14616,7 +16839,7 @@ func (o GetSimpleMonitorHealthCheckOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) int { return v.Port }).(pulumi.IntOutput)
 }
 
-// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+// The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
 func (o GetSimpleMonitorHealthCheckOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSimpleMonitorHealthCheck) string { return v.Protocol }).(pulumi.StringOutput)
 }
@@ -14981,7 +17204,7 @@ func (o GetVPCRouterDhcpServerArrayOutput) Index(i pulumi.IntInput) GetVPCRouter
 }
 
 type GetVPCRouterDhcpStaticMapping struct {
-	// The static IP address to assign to DHCP client.
+	// The IP address for peer.
 	IpAddress string `pulumi:"ipAddress"`
 	// The source MAC address of static mapping.
 	MacAddress string `pulumi:"macAddress"`
@@ -14999,7 +17222,7 @@ type GetVPCRouterDhcpStaticMappingInput interface {
 }
 
 type GetVPCRouterDhcpStaticMappingArgs struct {
-	// The static IP address to assign to DHCP client.
+	// The IP address for peer.
 	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
 	// The source MAC address of static mapping.
 	MacAddress pulumi.StringInput `pulumi:"macAddress"`
@@ -15056,7 +17279,7 @@ func (o GetVPCRouterDhcpStaticMappingOutput) ToGetVPCRouterDhcpStaticMappingOutp
 	return o
 }
 
-// The static IP address to assign to DHCP client.
+// The IP address for peer.
 func (o GetVPCRouterDhcpStaticMappingOutput) IpAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVPCRouterDhcpStaticMapping) string { return v.IpAddress }).(pulumi.StringOutput)
 }
@@ -16169,7 +18392,7 @@ func (o GetVPCRouterPublicNetworkInterfaceArrayOutput) Index(i pulumi.IntInput) 
 type GetVPCRouterSiteToSiteVpn struct {
 	// A list of CIDR block of the network under the VPC Router.
 	LocalPrefixes []string `pulumi:"localPrefixes"`
-	// The IP address of the opposing appliance connected to the VPC Router.
+	// A list of `peer` blocks as defined below.
 	Peer string `pulumi:"peer"`
 	// The pre shared secret for the VPN.
 	PreSharedSecret string `pulumi:"preSharedSecret"`
@@ -16193,7 +18416,7 @@ type GetVPCRouterSiteToSiteVpnInput interface {
 type GetVPCRouterSiteToSiteVpnArgs struct {
 	// A list of CIDR block of the network under the VPC Router.
 	LocalPrefixes pulumi.StringArrayInput `pulumi:"localPrefixes"`
-	// The IP address of the opposing appliance connected to the VPC Router.
+	// A list of `peer` blocks as defined below.
 	Peer pulumi.StringInput `pulumi:"peer"`
 	// The pre shared secret for the VPN.
 	PreSharedSecret pulumi.StringInput `pulumi:"preSharedSecret"`
@@ -16259,7 +18482,7 @@ func (o GetVPCRouterSiteToSiteVpnOutput) LocalPrefixes() pulumi.StringArrayOutpu
 	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) []string { return v.LocalPrefixes }).(pulumi.StringArrayOutput)
 }
 
-// The IP address of the opposing appliance connected to the VPC Router.
+// A list of `peer` blocks as defined below.
 func (o GetVPCRouterSiteToSiteVpnOutput) Peer() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVPCRouterSiteToSiteVpn) string { return v.Peer }).(pulumi.StringOutput)
 }
@@ -16626,7 +18849,245 @@ func (o GetVPCRouterUserArrayOutput) Index(i pulumi.IntInput) GetVPCRouterUserOu
 	}).(GetVPCRouterUserOutput)
 }
 
+type GetVPCRouterWireGuard struct {
+	// The IP address for peer.
+	IpAddress string `pulumi:"ipAddress"`
+	// A list of `peer` blocks as defined below.
+	Peers []GetVPCRouterWireGuardPeer `pulumi:"peers"`
+	// the public key of the WireGuard client.
+	PublicKey string `pulumi:"publicKey"`
+}
+
+// GetVPCRouterWireGuardInput is an input type that accepts GetVPCRouterWireGuardArgs and GetVPCRouterWireGuardOutput values.
+// You can construct a concrete instance of `GetVPCRouterWireGuardInput` via:
+//
+//          GetVPCRouterWireGuardArgs{...}
+type GetVPCRouterWireGuardInput interface {
+	pulumi.Input
+
+	ToGetVPCRouterWireGuardOutput() GetVPCRouterWireGuardOutput
+	ToGetVPCRouterWireGuardOutputWithContext(context.Context) GetVPCRouterWireGuardOutput
+}
+
+type GetVPCRouterWireGuardArgs struct {
+	// The IP address for peer.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// A list of `peer` blocks as defined below.
+	Peers GetVPCRouterWireGuardPeerArrayInput `pulumi:"peers"`
+	// the public key of the WireGuard client.
+	PublicKey pulumi.StringInput `pulumi:"publicKey"`
+}
+
+func (GetVPCRouterWireGuardArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVPCRouterWireGuard)(nil)).Elem()
+}
+
+func (i GetVPCRouterWireGuardArgs) ToGetVPCRouterWireGuardOutput() GetVPCRouterWireGuardOutput {
+	return i.ToGetVPCRouterWireGuardOutputWithContext(context.Background())
+}
+
+func (i GetVPCRouterWireGuardArgs) ToGetVPCRouterWireGuardOutputWithContext(ctx context.Context) GetVPCRouterWireGuardOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterWireGuardOutput)
+}
+
+// GetVPCRouterWireGuardArrayInput is an input type that accepts GetVPCRouterWireGuardArray and GetVPCRouterWireGuardArrayOutput values.
+// You can construct a concrete instance of `GetVPCRouterWireGuardArrayInput` via:
+//
+//          GetVPCRouterWireGuardArray{ GetVPCRouterWireGuardArgs{...} }
+type GetVPCRouterWireGuardArrayInput interface {
+	pulumi.Input
+
+	ToGetVPCRouterWireGuardArrayOutput() GetVPCRouterWireGuardArrayOutput
+	ToGetVPCRouterWireGuardArrayOutputWithContext(context.Context) GetVPCRouterWireGuardArrayOutput
+}
+
+type GetVPCRouterWireGuardArray []GetVPCRouterWireGuardInput
+
+func (GetVPCRouterWireGuardArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVPCRouterWireGuard)(nil)).Elem()
+}
+
+func (i GetVPCRouterWireGuardArray) ToGetVPCRouterWireGuardArrayOutput() GetVPCRouterWireGuardArrayOutput {
+	return i.ToGetVPCRouterWireGuardArrayOutputWithContext(context.Background())
+}
+
+func (i GetVPCRouterWireGuardArray) ToGetVPCRouterWireGuardArrayOutputWithContext(ctx context.Context) GetVPCRouterWireGuardArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterWireGuardArrayOutput)
+}
+
+type GetVPCRouterWireGuardOutput struct{ *pulumi.OutputState }
+
+func (GetVPCRouterWireGuardOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVPCRouterWireGuard)(nil)).Elem()
+}
+
+func (o GetVPCRouterWireGuardOutput) ToGetVPCRouterWireGuardOutput() GetVPCRouterWireGuardOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardOutput) ToGetVPCRouterWireGuardOutputWithContext(ctx context.Context) GetVPCRouterWireGuardOutput {
+	return o
+}
+
+// The IP address for peer.
+func (o GetVPCRouterWireGuardOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuard) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// A list of `peer` blocks as defined below.
+func (o GetVPCRouterWireGuardOutput) Peers() GetVPCRouterWireGuardPeerArrayOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuard) []GetVPCRouterWireGuardPeer { return v.Peers }).(GetVPCRouterWireGuardPeerArrayOutput)
+}
+
+// the public key of the WireGuard client.
+func (o GetVPCRouterWireGuardOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuard) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+type GetVPCRouterWireGuardArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVPCRouterWireGuardArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVPCRouterWireGuard)(nil)).Elem()
+}
+
+func (o GetVPCRouterWireGuardArrayOutput) ToGetVPCRouterWireGuardArrayOutput() GetVPCRouterWireGuardArrayOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardArrayOutput) ToGetVPCRouterWireGuardArrayOutputWithContext(ctx context.Context) GetVPCRouterWireGuardArrayOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardArrayOutput) Index(i pulumi.IntInput) GetVPCRouterWireGuardOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterWireGuard {
+		return vs[0].([]GetVPCRouterWireGuard)[vs[1].(int)]
+	}).(GetVPCRouterWireGuardOutput)
+}
+
+type GetVPCRouterWireGuardPeer struct {
+	// The IP address for peer.
+	IpAddress string `pulumi:"ipAddress"`
+	// The name of the target field. This value is case-sensitive.
+	Name string `pulumi:"name"`
+	// the public key of the WireGuard client.
+	PublicKey string `pulumi:"publicKey"`
+}
+
+// GetVPCRouterWireGuardPeerInput is an input type that accepts GetVPCRouterWireGuardPeerArgs and GetVPCRouterWireGuardPeerOutput values.
+// You can construct a concrete instance of `GetVPCRouterWireGuardPeerInput` via:
+//
+//          GetVPCRouterWireGuardPeerArgs{...}
+type GetVPCRouterWireGuardPeerInput interface {
+	pulumi.Input
+
+	ToGetVPCRouterWireGuardPeerOutput() GetVPCRouterWireGuardPeerOutput
+	ToGetVPCRouterWireGuardPeerOutputWithContext(context.Context) GetVPCRouterWireGuardPeerOutput
+}
+
+type GetVPCRouterWireGuardPeerArgs struct {
+	// The IP address for peer.
+	IpAddress pulumi.StringInput `pulumi:"ipAddress"`
+	// The name of the target field. This value is case-sensitive.
+	Name pulumi.StringInput `pulumi:"name"`
+	// the public key of the WireGuard client.
+	PublicKey pulumi.StringInput `pulumi:"publicKey"`
+}
+
+func (GetVPCRouterWireGuardPeerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (i GetVPCRouterWireGuardPeerArgs) ToGetVPCRouterWireGuardPeerOutput() GetVPCRouterWireGuardPeerOutput {
+	return i.ToGetVPCRouterWireGuardPeerOutputWithContext(context.Background())
+}
+
+func (i GetVPCRouterWireGuardPeerArgs) ToGetVPCRouterWireGuardPeerOutputWithContext(ctx context.Context) GetVPCRouterWireGuardPeerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterWireGuardPeerOutput)
+}
+
+// GetVPCRouterWireGuardPeerArrayInput is an input type that accepts GetVPCRouterWireGuardPeerArray and GetVPCRouterWireGuardPeerArrayOutput values.
+// You can construct a concrete instance of `GetVPCRouterWireGuardPeerArrayInput` via:
+//
+//          GetVPCRouterWireGuardPeerArray{ GetVPCRouterWireGuardPeerArgs{...} }
+type GetVPCRouterWireGuardPeerArrayInput interface {
+	pulumi.Input
+
+	ToGetVPCRouterWireGuardPeerArrayOutput() GetVPCRouterWireGuardPeerArrayOutput
+	ToGetVPCRouterWireGuardPeerArrayOutputWithContext(context.Context) GetVPCRouterWireGuardPeerArrayOutput
+}
+
+type GetVPCRouterWireGuardPeerArray []GetVPCRouterWireGuardPeerInput
+
+func (GetVPCRouterWireGuardPeerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (i GetVPCRouterWireGuardPeerArray) ToGetVPCRouterWireGuardPeerArrayOutput() GetVPCRouterWireGuardPeerArrayOutput {
+	return i.ToGetVPCRouterWireGuardPeerArrayOutputWithContext(context.Background())
+}
+
+func (i GetVPCRouterWireGuardPeerArray) ToGetVPCRouterWireGuardPeerArrayOutputWithContext(ctx context.Context) GetVPCRouterWireGuardPeerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterWireGuardPeerArrayOutput)
+}
+
+type GetVPCRouterWireGuardPeerOutput struct{ *pulumi.OutputState }
+
+func (GetVPCRouterWireGuardPeerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (o GetVPCRouterWireGuardPeerOutput) ToGetVPCRouterWireGuardPeerOutput() GetVPCRouterWireGuardPeerOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardPeerOutput) ToGetVPCRouterWireGuardPeerOutputWithContext(ctx context.Context) GetVPCRouterWireGuardPeerOutput {
+	return o
+}
+
+// The IP address for peer.
+func (o GetVPCRouterWireGuardPeerOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuardPeer) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// The name of the target field. This value is case-sensitive.
+func (o GetVPCRouterWireGuardPeerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuardPeer) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// the public key of the WireGuard client.
+func (o GetVPCRouterWireGuardPeerOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVPCRouterWireGuardPeer) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+type GetVPCRouterWireGuardPeerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVPCRouterWireGuardPeerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVPCRouterWireGuardPeer)(nil)).Elem()
+}
+
+func (o GetVPCRouterWireGuardPeerArrayOutput) ToGetVPCRouterWireGuardPeerArrayOutput() GetVPCRouterWireGuardPeerArrayOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardPeerArrayOutput) ToGetVPCRouterWireGuardPeerArrayOutputWithContext(ctx context.Context) GetVPCRouterWireGuardPeerArrayOutput {
+	return o
+}
+
+func (o GetVPCRouterWireGuardPeerArrayOutput) Index(i pulumi.IntInput) GetVPCRouterWireGuardPeerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVPCRouterWireGuardPeer {
+		return vs[0].([]GetVPCRouterWireGuardPeer)[vs[1].(int)]
+	}).(GetVPCRouterWireGuardPeerOutput)
+}
+
 func init() {
+	pulumi.RegisterOutputType(CertificateAuthorityClientOutput{})
+	pulumi.RegisterOutputType(CertificateAuthorityClientArrayOutput{})
+	pulumi.RegisterOutputType(CertificateAuthorityClientSubjectOutput{})
+	pulumi.RegisterOutputType(CertificateAuthorityServerOutput{})
+	pulumi.RegisterOutputType(CertificateAuthorityServerArrayOutput{})
+	pulumi.RegisterOutputType(CertificateAuthorityServerSubjectOutput{})
+	pulumi.RegisterOutputType(CertificateAuthoritySubjectOutput{})
+	pulumi.RegisterOutputType(CertificateAuthoritySubjectPtrOutput{})
 	pulumi.RegisterOutputType(ContainerRegistryUserOutput{})
 	pulumi.RegisterOutputType(ContainerRegistryUserArrayOutput{})
 	pulumi.RegisterOutputType(DNSRecordTypeOutput{})
@@ -16691,6 +19152,8 @@ func init() {
 	pulumi.RegisterOutputType(ProxyLBServerArrayOutput{})
 	pulumi.RegisterOutputType(ProxyLBSorryServerOutput{})
 	pulumi.RegisterOutputType(ProxyLBSorryServerPtrOutput{})
+	pulumi.RegisterOutputType(ProxyLBSyslogOutput{})
+	pulumi.RegisterOutputType(ProxyLBSyslogPtrOutput{})
 	pulumi.RegisterOutputType(ServerDiskEditParameterOutput{})
 	pulumi.RegisterOutputType(ServerDiskEditParameterPtrOutput{})
 	pulumi.RegisterOutputType(ServerDiskEditParameterNoteOutput{})
@@ -16725,6 +19188,10 @@ func init() {
 	pulumi.RegisterOutputType(VPCRouterStaticRouteArrayOutput{})
 	pulumi.RegisterOutputType(VPCRouterUserOutput{})
 	pulumi.RegisterOutputType(VPCRouterUserArrayOutput{})
+	pulumi.RegisterOutputType(VPCRouterWireGuardOutput{})
+	pulumi.RegisterOutputType(VPCRouterWireGuardPtrOutput{})
+	pulumi.RegisterOutputType(VPCRouterWireGuardPeerOutput{})
+	pulumi.RegisterOutputType(VPCRouterWireGuardPeerArrayOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterConditionArrayOutput{})
@@ -16734,6 +19201,13 @@ func init() {
 	pulumi.RegisterOutputType(GetCDROMFilterOutput{})
 	pulumi.RegisterOutputType(GetCDROMFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetCDROMFilterConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityClientOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityClientArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityFilterOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityFilterConditionOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityFilterConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityServerOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityServerArrayOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionArrayOutput{})
@@ -16757,6 +19231,9 @@ func init() {
 	pulumi.RegisterOutputType(GetESMEFilterOutput{})
 	pulumi.RegisterOutputType(GetESMEFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetESMEFilterConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetEnhancedDBFilterOutput{})
+	pulumi.RegisterOutputType(GetEnhancedDBFilterConditionOutput{})
+	pulumi.RegisterOutputType(GetEnhancedDBFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterConditionArrayOutput{})
@@ -16825,6 +19302,8 @@ func init() {
 	pulumi.RegisterOutputType(GetProxyLBServerArrayOutput{})
 	pulumi.RegisterOutputType(GetProxyLBSorryServerOutput{})
 	pulumi.RegisterOutputType(GetProxyLBSorryServerArrayOutput{})
+	pulumi.RegisterOutputType(GetProxyLBSyslogOutput{})
+	pulumi.RegisterOutputType(GetProxyLBSyslogArrayOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterConditionArrayOutput{})
@@ -16870,4 +19349,8 @@ func init() {
 	pulumi.RegisterOutputType(GetVPCRouterStaticRouteArrayOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterUserOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterUserArrayOutput{})
+	pulumi.RegisterOutputType(GetVPCRouterWireGuardOutput{})
+	pulumi.RegisterOutputType(GetVPCRouterWireGuardArrayOutput{})
+	pulumi.RegisterOutputType(GetVPCRouterWireGuardPeerOutput{})
+	pulumi.RegisterOutputType(GetVPCRouterWireGuardPeerArrayOutput{})
 }

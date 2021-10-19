@@ -38,6 +38,7 @@ namespace Pulumi.Sakuracloud
     ///             VipFailover = true,
     ///             StickySession = true,
     ///             Gzip = true,
+    ///             ProxyProtocol = true,
     ///             Timeout = 10,
     ///             Region = "is1",
     ///             HealthCheck = new Sakuracloud.Inputs.ProxyLBHealthCheckArgs
@@ -51,6 +52,11 @@ namespace Pulumi.Sakuracloud
     ///             {
     ///                 IpAddress = "192.0.2.1",
     ///                 Port = 80,
+    ///             },
+    ///             Syslog = new Sakuracloud.Inputs.ProxyLBSyslogArgs
+    ///             {
+    ///                 Server = "192.0.2.1",
+    ///                 Port = 514,
     ///             },
     ///             BindPorts = 
     ///             {
@@ -81,9 +87,29 @@ namespace Pulumi.Sakuracloud
     ///             {
     ///                 new Sakuracloud.Inputs.ProxyLBRuleArgs
     ///                 {
+    ///                     Action = "forward",
     ///                     Host = "www.example.com",
     ///                     Path = "/",
     ///                     Group = "group1",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.ProxyLBRuleArgs
+    ///                 {
+    ///                     Action = "redirect",
+    ///                     Host = "www2.example.com",
+    ///                     Path = "/",
+    ///                     Group = "group1",
+    ///                     RedirectLocation = "https://redirect.example.com",
+    ///                     RedirectStatusCode = "301",
+    ///                 },
+    ///                 new Sakuracloud.Inputs.ProxyLBRuleArgs
+    ///                 {
+    ///                     Action = "fixed",
+    ///                     Host = "www3.example.com",
+    ///                     Path = "/",
+    ///                     Group = "group1",
+    ///                     FixedStatusCode = "200",
+    ///                     FixedContentType = "text/plain",
+    ///                     FixedMessageBody = "body",
     ///                 },
     ///             },
     ///             Description = "description",
@@ -127,7 +153,6 @@ namespace Pulumi.Sakuracloud
 
         /// <summary>
         /// The flag to enable gzip compression.
-        /// ---
         /// </summary>
         [Output("gzip")]
         public Output<bool?> Gzip { get; private set; } = null!;
@@ -163,6 +188,12 @@ namespace Pulumi.Sakuracloud
         public Output<ImmutableArray<string>> ProxyNetworks { get; private set; } = null!;
 
         /// <summary>
+        /// The flag to enable proxy protocol v2.
+        /// </summary>
+        [Output("proxyProtocol")]
+        public Output<bool?> ProxyProtocol { get; private set; } = null!;
+
+        /// <summary>
         /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
         /// </summary>
         [Output("region")]
@@ -191,6 +222,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("stickySession")]
         public Output<bool?> StickySession { get; private set; } = null!;
+
+        /// <summary>
+        /// A `syslog` block as defined below.
+        /// </summary>
+        [Output("syslog")]
+        public Output<Outputs.ProxyLBSyslog> Syslog { get; private set; } = null!;
 
         /// <summary>
         /// Any tags to assign to the ProxyLB.
@@ -288,7 +325,6 @@ namespace Pulumi.Sakuracloud
 
         /// <summary>
         /// The flag to enable gzip compression.
-        /// ---
         /// </summary>
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
@@ -316,6 +352,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("plan")]
         public Input<int>? Plan { get; set; }
+
+        /// <summary>
+        /// The flag to enable proxy protocol v2.
+        /// </summary>
+        [Input("proxyProtocol")]
+        public Input<bool>? ProxyProtocol { get; set; }
 
         /// <summary>
         /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
@@ -358,6 +400,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("stickySession")]
         public Input<bool>? StickySession { get; set; }
+
+        /// <summary>
+        /// A `syslog` block as defined below.
+        /// </summary>
+        [Input("syslog")]
+        public Input<Inputs.ProxyLBSyslogArgs>? Syslog { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -422,7 +470,6 @@ namespace Pulumi.Sakuracloud
 
         /// <summary>
         /// The flag to enable gzip compression.
-        /// ---
         /// </summary>
         [Input("gzip")]
         public Input<bool>? Gzip { get; set; }
@@ -462,6 +509,12 @@ namespace Pulumi.Sakuracloud
             get => _proxyNetworks ?? (_proxyNetworks = new InputList<string>());
             set => _proxyNetworks = value;
         }
+
+        /// <summary>
+        /// The flag to enable proxy protocol v2.
+        /// </summary>
+        [Input("proxyProtocol")]
+        public Input<bool>? ProxyProtocol { get; set; }
 
         /// <summary>
         /// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
@@ -504,6 +557,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("stickySession")]
         public Input<bool>? StickySession { get; set; }
+
+        /// <summary>
+        /// A `syslog` block as defined below.
+        /// </summary>
+        [Input("syslog")]
+        public Input<Inputs.ProxyLBSyslogGetArgs>? Syslog { get; set; }
 
         [Input("tags")]
         private InputList<string>? _tags;

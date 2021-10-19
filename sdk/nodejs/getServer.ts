@@ -84,6 +84,10 @@ export interface GetServerResult {
      */
     readonly gateway: string;
     /**
+     * The number of GPUs.
+     */
+    readonly gpu: number;
+    /**
      * The hostname of the Server.
      */
     readonly hostname: string;

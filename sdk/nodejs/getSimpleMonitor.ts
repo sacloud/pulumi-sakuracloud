@@ -102,4 +102,8 @@ export interface GetSimpleMonitorResult {
      * The monitoring target of the simple monitor. This will be IP address or FQDN.
      */
     readonly target: string;
+    /**
+     * The timeout in seconds for monitoring.
+     */
+    readonly timeout: number;
 }

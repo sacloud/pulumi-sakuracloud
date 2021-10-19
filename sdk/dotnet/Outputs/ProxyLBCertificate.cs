@@ -18,6 +18,10 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ProxyLBCertificateAdditionalCertificate> AdditionalCertificates;
         /// <summary>
+        /// The common name of the certificate.
+        /// </summary>
+        public readonly string? CommonName;
+        /// <summary>
         /// The intermediate certificate for a server.
         /// </summary>
         public readonly string? IntermediateCert;
@@ -29,21 +33,31 @@ namespace Pulumi.Sakuracloud.Outputs
         /// The certificate for a server.
         /// </summary>
         public readonly string? ServerCert;
+        /// <summary>
+        /// The subject alternative names of the certificate.
+        /// </summary>
+        public readonly string? SubjectAltNames;
 
         [OutputConstructor]
         private ProxyLBCertificate(
             ImmutableArray<Outputs.ProxyLBCertificateAdditionalCertificate> additionalCertificates,
 
+            string? commonName,
+
             string? intermediateCert,
 
             string? privateKey,
 
-            string? serverCert)
+            string? serverCert,
+
+            string? subjectAltNames)
         {
             AdditionalCertificates = additionalCertificates;
+            CommonName = commonName;
             IntermediateCert = intermediateCert;
             PrivateKey = privateKey;
             ServerCert = serverCert;
+            SubjectAltNames = subjectAltNames;
         }
     }
 }

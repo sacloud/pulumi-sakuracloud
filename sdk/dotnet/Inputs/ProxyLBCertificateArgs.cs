@@ -25,6 +25,12 @@ namespace Pulumi.Sakuracloud.Inputs
         }
 
         /// <summary>
+        /// The common name of the certificate.
+        /// </summary>
+        [Input("commonName")]
+        public Input<string>? CommonName { get; set; }
+
+        /// <summary>
         /// The intermediate certificate for a server.
         /// </summary>
         [Input("intermediateCert")]
@@ -41,6 +47,12 @@ namespace Pulumi.Sakuracloud.Inputs
         /// </summary>
         [Input("serverCert")]
         public Input<string>? ServerCert { get; set; }
+
+        /// <summary>
+        /// The subject alternative names of the certificate.
+        /// </summary>
+        [Input("subjectAltNames")]
+        public Input<string>? SubjectAltNames { get; set; }
 
         public ProxyLBCertificateArgs()
         {

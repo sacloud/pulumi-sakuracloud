@@ -40,6 +40,7 @@ import (
 // 			VipFailover:   pulumi.Bool(true),
 // 			StickySession: pulumi.Bool(true),
 // 			Gzip:          pulumi.Bool(true),
+// 			ProxyProtocol: pulumi.Bool(true),
 // 			Timeout:       pulumi.Int(10),
 // 			Region:        pulumi.String("is1"),
 // 			HealthCheck: &sakuracloud.ProxyLBHealthCheckArgs{
@@ -51,6 +52,10 @@ import (
 // 			SorryServer: &sakuracloud.ProxyLBSorryServerArgs{
 // 				IpAddress: pulumi.String("192.0.2.1"),
 // 				Port:      pulumi.Int(80),
+// 			},
+// 			Syslog: &sakuracloud.ProxyLBSyslogArgs{
+// 				Server: pulumi.String("192.0.2.1"),
+// 				Port:   pulumi.Int(514),
 // 			},
 // 			BindPorts: sakuracloud.ProxyLBBindPortArray{
 // 				&sakuracloud.ProxyLBBindPortArgs{
@@ -73,9 +78,27 @@ import (
 // 			},
 // 			Rules: sakuracloud.ProxyLBRuleArray{
 // 				&sakuracloud.ProxyLBRuleArgs{
-// 					Host:  pulumi.String("www.example.com"),
-// 					Path:  pulumi.String("/"),
-// 					Group: pulumi.String("group1"),
+// 					Action: pulumi.String("forward"),
+// 					Host:   pulumi.String("www.example.com"),
+// 					Path:   pulumi.String("/"),
+// 					Group:  pulumi.String("group1"),
+// 				},
+// 				&sakuracloud.ProxyLBRuleArgs{
+// 					Action:             pulumi.String("redirect"),
+// 					Host:               pulumi.String("www2.example.com"),
+// 					Path:               pulumi.String("/"),
+// 					Group:              pulumi.String("group1"),
+// 					RedirectLocation:   pulumi.String("https://redirect.example.com"),
+// 					RedirectStatusCode: pulumi.String("301"),
+// 				},
+// 				&sakuracloud.ProxyLBRuleArgs{
+// 					Action:           pulumi.String("fixed"),
+// 					Host:             pulumi.String("www3.example.com"),
+// 					Path:             pulumi.String("/"),
+// 					Group:            pulumi.String("group1"),
+// 					FixedStatusCode:  pulumi.String("200"),
+// 					FixedContentType: pulumi.String("text/plain"),
+// 					FixedMessageBody: pulumi.String("body"),
 // 				},
 // 			},
 // 			Description: pulumi.String("description"),
@@ -103,7 +126,6 @@ type ProxyLB struct {
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
 	Fqdn pulumi.StringOutput `pulumi:"fqdn"`
 	// The flag to enable gzip compression.
-	// ---
 	Gzip pulumi.BoolPtrOutput `pulumi:"gzip"`
 	// A `healthCheck` block as defined below.
 	HealthCheck ProxyLBHealthCheckOutput `pulumi:"healthCheck"`
@@ -115,6 +137,8 @@ type ProxyLB struct {
 	Plan pulumi.IntPtrOutput `pulumi:"plan"`
 	// A list of CIDR block used by the ProxyLB to access the server.
 	ProxyNetworks pulumi.StringArrayOutput `pulumi:"proxyNetworks"`
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol pulumi.BoolPtrOutput `pulumi:"proxyProtocol"`
 	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
 	Region pulumi.StringPtrOutput `pulumi:"region"`
 	// One or more `rule` blocks as defined below.
@@ -125,6 +149,8 @@ type ProxyLB struct {
 	SorryServer ProxyLBSorryServerPtrOutput `pulumi:"sorryServer"`
 	// The flag to enable sticky session.
 	StickySession pulumi.BoolPtrOutput `pulumi:"stickySession"`
+	// A `syslog` block as defined below.
+	Syslog ProxyLBSyslogOutput `pulumi:"syslog"`
 	// Any tags to assign to the ProxyLB.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// The timeout duration in seconds. Default:`10`.
@@ -179,7 +205,6 @@ type proxyLBState struct {
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
 	Fqdn *string `pulumi:"fqdn"`
 	// The flag to enable gzip compression.
-	// ---
 	Gzip *bool `pulumi:"gzip"`
 	// A `healthCheck` block as defined below.
 	HealthCheck *ProxyLBHealthCheck `pulumi:"healthCheck"`
@@ -191,6 +216,8 @@ type proxyLBState struct {
 	Plan *int `pulumi:"plan"`
 	// A list of CIDR block used by the ProxyLB to access the server.
 	ProxyNetworks []string `pulumi:"proxyNetworks"`
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol *bool `pulumi:"proxyProtocol"`
 	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
 	Region *string `pulumi:"region"`
 	// One or more `rule` blocks as defined below.
@@ -201,6 +228,8 @@ type proxyLBState struct {
 	SorryServer *ProxyLBSorryServer `pulumi:"sorryServer"`
 	// The flag to enable sticky session.
 	StickySession *bool `pulumi:"stickySession"`
+	// A `syslog` block as defined below.
+	Syslog *ProxyLBSyslog `pulumi:"syslog"`
 	// Any tags to assign to the ProxyLB.
 	Tags []string `pulumi:"tags"`
 	// The timeout duration in seconds. Default:`10`.
@@ -221,7 +250,6 @@ type ProxyLBState struct {
 	// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
 	Fqdn pulumi.StringPtrInput
 	// The flag to enable gzip compression.
-	// ---
 	Gzip pulumi.BoolPtrInput
 	// A `healthCheck` block as defined below.
 	HealthCheck ProxyLBHealthCheckPtrInput
@@ -233,6 +261,8 @@ type ProxyLBState struct {
 	Plan pulumi.IntPtrInput
 	// A list of CIDR block used by the ProxyLB to access the server.
 	ProxyNetworks pulumi.StringArrayInput
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol pulumi.BoolPtrInput
 	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
 	Region pulumi.StringPtrInput
 	// One or more `rule` blocks as defined below.
@@ -243,6 +273,8 @@ type ProxyLBState struct {
 	SorryServer ProxyLBSorryServerPtrInput
 	// The flag to enable sticky session.
 	StickySession pulumi.BoolPtrInput
+	// A `syslog` block as defined below.
+	Syslog ProxyLBSyslogPtrInput
 	// Any tags to assign to the ProxyLB.
 	Tags pulumi.StringArrayInput
 	// The timeout duration in seconds. Default:`10`.
@@ -265,7 +297,6 @@ type proxyLBArgs struct {
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
 	Description *string `pulumi:"description"`
 	// The flag to enable gzip compression.
-	// ---
 	Gzip *bool `pulumi:"gzip"`
 	// A `healthCheck` block as defined below.
 	HealthCheck ProxyLBHealthCheck `pulumi:"healthCheck"`
@@ -275,6 +306,8 @@ type proxyLBArgs struct {
 	Name *string `pulumi:"name"`
 	// The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
 	Plan *int `pulumi:"plan"`
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol *bool `pulumi:"proxyProtocol"`
 	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
 	Region *string `pulumi:"region"`
 	// One or more `rule` blocks as defined below.
@@ -285,6 +318,8 @@ type proxyLBArgs struct {
 	SorryServer *ProxyLBSorryServer `pulumi:"sorryServer"`
 	// The flag to enable sticky session.
 	StickySession *bool `pulumi:"stickySession"`
+	// A `syslog` block as defined below.
+	Syslog *ProxyLBSyslog `pulumi:"syslog"`
 	// Any tags to assign to the ProxyLB.
 	Tags []string `pulumi:"tags"`
 	// The timeout duration in seconds. Default:`10`.
@@ -302,7 +337,6 @@ type ProxyLBArgs struct {
 	// The description of the ProxyLB. The length of this value must be in the range [`1`-`512`].
 	Description pulumi.StringPtrInput
 	// The flag to enable gzip compression.
-	// ---
 	Gzip pulumi.BoolPtrInput
 	// A `healthCheck` block as defined below.
 	HealthCheck ProxyLBHealthCheckInput
@@ -312,6 +346,8 @@ type ProxyLBArgs struct {
 	Name pulumi.StringPtrInput
 	// The plan name of the ProxyLB. This must be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`]. Default:`100`.
 	Plan pulumi.IntPtrInput
+	// The flag to enable proxy protocol v2.
+	ProxyProtocol pulumi.BoolPtrInput
 	// The name of region that the proxy LB is in. This must be one of [`tk1`/`is1`/`anycast`]. Changing this forces a new resource to be created. Default:`is1`.
 	Region pulumi.StringPtrInput
 	// One or more `rule` blocks as defined below.
@@ -322,6 +358,8 @@ type ProxyLBArgs struct {
 	SorryServer ProxyLBSorryServerPtrInput
 	// The flag to enable sticky session.
 	StickySession pulumi.BoolPtrInput
+	// A `syslog` block as defined below.
+	Syslog ProxyLBSyslogPtrInput
 	// Any tags to assign to the ProxyLB.
 	Tags pulumi.StringArrayInput
 	// The timeout duration in seconds. Default:`10`.

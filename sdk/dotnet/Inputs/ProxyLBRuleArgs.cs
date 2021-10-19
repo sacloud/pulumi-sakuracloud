@@ -13,6 +13,30 @@ namespace Pulumi.Sakuracloud.Inputs
     public sealed class ProxyLBRuleArgs : Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+        /// </summary>
+        [Input("action")]
+        public Input<string>? Action { get; set; }
+
+        /// <summary>
+        /// Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+        /// </summary>
+        [Input("fixedContentType")]
+        public Input<string>? FixedContentType { get; set; }
+
+        /// <summary>
+        /// Content body for fixed response sent when requests matches the rule.
+        /// </summary>
+        [Input("fixedMessageBody")]
+        public Input<string>? FixedMessageBody { get; set; }
+
+        /// <summary>
+        /// HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+        /// </summary>
+        [Input("fixedStatusCode")]
+        public Input<string>? FixedStatusCode { get; set; }
+
+        /// <summary>
         /// The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
         /// </summary>
         [Input("group")]
@@ -29,6 +53,18 @@ namespace Pulumi.Sakuracloud.Inputs
         /// </summary>
         [Input("path")]
         public Input<string>? Path { get; set; }
+
+        /// <summary>
+        /// The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+        /// </summary>
+        [Input("redirectLocation")]
+        public Input<string>? RedirectLocation { get; set; }
+
+        /// <summary>
+        /// HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+        /// </summary>
+        [Input("redirectStatusCode")]
+        public Input<string>? RedirectStatusCode { get; set; }
 
         public ProxyLBRuleArgs()
         {

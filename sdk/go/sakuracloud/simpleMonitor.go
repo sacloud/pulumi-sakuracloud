@@ -46,7 +46,8 @@ import (
 // 				pulumi.String("tag1"),
 // 				pulumi.String("tag2"),
 // 			},
-// 			Target: pulumi.String("www.example.com"),
+// 			Target:  pulumi.String("www.example.com"),
+// 			Timeout: pulumi.Int(10),
 // 		})
 // 		if err != nil {
 // 			return err
@@ -82,6 +83,8 @@ type SimpleMonitor struct {
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
 	// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
 	Target pulumi.StringOutput `pulumi:"target"`
+	// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+	Timeout pulumi.IntOutput `pulumi:"timeout"`
 }
 
 // NewSimpleMonitor registers a new resource with the given unique name, arguments, and options.
@@ -143,6 +146,8 @@ type simpleMonitorState struct {
 	Tags []string `pulumi:"tags"`
 	// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
 	Target *string `pulumi:"target"`
+	// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+	Timeout *int `pulumi:"timeout"`
 }
 
 type SimpleMonitorState struct {
@@ -170,6 +175,8 @@ type SimpleMonitorState struct {
 	Tags pulumi.StringArrayInput
 	// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
 	Target pulumi.StringPtrInput
+	// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+	Timeout pulumi.IntPtrInput
 }
 
 func (SimpleMonitorState) ElementType() reflect.Type {
@@ -201,6 +208,8 @@ type simpleMonitorArgs struct {
 	Tags []string `pulumi:"tags"`
 	// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
 	Target string `pulumi:"target"`
+	// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+	Timeout *int `pulumi:"timeout"`
 }
 
 // The set of arguments for constructing a SimpleMonitor resource.
@@ -229,6 +238,8 @@ type SimpleMonitorArgs struct {
 	Tags pulumi.StringArrayInput
 	// The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
 	Target pulumi.StringInput
+	// The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+	Timeout pulumi.IntPtrInput
 }
 
 func (SimpleMonitorArgs) ElementType() reflect.Type {

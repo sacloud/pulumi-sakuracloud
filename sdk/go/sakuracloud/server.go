@@ -86,7 +86,7 @@ type Server struct {
 	Core pulumi.IntPtrOutput `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`].
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// A `diskEditParameter` block as defined below.
+	// A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
 	DiskEditParameter ServerDiskEditParameterPtrOutput `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server.
 	Disks pulumi.StringArrayOutput `pulumi:"disks"`
@@ -96,6 +96,8 @@ type Server struct {
 	ForceShutdown pulumi.BoolPtrOutput `pulumi:"forceShutdown"`
 	// The gateway address used by the Server.
 	Gateway pulumi.StringOutput `pulumi:"gateway"`
+	// The number of GPUs.
+	Gpu pulumi.IntPtrOutput `pulumi:"gpu"`
 	// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// The icon id to attach to the Server.
@@ -120,6 +122,8 @@ type Server struct {
 	PrivateHostName pulumi.StringOutput `pulumi:"privateHostName"`
 	// Any tags to assign to the Server.
 	Tags pulumi.StringArrayOutput `pulumi:"tags"`
+	// A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+	UserData pulumi.StringPtrOutput `pulumi:"userData"`
 	// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringOutput `pulumi:"zone"`
 }
@@ -161,7 +165,7 @@ type serverState struct {
 	Core *int `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`].
 	Description *string `pulumi:"description"`
-	// A `diskEditParameter` block as defined below.
+	// A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
 	DiskEditParameter *ServerDiskEditParameter `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server.
 	Disks []string `pulumi:"disks"`
@@ -171,6 +175,8 @@ type serverState struct {
 	ForceShutdown *bool `pulumi:"forceShutdown"`
 	// The gateway address used by the Server.
 	Gateway *string `pulumi:"gateway"`
+	// The number of GPUs.
+	Gpu *int `pulumi:"gpu"`
 	// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
 	Hostname *string `pulumi:"hostname"`
 	// The icon id to attach to the Server.
@@ -195,6 +201,8 @@ type serverState struct {
 	PrivateHostName *string `pulumi:"privateHostName"`
 	// Any tags to assign to the Server.
 	Tags []string `pulumi:"tags"`
+	// A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+	UserData *string `pulumi:"userData"`
 	// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone *string `pulumi:"zone"`
 }
@@ -208,7 +216,7 @@ type ServerState struct {
 	Core pulumi.IntPtrInput
 	// The description of the Server. The length of this value must be in the range [`1`-`512`].
 	Description pulumi.StringPtrInput
-	// A `diskEditParameter` block as defined below.
+	// A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
 	DiskEditParameter ServerDiskEditParameterPtrInput
 	// A list of disk id connected to the server.
 	Disks pulumi.StringArrayInput
@@ -218,6 +226,8 @@ type ServerState struct {
 	ForceShutdown pulumi.BoolPtrInput
 	// The gateway address used by the Server.
 	Gateway pulumi.StringPtrInput
+	// The number of GPUs.
+	Gpu pulumi.IntPtrInput
 	// The hostname of the Server. The length of this value must be in the range [`1`-`64`].
 	Hostname pulumi.StringPtrInput
 	// The icon id to attach to the Server.
@@ -242,6 +252,8 @@ type ServerState struct {
 	PrivateHostName pulumi.StringPtrInput
 	// Any tags to assign to the Server.
 	Tags pulumi.StringArrayInput
+	// A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+	UserData pulumi.StringPtrInput
 	// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringPtrInput
 }
@@ -259,12 +271,14 @@ type serverArgs struct {
 	Core *int `pulumi:"core"`
 	// The description of the Server. The length of this value must be in the range [`1`-`512`].
 	Description *string `pulumi:"description"`
-	// A `diskEditParameter` block as defined below.
+	// A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
 	DiskEditParameter *ServerDiskEditParameter `pulumi:"diskEditParameter"`
 	// A list of disk id connected to the server.
 	Disks []string `pulumi:"disks"`
 	// The flag to use force shutdown when need to reboot/shutdown while applying.
 	ForceShutdown *bool `pulumi:"forceShutdown"`
+	// The number of GPUs.
+	Gpu *int `pulumi:"gpu"`
 	// The icon id to attach to the Server.
 	IconId *string `pulumi:"iconId"`
 	// The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
@@ -279,6 +293,8 @@ type serverArgs struct {
 	PrivateHostId *string `pulumi:"privateHostId"`
 	// Any tags to assign to the Server.
 	Tags []string `pulumi:"tags"`
+	// A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+	UserData *string `pulumi:"userData"`
 	// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone *string `pulumi:"zone"`
 }
@@ -293,12 +309,14 @@ type ServerArgs struct {
 	Core pulumi.IntPtrInput
 	// The description of the Server. The length of this value must be in the range [`1`-`512`].
 	Description pulumi.StringPtrInput
-	// A `diskEditParameter` block as defined below.
+	// A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
 	DiskEditParameter ServerDiskEditParameterPtrInput
 	// A list of disk id connected to the server.
 	Disks pulumi.StringArrayInput
 	// The flag to use force shutdown when need to reboot/shutdown while applying.
 	ForceShutdown pulumi.BoolPtrInput
+	// The number of GPUs.
+	Gpu pulumi.IntPtrInput
 	// The icon id to attach to the Server.
 	IconId pulumi.StringPtrInput
 	// The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
@@ -313,6 +331,8 @@ type ServerArgs struct {
 	PrivateHostId pulumi.StringPtrInput
 	// Any tags to assign to the Server.
 	Tags pulumi.StringArrayInput
+	// A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
+	UserData pulumi.StringPtrInput
 	// The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringPtrInput
 }

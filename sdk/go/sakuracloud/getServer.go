@@ -69,6 +69,8 @@ type LookupServerResult struct {
 	Filter     *GetServerFilter `pulumi:"filter"`
 	// The IP address of the gateway used by Server.
 	Gateway string `pulumi:"gateway"`
+	// The number of GPUs.
+	Gpu int `pulumi:"gpu"`
 	// The hostname of the Server.
 	Hostname string `pulumi:"hostname"`
 	// The icon id attached to the Server.

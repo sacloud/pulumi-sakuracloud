@@ -37,6 +37,7 @@ class VPCRouter(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  users: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterUserArgs']]]]] = None,
                  version: Optional[pulumi.Input[int]] = None,
+                 wire_guard: Optional[pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  __props__=None,
                  __name__=None,
@@ -142,6 +143,14 @@ class VPCRouter(pulumi.CustomResource):
                 range_start="192.168.11.31",
                 range_stop="192.168.11.40",
             ),
+            wire_guard=sakuracloud.VPCRouterWireGuardArgs(
+                ip_address="192.168.31.1/24",
+                peers=[sakuracloud.VPCRouterWireGuardPeerArgs(
+                    name="example",
+                    ip_address="192.168.31.11",
+                    public_key="<your-public-key>",
+                )],
+            ),
             site_to_site_vpns=[sakuracloud.VPCRouterSiteToSiteVpnArgs(
                 peer="10.0.0.1",
                 remote_id="10.0.0.1",
@@ -186,6 +195,7 @@ class VPCRouter(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the VPCRouter.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterUserArgs']]]] users: One or more `user` blocks as defined below.
         :param pulumi.Input[int] version: The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        :param pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']] wire_guard: A `wire_guard` block as defined below.
         :param pulumi.Input[str] zone: The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         if __name__ is not None:
@@ -225,6 +235,7 @@ class VPCRouter(pulumi.CustomResource):
             __props__['tags'] = tags
             __props__['users'] = users
             __props__['version'] = version
+            __props__['wire_guard'] = wire_guard
             __props__['zone'] = zone
             __props__['public_ip'] = None
             __props__['public_netmask'] = None
@@ -260,6 +271,7 @@ class VPCRouter(pulumi.CustomResource):
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             users: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterUserArgs']]]]] = None,
             version: Optional[pulumi.Input[int]] = None,
+            wire_guard: Optional[pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']]] = None,
             zone: Optional[pulumi.Input[str]] = None) -> 'VPCRouter':
         """
         Get an existing VPCRouter resource's state with the given name, id, and optional extra
@@ -290,6 +302,7 @@ class VPCRouter(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the VPCRouter.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterUserArgs']]]] users: One or more `user` blocks as defined below.
         :param pulumi.Input[int] version: The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        :param pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']] wire_guard: A `wire_guard` block as defined below.
         :param pulumi.Input[str] zone: The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -318,6 +331,7 @@ class VPCRouter(pulumi.CustomResource):
         __props__["tags"] = tags
         __props__["users"] = users
         __props__["version"] = version
+        __props__["wire_guard"] = wire_guard
         __props__["zone"] = zone
         return VPCRouter(resource_name, opts=opts, __props__=__props__)
 
@@ -496,6 +510,14 @@ class VPCRouter(pulumi.CustomResource):
         The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
         """
         return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter(name="wireGuard")
+    def wire_guard(self) -> pulumi.Output[Optional['outputs.VPCRouterWireGuard']]:
+        """
+        A `wire_guard` block as defined below.
+        """
+        return pulumi.get(self, "wire_guard")
 
     @property
     @pulumi.getter

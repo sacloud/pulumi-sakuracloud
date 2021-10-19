@@ -146,6 +146,16 @@ import (
 // 				RangeStart: pulumi.String("192.168.11.31"),
 // 				RangeStop:  pulumi.String("192.168.11.40"),
 // 			},
+// 			WireGuard: &sakuracloud.VPCRouterWireGuardArgs{
+// 				IpAddress: pulumi.String("192.168.31.1/24"),
+// 				Peers: sakuracloud.VPCRouterWireGuardPeerArray{
+// 					&sakuracloud.VPCRouterWireGuardPeerArgs{
+// 						Name:      pulumi.String("example"),
+// 						IpAddress: pulumi.String("192.168.31.11"),
+// 						PublicKey: pulumi.String("<your-public-key>"),
+// 					},
+// 				},
+// 			},
 // 			SiteToSiteVpns: sakuracloud.VPCRouterSiteToSiteVpnArray{
 // 				&sakuracloud.VPCRouterSiteToSiteVpnArgs{
 // 					Peer:            pulumi.String("10.0.0.1"),
@@ -235,6 +245,8 @@ type VPCRouter struct {
 	Users VPCRouterUserArrayOutput `pulumi:"users"`
 	// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
 	Version pulumi.IntPtrOutput `pulumi:"version"`
+	// A `wireGuard` block as defined below.
+	WireGuard VPCRouterWireGuardPtrOutput `pulumi:"wireGuard"`
 	// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringOutput `pulumi:"zone"`
 }
@@ -312,6 +324,8 @@ type vpcrouterState struct {
 	Users []VPCRouterUser `pulumi:"users"`
 	// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
 	Version *int `pulumi:"version"`
+	// A `wireGuard` block as defined below.
+	WireGuard *VPCRouterWireGuard `pulumi:"wireGuard"`
 	// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone *string `pulumi:"zone"`
 }
@@ -361,6 +375,8 @@ type VPCRouterState struct {
 	Users VPCRouterUserArrayInput
 	// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
 	Version pulumi.IntPtrInput
+	// A `wireGuard` block as defined below.
+	WireGuard VPCRouterWireGuardPtrInput
 	// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringPtrInput
 }
@@ -410,6 +426,8 @@ type vpcrouterArgs struct {
 	Users []VPCRouterUser `pulumi:"users"`
 	// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
 	Version *int `pulumi:"version"`
+	// A `wireGuard` block as defined below.
+	WireGuard *VPCRouterWireGuard `pulumi:"wireGuard"`
 	// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone *string `pulumi:"zone"`
 }
@@ -456,6 +474,8 @@ type VPCRouterArgs struct {
 	Users VPCRouterUserArrayInput
 	// The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
 	Version pulumi.IntPtrInput
+	// A `wireGuard` block as defined below.
+	WireGuard VPCRouterWireGuardPtrInput
 	// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
 	Zone pulumi.StringPtrInput
 }

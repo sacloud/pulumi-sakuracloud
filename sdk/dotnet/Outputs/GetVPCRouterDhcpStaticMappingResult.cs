@@ -14,7 +14,7 @@ namespace Pulumi.Sakuracloud.Outputs
     public sealed class GetVPCRouterDhcpStaticMappingResult
     {
         /// <summary>
-        /// The static IP address to assign to DHCP client.
+        /// The IP address for peer.
         /// </summary>
         public readonly string IpAddress;
         /// <summary>

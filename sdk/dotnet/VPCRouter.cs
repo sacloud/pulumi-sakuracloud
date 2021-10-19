@@ -155,6 +155,19 @@ namespace Pulumi.Sakuracloud
     ///                 RangeStart = "192.168.11.31",
     ///                 RangeStop = "192.168.11.40",
     ///             },
+    ///             WireGuard = new Sakuracloud.Inputs.VPCRouterWireGuardArgs
+    ///             {
+    ///                 IpAddress = "192.168.31.1/24",
+    ///                 Peers = 
+    ///                 {
+    ///                     new Sakuracloud.Inputs.VPCRouterWireGuardPeerArgs
+    ///                     {
+    ///                         Name = "example",
+    ///                         IpAddress = "192.168.31.11",
+    ///                         PublicKey = "&lt;your-public-key&gt;",
+    ///                     },
+    ///                 },
+    ///             },
     ///             SiteToSiteVpns = 
     ///             {
     ///                 new Sakuracloud.Inputs.VPCRouterSiteToSiteVpnArgs
@@ -337,6 +350,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Output("version")]
         public Output<int?> Version { get; private set; } = null!;
+
+        /// <summary>
+        /// A `wire_guard` block as defined below.
+        /// </summary>
+        [Output("wireGuard")]
+        public Output<Outputs.VPCRouterWireGuard?> WireGuard { get; private set; } = null!;
 
         /// <summary>
         /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
@@ -571,6 +590,12 @@ namespace Pulumi.Sakuracloud
         public Input<int>? Version { get; set; }
 
         /// <summary>
+        /// A `wire_guard` block as defined below.
+        /// </summary>
+        [Input("wireGuard")]
+        public Input<Inputs.VPCRouterWireGuardArgs>? WireGuard { get; set; }
+
+        /// <summary>
         /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         /// </summary>
         [Input("zone")]
@@ -774,6 +799,12 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         [Input("version")]
         public Input<int>? Version { get; set; }
+
+        /// <summary>
+        /// A `wire_guard` block as defined below.
+        /// </summary>
+        [Input("wireGuard")]
+        public Input<Inputs.VPCRouterWireGuardGetArgs>? WireGuard { get; set; }
 
         /// <summary>
         /// The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.

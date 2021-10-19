@@ -18,6 +18,7 @@ import * as utilities from "./utilities";
  *     proxylbId: sakuracloud_proxylb.foobar.id,
  *     acceptTos: true,
  *     commonName: "www.example.com",
+ *     subjectAltNames: ["www1.example.com"],
  *     updateDelaySec: 120,
  * });
  * const foobarProxyLB = sakuracloud.getProxyLB({
@@ -72,6 +73,10 @@ export class ProxyLBACME extends pulumi.CustomResource {
      */
     public readonly proxylbId!: pulumi.Output<string>;
     /**
+     * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+     */
+    public readonly subjectAltNames!: pulumi.Output<string[] | undefined>;
+    /**
      * The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
      */
     public readonly updateDelaySec!: pulumi.Output<number | undefined>;
@@ -93,6 +98,7 @@ export class ProxyLBACME extends pulumi.CustomResource {
             inputs["certificates"] = state ? state.certificates : undefined;
             inputs["commonName"] = state ? state.commonName : undefined;
             inputs["proxylbId"] = state ? state.proxylbId : undefined;
+            inputs["subjectAltNames"] = state ? state.subjectAltNames : undefined;
             inputs["updateDelaySec"] = state ? state.updateDelaySec : undefined;
         } else {
             const args = argsOrState as ProxyLBACMEArgs | undefined;
@@ -108,6 +114,7 @@ export class ProxyLBACME extends pulumi.CustomResource {
             inputs["acceptTos"] = args ? args.acceptTos : undefined;
             inputs["commonName"] = args ? args.commonName : undefined;
             inputs["proxylbId"] = args ? args.proxylbId : undefined;
+            inputs["subjectAltNames"] = args ? args.subjectAltNames : undefined;
             inputs["updateDelaySec"] = args ? args.updateDelaySec : undefined;
             inputs["certificates"] = undefined /*out*/;
         }
@@ -139,6 +146,10 @@ export interface ProxyLBACMEState {
      */
     readonly proxylbId?: pulumi.Input<string>;
     /**
+     * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+     */
+    readonly subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
      */
     readonly updateDelaySec?: pulumi.Input<number>;
@@ -160,6 +171,10 @@ export interface ProxyLBACMEArgs {
      * The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
      */
     readonly proxylbId: pulumi.Input<string>;
+    /**
+     * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+     */
+    readonly subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
      */

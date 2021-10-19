@@ -29,6 +29,7 @@ class SimpleMonitor(pulumi.CustomResource):
                  notify_slack_webhook: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  target: Optional[pulumi.Input[str]] = None,
+                 timeout: Optional[pulumi.Input[int]] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
@@ -62,7 +63,8 @@ class SimpleMonitor(pulumi.CustomResource):
                 "tag1",
                 "tag2",
             ],
-            target="www.example.com")
+            target="www.example.com",
+            timeout=10)
         ```
 
         :param str resource_name: The name of the resource.
@@ -79,6 +81,7 @@ class SimpleMonitor(pulumi.CustomResource):
         :param pulumi.Input[str] notify_slack_webhook: The webhook URL for sending notification by slack/discord.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SimpleMonitor.
         :param pulumi.Input[str] target: The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] timeout: The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
         """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
@@ -113,6 +116,7 @@ class SimpleMonitor(pulumi.CustomResource):
             if target is None and not opts.urn:
                 raise TypeError("Missing required property 'target'")
             __props__['target'] = target
+            __props__['timeout'] = timeout
         super(SimpleMonitor, __self__).__init__(
             'sakuracloud:index/simpleMonitor:SimpleMonitor',
             resource_name,
@@ -134,7 +138,8 @@ class SimpleMonitor(pulumi.CustomResource):
             notify_slack_enabled: Optional[pulumi.Input[bool]] = None,
             notify_slack_webhook: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            target: Optional[pulumi.Input[str]] = None) -> 'SimpleMonitor':
+            target: Optional[pulumi.Input[str]] = None,
+            timeout: Optional[pulumi.Input[int]] = None) -> 'SimpleMonitor':
         """
         Get an existing SimpleMonitor resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -154,6 +159,7 @@ class SimpleMonitor(pulumi.CustomResource):
         :param pulumi.Input[str] notify_slack_webhook: The webhook URL for sending notification by slack/discord.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SimpleMonitor.
         :param pulumi.Input[str] target: The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
+        :param pulumi.Input[int] timeout: The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -171,6 +177,7 @@ class SimpleMonitor(pulumi.CustomResource):
         __props__["notify_slack_webhook"] = notify_slack_webhook
         __props__["tags"] = tags
         __props__["target"] = target
+        __props__["timeout"] = timeout
         return SimpleMonitor(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -268,6 +275,14 @@ class SimpleMonitor(pulumi.CustomResource):
         The monitoring target of the simple monitor. This must be IP address or FQDN. Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> pulumi.Output[int]:
+        """
+        The timeout in seconds for monitoring. This must be in the range [`10`-`30`].
+        """
+        return pulumi.get(self, "timeout")
 
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop

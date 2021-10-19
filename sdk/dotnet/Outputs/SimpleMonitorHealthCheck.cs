@@ -26,6 +26,10 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly string? ExcepctedData;
         /// <summary>
+        /// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+        /// </summary>
+        public readonly string? Ftps;
+        /// <summary>
         /// The value of host header send when checking by HTTP/HTTPS.
         /// </summary>
         public readonly string? HostHeader;
@@ -50,7 +54,7 @@ namespace Pulumi.Sakuracloud.Outputs
         /// </summary>
         public readonly int? Port;
         /// <summary>
-        /// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+        /// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
         /// </summary>
         public readonly string Protocol;
         /// <summary>
@@ -86,6 +90,8 @@ namespace Pulumi.Sakuracloud.Outputs
 
             string? excepctedData,
 
+            string? ftps,
+
             string? hostHeader,
 
             bool? http2,
@@ -115,6 +121,7 @@ namespace Pulumi.Sakuracloud.Outputs
             Community = community;
             ContainsString = containsString;
             ExcepctedData = excepctedData;
+            Ftps = ftps;
             HostHeader = hostHeader;
             Http2 = http2;
             Oid = oid;

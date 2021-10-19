@@ -9,24 +9,26 @@ export * from "./archive";
 export * from "./archiveShare";
 export * from "./autoBackup";
 export * from "./bridge";
-export * from "./bucketObject";
 export * from "./cdrom";
+export * from "./certificateAuthority";
 export * from "./containerRegistry";
 export * from "./database";
 export * from "./databaseReadReplica";
 export * from "./disk";
 export * from "./dns";
 export * from "./dnsrecord";
+export * from "./enhancedDB";
 export * from "./esme";
 export * from "./getArchive";
 export * from "./getBridge";
-export * from "./getBucketObject";
 export * from "./getCDROM";
+export * from "./getCertificateAuthority";
 export * from "./getContainerRegistry";
 export * from "./getDNS";
 export * from "./getDatabase";
 export * from "./getDisk";
 export * from "./getESME";
+export * from "./getEnhancedDB";
 export * from "./getGSLB";
 export * from "./getIcon";
 export * from "./getInternet";
@@ -85,8 +87,8 @@ import { Archive } from "./archive";
 import { ArchiveShare } from "./archiveShare";
 import { AutoBackup } from "./autoBackup";
 import { Bridge } from "./bridge";
-import { BucketObject } from "./bucketObject";
 import { CDROM } from "./cdrom";
+import { CertificateAuthority } from "./certificateAuthority";
 import { ContainerRegistry } from "./containerRegistry";
 import { DNS } from "./dns";
 import { DNSRecord } from "./dnsrecord";
@@ -94,6 +96,7 @@ import { Database } from "./database";
 import { DatabaseReadReplica } from "./databaseReadReplica";
 import { Disk } from "./disk";
 import { ESME } from "./esme";
+import { EnhancedDB } from "./enhancedDB";
 import { GSLB } from "./gslb";
 import { IPv4Ptr } from "./ipv4Ptr";
 import { Icon } from "./icon";
@@ -130,10 +133,10 @@ const _module = {
                 return new AutoBackup(name, <any>undefined, { urn })
             case "sakuracloud:index/bridge:Bridge":
                 return new Bridge(name, <any>undefined, { urn })
-            case "sakuracloud:index/bucketObject:BucketObject":
-                return new BucketObject(name, <any>undefined, { urn })
             case "sakuracloud:index/cDROM:CDROM":
                 return new CDROM(name, <any>undefined, { urn })
+            case "sakuracloud:index/certificateAuthority:CertificateAuthority":
+                return new CertificateAuthority(name, <any>undefined, { urn })
             case "sakuracloud:index/containerRegistry:ContainerRegistry":
                 return new ContainerRegistry(name, <any>undefined, { urn })
             case "sakuracloud:index/dNS:DNS":
@@ -148,6 +151,8 @@ const _module = {
                 return new Disk(name, <any>undefined, { urn })
             case "sakuracloud:index/eSME:ESME":
                 return new ESME(name, <any>undefined, { urn })
+            case "sakuracloud:index/enhancedDB:EnhancedDB":
+                return new EnhancedDB(name, <any>undefined, { urn })
             case "sakuracloud:index/gSLB:GSLB":
                 return new GSLB(name, <any>undefined, { urn })
             case "sakuracloud:index/iPv4Ptr:IPv4Ptr":
@@ -203,8 +208,8 @@ pulumi.runtime.registerResourceModule("sakuracloud", "index/archive", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/archiveShare", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/autoBackup", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/bridge", _module)
-pulumi.runtime.registerResourceModule("sakuracloud", "index/bucketObject", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/cDROM", _module)
+pulumi.runtime.registerResourceModule("sakuracloud", "index/certificateAuthority", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/containerRegistry", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/dNS", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/dNSRecord", _module)
@@ -212,6 +217,7 @@ pulumi.runtime.registerResourceModule("sakuracloud", "index/database", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/databaseReadReplica", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/disk", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/eSME", _module)
+pulumi.runtime.registerResourceModule("sakuracloud", "index/enhancedDB", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/gSLB", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/iPv4Ptr", _module)
 pulumi.runtime.registerResourceModule("sakuracloud", "index/icon", _module)

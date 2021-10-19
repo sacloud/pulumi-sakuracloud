@@ -101,6 +101,10 @@ namespace Pulumi.Sakuracloud
         /// </summary>
         public readonly string Gateway;
         /// <summary>
+        /// The number of GPUs.
+        /// </summary>
+        public readonly int Gpu;
+        /// <summary>
         /// The hostname of the Server.
         /// </summary>
         public readonly string Hostname;
@@ -172,6 +176,8 @@ namespace Pulumi.Sakuracloud
 
             string gateway,
 
+            int gpu,
+
             string hostname,
 
             string iconId,
@@ -208,6 +214,7 @@ namespace Pulumi.Sakuracloud
             DnsServers = dnsServers;
             Filter = filter;
             Gateway = gateway;
+            Gpu = gpu;
             Hostname = hostname;
             IconId = iconId;
             Id = id;

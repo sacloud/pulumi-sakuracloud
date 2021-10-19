@@ -21,7 +21,7 @@ class GetSimpleMonitorResult:
     """
     A collection of values returned by getSimpleMonitor.
     """
-    def __init__(__self__, delay_loop=None, description=None, enabled=None, filter=None, health_checks=None, icon_id=None, id=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None):
+    def __init__(__self__, delay_loop=None, description=None, enabled=None, filter=None, health_checks=None, icon_id=None, id=None, notify_email_enabled=None, notify_email_html=None, notify_interval=None, notify_slack_enabled=None, notify_slack_webhook=None, tags=None, target=None, timeout=None):
         if delay_loop and not isinstance(delay_loop, int):
             raise TypeError("Expected argument 'delay_loop' to be a int")
         pulumi.set(__self__, "delay_loop", delay_loop)
@@ -64,6 +64,9 @@ class GetSimpleMonitorResult:
         if target and not isinstance(target, str):
             raise TypeError("Expected argument 'target' to be a str")
         pulumi.set(__self__, "target", target)
+        if timeout and not isinstance(timeout, int):
+            raise TypeError("Expected argument 'timeout' to be a int")
+        pulumi.set(__self__, "timeout", timeout)
 
     @property
     @pulumi.getter(name="delayLoop")
@@ -174,6 +177,14 @@ class GetSimpleMonitorResult:
         """
         return pulumi.get(self, "target")
 
+    @property
+    @pulumi.getter
+    def timeout(self) -> int:
+        """
+        The timeout in seconds for monitoring.
+        """
+        return pulumi.get(self, "timeout")
+
 
 class AwaitableGetSimpleMonitorResult(GetSimpleMonitorResult):
     # pylint: disable=using-constant-test
@@ -194,7 +205,8 @@ class AwaitableGetSimpleMonitorResult(GetSimpleMonitorResult):
             notify_slack_enabled=self.notify_slack_enabled,
             notify_slack_webhook=self.notify_slack_webhook,
             tags=self.tags,
-            target=self.target)
+            target=self.target,
+            timeout=self.timeout)
 
 
 def get_simple_monitor(filter: Optional[pulumi.InputType['GetSimpleMonitorFilterArgs']] = None,
@@ -238,4 +250,5 @@ def get_simple_monitor(filter: Optional[pulumi.InputType['GetSimpleMonitorFilter
         notify_slack_enabled=__ret__.notify_slack_enabled,
         notify_slack_webhook=__ret__.notify_slack_webhook,
         tags=__ret__.tags,
-        target=__ret__.target)
+        target=__ret__.target,
+        timeout=__ret__.timeout)

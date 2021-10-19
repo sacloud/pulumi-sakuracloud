@@ -31,6 +31,12 @@ namespace Pulumi.Sakuracloud.Inputs
         public Input<string>? ExcepctedData { get; set; }
 
         /// <summary>
+        /// The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+        /// </summary>
+        [Input("ftps")]
+        public Input<string>? Ftps { get; set; }
+
+        /// <summary>
         /// The value of host header send when checking by HTTP/HTTPS.
         /// </summary>
         [Input("hostHeader")]
@@ -67,7 +73,7 @@ namespace Pulumi.Sakuracloud.Inputs
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+        /// The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
         /// </summary>
         [Input("protocol", required: true)]
         public Input<string> Protocol { get; set; } = null!;

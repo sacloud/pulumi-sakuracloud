@@ -4,6 +4,169 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
+export interface CertificateAuthorityClient {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate: string;
+    /**
+     * Input for issuing a certificate.
+     */
+    csr?: string;
+    /**
+     * Input for issuing a certificate.
+     */
+    email?: string;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold?: boolean;
+    /**
+     * The id of the certificate.
+     */
+    id: string;
+    /**
+     * Current state of the certificate.
+     */
+    issueState: string;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter: string;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore: string;
+    /**
+     * Input for issuing a certificate.
+     */
+    publicKey?: string;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber: string;
+    /**
+     * A `subject` block as defined below.
+     */
+    subject: outputs.CertificateAuthorityClientSubject;
+    /**
+     * The URL for issuing the certificate.
+     */
+    url: string;
+    /**
+     * The number of hours after initial issuing that the certificate will become invalid.
+     */
+    validityPeriodHours: number;
+}
+
+export interface CertificateAuthorityClientSubject {
+    /**
+     * .
+     */
+    commonName: string;
+    /**
+     * .
+     */
+    country: string;
+    /**
+     * .
+     */
+    organization: string;
+    /**
+     * .
+     */
+    organizationUnits?: string[];
+}
+
+export interface CertificateAuthorityServer {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate: string;
+    /**
+     * Input for issuing a certificate.
+     */
+    csr?: string;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold?: boolean;
+    /**
+     * The id of the certificate.
+     */
+    id: string;
+    /**
+     * Current state of the certificate.
+     */
+    issueState: string;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter: string;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore: string;
+    /**
+     * Input for issuing a certificate.
+     */
+    publicKey?: string;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber: string;
+    /**
+     * A `subject` block as defined below.
+     */
+    subject: outputs.CertificateAuthorityServerSubject;
+    /**
+     * .
+     */
+    subjectAlternativeNames?: string[];
+    /**
+     * The number of hours after initial issuing that the certificate will become invalid.
+     */
+    validityPeriodHours: number;
+}
+
+export interface CertificateAuthorityServerSubject {
+    /**
+     * .
+     */
+    commonName: string;
+    /**
+     * .
+     */
+    country: string;
+    /**
+     * .
+     */
+    organization: string;
+    /**
+     * .
+     */
+    organizationUnits?: string[];
+}
+
+export interface CertificateAuthoritySubject {
+    /**
+     * .
+     */
+    commonName: string;
+    /**
+     * .
+     */
+    country: string;
+    /**
+     * .
+     */
+    organization: string;
+    /**
+     * .
+     */
+    organizationUnits?: string[];
+}
+
 export interface ContainerRegistryUser {
     /**
      * The user name used to authenticate remote access.
@@ -239,6 +402,114 @@ export interface GetCDROMFilterCondition {
     values: string[];
 }
 
+export interface GetCertificateAuthorityClient {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate: string;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold: boolean;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id: string;
+    /**
+     * Current state of the certificate.
+     */
+    issueState: string;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter: string;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore: string;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber: string;
+    /**
+     * .
+     */
+    subjectString: string;
+    /**
+     * The URL for issuing the certificate.
+     */
+    url: string;
+}
+
+export interface GetCertificateAuthorityFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: outputs.GetCertificateAuthorityFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: string[];
+}
+
+export interface GetCertificateAuthorityFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: string[];
+}
+
+export interface GetCertificateAuthorityServer {
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    certificate: string;
+    /**
+     * Flag to suspend/hold the certificate.
+     */
+    hold?: boolean;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id: string;
+    /**
+     * Current state of the certificate.
+     */
+    issueState: string;
+    /**
+     * The date on which the certificate validity period ends, in RFC3339 format.
+     */
+    notAfter: string;
+    /**
+     * The date on which the certificate validity period begins, in RFC3339 format.
+     */
+    notBefore: string;
+    /**
+     * The body of the CA's certificate in PEM format.
+     */
+    serialNumber: string;
+    /**
+     * .
+     */
+    subjectAlternativeNames: string[];
+    /**
+     * .
+     */
+    subjectString: string;
+}
+
 export interface GetContainerRegistryFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -465,6 +736,36 @@ export interface GetESMEFilterCondition {
     name: string;
     /**
      * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
+    values: string[];
+}
+
+export interface GetEnhancedDBFilter {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: outputs.GetEnhancedDBFilterCondition[];
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: string;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: string[];
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: string[];
+}
+
+export interface GetEnhancedDBFilterCondition {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
 }
@@ -962,7 +1263,7 @@ export interface GetPrivateHostFilterCondition {
 
 export interface GetProxyLBBindPort {
     /**
-     * The port number of the SorryServer. This will be used when all servers are down.
+     * The number of syslog port.
      */
     port: number;
     /**
@@ -977,6 +1278,7 @@ export interface GetProxyLBBindPort {
      * A list of `responseHeader` blocks as defined below.
      */
     responseHeaders: outputs.GetProxyLBBindPortResponseHeader[];
+    sslPolicy: string;
     /**
      * The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
      */
@@ -995,7 +1297,14 @@ export interface GetProxyLBBindPortResponseHeader {
 }
 
 export interface GetProxyLBCertificate {
+    /**
+     * A list of `additionalCertificate` blocks as defined below.
+     */
     additionalCertificates: outputs.GetProxyLBCertificateAdditionalCertificate[];
+    /**
+     * The common name of the certificate.
+     */
+    commonName: string;
     /**
      * The intermediate certificate for a server.
      */
@@ -1008,6 +1317,10 @@ export interface GetProxyLBCertificate {
      * The certificate for a server.
      */
     serverCert: string;
+    /**
+     * The subject alternative names of the certificate.
+     */
+    subjectAltNames: string;
 }
 
 export interface GetProxyLBCertificateAdditionalCertificate {
@@ -1069,7 +1382,7 @@ export interface GetProxyLBHealthCheck {
      */
     path: string;
     /**
-     * The port number of the SorryServer. This will be used when all servers are down.
+     * The number of syslog port.
      */
     port: number;
     /**
@@ -1079,6 +1392,22 @@ export interface GetProxyLBHealthCheck {
 }
 
 export interface GetProxyLBRule {
+    /**
+     * The type of action to be performed when requests matches the rule. This will be one of [`forward`/`redirect`/`fixed`].
+     */
+    action: string;
+    /**
+     * Content-Type header value for fixed response sent when requests matches the rule. This will be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+     */
+    fixedContentType: string;
+    /**
+     * Content body for fixed response sent when requests matches the rule.
+     */
+    fixedMessageBody: string;
+    /**
+     * HTTP status code for fixed response sent when requests matches the rule. This will be one of [`200`/`403`/`503`].
+     */
+    fixedStatusCode: string;
     /**
      * The name of load balancing group. This is used when using rule-based load balancing.
      */
@@ -1091,6 +1420,14 @@ export interface GetProxyLBRule {
      * The request path that is used as condition of rule-based balancing.
      */
     path: string;
+    /**
+     * The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+     */
+    redirectLocation: string;
+    /**
+     * HTTP status code for redirects sent when requests matches the rule. This will be one of [`301`/`302`].
+     */
+    redirectStatusCode: string;
 }
 
 export interface GetProxyLBServer {
@@ -1107,7 +1444,7 @@ export interface GetProxyLBServer {
      */
     ipAddress: string;
     /**
-     * The port number of the SorryServer. This will be used when all servers are down.
+     * The number of syslog port.
      */
     port: number;
 }
@@ -1118,9 +1455,20 @@ export interface GetProxyLBSorryServer {
      */
     ipAddress: string;
     /**
-     * The port number of the SorryServer. This will be used when all servers are down.
+     * The number of syslog port.
      */
     port: number;
+}
+
+export interface GetProxyLBSyslog {
+    /**
+     * The number of syslog port.
+     */
+    port: number;
+    /**
+     * The address of syslog server.
+     */
+    server: string;
 }
 
 export interface GetSSHKeyFilter {
@@ -1242,6 +1590,10 @@ export interface GetSimpleMonitorHealthCheck {
      */
     excepctedData: string;
     /**
+     * The methods of invoking security for monitoring with FTPS. This will be one of [``/`implicit`/`explicit`].
+     */
+    ftps: string;
+    /**
      * The value of host header send when checking by HTTP/HTTPS.
      */
     hostHeader: string;
@@ -1266,7 +1618,7 @@ export interface GetSimpleMonitorHealthCheck {
      */
     port: number;
     /**
-     * The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+     * The protocol used for health checks. This will be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
      */
     protocol: string;
     /**
@@ -1346,7 +1698,7 @@ export interface GetVPCRouterDhcpServer {
 
 export interface GetVPCRouterDhcpStaticMapping {
     /**
-     * The static IP address to assign to DHCP client.
+     * The IP address for peer.
      */
     ipAddress: string;
     /**
@@ -1536,7 +1888,7 @@ export interface GetVPCRouterSiteToSiteVpn {
      */
     localPrefixes: string[];
     /**
-     * The IP address of the opposing appliance connected to the VPC Router.
+     * A list of `peer` blocks as defined below.
      */
     peer: string;
     /**
@@ -1588,6 +1940,36 @@ export interface GetVPCRouterUser {
      * The password used to authenticate remote access.
      */
     password: string;
+}
+
+export interface GetVPCRouterWireGuard {
+    /**
+     * The IP address for peer.
+     */
+    ipAddress: string;
+    /**
+     * A list of `peer` blocks as defined below.
+     */
+    peers: outputs.GetVPCRouterWireGuardPeer[];
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey: string;
+}
+
+export interface GetVPCRouterWireGuardPeer {
+    /**
+     * The IP address for peer.
+     */
+    ipAddress: string;
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: string;
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey: string;
 }
 
 export interface LoadBalancerNetworkInterface {
@@ -1881,6 +2263,10 @@ export interface ProxyLBACMECertificate {
      */
     additionalCertificates: outputs.ProxyLBACMECertificateAdditionalCertificate[];
     /**
+     * The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
+     */
+    commonName: string;
+    /**
      * The intermediate certificate for a server.
      */
     intermediateCert: string;
@@ -1892,6 +2278,10 @@ export interface ProxyLBACMECertificate {
      * The certificate for a server.
      */
     serverCert: string;
+    /**
+     * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
+     */
+    subjectAltNames: string;
 }
 
 export interface ProxyLBACMECertificateAdditionalCertificate {
@@ -1927,6 +2317,10 @@ export interface ProxyLBBindPort {
      */
     responseHeaders?: outputs.ProxyLBBindPortResponseHeader[];
     /**
+     * The ssl policy. This must be one of [`TLS-1-2-2019-04`/`TLS-1-2-2021-06`/`TLS-1-3-2021-06`].
+     */
+    sslPolicy?: string;
+    /**
      * The flag to enable HTTP/2. This flag is used only when `proxyMode` is `https`.
      */
     supportHttp2?: boolean;
@@ -1949,6 +2343,10 @@ export interface ProxyLBCertificate {
      */
     additionalCertificates?: outputs.ProxyLBCertificateAdditionalCertificate[];
     /**
+     * The common name of the certificate.
+     */
+    commonName: string;
+    /**
      * The intermediate certificate for a server.
      */
     intermediateCert: string;
@@ -1960,6 +2358,10 @@ export interface ProxyLBCertificate {
      * The certificate for a server.
      */
     serverCert: string;
+    /**
+     * The subject alternative names of the certificate.
+     */
+    subjectAltNames: string;
 }
 
 export interface ProxyLBCertificateAdditionalCertificate {
@@ -2002,6 +2404,22 @@ export interface ProxyLBHealthCheck {
 
 export interface ProxyLBRule {
     /**
+     * The type of action to be performed when requests matches the rule. This must be one of [`forward`/`redirect`/`fixed`] Default: `forward`.
+     */
+    action?: string;
+    /**
+     * Content-Type header value for fixed response sent when requests matches the rule. This must be one of [`text/plain`/`text/html`/`application/javascript`/`application/json`].
+     */
+    fixedContentType?: string;
+    /**
+     * Content body for fixed response sent when requests matches the rule.
+     */
+    fixedMessageBody?: string;
+    /**
+     * HTTP status code for fixed response sent when requests matches the rule. This must be one of [`200`/`403`/`503`].
+     */
+    fixedStatusCode?: string;
+    /**
      * The name of load balancing group. When proxyLB received request which matched to `host` and `path`, proxyLB forwards the request to servers that having same group name. The length of this value must be in the range [`1`-`10`].
      */
     group?: string;
@@ -2013,6 +2431,14 @@ export interface ProxyLBRule {
      * The request path that is used as condition of rule-based balancing.
      */
     path?: string;
+    /**
+     * The URL to redirect to when the request matches the rule. see https://manual.sakura.ad.jp/cloud/appliance/enhanced-lb/#enhanced-lb-rule for details.
+     */
+    redirectLocation?: string;
+    /**
+     * HTTP status code for redirects sent when requests matches the rule. This must be one of [`301`/`302`].
+     */
+    redirectStatusCode?: string;
 }
 
 export interface ProxyLBServer {
@@ -2043,6 +2469,17 @@ export interface ProxyLBSorryServer {
      * The port number of the SorryServer. This will be used when all servers are down.
      */
     port?: number;
+}
+
+export interface ProxyLBSyslog {
+    /**
+     * The number of syslog port.
+     */
+    port: number;
+    /**
+     * The address of syslog server.
+     */
+    server?: string;
 }
 
 export interface ServerDiskEditParameter {
@@ -2147,6 +2584,10 @@ export interface SimpleMonitorHealthCheck {
      */
     excepctedData?: string;
     /**
+     * The methods of invoking security for monitoring with FTPS. This must be one of [``/`implicit`/`explicit`].
+     */
+    ftps?: string;
+    /**
      * The value of host header send when checking by HTTP/HTTPS.
      */
     hostHeader?: string;
@@ -2171,7 +2612,7 @@ export interface SimpleMonitorHealthCheck {
      */
     port: number;
     /**
-     * The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`].
+     * The protocol used for health checks. This must be one of [`http`/`https`/`ping`/`tcp`/`dns`/`ssh`/`smtp`/`pop3`/`snmp`/`sslcertificate`/`ftp`].
      */
     protocol: string;
     /**
@@ -2433,4 +2874,34 @@ export interface VPCRouterUser {
      * The password used to authenticate remote access.
      */
     password: string;
+}
+
+export interface VPCRouterWireGuard {
+    /**
+     * The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
+     */
+    ipAddress: string;
+    /**
+     * One or more `peer` blocks as defined below.
+     */
+    peers?: outputs.VPCRouterWireGuardPeer[];
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey: string;
+}
+
+export interface VPCRouterWireGuardPeer {
+    /**
+     * The IP address for peer.
+     */
+    ipAddress: string;
+    /**
+     * the of the peer.
+     */
+    name: string;
+    /**
+     * the public key of the WireGuard client.
+     */
+    publicKey: string;
 }
