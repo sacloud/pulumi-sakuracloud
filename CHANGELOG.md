@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+# 0.6.1 (Unreleased)
+
+* Update dependency settings #19 (@yamamoto-febc)
+
 # 0.6.0 (2021-10-19)
 
 * Upgrade dependencies - sdk v3 #16 (@yamamoto-febc)
