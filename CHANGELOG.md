@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-# 0.6.0 (Unreleased)
+# 0.6.0 (2021-10-19)
 
 * Upgrade dependencies - sdk v3 #16 (@yamamoto-febc)
 * Upgrade terraform-provider-sakuracloud to v2.14+ #15 (@yamamoto-febc)
