@@ -160,51 +160,51 @@ export interface DiskState {
     /**
      * The name of the disk connector. This must be one of [`virtio`/`ide`]. Changing this forces a new resource to be created. Default:`virtio`.
      */
-    readonly connector?: pulumi.Input<string>;
+    connector?: pulumi.Input<string>;
     /**
      * The description of the disk. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A list of disk id. The disk will be located to different storage from these disks. Changing this forces a new resource to be created.
      */
-    readonly distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
+    distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The icon id to attach to the disk.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the disk. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The plan name of the disk. This must be one of [`ssd`/`hdd`]. Changing this forces a new resource to be created. Default:`ssd`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The id of the Server connected to the disk.
      */
-    readonly serverId?: pulumi.Input<string>;
+    serverId?: pulumi.Input<string>;
     /**
      * The size of disk in GiB. Changing this forces a new resource to be created. Default:`20`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * The id of the source archive. This conflicts with [`sourceDiskId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveId?: pulumi.Input<string>;
+    sourceArchiveId?: pulumi.Input<string>;
     /**
      * The id of the source disk. This conflicts with [`sourceArchiveId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceDiskId?: pulumi.Input<string>;
+    sourceDiskId?: pulumi.Input<string>;
     /**
      * Any tags to assign to the disk.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the disk will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -214,45 +214,45 @@ export interface DiskArgs {
     /**
      * The name of the disk connector. This must be one of [`virtio`/`ide`]. Changing this forces a new resource to be created. Default:`virtio`.
      */
-    readonly connector?: pulumi.Input<string>;
+    connector?: pulumi.Input<string>;
     /**
      * The description of the disk. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A list of disk id. The disk will be located to different storage from these disks. Changing this forces a new resource to be created.
      */
-    readonly distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
+    distantFroms?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The icon id to attach to the disk.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the disk. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The plan name of the disk. This must be one of [`ssd`/`hdd`]. Changing this forces a new resource to be created. Default:`ssd`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The size of disk in GiB. Changing this forces a new resource to be created. Default:`20`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * The id of the source archive. This conflicts with [`sourceDiskId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceArchiveId?: pulumi.Input<string>;
+    sourceArchiveId?: pulumi.Input<string>;
     /**
      * The id of the source disk. This conflicts with [`sourceArchiveId`]. Changing this forces a new resource to be created.
      */
-    readonly sourceDiskId?: pulumi.Input<string>;
+    sourceDiskId?: pulumi.Input<string>;
     /**
      * Any tags to assign to the disk.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the disk will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetProxyLBResult',
     'AwaitableGetProxyLBResult',
     'get_proxy_lb',
+    'get_proxy_lb_output',
 ]
 
 @pulumi.output_type
@@ -356,3 +357,26 @@ def get_proxy_lb(filter: Optional[pulumi.InputType['GetProxyLBFilterArgs']] = No
         timeout=__ret__.timeout,
         vip=__ret__.vip,
         vip_failover=__ret__.vip_failover)
+
+
+@_utilities.lift_output_func(get_proxy_lb)
+def get_proxy_lb_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetProxyLBFilterArgs']]]] = None,
+                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetProxyLBResult]:
+    """
+    Get information about an existing ProxyLB.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_proxy_lb(filter=sakuracloud.GetProxyLBFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetProxyLBFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

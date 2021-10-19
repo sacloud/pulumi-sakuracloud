@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getLoadBalancer(args?: GetLoadBalancerArgs, opts?: pulumi.InvokeOptions): Promise<GetLoadBalancerResult> {
@@ -43,11 +43,11 @@ export interface GetLoadBalancerArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetLoadBalancerFilter;
+    filter?: inputs.GetLoadBalancerFilter;
     /**
      * The name of zone that the LoadBalancer is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -88,4 +88,22 @@ export interface GetLoadBalancerResult {
      */
     readonly vips: outputs.GetLoadBalancerVip[];
     readonly zone: string;
+}
+
+export function getLoadBalancerOutput(args?: GetLoadBalancerOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLoadBalancerResult> {
+    return pulumi.output(args).apply(a => getLoadBalancer(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getLoadBalancer.
+ */
+export interface GetLoadBalancerOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetLoadBalancerFilterArgs>;
+    /**
+     * The name of zone that the LoadBalancer is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

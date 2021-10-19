@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Mobile Gateway.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -35,8 +35,8 @@ import (
 // 		}
 // 		_, err = sakuracloud.NewMobileGateway(ctx, "foobarMobileGateway", &sakuracloud.MobileGatewayArgs{
 // 			InternetConnection: pulumi.Bool(true),
-// 			DnsServers:         toPulumiStringArray(zone.DnsServers),
-// 			PrivateNetworkInterface: &sakuracloud.MobileGatewayPrivateNetworkInterfaceArgs{
+// 			DnsServers:         interface{}(zone.DnsServers),
+// 			PrivateNetworkInterface: &MobileGatewayPrivateNetworkInterfaceArgs{
 // 				SwitchId:  foobarSwitch.ID(),
 // 				IpAddress: pulumi.String("192.168.11.101"),
 // 				Netmask:   pulumi.Int(24),
@@ -46,7 +46,7 @@ import (
 // 				pulumi.String("tag1"),
 // 				pulumi.String("tag2"),
 // 			},
-// 			TrafficControl: &sakuracloud.MobileGatewayTrafficControlArgs{
+// 			TrafficControl: &MobileGatewayTrafficControlArgs{
 // 				Quota:              pulumi.Int(256),
 // 				BandWidthLimit:     pulumi.Int(64),
 // 				EnableEmail:        pulumi.Bool(true),
@@ -54,16 +54,16 @@ import (
 // 				SlackWebhook:       pulumi.String("https://hooks.slack.com/services/xxx/xxx/xxx"),
 // 				AutoTrafficShaping: pulumi.Bool(true),
 // 			},
-// 			StaticRoutes: sakuracloud.MobileGatewayStaticRouteArray{
-// 				&sakuracloud.MobileGatewayStaticRouteArgs{
+// 			StaticRoutes: MobileGatewayStaticRouteArray{
+// 				&MobileGatewayStaticRouteArgs{
 // 					Prefix:  pulumi.String("192.168.10.0/24"),
 // 					NextHop: pulumi.String("192.168.11.1"),
 // 				},
-// 				&sakuracloud.MobileGatewayStaticRouteArgs{
+// 				&MobileGatewayStaticRouteArgs{
 // 					Prefix:  pulumi.String("192.168.10.0/25"),
 // 					NextHop: pulumi.String("192.168.11.2"),
 // 				},
-// 				&sakuracloud.MobileGatewayStaticRouteArgs{
+// 				&MobileGatewayStaticRouteArgs{
 // 					Prefix:  pulumi.String("192.168.10.0/26"),
 // 					NextHop: pulumi.String("192.168.11.3"),
 // 				},
@@ -74,13 +74,6 @@ import (
 // 		}
 // 		return nil
 // 	})
-// }
-// func toPulumiStringArray(arr []string) pulumi.StringArray {
-// 	var pulumiArr pulumi.StringArray
-// 	for _, v := range arr {
-// 		pulumiArr = append(pulumiArr, pulumi.String(v))
-// 	}
-// 	return pulumiArr
 // }
 // ```
 type MobileGateway struct {
@@ -344,7 +337,7 @@ type MobileGatewayArrayInput interface {
 type MobileGatewayArray []MobileGatewayInput
 
 func (MobileGatewayArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*MobileGateway)(nil))
+	return reflect.TypeOf((*[]*MobileGateway)(nil)).Elem()
 }
 
 func (i MobileGatewayArray) ToMobileGatewayArrayOutput() MobileGatewayArrayOutput {
@@ -369,7 +362,7 @@ type MobileGatewayMapInput interface {
 type MobileGatewayMap map[string]MobileGatewayInput
 
 func (MobileGatewayMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*MobileGateway)(nil))
+	return reflect.TypeOf((*map[string]*MobileGateway)(nil)).Elem()
 }
 
 func (i MobileGatewayMap) ToMobileGatewayMapOutput() MobileGatewayMapOutput {
@@ -380,9 +373,7 @@ func (i MobileGatewayMap) ToMobileGatewayMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(MobileGatewayMapOutput)
 }
 
-type MobileGatewayOutput struct {
-	*pulumi.OutputState
-}
+type MobileGatewayOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*MobileGateway)(nil))
@@ -401,14 +392,12 @@ func (o MobileGatewayOutput) ToMobileGatewayPtrOutput() MobileGatewayPtrOutput {
 }
 
 func (o MobileGatewayOutput) ToMobileGatewayPtrOutputWithContext(ctx context.Context) MobileGatewayPtrOutput {
-	return o.ApplyT(func(v MobileGateway) *MobileGateway {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MobileGateway) *MobileGateway {
 		return &v
 	}).(MobileGatewayPtrOutput)
 }
 
-type MobileGatewayPtrOutput struct {
-	*pulumi.OutputState
-}
+type MobileGatewayPtrOutput struct{ *pulumi.OutputState }
 
 func (MobileGatewayPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**MobileGateway)(nil))
@@ -420,6 +409,16 @@ func (o MobileGatewayPtrOutput) ToMobileGatewayPtrOutput() MobileGatewayPtrOutpu
 
 func (o MobileGatewayPtrOutput) ToMobileGatewayPtrOutputWithContext(ctx context.Context) MobileGatewayPtrOutput {
 	return o
+}
+
+func (o MobileGatewayPtrOutput) Elem() MobileGatewayOutput {
+	return o.ApplyT(func(v *MobileGateway) MobileGateway {
+		if v != nil {
+			return *v
+		}
+		var ret MobileGateway
+		return ret
+	}).(MobileGatewayOutput)
 }
 
 type MobileGatewayArrayOutput struct{ *pulumi.OutputState }
@@ -463,6 +462,10 @@ func (o MobileGatewayMapOutput) MapIndex(k pulumi.StringInput) MobileGatewayOutp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayInput)(nil)).Elem(), &MobileGateway{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayPtrInput)(nil)).Elem(), &MobileGateway{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayArrayInput)(nil)).Elem(), MobileGatewayArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayMapInput)(nil)).Elem(), MobileGatewayMap{})
 	pulumi.RegisterOutputType(MobileGatewayOutput{})
 	pulumi.RegisterOutputType(MobileGatewayPtrOutput{})
 	pulumi.RegisterOutputType(MobileGatewayArrayOutput{})

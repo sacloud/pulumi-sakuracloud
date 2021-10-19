@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing SSH Key.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupSSHKey(ctx, &sakuracloud.LookupSSHKeyArgs{
-// 			Filter: sakuracloud.GetSSHKeyFilter{
+// 		_, err := sakuracloud.LookupSSHKey(ctx, &GetSSHKeyArgs{
+// 			Filter: GetSSHKeyFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -63,4 +66,71 @@ type LookupSSHKeyResult struct {
 	Name string `pulumi:"name"`
 	// The value of public key.
 	PublicKey string `pulumi:"publicKey"`
+}
+
+func LookupSSHKeyOutput(ctx *pulumi.Context, args LookupSSHKeyOutputArgs, opts ...pulumi.InvokeOption) LookupSSHKeyResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupSSHKeyResult, error) {
+			args := v.(LookupSSHKeyArgs)
+			r, err := LookupSSHKey(ctx, &args, opts...)
+			return *r, err
+		}).(LookupSSHKeyResultOutput)
+}
+
+// A collection of arguments for invoking getSSHKey.
+type LookupSSHKeyOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetSSHKeyFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupSSHKeyOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSSHKeyArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getSSHKey.
+type LookupSSHKeyResultOutput struct{ *pulumi.OutputState }
+
+func (LookupSSHKeyResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSSHKeyResult)(nil)).Elem()
+}
+
+func (o LookupSSHKeyResultOutput) ToLookupSSHKeyResultOutput() LookupSSHKeyResultOutput {
+	return o
+}
+
+func (o LookupSSHKeyResultOutput) ToLookupSSHKeyResultOutputWithContext(ctx context.Context) LookupSSHKeyResultOutput {
+	return o
+}
+
+// The description of the SSHKey.
+func (o LookupSSHKeyResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupSSHKeyResultOutput) Filter() GetSSHKeyFilterPtrOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) *GetSSHKeyFilter { return v.Filter }).(GetSSHKeyFilterPtrOutput)
+}
+
+// The fingerprint of public key.
+func (o LookupSSHKeyResultOutput) Fingerprint() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) string { return v.Fingerprint }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupSSHKeyResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the SSHKey.
+func (o LookupSSHKeyResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of public key.
+func (o LookupSSHKeyResultOutput) PublicKey() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSSHKeyResult) string { return v.PublicKey }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupSSHKeyResultOutput{})
 }

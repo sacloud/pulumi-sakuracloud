@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetEnhancedDBResult',
     'AwaitableGetEnhancedDBResult',
     'get_enhanced_db',
+    'get_enhanced_db_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,26 @@ def get_enhanced_db(filter: Optional[pulumi.InputType['GetEnhancedDBFilterArgs']
         name=__ret__.name,
         region=__ret__.region,
         tags=__ret__.tags)
+
+
+@_utilities.lift_output_func(get_enhanced_db)
+def get_enhanced_db_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetEnhancedDBFilterArgs']]]] = None,
+                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetEnhancedDBResult]:
+    """
+    Get information about an existing Enhanced Database.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_enhanced_db(filter=sakuracloud.GetEnhancedDBFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetEnhancedDBFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

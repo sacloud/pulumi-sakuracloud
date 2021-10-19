@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Server.
@@ -19,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foobarPacketFilter, err := sakuracloud.LookupPacketFilter(ctx, &sakuracloud.LookupPacketFilterArgs{
-// 			Filter: sakuracloud.GetPacketFilterFilter{
+// 		foobarPacketFilter, err := sakuracloud.LookupPacketFilter(ctx, &GetPacketFilterArgs{
+// 			Filter: GetPacketFilterFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -35,7 +35,7 @@ import (
 // 			return err
 // 		}
 // 		opt0 := "ubuntu2004"
-// 		ubuntu, err := sakuracloud.LookupArchive(ctx, &sakuracloud.LookupArchiveArgs{
+// 		ubuntu, err := sakuracloud.LookupArchive(ctx, &GetArchiveArgs{
 // 			OsType: &opt0,
 // 		}, nil)
 // 		if err != nil {
@@ -56,13 +56,13 @@ import (
 // 				pulumi.String("tag1"),
 // 				pulumi.String("tag2"),
 // 			},
-// 			NetworkInterfaces: sakuracloud.ServerNetworkInterfaceArray{
-// 				&sakuracloud.ServerNetworkInterfaceArgs{
+// 			NetworkInterfaces: ServerNetworkInterfaceArray{
+// 				&ServerNetworkInterfaceArgs{
 // 					Upstream:       pulumi.String("shared"),
 // 					PacketFilterId: pulumi.String(foobarPacketFilter.Id),
 // 				},
 // 			},
-// 			DiskEditParameter: &sakuracloud.ServerDiskEditParameterArgs{
+// 			DiskEditParameter: &ServerDiskEditParameterArgs{
 // 				Hostname:      pulumi.String("hostname"),
 // 				Password:      pulumi.String("password"),
 // 				DisablePwAuth: pulumi.Bool(true),
@@ -403,7 +403,7 @@ type ServerArrayInput interface {
 type ServerArray []ServerInput
 
 func (ServerArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Server)(nil))
+	return reflect.TypeOf((*[]*Server)(nil)).Elem()
 }
 
 func (i ServerArray) ToServerArrayOutput() ServerArrayOutput {
@@ -428,7 +428,7 @@ type ServerMapInput interface {
 type ServerMap map[string]ServerInput
 
 func (ServerMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Server)(nil))
+	return reflect.TypeOf((*map[string]*Server)(nil)).Elem()
 }
 
 func (i ServerMap) ToServerMapOutput() ServerMapOutput {
@@ -439,9 +439,7 @@ func (i ServerMap) ToServerMapOutputWithContext(ctx context.Context) ServerMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(ServerMapOutput)
 }
 
-type ServerOutput struct {
-	*pulumi.OutputState
-}
+type ServerOutput struct{ *pulumi.OutputState }
 
 func (ServerOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Server)(nil))
@@ -460,14 +458,12 @@ func (o ServerOutput) ToServerPtrOutput() ServerPtrOutput {
 }
 
 func (o ServerOutput) ToServerPtrOutputWithContext(ctx context.Context) ServerPtrOutput {
-	return o.ApplyT(func(v Server) *Server {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Server) *Server {
 		return &v
 	}).(ServerPtrOutput)
 }
 
-type ServerPtrOutput struct {
-	*pulumi.OutputState
-}
+type ServerPtrOutput struct{ *pulumi.OutputState }
 
 func (ServerPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Server)(nil))
@@ -479,6 +475,16 @@ func (o ServerPtrOutput) ToServerPtrOutput() ServerPtrOutput {
 
 func (o ServerPtrOutput) ToServerPtrOutputWithContext(ctx context.Context) ServerPtrOutput {
 	return o
+}
+
+func (o ServerPtrOutput) Elem() ServerOutput {
+	return o.ApplyT(func(v *Server) Server {
+		if v != nil {
+			return *v
+		}
+		var ret Server
+		return ret
+	}).(ServerOutput)
 }
 
 type ServerArrayOutput struct{ *pulumi.OutputState }
@@ -522,6 +528,10 @@ func (o ServerMapOutput) MapIndex(k pulumi.StringInput) ServerOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerInput)(nil)).Elem(), &Server{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerPtrInput)(nil)).Elem(), &Server{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerArrayInput)(nil)).Elem(), ServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerMapInput)(nil)).Elem(), ServerMap{})
 	pulumi.RegisterOutputType(ServerOutput{})
 	pulumi.RegisterOutputType(ServerPtrOutput{})
 	pulumi.RegisterOutputType(ServerArrayOutput{})

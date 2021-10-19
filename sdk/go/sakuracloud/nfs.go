@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud NFS.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -32,7 +32,7 @@ import (
 // 		_, err = sakuracloud.NewNFS(ctx, "foobarNFS", &sakuracloud.NFSArgs{
 // 			Plan: pulumi.String("ssd"),
 // 			Size: pulumi.Int(500),
-// 			NetworkInterface: &sakuracloud.NFSNetworkInterfaceArgs{
+// 			NetworkInterface: &NFSNetworkInterfaceArgs{
 // 				SwitchId:  foobarSwitch.ID(),
 // 				IpAddress: pulumi.String("192.168.11.101"),
 // 				Netmask:   pulumi.Int(24),
@@ -250,7 +250,7 @@ type NFSArrayInput interface {
 type NFSArray []NFSInput
 
 func (NFSArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*NFS)(nil))
+	return reflect.TypeOf((*[]*NFS)(nil)).Elem()
 }
 
 func (i NFSArray) ToNFSArrayOutput() NFSArrayOutput {
@@ -275,7 +275,7 @@ type NFSMapInput interface {
 type NFSMap map[string]NFSInput
 
 func (NFSMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*NFS)(nil))
+	return reflect.TypeOf((*map[string]*NFS)(nil)).Elem()
 }
 
 func (i NFSMap) ToNFSMapOutput() NFSMapOutput {
@@ -286,9 +286,7 @@ func (i NFSMap) ToNFSMapOutputWithContext(ctx context.Context) NFSMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(NFSMapOutput)
 }
 
-type NFSOutput struct {
-	*pulumi.OutputState
-}
+type NFSOutput struct{ *pulumi.OutputState }
 
 func (NFSOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*NFS)(nil))
@@ -307,14 +305,12 @@ func (o NFSOutput) ToNFSPtrOutput() NFSPtrOutput {
 }
 
 func (o NFSOutput) ToNFSPtrOutputWithContext(ctx context.Context) NFSPtrOutput {
-	return o.ApplyT(func(v NFS) *NFS {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NFS) *NFS {
 		return &v
 	}).(NFSPtrOutput)
 }
 
-type NFSPtrOutput struct {
-	*pulumi.OutputState
-}
+type NFSPtrOutput struct{ *pulumi.OutputState }
 
 func (NFSPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**NFS)(nil))
@@ -326,6 +322,16 @@ func (o NFSPtrOutput) ToNFSPtrOutput() NFSPtrOutput {
 
 func (o NFSPtrOutput) ToNFSPtrOutputWithContext(ctx context.Context) NFSPtrOutput {
 	return o
+}
+
+func (o NFSPtrOutput) Elem() NFSOutput {
+	return o.ApplyT(func(v *NFS) NFS {
+		if v != nil {
+			return *v
+		}
+		var ret NFS
+		return ret
+	}).(NFSOutput)
 }
 
 type NFSArrayOutput struct{ *pulumi.OutputState }
@@ -369,6 +375,10 @@ func (o NFSMapOutput) MapIndex(k pulumi.StringInput) NFSOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSInput)(nil)).Elem(), &NFS{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSPtrInput)(nil)).Elem(), &NFS{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSArrayInput)(nil)).Elem(), NFSArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSMapInput)(nil)).Elem(), NFSMap{})
 	pulumi.RegisterOutputType(NFSOutput{})
 	pulumi.RegisterOutputType(NFSPtrOutput{})
 	pulumi.RegisterOutputType(NFSArrayOutput{})

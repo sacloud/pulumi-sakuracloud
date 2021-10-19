@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Packet Filter.
@@ -19,45 +19,45 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		_, err := sakuracloud.NewPacketFilter(ctx, "foobar", &sakuracloud.PacketFilterArgs{
 // 			Description: pulumi.String("description"),
-// 			Expressions: sakuracloud.PacketFilterExpressionArray{
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 			Expressions: PacketFilterExpressionArray{
+// 				&PacketFilterExpressionArgs{
 // 					DestinationPort: pulumi.String("22"),
 // 					Protocol:        pulumi.String("tcp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					DestinationPort: pulumi.String("80"),
 // 					Protocol:        pulumi.String("tcp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					DestinationPort: pulumi.String("443"),
 // 					Protocol:        pulumi.String("tcp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					Protocol: pulumi.String("icmp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					Protocol: pulumi.String("fragment"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					Protocol:   pulumi.String("udp"),
 // 					SourcePort: pulumi.String("123"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					DestinationPort: pulumi.String("32768-61000"),
 // 					Protocol:        pulumi.String("tcp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					DestinationPort: pulumi.String("32768-61000"),
 // 					Protocol:        pulumi.String("udp"),
 // 				},
-// 				&sakuracloud.PacketFilterExpressionArgs{
+// 				&PacketFilterExpressionArgs{
 // 					Allow:       pulumi.Bool(false),
 // 					Description: pulumi.String("Deny ALL"),
 // 					Protocol:    pulumi.String("ip"),
@@ -227,7 +227,7 @@ type PacketFilterArrayInput interface {
 type PacketFilterArray []PacketFilterInput
 
 func (PacketFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*PacketFilter)(nil))
+	return reflect.TypeOf((*[]*PacketFilter)(nil)).Elem()
 }
 
 func (i PacketFilterArray) ToPacketFilterArrayOutput() PacketFilterArrayOutput {
@@ -252,7 +252,7 @@ type PacketFilterMapInput interface {
 type PacketFilterMap map[string]PacketFilterInput
 
 func (PacketFilterMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*PacketFilter)(nil))
+	return reflect.TypeOf((*map[string]*PacketFilter)(nil)).Elem()
 }
 
 func (i PacketFilterMap) ToPacketFilterMapOutput() PacketFilterMapOutput {
@@ -263,9 +263,7 @@ func (i PacketFilterMap) ToPacketFilterMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(PacketFilterMapOutput)
 }
 
-type PacketFilterOutput struct {
-	*pulumi.OutputState
-}
+type PacketFilterOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*PacketFilter)(nil))
@@ -284,14 +282,12 @@ func (o PacketFilterOutput) ToPacketFilterPtrOutput() PacketFilterPtrOutput {
 }
 
 func (o PacketFilterOutput) ToPacketFilterPtrOutputWithContext(ctx context.Context) PacketFilterPtrOutput {
-	return o.ApplyT(func(v PacketFilter) *PacketFilter {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PacketFilter) *PacketFilter {
 		return &v
 	}).(PacketFilterPtrOutput)
 }
 
-type PacketFilterPtrOutput struct {
-	*pulumi.OutputState
-}
+type PacketFilterPtrOutput struct{ *pulumi.OutputState }
 
 func (PacketFilterPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**PacketFilter)(nil))
@@ -303,6 +299,16 @@ func (o PacketFilterPtrOutput) ToPacketFilterPtrOutput() PacketFilterPtrOutput {
 
 func (o PacketFilterPtrOutput) ToPacketFilterPtrOutputWithContext(ctx context.Context) PacketFilterPtrOutput {
 	return o
+}
+
+func (o PacketFilterPtrOutput) Elem() PacketFilterOutput {
+	return o.ApplyT(func(v *PacketFilter) PacketFilter {
+		if v != nil {
+			return *v
+		}
+		var ret PacketFilter
+		return ret
+	}).(PacketFilterOutput)
 }
 
 type PacketFilterArrayOutput struct{ *pulumi.OutputState }
@@ -346,6 +352,10 @@ func (o PacketFilterMapOutput) MapIndex(k pulumi.StringInput) PacketFilterOutput
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterInput)(nil)).Elem(), &PacketFilter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterPtrInput)(nil)).Elem(), &PacketFilter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterArrayInput)(nil)).Elem(), PacketFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterMapInput)(nil)).Elem(), PacketFilterMap{})
 	pulumi.RegisterOutputType(PacketFilterOutput{})
 	pulumi.RegisterOutputType(PacketFilterPtrOutput{})
 	pulumi.RegisterOutputType(PacketFilterArrayOutput{})

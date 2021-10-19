@@ -5,22 +5,241 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['WebAccelCertificate']
+__all__ = ['WebAccelCertificateArgs', 'WebAccelCertificate']
+
+@pulumi.input_type
+class WebAccelCertificateArgs:
+    def __init__(__self__, *,
+                 certificate_chain: pulumi.Input[str],
+                 private_key: pulumi.Input[str],
+                 site_id: pulumi.Input[str]):
+        """
+        The set of arguments for constructing a WebAccelCertificate resource.
+        :param pulumi.Input[str] certificate_chain: .
+        :param pulumi.Input[str] private_key: .
+        :param pulumi.Input[str] site_id: .
+        """
+        pulumi.set(__self__, "certificate_chain", certificate_chain)
+        pulumi.set(__self__, "private_key", private_key)
+        pulumi.set(__self__, "site_id", site_id)
+
+    @property
+    @pulumi.getter(name="certificateChain")
+    def certificate_chain(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "certificate_chain")
+
+    @certificate_chain.setter
+    def certificate_chain(self, value: pulumi.Input[str]):
+        pulumi.set(self, "certificate_chain", value)
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "private_key", value)
+
+    @property
+    @pulumi.getter(name="siteId")
+    def site_id(self) -> pulumi.Input[str]:
+        """
+        .
+        """
+        return pulumi.get(self, "site_id")
+
+    @site_id.setter
+    def site_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "site_id", value)
+
+
+@pulumi.input_type
+class _WebAccelCertificateState:
+    def __init__(__self__, *,
+                 certificate_chain: Optional[pulumi.Input[str]] = None,
+                 dns_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 issuer_common_name: Optional[pulumi.Input[str]] = None,
+                 not_after: Optional[pulumi.Input[str]] = None,
+                 not_before: Optional[pulumi.Input[str]] = None,
+                 private_key: Optional[pulumi.Input[str]] = None,
+                 serial_number: Optional[pulumi.Input[str]] = None,
+                 sha256_fingerprint: Optional[pulumi.Input[str]] = None,
+                 site_id: Optional[pulumi.Input[str]] = None,
+                 subject_common_name: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering WebAccelCertificate resources.
+        :param pulumi.Input[str] certificate_chain: .
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_names: .
+        :param pulumi.Input[str] issuer_common_name: .
+        :param pulumi.Input[str] not_after: .
+        :param pulumi.Input[str] not_before: .
+        :param pulumi.Input[str] private_key: .
+        :param pulumi.Input[str] serial_number: .
+        :param pulumi.Input[str] sha256_fingerprint: .
+        :param pulumi.Input[str] site_id: .
+        :param pulumi.Input[str] subject_common_name: .
+        """
+        if certificate_chain is not None:
+            pulumi.set(__self__, "certificate_chain", certificate_chain)
+        if dns_names is not None:
+            pulumi.set(__self__, "dns_names", dns_names)
+        if issuer_common_name is not None:
+            pulumi.set(__self__, "issuer_common_name", issuer_common_name)
+        if not_after is not None:
+            pulumi.set(__self__, "not_after", not_after)
+        if not_before is not None:
+            pulumi.set(__self__, "not_before", not_before)
+        if private_key is not None:
+            pulumi.set(__self__, "private_key", private_key)
+        if serial_number is not None:
+            pulumi.set(__self__, "serial_number", serial_number)
+        if sha256_fingerprint is not None:
+            pulumi.set(__self__, "sha256_fingerprint", sha256_fingerprint)
+        if site_id is not None:
+            pulumi.set(__self__, "site_id", site_id)
+        if subject_common_name is not None:
+            pulumi.set(__self__, "subject_common_name", subject_common_name)
+
+    @property
+    @pulumi.getter(name="certificateChain")
+    def certificate_chain(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "certificate_chain")
+
+    @certificate_chain.setter
+    def certificate_chain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate_chain", value)
+
+    @property
+    @pulumi.getter(name="dnsNames")
+    def dns_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        .
+        """
+        return pulumi.get(self, "dns_names")
+
+    @dns_names.setter
+    def dns_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "dns_names", value)
+
+    @property
+    @pulumi.getter(name="issuerCommonName")
+    def issuer_common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "issuer_common_name")
+
+    @issuer_common_name.setter
+    def issuer_common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "issuer_common_name", value)
+
+    @property
+    @pulumi.getter(name="notAfter")
+    def not_after(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "not_after")
+
+    @not_after.setter
+    def not_after(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_after", value)
+
+    @property
+    @pulumi.getter(name="notBefore")
+    def not_before(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "not_before")
+
+    @not_before.setter
+    def not_before(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "not_before", value)
+
+    @property
+    @pulumi.getter(name="privateKey")
+    def private_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "private_key")
+
+    @private_key.setter
+    def private_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_key", value)
+
+    @property
+    @pulumi.getter(name="serialNumber")
+    def serial_number(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "serial_number")
+
+    @serial_number.setter
+    def serial_number(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "serial_number", value)
+
+    @property
+    @pulumi.getter(name="sha256Fingerprint")
+    def sha256_fingerprint(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "sha256_fingerprint")
+
+    @sha256_fingerprint.setter
+    def sha256_fingerprint(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "sha256_fingerprint", value)
+
+    @property
+    @pulumi.getter(name="siteId")
+    def site_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "site_id")
+
+    @site_id.setter
+    def site_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "site_id", value)
+
+    @property
+    @pulumi.getter(name="subjectCommonName")
+    def subject_common_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        .
+        """
+        return pulumi.get(self, "subject_common_name")
+
+    @subject_common_name.setter
+    def subject_common_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "subject_common_name", value)
 
 
 class WebAccelCertificate(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  certificate_chain: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
                  site_id: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud sakuracloud_webaccel_certificate.
 
@@ -43,12 +262,47 @@ class WebAccelCertificate(pulumi.CustomResource):
         :param pulumi.Input[str] private_key: .
         :param pulumi.Input[str] site_id: .
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: WebAccelCertificateArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud sakuracloud_webaccel_certificate.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        site = sakuracloud.get_web_accel(name="your-site-name")
+        foobar = sakuracloud.WebAccelCertificate("foobar",
+            site_id=site.id,
+            certificate_chain=(lambda path: open(path).read())("path/to/your/certificate/chain"),
+            private_key=(lambda path: open(path).read())("path/to/your/private/key"))
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param WebAccelCertificateArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(WebAccelCertificateArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 certificate_chain: Optional[pulumi.Input[str]] = None,
+                 private_key: Optional[pulumi.Input[str]] = None,
+                 site_id: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -58,24 +312,24 @@ class WebAccelCertificate(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = WebAccelCertificateArgs.__new__(WebAccelCertificateArgs)
 
             if certificate_chain is None and not opts.urn:
                 raise TypeError("Missing required property 'certificate_chain'")
-            __props__['certificate_chain'] = certificate_chain
+            __props__.__dict__["certificate_chain"] = certificate_chain
             if private_key is None and not opts.urn:
                 raise TypeError("Missing required property 'private_key'")
-            __props__['private_key'] = private_key
+            __props__.__dict__["private_key"] = private_key
             if site_id is None and not opts.urn:
                 raise TypeError("Missing required property 'site_id'")
-            __props__['site_id'] = site_id
-            __props__['dns_names'] = None
-            __props__['issuer_common_name'] = None
-            __props__['not_after'] = None
-            __props__['not_before'] = None
-            __props__['serial_number'] = None
-            __props__['sha256_fingerprint'] = None
-            __props__['subject_common_name'] = None
+            __props__.__dict__["site_id"] = site_id
+            __props__.__dict__["dns_names"] = None
+            __props__.__dict__["issuer_common_name"] = None
+            __props__.__dict__["not_after"] = None
+            __props__.__dict__["not_before"] = None
+            __props__.__dict__["serial_number"] = None
+            __props__.__dict__["sha256_fingerprint"] = None
+            __props__.__dict__["subject_common_name"] = None
         super(WebAccelCertificate, __self__).__init__(
             'sakuracloud:index/webAccelCertificate:WebAccelCertificate',
             resource_name,
@@ -116,18 +370,18 @@ class WebAccelCertificate(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _WebAccelCertificateState.__new__(_WebAccelCertificateState)
 
-        __props__["certificate_chain"] = certificate_chain
-        __props__["dns_names"] = dns_names
-        __props__["issuer_common_name"] = issuer_common_name
-        __props__["not_after"] = not_after
-        __props__["not_before"] = not_before
-        __props__["private_key"] = private_key
-        __props__["serial_number"] = serial_number
-        __props__["sha256_fingerprint"] = sha256_fingerprint
-        __props__["site_id"] = site_id
-        __props__["subject_common_name"] = subject_common_name
+        __props__.__dict__["certificate_chain"] = certificate_chain
+        __props__.__dict__["dns_names"] = dns_names
+        __props__.__dict__["issuer_common_name"] = issuer_common_name
+        __props__.__dict__["not_after"] = not_after
+        __props__.__dict__["not_before"] = not_before
+        __props__.__dict__["private_key"] = private_key
+        __props__.__dict__["serial_number"] = serial_number
+        __props__.__dict__["sha256_fingerprint"] = sha256_fingerprint
+        __props__.__dict__["site_id"] = site_id
+        __props__.__dict__["subject_common_name"] = subject_common_name
         return WebAccelCertificate(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -209,10 +463,4 @@ class WebAccelCertificate(pulumi.CustomResource):
         .
         """
         return pulumi.get(self, "subject_common_name")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

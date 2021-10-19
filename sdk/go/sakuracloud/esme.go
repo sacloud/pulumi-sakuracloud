@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud ESME resource.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -206,7 +206,7 @@ type ESMEArrayInput interface {
 type ESMEArray []ESMEInput
 
 func (ESMEArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ESME)(nil))
+	return reflect.TypeOf((*[]*ESME)(nil)).Elem()
 }
 
 func (i ESMEArray) ToESMEArrayOutput() ESMEArrayOutput {
@@ -231,7 +231,7 @@ type ESMEMapInput interface {
 type ESMEMap map[string]ESMEInput
 
 func (ESMEMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ESME)(nil))
+	return reflect.TypeOf((*map[string]*ESME)(nil)).Elem()
 }
 
 func (i ESMEMap) ToESMEMapOutput() ESMEMapOutput {
@@ -242,9 +242,7 @@ func (i ESMEMap) ToESMEMapOutputWithContext(ctx context.Context) ESMEMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ESMEMapOutput)
 }
 
-type ESMEOutput struct {
-	*pulumi.OutputState
-}
+type ESMEOutput struct{ *pulumi.OutputState }
 
 func (ESMEOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ESME)(nil))
@@ -263,14 +261,12 @@ func (o ESMEOutput) ToESMEPtrOutput() ESMEPtrOutput {
 }
 
 func (o ESMEOutput) ToESMEPtrOutputWithContext(ctx context.Context) ESMEPtrOutput {
-	return o.ApplyT(func(v ESME) *ESME {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ESME) *ESME {
 		return &v
 	}).(ESMEPtrOutput)
 }
 
-type ESMEPtrOutput struct {
-	*pulumi.OutputState
-}
+type ESMEPtrOutput struct{ *pulumi.OutputState }
 
 func (ESMEPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ESME)(nil))
@@ -282,6 +278,16 @@ func (o ESMEPtrOutput) ToESMEPtrOutput() ESMEPtrOutput {
 
 func (o ESMEPtrOutput) ToESMEPtrOutputWithContext(ctx context.Context) ESMEPtrOutput {
 	return o
+}
+
+func (o ESMEPtrOutput) Elem() ESMEOutput {
+	return o.ApplyT(func(v *ESME) ESME {
+		if v != nil {
+			return *v
+		}
+		var ret ESME
+		return ret
+	}).(ESMEOutput)
 }
 
 type ESMEArrayOutput struct{ *pulumi.OutputState }
@@ -325,6 +331,10 @@ func (o ESMEMapOutput) MapIndex(k pulumi.StringInput) ESMEOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ESMEInput)(nil)).Elem(), &ESME{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ESMEPtrInput)(nil)).Elem(), &ESME{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ESMEArrayInput)(nil)).Elem(), ESMEArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ESMEMapInput)(nil)).Elem(), ESMEMap{})
 	pulumi.RegisterOutputType(ESMEOutput{})
 	pulumi.RegisterOutputType(ESMEPtrOutput{})
 	pulumi.RegisterOutputType(ESMEArrayOutput{})

@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getBridge(args?: GetBridgeArgs, opts?: pulumi.InvokeOptions): Promise<GetBridgeResult> {
@@ -43,11 +43,11 @@ export interface GetBridgeArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetBridgeFilter;
+    filter?: inputs.GetBridgeFilter;
     /**
      * The name of zone that the Bridge is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -68,4 +68,22 @@ export interface GetBridgeResult {
      */
     readonly name: string;
     readonly zone: string;
+}
+
+export function getBridgeOutput(args?: GetBridgeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBridgeResult> {
+    return pulumi.output(args).apply(a => getBridge(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getBridge.
+ */
+export interface GetBridgeOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetBridgeFilterArgs>;
+    /**
+     * The name of zone that the Bridge is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

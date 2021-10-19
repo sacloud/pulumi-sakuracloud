@@ -259,99 +259,99 @@ export interface ServerState {
     /**
      * The id of the CD-ROM to attach to the Server.
      */
-    readonly cdromId?: pulumi.Input<string>;
+    cdromId?: pulumi.Input<string>;
     /**
      * The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
      */
-    readonly commitment?: pulumi.Input<string>;
+    commitment?: pulumi.Input<string>;
     /**
      * The number of virtual CPUs. Default:`1`.
      */
-    readonly core?: pulumi.Input<number>;
+    core?: pulumi.Input<number>;
     /**
      * The description of the Server. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
      */
-    readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
+    diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
      * A list of disk id connected to the server.
      */
-    readonly disks?: pulumi.Input<pulumi.Input<string>[]>;
+    disks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A list of IP address of DNS server in the zone.
      */
-    readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The flag to use force shutdown when need to reboot/shutdown while applying.
      */
-    readonly forceShutdown?: pulumi.Input<boolean>;
+    forceShutdown?: pulumi.Input<boolean>;
     /**
      * The gateway address used by the Server.
      */
-    readonly gateway?: pulumi.Input<string>;
+    gateway?: pulumi.Input<string>;
     /**
      * The number of GPUs.
      */
-    readonly gpu?: pulumi.Input<number>;
+    gpu?: pulumi.Input<number>;
     /**
      * The hostname of the Server. The length of this value must be in the range [`1`-`64`].
      */
-    readonly hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Server.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
      */
-    readonly interfaceDriver?: pulumi.Input<string>;
+    interfaceDriver?: pulumi.Input<string>;
     /**
      * The IP address to assign to the Server.
      */
-    readonly ipAddress?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string>;
     /**
      * The size of memory in GiB. Default:`1`.
      */
-    readonly memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number>;
     /**
      * The name of the Server. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The bit length of the subnet to assign to the Server.
      */
-    readonly netmask?: pulumi.Input<number>;
+    netmask?: pulumi.Input<number>;
     /**
      * The network address which the `ipAddress` belongs.
      */
-    readonly networkAddress?: pulumi.Input<string>;
+    networkAddress?: pulumi.Input<string>;
     /**
      * One or more `networkInterface` blocks as defined below.
      */
-    readonly networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
+    networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
     /**
      * The id of the PrivateHost which the Server is assigned.
      */
-    readonly privateHostId?: pulumi.Input<string>;
+    privateHostId?: pulumi.Input<string>;
     /**
      * The id of the PrivateHost which the Server is assigned.
      */
-    readonly privateHostName?: pulumi.Input<string>;
+    privateHostName?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Server.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
      */
-    readonly userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string>;
     /**
      * The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -361,69 +361,69 @@ export interface ServerArgs {
     /**
      * The id of the CD-ROM to attach to the Server.
      */
-    readonly cdromId?: pulumi.Input<string>;
+    cdromId?: pulumi.Input<string>;
     /**
      * The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
      */
-    readonly commitment?: pulumi.Input<string>;
+    commitment?: pulumi.Input<string>;
     /**
      * The number of virtual CPUs. Default:`1`.
      */
-    readonly core?: pulumi.Input<number>;
+    core?: pulumi.Input<number>;
     /**
      * The description of the Server. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A `diskEditParameter` block as defined below. This parameter conflicts with [`userData`].
      */
-    readonly diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
+    diskEditParameter?: pulumi.Input<inputs.ServerDiskEditParameter>;
     /**
      * A list of disk id connected to the server.
      */
-    readonly disks?: pulumi.Input<pulumi.Input<string>[]>;
+    disks?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The flag to use force shutdown when need to reboot/shutdown while applying.
      */
-    readonly forceShutdown?: pulumi.Input<boolean>;
+    forceShutdown?: pulumi.Input<boolean>;
     /**
      * The number of GPUs.
      */
-    readonly gpu?: pulumi.Input<number>;
+    gpu?: pulumi.Input<number>;
     /**
      * The icon id to attach to the Server.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
      */
-    readonly interfaceDriver?: pulumi.Input<string>;
+    interfaceDriver?: pulumi.Input<string>;
     /**
      * The size of memory in GiB. Default:`1`.
      */
-    readonly memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number>;
     /**
      * The name of the Server. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * One or more `networkInterface` blocks as defined below.
      */
-    readonly networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
+    networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ServerNetworkInterface>[]>;
     /**
      * The id of the PrivateHost which the Server is assigned.
      */
-    readonly privateHostId?: pulumi.Input<string>;
+    privateHostId?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Server.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * A string representing the user data used by cloud-init. This parameter conflicts with [`diskEditParameter`].
      */
-    readonly userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string>;
     /**
      * The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

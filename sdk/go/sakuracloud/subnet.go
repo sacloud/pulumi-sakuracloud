@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Subnet.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -232,7 +232,7 @@ type SubnetArrayInput interface {
 type SubnetArray []SubnetInput
 
 func (SubnetArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Subnet)(nil))
+	return reflect.TypeOf((*[]*Subnet)(nil)).Elem()
 }
 
 func (i SubnetArray) ToSubnetArrayOutput() SubnetArrayOutput {
@@ -257,7 +257,7 @@ type SubnetMapInput interface {
 type SubnetMap map[string]SubnetInput
 
 func (SubnetMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Subnet)(nil))
+	return reflect.TypeOf((*map[string]*Subnet)(nil)).Elem()
 }
 
 func (i SubnetMap) ToSubnetMapOutput() SubnetMapOutput {
@@ -268,9 +268,7 @@ func (i SubnetMap) ToSubnetMapOutputWithContext(ctx context.Context) SubnetMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(SubnetMapOutput)
 }
 
-type SubnetOutput struct {
-	*pulumi.OutputState
-}
+type SubnetOutput struct{ *pulumi.OutputState }
 
 func (SubnetOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Subnet)(nil))
@@ -289,14 +287,12 @@ func (o SubnetOutput) ToSubnetPtrOutput() SubnetPtrOutput {
 }
 
 func (o SubnetOutput) ToSubnetPtrOutputWithContext(ctx context.Context) SubnetPtrOutput {
-	return o.ApplyT(func(v Subnet) *Subnet {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Subnet) *Subnet {
 		return &v
 	}).(SubnetPtrOutput)
 }
 
-type SubnetPtrOutput struct {
-	*pulumi.OutputState
-}
+type SubnetPtrOutput struct{ *pulumi.OutputState }
 
 func (SubnetPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Subnet)(nil))
@@ -308,6 +304,16 @@ func (o SubnetPtrOutput) ToSubnetPtrOutput() SubnetPtrOutput {
 
 func (o SubnetPtrOutput) ToSubnetPtrOutputWithContext(ctx context.Context) SubnetPtrOutput {
 	return o
+}
+
+func (o SubnetPtrOutput) Elem() SubnetOutput {
+	return o.ApplyT(func(v *Subnet) Subnet {
+		if v != nil {
+			return *v
+		}
+		var ret Subnet
+		return ret
+	}).(SubnetOutput)
 }
 
 type SubnetArrayOutput struct{ *pulumi.OutputState }
@@ -351,6 +357,10 @@ func (o SubnetMapOutput) MapIndex(k pulumi.StringInput) SubnetOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SubnetInput)(nil)).Elem(), &Subnet{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SubnetPtrInput)(nil)).Elem(), &Subnet{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SubnetArrayInput)(nil)).Elem(), SubnetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SubnetMapInput)(nil)).Elem(), SubnetMap{})
 	pulumi.RegisterOutputType(SubnetOutput{})
 	pulumi.RegisterOutputType(SubnetPtrOutput{})
 	pulumi.RegisterOutputType(SubnetArrayOutput{})

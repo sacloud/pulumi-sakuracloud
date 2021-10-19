@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getCertificateAuthority(args?: GetCertificateAuthorityArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateAuthorityResult> {
@@ -42,7 +42,7 @@ export interface GetCertificateAuthorityArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetCertificateAuthorityFilter;
+    filter?: inputs.GetCertificateAuthorityFilter;
 }
 
 /**
@@ -102,4 +102,18 @@ export interface GetCertificateAuthorityResult {
      * Any tags assigned to the CertificateAuthority.
      */
     readonly tags: string[];
+}
+
+export function getCertificateAuthorityOutput(args?: GetCertificateAuthorityOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateAuthorityResult> {
+    return pulumi.output(args).apply(a => getCertificateAuthority(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getCertificateAuthority.
+ */
+export interface GetCertificateAuthorityOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetCertificateAuthorityFilterArgs>;
 }

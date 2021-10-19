@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getDatabase(args?: GetDatabaseArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseResult> {
@@ -43,11 +43,11 @@ export interface GetDatabaseArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetDatabaseFilter;
+    filter?: inputs.GetDatabaseFilter;
     /**
      * The name of zone that the Database is in (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -112,4 +112,22 @@ export interface GetDatabaseResult {
      */
     readonly username: string;
     readonly zone: string;
+}
+
+export function getDatabaseOutput(args?: GetDatabaseOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabaseResult> {
+    return pulumi.output(args).apply(a => getDatabase(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getDatabase.
+ */
+export interface GetDatabaseOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetDatabaseFilterArgs>;
+    /**
+     * The name of zone that the Database is in (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+     */
+    zone?: pulumi.Input<string>;
 }

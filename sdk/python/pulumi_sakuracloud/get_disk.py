@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetDiskResult',
     'AwaitableGetDiskResult',
     'get_disk',
+    'get_disk_output',
 ]
 
 @pulumi.output_type
@@ -226,3 +227,28 @@ def get_disk(filter: Optional[pulumi.InputType['GetDiskFilterArgs']] = None,
         source_disk_id=__ret__.source_disk_id,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_disk)
+def get_disk_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetDiskFilterArgs']]]] = None,
+                    zone: Optional[pulumi.Input[Optional[str]]] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDiskResult]:
+    """
+    Get information about an existing Disk.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_disk(filter=sakuracloud.GetDiskFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetDiskFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the Disk is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

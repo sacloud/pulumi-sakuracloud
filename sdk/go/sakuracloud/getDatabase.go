@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Database.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupDatabase(ctx, &sakuracloud.LookupDatabaseArgs{
-// 			Filter: sakuracloud.GetDatabaseFilter{
+// 		_, err := sakuracloud.LookupDatabase(ctx, &GetDatabaseArgs{
+// 			Filter: GetDatabaseFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -84,4 +87,122 @@ type LookupDatabaseResult struct {
 	// The name of default user on the database.
 	Username string `pulumi:"username"`
 	Zone     string `pulumi:"zone"`
+}
+
+func LookupDatabaseOutput(ctx *pulumi.Context, args LookupDatabaseOutputArgs, opts ...pulumi.InvokeOption) LookupDatabaseResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupDatabaseResult, error) {
+			args := v.(LookupDatabaseArgs)
+			r, err := LookupDatabase(ctx, &args, opts...)
+			return *r, err
+		}).(LookupDatabaseResultOutput)
+}
+
+// A collection of arguments for invoking getDatabase.
+type LookupDatabaseOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetDatabaseFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the Database is in (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupDatabaseOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDatabaseArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getDatabase.
+type LookupDatabaseResultOutput struct{ *pulumi.OutputState }
+
+func (LookupDatabaseResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDatabaseResult)(nil)).Elem()
+}
+
+func (o LookupDatabaseResultOutput) ToLookupDatabaseResultOutput() LookupDatabaseResultOutput {
+	return o
+}
+
+func (o LookupDatabaseResultOutput) ToLookupDatabaseResultOutputWithContext(ctx context.Context) LookupDatabaseResultOutput {
+	return o
+}
+
+// A list of `backup` blocks as defined below.
+func (o LookupDatabaseResultOutput) Backups() GetDatabaseBackupArrayOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) []GetDatabaseBackup { return v.Backups }).(GetDatabaseBackupArrayOutput)
+}
+
+// The type of the database. This will be one of [`mariadb`/`postgres`].
+func (o LookupDatabaseResultOutput) DatabaseType() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.DatabaseType }).(pulumi.StringOutput)
+}
+
+// The description of the Database.
+func (o LookupDatabaseResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupDatabaseResultOutput) Filter() GetDatabaseFilterPtrOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) *GetDatabaseFilter { return v.Filter }).(GetDatabaseFilterPtrOutput)
+}
+
+// The icon id attached to the Database.
+func (o LookupDatabaseResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupDatabaseResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Database.
+func (o LookupDatabaseResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// A list of `networkInterface` blocks as defined below.
+func (o LookupDatabaseResultOutput) NetworkInterfaces() GetDatabaseNetworkInterfaceArrayOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) []GetDatabaseNetworkInterface { return v.NetworkInterfaces }).(GetDatabaseNetworkInterfaceArrayOutput)
+}
+
+// The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
+func (o LookupDatabaseResultOutput) Parameters() pulumi.StringMapOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) map[string]string { return v.Parameters }).(pulumi.StringMapOutput)
+}
+
+// The password of default user on the database.
+func (o LookupDatabaseResultOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// The plan name of the Database. This will be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`].
+func (o LookupDatabaseResultOutput) Plan() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Plan }).(pulumi.StringOutput)
+}
+
+// The password of user that processing a replication.
+func (o LookupDatabaseResultOutput) ReplicaPassword() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.ReplicaPassword }).(pulumi.StringOutput)
+}
+
+// The name of user that processing a replication.
+func (o LookupDatabaseResultOutput) ReplicaUser() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.ReplicaUser }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the Database.
+func (o LookupDatabaseResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The name of default user on the database.
+func (o LookupDatabaseResultOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Username }).(pulumi.StringOutput)
+}
+
+func (o LookupDatabaseResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupDatabaseResultOutput{})
 }

@@ -5,22 +5,147 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['SSHKey']
+__all__ = ['SSHKeyArgs', 'SSHKey']
+
+@pulumi.input_type
+class SSHKeyArgs:
+    def __init__(__self__, *,
+                 public_key: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a SSHKey resource.
+        :param pulumi.Input[str] public_key: The body of the public key. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
+        """
+        pulumi.set(__self__, "public_key", public_key)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> pulumi.Input[str]:
+        """
+        The body of the public key. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "public_key", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
+class _SSHKeyState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 fingerprint: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering SSHKey resources.
+        :param pulumi.Input[str] description: The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] fingerprint: The fingerprint of the public key.
+        :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] public_key: The body of the public key. Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if fingerprint is not None:
+            pulumi.set(__self__, "fingerprint", fingerprint)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if public_key is not None:
+            pulumi.set(__self__, "public_key", public_key)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SSHKey. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def fingerprint(self) -> Optional[pulumi.Input[str]]:
+        """
+        The fingerprint of the public key.
+        """
+        return pulumi.get(self, "fingerprint")
+
+    @fingerprint.setter
+    def fingerprint(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fingerprint", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="publicKey")
+    def public_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The body of the public key. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "public_key")
+
+    @public_key.setter
+    def public_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_key", value)
 
 
 class SSHKey(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  public_key: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud SSH Key.
 
@@ -39,12 +164,43 @@ class SSHKey(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the SSHKey. The length of this value must be in the range [`1`-`64`].
         :param pulumi.Input[str] public_key: The body of the public key. Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: SSHKeyArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud SSH Key.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.SSHKey("foobar", public_key=(lambda path: open(path).read())("~/.ssh/id_rsa.pub"))
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param SSHKeyArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(SSHKeyArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 public_key: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -54,14 +210,14 @@ class SSHKey(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SSHKeyArgs.__new__(SSHKeyArgs)
 
-            __props__['description'] = description
-            __props__['name'] = name
+            __props__.__dict__["description"] = description
+            __props__.__dict__["name"] = name
             if public_key is None and not opts.urn:
                 raise TypeError("Missing required property 'public_key'")
-            __props__['public_key'] = public_key
-            __props__['fingerprint'] = None
+            __props__.__dict__["public_key"] = public_key
+            __props__.__dict__["fingerprint"] = None
         super(SSHKey, __self__).__init__(
             'sakuracloud:index/sSHKey:SSHKey',
             resource_name,
@@ -90,12 +246,12 @@ class SSHKey(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SSHKeyState.__new__(_SSHKeyState)
 
-        __props__["description"] = description
-        __props__["fingerprint"] = fingerprint
-        __props__["name"] = name
-        __props__["public_key"] = public_key
+        __props__.__dict__["description"] = description
+        __props__.__dict__["fingerprint"] = fingerprint
+        __props__.__dict__["name"] = name
+        __props__.__dict__["public_key"] = public_key
         return SSHKey(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -129,10 +285,4 @@ class SSHKey(pulumi.CustomResource):
         The body of the public key. Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "public_key")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

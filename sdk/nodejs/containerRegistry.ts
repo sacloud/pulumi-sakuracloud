@@ -165,39 +165,39 @@ export interface ContainerRegistryState {
     /**
      * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
      */
-    readonly accessLevel?: pulumi.Input<string>;
+    accessLevel?: pulumi.Input<string>;
     /**
      * The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The FQDN for accessing the Container Registry. FQDN is built from `subdomainLabel` + `.sakuracr.jp`.
      */
-    readonly fqdn?: pulumi.Input<string>;
+    fqdn?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Container Registry.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly subdomainLabel?: pulumi.Input<string>;
+    subdomainLabel?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Container Registry.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * One or more `user` blocks as defined below.
      */
-    readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
+    users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
     /**
      * The alias for accessing the container registry.
      */
-    readonly virtualDomain?: pulumi.Input<string>;
+    virtualDomain?: pulumi.Input<string>;
 }
 
 /**
@@ -207,33 +207,33 @@ export interface ContainerRegistryArgs {
     /**
      * The level of access that allow to users. This must be one of [`readwrite`/`readonly`/`none`].
      */
-    readonly accessLevel: pulumi.Input<string>;
+    accessLevel: pulumi.Input<string>;
     /**
      * The description of the Container Registry. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Container Registry.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Container Registry. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The label at the lowest of the FQDN used when be accessed from users. The length of this value must be in the range [`1`-`64`]. Changing this forces a new resource to be created.
      */
-    readonly subdomainLabel: pulumi.Input<string>;
+    subdomainLabel: pulumi.Input<string>;
     /**
      * Any tags to assign to the Container Registry.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * One or more `user` blocks as defined below.
      */
-    readonly users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
+    users?: pulumi.Input<pulumi.Input<inputs.ContainerRegistryUser>[]>;
     /**
      * The alias for accessing the container registry.
      */
-    readonly virtualDomain?: pulumi.Input<string>;
+    virtualDomain?: pulumi.Input<string>;
 }

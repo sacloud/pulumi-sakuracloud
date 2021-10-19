@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing sakuracloud_webaccel.
@@ -49,4 +52,102 @@ type GetWebAccelResult struct {
 	Subdomain string `pulumi:"subdomain"`
 	// .
 	TxtRecordValue string `pulumi:"txtRecordValue"`
+}
+
+func GetWebAccelOutput(ctx *pulumi.Context, args GetWebAccelOutputArgs, opts ...pulumi.InvokeOption) GetWebAccelResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (GetWebAccelResult, error) {
+			args := v.(GetWebAccelArgs)
+			r, err := GetWebAccel(ctx, &args, opts...)
+			return *r, err
+		}).(GetWebAccelResultOutput)
+}
+
+// A collection of arguments for invoking getWebAccel.
+type GetWebAccelOutputArgs struct {
+	// .
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// .
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (GetWebAccelOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWebAccelArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getWebAccel.
+type GetWebAccelResultOutput struct{ *pulumi.OutputState }
+
+func (GetWebAccelResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWebAccelResult)(nil)).Elem()
+}
+
+func (o GetWebAccelResultOutput) ToGetWebAccelResultOutput() GetWebAccelResultOutput {
+	return o
+}
+
+func (o GetWebAccelResultOutput) ToGetWebAccelResultOutputWithContext(ctx context.Context) GetWebAccelResultOutput {
+	return o
+}
+
+// .
+func (o GetWebAccelResultOutput) CnameRecordValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.CnameRecordValue }).(pulumi.StringOutput)
+}
+
+func (o GetWebAccelResultOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) DomainType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.DomainType }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) HasCertificate() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetWebAccelResult) bool { return v.HasCertificate }).(pulumi.BoolOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) HostHeader() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.HostHeader }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o GetWebAccelResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o GetWebAccelResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) Origin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Origin }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) SiteId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.SiteId }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) Subdomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.Subdomain }).(pulumi.StringOutput)
+}
+
+// .
+func (o GetWebAccelResultOutput) TxtRecordValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWebAccelResult) string { return v.TxtRecordValue }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(GetWebAccelResultOutput{})
 }

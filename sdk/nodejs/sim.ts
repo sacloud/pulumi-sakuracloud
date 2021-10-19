@@ -165,47 +165,47 @@ export interface SIMState {
     /**
      * A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
      */
-    readonly carriers?: pulumi.Input<pulumi.Input<string>[]>;
+    carriers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The description of the SIM. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The flag to enable the SIM. Default:`true`.
      */
-    readonly enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean>;
     /**
      * ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
      */
-    readonly iccid?: pulumi.Input<string>;
+    iccid?: pulumi.Input<string>;
     /**
      * The icon id to attach to the SIM.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The id of the device to restrict devices that can use the SIM.
      */
-    readonly imei?: pulumi.Input<string>;
+    imei?: pulumi.Input<string>;
     /**
      * The IP address assigned to the SIM.
      */
-    readonly ipAddress?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string>;
     /**
      * The id of the MobileGateway which the SIM is assigned.
      */
-    readonly mobileGatewayId?: pulumi.Input<string>;
+    mobileGatewayId?: pulumi.Input<string>;
     /**
      * The name of the SIM. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The passcord to authenticate the SIM. Changing this forces a new resource to be created.
      */
-    readonly passcode?: pulumi.Input<string>;
+    passcode?: pulumi.Input<string>;
     /**
      * Any tags to assign to the SIM.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -215,37 +215,37 @@ export interface SIMArgs {
     /**
      * A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
      */
-    readonly carriers: pulumi.Input<pulumi.Input<string>[]>;
+    carriers: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The description of the SIM. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The flag to enable the SIM. Default:`true`.
      */
-    readonly enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean>;
     /**
      * ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
      */
-    readonly iccid: pulumi.Input<string>;
+    iccid: pulumi.Input<string>;
     /**
      * The icon id to attach to the SIM.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The id of the device to restrict devices that can use the SIM.
      */
-    readonly imei?: pulumi.Input<string>;
+    imei?: pulumi.Input<string>;
     /**
      * The name of the SIM. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The passcord to authenticate the SIM. Changing this forces a new resource to be created.
      */
-    readonly passcode: pulumi.Input<string>;
+    passcode: pulumi.Input<string>;
     /**
      * Any tags to assign to the SIM.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

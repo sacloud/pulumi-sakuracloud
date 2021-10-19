@@ -5,13 +5,346 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['SIM']
+__all__ = ['SIMArgs', 'SIM']
+
+@pulumi.input_type
+class SIMArgs:
+    def __init__(__self__, *,
+                 carriers: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 iccid: pulumi.Input[str],
+                 passcode: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 imei: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a SIM resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] carriers: A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
+        :param pulumi.Input[str] iccid: ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] passcode: The passcord to authenticate the SIM. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] description: The description of the SIM. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[bool] enabled: The flag to enable the SIM. Default:`true`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SIM.
+        :param pulumi.Input[str] imei: The id of the device to restrict devices that can use the SIM.
+        :param pulumi.Input[str] name: The name of the SIM. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SIM.
+        """
+        pulumi.set(__self__, "carriers", carriers)
+        pulumi.set(__self__, "iccid", iccid)
+        pulumi.set(__self__, "passcode", passcode)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if imei is not None:
+            pulumi.set(__self__, "imei", imei)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def carriers(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
+        """
+        return pulumi.get(self, "carriers")
+
+    @carriers.setter
+    def carriers(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "carriers", value)
+
+    @property
+    @pulumi.getter
+    def iccid(self) -> pulumi.Input[str]:
+        """
+        ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "iccid")
+
+    @iccid.setter
+    def iccid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "iccid", value)
+
+    @property
+    @pulumi.getter
+    def passcode(self) -> pulumi.Input[str]:
+        """
+        The passcord to authenticate the SIM. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "passcode")
+
+    @passcode.setter
+    def passcode(self, value: pulumi.Input[str]):
+        pulumi.set(self, "passcode", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SIM. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable the SIM. Default:`true`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the SIM.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def imei(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the device to restrict devices that can use the SIM.
+        """
+        return pulumi.get(self, "imei")
+
+    @imei.setter
+    def imei(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "imei", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SIM. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the SIM.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class _SIMState:
+    def __init__(__self__, *,
+                 carriers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 iccid: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 imei: Optional[pulumi.Input[str]] = None,
+                 ip_address: Optional[pulumi.Input[str]] = None,
+                 mobile_gateway_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 passcode: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        Input properties used for looking up and filtering SIM resources.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] carriers: A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
+        :param pulumi.Input[str] description: The description of the SIM. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[bool] enabled: The flag to enable the SIM. Default:`true`.
+        :param pulumi.Input[str] iccid: ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the SIM.
+        :param pulumi.Input[str] imei: The id of the device to restrict devices that can use the SIM.
+        :param pulumi.Input[str] ip_address: The IP address assigned to the SIM.
+        :param pulumi.Input[str] mobile_gateway_id: The id of the MobileGateway which the SIM is assigned.
+        :param pulumi.Input[str] name: The name of the SIM. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] passcode: The passcord to authenticate the SIM. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SIM.
+        """
+        if carriers is not None:
+            pulumi.set(__self__, "carriers", carriers)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if iccid is not None:
+            pulumi.set(__self__, "iccid", iccid)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if imei is not None:
+            pulumi.set(__self__, "imei", imei)
+        if ip_address is not None:
+            pulumi.set(__self__, "ip_address", ip_address)
+        if mobile_gateway_id is not None:
+            pulumi.set(__self__, "mobile_gateway_id", mobile_gateway_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if passcode is not None:
+            pulumi.set(__self__, "passcode", passcode)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def carriers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of a communication company. Each element must be one of `kddi`/`docomo`/`softbank`.
+        """
+        return pulumi.get(self, "carriers")
+
+    @carriers.setter
+    def carriers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "carriers", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the SIM. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable the SIM. Default:`true`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def iccid(self) -> Optional[pulumi.Input[str]]:
+        """
+        ICCID(Integrated Circuit Card ID) assigned to the SIM. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "iccid")
+
+    @iccid.setter
+    def iccid(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "iccid", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the SIM.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def imei(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the device to restrict devices that can use the SIM.
+        """
+        return pulumi.get(self, "imei")
+
+    @imei.setter
+    def imei(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "imei", value)
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IP address assigned to the SIM.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @ip_address.setter
+    def ip_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip_address", value)
+
+    @property
+    @pulumi.getter(name="mobileGatewayId")
+    def mobile_gateway_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the MobileGateway which the SIM is assigned.
+        """
+        return pulumi.get(self, "mobile_gateway_id")
+
+    @mobile_gateway_id.setter
+    def mobile_gateway_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mobile_gateway_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the SIM. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def passcode(self) -> Optional[pulumi.Input[str]]:
+        """
+        The passcord to authenticate the SIM. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "passcode")
+
+    @passcode.setter
+    def passcode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "passcode", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the SIM.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class SIM(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -24,9 +357,7 @@ class SIM(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  passcode: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud SIM.
 
@@ -64,12 +395,62 @@ class SIM(pulumi.CustomResource):
         :param pulumi.Input[str] passcode: The passcord to authenticate the SIM. Changing this forces a new resource to be created.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the SIM.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: SIMArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud SIM.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.SIM("foobar",
+            carriers=[
+                "softbank",
+                "docomo",
+                "kddi",
+            ],
+            description="description",
+            enabled=True,
+            iccid="your-iccid",
+            passcode="your-password",
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param SIMArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(SIMArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 carriers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 iccid: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 imei: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 passcode: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -79,25 +460,25 @@ class SIM(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SIMArgs.__new__(SIMArgs)
 
             if carriers is None and not opts.urn:
                 raise TypeError("Missing required property 'carriers'")
-            __props__['carriers'] = carriers
-            __props__['description'] = description
-            __props__['enabled'] = enabled
+            __props__.__dict__["carriers"] = carriers
+            __props__.__dict__["description"] = description
+            __props__.__dict__["enabled"] = enabled
             if iccid is None and not opts.urn:
                 raise TypeError("Missing required property 'iccid'")
-            __props__['iccid'] = iccid
-            __props__['icon_id'] = icon_id
-            __props__['imei'] = imei
-            __props__['name'] = name
+            __props__.__dict__["iccid"] = iccid
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["imei"] = imei
+            __props__.__dict__["name"] = name
             if passcode is None and not opts.urn:
                 raise TypeError("Missing required property 'passcode'")
-            __props__['passcode'] = passcode
-            __props__['tags'] = tags
-            __props__['ip_address'] = None
-            __props__['mobile_gateway_id'] = None
+            __props__.__dict__["passcode"] = passcode
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["ip_address"] = None
+            __props__.__dict__["mobile_gateway_id"] = None
         super(SIM, __self__).__init__(
             'sakuracloud:index/sIM:SIM',
             resource_name,
@@ -140,19 +521,19 @@ class SIM(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SIMState.__new__(_SIMState)
 
-        __props__["carriers"] = carriers
-        __props__["description"] = description
-        __props__["enabled"] = enabled
-        __props__["iccid"] = iccid
-        __props__["icon_id"] = icon_id
-        __props__["imei"] = imei
-        __props__["ip_address"] = ip_address
-        __props__["mobile_gateway_id"] = mobile_gateway_id
-        __props__["name"] = name
-        __props__["passcode"] = passcode
-        __props__["tags"] = tags
+        __props__.__dict__["carriers"] = carriers
+        __props__.__dict__["description"] = description
+        __props__.__dict__["enabled"] = enabled
+        __props__.__dict__["iccid"] = iccid
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["imei"] = imei
+        __props__.__dict__["ip_address"] = ip_address
+        __props__.__dict__["mobile_gateway_id"] = mobile_gateway_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["passcode"] = passcode
+        __props__.__dict__["tags"] = tags
         return SIM(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -242,10 +623,4 @@ class SIM(pulumi.CustomResource):
         Any tags to assign to the SIM.
         """
         return pulumi.get(self, "tags")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

@@ -19,6 +19,77 @@ namespace Pulumi.Sakuracloud
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>
+        /// The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+        /// `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("acceptLanguage")]
+        public Output<string?> AcceptLanguage { get; private set; } = null!;
+
+        /// <summary>
+        /// The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+        /// via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        /// </summary>
+        [Output("apiRootUrl")]
+        public Output<string?> ApiRootUrl { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+        /// `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("defaultZone")]
+        public Output<string?> DefaultZone { get; private set; } = null!;
+
+        /// <summary>
+        /// The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+        /// from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("fakeMode")]
+        public Output<string?> FakeMode { get; private set; } = null!;
+
+        /// <summary>
+        /// The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+        /// provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+        /// `profile` is specified
+        /// </summary>
+        [Output("fakeStorePath")]
+        public Output<string?> FakeStorePath { get; private set; } = null!;
+
+        /// <summary>
+        /// The profile name of your SakuraCloud account. Default:`default`
+        /// </summary>
+        [Output("profile")]
+        public Output<string?> Profile { get; private set; } = null!;
+
+        /// <summary>
+        /// The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        /// `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("secret")]
+        public Output<string?> Secret { get; private set; } = null!;
+
+        /// <summary>
+        /// The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        /// `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("token")]
+        public Output<string?> Token { get; private set; } = null!;
+
+        /// <summary>
+        /// The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+        /// shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("trace")]
+        public Output<string?> Trace { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+        /// environment variables, or via a shared credentials file if `profile` is specified
+        /// </summary>
+        [Output("zone")]
+        public Output<string?> Zone { get; private set; } = null!;
+
+
+        /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
         ///

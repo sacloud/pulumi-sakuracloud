@@ -335,6 +335,25 @@ export interface GetArchiveFilter {
     tags?: string[];
 }
 
+export interface GetArchiveFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetArchiveFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetArchiveFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -344,6 +363,17 @@ export interface GetArchiveFilterCondition {
      * The values of the condition. If multiple values are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetArchiveFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetBridgeFilter {
@@ -361,6 +391,21 @@ export interface GetBridgeFilter {
     names?: string[];
 }
 
+export interface GetBridgeFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetBridgeFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetBridgeFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -370,6 +415,17 @@ export interface GetBridgeFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetBridgeFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetCDROMFilter {
@@ -389,6 +445,36 @@ export interface GetCDROMFilter {
      * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
      */
     tags?: string[];
+}
+
+export interface GetCDROMFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetCDROMFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetCDROMFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetCDROMFilterCondition {
@@ -421,6 +507,36 @@ export interface GetCertificateAuthorityFilter {
     tags?: string[];
 }
 
+export interface GetCertificateAuthorityFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetCertificateAuthorityFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetCertificateAuthorityFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetCertificateAuthorityFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -451,6 +567,25 @@ export interface GetContainerRegistryFilter {
     tags?: string[];
 }
 
+export interface GetContainerRegistryFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetContainerRegistryFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetContainerRegistryFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -460,6 +595,17 @@ export interface GetContainerRegistryFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetContainerRegistryFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetDNSFilter {
@@ -479,6 +625,36 @@ export interface GetDNSFilter {
      * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
      */
     tags?: string[];
+}
+
+export interface GetDNSFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetDNSFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetDNSFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetDNSFilterCondition {
@@ -511,6 +687,36 @@ export interface GetDatabaseFilter {
     tags?: string[];
 }
 
+export interface GetDatabaseFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetDatabaseFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetDatabaseFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetDatabaseFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -539,6 +745,36 @@ export interface GetDiskFilter {
      * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
      */
     tags?: string[];
+}
+
+export interface GetDiskFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetDiskFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetDiskFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetDiskFilterCondition {
@@ -571,6 +807,25 @@ export interface GetESMEFilter {
     tags?: string[];
 }
 
+export interface GetESMEFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetESMEFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetESMEFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -580,6 +835,17 @@ export interface GetESMEFilterCondition {
      * The values of the condition. If multiple values are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetESMEFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetEnhancedDBFilter {
@@ -601,6 +867,25 @@ export interface GetEnhancedDBFilter {
     tags?: string[];
 }
 
+export interface GetEnhancedDBFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetEnhancedDBFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetEnhancedDBFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -610,6 +895,36 @@ export interface GetEnhancedDBFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetEnhancedDBFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetGSLBFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetGSLBFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetGSLBFilter {
@@ -642,6 +957,36 @@ export interface GetGSLBFilterCondition {
     values: string[];
 }
 
+export interface GetGSLBFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetIconFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetIconFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetIconFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -659,6 +1004,17 @@ export interface GetIconFilter {
      * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
      */
     tags?: string[];
+}
+
+export interface GetIconFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetIconFilterCondition {
@@ -691,6 +1047,25 @@ export interface GetInternetFilter {
     tags?: string[];
 }
 
+export interface GetInternetFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetInternetFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetInternetFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -700,6 +1075,17 @@ export interface GetInternetFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetInternetFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetLoadBalancerFilter {
@@ -721,6 +1107,25 @@ export interface GetLoadBalancerFilter {
     tags?: string[];
 }
 
+export interface GetLoadBalancerFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetLoadBalancerFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetLoadBalancerFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -730,6 +1135,36 @@ export interface GetLoadBalancerFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetLoadBalancerFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetLocalRouterFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetLocalRouterFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetLocalRouterFilter {
@@ -762,6 +1197,17 @@ export interface GetLocalRouterFilterCondition {
     values: string[];
 }
 
+export interface GetLocalRouterFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetNFSFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -779,6 +1225,36 @@ export interface GetNFSFilter {
      * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
      */
     tags?: string[];
+}
+
+export interface GetNFSFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetNFSFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetNFSFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetNFSFilterCondition {
@@ -811,6 +1287,25 @@ export interface GetNoteFilter {
     tags?: string[];
 }
 
+export interface GetNoteFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetNoteFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetNoteFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -820,6 +1315,17 @@ export interface GetNoteFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetNoteFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetPacketFilterFilter {
@@ -837,6 +1343,21 @@ export interface GetPacketFilterFilter {
     names?: string[];
 }
 
+export interface GetPacketFilterFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetPacketFilterFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetPacketFilterFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -846,6 +1367,36 @@ export interface GetPacketFilterFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetPacketFilterFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetPrivateHostFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetPrivateHostFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetPrivateHostFilter {
@@ -878,6 +1429,17 @@ export interface GetPrivateHostFilterCondition {
     values: string[];
 }
 
+export interface GetPrivateHostFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetProxyLBFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -897,6 +1459,25 @@ export interface GetProxyLBFilter {
     tags?: string[];
 }
 
+export interface GetProxyLBFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetProxyLBFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetProxyLBFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -906,6 +1487,17 @@ export interface GetProxyLBFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetProxyLBFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetSSHKeyFilter {
@@ -923,6 +1515,21 @@ export interface GetSSHKeyFilter {
     names?: string[];
 }
 
+export interface GetSSHKeyFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetSSHKeyFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetSSHKeyFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -932,6 +1539,36 @@ export interface GetSSHKeyFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetSSHKeyFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetServerFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetServerFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetServerFilter {
@@ -964,6 +1601,36 @@ export interface GetServerFilterCondition {
     values: string[];
 }
 
+export interface GetServerFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetSimpleMonitorFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetSimpleMonitorFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetSimpleMonitorFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -983,6 +1650,17 @@ export interface GetSimpleMonitorFilter {
     tags?: string[];
 }
 
+export interface GetSimpleMonitorFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetSimpleMonitorFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -992,6 +1670,25 @@ export interface GetSimpleMonitorFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetSwitchFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetSwitchFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface GetSwitchFilter {
@@ -1024,6 +1721,17 @@ export interface GetSwitchFilterCondition {
     values: string[];
 }
 
+export interface GetSwitchFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetVPCRouterFilter {
     /**
      * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -1043,6 +1751,25 @@ export interface GetVPCRouterFilter {
     tags?: string[];
 }
 
+export interface GetVPCRouterFilterArgs {
+    /**
+     * One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+     */
+    conditions?: pulumi.Input<pulumi.Input<inputs.GetVPCRouterFilterConditionArgs>[]>;
+    /**
+     * The resource id on SakuraCloud used for filtering.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+     */
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface GetVPCRouterFilterCondition {
     /**
      * The name of the target field. This value is case-sensitive.
@@ -1052,6 +1779,17 @@ export interface GetVPCRouterFilterCondition {
      * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
      */
     values: string[];
+}
+
+export interface GetVPCRouterFilterConditionArgs {
+    /**
+     * The name of the target field. This value is case-sensitive.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The values of the condition. If multiple values ​​are specified, they combined as AND condition.
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface LoadBalancerNetworkInterface {

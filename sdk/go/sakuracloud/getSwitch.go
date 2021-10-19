@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Switch.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupSwitch(ctx, &sakuracloud.LookupSwitchArgs{
-// 			Filter: sakuracloud.GetSwitchFilter{
+// 		_, err := sakuracloud.LookupSwitch(ctx, &GetSwitchArgs{
+// 			Filter: GetSwitchFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -70,4 +73,87 @@ type LookupSwitchResult struct {
 	// Any tags assigned to the Switch.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupSwitchOutput(ctx *pulumi.Context, args LookupSwitchOutputArgs, opts ...pulumi.InvokeOption) LookupSwitchResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupSwitchResult, error) {
+			args := v.(LookupSwitchArgs)
+			r, err := LookupSwitch(ctx, &args, opts...)
+			return *r, err
+		}).(LookupSwitchResultOutput)
+}
+
+// A collection of arguments for invoking getSwitch.
+type LookupSwitchOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetSwitchFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the Switch is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupSwitchOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSwitchArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getSwitch.
+type LookupSwitchResultOutput struct{ *pulumi.OutputState }
+
+func (LookupSwitchResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSwitchResult)(nil)).Elem()
+}
+
+func (o LookupSwitchResultOutput) ToLookupSwitchResultOutput() LookupSwitchResultOutput {
+	return o
+}
+
+func (o LookupSwitchResultOutput) ToLookupSwitchResultOutputWithContext(ctx context.Context) LookupSwitchResultOutput {
+	return o
+}
+
+// The bridge id attached to the Switch.
+func (o LookupSwitchResultOutput) BridgeId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.BridgeId }).(pulumi.StringOutput)
+}
+
+// The description of the Switch.
+func (o LookupSwitchResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupSwitchResultOutput) Filter() GetSwitchFilterPtrOutput {
+	return o.ApplyT(func(v LookupSwitchResult) *GetSwitchFilter { return v.Filter }).(GetSwitchFilterPtrOutput)
+}
+
+// The icon id attached to the Switch.
+func (o LookupSwitchResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupSwitchResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Switch.
+func (o LookupSwitchResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// A list of server id connected to the Switch.
+func (o LookupSwitchResultOutput) ServerIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupSwitchResult) []string { return v.ServerIds }).(pulumi.StringArrayOutput)
+}
+
+// Any tags assigned to the Switch.
+func (o LookupSwitchResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupSwitchResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupSwitchResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSwitchResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupSwitchResultOutput{})
 }

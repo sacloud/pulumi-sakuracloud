@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetPacketFilterResult',
     'AwaitableGetPacketFilterResult',
     'get_packet_filter',
+    'get_packet_filter_output',
 ]
 
 @pulumi.output_type
@@ -135,3 +136,28 @@ def get_packet_filter(filter: Optional[pulumi.InputType['GetPacketFilterFilterAr
         id=__ret__.id,
         name=__ret__.name,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_packet_filter)
+def get_packet_filter_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetPacketFilterFilterArgs']]]] = None,
+                             zone: Optional[pulumi.Input[Optional[str]]] = None,
+                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPacketFilterResult]:
+    """
+    Get information about an existing Packet Filter.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_packet_filter(filter=sakuracloud.GetPacketFilterFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetPacketFilterFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

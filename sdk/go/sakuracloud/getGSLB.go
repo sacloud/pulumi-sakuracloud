@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing GSLB.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupGSLB(ctx, &sakuracloud.LookupGSLBArgs{
-// 			Filter: sakuracloud.GetGSLBFilter{
+// 		_, err := sakuracloud.LookupGSLB(ctx, &GetGSLBArgs{
+// 			Filter: GetGSLBFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -73,4 +76,96 @@ type LookupGSLBResult struct {
 	Tags []string `pulumi:"tags"`
 	// The flag to enable weighted load-balancing.
 	Weighted bool `pulumi:"weighted"`
+}
+
+func LookupGSLBOutput(ctx *pulumi.Context, args LookupGSLBOutputArgs, opts ...pulumi.InvokeOption) LookupGSLBResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupGSLBResult, error) {
+			args := v.(LookupGSLBArgs)
+			r, err := LookupGSLB(ctx, &args, opts...)
+			return *r, err
+		}).(LookupGSLBResultOutput)
+}
+
+// A collection of arguments for invoking getGSLB.
+type LookupGSLBOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetGSLBFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupGSLBOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupGSLBArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getGSLB.
+type LookupGSLBResultOutput struct{ *pulumi.OutputState }
+
+func (LookupGSLBResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupGSLBResult)(nil)).Elem()
+}
+
+func (o LookupGSLBResultOutput) ToLookupGSLBResultOutput() LookupGSLBResultOutput {
+	return o
+}
+
+func (o LookupGSLBResultOutput) ToLookupGSLBResultOutputWithContext(ctx context.Context) LookupGSLBResultOutput {
+	return o
+}
+
+// The description of the GSLB.
+func (o LookupGSLBResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupGSLBResultOutput) Filter() GetGSLBFilterPtrOutput {
+	return o.ApplyT(func(v LookupGSLBResult) *GetGSLBFilter { return v.Filter }).(GetGSLBFilterPtrOutput)
+}
+
+// The FQDN for accessing to the GSLB. This is typically used as value of CNAME record.
+func (o LookupGSLBResultOutput) Fqdn() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.Fqdn }).(pulumi.StringOutput)
+}
+
+// A list of `healthCheck` blocks as defined below.
+func (o LookupGSLBResultOutput) HealthChecks() GetGSLBHealthCheckArrayOutput {
+	return o.ApplyT(func(v LookupGSLBResult) []GetGSLBHealthCheck { return v.HealthChecks }).(GetGSLBHealthCheckArrayOutput)
+}
+
+// The icon id attached to the GSLB.
+func (o LookupGSLBResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupGSLBResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the GSLB.
+func (o LookupGSLBResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// A list of `server` blocks as defined below.
+func (o LookupGSLBResultOutput) Servers() GetGSLBServerArrayOutput {
+	return o.ApplyT(func(v LookupGSLBResult) []GetGSLBServer { return v.Servers }).(GetGSLBServerArrayOutput)
+}
+
+// The IP address of the SorryServer. This will be used when all servers are down.
+func (o LookupGSLBResultOutput) SorryServer() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupGSLBResult) string { return v.SorryServer }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the GSLB.
+func (o LookupGSLBResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupGSLBResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The flag to enable weighted load-balancing.
+func (o LookupGSLBResultOutput) Weighted() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupGSLBResult) bool { return v.Weighted }).(pulumi.BoolOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupGSLBResultOutput{})
 }

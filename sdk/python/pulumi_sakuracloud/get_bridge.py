@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetBridgeResult',
     'AwaitableGetBridgeResult',
     'get_bridge',
+    'get_bridge_output',
 ]
 
 @pulumi.output_type
@@ -122,3 +123,28 @@ def get_bridge(filter: Optional[pulumi.InputType['GetBridgeFilterArgs']] = None,
         id=__ret__.id,
         name=__ret__.name,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_bridge)
+def get_bridge_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetBridgeFilterArgs']]]] = None,
+                      zone: Optional[pulumi.Input[Optional[str]]] = None,
+                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetBridgeResult]:
+    """
+    Get information about an existing Bridge.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_bridge(filter=sakuracloud.GetBridgeFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetBridgeFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the Bridge is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

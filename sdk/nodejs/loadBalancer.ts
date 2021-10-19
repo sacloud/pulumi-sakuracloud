@@ -162,35 +162,35 @@ export interface LoadBalancerState {
     /**
      * The description of the VIP. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the LoadBalancer.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface?: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
+    networkInterface?: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
     /**
      * The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]. Changing this forces a new resource to be created. Default:`standard`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * Any tags to assign to the LoadBalancer.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * One or more `vip` blocks as defined below.
      */
-    readonly vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
+    vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
     /**
      * The name of zone that the LoadBalancer will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -200,33 +200,33 @@ export interface LoadBalancerArgs {
     /**
      * The description of the VIP. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the LoadBalancer.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the LoadBalancer. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
+    networkInterface: pulumi.Input<inputs.LoadBalancerNetworkInterface>;
     /**
      * The plan name of the LoadBalancer. This must be one of [`standard`/`highspec`]. Changing this forces a new resource to be created. Default:`standard`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * Any tags to assign to the LoadBalancer.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * One or more `vip` blocks as defined below.
      */
-    readonly vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
+    vips?: pulumi.Input<pulumi.Input<inputs.LoadBalancerVip>[]>;
     /**
      * The name of zone that the LoadBalancer will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

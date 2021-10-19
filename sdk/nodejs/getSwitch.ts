@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getSwitch(args?: GetSwitchArgs, opts?: pulumi.InvokeOptions): Promise<GetSwitchResult> {
@@ -43,11 +43,11 @@ export interface GetSwitchArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetSwitchFilter;
+    filter?: inputs.GetSwitchFilter;
     /**
      * The name of zone that the Switch is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -84,4 +84,22 @@ export interface GetSwitchResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getSwitchOutput(args?: GetSwitchOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSwitchResult> {
+    return pulumi.output(args).apply(a => getSwitch(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getSwitch.
+ */
+export interface GetSwitchOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetSwitchFilterArgs>;
+    /**
+     * The name of zone that the Switch is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

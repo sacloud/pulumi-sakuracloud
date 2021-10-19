@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetGSLBResult',
     'AwaitableGetGSLBResult',
     'get_gslb',
+    'get_gslb_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,26 @@ def get_gslb(filter: Optional[pulumi.InputType['GetGSLBFilterArgs']] = None,
         sorry_server=__ret__.sorry_server,
         tags=__ret__.tags,
         weighted=__ret__.weighted)
+
+
+@_utilities.lift_output_func(get_gslb)
+def get_gslb_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetGSLBFilterArgs']]]] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetGSLBResult]:
+    """
+    Get information about an existing GSLB.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_gslb(filter=sakuracloud.GetGSLBFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetGSLBFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

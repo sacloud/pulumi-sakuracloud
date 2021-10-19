@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Auto Backup.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -256,7 +256,7 @@ type AutoBackupArrayInput interface {
 type AutoBackupArray []AutoBackupInput
 
 func (AutoBackupArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*AutoBackup)(nil))
+	return reflect.TypeOf((*[]*AutoBackup)(nil)).Elem()
 }
 
 func (i AutoBackupArray) ToAutoBackupArrayOutput() AutoBackupArrayOutput {
@@ -281,7 +281,7 @@ type AutoBackupMapInput interface {
 type AutoBackupMap map[string]AutoBackupInput
 
 func (AutoBackupMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*AutoBackup)(nil))
+	return reflect.TypeOf((*map[string]*AutoBackup)(nil)).Elem()
 }
 
 func (i AutoBackupMap) ToAutoBackupMapOutput() AutoBackupMapOutput {
@@ -292,9 +292,7 @@ func (i AutoBackupMap) ToAutoBackupMapOutputWithContext(ctx context.Context) Aut
 	return pulumi.ToOutputWithContext(ctx, i).(AutoBackupMapOutput)
 }
 
-type AutoBackupOutput struct {
-	*pulumi.OutputState
-}
+type AutoBackupOutput struct{ *pulumi.OutputState }
 
 func (AutoBackupOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*AutoBackup)(nil))
@@ -313,14 +311,12 @@ func (o AutoBackupOutput) ToAutoBackupPtrOutput() AutoBackupPtrOutput {
 }
 
 func (o AutoBackupOutput) ToAutoBackupPtrOutputWithContext(ctx context.Context) AutoBackupPtrOutput {
-	return o.ApplyT(func(v AutoBackup) *AutoBackup {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AutoBackup) *AutoBackup {
 		return &v
 	}).(AutoBackupPtrOutput)
 }
 
-type AutoBackupPtrOutput struct {
-	*pulumi.OutputState
-}
+type AutoBackupPtrOutput struct{ *pulumi.OutputState }
 
 func (AutoBackupPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**AutoBackup)(nil))
@@ -332,6 +328,16 @@ func (o AutoBackupPtrOutput) ToAutoBackupPtrOutput() AutoBackupPtrOutput {
 
 func (o AutoBackupPtrOutput) ToAutoBackupPtrOutputWithContext(ctx context.Context) AutoBackupPtrOutput {
 	return o
+}
+
+func (o AutoBackupPtrOutput) Elem() AutoBackupOutput {
+	return o.ApplyT(func(v *AutoBackup) AutoBackup {
+		if v != nil {
+			return *v
+		}
+		var ret AutoBackup
+		return ret
+	}).(AutoBackupOutput)
 }
 
 type AutoBackupArrayOutput struct{ *pulumi.OutputState }
@@ -375,6 +381,10 @@ func (o AutoBackupMapOutput) MapIndex(k pulumi.StringInput) AutoBackupOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AutoBackupInput)(nil)).Elem(), &AutoBackup{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutoBackupPtrInput)(nil)).Elem(), &AutoBackup{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutoBackupArrayInput)(nil)).Elem(), AutoBackupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AutoBackupMapInput)(nil)).Elem(), AutoBackupMap{})
 	pulumi.RegisterOutputType(AutoBackupOutput{})
 	pulumi.RegisterOutputType(AutoBackupPtrOutput{})
 	pulumi.RegisterOutputType(AutoBackupArrayOutput{})

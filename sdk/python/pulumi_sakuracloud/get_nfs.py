@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetNFSResult',
     'AwaitableGetNFSResult',
     'get_nfs',
+    'get_nfs_output',
 ]
 
 @pulumi.output_type
@@ -187,3 +188,28 @@ def get_nfs(filter: Optional[pulumi.InputType['GetNFSFilterArgs']] = None,
         size=__ret__.size,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_nfs)
+def get_nfs_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetNFSFilterArgs']]]] = None,
+                   zone: Optional[pulumi.Input[Optional[str]]] = None,
+                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetNFSResult]:
+    """
+    Get information about an existing NFS.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_nfs(filter=sakuracloud.GetNFSFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetNFSFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the NFS is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getNFS(args?: GetNFSArgs, opts?: pulumi.InvokeOptions): Promise<GetNFSResult> {
@@ -43,11 +43,11 @@ export interface GetNFSArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetNFSFilter;
+    filter?: inputs.GetNFSFilter;
     /**
      * The name of zone that the NFS is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -88,4 +88,22 @@ export interface GetNFSResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getNFSOutput(args?: GetNFSOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNFSResult> {
+    return pulumi.output(args).apply(a => getNFS(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getNFS.
+ */
+export interface GetNFSOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetNFSFilterArgs>;
+    /**
+     * The name of zone that the NFS is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

@@ -5,13 +5,14 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
 __all__ = [
     'GetServerVNCInfoResult',
     'AwaitableGetServerVNCInfoResult',
     'get_server_vnc_info',
+    'get_server_vnc_info_output',
 ]
 
 @pulumi.output_type
@@ -131,3 +132,26 @@ def get_server_vnc_info(server_id: Optional[str] = None,
         port=__ret__.port,
         server_id=__ret__.server_id,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_server_vnc_info)
+def get_server_vnc_info_output(server_id: Optional[pulumi.Input[str]] = None,
+                               zone: Optional[pulumi.Input[Optional[str]]] = None,
+                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetServerVNCInfoResult]:
+    """
+    Get information about VNC for connecting to an existing Server.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_server_vnc_info(server_id=sakuracloud_server["foobar"]["id"])
+    ```
+
+
+    :param str server_id: The id of the Server.
+    :param str zone: The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+    """
+    ...

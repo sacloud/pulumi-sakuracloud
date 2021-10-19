@@ -5,13 +5,204 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['Note']
+__all__ = ['NoteArgs', 'Note']
+
+@pulumi.input_type
+class NoteArgs:
+    def __init__(__self__, *,
+                 content: pulumi.Input[str],
+                 class_: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a Note resource.
+        :param pulumi.Input[str] content: The content of the Note. This must be specified as a shell script or as a cloud-config.
+        :param pulumi.Input[str] class_: The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Note.
+        :param pulumi.Input[str] name: The name of the Note. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Note.
+        """
+        pulumi.set(__self__, "content", content)
+        if class_ is not None:
+            pulumi.set(__self__, "class_", class_)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def content(self) -> pulumi.Input[str]:
+        """
+        The content of the Note. This must be specified as a shell script or as a cloud-config.
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: pulumi.Input[str]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter(name="class")
+    def class_(self) -> Optional[pulumi.Input[str]]:
+        """
+        The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
+        """
+        return pulumi.get(self, "class_")
+
+    @class_.setter
+    def class_(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "class_", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Note.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Note. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Note.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class _NoteState:
+    def __init__(__self__, *,
+                 class_: Optional[pulumi.Input[str]] = None,
+                 content: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        Input properties used for looking up and filtering Note resources.
+        :param pulumi.Input[str] class_: The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
+        :param pulumi.Input[str] content: The content of the Note. This must be specified as a shell script or as a cloud-config.
+        :param pulumi.Input[str] description: The description of the Note. This will be computed from special tags within body of `content`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Note.
+        :param pulumi.Input[str] name: The name of the Note. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Note.
+        """
+        if class_ is not None:
+            pulumi.set(__self__, "class_", class_)
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="class")
+    def class_(self) -> Optional[pulumi.Input[str]]:
+        """
+        The class of the Note. This must be one of `shell`/`yaml_cloud_config`. Default:`shell`.
+        """
+        return pulumi.get(self, "class_")
+
+    @class_.setter
+    def class_(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "class_", value)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The content of the Note. This must be specified as a shell script or as a cloud-config.
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Note. This will be computed from special tags within body of `content`.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Note.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Note. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Note.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class Note(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -20,9 +211,7 @@ class Note(pulumi.CustomResource):
                  icon_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Note.
 
@@ -43,12 +232,45 @@ class Note(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the Note. The length of this value must be in the range [`1`-`64`].
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Note.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: NoteArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Note.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.Note("foobar", content=(lambda path: open(path).read())("startup-script.sh"))
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param NoteArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(NoteArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 class_: Optional[pulumi.Input[str]] = None,
+                 content: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -58,16 +280,16 @@ class Note(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = NoteArgs.__new__(NoteArgs)
 
-            __props__['class_'] = class_
+            __props__.__dict__["class_"] = class_
             if content is None and not opts.urn:
                 raise TypeError("Missing required property 'content'")
-            __props__['content'] = content
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
-            __props__['tags'] = tags
-            __props__['description'] = None
+            __props__.__dict__["content"] = content
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["description"] = None
         super(Note, __self__).__init__(
             'sakuracloud:index/note:Note',
             resource_name,
@@ -100,14 +322,14 @@ class Note(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _NoteState.__new__(_NoteState)
 
-        __props__["class_"] = class_
-        __props__["content"] = content
-        __props__["description"] = description
-        __props__["icon_id"] = icon_id
-        __props__["name"] = name
-        __props__["tags"] = tags
+        __props__.__dict__["class_"] = class_
+        __props__.__dict__["content"] = content
+        __props__.__dict__["description"] = description
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["tags"] = tags
         return Note(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -157,10 +379,4 @@ class Note(pulumi.CustomResource):
         Any tags to assign to the Note.
         """
         return pulumi.get(self, "tags")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

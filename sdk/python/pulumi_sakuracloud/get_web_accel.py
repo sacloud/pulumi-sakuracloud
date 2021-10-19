@@ -5,13 +5,14 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
 __all__ = [
     'GetWebAccelResult',
     'AwaitableGetWebAccelResult',
     'get_web_accel',
+    'get_web_accel_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,17 @@ def get_web_accel(domain: Optional[str] = None,
         status=__ret__.status,
         subdomain=__ret__.subdomain,
         txt_record_value=__ret__.txt_record_value)
+
+
+@_utilities.lift_output_func(get_web_accel)
+def get_web_accel_output(domain: Optional[pulumi.Input[Optional[str]]] = None,
+                         name: Optional[pulumi.Input[Optional[str]]] = None,
+                         opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetWebAccelResult]:
+    """
+    Get information about an existing sakuracloud_webaccel.
+
+
+    :param str domain: .
+    :param str name: .
+    """
+    ...

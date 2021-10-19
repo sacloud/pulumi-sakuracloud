@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetDNSResult',
     'AwaitableGetDNSResult',
     'get_dns',
+    'get_dns_output',
 ]
 
 @pulumi.output_type
@@ -161,3 +162,26 @@ def get_dns(filter: Optional[pulumi.InputType['GetDNSFilterArgs']] = None,
         records=__ret__.records,
         tags=__ret__.tags,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_dns)
+def get_dns_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetDNSFilterArgs']]]] = None,
+                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDNSResult]:
+    """
+    Get information about an existing DNS.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_dns(filter=sakuracloud.GetDNSFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetDNSFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

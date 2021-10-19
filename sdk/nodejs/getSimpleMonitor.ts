@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getSimpleMonitor(args?: GetSimpleMonitorArgs, opts?: pulumi.InvokeOptions): Promise<GetSimpleMonitorResult> {
@@ -42,7 +42,7 @@ export interface GetSimpleMonitorArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetSimpleMonitorFilter;
+    filter?: inputs.GetSimpleMonitorFilter;
 }
 
 /**
@@ -106,4 +106,18 @@ export interface GetSimpleMonitorResult {
      * The timeout in seconds for monitoring.
      */
     readonly timeout: number;
+}
+
+export function getSimpleMonitorOutput(args?: GetSimpleMonitorOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSimpleMonitorResult> {
+    return pulumi.output(args).apply(a => getSimpleMonitor(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getSimpleMonitor.
+ */
+export interface GetSimpleMonitorOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetSimpleMonitorFilterArgs>;
 }

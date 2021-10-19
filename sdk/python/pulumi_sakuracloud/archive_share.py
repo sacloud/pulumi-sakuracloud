@@ -5,21 +5,114 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['ArchiveShare']
+__all__ = ['ArchiveShareArgs', 'ArchiveShare']
+
+@pulumi.input_type
+class ArchiveShareArgs:
+    def __init__(__self__, *,
+                 archive_id: pulumi.Input[str],
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a ArchiveShare resource.
+        :param pulumi.Input[str] archive_id: The id of the archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] zone: The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "archive_id", archive_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="archiveId")
+    def archive_id(self) -> pulumi.Input[str]:
+        """
+        The id of the archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "archive_id")
+
+    @archive_id.setter
+    def archive_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "archive_id", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _ArchiveShareState:
+    def __init__(__self__, *,
+                 archive_id: Optional[pulumi.Input[str]] = None,
+                 share_key: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering ArchiveShare resources.
+        :param pulumi.Input[str] archive_id: The id of the archive. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] share_key: The key to use sharing the Archive.
+        :param pulumi.Input[str] zone: The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if archive_id is not None:
+            pulumi.set(__self__, "archive_id", archive_id)
+        if share_key is not None:
+            pulumi.set(__self__, "share_key", share_key)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="archiveId")
+    def archive_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the archive. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "archive_id")
+
+    @archive_id.setter
+    def archive_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "archive_id", value)
+
+    @property
+    @pulumi.getter(name="shareKey")
+    def share_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The key to use sharing the Archive.
+        """
+        return pulumi.get(self, "share_key")
+
+    @share_key.setter
+    def share_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "share_key", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class ArchiveShare(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  archive_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Archive Sharing.
 
@@ -40,12 +133,45 @@ class ArchiveShare(pulumi.CustomResource):
         :param pulumi.Input[str] archive_id: The id of the archive. Changing this forces a new resource to be created.
         :param pulumi.Input[str] zone: The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: ArchiveShareArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Archive Sharing.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        source = sakuracloud.Archive("source",
+            size=20,
+            archive_file="test/dummy.raw")
+        share_info = sakuracloud.ArchiveShare("shareInfo", archive_id=source.id)
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param ArchiveShareArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ArchiveShareArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 archive_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -55,13 +181,13 @@ class ArchiveShare(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ArchiveShareArgs.__new__(ArchiveShareArgs)
 
             if archive_id is None and not opts.urn:
                 raise TypeError("Missing required property 'archive_id'")
-            __props__['archive_id'] = archive_id
-            __props__['zone'] = zone
-            __props__['share_key'] = None
+            __props__.__dict__["archive_id"] = archive_id
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["share_key"] = None
         super(ArchiveShare, __self__).__init__(
             'sakuracloud:index/archiveShare:ArchiveShare',
             resource_name,
@@ -88,11 +214,11 @@ class ArchiveShare(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ArchiveShareState.__new__(_ArchiveShareState)
 
-        __props__["archive_id"] = archive_id
-        __props__["share_key"] = share_key
-        __props__["zone"] = zone
+        __props__.__dict__["archive_id"] = archive_id
+        __props__.__dict__["share_key"] = share_key
+        __props__.__dict__["zone"] = zone
         return ArchiveShare(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -118,10 +244,4 @@ class ArchiveShare(pulumi.CustomResource):
         The name of zone that the ArchiveShare will be created (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

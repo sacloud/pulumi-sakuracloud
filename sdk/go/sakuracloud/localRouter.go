@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Local Router.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -29,8 +29,8 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		peer, err := sakuracloud.LookupLocalRouter(ctx, &sakuracloud.LookupLocalRouterArgs{
-// 			Filter: sakuracloud.GetLocalRouterFilter{
+// 		peer, err := sakuracloud.LookupLocalRouter(ctx, &GetLocalRouterArgs{
+// 			Filter: GetLocalRouterFilter{
 // 				Names: []string{
 // 					"peer",
 // 				},
@@ -45,12 +45,12 @@ import (
 // 				pulumi.String("tag1"),
 // 				pulumi.String("tag2"),
 // 			},
-// 			Switch: &sakuracloud.LocalRouterSwitchArgs{
+// 			Switch: &LocalRouterSwitchArgs{
 // 				Code:     foobarSwitch.ID(),
 // 				Category: pulumi.String("cloud"),
 // 				ZoneId:   pulumi.String("is1a"),
 // 			},
-// 			NetworkInterface: &sakuracloud.LocalRouterNetworkInterfaceArgs{
+// 			NetworkInterface: &LocalRouterNetworkInterfaceArgs{
 // 				Vip: pulumi.String("192.168.11.1"),
 // 				IpAddresses: pulumi.StringArray{
 // 					pulumi.String("192.168.11.11"),
@@ -59,18 +59,18 @@ import (
 // 				Netmask: pulumi.Int(24),
 // 				Vrid:    pulumi.Int(101),
 // 			},
-// 			StaticRoutes: sakuracloud.LocalRouterStaticRouteArray{
-// 				&sakuracloud.LocalRouterStaticRouteArgs{
+// 			StaticRoutes: LocalRouterStaticRouteArray{
+// 				&LocalRouterStaticRouteArgs{
 // 					Prefix:  pulumi.String("10.0.0.0/24"),
 // 					NextHop: pulumi.String("192.168.11.2"),
 // 				},
-// 				&sakuracloud.LocalRouterStaticRouteArgs{
+// 				&LocalRouterStaticRouteArgs{
 // 					Prefix:  pulumi.String("172.16.0.0/16"),
 // 					NextHop: pulumi.String("192.168.11.3"),
 // 				},
 // 			},
-// 			Peers: sakuracloud.LocalRouterPeerArray{
-// 				&sakuracloud.LocalRouterPeerArgs{
+// 			Peers: LocalRouterPeerArray{
+// 				&LocalRouterPeerArgs{
 // 					PeerId:      pulumi.String(peer.Id),
 // 					SecretKey:   pulumi.String(peer.SecretKeys[0]),
 // 					Description: pulumi.String("description"),
@@ -292,7 +292,7 @@ type LocalRouterArrayInput interface {
 type LocalRouterArray []LocalRouterInput
 
 func (LocalRouterArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*LocalRouter)(nil))
+	return reflect.TypeOf((*[]*LocalRouter)(nil)).Elem()
 }
 
 func (i LocalRouterArray) ToLocalRouterArrayOutput() LocalRouterArrayOutput {
@@ -317,7 +317,7 @@ type LocalRouterMapInput interface {
 type LocalRouterMap map[string]LocalRouterInput
 
 func (LocalRouterMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*LocalRouter)(nil))
+	return reflect.TypeOf((*map[string]*LocalRouter)(nil)).Elem()
 }
 
 func (i LocalRouterMap) ToLocalRouterMapOutput() LocalRouterMapOutput {
@@ -328,9 +328,7 @@ func (i LocalRouterMap) ToLocalRouterMapOutputWithContext(ctx context.Context) L
 	return pulumi.ToOutputWithContext(ctx, i).(LocalRouterMapOutput)
 }
 
-type LocalRouterOutput struct {
-	*pulumi.OutputState
-}
+type LocalRouterOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*LocalRouter)(nil))
@@ -349,14 +347,12 @@ func (o LocalRouterOutput) ToLocalRouterPtrOutput() LocalRouterPtrOutput {
 }
 
 func (o LocalRouterOutput) ToLocalRouterPtrOutputWithContext(ctx context.Context) LocalRouterPtrOutput {
-	return o.ApplyT(func(v LocalRouter) *LocalRouter {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LocalRouter) *LocalRouter {
 		return &v
 	}).(LocalRouterPtrOutput)
 }
 
-type LocalRouterPtrOutput struct {
-	*pulumi.OutputState
-}
+type LocalRouterPtrOutput struct{ *pulumi.OutputState }
 
 func (LocalRouterPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**LocalRouter)(nil))
@@ -368,6 +364,16 @@ func (o LocalRouterPtrOutput) ToLocalRouterPtrOutput() LocalRouterPtrOutput {
 
 func (o LocalRouterPtrOutput) ToLocalRouterPtrOutputWithContext(ctx context.Context) LocalRouterPtrOutput {
 	return o
+}
+
+func (o LocalRouterPtrOutput) Elem() LocalRouterOutput {
+	return o.ApplyT(func(v *LocalRouter) LocalRouter {
+		if v != nil {
+			return *v
+		}
+		var ret LocalRouter
+		return ret
+	}).(LocalRouterOutput)
 }
 
 type LocalRouterArrayOutput struct{ *pulumi.OutputState }
@@ -411,6 +417,10 @@ func (o LocalRouterMapOutput) MapIndex(k pulumi.StringInput) LocalRouterOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterInput)(nil)).Elem(), &LocalRouter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterPtrInput)(nil)).Elem(), &LocalRouter{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterArrayInput)(nil)).Elem(), LocalRouterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterMapInput)(nil)).Elem(), LocalRouterMap{})
 	pulumi.RegisterOutputType(LocalRouterOutput{})
 	pulumi.RegisterOutputType(LocalRouterPtrOutput{})
 	pulumi.RegisterOutputType(LocalRouterArrayOutput{})

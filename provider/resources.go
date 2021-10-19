@@ -19,11 +19,11 @@ import (
 	"path/filepath"
 	"unicode"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfbridge"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
+	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 	"github.com/sacloud/pulumi-sakuracloud/provider/pkg/version"
 	"github.com/sacloud/terraform-provider-sakuracloud/sakuracloud"
 )

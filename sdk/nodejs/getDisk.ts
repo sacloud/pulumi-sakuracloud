@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getDisk(args?: GetDiskArgs, opts?: pulumi.InvokeOptions): Promise<GetDiskResult> {
@@ -43,11 +43,11 @@ export interface GetDiskArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetDiskFilter;
+    filter?: inputs.GetDiskFilter;
     /**
      * The name of zone that the Disk is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -100,4 +100,22 @@ export interface GetDiskResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getDiskOutput(args?: GetDiskOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDiskResult> {
+    return pulumi.output(args).apply(a => getDisk(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getDisk.
+ */
+export interface GetDiskOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetDiskFilterArgs>;
+    /**
+     * The name of zone that the Disk is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

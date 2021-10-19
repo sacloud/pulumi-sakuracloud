@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud ProxyLB ACME Setting.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -37,8 +37,8 @@ import (
 // 		if err != nil {
 // 			return err
 // 		}
-// 		_, err = sakuracloud.LookupProxyLB(ctx, &sakuracloud.LookupProxyLBArgs{
-// 			Filter: sakuracloud.GetProxyLBFilter{
+// 		_, err = sakuracloud.LookupProxyLB(ctx, &GetProxyLBArgs{
+// 			Filter: GetProxyLBFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -232,7 +232,7 @@ type ProxyLBACMEArrayInput interface {
 type ProxyLBACMEArray []ProxyLBACMEInput
 
 func (ProxyLBACMEArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ProxyLBACME)(nil))
+	return reflect.TypeOf((*[]*ProxyLBACME)(nil)).Elem()
 }
 
 func (i ProxyLBACMEArray) ToProxyLBACMEArrayOutput() ProxyLBACMEArrayOutput {
@@ -257,7 +257,7 @@ type ProxyLBACMEMapInput interface {
 type ProxyLBACMEMap map[string]ProxyLBACMEInput
 
 func (ProxyLBACMEMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ProxyLBACME)(nil))
+	return reflect.TypeOf((*map[string]*ProxyLBACME)(nil)).Elem()
 }
 
 func (i ProxyLBACMEMap) ToProxyLBACMEMapOutput() ProxyLBACMEMapOutput {
@@ -268,9 +268,7 @@ func (i ProxyLBACMEMap) ToProxyLBACMEMapOutputWithContext(ctx context.Context) P
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBACMEMapOutput)
 }
 
-type ProxyLBACMEOutput struct {
-	*pulumi.OutputState
-}
+type ProxyLBACMEOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMEOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLBACME)(nil))
@@ -289,14 +287,12 @@ func (o ProxyLBACMEOutput) ToProxyLBACMEPtrOutput() ProxyLBACMEPtrOutput {
 }
 
 func (o ProxyLBACMEOutput) ToProxyLBACMEPtrOutputWithContext(ctx context.Context) ProxyLBACMEPtrOutput {
-	return o.ApplyT(func(v ProxyLBACME) *ProxyLBACME {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLBACME) *ProxyLBACME {
 		return &v
 	}).(ProxyLBACMEPtrOutput)
 }
 
-type ProxyLBACMEPtrOutput struct {
-	*pulumi.OutputState
-}
+type ProxyLBACMEPtrOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBACMEPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ProxyLBACME)(nil))
@@ -308,6 +304,16 @@ func (o ProxyLBACMEPtrOutput) ToProxyLBACMEPtrOutput() ProxyLBACMEPtrOutput {
 
 func (o ProxyLBACMEPtrOutput) ToProxyLBACMEPtrOutputWithContext(ctx context.Context) ProxyLBACMEPtrOutput {
 	return o
+}
+
+func (o ProxyLBACMEPtrOutput) Elem() ProxyLBACMEOutput {
+	return o.ApplyT(func(v *ProxyLBACME) ProxyLBACME {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLBACME
+		return ret
+	}).(ProxyLBACMEOutput)
 }
 
 type ProxyLBACMEArrayOutput struct{ *pulumi.OutputState }
@@ -351,6 +357,10 @@ func (o ProxyLBACMEMapOutput) MapIndex(k pulumi.StringInput) ProxyLBACMEOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMEInput)(nil)).Elem(), &ProxyLBACME{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMEPtrInput)(nil)).Elem(), &ProxyLBACME{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMEArrayInput)(nil)).Elem(), ProxyLBACMEArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMEMapInput)(nil)).Elem(), ProxyLBACMEMap{})
 	pulumi.RegisterOutputType(ProxyLBACMEOutput{})
 	pulumi.RegisterOutputType(ProxyLBACMEPtrOutput{})
 	pulumi.RegisterOutputType(ProxyLBACMEArrayOutput{})

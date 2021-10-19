@@ -5,15 +5,253 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['DatabaseReadReplica']
+__all__ = ['DatabaseReadReplicaArgs', 'DatabaseReadReplica']
+
+@pulumi.input_type
+class DatabaseReadReplicaArgs:
+    def __init__(__self__, *,
+                 master_id: pulumi.Input[str],
+                 network_interface: pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs'],
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a DatabaseReadReplica resource.
+        :param pulumi.Input[str] master_id: The id of the replication master database. Changing this forces a new resource to be created.
+        :param pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs'] network_interface: An `network_interface` block as defined below.
+        :param pulumi.Input[str] description: The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the read-replica database.
+        :param pulumi.Input[str] name: The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the read-replica database.
+        :param pulumi.Input[str] zone: The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "master_id", master_id)
+        pulumi.set(__self__, "network_interface", network_interface)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="masterId")
+    def master_id(self) -> pulumi.Input[str]:
+        """
+        The id of the replication master database. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "master_id")
+
+    @master_id.setter
+    def master_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "master_id", value)
+
+    @property
+    @pulumi.getter(name="networkInterface")
+    def network_interface(self) -> pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs']:
+        """
+        An `network_interface` block as defined below.
+        """
+        return pulumi.get(self, "network_interface")
+
+    @network_interface.setter
+    def network_interface(self, value: pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs']):
+        pulumi.set(self, "network_interface", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the read-replica database.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the read-replica database.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _DatabaseReadReplicaState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 master_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 network_interface: Optional[pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs']] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering DatabaseReadReplica resources.
+        :param pulumi.Input[str] description: The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the read-replica database.
+        :param pulumi.Input[str] master_id: The id of the replication master database. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] name: The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs'] network_interface: An `network_interface` block as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the read-replica database.
+        :param pulumi.Input[str] zone: The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if master_id is not None:
+            pulumi.set(__self__, "master_id", master_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if network_interface is not None:
+            pulumi.set(__self__, "network_interface", network_interface)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the read-replica database. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the read-replica database.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="masterId")
+    def master_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the replication master database. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "master_id")
+
+    @master_id.setter
+    def master_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "master_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the read-replica database. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="networkInterface")
+    def network_interface(self) -> Optional[pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs']]:
+        """
+        An `network_interface` block as defined below.
+        """
+        return pulumi.get(self, "network_interface")
+
+    @network_interface.setter
+    def network_interface(self, value: Optional[pulumi.Input['DatabaseReadReplicaNetworkInterfaceArgs']]):
+        pulumi.set(self, "network_interface", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the read-replica database.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class DatabaseReadReplica(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -24,9 +262,7 @@ class DatabaseReadReplica(pulumi.CustomResource):
                  network_interface: Optional[pulumi.Input[pulumi.InputType['DatabaseReadReplicaNetworkInterfaceArgs']]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Database Read Replica.
 
@@ -61,12 +297,59 @@ class DatabaseReadReplica(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the read-replica database.
         :param pulumi.Input[str] zone: The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: DatabaseReadReplicaArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Database Read Replica.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        master = sakuracloud.get_database(filter=sakuracloud.GetDatabaseFilterArgs(
+            names=["master-database-name"],
+        ))
+        foobar = sakuracloud.DatabaseReadReplica("foobar",
+            master_id=master.id,
+            network_interface=sakuracloud.DatabaseReadReplicaNetworkInterfaceArgs(
+                ip_address="192.168.11.111",
+            ),
+            description="description",
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param DatabaseReadReplicaArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(DatabaseReadReplicaArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 master_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 network_interface: Optional[pulumi.Input[pulumi.InputType['DatabaseReadReplicaNetworkInterfaceArgs']]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -76,19 +359,19 @@ class DatabaseReadReplica(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = DatabaseReadReplicaArgs.__new__(DatabaseReadReplicaArgs)
 
-            __props__['description'] = description
-            __props__['icon_id'] = icon_id
+            __props__.__dict__["description"] = description
+            __props__.__dict__["icon_id"] = icon_id
             if master_id is None and not opts.urn:
                 raise TypeError("Missing required property 'master_id'")
-            __props__['master_id'] = master_id
-            __props__['name'] = name
+            __props__.__dict__["master_id"] = master_id
+            __props__.__dict__["name"] = name
             if network_interface is None and not opts.urn:
                 raise TypeError("Missing required property 'network_interface'")
-            __props__['network_interface'] = network_interface
-            __props__['tags'] = tags
-            __props__['zone'] = zone
+            __props__.__dict__["network_interface"] = network_interface
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["zone"] = zone
         super(DatabaseReadReplica, __self__).__init__(
             'sakuracloud:index/databaseReadReplica:DatabaseReadReplica',
             resource_name,
@@ -123,15 +406,15 @@ class DatabaseReadReplica(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _DatabaseReadReplicaState.__new__(_DatabaseReadReplicaState)
 
-        __props__["description"] = description
-        __props__["icon_id"] = icon_id
-        __props__["master_id"] = master_id
-        __props__["name"] = name
-        __props__["network_interface"] = network_interface
-        __props__["tags"] = tags
-        __props__["zone"] = zone
+        __props__.__dict__["description"] = description
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["master_id"] = master_id
+        __props__.__dict__["name"] = name
+        __props__.__dict__["network_interface"] = network_interface
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["zone"] = zone
         return DatabaseReadReplica(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -189,10 +472,4 @@ class DatabaseReadReplica(pulumi.CustomResource):
         The name of zone that the read-replica database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

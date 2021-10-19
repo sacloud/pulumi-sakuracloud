@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud ProxyLB.
@@ -20,14 +20,14 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		foobarServer, err := sakuracloud.NewServer(ctx, "foobarServer", &sakuracloud.ServerArgs{
-// 			NetworkInterfaces: sakuracloud.ServerNetworkInterfaceArray{
-// 				&sakuracloud.ServerNetworkInterfaceArgs{
+// 			NetworkInterfaces: ServerNetworkInterfaceArray{
+// 				&ServerNetworkInterfaceArgs{
 // 					Upstream: pulumi.String("shared"),
 // 				},
 // 			},
@@ -43,47 +43,47 @@ import (
 // 			ProxyProtocol: pulumi.Bool(true),
 // 			Timeout:       pulumi.Int(10),
 // 			Region:        pulumi.String("is1"),
-// 			HealthCheck: &sakuracloud.ProxyLBHealthCheckArgs{
+// 			HealthCheck: &ProxyLBHealthCheckArgs{
 // 				Protocol:   pulumi.String("http"),
 // 				DelayLoop:  pulumi.Int(10),
 // 				HostHeader: pulumi.String("example.com"),
 // 				Path:       pulumi.String("/"),
 // 			},
-// 			SorryServer: &sakuracloud.ProxyLBSorryServerArgs{
+// 			SorryServer: &ProxyLBSorryServerArgs{
 // 				IpAddress: pulumi.String("192.0.2.1"),
 // 				Port:      pulumi.Int(80),
 // 			},
-// 			Syslog: &sakuracloud.ProxyLBSyslogArgs{
+// 			Syslog: &ProxyLBSyslogArgs{
 // 				Server: pulumi.String("192.0.2.1"),
 // 				Port:   pulumi.Int(514),
 // 			},
-// 			BindPorts: sakuracloud.ProxyLBBindPortArray{
-// 				&sakuracloud.ProxyLBBindPortArgs{
+// 			BindPorts: ProxyLBBindPortArray{
+// 				&ProxyLBBindPortArgs{
 // 					ProxyMode: pulumi.String("http"),
 // 					Port:      pulumi.Int(80),
-// 					ResponseHeaders: sakuracloud.ProxyLBBindPortResponseHeaderArray{
-// 						&sakuracloud.ProxyLBBindPortResponseHeaderArgs{
+// 					ResponseHeaders: ProxyLBBindPortResponseHeaderArray{
+// 						&ProxyLBBindPortResponseHeaderArgs{
 // 							Header: pulumi.String("Cache-Control"),
 // 							Value:  pulumi.String("public, max-age=10"),
 // 						},
 // 					},
 // 				},
 // 			},
-// 			Servers: sakuracloud.ProxyLBServerArray{
-// 				&sakuracloud.ProxyLBServerArgs{
+// 			Servers: ProxyLBServerArray{
+// 				&ProxyLBServerArgs{
 // 					IpAddress: foobarServer.IpAddress,
 // 					Port:      pulumi.Int(80),
 // 					Group:     pulumi.String("group1"),
 // 				},
 // 			},
-// 			Rules: sakuracloud.ProxyLBRuleArray{
-// 				&sakuracloud.ProxyLBRuleArgs{
+// 			Rules: ProxyLBRuleArray{
+// 				&ProxyLBRuleArgs{
 // 					Action: pulumi.String("forward"),
 // 					Host:   pulumi.String("www.example.com"),
 // 					Path:   pulumi.String("/"),
 // 					Group:  pulumi.String("group1"),
 // 				},
-// 				&sakuracloud.ProxyLBRuleArgs{
+// 				&ProxyLBRuleArgs{
 // 					Action:             pulumi.String("redirect"),
 // 					Host:               pulumi.String("www2.example.com"),
 // 					Path:               pulumi.String("/"),
@@ -91,7 +91,7 @@ import (
 // 					RedirectLocation:   pulumi.String("https://redirect.example.com"),
 // 					RedirectStatusCode: pulumi.String("301"),
 // 				},
-// 				&sakuracloud.ProxyLBRuleArgs{
+// 				&ProxyLBRuleArgs{
 // 					Action:           pulumi.String("fixed"),
 // 					Host:             pulumi.String("www3.example.com"),
 // 					Path:             pulumi.String("/"),
@@ -434,7 +434,7 @@ type ProxyLBArrayInput interface {
 type ProxyLBArray []ProxyLBInput
 
 func (ProxyLBArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ProxyLB)(nil))
+	return reflect.TypeOf((*[]*ProxyLB)(nil)).Elem()
 }
 
 func (i ProxyLBArray) ToProxyLBArrayOutput() ProxyLBArrayOutput {
@@ -459,7 +459,7 @@ type ProxyLBMapInput interface {
 type ProxyLBMap map[string]ProxyLBInput
 
 func (ProxyLBMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ProxyLB)(nil))
+	return reflect.TypeOf((*map[string]*ProxyLB)(nil)).Elem()
 }
 
 func (i ProxyLBMap) ToProxyLBMapOutput() ProxyLBMapOutput {
@@ -470,9 +470,7 @@ func (i ProxyLBMap) ToProxyLBMapOutputWithContext(ctx context.Context) ProxyLBMa
 	return pulumi.ToOutputWithContext(ctx, i).(ProxyLBMapOutput)
 }
 
-type ProxyLBOutput struct {
-	*pulumi.OutputState
-}
+type ProxyLBOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ProxyLB)(nil))
@@ -491,14 +489,12 @@ func (o ProxyLBOutput) ToProxyLBPtrOutput() ProxyLBPtrOutput {
 }
 
 func (o ProxyLBOutput) ToProxyLBPtrOutputWithContext(ctx context.Context) ProxyLBPtrOutput {
-	return o.ApplyT(func(v ProxyLB) *ProxyLB {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLB) *ProxyLB {
 		return &v
 	}).(ProxyLBPtrOutput)
 }
 
-type ProxyLBPtrOutput struct {
-	*pulumi.OutputState
-}
+type ProxyLBPtrOutput struct{ *pulumi.OutputState }
 
 func (ProxyLBPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ProxyLB)(nil))
@@ -510,6 +506,16 @@ func (o ProxyLBPtrOutput) ToProxyLBPtrOutput() ProxyLBPtrOutput {
 
 func (o ProxyLBPtrOutput) ToProxyLBPtrOutputWithContext(ctx context.Context) ProxyLBPtrOutput {
 	return o
+}
+
+func (o ProxyLBPtrOutput) Elem() ProxyLBOutput {
+	return o.ApplyT(func(v *ProxyLB) ProxyLB {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLB
+		return ret
+	}).(ProxyLBOutput)
 }
 
 type ProxyLBArrayOutput struct{ *pulumi.OutputState }
@@ -553,6 +559,10 @@ func (o ProxyLBMapOutput) MapIndex(k pulumi.StringInput) ProxyLBOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBInput)(nil)).Elem(), &ProxyLB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBPtrInput)(nil)).Elem(), &ProxyLB{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBArrayInput)(nil)).Elem(), ProxyLBArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBMapInput)(nil)).Elem(), ProxyLBMap{})
 	pulumi.RegisterOutputType(ProxyLBOutput{})
 	pulumi.RegisterOutputType(ProxyLBPtrOutput{})
 	pulumi.RegisterOutputType(ProxyLBArrayOutput{})

@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Subnet.
@@ -16,15 +19,15 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		cfg := config.New(ctx, "")
 // 		internetId := cfg.RequireObject("internetId")
-// 		_, err := sakuracloud.LookupSubnet(ctx, &sakuracloud.LookupSubnetArgs{
+// 		_, err := sakuracloud.LookupSubnet(ctx, &GetSubnetArgs{
 // 			InternetId: internetId,
 // 			Index:      1,
 // 		}, nil)
@@ -75,4 +78,98 @@ type LookupSubnetResult struct {
 	// The id of the switch connected from the Subnet.
 	SwitchId string `pulumi:"switchId"`
 	Zone     string `pulumi:"zone"`
+}
+
+func LookupSubnetOutput(ctx *pulumi.Context, args LookupSubnetOutputArgs, opts ...pulumi.InvokeOption) LookupSubnetResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupSubnetResult, error) {
+			args := v.(LookupSubnetArgs)
+			r, err := LookupSubnet(ctx, &args, opts...)
+			return *r, err
+		}).(LookupSubnetResultOutput)
+}
+
+// A collection of arguments for invoking getSubnet.
+type LookupSubnetOutputArgs struct {
+	// The index of the subnet in assigned to the Switch+Router. Changing this forces a new resource to be created.
+	Index pulumi.IntInput `pulumi:"index"`
+	// The id of the switch+router resource that the Subnet belongs. Changing this forces a new resource to be created.
+	InternetId pulumi.StringInput `pulumi:"internetId"`
+	// The name of zone that the Subnet is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupSubnetOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSubnetArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getSubnet.
+type LookupSubnetResultOutput struct{ *pulumi.OutputState }
+
+func (LookupSubnetResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupSubnetResult)(nil)).Elem()
+}
+
+func (o LookupSubnetResultOutput) ToLookupSubnetResultOutput() LookupSubnetResultOutput {
+	return o
+}
+
+func (o LookupSubnetResultOutput) ToLookupSubnetResultOutputWithContext(ctx context.Context) LookupSubnetResultOutput {
+	return o
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupSubnetResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o LookupSubnetResultOutput) Index() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSubnetResult) int { return v.Index }).(pulumi.IntOutput)
+}
+
+func (o LookupSubnetResultOutput) InternetId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.InternetId }).(pulumi.StringOutput)
+}
+
+// A list of assigned global address to the Subnet.
+func (o LookupSubnetResultOutput) IpAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupSubnetResult) []string { return v.IpAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Maximum IP address in assigned global addresses to the Subnet.
+func (o LookupSubnetResultOutput) MaxIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.MaxIpAddress }).(pulumi.StringOutput)
+}
+
+// Minimum IP address in assigned global addresses to the Subnet.
+func (o LookupSubnetResultOutput) MinIpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.MinIpAddress }).(pulumi.StringOutput)
+}
+
+// The bit length of the subnet assigned to the Subnet.
+func (o LookupSubnetResultOutput) Netmask() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupSubnetResult) int { return v.Netmask }).(pulumi.IntOutput)
+}
+
+// The IPv4 network address assigned to the Subnet.
+func (o LookupSubnetResultOutput) NetworkAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.NetworkAddress }).(pulumi.StringOutput)
+}
+
+// The ip address of the next-hop at the Subnet.
+func (o LookupSubnetResultOutput) NextHop() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.NextHop }).(pulumi.StringOutput)
+}
+
+// The id of the switch connected from the Subnet.
+func (o LookupSubnetResultOutput) SwitchId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.SwitchId }).(pulumi.StringOutput)
+}
+
+func (o LookupSubnetResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSubnetResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupSubnetResultOutput{})
 }

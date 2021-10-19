@@ -206,59 +206,59 @@ export interface DatabaseState {
     /**
      * A `backup` block as defined below.
      */
-    readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
+    backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
      * The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
      */
-    readonly databaseType?: pulumi.Input<string>;
+    databaseType?: pulumi.Input<string>;
     /**
      * The description of the Database. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Database.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Database. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface?: pulumi.Input<inputs.DatabaseNetworkInterface>;
+    networkInterface?: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
      * The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
      */
-    readonly parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * The password of default user on the database.
      */
-    readonly password?: pulumi.Input<string>;
+    password?: pulumi.Input<string>;
     /**
      * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The password of user that processing a replication.
      */
-    readonly replicaPassword?: pulumi.Input<string>;
+    replicaPassword?: pulumi.Input<string>;
     /**
      * The name of user that processing a replication. Default:`replica`.
      */
-    readonly replicaUser?: pulumi.Input<string>;
+    replicaUser?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Database.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
      */
-    readonly username?: pulumi.Input<string>;
+    username?: pulumi.Input<string>;
     /**
      * The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -268,57 +268,57 @@ export interface DatabaseArgs {
     /**
      * A `backup` block as defined below.
      */
-    readonly backup?: pulumi.Input<inputs.DatabaseBackup>;
+    backup?: pulumi.Input<inputs.DatabaseBackup>;
     /**
      * The type of the database. This must be one of [`mariadb`/`postgres`]. Changing this forces a new resource to be created. Default:`postgres`.
      */
-    readonly databaseType?: pulumi.Input<string>;
+    databaseType?: pulumi.Input<string>;
     /**
      * The description of the Database. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Database.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Database. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface: pulumi.Input<inputs.DatabaseNetworkInterface>;
+    networkInterface: pulumi.Input<inputs.DatabaseNetworkInterface>;
     /**
      * The map for setting RDBMS-specific parameters. Valid keys can be found with the `usacloud database list-parameters` command.
      */
-    readonly parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * The password of default user on the database.
      */
-    readonly password: pulumi.Input<string>;
+    password: pulumi.Input<string>;
     /**
      * The plan name of the Database. This must be one of [`10g`/`30g`/`90g`/`240g`/`500g`/`1t`]. Changing this forces a new resource to be created. Default:`10g`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The password of user that processing a replication.
      */
-    readonly replicaPassword?: pulumi.Input<string>;
+    replicaPassword?: pulumi.Input<string>;
     /**
      * The name of user that processing a replication. Default:`replica`.
      */
-    readonly replicaUser?: pulumi.Input<string>;
+    replicaUser?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Database.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of default user on the database. The length of this value must be in the range [`3`-`20`]. Changing this forces a new resource to be created.
      */
-    readonly username: pulumi.Input<string>;
+    username: pulumi.Input<string>;
     /**
      * The name of zone that the Database will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

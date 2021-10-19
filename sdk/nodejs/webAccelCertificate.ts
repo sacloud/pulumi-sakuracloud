@@ -152,43 +152,43 @@ export interface WebAccelCertificateState {
     /**
      * .
      */
-    readonly certificateChain?: pulumi.Input<string>;
+    certificateChain?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * .
      */
-    readonly issuerCommonName?: pulumi.Input<string>;
+    issuerCommonName?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly notAfter?: pulumi.Input<string>;
+    notAfter?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly notBefore?: pulumi.Input<string>;
+    notBefore?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly serialNumber?: pulumi.Input<string>;
+    serialNumber?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly sha256Fingerprint?: pulumi.Input<string>;
+    sha256Fingerprint?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly siteId?: pulumi.Input<string>;
+    siteId?: pulumi.Input<string>;
     /**
      * .
      */
-    readonly subjectCommonName?: pulumi.Input<string>;
+    subjectCommonName?: pulumi.Input<string>;
 }
 
 /**
@@ -198,13 +198,13 @@ export interface WebAccelCertificateArgs {
     /**
      * .
      */
-    readonly certificateChain: pulumi.Input<string>;
+    certificateChain: pulumi.Input<string>;
     /**
      * .
      */
-    readonly privateKey: pulumi.Input<string>;
+    privateKey: pulumi.Input<string>;
     /**
      * .
      */
-    readonly siteId: pulumi.Input<string>;
+    siteId: pulumi.Input<string>;
 }

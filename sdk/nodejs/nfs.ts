@@ -142,35 +142,35 @@ export interface NFSState {
     /**
      * The description of the NFS. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the NFS.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the NFS. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface?: pulumi.Input<inputs.NFSNetworkInterface>;
+    networkInterface?: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
      * The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * Any tags to assign to the NFS.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -180,33 +180,33 @@ export interface NFSArgs {
     /**
      * The description of the NFS. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the NFS.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the NFS. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * An `networkInterface` block as defined below.
      */
-    readonly networkInterface: pulumi.Input<inputs.NFSNetworkInterface>;
+    networkInterface: pulumi.Input<inputs.NFSNetworkInterface>;
     /**
      * The plan name of the NFS. This must be one of [`hdd`/`ssd`]. Changing this forces a new resource to be created. Default:`hdd`.
      */
-    readonly plan?: pulumi.Input<string>;
+    plan?: pulumi.Input<string>;
     /**
      * The size of NFS in GiB. Changing this forces a new resource to be created. Default:`100`.
      */
-    readonly size?: pulumi.Input<number>;
+    size?: pulumi.Input<number>;
     /**
      * Any tags to assign to the NFS.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of zone that the NFS will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }

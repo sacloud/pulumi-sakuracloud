@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getIcon(args?: GetIconArgs, opts?: pulumi.InvokeOptions): Promise<GetIconResult> {
@@ -42,7 +42,7 @@ export interface GetIconArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetIconFilter;
+    filter?: inputs.GetIconFilter;
 }
 
 /**
@@ -66,4 +66,18 @@ export interface GetIconResult {
      * The URL for getting the icon's raw data.
      */
     readonly url: string;
+}
+
+export function getIconOutput(args?: GetIconOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIconResult> {
+    return pulumi.output(args).apply(a => getIcon(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getIcon.
+ */
+export interface GetIconOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetIconFilterArgs>;
 }

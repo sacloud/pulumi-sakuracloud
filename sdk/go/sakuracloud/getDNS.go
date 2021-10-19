@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing DNS.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupDNS(ctx, &sakuracloud.LookupDNSArgs{
-// 			Filter: sakuracloud.GetDNSFilter{
+// 		_, err := sakuracloud.LookupDNS(ctx, &GetDNSArgs{
+// 			Filter: GetDNSFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -67,4 +70,81 @@ type LookupDNSResult struct {
 	Tags []string `pulumi:"tags"`
 	// The name of managed domain.
 	Zone string `pulumi:"zone"`
+}
+
+func LookupDNSOutput(ctx *pulumi.Context, args LookupDNSOutputArgs, opts ...pulumi.InvokeOption) LookupDNSResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupDNSResult, error) {
+			args := v.(LookupDNSArgs)
+			r, err := LookupDNS(ctx, &args, opts...)
+			return *r, err
+		}).(LookupDNSResultOutput)
+}
+
+// A collection of arguments for invoking getDNS.
+type LookupDNSOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetDNSFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupDNSOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDNSArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getDNS.
+type LookupDNSResultOutput struct{ *pulumi.OutputState }
+
+func (LookupDNSResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDNSResult)(nil)).Elem()
+}
+
+func (o LookupDNSResultOutput) ToLookupDNSResultOutput() LookupDNSResultOutput {
+	return o
+}
+
+func (o LookupDNSResultOutput) ToLookupDNSResultOutputWithContext(ctx context.Context) LookupDNSResultOutput {
+	return o
+}
+
+// The description of the DNS.
+func (o LookupDNSResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDNSResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// A list of IP address of DNS server that manage this zone.
+func (o LookupDNSResultOutput) DnsServers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupDNSResult) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupDNSResultOutput) Filter() GetDNSFilterPtrOutput {
+	return o.ApplyT(func(v LookupDNSResult) *GetDNSFilter { return v.Filter }).(GetDNSFilterPtrOutput)
+}
+
+// The icon id attached to the DNS.
+func (o LookupDNSResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDNSResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupDNSResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDNSResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// A list of `record` blocks as defined below.
+func (o LookupDNSResultOutput) Records() GetDNSRecordTypeArrayOutput {
+	return o.ApplyT(func(v LookupDNSResult) []GetDNSRecordType { return v.Records }).(GetDNSRecordTypeArrayOutput)
+}
+
+// Any tags assigned to the DNS.
+func (o LookupDNSResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupDNSResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The name of managed domain.
+func (o LookupDNSResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDNSResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupDNSResultOutput{})
 }

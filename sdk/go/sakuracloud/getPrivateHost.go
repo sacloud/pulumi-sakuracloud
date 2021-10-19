@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Private Host.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupPrivateHost(ctx, &sakuracloud.LookupPrivateHostArgs{
-// 			Filter: sakuracloud.GetPrivateHostFilter{
+// 		_, err := sakuracloud.LookupPrivateHost(ctx, &GetPrivateHostArgs{
+// 			Filter: GetPrivateHostFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -74,4 +77,97 @@ type LookupPrivateHostResult struct {
 	// Any tags assigned to the PrivateHost.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupPrivateHostOutput(ctx *pulumi.Context, args LookupPrivateHostOutputArgs, opts ...pulumi.InvokeOption) LookupPrivateHostResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupPrivateHostResult, error) {
+			args := v.(LookupPrivateHostArgs)
+			r, err := LookupPrivateHost(ctx, &args, opts...)
+			return *r, err
+		}).(LookupPrivateHostResultOutput)
+}
+
+// A collection of arguments for invoking getPrivateHost.
+type LookupPrivateHostOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetPrivateHostFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the PrivateHost is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupPrivateHostOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupPrivateHostArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getPrivateHost.
+type LookupPrivateHostResultOutput struct{ *pulumi.OutputState }
+
+func (LookupPrivateHostResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupPrivateHostResult)(nil)).Elem()
+}
+
+func (o LookupPrivateHostResultOutput) ToLookupPrivateHostResultOutput() LookupPrivateHostResultOutput {
+	return o
+}
+
+func (o LookupPrivateHostResultOutput) ToLookupPrivateHostResultOutputWithContext(ctx context.Context) LookupPrivateHostResultOutput {
+	return o
+}
+
+// The total number of CPUs assigned to servers on the private host.
+func (o LookupPrivateHostResultOutput) AssignedCore() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) int { return v.AssignedCore }).(pulumi.IntOutput)
+}
+
+// The total size of memory assigned to servers on the private host.
+func (o LookupPrivateHostResultOutput) AssignedMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) int { return v.AssignedMemory }).(pulumi.IntOutput)
+}
+
+// The class of the PrivateHost. This will be one of [`dynamic`/`msWindows`].
+func (o LookupPrivateHostResultOutput) Class() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Class }).(pulumi.StringOutput)
+}
+
+// The description of the PrivateHost.
+func (o LookupPrivateHostResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupPrivateHostResultOutput) Filter() GetPrivateHostFilterPtrOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) *GetPrivateHostFilter { return v.Filter }).(GetPrivateHostFilterPtrOutput)
+}
+
+// The hostname of the private host.
+func (o LookupPrivateHostResultOutput) Hostname() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Hostname }).(pulumi.StringOutput)
+}
+
+// The icon id attached to the PrivateHost.
+func (o LookupPrivateHostResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupPrivateHostResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the PrivateHost.
+func (o LookupPrivateHostResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the PrivateHost.
+func (o LookupPrivateHostResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupPrivateHostResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPrivateHostResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupPrivateHostResultOutput{})
 }

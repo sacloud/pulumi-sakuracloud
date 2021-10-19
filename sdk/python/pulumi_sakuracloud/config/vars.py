@@ -5,126 +5,143 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from .. import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from .. import _utilities
 
-__all__ = [
-    'accept_language',
-    'api_request_rate_limit',
-    'api_request_timeout',
-    'api_root_url',
-    'default_zone',
-    'fake_mode',
-    'fake_store_path',
-    'profile',
-    'retry_max',
-    'retry_wait_max',
-    'retry_wait_min',
-    'secret',
-    'token',
-    'trace',
-    'zone',
-    'zones',
-]
+import types
 
 __config__ = pulumi.Config('sakuracloud')
 
-accept_language = __config__.get('acceptLanguage')
-"""
-The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
-`SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
-"""
 
-api_request_rate_limit = __config__.get('apiRequestRateLimit')
-"""
-The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
-environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
-"""
+class _ExportableConfig(types.ModuleType):
+    @property
+    def accept_language(self) -> Optional[str]:
+        """
+        The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+        `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('acceptLanguage')
 
-api_request_timeout = __config__.get('apiRequestTimeout')
-"""
-The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
-environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
-"""
+    @property
+    def api_request_rate_limit(self) -> Optional[int]:
+        """
+        The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+        environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
+        """
+        return __config__.get_int('apiRequestRateLimit')
 
-api_root_url = __config__.get('apiRootUrl')
-"""
-The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
-via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
-"""
+    @property
+    def api_request_timeout(self) -> Optional[int]:
+        """
+        The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+        environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
+        """
+        return __config__.get_int('apiRequestTimeout')
 
-default_zone = __config__.get('defaultZone')
-"""
-The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
-`SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
-"""
+    @property
+    def api_root_url(self) -> Optional[str]:
+        """
+        The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+        via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        """
+        return __config__.get('apiRootUrl')
 
-fake_mode = __config__.get('fakeMode')
-"""
-The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
-from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
-"""
+    @property
+    def default_zone(self) -> Optional[str]:
+        """
+        The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('defaultZone')
 
-fake_store_path = __config__.get('fakeStorePath')
-"""
-The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
-provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
-`profile` is specified
-"""
+    @property
+    def fake_mode(self) -> Optional[str]:
+        """
+        The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+        from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('fakeMode')
 
-profile = __config__.get('profile') or (_utilities.get_env('SAKURACLOUD_PROFILE') or 'default')
-"""
-The profile name of your SakuraCloud account. Default:`default`
-"""
+    @property
+    def fake_store_path(self) -> Optional[str]:
+        """
+        The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+        provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+        `profile` is specified
+        """
+        return __config__.get('fakeStorePath')
 
-retry_max = __config__.get('retryMax')
-"""
-The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
-sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
-specified. Default:`100`
-"""
+    @property
+    def profile(self) -> str:
+        """
+        The profile name of your SakuraCloud account. Default:`default`
+        """
+        return __config__.get('profile') or (_utilities.get_env('SAKURACLOUD_PROFILE') or 'default')
 
-retry_wait_max = __config__.get('retryWaitMax')
-"""
-The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
-`503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
-file if `profile` is specified
-"""
+    @property
+    def retry_max(self) -> Optional[int]:
+        """
+        The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+        sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+        specified. Default:`100`
+        """
+        return __config__.get_int('retryMax')
 
-retry_wait_min = __config__.get('retryWaitMin')
-"""
-The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
-`503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
-file if `profile` is specified
-"""
+    @property
+    def retry_wait_max(self) -> Optional[int]:
+        """
+        The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+        file if `profile` is specified
+        """
+        return __config__.get_int('retryWaitMax')
 
-secret = __config__.get('secret') or (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN_SECRET') or '')
-"""
-The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
-`SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
-"""
+    @property
+    def retry_wait_min(self) -> Optional[int]:
+        """
+        The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+        file if `profile` is specified
+        """
+        return __config__.get_int('retryWaitMin')
 
-token = __config__.get('token') or (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN') or '')
-"""
-The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
-`SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
-"""
+    @property
+    def secret(self) -> str:
+        """
+        The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('secret') or (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN_SECRET') or '')
 
-trace = __config__.get('trace')
-"""
-The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
-shared credentials file if `profile` is specified
-"""
+    @property
+    def token(self) -> str:
+        """
+        The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('token') or (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN') or '')
 
-zone = __config__.get('zone') or (_utilities.get_env('SAKURACLOUD_ZONE') or 'is1b')
-"""
-The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
-environment variables, or via a shared credentials file if `profile` is specified
-"""
+    @property
+    def trace(self) -> Optional[str]:
+        """
+        The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+        shared credentials file if `profile` is specified
+        """
+        return __config__.get('trace')
 
-zones = __config__.get('zones')
-"""
-A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
-specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
-"""
+    @property
+    def zone(self) -> str:
+        """
+        The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+        environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return __config__.get('zone') or (_utilities.get_env('SAKURACLOUD_ZONE') or 'is1b')
+
+    @property
+    def zones(self) -> Optional[str]:
+        """
+        A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+        specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
+        """
+        return __config__.get('zones')
 

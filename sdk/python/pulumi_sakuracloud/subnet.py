@@ -5,13 +5,235 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['Subnet']
+__all__ = ['SubnetArgs', 'Subnet']
+
+@pulumi.input_type
+class SubnetArgs:
+    def __init__(__self__, *,
+                 internet_id: pulumi.Input[str],
+                 next_hop: pulumi.Input[str],
+                 netmask: Optional[pulumi.Input[int]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a Subnet resource.
+        :param pulumi.Input[str] internet_id: The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] next_hop: The ip address of the next-hop at the subnet.
+        :param pulumi.Input[int] netmask: The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
+        :param pulumi.Input[str] zone: The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "internet_id", internet_id)
+        pulumi.set(__self__, "next_hop", next_hop)
+        if netmask is not None:
+            pulumi.set(__self__, "netmask", netmask)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="internetId")
+    def internet_id(self) -> pulumi.Input[str]:
+        """
+        The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "internet_id")
+
+    @internet_id.setter
+    def internet_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "internet_id", value)
+
+    @property
+    @pulumi.getter(name="nextHop")
+    def next_hop(self) -> pulumi.Input[str]:
+        """
+        The ip address of the next-hop at the subnet.
+        """
+        return pulumi.get(self, "next_hop")
+
+    @next_hop.setter
+    def next_hop(self, value: pulumi.Input[str]):
+        pulumi.set(self, "next_hop", value)
+
+    @property
+    @pulumi.getter
+    def netmask(self) -> Optional[pulumi.Input[int]]:
+        """
+        The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
+        """
+        return pulumi.get(self, "netmask")
+
+    @netmask.setter
+    def netmask(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "netmask", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _SubnetState:
+    def __init__(__self__, *,
+                 internet_id: Optional[pulumi.Input[str]] = None,
+                 ip_addresses: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 max_ip_address: Optional[pulumi.Input[str]] = None,
+                 min_ip_address: Optional[pulumi.Input[str]] = None,
+                 netmask: Optional[pulumi.Input[int]] = None,
+                 network_address: Optional[pulumi.Input[str]] = None,
+                 next_hop: Optional[pulumi.Input[str]] = None,
+                 switch_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Subnet resources.
+        :param pulumi.Input[str] internet_id: The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ip_addresses: A list of assigned global address to the subnet.
+        :param pulumi.Input[str] max_ip_address: Maximum IP address in assigned global addresses to the subnet.
+        :param pulumi.Input[str] min_ip_address: Minimum IP address in assigned global addresses to the subnet.
+        :param pulumi.Input[int] netmask: The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
+        :param pulumi.Input[str] network_address: The IPv4 network address assigned to the Subnet.
+        :param pulumi.Input[str] next_hop: The ip address of the next-hop at the subnet.
+        :param pulumi.Input[str] switch_id: The id of the switch connected from the Subnet.
+        :param pulumi.Input[str] zone: The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if internet_id is not None:
+            pulumi.set(__self__, "internet_id", internet_id)
+        if ip_addresses is not None:
+            pulumi.set(__self__, "ip_addresses", ip_addresses)
+        if max_ip_address is not None:
+            pulumi.set(__self__, "max_ip_address", max_ip_address)
+        if min_ip_address is not None:
+            pulumi.set(__self__, "min_ip_address", min_ip_address)
+        if netmask is not None:
+            pulumi.set(__self__, "netmask", netmask)
+        if network_address is not None:
+            pulumi.set(__self__, "network_address", network_address)
+        if next_hop is not None:
+            pulumi.set(__self__, "next_hop", next_hop)
+        if switch_id is not None:
+            pulumi.set(__self__, "switch_id", switch_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="internetId")
+    def internet_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the switch+router resource that the subnet belongs. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "internet_id")
+
+    @internet_id.setter
+    def internet_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internet_id", value)
+
+    @property
+    @pulumi.getter(name="ipAddresses")
+    def ip_addresses(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of assigned global address to the subnet.
+        """
+        return pulumi.get(self, "ip_addresses")
+
+    @ip_addresses.setter
+    def ip_addresses(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ip_addresses", value)
+
+    @property
+    @pulumi.getter(name="maxIpAddress")
+    def max_ip_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Maximum IP address in assigned global addresses to the subnet.
+        """
+        return pulumi.get(self, "max_ip_address")
+
+    @max_ip_address.setter
+    def max_ip_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "max_ip_address", value)
+
+    @property
+    @pulumi.getter(name="minIpAddress")
+    def min_ip_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        Minimum IP address in assigned global addresses to the subnet.
+        """
+        return pulumi.get(self, "min_ip_address")
+
+    @min_ip_address.setter
+    def min_ip_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "min_ip_address", value)
+
+    @property
+    @pulumi.getter
+    def netmask(self) -> Optional[pulumi.Input[int]]:
+        """
+        The bit length of the subnet to assign to the Subnet. This must be in the range [`26`-`28`]. Changing this forces a new resource to be created. Default:`28`.
+        """
+        return pulumi.get(self, "netmask")
+
+    @netmask.setter
+    def netmask(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "netmask", value)
+
+    @property
+    @pulumi.getter(name="networkAddress")
+    def network_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IPv4 network address assigned to the Subnet.
+        """
+        return pulumi.get(self, "network_address")
+
+    @network_address.setter
+    def network_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "network_address", value)
+
+    @property
+    @pulumi.getter(name="nextHop")
+    def next_hop(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ip address of the next-hop at the subnet.
+        """
+        return pulumi.get(self, "next_hop")
+
+    @next_hop.setter
+    def next_hop(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "next_hop", value)
+
+    @property
+    @pulumi.getter(name="switchId")
+    def switch_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the switch connected from the Subnet.
+        """
+        return pulumi.get(self, "switch_id")
+
+    @switch_id.setter
+    def switch_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "switch_id", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class Subnet(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -19,9 +241,7 @@ class Subnet(pulumi.CustomResource):
                  netmask: Optional[pulumi.Input[int]] = None,
                  next_hop: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Subnet.
 
@@ -44,12 +264,47 @@ class Subnet(pulumi.CustomResource):
         :param pulumi.Input[str] next_hop: The ip address of the next-hop at the subnet.
         :param pulumi.Input[str] zone: The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: SubnetArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Subnet.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar_internet = sakuracloud.Internet("foobarInternet")
+        foobar_subnet = sakuracloud.Subnet("foobarSubnet",
+            internet_id=foobar_internet.id,
+            next_hop=foobar_internet.min_ip_address)
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param SubnetArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(SubnetArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 internet_id: Optional[pulumi.Input[str]] = None,
+                 netmask: Optional[pulumi.Input[int]] = None,
+                 next_hop: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -59,21 +314,21 @@ class Subnet(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = SubnetArgs.__new__(SubnetArgs)
 
             if internet_id is None and not opts.urn:
                 raise TypeError("Missing required property 'internet_id'")
-            __props__['internet_id'] = internet_id
-            __props__['netmask'] = netmask
+            __props__.__dict__["internet_id"] = internet_id
+            __props__.__dict__["netmask"] = netmask
             if next_hop is None and not opts.urn:
                 raise TypeError("Missing required property 'next_hop'")
-            __props__['next_hop'] = next_hop
-            __props__['zone'] = zone
-            __props__['ip_addresses'] = None
-            __props__['max_ip_address'] = None
-            __props__['min_ip_address'] = None
-            __props__['network_address'] = None
-            __props__['switch_id'] = None
+            __props__.__dict__["next_hop"] = next_hop
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["ip_addresses"] = None
+            __props__.__dict__["max_ip_address"] = None
+            __props__.__dict__["min_ip_address"] = None
+            __props__.__dict__["network_address"] = None
+            __props__.__dict__["switch_id"] = None
         super(Subnet, __self__).__init__(
             'sakuracloud:index/subnet:Subnet',
             resource_name,
@@ -112,17 +367,17 @@ class Subnet(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _SubnetState.__new__(_SubnetState)
 
-        __props__["internet_id"] = internet_id
-        __props__["ip_addresses"] = ip_addresses
-        __props__["max_ip_address"] = max_ip_address
-        __props__["min_ip_address"] = min_ip_address
-        __props__["netmask"] = netmask
-        __props__["network_address"] = network_address
-        __props__["next_hop"] = next_hop
-        __props__["switch_id"] = switch_id
-        __props__["zone"] = zone
+        __props__.__dict__["internet_id"] = internet_id
+        __props__.__dict__["ip_addresses"] = ip_addresses
+        __props__.__dict__["max_ip_address"] = max_ip_address
+        __props__.__dict__["min_ip_address"] = min_ip_address
+        __props__.__dict__["netmask"] = netmask
+        __props__.__dict__["network_address"] = network_address
+        __props__.__dict__["next_hop"] = next_hop
+        __props__.__dict__["switch_id"] = switch_id
+        __props__.__dict__["zone"] = zone
         return Subnet(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -196,10 +451,4 @@ class Subnet(pulumi.CustomResource):
         The name of zone that the Subnet will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

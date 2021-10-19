@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Icon.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupIcon(ctx, &sakuracloud.LookupIconArgs{
-// 			Filter: sakuracloud.GetIconFilter{
+// 		_, err := sakuracloud.LookupIcon(ctx, &GetIconArgs{
+// 			Filter: GetIconFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -61,4 +64,66 @@ type LookupIconResult struct {
 	Tags []string `pulumi:"tags"`
 	// The URL for getting the icon's raw data.
 	Url string `pulumi:"url"`
+}
+
+func LookupIconOutput(ctx *pulumi.Context, args LookupIconOutputArgs, opts ...pulumi.InvokeOption) LookupIconResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupIconResult, error) {
+			args := v.(LookupIconArgs)
+			r, err := LookupIcon(ctx, &args, opts...)
+			return *r, err
+		}).(LookupIconResultOutput)
+}
+
+// A collection of arguments for invoking getIcon.
+type LookupIconOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetIconFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupIconOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupIconArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getIcon.
+type LookupIconResultOutput struct{ *pulumi.OutputState }
+
+func (LookupIconResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupIconResult)(nil)).Elem()
+}
+
+func (o LookupIconResultOutput) ToLookupIconResultOutput() LookupIconResultOutput {
+	return o
+}
+
+func (o LookupIconResultOutput) ToLookupIconResultOutputWithContext(ctx context.Context) LookupIconResultOutput {
+	return o
+}
+
+func (o LookupIconResultOutput) Filter() GetIconFilterPtrOutput {
+	return o.ApplyT(func(v LookupIconResult) *GetIconFilter { return v.Filter }).(GetIconFilterPtrOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupIconResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupIconResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Icon.
+func (o LookupIconResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupIconResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the Icon.
+func (o LookupIconResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupIconResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The URL for getting the icon's raw data.
+func (o LookupIconResultOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupIconResult) string { return v.Url }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupIconResultOutput{})
 }

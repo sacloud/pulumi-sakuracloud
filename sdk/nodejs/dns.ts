@@ -134,27 +134,27 @@ export interface DNSState {
     /**
      * The description of the DNS. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * A list of IP address of DNS server that manage this zone.
      */
-    readonly dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The icon id to attach to the DNS.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * One or more `record` blocks as defined below.
      */
-    readonly records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
+    records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
     /**
      * Any tags to assign to the DNS.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The target zone. (e.g. `example.com`). Changing this forces a new resource to be created.
      */
-    readonly zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
 }
 
 /**
@@ -164,21 +164,21 @@ export interface DNSArgs {
     /**
      * The description of the DNS. The length of this value must be in the range [`1`-`512`].
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the DNS.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * One or more `record` blocks as defined below.
      */
-    readonly records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
+    records?: pulumi.Input<pulumi.Input<inputs.DNSRecord>[]>;
     /**
      * Any tags to assign to the DNS.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The target zone. (e.g. `example.com`). Changing this forces a new resource to be created.
      */
-    readonly zone: pulumi.Input<string>;
+    zone: pulumi.Input<string>;
 }

@@ -5,13 +5,283 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['EnhancedDB']
+__all__ = ['EnhancedDBArgs', 'EnhancedDB']
+
+@pulumi.input_type
+class EnhancedDBArgs:
+    def __init__(__self__, *,
+                 database_name: pulumi.Input[str],
+                 password: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a EnhancedDB resource.
+        :param pulumi.Input[str] database_name: The name of database. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] password: The password of database.
+        :param pulumi.Input[str] description: The description of the Enhanced Database. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Enhanced Database.
+        :param pulumi.Input[str] name: The name of the Enhanced Database. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Enhanced Database.
+        """
+        pulumi.set(__self__, "database_name", database_name)
+        pulumi.set(__self__, "password", password)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> pulumi.Input[str]:
+        """
+        The name of database. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "database_name", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> pulumi.Input[str]:
+        """
+        The password of database.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: pulumi.Input[str]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Enhanced Database. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Enhanced Database.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Enhanced Database. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Enhanced Database.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+@pulumi.input_type
+class _EnhancedDBState:
+    def __init__(__self__, *,
+                 database_name: Optional[pulumi.Input[str]] = None,
+                 database_type: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hostname: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 max_connections: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 region: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        Input properties used for looking up and filtering EnhancedDB resources.
+        :param pulumi.Input[str] database_name: The name of database. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] database_type: The type of database.
+        :param pulumi.Input[str] description: The description of the Enhanced Database. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] hostname: The name of database host. This will be built from `database_name` + `tidb-is1.db.sakurausercontent.com`.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Enhanced Database.
+        :param pulumi.Input[int] max_connections: The value of max connections setting.
+        :param pulumi.Input[str] name: The name of the Enhanced Database. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] password: The password of database.
+        :param pulumi.Input[str] region: The region name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Enhanced Database.
+        """
+        if database_name is not None:
+            pulumi.set(__self__, "database_name", database_name)
+        if database_type is not None:
+            pulumi.set(__self__, "database_type", database_type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hostname is not None:
+            pulumi.set(__self__, "hostname", hostname)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if max_connections is not None:
+            pulumi.set(__self__, "max_connections", max_connections)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of database. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_name", value)
+
+    @property
+    @pulumi.getter(name="databaseType")
+    def database_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of database.
+        """
+        return pulumi.get(self, "database_type")
+
+    @database_type.setter
+    def database_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_type", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Enhanced Database. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def hostname(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of database host. This will be built from `database_name` + `tidb-is1.db.sakurausercontent.com`.
+        """
+        return pulumi.get(self, "hostname")
+
+    @hostname.setter
+    def hostname(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hostname", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Enhanced Database.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="maxConnections")
+    def max_connections(self) -> Optional[pulumi.Input[int]]:
+        """
+        The value of max connections setting.
+        """
+        return pulumi.get(self, "max_connections")
+
+    @max_connections.setter
+    def max_connections(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "max_connections", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Enhanced Database. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        The password of database.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[pulumi.Input[str]]:
+        """
+        The region name.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Enhanced Database.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class EnhancedDB(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -21,9 +291,7 @@ class EnhancedDB(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud sakuracloud_enhanced_db.
 
@@ -52,12 +320,53 @@ class EnhancedDB(pulumi.CustomResource):
         :param pulumi.Input[str] password: The password of database.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Enhanced Database.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: EnhancedDBArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud sakuracloud_enhanced_db.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.EnhancedDB("foobar",
+            database_name="example",
+            description="...",
+            password="your-password",
+            tags=[
+                "...",
+                "...",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param EnhancedDBArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(EnhancedDBArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 database_name: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -67,22 +376,22 @@ class EnhancedDB(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = EnhancedDBArgs.__new__(EnhancedDBArgs)
 
             if database_name is None and not opts.urn:
                 raise TypeError("Missing required property 'database_name'")
-            __props__['database_name'] = database_name
-            __props__['description'] = description
-            __props__['icon_id'] = icon_id
-            __props__['name'] = name
+            __props__.__dict__["database_name"] = database_name
+            __props__.__dict__["description"] = description
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["name"] = name
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
-            __props__['password'] = password
-            __props__['tags'] = tags
-            __props__['database_type'] = None
-            __props__['hostname'] = None
-            __props__['max_connections'] = None
-            __props__['region'] = None
+            __props__.__dict__["password"] = password
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["database_type"] = None
+            __props__.__dict__["hostname"] = None
+            __props__.__dict__["max_connections"] = None
+            __props__.__dict__["region"] = None
         super(EnhancedDB, __self__).__init__(
             'sakuracloud:index/enhancedDB:EnhancedDB',
             resource_name,
@@ -123,18 +432,18 @@ class EnhancedDB(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _EnhancedDBState.__new__(_EnhancedDBState)
 
-        __props__["database_name"] = database_name
-        __props__["database_type"] = database_type
-        __props__["description"] = description
-        __props__["hostname"] = hostname
-        __props__["icon_id"] = icon_id
-        __props__["max_connections"] = max_connections
-        __props__["name"] = name
-        __props__["password"] = password
-        __props__["region"] = region
-        __props__["tags"] = tags
+        __props__.__dict__["database_name"] = database_name
+        __props__.__dict__["database_type"] = database_type
+        __props__.__dict__["description"] = description
+        __props__.__dict__["hostname"] = hostname
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["max_connections"] = max_connections
+        __props__.__dict__["name"] = name
+        __props__.__dict__["password"] = password
+        __props__.__dict__["region"] = region
+        __props__.__dict__["tags"] = tags
         return EnhancedDB(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -216,10 +525,4 @@ class EnhancedDB(pulumi.CustomResource):
         Any tags to assign to the Enhanced Database.
         """
         return pulumi.get(self, "tags")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetLocalRouterResult',
     'AwaitableGetLocalRouterResult',
     'get_local_router',
+    'get_local_router_output',
 ]
 
 @pulumi.output_type
@@ -200,3 +201,26 @@ def get_local_router(filter: Optional[pulumi.InputType['GetLocalRouterFilterArgs
         static_routes=__ret__.static_routes,
         switches=__ret__.switches,
         tags=__ret__.tags)
+
+
+@_utilities.lift_output_func(get_local_router)
+def get_local_router_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetLocalRouterFilterArgs']]]] = None,
+                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetLocalRouterResult]:
+    """
+    Get information about an existing Local Router.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_local_router(filter=sakuracloud.GetLocalRouterFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetLocalRouterFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getNote(args?: GetNoteArgs, opts?: pulumi.InvokeOptions): Promise<GetNoteResult> {
@@ -42,7 +42,7 @@ export interface GetNoteArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetNoteFilter;
+    filter?: inputs.GetNoteFilter;
 }
 
 /**
@@ -78,4 +78,18 @@ export interface GetNoteResult {
      * Any tags assigned to the Note.
      */
     readonly tags: string[];
+}
+
+export function getNoteOutput(args?: GetNoteOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNoteResult> {
+    return pulumi.output(args).apply(a => getNote(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getNote.
+ */
+export interface GetNoteOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetNoteFilterArgs>;
 }

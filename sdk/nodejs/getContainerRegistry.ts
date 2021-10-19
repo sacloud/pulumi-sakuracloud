@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getContainerRegistry(args?: GetContainerRegistryArgs, opts?: pulumi.InvokeOptions): Promise<GetContainerRegistryResult> {
@@ -42,7 +42,7 @@ export interface GetContainerRegistryArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetContainerRegistryFilter;
+    filter?: inputs.GetContainerRegistryFilter;
 }
 
 /**
@@ -90,4 +90,18 @@ export interface GetContainerRegistryResult {
      * The alias for accessing the container registry.
      */
     readonly virtualDomain: string;
+}
+
+export function getContainerRegistryOutput(args?: GetContainerRegistryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetContainerRegistryResult> {
+    return pulumi.output(args).apply(a => getContainerRegistry(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getContainerRegistry.
+ */
+export interface GetContainerRegistryOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetContainerRegistryFilterArgs>;
 }

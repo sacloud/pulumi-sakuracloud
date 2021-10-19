@@ -5,13 +5,349 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['CDROM']
+__all__ = ['CDROMArgs', 'CDROM']
+
+@pulumi.input_type
+class CDROMArgs:
+    def __init__(__self__, *,
+                 content: Optional[pulumi.Input[str]] = None,
+                 content_file_name: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 iso_image_file: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a CDROM resource.
+        :param pulumi.Input[str] content: The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
+        :param pulumi.Input[str] content_file_name: The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
+        :param pulumi.Input[str] description: The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the CD-ROM.
+        :param pulumi.Input[str] iso_image_file: The file path to upload to as the CD-ROM. This conflicts with [`content`].
+        :param pulumi.Input[str] name: The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[int] size: The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the CD-ROM.
+        :param pulumi.Input[str] zone: The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if content_file_name is not None:
+            pulumi.set(__self__, "content_file_name", content_file_name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hash is not None:
+            pulumi.set(__self__, "hash", hash)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if iso_image_file is not None:
+            pulumi.set(__self__, "iso_image_file", iso_image_file)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter(name="contentFileName")
+    def content_file_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
+        """
+        return pulumi.get(self, "content_file_name")
+
+    @content_file_name.setter
+    def content_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_file_name", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The md5 checksum calculated from the base64 encoded file body.
+        """
+        return pulumi.get(self, "hash")
+
+    @hash.setter
+    def hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the CD-ROM.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="isoImageFile")
+    def iso_image_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to as the CD-ROM. This conflicts with [`content`].
+        """
+        return pulumi.get(self, "iso_image_file")
+
+    @iso_image_file.setter
+    def iso_image_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "iso_image_file", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
+        """
+        return pulumi.get(self, "size")
+
+    @size.setter
+    def size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the CD-ROM.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _CDROMState:
+    def __init__(__self__, *,
+                 content: Optional[pulumi.Input[str]] = None,
+                 content_file_name: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 iso_image_file: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering CDROM resources.
+        :param pulumi.Input[str] content: The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
+        :param pulumi.Input[str] content_file_name: The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
+        :param pulumi.Input[str] description: The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input[str] hash: The md5 checksum calculated from the base64 encoded file body.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the CD-ROM.
+        :param pulumi.Input[str] iso_image_file: The file path to upload to as the CD-ROM. This conflicts with [`content`].
+        :param pulumi.Input[str] name: The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[int] size: The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the CD-ROM.
+        :param pulumi.Input[str] zone: The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if content_file_name is not None:
+            pulumi.set(__self__, "content_file_name", content_file_name)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hash is not None:
+            pulumi.set(__self__, "hash", hash)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if iso_image_file is not None:
+            pulumi.set(__self__, "iso_image_file", iso_image_file)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The content to upload to as the CD-ROM. This conflicts with [`iso_image_file`].
+        """
+        return pulumi.get(self, "content")
+
+    @content.setter
+    def content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content", value)
+
+    @property
+    @pulumi.getter(name="contentFileName")
+    def content_file_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of content file to upload to as the CD-ROM. This is only used when `content` is specified. This conflicts with [`iso_image_file`]. Default:`config`.
+        """
+        return pulumi.get(self, "content_file_name")
+
+    @content_file_name.setter
+    def content_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "content_file_name", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the CD-ROM. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The md5 checksum calculated from the base64 encoded file body.
+        """
+        return pulumi.get(self, "hash")
+
+    @hash.setter
+    def hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hash", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the CD-ROM.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="isoImageFile")
+    def iso_image_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path to upload to as the CD-ROM. This conflicts with [`content`].
+        """
+        return pulumi.get(self, "iso_image_file")
+
+    @iso_image_file.setter
+    def iso_image_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "iso_image_file", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the CD-ROM. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of CD-ROM in GiB. This must be one of [`5`/`10`]. Changing this forces a new resource to be created. Default:`5`.
+        """
+        return pulumi.get(self, "size")
+
+    @size.setter
+    def size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "size", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the CD-ROM.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class CDROM(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -25,9 +361,7 @@ class CDROM(pulumi.CustomResource):
                  size: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud CD-ROM.
 
@@ -60,12 +394,57 @@ class CDROM(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the CD-ROM.
         :param pulumi.Input[str] zone: The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[CDROMArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud CD-ROM.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.CDROM("foobar",
+            description="description",
+            iso_image_file="example.iso",
+            size=5,
+            tags=[
+                "tag1",
+                "tag2",
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param CDROMArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(CDROMArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 content: Optional[pulumi.Input[str]] = None,
+                 content_file_name: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 hash: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 iso_image_file: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 size: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -75,18 +454,18 @@ class CDROM(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = CDROMArgs.__new__(CDROMArgs)
 
-            __props__['content'] = content
-            __props__['content_file_name'] = content_file_name
-            __props__['description'] = description
-            __props__['hash'] = hash
-            __props__['icon_id'] = icon_id
-            __props__['iso_image_file'] = iso_image_file
-            __props__['name'] = name
-            __props__['size'] = size
-            __props__['tags'] = tags
-            __props__['zone'] = zone
+            __props__.__dict__["content"] = content
+            __props__.__dict__["content_file_name"] = content_file_name
+            __props__.__dict__["description"] = description
+            __props__.__dict__["hash"] = hash
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["iso_image_file"] = iso_image_file
+            __props__.__dict__["name"] = name
+            __props__.__dict__["size"] = size
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["zone"] = zone
         super(CDROM, __self__).__init__(
             'sakuracloud:index/cDROM:CDROM',
             resource_name,
@@ -127,18 +506,18 @@ class CDROM(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _CDROMState.__new__(_CDROMState)
 
-        __props__["content"] = content
-        __props__["content_file_name"] = content_file_name
-        __props__["description"] = description
-        __props__["hash"] = hash
-        __props__["icon_id"] = icon_id
-        __props__["iso_image_file"] = iso_image_file
-        __props__["name"] = name
-        __props__["size"] = size
-        __props__["tags"] = tags
-        __props__["zone"] = zone
+        __props__.__dict__["content"] = content
+        __props__.__dict__["content_file_name"] = content_file_name
+        __props__.__dict__["description"] = description
+        __props__.__dict__["hash"] = hash
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["iso_image_file"] = iso_image_file
+        __props__.__dict__["name"] = name
+        __props__.__dict__["size"] = size
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["zone"] = zone
         return CDROM(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -220,10 +599,4 @@ class CDROM(pulumi.CustomResource):
         The name of zone that the CD-ROM will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

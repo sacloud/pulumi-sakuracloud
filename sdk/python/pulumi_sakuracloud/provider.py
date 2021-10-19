@@ -5,13 +5,323 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
-__all__ = ['Provider']
+__all__ = ['ProviderArgs', 'Provider']
+
+@pulumi.input_type
+class ProviderArgs:
+    def __init__(__self__, *,
+                 accept_language: Optional[pulumi.Input[str]] = None,
+                 api_request_rate_limit: Optional[pulumi.Input[int]] = None,
+                 api_request_timeout: Optional[pulumi.Input[int]] = None,
+                 api_root_url: Optional[pulumi.Input[str]] = None,
+                 default_zone: Optional[pulumi.Input[str]] = None,
+                 fake_mode: Optional[pulumi.Input[str]] = None,
+                 fake_store_path: Optional[pulumi.Input[str]] = None,
+                 profile: Optional[pulumi.Input[str]] = None,
+                 retry_max: Optional[pulumi.Input[int]] = None,
+                 retry_wait_max: Optional[pulumi.Input[int]] = None,
+                 retry_wait_min: Optional[pulumi.Input[int]] = None,
+                 secret: Optional[pulumi.Input[str]] = None,
+                 token: Optional[pulumi.Input[str]] = None,
+                 trace: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[str] accept_language: The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+               `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[int] api_request_rate_limit: The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+               environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
+        :param pulumi.Input[int] api_request_timeout: The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+               environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
+        :param pulumi.Input[str] api_root_url: The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+               via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        :param pulumi.Input[str] default_zone: The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+               `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] fake_mode: The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+               from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] fake_store_path: The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+               provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+               `profile` is specified
+        :param pulumi.Input[str] profile: The profile name of your SakuraCloud account. Default:`default`
+        :param pulumi.Input[int] retry_max: The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+               sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+               specified. Default:`100`
+        :param pulumi.Input[int] retry_wait_max: The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+               `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+               file if `profile` is specified
+        :param pulumi.Input[int] retry_wait_min: The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+               `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+               file if `profile` is specified
+        :param pulumi.Input[str] secret: The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+               `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] token: The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+               `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[str] trace: The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+               shared credentials file if `profile` is specified
+        :param pulumi.Input[str] zone: The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+               environment variables, or via a shared credentials file if `profile` is specified
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+               specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
+        """
+        if accept_language is not None:
+            pulumi.set(__self__, "accept_language", accept_language)
+        if api_request_rate_limit is not None:
+            pulumi.set(__self__, "api_request_rate_limit", api_request_rate_limit)
+        if api_request_timeout is not None:
+            pulumi.set(__self__, "api_request_timeout", api_request_timeout)
+        if api_root_url is not None:
+            pulumi.set(__self__, "api_root_url", api_root_url)
+        if default_zone is not None:
+            pulumi.set(__self__, "default_zone", default_zone)
+        if fake_mode is not None:
+            pulumi.set(__self__, "fake_mode", fake_mode)
+        if fake_store_path is not None:
+            pulumi.set(__self__, "fake_store_path", fake_store_path)
+        if profile is None:
+            profile = (_utilities.get_env('SAKURACLOUD_PROFILE') or 'default')
+        if profile is not None:
+            pulumi.set(__self__, "profile", profile)
+        if retry_max is not None:
+            pulumi.set(__self__, "retry_max", retry_max)
+        if retry_wait_max is not None:
+            pulumi.set(__self__, "retry_wait_max", retry_wait_max)
+        if retry_wait_min is not None:
+            pulumi.set(__self__, "retry_wait_min", retry_wait_min)
+        if secret is None:
+            secret = (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN_SECRET') or '')
+        if secret is not None:
+            pulumi.set(__self__, "secret", secret)
+        if token is None:
+            token = (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN') or '')
+        if token is not None:
+            pulumi.set(__self__, "token", token)
+        if trace is not None:
+            pulumi.set(__self__, "trace", trace)
+        if zone is None:
+            zone = (_utilities.get_env('SAKURACLOUD_ZONE') or 'is1b')
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+        if zones is not None:
+            pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter(name="acceptLanguage")
+    def accept_language(self) -> Optional[pulumi.Input[str]]:
+        """
+        The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+        `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "accept_language")
+
+    @accept_language.setter
+    def accept_language(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "accept_language", value)
+
+    @property
+    @pulumi.getter(name="apiRequestRateLimit")
+    def api_request_rate_limit(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of SakuraCloud API calls per second. It can also be sourced from the `SAKURACLOUD_RATE_LIMIT`
+        environment variables, or via a shared credentials file if `profile` is specified. Default:`10`
+        """
+        return pulumi.get(self, "api_request_rate_limit")
+
+    @api_request_rate_limit.setter
+    def api_request_rate_limit(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "api_request_rate_limit", value)
+
+    @property
+    @pulumi.getter(name="apiRequestTimeout")
+    def api_request_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        The timeout seconds for each SakuraCloud API call. It can also be sourced from the `SAKURACLOUD_API_REQUEST_TIMEOUT`
+        environment variables, or via a shared credentials file if `profile` is specified. Default:`300`
+        """
+        return pulumi.get(self, "api_request_timeout")
+
+    @api_request_timeout.setter
+    def api_request_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "api_request_timeout", value)
+
+    @property
+    @pulumi.getter(name="apiRootUrl")
+    def api_root_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+        via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        """
+        return pulumi.get(self, "api_root_url")
+
+    @api_root_url.setter
+    def api_root_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_root_url", value)
+
+    @property
+    @pulumi.getter(name="defaultZone")
+    def default_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "default_zone")
+
+    @default_zone.setter
+    def default_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "default_zone", value)
+
+    @property
+    @pulumi.getter(name="fakeMode")
+    def fake_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+        from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "fake_mode")
+
+    @fake_mode.setter
+    def fake_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fake_mode", value)
+
+    @property
+    @pulumi.getter(name="fakeStorePath")
+    def fake_store_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+        provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+        `profile` is specified
+        """
+        return pulumi.get(self, "fake_store_path")
+
+    @fake_store_path.setter
+    def fake_store_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fake_store_path", value)
+
+    @property
+    @pulumi.getter
+    def profile(self) -> Optional[pulumi.Input[str]]:
+        """
+        The profile name of your SakuraCloud account. Default:`default`
+        """
+        return pulumi.get(self, "profile")
+
+    @profile.setter
+    def profile(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "profile", value)
+
+    @property
+    @pulumi.getter(name="retryMax")
+    def retry_max(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of API call retries used when SakuraCloud API returns status code `423` or `503`. It can also be
+        sourced from the `SAKURACLOUD_RETRY_MAX` environment variables, or via a shared credentials file if `profile` is
+        specified. Default:`100`
+        """
+        return pulumi.get(self, "retry_max")
+
+    @retry_max.setter
+    def retry_max(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_max", value)
+
+    @property
+    @pulumi.getter(name="retryWaitMax")
+    def retry_wait_max(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MAX` environment variables, or via a shared credentials
+        file if `profile` is specified
+        """
+        return pulumi.get(self, "retry_wait_max")
+
+    @retry_wait_max.setter
+    def retry_wait_max(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_wait_max", value)
+
+    @property
+    @pulumi.getter(name="retryWaitMin")
+    def retry_wait_min(self) -> Optional[pulumi.Input[int]]:
+        """
+        The minimum wait interval(in seconds) for retrying API call used when SakuraCloud API returns status code `423` or
+        `503`. It can also be sourced from the `SAKURACLOUD_RETRY_WAIT_MIN` environment variables, or via a shared credentials
+        file if `profile` is specified
+        """
+        return pulumi.get(self, "retry_wait_min")
+
+    @retry_wait_min.setter
+    def retry_wait_min(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retry_wait_min", value)
+
+    @property
+    @pulumi.getter
+    def secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "secret")
+
+    @secret.setter
+    def secret(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "secret", value)
+
+    @property
+    @pulumi.getter
+    def token(self) -> Optional[pulumi.Input[str]]:
+        """
+        The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "token")
+
+    @token.setter
+    def token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "token", value)
+
+    @property
+    @pulumi.getter
+    def trace(self) -> Optional[pulumi.Input[str]]:
+        """
+        The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+        shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "trace")
+
+    @trace.setter
+    def trace(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "trace", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+        environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
+        specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
+        """
+        return pulumi.get(self, "zones")
+
+    @zones.setter
+    def zones(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "zones", value)
 
 
 class Provider(pulumi.ProviderResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -31,9 +341,7 @@ class Provider(pulumi.ProviderResource):
                  trace: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         The provider type for the sakuracloud package. By default, resources use package-wide configuration
         settings, however an explicit `Provider` instance may be created and passed during resource
@@ -78,12 +386,50 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: A list of available SakuraCloud zone name. It can also be sourced via a shared credentials file if `profile` is
                specified. Default:[`is1a`, `is1b`, `tk1a`, `tk1v`]
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[ProviderArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        The provider type for the sakuracloud package. By default, resources use package-wide configuration
+        settings, however an explicit `Provider` instance may be created and passed during resource
+        construction to achieve fine-grained programmatic control over provider settings. See the
+        [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
+
+        :param str resource_name: The name of the resource.
+        :param ProviderArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ProviderArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 accept_language: Optional[pulumi.Input[str]] = None,
+                 api_request_rate_limit: Optional[pulumi.Input[int]] = None,
+                 api_request_timeout: Optional[pulumi.Input[int]] = None,
+                 api_root_url: Optional[pulumi.Input[str]] = None,
+                 default_zone: Optional[pulumi.Input[str]] = None,
+                 fake_mode: Optional[pulumi.Input[str]] = None,
+                 fake_store_path: Optional[pulumi.Input[str]] = None,
+                 profile: Optional[pulumi.Input[str]] = None,
+                 retry_max: Optional[pulumi.Input[int]] = None,
+                 retry_wait_max: Optional[pulumi.Input[int]] = None,
+                 retry_wait_min: Optional[pulumi.Input[int]] = None,
+                 secret: Optional[pulumi.Input[str]] = None,
+                 token: Optional[pulumi.Input[str]] = None,
+                 trace: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -93,41 +439,125 @@ class Provider(pulumi.ProviderResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            __props__['accept_language'] = accept_language
-            __props__['api_request_rate_limit'] = pulumi.Output.from_input(api_request_rate_limit).apply(pulumi.runtime.to_json) if api_request_rate_limit is not None else None
-            __props__['api_request_timeout'] = pulumi.Output.from_input(api_request_timeout).apply(pulumi.runtime.to_json) if api_request_timeout is not None else None
-            __props__['api_root_url'] = api_root_url
-            __props__['default_zone'] = default_zone
-            __props__['fake_mode'] = fake_mode
-            __props__['fake_store_path'] = fake_store_path
+            __props__.__dict__["accept_language"] = accept_language
+            __props__.__dict__["api_request_rate_limit"] = pulumi.Output.from_input(api_request_rate_limit).apply(pulumi.runtime.to_json) if api_request_rate_limit is not None else None
+            __props__.__dict__["api_request_timeout"] = pulumi.Output.from_input(api_request_timeout).apply(pulumi.runtime.to_json) if api_request_timeout is not None else None
+            __props__.__dict__["api_root_url"] = api_root_url
+            __props__.__dict__["default_zone"] = default_zone
+            __props__.__dict__["fake_mode"] = fake_mode
+            __props__.__dict__["fake_store_path"] = fake_store_path
             if profile is None:
                 profile = (_utilities.get_env('SAKURACLOUD_PROFILE') or 'default')
-            __props__['profile'] = profile
-            __props__['retry_max'] = pulumi.Output.from_input(retry_max).apply(pulumi.runtime.to_json) if retry_max is not None else None
-            __props__['retry_wait_max'] = pulumi.Output.from_input(retry_wait_max).apply(pulumi.runtime.to_json) if retry_wait_max is not None else None
-            __props__['retry_wait_min'] = pulumi.Output.from_input(retry_wait_min).apply(pulumi.runtime.to_json) if retry_wait_min is not None else None
+            __props__.__dict__["profile"] = profile
+            __props__.__dict__["retry_max"] = pulumi.Output.from_input(retry_max).apply(pulumi.runtime.to_json) if retry_max is not None else None
+            __props__.__dict__["retry_wait_max"] = pulumi.Output.from_input(retry_wait_max).apply(pulumi.runtime.to_json) if retry_wait_max is not None else None
+            __props__.__dict__["retry_wait_min"] = pulumi.Output.from_input(retry_wait_min).apply(pulumi.runtime.to_json) if retry_wait_min is not None else None
             if secret is None:
                 secret = (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN_SECRET') or '')
-            __props__['secret'] = secret
+            __props__.__dict__["secret"] = secret
             if token is None:
                 token = (_utilities.get_env('SAKURACLOUD_ACCESS_TOKEN') or '')
-            __props__['token'] = token
-            __props__['trace'] = trace
+            __props__.__dict__["token"] = token
+            __props__.__dict__["trace"] = trace
             if zone is None:
                 zone = (_utilities.get_env('SAKURACLOUD_ZONE') or 'is1b')
-            __props__['zone'] = zone
-            __props__['zones'] = pulumi.Output.from_input(zones).apply(pulumi.runtime.to_json) if zones is not None else None
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["zones"] = pulumi.Output.from_input(zones).apply(pulumi.runtime.to_json) if zones is not None else None
         super(Provider, __self__).__init__(
             'sakuracloud',
             resource_name,
             __props__,
             opts)
 
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+    @property
+    @pulumi.getter(name="acceptLanguage")
+    def accept_language(self) -> pulumi.Output[Optional[str]]:
+        """
+        The value of AcceptLanguage header used when calling SakuraCloud API. It can also be sourced from the
+        `SAKURACLOUD_ACCEPT_LANGUAGE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "accept_language")
 
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
+    @property
+    @pulumi.getter(name="apiRootUrl")
+    def api_root_url(self) -> pulumi.Output[Optional[str]]:
+        """
+        The root URL of SakuraCloud API. It can also be sourced from the `SAKURACLOUD_API_ROOT_URL` environment variables, or
+        via a shared credentials file if `profile` is specified. Default:`https://secure.sakura.ad.jp/cloud/zone`
+        """
+        return pulumi.get(self, "api_root_url")
+
+    @property
+    @pulumi.getter(name="defaultZone")
+    def default_zone(self) -> pulumi.Output[Optional[str]]:
+        """
+        The name of zone to use as default for global resources. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_DEFAULT_ZONE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "default_zone")
+
+    @property
+    @pulumi.getter(name="fakeMode")
+    def fake_mode(self) -> pulumi.Output[Optional[str]]:
+        """
+        The flag to enable fake of SakuraCloud API call. It is for debugging or developping the provider. It can also be sourced
+        from the `FAKE_MODE` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "fake_mode")
+
+    @property
+    @pulumi.getter(name="fakeStorePath")
+    def fake_store_path(self) -> pulumi.Output[Optional[str]]:
+        """
+        The file path used by SakuraCloud API fake driver for storing fake data. It is for debugging or developping the
+        provider. It can also be sourced from the `FAKE_STORE_PATH` environment variables, or via a shared credentials file if
+        `profile` is specified
+        """
+        return pulumi.get(self, "fake_store_path")
+
+    @property
+    @pulumi.getter
+    def profile(self) -> pulumi.Output[Optional[str]]:
+        """
+        The profile name of your SakuraCloud account. Default:`default`
+        """
+        return pulumi.get(self, "profile")
+
+    @property
+    @pulumi.getter
+    def secret(self) -> pulumi.Output[Optional[str]]:
+        """
+        The API secret of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN_SECRET` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "secret")
+
+    @property
+    @pulumi.getter
+    def token(self) -> pulumi.Output[Optional[str]]:
+        """
+        The API token of your SakuraCloud account. It must be provided, but it can also be sourced from the
+        `SAKURACLOUD_ACCESS_TOKEN` environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "token")
+
+    @property
+    @pulumi.getter
+    def trace(self) -> pulumi.Output[Optional[str]]:
+        """
+        The flag to enable output trace log. It can also be sourced from the `SAKURACLOUD_TRACE` environment variables, or via a
+        shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "trace")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> pulumi.Output[Optional[str]]:
+        """
+        The name of zone to use as default. It must be provided, but it can also be sourced from the `SAKURACLOUD_ZONE`
+        environment variables, or via a shared credentials file if `profile` is specified
+        """
+        return pulumi.get(self, "zone")
 

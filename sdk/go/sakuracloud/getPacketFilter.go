@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Packet Filter.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupPacketFilter(ctx, &sakuracloud.LookupPacketFilterArgs{
-// 			Filter: sakuracloud.GetPacketFilterFilter{
+// 		_, err := sakuracloud.LookupPacketFilter(ctx, &GetPacketFilterArgs{
+// 			Filter: GetPacketFilterFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -64,4 +67,72 @@ type LookupPacketFilterResult struct {
 	// The name of the PacketFilter.
 	Name string `pulumi:"name"`
 	Zone string `pulumi:"zone"`
+}
+
+func LookupPacketFilterOutput(ctx *pulumi.Context, args LookupPacketFilterOutputArgs, opts ...pulumi.InvokeOption) LookupPacketFilterResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupPacketFilterResult, error) {
+			args := v.(LookupPacketFilterArgs)
+			r, err := LookupPacketFilter(ctx, &args, opts...)
+			return *r, err
+		}).(LookupPacketFilterResultOutput)
+}
+
+// A collection of arguments for invoking getPacketFilter.
+type LookupPacketFilterOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetPacketFilterFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupPacketFilterOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupPacketFilterArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getPacketFilter.
+type LookupPacketFilterResultOutput struct{ *pulumi.OutputState }
+
+func (LookupPacketFilterResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupPacketFilterResult)(nil)).Elem()
+}
+
+func (o LookupPacketFilterResultOutput) ToLookupPacketFilterResultOutput() LookupPacketFilterResultOutput {
+	return o
+}
+
+func (o LookupPacketFilterResultOutput) ToLookupPacketFilterResultOutputWithContext(ctx context.Context) LookupPacketFilterResultOutput {
+	return o
+}
+
+// The description of the expression.
+func (o LookupPacketFilterResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// One or more `expression` blocks as defined below.
+func (o LookupPacketFilterResultOutput) Expressions() GetPacketFilterExpressionArrayOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) []GetPacketFilterExpression { return v.Expressions }).(GetPacketFilterExpressionArrayOutput)
+}
+
+func (o LookupPacketFilterResultOutput) Filter() GetPacketFilterFilterPtrOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) *GetPacketFilterFilter { return v.Filter }).(GetPacketFilterFilterPtrOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupPacketFilterResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the PacketFilter.
+func (o LookupPacketFilterResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o LookupPacketFilterResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupPacketFilterResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupPacketFilterResultOutput{})
 }

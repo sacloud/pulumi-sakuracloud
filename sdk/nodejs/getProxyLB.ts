@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getProxyLB(args?: GetProxyLBArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyLBResult> {
@@ -42,7 +42,7 @@ export interface GetProxyLBArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetProxyLBFilter;
+    filter?: inputs.GetProxyLBFilter;
 }
 
 /**
@@ -138,4 +138,18 @@ export interface GetProxyLBResult {
      * The flag to enable VIP fail-over.
      */
     readonly vipFailover: boolean;
+}
+
+export function getProxyLBOutput(args?: GetProxyLBOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyLBResult> {
+    return pulumi.output(args).apply(a => getProxyLB(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getProxyLB.
+ */
+export interface GetProxyLBOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetProxyLBFilterArgs>;
 }

@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Switch.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -220,7 +220,7 @@ type SwitchArrayInput interface {
 type SwitchArray []SwitchInput
 
 func (SwitchArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Switch)(nil))
+	return reflect.TypeOf((*[]*Switch)(nil)).Elem()
 }
 
 func (i SwitchArray) ToSwitchArrayOutput() SwitchArrayOutput {
@@ -245,7 +245,7 @@ type SwitchMapInput interface {
 type SwitchMap map[string]SwitchInput
 
 func (SwitchMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Switch)(nil))
+	return reflect.TypeOf((*map[string]*Switch)(nil)).Elem()
 }
 
 func (i SwitchMap) ToSwitchMapOutput() SwitchMapOutput {
@@ -256,9 +256,7 @@ func (i SwitchMap) ToSwitchMapOutputWithContext(ctx context.Context) SwitchMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(SwitchMapOutput)
 }
 
-type SwitchOutput struct {
-	*pulumi.OutputState
-}
+type SwitchOutput struct{ *pulumi.OutputState }
 
 func (SwitchOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Switch)(nil))
@@ -277,14 +275,12 @@ func (o SwitchOutput) ToSwitchPtrOutput() SwitchPtrOutput {
 }
 
 func (o SwitchOutput) ToSwitchPtrOutputWithContext(ctx context.Context) SwitchPtrOutput {
-	return o.ApplyT(func(v Switch) *Switch {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Switch) *Switch {
 		return &v
 	}).(SwitchPtrOutput)
 }
 
-type SwitchPtrOutput struct {
-	*pulumi.OutputState
-}
+type SwitchPtrOutput struct{ *pulumi.OutputState }
 
 func (SwitchPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Switch)(nil))
@@ -296,6 +292,16 @@ func (o SwitchPtrOutput) ToSwitchPtrOutput() SwitchPtrOutput {
 
 func (o SwitchPtrOutput) ToSwitchPtrOutputWithContext(ctx context.Context) SwitchPtrOutput {
 	return o
+}
+
+func (o SwitchPtrOutput) Elem() SwitchOutput {
+	return o.ApplyT(func(v *Switch) Switch {
+		if v != nil {
+			return *v
+		}
+		var ret Switch
+		return ret
+	}).(SwitchOutput)
 }
 
 type SwitchArrayOutput struct{ *pulumi.OutputState }
@@ -339,6 +345,10 @@ func (o SwitchMapOutput) MapIndex(k pulumi.StringInput) SwitchOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SwitchInput)(nil)).Elem(), &Switch{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SwitchPtrInput)(nil)).Elem(), &Switch{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SwitchArrayInput)(nil)).Elem(), SwitchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SwitchMapInput)(nil)).Elem(), SwitchMap{})
 	pulumi.RegisterOutputType(SwitchOutput{})
 	pulumi.RegisterOutputType(SwitchPtrOutput{})
 	pulumi.RegisterOutputType(SwitchArrayOutput{})

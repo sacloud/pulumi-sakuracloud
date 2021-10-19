@@ -21,7 +21,7 @@ import * as utilities from "./utilities";
  *             values: ["Parted Magic 2013_08_01"],
  *         }],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getCDROM(args?: GetCDROMArgs, opts?: pulumi.InvokeOptions): Promise<GetCDROMResult> {
@@ -46,11 +46,11 @@ export interface GetCDROMArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetCDROMFilter;
+    filter?: inputs.GetCDROMFilter;
     /**
      * The name of zone that the CD-ROM is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -83,4 +83,22 @@ export interface GetCDROMResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getCDROMOutput(args?: GetCDROMOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCDROMResult> {
+    return pulumi.output(args).apply(a => getCDROM(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getCDROM.
+ */
+export interface GetCDROMOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetCDROMFilterArgs>;
+    /**
+     * The name of zone that the CD-ROM is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

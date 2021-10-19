@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing ProxyLB.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupProxyLB(ctx, &sakuracloud.LookupProxyLBArgs{
-// 			Filter: sakuracloud.GetProxyLBFilter{
+// 		_, err := sakuracloud.LookupProxyLB(ctx, &GetProxyLBArgs{
+// 			Filter: GetProxyLBFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -97,4 +100,156 @@ type LookupProxyLBResult struct {
 	Vip string `pulumi:"vip"`
 	// The flag to enable VIP fail-over.
 	VipFailover bool `pulumi:"vipFailover"`
+}
+
+func LookupProxyLBOutput(ctx *pulumi.Context, args LookupProxyLBOutputArgs, opts ...pulumi.InvokeOption) LookupProxyLBResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupProxyLBResult, error) {
+			args := v.(LookupProxyLBArgs)
+			r, err := LookupProxyLB(ctx, &args, opts...)
+			return *r, err
+		}).(LookupProxyLBResultOutput)
+}
+
+// A collection of arguments for invoking getProxyLB.
+type LookupProxyLBOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetProxyLBFilterPtrInput `pulumi:"filter"`
+}
+
+func (LookupProxyLBOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupProxyLBArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getProxyLB.
+type LookupProxyLBResultOutput struct{ *pulumi.OutputState }
+
+func (LookupProxyLBResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupProxyLBResult)(nil)).Elem()
+}
+
+func (o LookupProxyLBResultOutput) ToLookupProxyLBResultOutput() LookupProxyLBResultOutput {
+	return o
+}
+
+func (o LookupProxyLBResultOutput) ToLookupProxyLBResultOutputWithContext(ctx context.Context) LookupProxyLBResultOutput {
+	return o
+}
+
+// A list of `bindPort` blocks as defined below.
+func (o LookupProxyLBResultOutput) BindPorts() GetProxyLBBindPortArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBBindPort { return v.BindPorts }).(GetProxyLBBindPortArrayOutput)
+}
+
+// A list of `certificate` blocks as defined below.
+func (o LookupProxyLBResultOutput) Certificates() GetProxyLBCertificateArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBCertificate { return v.Certificates }).(GetProxyLBCertificateArrayOutput)
+}
+
+// The description of the ProxyLB.
+func (o LookupProxyLBResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupProxyLBResultOutput) Filter() GetProxyLBFilterPtrOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) *GetProxyLBFilter { return v.Filter }).(GetProxyLBFilterPtrOutput)
+}
+
+// The FQDN for accessing to the ProxyLB. This is typically used as value of CNAME record.
+func (o LookupProxyLBResultOutput) Fqdn() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Fqdn }).(pulumi.StringOutput)
+}
+
+// The flag to enable gzip compression.
+func (o LookupProxyLBResultOutput) Gzip() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) bool { return v.Gzip }).(pulumi.BoolOutput)
+}
+
+// A list of `healthCheck` blocks as defined below.
+func (o LookupProxyLBResultOutput) HealthChecks() GetProxyLBHealthCheckArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBHealthCheck { return v.HealthChecks }).(GetProxyLBHealthCheckArrayOutput)
+}
+
+// The icon id attached to the ProxyLB.
+func (o LookupProxyLBResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupProxyLBResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the ProxyLB.
+func (o LookupProxyLBResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The plan name of the ProxyLB. This will be one of [`100`/`500`/`1000`/`5000`/`10000`/`50000`/`100000`/`400000`].
+func (o LookupProxyLBResultOutput) Plan() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) int { return v.Plan }).(pulumi.IntOutput)
+}
+
+// A list of CIDR block used by the ProxyLB to access the server.
+func (o LookupProxyLBResultOutput) ProxyNetworks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []string { return v.ProxyNetworks }).(pulumi.StringArrayOutput)
+}
+
+// The flag to enable proxy protocol v2.
+func (o LookupProxyLBResultOutput) ProxyProtocol() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) bool { return v.ProxyProtocol }).(pulumi.BoolOutput)
+}
+
+// The name of region that the proxy LB is in. This will be one of [`tk1`/`is1`/`anycast`].
+func (o LookupProxyLBResultOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// A list of `rule` blocks as defined below.
+func (o LookupProxyLBResultOutput) Rules() GetProxyLBRuleArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBRule { return v.Rules }).(GetProxyLBRuleArrayOutput)
+}
+
+// The address of syslog server.
+func (o LookupProxyLBResultOutput) Servers() GetProxyLBServerArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBServer { return v.Servers }).(GetProxyLBServerArrayOutput)
+}
+
+// A list of `sorryServer` blocks as defined below.
+func (o LookupProxyLBResultOutput) SorryServers() GetProxyLBSorryServerArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBSorryServer { return v.SorryServers }).(GetProxyLBSorryServerArrayOutput)
+}
+
+// The flag to enable sticky session.
+func (o LookupProxyLBResultOutput) StickySession() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) bool { return v.StickySession }).(pulumi.BoolOutput)
+}
+
+// A list of `syslog` blocks as defined below.
+func (o LookupProxyLBResultOutput) Syslogs() GetProxyLBSyslogArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []GetProxyLBSyslog { return v.Syslogs }).(GetProxyLBSyslogArrayOutput)
+}
+
+// Any tags assigned to the ProxyLB.
+func (o LookupProxyLBResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The timeout duration in seconds.
+func (o LookupProxyLBResultOutput) Timeout() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) int { return v.Timeout }).(pulumi.IntOutput)
+}
+
+// The virtual IP address assigned to the ProxyLB.
+func (o LookupProxyLBResultOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// The flag to enable VIP fail-over.
+func (o LookupProxyLBResultOutput) VipFailover() pulumi.BoolOutput {
+	return o.ApplyT(func(v LookupProxyLBResult) bool { return v.VipFailover }).(pulumi.BoolOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupProxyLBResultOutput{})
 }

@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetDatabaseResult',
     'AwaitableGetDatabaseResult',
     'get_database',
+    'get_database_output',
 ]
 
 @pulumi.output_type
@@ -265,3 +266,28 @@ def get_database(filter: Optional[pulumi.InputType['GetDatabaseFilterArgs']] = N
         tags=__ret__.tags,
         username=__ret__.username,
         zone=__ret__.zone)
+
+
+@_utilities.lift_output_func(get_database)
+def get_database_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetDatabaseFilterArgs']]]] = None,
+                        zone: Optional[pulumi.Input[Optional[str]]] = None,
+                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDatabaseResult]:
+    """
+    Get information about an existing Database.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_database(filter=sakuracloud.GetDatabaseFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetDatabaseFilterArgs'] filter: One or more values used for filtering, as defined below.
+    :param str zone: The name of zone that the Database is in (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+    """
+    ...

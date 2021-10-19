@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Simple Monitor.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -28,7 +28,7 @@ import (
 // 		_, err := sakuracloud.NewSimpleMonitor(ctx, "foobar", &sakuracloud.SimpleMonitorArgs{
 // 			DelayLoop:   pulumi.Int(60),
 // 			Description: pulumi.String("description"),
-// 			HealthCheck: &sakuracloud.SimpleMonitorHealthCheckArgs{
+// 			HealthCheck: &SimpleMonitorHealthCheckArgs{
 // 				ContainsString: pulumi.String("ok"),
 // 				HostHeader:     pulumi.String("example.com"),
 // 				Http2:          pulumi.Bool(true),
@@ -308,7 +308,7 @@ type SimpleMonitorArrayInput interface {
 type SimpleMonitorArray []SimpleMonitorInput
 
 func (SimpleMonitorArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*SimpleMonitor)(nil))
+	return reflect.TypeOf((*[]*SimpleMonitor)(nil)).Elem()
 }
 
 func (i SimpleMonitorArray) ToSimpleMonitorArrayOutput() SimpleMonitorArrayOutput {
@@ -333,7 +333,7 @@ type SimpleMonitorMapInput interface {
 type SimpleMonitorMap map[string]SimpleMonitorInput
 
 func (SimpleMonitorMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*SimpleMonitor)(nil))
+	return reflect.TypeOf((*map[string]*SimpleMonitor)(nil)).Elem()
 }
 
 func (i SimpleMonitorMap) ToSimpleMonitorMapOutput() SimpleMonitorMapOutput {
@@ -344,9 +344,7 @@ func (i SimpleMonitorMap) ToSimpleMonitorMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(SimpleMonitorMapOutput)
 }
 
-type SimpleMonitorOutput struct {
-	*pulumi.OutputState
-}
+type SimpleMonitorOutput struct{ *pulumi.OutputState }
 
 func (SimpleMonitorOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*SimpleMonitor)(nil))
@@ -365,14 +363,12 @@ func (o SimpleMonitorOutput) ToSimpleMonitorPtrOutput() SimpleMonitorPtrOutput {
 }
 
 func (o SimpleMonitorOutput) ToSimpleMonitorPtrOutputWithContext(ctx context.Context) SimpleMonitorPtrOutput {
-	return o.ApplyT(func(v SimpleMonitor) *SimpleMonitor {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SimpleMonitor) *SimpleMonitor {
 		return &v
 	}).(SimpleMonitorPtrOutput)
 }
 
-type SimpleMonitorPtrOutput struct {
-	*pulumi.OutputState
-}
+type SimpleMonitorPtrOutput struct{ *pulumi.OutputState }
 
 func (SimpleMonitorPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**SimpleMonitor)(nil))
@@ -384,6 +380,16 @@ func (o SimpleMonitorPtrOutput) ToSimpleMonitorPtrOutput() SimpleMonitorPtrOutpu
 
 func (o SimpleMonitorPtrOutput) ToSimpleMonitorPtrOutputWithContext(ctx context.Context) SimpleMonitorPtrOutput {
 	return o
+}
+
+func (o SimpleMonitorPtrOutput) Elem() SimpleMonitorOutput {
+	return o.ApplyT(func(v *SimpleMonitor) SimpleMonitor {
+		if v != nil {
+			return *v
+		}
+		var ret SimpleMonitor
+		return ret
+	}).(SimpleMonitorOutput)
 }
 
 type SimpleMonitorArrayOutput struct{ *pulumi.OutputState }
@@ -427,6 +433,10 @@ func (o SimpleMonitorMapOutput) MapIndex(k pulumi.StringInput) SimpleMonitorOutp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorInput)(nil)).Elem(), &SimpleMonitor{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorPtrInput)(nil)).Elem(), &SimpleMonitor{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorArrayInput)(nil)).Elem(), SimpleMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorMapInput)(nil)).Elem(), SimpleMonitorMap{})
 	pulumi.RegisterOutputType(SimpleMonitorOutput{})
 	pulumi.RegisterOutputType(SimpleMonitorPtrOutput{})
 	pulumi.RegisterOutputType(SimpleMonitorArrayOutput{})

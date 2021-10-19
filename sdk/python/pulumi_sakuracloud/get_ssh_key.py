@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetSSHKeyResult',
     'AwaitableGetSSHKeyResult',
     'get_ssh_key',
+    'get_ssh_key_output',
 ]
 
 @pulumi.output_type
@@ -135,3 +136,26 @@ def get_ssh_key(filter: Optional[pulumi.InputType['GetSSHKeyFilterArgs']] = None
         id=__ret__.id,
         name=__ret__.name,
         public_key=__ret__.public_key)
+
+
+@_utilities.lift_output_func(get_ssh_key)
+def get_ssh_key_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetSSHKeyFilterArgs']]]] = None,
+                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSSHKeyResult]:
+    """
+    Get information about an existing SSH Key.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_ssh_key(filter=sakuracloud.GetSSHKeyFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetSSHKeyFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

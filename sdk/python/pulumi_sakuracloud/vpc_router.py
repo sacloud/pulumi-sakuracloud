@@ -5,15 +5,767 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['VPCRouter']
+__all__ = ['VPCRouterArgs', 'VPCRouter']
+
+@pulumi.input_type
+class VPCRouterArgs:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 dhcp_servers: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]] = None,
+                 dhcp_static_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]] = None,
+                 firewalls: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 l2tp: Optional[pulumi.Input['VPCRouterL2tpArgs']] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
+                 port_forwardings: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]] = None,
+                 pptp: Optional[pulumi.Input['VPCRouterPptpArgs']] = None,
+                 private_network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]] = None,
+                 public_network_interface: Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']] = None,
+                 site_to_site_vpns: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]] = None,
+                 static_nats: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]] = None,
+                 syslog_host: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]] = None,
+                 version: Optional[pulumi.Input[int]] = None,
+                 wire_guard: Optional[pulumi.Input['VPCRouterWireGuardArgs']] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a VPCRouter resource.
+        :param pulumi.Input[str] description: The description of the expression. The length of this value must be in the range [`0`-`512`].
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]] dhcp_servers: One or more `dhcp_server` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]] dhcp_static_mappings: One or more `dhcp_static_mapping` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]] firewalls: One or more `firewall` blocks as defined below.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the VPCRouter.
+        :param pulumi.Input[bool] internet_connection: The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
+        :param pulumi.Input['VPCRouterL2tpArgs'] l2tp: A `l2tp` block as defined below.
+        :param pulumi.Input[str] name: The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] plan: The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]] port_forwardings: One or more `port_forwarding` blocks as defined below.
+        :param pulumi.Input['VPCRouterPptpArgs'] pptp: A `pptp` block as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]] private_network_interfaces: A list of additional network interface setting. This doesn't include primary network interface setting.
+        :param pulumi.Input['VPCRouterPublicNetworkInterfaceArgs'] public_network_interface: An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]] site_to_site_vpns: One or more `site_to_site_vpn` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]] static_nats: One or more `static_nat` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]] static_routes: One or more `static_route` blocks as defined below.
+        :param pulumi.Input[str] syslog_host: The ip address of the syslog host to which the VPC Router sends logs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the VPCRouter.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]] users: One or more `user` blocks as defined below.
+        :param pulumi.Input[int] version: The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        :param pulumi.Input['VPCRouterWireGuardArgs'] wire_guard: A `wire_guard` block as defined below.
+        :param pulumi.Input[str] zone: The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if dhcp_servers is not None:
+            pulumi.set(__self__, "dhcp_servers", dhcp_servers)
+        if dhcp_static_mappings is not None:
+            pulumi.set(__self__, "dhcp_static_mappings", dhcp_static_mappings)
+        if firewalls is not None:
+            pulumi.set(__self__, "firewalls", firewalls)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if internet_connection is not None:
+            pulumi.set(__self__, "internet_connection", internet_connection)
+        if l2tp is not None:
+            pulumi.set(__self__, "l2tp", l2tp)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if plan is not None:
+            pulumi.set(__self__, "plan", plan)
+        if port_forwardings is not None:
+            pulumi.set(__self__, "port_forwardings", port_forwardings)
+        if pptp is not None:
+            pulumi.set(__self__, "pptp", pptp)
+        if private_network_interfaces is not None:
+            pulumi.set(__self__, "private_network_interfaces", private_network_interfaces)
+        if public_network_interface is not None:
+            pulumi.set(__self__, "public_network_interface", public_network_interface)
+        if site_to_site_vpns is not None:
+            pulumi.set(__self__, "site_to_site_vpns", site_to_site_vpns)
+        if static_nats is not None:
+            pulumi.set(__self__, "static_nats", static_nats)
+        if static_routes is not None:
+            pulumi.set(__self__, "static_routes", static_routes)
+        if syslog_host is not None:
+            pulumi.set(__self__, "syslog_host", syslog_host)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+        if wire_guard is not None:
+            pulumi.set(__self__, "wire_guard", wire_guard)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the expression. The length of this value must be in the range [`0`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="dhcpServers")
+    def dhcp_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]]:
+        """
+        One or more `dhcp_server` blocks as defined below.
+        """
+        return pulumi.get(self, "dhcp_servers")
+
+    @dhcp_servers.setter
+    def dhcp_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]]):
+        pulumi.set(self, "dhcp_servers", value)
+
+    @property
+    @pulumi.getter(name="dhcpStaticMappings")
+    def dhcp_static_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]]:
+        """
+        One or more `dhcp_static_mapping` blocks as defined below.
+        """
+        return pulumi.get(self, "dhcp_static_mappings")
+
+    @dhcp_static_mappings.setter
+    def dhcp_static_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]]):
+        pulumi.set(self, "dhcp_static_mappings", value)
+
+    @property
+    @pulumi.getter
+    def firewalls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]]:
+        """
+        One or more `firewall` blocks as defined below.
+        """
+        return pulumi.get(self, "firewalls")
+
+    @firewalls.setter
+    def firewalls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]]):
+        pulumi.set(self, "firewalls", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the VPCRouter.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="internetConnection")
+    def internet_connection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
+        """
+        return pulumi.get(self, "internet_connection")
+
+    @internet_connection.setter
+    def internet_connection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "internet_connection", value)
+
+    @property
+    @pulumi.getter
+    def l2tp(self) -> Optional[pulumi.Input['VPCRouterL2tpArgs']]:
+        """
+        A `l2tp` block as defined below.
+        """
+        return pulumi.get(self, "l2tp")
+
+    @l2tp.setter
+    def l2tp(self, value: Optional[pulumi.Input['VPCRouterL2tpArgs']]):
+        pulumi.set(self, "l2tp", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def plan(self) -> Optional[pulumi.Input[str]]:
+        """
+        The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
+        """
+        return pulumi.get(self, "plan")
+
+    @plan.setter
+    def plan(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "plan", value)
+
+    @property
+    @pulumi.getter(name="portForwardings")
+    def port_forwardings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]]:
+        """
+        One or more `port_forwarding` blocks as defined below.
+        """
+        return pulumi.get(self, "port_forwardings")
+
+    @port_forwardings.setter
+    def port_forwardings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]]):
+        pulumi.set(self, "port_forwardings", value)
+
+    @property
+    @pulumi.getter
+    def pptp(self) -> Optional[pulumi.Input['VPCRouterPptpArgs']]:
+        """
+        A `pptp` block as defined below.
+        """
+        return pulumi.get(self, "pptp")
+
+    @pptp.setter
+    def pptp(self, value: Optional[pulumi.Input['VPCRouterPptpArgs']]):
+        pulumi.set(self, "pptp", value)
+
+    @property
+    @pulumi.getter(name="privateNetworkInterfaces")
+    def private_network_interfaces(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]]:
+        """
+        A list of additional network interface setting. This doesn't include primary network interface setting.
+        """
+        return pulumi.get(self, "private_network_interfaces")
+
+    @private_network_interfaces.setter
+    def private_network_interfaces(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]]):
+        pulumi.set(self, "private_network_interfaces", value)
+
+    @property
+    @pulumi.getter(name="publicNetworkInterface")
+    def public_network_interface(self) -> Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']]:
+        """
+        An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        """
+        return pulumi.get(self, "public_network_interface")
+
+    @public_network_interface.setter
+    def public_network_interface(self, value: Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']]):
+        pulumi.set(self, "public_network_interface", value)
+
+    @property
+    @pulumi.getter(name="siteToSiteVpns")
+    def site_to_site_vpns(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]]:
+        """
+        One or more `site_to_site_vpn` blocks as defined below.
+        """
+        return pulumi.get(self, "site_to_site_vpns")
+
+    @site_to_site_vpns.setter
+    def site_to_site_vpns(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]]):
+        pulumi.set(self, "site_to_site_vpns", value)
+
+    @property
+    @pulumi.getter(name="staticNats")
+    def static_nats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]]:
+        """
+        One or more `static_nat` blocks as defined below.
+        """
+        return pulumi.get(self, "static_nats")
+
+    @static_nats.setter
+    def static_nats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]]):
+        pulumi.set(self, "static_nats", value)
+
+    @property
+    @pulumi.getter(name="staticRoutes")
+    def static_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]]:
+        """
+        One or more `static_route` blocks as defined below.
+        """
+        return pulumi.get(self, "static_routes")
+
+    @static_routes.setter
+    def static_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]]):
+        pulumi.set(self, "static_routes", value)
+
+    @property
+    @pulumi.getter(name="syslogHost")
+    def syslog_host(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ip address of the syslog host to which the VPC Router sends logs.
+        """
+        return pulumi.get(self, "syslog_host")
+
+    @syslog_host.setter
+    def syslog_host(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "syslog_host", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the VPCRouter.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]]:
+        """
+        One or more `user` blocks as defined below.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]]):
+        pulumi.set(self, "users", value)
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[int]]:
+        """
+        The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "version", value)
+
+    @property
+    @pulumi.getter(name="wireGuard")
+    def wire_guard(self) -> Optional[pulumi.Input['VPCRouterWireGuardArgs']]:
+        """
+        A `wire_guard` block as defined below.
+        """
+        return pulumi.get(self, "wire_guard")
+
+    @wire_guard.setter
+    def wire_guard(self, value: Optional[pulumi.Input['VPCRouterWireGuardArgs']]):
+        pulumi.set(self, "wire_guard", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _VPCRouterState:
+    def __init__(__self__, *,
+                 description: Optional[pulumi.Input[str]] = None,
+                 dhcp_servers: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]] = None,
+                 dhcp_static_mappings: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]] = None,
+                 firewalls: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 l2tp: Optional[pulumi.Input['VPCRouterL2tpArgs']] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
+                 port_forwardings: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]] = None,
+                 pptp: Optional[pulumi.Input['VPCRouterPptpArgs']] = None,
+                 private_network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]] = None,
+                 public_ip: Optional[pulumi.Input[str]] = None,
+                 public_netmask: Optional[pulumi.Input[int]] = None,
+                 public_network_interface: Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']] = None,
+                 site_to_site_vpns: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]] = None,
+                 static_nats: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]] = None,
+                 syslog_host: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]] = None,
+                 version: Optional[pulumi.Input[int]] = None,
+                 wire_guard: Optional[pulumi.Input['VPCRouterWireGuardArgs']] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering VPCRouter resources.
+        :param pulumi.Input[str] description: The description of the expression. The length of this value must be in the range [`0`-`512`].
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]] dhcp_servers: One or more `dhcp_server` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]] dhcp_static_mappings: One or more `dhcp_static_mapping` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]] firewalls: One or more `firewall` blocks as defined below.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the VPCRouter.
+        :param pulumi.Input[bool] internet_connection: The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
+        :param pulumi.Input['VPCRouterL2tpArgs'] l2tp: A `l2tp` block as defined below.
+        :param pulumi.Input[str] name: The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] plan: The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]] port_forwardings: One or more `port_forwarding` blocks as defined below.
+        :param pulumi.Input['VPCRouterPptpArgs'] pptp: A `pptp` block as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]] private_network_interfaces: A list of additional network interface setting. This doesn't include primary network interface setting.
+        :param pulumi.Input[str] public_ip: The public IP address used for the static NAT.
+        :param pulumi.Input[int] public_netmask: The bit length of the subnet to assign to the public network interface.
+        :param pulumi.Input['VPCRouterPublicNetworkInterfaceArgs'] public_network_interface: An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]] site_to_site_vpns: One or more `site_to_site_vpn` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]] static_nats: One or more `static_nat` blocks as defined below.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]] static_routes: One or more `static_route` blocks as defined below.
+        :param pulumi.Input[str] syslog_host: The ip address of the syslog host to which the VPC Router sends logs.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the VPCRouter.
+        :param pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]] users: One or more `user` blocks as defined below.
+        :param pulumi.Input[int] version: The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        :param pulumi.Input['VPCRouterWireGuardArgs'] wire_guard: A `wire_guard` block as defined below.
+        :param pulumi.Input[str] zone: The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if dhcp_servers is not None:
+            pulumi.set(__self__, "dhcp_servers", dhcp_servers)
+        if dhcp_static_mappings is not None:
+            pulumi.set(__self__, "dhcp_static_mappings", dhcp_static_mappings)
+        if firewalls is not None:
+            pulumi.set(__self__, "firewalls", firewalls)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if internet_connection is not None:
+            pulumi.set(__self__, "internet_connection", internet_connection)
+        if l2tp is not None:
+            pulumi.set(__self__, "l2tp", l2tp)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if plan is not None:
+            pulumi.set(__self__, "plan", plan)
+        if port_forwardings is not None:
+            pulumi.set(__self__, "port_forwardings", port_forwardings)
+        if pptp is not None:
+            pulumi.set(__self__, "pptp", pptp)
+        if private_network_interfaces is not None:
+            pulumi.set(__self__, "private_network_interfaces", private_network_interfaces)
+        if public_ip is not None:
+            pulumi.set(__self__, "public_ip", public_ip)
+        if public_netmask is not None:
+            pulumi.set(__self__, "public_netmask", public_netmask)
+        if public_network_interface is not None:
+            pulumi.set(__self__, "public_network_interface", public_network_interface)
+        if site_to_site_vpns is not None:
+            pulumi.set(__self__, "site_to_site_vpns", site_to_site_vpns)
+        if static_nats is not None:
+            pulumi.set(__self__, "static_nats", static_nats)
+        if static_routes is not None:
+            pulumi.set(__self__, "static_routes", static_routes)
+        if syslog_host is not None:
+            pulumi.set(__self__, "syslog_host", syslog_host)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if users is not None:
+            pulumi.set(__self__, "users", users)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+        if wire_guard is not None:
+            pulumi.set(__self__, "wire_guard", wire_guard)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the expression. The length of this value must be in the range [`0`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="dhcpServers")
+    def dhcp_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]]:
+        """
+        One or more `dhcp_server` blocks as defined below.
+        """
+        return pulumi.get(self, "dhcp_servers")
+
+    @dhcp_servers.setter
+    def dhcp_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpServerArgs']]]]):
+        pulumi.set(self, "dhcp_servers", value)
+
+    @property
+    @pulumi.getter(name="dhcpStaticMappings")
+    def dhcp_static_mappings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]]:
+        """
+        One or more `dhcp_static_mapping` blocks as defined below.
+        """
+        return pulumi.get(self, "dhcp_static_mappings")
+
+    @dhcp_static_mappings.setter
+    def dhcp_static_mappings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterDhcpStaticMappingArgs']]]]):
+        pulumi.set(self, "dhcp_static_mappings", value)
+
+    @property
+    @pulumi.getter
+    def firewalls(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]]:
+        """
+        One or more `firewall` blocks as defined below.
+        """
+        return pulumi.get(self, "firewalls")
+
+    @firewalls.setter
+    def firewalls(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterFirewallArgs']]]]):
+        pulumi.set(self, "firewalls", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the VPCRouter.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="internetConnection")
+    def internet_connection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to enable connecting to the Internet from the VPC Router. Default:`true`.
+        """
+        return pulumi.get(self, "internet_connection")
+
+    @internet_connection.setter
+    def internet_connection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "internet_connection", value)
+
+    @property
+    @pulumi.getter
+    def l2tp(self) -> Optional[pulumi.Input['VPCRouterL2tpArgs']]:
+        """
+        A `l2tp` block as defined below.
+        """
+        return pulumi.get(self, "l2tp")
+
+    @l2tp.setter
+    def l2tp(self, value: Optional[pulumi.Input['VPCRouterL2tpArgs']]):
+        pulumi.set(self, "l2tp", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the VPCRouter. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def plan(self) -> Optional[pulumi.Input[str]]:
+        """
+        The plan name of the VPCRouter. This must be one of [`standard`/`premium`/`highspec`/`highspec4000`]. Changing this forces a new resource to be created. Default:`standard`.
+        """
+        return pulumi.get(self, "plan")
+
+    @plan.setter
+    def plan(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "plan", value)
+
+    @property
+    @pulumi.getter(name="portForwardings")
+    def port_forwardings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]]:
+        """
+        One or more `port_forwarding` blocks as defined below.
+        """
+        return pulumi.get(self, "port_forwardings")
+
+    @port_forwardings.setter
+    def port_forwardings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPortForwardingArgs']]]]):
+        pulumi.set(self, "port_forwardings", value)
+
+    @property
+    @pulumi.getter
+    def pptp(self) -> Optional[pulumi.Input['VPCRouterPptpArgs']]:
+        """
+        A `pptp` block as defined below.
+        """
+        return pulumi.get(self, "pptp")
+
+    @pptp.setter
+    def pptp(self, value: Optional[pulumi.Input['VPCRouterPptpArgs']]):
+        pulumi.set(self, "pptp", value)
+
+    @property
+    @pulumi.getter(name="privateNetworkInterfaces")
+    def private_network_interfaces(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]]:
+        """
+        A list of additional network interface setting. This doesn't include primary network interface setting.
+        """
+        return pulumi.get(self, "private_network_interfaces")
+
+    @private_network_interfaces.setter
+    def private_network_interfaces(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterPrivateNetworkInterfaceArgs']]]]):
+        pulumi.set(self, "private_network_interfaces", value)
+
+    @property
+    @pulumi.getter(name="publicIp")
+    def public_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        The public IP address used for the static NAT.
+        """
+        return pulumi.get(self, "public_ip")
+
+    @public_ip.setter
+    def public_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "public_ip", value)
+
+    @property
+    @pulumi.getter(name="publicNetmask")
+    def public_netmask(self) -> Optional[pulumi.Input[int]]:
+        """
+        The bit length of the subnet to assign to the public network interface.
+        """
+        return pulumi.get(self, "public_netmask")
+
+    @public_netmask.setter
+    def public_netmask(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "public_netmask", value)
+
+    @property
+    @pulumi.getter(name="publicNetworkInterface")
+    def public_network_interface(self) -> Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']]:
+        """
+        An `public_network_interface` block as defined below. This block is required when `plan` is not `standard`.
+        """
+        return pulumi.get(self, "public_network_interface")
+
+    @public_network_interface.setter
+    def public_network_interface(self, value: Optional[pulumi.Input['VPCRouterPublicNetworkInterfaceArgs']]):
+        pulumi.set(self, "public_network_interface", value)
+
+    @property
+    @pulumi.getter(name="siteToSiteVpns")
+    def site_to_site_vpns(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]]:
+        """
+        One or more `site_to_site_vpn` blocks as defined below.
+        """
+        return pulumi.get(self, "site_to_site_vpns")
+
+    @site_to_site_vpns.setter
+    def site_to_site_vpns(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterSiteToSiteVpnArgs']]]]):
+        pulumi.set(self, "site_to_site_vpns", value)
+
+    @property
+    @pulumi.getter(name="staticNats")
+    def static_nats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]]:
+        """
+        One or more `static_nat` blocks as defined below.
+        """
+        return pulumi.get(self, "static_nats")
+
+    @static_nats.setter
+    def static_nats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticNatArgs']]]]):
+        pulumi.set(self, "static_nats", value)
+
+    @property
+    @pulumi.getter(name="staticRoutes")
+    def static_routes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]]:
+        """
+        One or more `static_route` blocks as defined below.
+        """
+        return pulumi.get(self, "static_routes")
+
+    @static_routes.setter
+    def static_routes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterStaticRouteArgs']]]]):
+        pulumi.set(self, "static_routes", value)
+
+    @property
+    @pulumi.getter(name="syslogHost")
+    def syslog_host(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ip address of the syslog host to which the VPC Router sends logs.
+        """
+        return pulumi.get(self, "syslog_host")
+
+    @syslog_host.setter
+    def syslog_host(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "syslog_host", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the VPCRouter.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter
+    def users(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]]:
+        """
+        One or more `user` blocks as defined below.
+        """
+        return pulumi.get(self, "users")
+
+    @users.setter
+    def users(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['VPCRouterUserArgs']]]]):
+        pulumi.set(self, "users", value)
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[int]]:
+        """
+        The version of the VPC Router. Changing this forces a new resource to be created. Default:`2`.
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "version", value)
+
+    @property
+    @pulumi.getter(name="wireGuard")
+    def wire_guard(self) -> Optional[pulumi.Input['VPCRouterWireGuardArgs']]:
+        """
+        A `wire_guard` block as defined below.
+        """
+        return pulumi.get(self, "wire_guard")
+
+    @wire_guard.setter
+    def wire_guard(self, value: Optional[pulumi.Input['VPCRouterWireGuardArgs']]):
+        pulumi.set(self, "wire_guard", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class VPCRouter(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -39,9 +791,7 @@ class VPCRouter(pulumi.CustomResource):
                  version: Optional[pulumi.Input[int]] = None,
                  wire_guard: Optional[pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud VPC Router.
 
@@ -198,12 +948,181 @@ class VPCRouter(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']] wire_guard: A `wire_guard` block as defined below.
         :param pulumi.Input[str] zone: The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[VPCRouterArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud VPC Router.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        standard = sakuracloud.VPCRouter("standard",
+            description="description",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            internet_connection=True)
+        foobar_internet = sakuracloud.Internet("foobarInternet")
+        foobar_switch = sakuracloud.Switch("foobarSwitch")
+        premium = sakuracloud.VPCRouter("premium",
+            description="description",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            plan="premium",
+            internet_connection=True,
+            public_network_interface=sakuracloud.VPCRouterPublicNetworkInterfaceArgs(
+                switch_id=foobar_internet.switch_id,
+                vip=foobar_internet.ip_addresses[0],
+                ip_addresses=[
+                    foobar_internet.ip_addresses[1],
+                    foobar_internet.ip_addresses[2],
+                ],
+                aliases=[foobar_internet.ip_addresses[3]],
+                vrid=1,
+            ),
+            private_network_interfaces=[sakuracloud.VPCRouterPrivateNetworkInterfaceArgs(
+                index=1,
+                switch_id=foobar_switch.id,
+                vip="192.168.11.1",
+                ip_addresses=[
+                    "192.168.11.2",
+                    "192.168.11.3",
+                ],
+                netmask=24,
+            )],
+            dhcp_servers=[sakuracloud.VPCRouterDhcpServerArgs(
+                interface_index=1,
+                range_start="192.168.11.11",
+                range_stop="192.168.11.20",
+                dns_servers=[
+                    "8.8.8.8",
+                    "8.8.4.4",
+                ],
+            )],
+            dhcp_static_mappings=[sakuracloud.VPCRouterDhcpStaticMappingArgs(
+                ip_address="192.168.11.10",
+                mac_address="aa:bb:cc:aa:bb:cc",
+            )],
+            firewalls=[sakuracloud.VPCRouterFirewallArgs(
+                interface_index=1,
+                direction="send",
+                expressions=[
+                    sakuracloud.VPCRouterFirewallExpressionArgs(
+                        protocol="tcp",
+                        source_network="",
+                        source_port="80",
+                        destination_network="",
+                        destination_port="",
+                        allow=True,
+                        logging=True,
+                        description="desc",
+                    ),
+                    sakuracloud.VPCRouterFirewallExpressionArgs(
+                        protocol="ip",
+                        source_network="",
+                        source_port="",
+                        destination_network="",
+                        destination_port="",
+                        allow=False,
+                        logging=True,
+                        description="desc",
+                    ),
+                ],
+            )],
+            l2tp=sakuracloud.VPCRouterL2tpArgs(
+                pre_shared_secret="example",
+                range_start="192.168.11.21",
+                range_stop="192.168.11.30",
+            ),
+            port_forwardings=[sakuracloud.VPCRouterPortForwardingArgs(
+                protocol="udp",
+                public_port=10022,
+                private_ip="192.168.11.11",
+                private_port=22,
+                description="desc",
+            )],
+            pptp=sakuracloud.VPCRouterPptpArgs(
+                range_start="192.168.11.31",
+                range_stop="192.168.11.40",
+            ),
+            wire_guard=sakuracloud.VPCRouterWireGuardArgs(
+                ip_address="192.168.31.1/24",
+                peers=[sakuracloud.VPCRouterWireGuardPeerArgs(
+                    name="example",
+                    ip_address="192.168.31.11",
+                    public_key="<your-public-key>",
+                )],
+            ),
+            site_to_site_vpns=[sakuracloud.VPCRouterSiteToSiteVpnArgs(
+                peer="10.0.0.1",
+                remote_id="10.0.0.1",
+                pre_shared_secret="example",
+                routes=["10.0.0.0/8"],
+                local_prefixes=["192.168.21.0/24"],
+            )],
+            static_nats=[sakuracloud.VPCRouterStaticNatArgs(
+                public_ip=foobar_internet.ip_addresses[3],
+                private_ip="192.168.11.12",
+                description="desc",
+            )],
+            static_routes=[sakuracloud.VPCRouterStaticRouteArgs(
+                prefix="172.16.0.0/16",
+                next_hop="192.168.11.99",
+            )],
+            users=[sakuracloud.VPCRouterUserArgs(
+                name="username",
+                password="password",
+            )])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param VPCRouterArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(VPCRouterArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 dhcp_servers: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterDhcpServerArgs']]]]] = None,
+                 dhcp_static_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterDhcpStaticMappingArgs']]]]] = None,
+                 firewalls: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterFirewallArgs']]]]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 internet_connection: Optional[pulumi.Input[bool]] = None,
+                 l2tp: Optional[pulumi.Input[pulumi.InputType['VPCRouterL2tpArgs']]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
+                 port_forwardings: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterPortForwardingArgs']]]]] = None,
+                 pptp: Optional[pulumi.Input[pulumi.InputType['VPCRouterPptpArgs']]] = None,
+                 private_network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterPrivateNetworkInterfaceArgs']]]]] = None,
+                 public_network_interface: Optional[pulumi.Input[pulumi.InputType['VPCRouterPublicNetworkInterfaceArgs']]] = None,
+                 site_to_site_vpns: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterSiteToSiteVpnArgs']]]]] = None,
+                 static_nats: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterStaticNatArgs']]]]] = None,
+                 static_routes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterStaticRouteArgs']]]]] = None,
+                 syslog_host: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 users: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['VPCRouterUserArgs']]]]] = None,
+                 version: Optional[pulumi.Input[int]] = None,
+                 wire_guard: Optional[pulumi.Input[pulumi.InputType['VPCRouterWireGuardArgs']]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -213,32 +1132,32 @@ class VPCRouter(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = VPCRouterArgs.__new__(VPCRouterArgs)
 
-            __props__['description'] = description
-            __props__['dhcp_servers'] = dhcp_servers
-            __props__['dhcp_static_mappings'] = dhcp_static_mappings
-            __props__['firewalls'] = firewalls
-            __props__['icon_id'] = icon_id
-            __props__['internet_connection'] = internet_connection
-            __props__['l2tp'] = l2tp
-            __props__['name'] = name
-            __props__['plan'] = plan
-            __props__['port_forwardings'] = port_forwardings
-            __props__['pptp'] = pptp
-            __props__['private_network_interfaces'] = private_network_interfaces
-            __props__['public_network_interface'] = public_network_interface
-            __props__['site_to_site_vpns'] = site_to_site_vpns
-            __props__['static_nats'] = static_nats
-            __props__['static_routes'] = static_routes
-            __props__['syslog_host'] = syslog_host
-            __props__['tags'] = tags
-            __props__['users'] = users
-            __props__['version'] = version
-            __props__['wire_guard'] = wire_guard
-            __props__['zone'] = zone
-            __props__['public_ip'] = None
-            __props__['public_netmask'] = None
+            __props__.__dict__["description"] = description
+            __props__.__dict__["dhcp_servers"] = dhcp_servers
+            __props__.__dict__["dhcp_static_mappings"] = dhcp_static_mappings
+            __props__.__dict__["firewalls"] = firewalls
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["internet_connection"] = internet_connection
+            __props__.__dict__["l2tp"] = l2tp
+            __props__.__dict__["name"] = name
+            __props__.__dict__["plan"] = plan
+            __props__.__dict__["port_forwardings"] = port_forwardings
+            __props__.__dict__["pptp"] = pptp
+            __props__.__dict__["private_network_interfaces"] = private_network_interfaces
+            __props__.__dict__["public_network_interface"] = public_network_interface
+            __props__.__dict__["site_to_site_vpns"] = site_to_site_vpns
+            __props__.__dict__["static_nats"] = static_nats
+            __props__.__dict__["static_routes"] = static_routes
+            __props__.__dict__["syslog_host"] = syslog_host
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["users"] = users
+            __props__.__dict__["version"] = version
+            __props__.__dict__["wire_guard"] = wire_guard
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["public_ip"] = None
+            __props__.__dict__["public_netmask"] = None
         super(VPCRouter, __self__).__init__(
             'sakuracloud:index/vPCRouter:VPCRouter',
             resource_name,
@@ -307,32 +1226,32 @@ class VPCRouter(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _VPCRouterState.__new__(_VPCRouterState)
 
-        __props__["description"] = description
-        __props__["dhcp_servers"] = dhcp_servers
-        __props__["dhcp_static_mappings"] = dhcp_static_mappings
-        __props__["firewalls"] = firewalls
-        __props__["icon_id"] = icon_id
-        __props__["internet_connection"] = internet_connection
-        __props__["l2tp"] = l2tp
-        __props__["name"] = name
-        __props__["plan"] = plan
-        __props__["port_forwardings"] = port_forwardings
-        __props__["pptp"] = pptp
-        __props__["private_network_interfaces"] = private_network_interfaces
-        __props__["public_ip"] = public_ip
-        __props__["public_netmask"] = public_netmask
-        __props__["public_network_interface"] = public_network_interface
-        __props__["site_to_site_vpns"] = site_to_site_vpns
-        __props__["static_nats"] = static_nats
-        __props__["static_routes"] = static_routes
-        __props__["syslog_host"] = syslog_host
-        __props__["tags"] = tags
-        __props__["users"] = users
-        __props__["version"] = version
-        __props__["wire_guard"] = wire_guard
-        __props__["zone"] = zone
+        __props__.__dict__["description"] = description
+        __props__.__dict__["dhcp_servers"] = dhcp_servers
+        __props__.__dict__["dhcp_static_mappings"] = dhcp_static_mappings
+        __props__.__dict__["firewalls"] = firewalls
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["internet_connection"] = internet_connection
+        __props__.__dict__["l2tp"] = l2tp
+        __props__.__dict__["name"] = name
+        __props__.__dict__["plan"] = plan
+        __props__.__dict__["port_forwardings"] = port_forwardings
+        __props__.__dict__["pptp"] = pptp
+        __props__.__dict__["private_network_interfaces"] = private_network_interfaces
+        __props__.__dict__["public_ip"] = public_ip
+        __props__.__dict__["public_netmask"] = public_netmask
+        __props__.__dict__["public_network_interface"] = public_network_interface
+        __props__.__dict__["site_to_site_vpns"] = site_to_site_vpns
+        __props__.__dict__["static_nats"] = static_nats
+        __props__.__dict__["static_routes"] = static_routes
+        __props__.__dict__["syslog_host"] = syslog_host
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["users"] = users
+        __props__.__dict__["version"] = version
+        __props__.__dict__["wire_guard"] = wire_guard
+        __props__.__dict__["zone"] = zone
         return VPCRouter(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -526,10 +1445,4 @@ class VPCRouter(pulumi.CustomResource):
         The name of zone that the VPCRouter will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

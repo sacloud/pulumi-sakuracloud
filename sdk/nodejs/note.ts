@@ -115,27 +115,27 @@ export interface NoteState {
     /**
      * The class of the Note. This must be one of `shell`/`yamlCloudConfig`. Default:`shell`.
      */
-    readonly class?: pulumi.Input<string>;
+    class?: pulumi.Input<string>;
     /**
      * The content of the Note. This must be specified as a shell script or as a cloud-config.
      */
-    readonly content?: pulumi.Input<string>;
+    content?: pulumi.Input<string>;
     /**
      * The description of the Note. This will be computed from special tags within body of `content`.
      */
-    readonly description?: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The icon id to attach to the Note.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Note. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Note.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -145,21 +145,21 @@ export interface NoteArgs {
     /**
      * The class of the Note. This must be one of `shell`/`yamlCloudConfig`. Default:`shell`.
      */
-    readonly class?: pulumi.Input<string>;
+    class?: pulumi.Input<string>;
     /**
      * The content of the Note. This must be specified as a shell script or as a cloud-config.
      */
-    readonly content: pulumi.Input<string>;
+    content: pulumi.Input<string>;
     /**
      * The icon id to attach to the Note.
      */
-    readonly iconId?: pulumi.Input<string>;
+    iconId?: pulumi.Input<string>;
     /**
      * The name of the Note. The length of this value must be in the range [`1`-`64`].
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Any tags to assign to the Note.
      */
-    readonly tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

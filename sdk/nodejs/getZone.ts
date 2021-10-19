@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -14,10 +13,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as sakuracloud from "@pulumi/sakuracloud";
  *
- * const current = pulumi.output(sakuracloud.getZone({ async: true }));
+ * const current = pulumi.output(sakuracloud.getZone());
  * const is1a = pulumi.output(sakuracloud.getZone({
  *     name: "is1a",
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> {
@@ -41,7 +40,7 @@ export interface GetZoneArgs {
     /**
      * The name of the zone (e.g. `is1a`,`tk1a`).
      */
-    readonly name?: string;
+    name?: string;
 }
 
 /**
@@ -73,4 +72,18 @@ export interface GetZoneResult {
      * The id of the zone.
      */
     readonly zoneId: string;
+}
+
+export function getZoneOutput(args?: GetZoneOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetZoneResult> {
+    return pulumi.output(args).apply(a => getZone(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getZone.
+ */
+export interface GetZoneOutputArgs {
+    /**
+     * The name of the zone (e.g. `is1a`,`tk1a`).
+     */
+    name?: pulumi.Input<string>;
 }

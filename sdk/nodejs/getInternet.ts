@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getInternet(args?: GetInternetArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetResult> {
@@ -43,11 +43,11 @@ export interface GetInternetArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetInternetFilter;
+    filter?: inputs.GetInternetFilter;
     /**
      * The name of zone that the Switch+Router is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -128,4 +128,22 @@ export interface GetInternetResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getInternetOutput(args?: GetInternetOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInternetResult> {
+    return pulumi.output(args).apply(a => getInternet(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getInternet.
+ */
+export interface GetInternetOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetInternetFilterArgs>;
+    /**
+     * The name of zone that the Switch+Router is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Database Read Replica.
@@ -20,13 +20,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		master, err := sakuracloud.LookupDatabase(ctx, &sakuracloud.LookupDatabaseArgs{
-// 			Filter: sakuracloud.GetDatabaseFilter{
+// 		master, err := sakuracloud.LookupDatabase(ctx, &GetDatabaseArgs{
+// 			Filter: GetDatabaseFilter{
 // 				Names: []string{
 // 					"master-database-name",
 // 				},
@@ -37,7 +37,7 @@ import (
 // 		}
 // 		_, err = sakuracloud.NewDatabaseReadReplica(ctx, "foobar", &sakuracloud.DatabaseReadReplicaArgs{
 // 			MasterId: pulumi.String(master.Id),
-// 			NetworkInterface: &sakuracloud.DatabaseReadReplicaNetworkInterfaceArgs{
+// 			NetworkInterface: &DatabaseReadReplicaNetworkInterfaceArgs{
 // 				IpAddress: pulumi.String("192.168.11.111"),
 // 			},
 // 			Description: pulumi.String("description"),
@@ -245,7 +245,7 @@ type DatabaseReadReplicaArrayInput interface {
 type DatabaseReadReplicaArray []DatabaseReadReplicaInput
 
 func (DatabaseReadReplicaArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*DatabaseReadReplica)(nil))
+	return reflect.TypeOf((*[]*DatabaseReadReplica)(nil)).Elem()
 }
 
 func (i DatabaseReadReplicaArray) ToDatabaseReadReplicaArrayOutput() DatabaseReadReplicaArrayOutput {
@@ -270,7 +270,7 @@ type DatabaseReadReplicaMapInput interface {
 type DatabaseReadReplicaMap map[string]DatabaseReadReplicaInput
 
 func (DatabaseReadReplicaMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*DatabaseReadReplica)(nil))
+	return reflect.TypeOf((*map[string]*DatabaseReadReplica)(nil)).Elem()
 }
 
 func (i DatabaseReadReplicaMap) ToDatabaseReadReplicaMapOutput() DatabaseReadReplicaMapOutput {
@@ -281,9 +281,7 @@ func (i DatabaseReadReplicaMap) ToDatabaseReadReplicaMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(DatabaseReadReplicaMapOutput)
 }
 
-type DatabaseReadReplicaOutput struct {
-	*pulumi.OutputState
-}
+type DatabaseReadReplicaOutput struct{ *pulumi.OutputState }
 
 func (DatabaseReadReplicaOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*DatabaseReadReplica)(nil))
@@ -302,14 +300,12 @@ func (o DatabaseReadReplicaOutput) ToDatabaseReadReplicaPtrOutput() DatabaseRead
 }
 
 func (o DatabaseReadReplicaOutput) ToDatabaseReadReplicaPtrOutputWithContext(ctx context.Context) DatabaseReadReplicaPtrOutput {
-	return o.ApplyT(func(v DatabaseReadReplica) *DatabaseReadReplica {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatabaseReadReplica) *DatabaseReadReplica {
 		return &v
 	}).(DatabaseReadReplicaPtrOutput)
 }
 
-type DatabaseReadReplicaPtrOutput struct {
-	*pulumi.OutputState
-}
+type DatabaseReadReplicaPtrOutput struct{ *pulumi.OutputState }
 
 func (DatabaseReadReplicaPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**DatabaseReadReplica)(nil))
@@ -321,6 +317,16 @@ func (o DatabaseReadReplicaPtrOutput) ToDatabaseReadReplicaPtrOutput() DatabaseR
 
 func (o DatabaseReadReplicaPtrOutput) ToDatabaseReadReplicaPtrOutputWithContext(ctx context.Context) DatabaseReadReplicaPtrOutput {
 	return o
+}
+
+func (o DatabaseReadReplicaPtrOutput) Elem() DatabaseReadReplicaOutput {
+	return o.ApplyT(func(v *DatabaseReadReplica) DatabaseReadReplica {
+		if v != nil {
+			return *v
+		}
+		var ret DatabaseReadReplica
+		return ret
+	}).(DatabaseReadReplicaOutput)
 }
 
 type DatabaseReadReplicaArrayOutput struct{ *pulumi.OutputState }
@@ -364,6 +370,10 @@ func (o DatabaseReadReplicaMapOutput) MapIndex(k pulumi.StringInput) DatabaseRea
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaInput)(nil)).Elem(), &DatabaseReadReplica{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaPtrInput)(nil)).Elem(), &DatabaseReadReplica{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaArrayInput)(nil)).Elem(), DatabaseReadReplicaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaMapInput)(nil)).Elem(), DatabaseReadReplicaMap{})
 	pulumi.RegisterOutputType(DatabaseReadReplicaOutput{})
 	pulumi.RegisterOutputType(DatabaseReadReplicaPtrOutput{})
 	pulumi.RegisterOutputType(DatabaseReadReplicaArrayOutput{})

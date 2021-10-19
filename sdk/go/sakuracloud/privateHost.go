@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Private Host.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -232,7 +232,7 @@ type PrivateHostArrayInput interface {
 type PrivateHostArray []PrivateHostInput
 
 func (PrivateHostArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*PrivateHost)(nil))
+	return reflect.TypeOf((*[]*PrivateHost)(nil)).Elem()
 }
 
 func (i PrivateHostArray) ToPrivateHostArrayOutput() PrivateHostArrayOutput {
@@ -257,7 +257,7 @@ type PrivateHostMapInput interface {
 type PrivateHostMap map[string]PrivateHostInput
 
 func (PrivateHostMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*PrivateHost)(nil))
+	return reflect.TypeOf((*map[string]*PrivateHost)(nil)).Elem()
 }
 
 func (i PrivateHostMap) ToPrivateHostMapOutput() PrivateHostMapOutput {
@@ -268,9 +268,7 @@ func (i PrivateHostMap) ToPrivateHostMapOutputWithContext(ctx context.Context) P
 	return pulumi.ToOutputWithContext(ctx, i).(PrivateHostMapOutput)
 }
 
-type PrivateHostOutput struct {
-	*pulumi.OutputState
-}
+type PrivateHostOutput struct{ *pulumi.OutputState }
 
 func (PrivateHostOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*PrivateHost)(nil))
@@ -289,14 +287,12 @@ func (o PrivateHostOutput) ToPrivateHostPtrOutput() PrivateHostPtrOutput {
 }
 
 func (o PrivateHostOutput) ToPrivateHostPtrOutputWithContext(ctx context.Context) PrivateHostPtrOutput {
-	return o.ApplyT(func(v PrivateHost) *PrivateHost {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PrivateHost) *PrivateHost {
 		return &v
 	}).(PrivateHostPtrOutput)
 }
 
-type PrivateHostPtrOutput struct {
-	*pulumi.OutputState
-}
+type PrivateHostPtrOutput struct{ *pulumi.OutputState }
 
 func (PrivateHostPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**PrivateHost)(nil))
@@ -308,6 +304,16 @@ func (o PrivateHostPtrOutput) ToPrivateHostPtrOutput() PrivateHostPtrOutput {
 
 func (o PrivateHostPtrOutput) ToPrivateHostPtrOutputWithContext(ctx context.Context) PrivateHostPtrOutput {
 	return o
+}
+
+func (o PrivateHostPtrOutput) Elem() PrivateHostOutput {
+	return o.ApplyT(func(v *PrivateHost) PrivateHost {
+		if v != nil {
+			return *v
+		}
+		var ret PrivateHost
+		return ret
+	}).(PrivateHostOutput)
 }
 
 type PrivateHostArrayOutput struct{ *pulumi.OutputState }
@@ -351,6 +357,10 @@ func (o PrivateHostMapOutput) MapIndex(k pulumi.StringInput) PrivateHostOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateHostInput)(nil)).Elem(), &PrivateHost{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateHostPtrInput)(nil)).Elem(), &PrivateHost{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateHostArrayInput)(nil)).Elem(), PrivateHostArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateHostMapInput)(nil)).Elem(), PrivateHostMap{})
 	pulumi.RegisterOutputType(PrivateHostOutput{})
 	pulumi.RegisterOutputType(PrivateHostPtrOutput{})
 	pulumi.RegisterOutputType(PrivateHostArrayOutput{})

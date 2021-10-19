@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Bridge.
@@ -19,7 +19,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -196,7 +196,7 @@ type BridgeArrayInput interface {
 type BridgeArray []BridgeInput
 
 func (BridgeArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*Bridge)(nil))
+	return reflect.TypeOf((*[]*Bridge)(nil)).Elem()
 }
 
 func (i BridgeArray) ToBridgeArrayOutput() BridgeArrayOutput {
@@ -221,7 +221,7 @@ type BridgeMapInput interface {
 type BridgeMap map[string]BridgeInput
 
 func (BridgeMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*Bridge)(nil))
+	return reflect.TypeOf((*map[string]*Bridge)(nil)).Elem()
 }
 
 func (i BridgeMap) ToBridgeMapOutput() BridgeMapOutput {
@@ -232,9 +232,7 @@ func (i BridgeMap) ToBridgeMapOutputWithContext(ctx context.Context) BridgeMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(BridgeMapOutput)
 }
 
-type BridgeOutput struct {
-	*pulumi.OutputState
-}
+type BridgeOutput struct{ *pulumi.OutputState }
 
 func (BridgeOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*Bridge)(nil))
@@ -253,14 +251,12 @@ func (o BridgeOutput) ToBridgePtrOutput() BridgePtrOutput {
 }
 
 func (o BridgeOutput) ToBridgePtrOutputWithContext(ctx context.Context) BridgePtrOutput {
-	return o.ApplyT(func(v Bridge) *Bridge {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v Bridge) *Bridge {
 		return &v
 	}).(BridgePtrOutput)
 }
 
-type BridgePtrOutput struct {
-	*pulumi.OutputState
-}
+type BridgePtrOutput struct{ *pulumi.OutputState }
 
 func (BridgePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**Bridge)(nil))
@@ -272,6 +268,16 @@ func (o BridgePtrOutput) ToBridgePtrOutput() BridgePtrOutput {
 
 func (o BridgePtrOutput) ToBridgePtrOutputWithContext(ctx context.Context) BridgePtrOutput {
 	return o
+}
+
+func (o BridgePtrOutput) Elem() BridgeOutput {
+	return o.ApplyT(func(v *Bridge) Bridge {
+		if v != nil {
+			return *v
+		}
+		var ret Bridge
+		return ret
+	}).(BridgeOutput)
 }
 
 type BridgeArrayOutput struct{ *pulumi.OutputState }
@@ -315,6 +321,10 @@ func (o BridgeMapOutput) MapIndex(k pulumi.StringInput) BridgeOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*BridgeInput)(nil)).Elem(), &Bridge{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BridgePtrInput)(nil)).Elem(), &Bridge{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BridgeArrayInput)(nil)).Elem(), BridgeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BridgeMapInput)(nil)).Elem(), BridgeMap{})
 	pulumi.RegisterOutputType(BridgeOutput{})
 	pulumi.RegisterOutputType(BridgePtrOutput{})
 	pulumi.RegisterOutputType(BridgeArrayOutput{})

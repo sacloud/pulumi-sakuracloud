@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getServer(args?: GetServerArgs, opts?: pulumi.InvokeOptions): Promise<GetServerResult> {
@@ -43,11 +43,11 @@ export interface GetServerArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetServerFilter;
+    filter?: inputs.GetServerFilter;
     /**
      * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -140,4 +140,22 @@ export interface GetServerResult {
      */
     readonly tags: string[];
     readonly zone: string;
+}
+
+export function getServerOutput(args?: GetServerOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetServerResult> {
+    return pulumi.output(args).apply(a => getServer(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getServer.
+ */
+export interface GetServerOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetServerFilterArgs>;
+    /**
+     * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

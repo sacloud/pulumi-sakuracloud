@@ -5,13 +5,14 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 
 __all__ = [
     'GetZoneResult',
     'AwaitableGetZoneResult',
     'get_zone',
+    'get_zone_output',
 ]
 
 @pulumi.output_type
@@ -145,3 +146,25 @@ def get_zone(name: Optional[str] = None,
         region_id=__ret__.region_id,
         region_name=__ret__.region_name,
         zone_id=__ret__.zone_id)
+
+
+@_utilities.lift_output_func(get_zone)
+def get_zone_output(name: Optional[pulumi.Input[Optional[str]]] = None,
+                    opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetZoneResult]:
+    """
+    Get information about an existing Zone.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    current = sakuracloud.get_zone()
+    is1a = sakuracloud.get_zone(name="is1a")
+    ```
+
+
+    :param str name: The name of the zone (e.g. `is1a`,`tk1a`).
+    """
+    ...

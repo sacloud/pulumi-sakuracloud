@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getDNS(args?: GetDNSArgs, opts?: pulumi.InvokeOptions): Promise<GetDNSResult> {
@@ -42,7 +42,7 @@ export interface GetDNSArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetDNSFilter;
+    filter?: inputs.GetDNSFilter;
 }
 
 /**
@@ -78,4 +78,18 @@ export interface GetDNSResult {
      * The name of managed domain.
      */
     readonly zone: string;
+}
+
+export function getDNSOutput(args?: GetDNSOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDNSResult> {
+    return pulumi.output(args).apply(a => getDNS(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getDNS.
+ */
+export interface GetDNSOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetDNSFilterArgs>;
 }

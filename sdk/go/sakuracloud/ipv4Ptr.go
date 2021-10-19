@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud IPv4 PTR.
@@ -20,14 +20,14 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
 // 		server, err := sakuracloud.NewServer(ctx, "server", &sakuracloud.ServerArgs{
-// 			NetworkInterfaces: sakuracloud.ServerNetworkInterfaceArray{
-// 				&sakuracloud.ServerNetworkInterfaceArgs{
+// 			NetworkInterfaces: ServerNetworkInterfaceArray{
+// 				&ServerNetworkInterfaceArgs{
 // 					Upstream: pulumi.String("shared"),
 // 				},
 // 			},
@@ -220,7 +220,7 @@ type IPv4PtrArrayInput interface {
 type IPv4PtrArray []IPv4PtrInput
 
 func (IPv4PtrArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*IPv4Ptr)(nil))
+	return reflect.TypeOf((*[]*IPv4Ptr)(nil)).Elem()
 }
 
 func (i IPv4PtrArray) ToIPv4PtrArrayOutput() IPv4PtrArrayOutput {
@@ -245,7 +245,7 @@ type IPv4PtrMapInput interface {
 type IPv4PtrMap map[string]IPv4PtrInput
 
 func (IPv4PtrMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*IPv4Ptr)(nil))
+	return reflect.TypeOf((*map[string]*IPv4Ptr)(nil)).Elem()
 }
 
 func (i IPv4PtrMap) ToIPv4PtrMapOutput() IPv4PtrMapOutput {
@@ -256,9 +256,7 @@ func (i IPv4PtrMap) ToIPv4PtrMapOutputWithContext(ctx context.Context) IPv4PtrMa
 	return pulumi.ToOutputWithContext(ctx, i).(IPv4PtrMapOutput)
 }
 
-type IPv4PtrOutput struct {
-	*pulumi.OutputState
-}
+type IPv4PtrOutput struct{ *pulumi.OutputState }
 
 func (IPv4PtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*IPv4Ptr)(nil))
@@ -277,14 +275,12 @@ func (o IPv4PtrOutput) ToIPv4PtrPtrOutput() IPv4PtrPtrOutput {
 }
 
 func (o IPv4PtrOutput) ToIPv4PtrPtrOutputWithContext(ctx context.Context) IPv4PtrPtrOutput {
-	return o.ApplyT(func(v IPv4Ptr) *IPv4Ptr {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IPv4Ptr) *IPv4Ptr {
 		return &v
 	}).(IPv4PtrPtrOutput)
 }
 
-type IPv4PtrPtrOutput struct {
-	*pulumi.OutputState
-}
+type IPv4PtrPtrOutput struct{ *pulumi.OutputState }
 
 func (IPv4PtrPtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**IPv4Ptr)(nil))
@@ -296,6 +292,16 @@ func (o IPv4PtrPtrOutput) ToIPv4PtrPtrOutput() IPv4PtrPtrOutput {
 
 func (o IPv4PtrPtrOutput) ToIPv4PtrPtrOutputWithContext(ctx context.Context) IPv4PtrPtrOutput {
 	return o
+}
+
+func (o IPv4PtrPtrOutput) Elem() IPv4PtrOutput {
+	return o.ApplyT(func(v *IPv4Ptr) IPv4Ptr {
+		if v != nil {
+			return *v
+		}
+		var ret IPv4Ptr
+		return ret
+	}).(IPv4PtrOutput)
 }
 
 type IPv4PtrArrayOutput struct{ *pulumi.OutputState }
@@ -339,6 +345,10 @@ func (o IPv4PtrMapOutput) MapIndex(k pulumi.StringInput) IPv4PtrOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*IPv4PtrInput)(nil)).Elem(), &IPv4Ptr{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IPv4PtrPtrInput)(nil)).Elem(), &IPv4Ptr{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IPv4PtrArrayInput)(nil)).Elem(), IPv4PtrArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IPv4PtrMapInput)(nil)).Elem(), IPv4PtrMap{})
 	pulumi.RegisterOutputType(IPv4PtrOutput{})
 	pulumi.RegisterOutputType(IPv4PtrPtrOutput{})
 	pulumi.RegisterOutputType(IPv4PtrArrayOutput{})

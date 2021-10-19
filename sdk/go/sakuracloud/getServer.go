@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Server.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupServer(ctx, &sakuracloud.LookupServerArgs{
-// 			Filter: sakuracloud.GetServerFilter{
+// 		_, err := sakuracloud.LookupServer(ctx, &GetServerArgs{
+// 			Filter: GetServerFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -98,4 +101,157 @@ type LookupServerResult struct {
 	// Any tags assigned to the Server.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupServerOutput(ctx *pulumi.Context, args LookupServerOutputArgs, opts ...pulumi.InvokeOption) LookupServerResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupServerResult, error) {
+			args := v.(LookupServerArgs)
+			r, err := LookupServer(ctx, &args, opts...)
+			return *r, err
+		}).(LookupServerResultOutput)
+}
+
+// A collection of arguments for invoking getServer.
+type LookupServerOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetServerFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupServerOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupServerArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getServer.
+type LookupServerResultOutput struct{ *pulumi.OutputState }
+
+func (LookupServerResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupServerResult)(nil)).Elem()
+}
+
+func (o LookupServerResultOutput) ToLookupServerResultOutput() LookupServerResultOutput {
+	return o
+}
+
+func (o LookupServerResultOutput) ToLookupServerResultOutputWithContext(ctx context.Context) LookupServerResultOutput {
+	return o
+}
+
+// The id of the CD-ROM attached to the server.
+func (o LookupServerResultOutput) CdromId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.CdromId }).(pulumi.StringOutput)
+}
+
+// The policy of how to allocate virtual CPUs to the server. This will be one of [`standard`/`dedicatedcpu`].
+func (o LookupServerResultOutput) Commitment() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Commitment }).(pulumi.StringOutput)
+}
+
+// The number of virtual CPUs.
+func (o LookupServerResultOutput) Core() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupServerResult) int { return v.Core }).(pulumi.IntOutput)
+}
+
+// The description of the Server.
+func (o LookupServerResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// A list of disk id connected to the server.
+func (o LookupServerResultOutput) Disks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupServerResult) []string { return v.Disks }).(pulumi.StringArrayOutput)
+}
+
+// A list of IP address of DNS server in the zone.
+func (o LookupServerResultOutput) DnsServers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupServerResult) []string { return v.DnsServers }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupServerResultOutput) Filter() GetServerFilterPtrOutput {
+	return o.ApplyT(func(v LookupServerResult) *GetServerFilter { return v.Filter }).(GetServerFilterPtrOutput)
+}
+
+// The IP address of the gateway used by Server.
+func (o LookupServerResultOutput) Gateway() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Gateway }).(pulumi.StringOutput)
+}
+
+// The number of GPUs.
+func (o LookupServerResultOutput) Gpu() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupServerResult) int { return v.Gpu }).(pulumi.IntOutput)
+}
+
+// The hostname of the Server.
+func (o LookupServerResultOutput) Hostname() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Hostname }).(pulumi.StringOutput)
+}
+
+// The icon id attached to the Server.
+func (o LookupServerResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupServerResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The driver name of network interface. This will be one of [`virtio`/`e1000`].
+func (o LookupServerResultOutput) InterfaceDriver() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.InterfaceDriver }).(pulumi.StringOutput)
+}
+
+// The IP address assigned to the Server.
+func (o LookupServerResultOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.IpAddress }).(pulumi.StringOutput)
+}
+
+// The size of memory in GiB.
+func (o LookupServerResultOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupServerResult) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// The name of the Server.
+func (o LookupServerResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The bit length of the subnet assigned to the Server.
+func (o LookupServerResultOutput) Netmask() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupServerResult) int { return v.Netmask }).(pulumi.IntOutput)
+}
+
+// The network address which the `ipAddress` belongs.
+func (o LookupServerResultOutput) NetworkAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.NetworkAddress }).(pulumi.StringOutput)
+}
+
+// A list of `networkInterface` blocks as defined below.
+func (o LookupServerResultOutput) NetworkInterfaces() GetServerNetworkInterfaceArrayOutput {
+	return o.ApplyT(func(v LookupServerResult) []GetServerNetworkInterface { return v.NetworkInterfaces }).(GetServerNetworkInterfaceArrayOutput)
+}
+
+// The id of the private host which the server is assigned.
+func (o LookupServerResultOutput) PrivateHostId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.PrivateHostId }).(pulumi.StringOutput)
+}
+
+// The name of the private host which the server is assigned.
+func (o LookupServerResultOutput) PrivateHostName() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.PrivateHostName }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the Server.
+func (o LookupServerResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupServerResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupServerResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupServerResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupServerResultOutput{})
 }

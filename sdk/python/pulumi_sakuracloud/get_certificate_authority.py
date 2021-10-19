@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetCertificateAuthorityResult',
     'AwaitableGetCertificateAuthorityResult',
     'get_certificate_authority',
+    'get_certificate_authority_output',
 ]
 
 @pulumi.output_type
@@ -239,3 +240,26 @@ def get_certificate_authority(filter: Optional[pulumi.InputType['GetCertificateA
         servers=__ret__.servers,
         subject_string=__ret__.subject_string,
         tags=__ret__.tags)
+
+
+@_utilities.lift_output_func(get_certificate_authority)
+def get_certificate_authority_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetCertificateAuthorityFilterArgs']]]] = None,
+                                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCertificateAuthorityResult]:
+    """
+    Get information about an existing sakuracloud_certificate_authority.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_certificate_authority(filter=sakuracloud.GetCertificateAuthorityFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetCertificateAuthorityFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

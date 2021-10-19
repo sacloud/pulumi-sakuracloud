@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about VNC for connecting to an existing Server.
@@ -16,12 +19,12 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.GetServerVNCInfo(ctx, &sakuracloud.GetServerVNCInfoArgs{
+// 		_, err := sakuracloud.GetServerVNCInfo(ctx, &GetServerVNCInfoArgs{
 // 			ServerId: sakuracloud_server.Foobar.Id,
 // 		}, nil)
 // 		if err != nil {
@@ -60,4 +63,72 @@ type GetServerVNCInfoResult struct {
 	Port     int    `pulumi:"port"`
 	ServerId string `pulumi:"serverId"`
 	Zone     string `pulumi:"zone"`
+}
+
+func GetServerVNCInfoOutput(ctx *pulumi.Context, args GetServerVNCInfoOutputArgs, opts ...pulumi.InvokeOption) GetServerVNCInfoResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (GetServerVNCInfoResult, error) {
+			args := v.(GetServerVNCInfoArgs)
+			r, err := GetServerVNCInfo(ctx, &args, opts...)
+			return *r, err
+		}).(GetServerVNCInfoResultOutput)
+}
+
+// A collection of arguments for invoking getServerVNCInfo.
+type GetServerVNCInfoOutputArgs struct {
+	// The id of the Server.
+	ServerId pulumi.StringInput `pulumi:"serverId"`
+	// The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (GetServerVNCInfoOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServerVNCInfoArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getServerVNCInfo.
+type GetServerVNCInfoResultOutput struct{ *pulumi.OutputState }
+
+func (GetServerVNCInfoResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServerVNCInfoResult)(nil)).Elem()
+}
+
+func (o GetServerVNCInfoResultOutput) ToGetServerVNCInfoResultOutput() GetServerVNCInfoResultOutput {
+	return o
+}
+
+func (o GetServerVNCInfoResultOutput) ToGetServerVNCInfoResultOutputWithContext(ctx context.Context) GetServerVNCInfoResultOutput {
+	return o
+}
+
+// The host name for connecting by VNC.
+func (o GetServerVNCInfoResultOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o GetServerVNCInfoResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The password for connecting by VNC.
+func (o GetServerVNCInfoResultOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// The port number for connecting by VNC.
+func (o GetServerVNCInfoResultOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) int { return v.Port }).(pulumi.IntOutput)
+}
+
+func (o GetServerVNCInfoResultOutput) ServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) string { return v.ServerId }).(pulumi.StringOutput)
+}
+
+func (o GetServerVNCInfoResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServerVNCInfoResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(GetServerVNCInfoResultOutput{})
 }

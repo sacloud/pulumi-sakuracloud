@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 type module struct {
@@ -21,83 +21,84 @@ func (m *module) Version() semver.Version {
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
 	case "sakuracloud:index/archive:Archive":
-		r, err = NewArchive(ctx, name, nil, pulumi.URN_(urn))
+		r = &Archive{}
 	case "sakuracloud:index/archiveShare:ArchiveShare":
-		r, err = NewArchiveShare(ctx, name, nil, pulumi.URN_(urn))
+		r = &ArchiveShare{}
 	case "sakuracloud:index/autoBackup:AutoBackup":
-		r, err = NewAutoBackup(ctx, name, nil, pulumi.URN_(urn))
+		r = &AutoBackup{}
 	case "sakuracloud:index/bridge:Bridge":
-		r, err = NewBridge(ctx, name, nil, pulumi.URN_(urn))
+		r = &Bridge{}
 	case "sakuracloud:index/cDROM:CDROM":
-		r, err = NewCDROM(ctx, name, nil, pulumi.URN_(urn))
+		r = &CDROM{}
 	case "sakuracloud:index/certificateAuthority:CertificateAuthority":
-		r, err = NewCertificateAuthority(ctx, name, nil, pulumi.URN_(urn))
+		r = &CertificateAuthority{}
 	case "sakuracloud:index/containerRegistry:ContainerRegistry":
-		r, err = NewContainerRegistry(ctx, name, nil, pulumi.URN_(urn))
+		r = &ContainerRegistry{}
 	case "sakuracloud:index/dNS:DNS":
-		r, err = NewDNS(ctx, name, nil, pulumi.URN_(urn))
+		r = &DNS{}
 	case "sakuracloud:index/dNSRecord:DNSRecord":
-		r, err = NewDNSRecord(ctx, name, nil, pulumi.URN_(urn))
+		r = &DNSRecord{}
 	case "sakuracloud:index/database:Database":
-		r, err = NewDatabase(ctx, name, nil, pulumi.URN_(urn))
+		r = &Database{}
 	case "sakuracloud:index/databaseReadReplica:DatabaseReadReplica":
-		r, err = NewDatabaseReadReplica(ctx, name, nil, pulumi.URN_(urn))
+		r = &DatabaseReadReplica{}
 	case "sakuracloud:index/disk:Disk":
-		r, err = NewDisk(ctx, name, nil, pulumi.URN_(urn))
+		r = &Disk{}
 	case "sakuracloud:index/eSME:ESME":
-		r, err = NewESME(ctx, name, nil, pulumi.URN_(urn))
+		r = &ESME{}
 	case "sakuracloud:index/enhancedDB:EnhancedDB":
-		r, err = NewEnhancedDB(ctx, name, nil, pulumi.URN_(urn))
+		r = &EnhancedDB{}
 	case "sakuracloud:index/gSLB:GSLB":
-		r, err = NewGSLB(ctx, name, nil, pulumi.URN_(urn))
+		r = &GSLB{}
 	case "sakuracloud:index/iPv4Ptr:IPv4Ptr":
-		r, err = NewIPv4Ptr(ctx, name, nil, pulumi.URN_(urn))
+		r = &IPv4Ptr{}
 	case "sakuracloud:index/icon:Icon":
-		r, err = NewIcon(ctx, name, nil, pulumi.URN_(urn))
+		r = &Icon{}
 	case "sakuracloud:index/internet:Internet":
-		r, err = NewInternet(ctx, name, nil, pulumi.URN_(urn))
+		r = &Internet{}
 	case "sakuracloud:index/loadBalancer:LoadBalancer":
-		r, err = NewLoadBalancer(ctx, name, nil, pulumi.URN_(urn))
+		r = &LoadBalancer{}
 	case "sakuracloud:index/localRouter:LocalRouter":
-		r, err = NewLocalRouter(ctx, name, nil, pulumi.URN_(urn))
+		r = &LocalRouter{}
 	case "sakuracloud:index/mobileGateway:MobileGateway":
-		r, err = NewMobileGateway(ctx, name, nil, pulumi.URN_(urn))
+		r = &MobileGateway{}
 	case "sakuracloud:index/nFS:NFS":
-		r, err = NewNFS(ctx, name, nil, pulumi.URN_(urn))
+		r = &NFS{}
 	case "sakuracloud:index/note:Note":
-		r, err = NewNote(ctx, name, nil, pulumi.URN_(urn))
+		r = &Note{}
 	case "sakuracloud:index/packetFilter:PacketFilter":
-		r, err = NewPacketFilter(ctx, name, nil, pulumi.URN_(urn))
+		r = &PacketFilter{}
 	case "sakuracloud:index/packetFilterRule:PacketFilterRule":
-		r, err = NewPacketFilterRule(ctx, name, nil, pulumi.URN_(urn))
+		r = &PacketFilterRule{}
 	case "sakuracloud:index/privateHost:PrivateHost":
-		r, err = NewPrivateHost(ctx, name, nil, pulumi.URN_(urn))
+		r = &PrivateHost{}
 	case "sakuracloud:index/proxyLB:ProxyLB":
-		r, err = NewProxyLB(ctx, name, nil, pulumi.URN_(urn))
+		r = &ProxyLB{}
 	case "sakuracloud:index/proxyLBACME:ProxyLBACME":
-		r, err = NewProxyLBACME(ctx, name, nil, pulumi.URN_(urn))
+		r = &ProxyLBACME{}
 	case "sakuracloud:index/sIM:SIM":
-		r, err = NewSIM(ctx, name, nil, pulumi.URN_(urn))
+		r = &SIM{}
 	case "sakuracloud:index/sSHKey:SSHKey":
-		r, err = NewSSHKey(ctx, name, nil, pulumi.URN_(urn))
+		r = &SSHKey{}
 	case "sakuracloud:index/sSHKeyGen:SSHKeyGen":
-		r, err = NewSSHKeyGen(ctx, name, nil, pulumi.URN_(urn))
+		r = &SSHKeyGen{}
 	case "sakuracloud:index/server:Server":
-		r, err = NewServer(ctx, name, nil, pulumi.URN_(urn))
+		r = &Server{}
 	case "sakuracloud:index/simpleMonitor:SimpleMonitor":
-		r, err = NewSimpleMonitor(ctx, name, nil, pulumi.URN_(urn))
+		r = &SimpleMonitor{}
 	case "sakuracloud:index/subnet:Subnet":
-		r, err = NewSubnet(ctx, name, nil, pulumi.URN_(urn))
+		r = &Subnet{}
 	case "sakuracloud:index/switch:Switch":
-		r, err = NewSwitch(ctx, name, nil, pulumi.URN_(urn))
+		r = &Switch{}
 	case "sakuracloud:index/vPCRouter:VPCRouter":
-		r, err = NewVPCRouter(ctx, name, nil, pulumi.URN_(urn))
+		r = &VPCRouter{}
 	case "sakuracloud:index/webAccelCertificate:WebAccelCertificate":
-		r, err = NewWebAccelCertificate(ctx, name, nil, pulumi.URN_(urn))
+		r = &WebAccelCertificate{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
 
+	err = ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
 	return
 }
 
@@ -114,13 +115,15 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 		return nil, fmt.Errorf("unknown provider type: %s", typ)
 	}
 
-	return NewProvider(ctx, name, nil, pulumi.URN_(urn))
+	r := &Provider{}
+	err := ctx.RegisterResource(typ, name, nil, r, pulumi.URN_(urn))
+	return r, err
 }
 
 func init() {
 	version, err := PkgVersion()
 	if err != nil {
-		fmt.Println("failed to determine package version. defaulting to v1: %v", err)
+		fmt.Printf("failed to determine package version. defaulting to v1: %v\n", err)
 	}
 	pulumi.RegisterResourceModule(
 		"sakuracloud",

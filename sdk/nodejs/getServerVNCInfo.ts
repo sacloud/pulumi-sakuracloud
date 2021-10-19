@@ -2,7 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
 /**
@@ -40,11 +39,11 @@ export interface GetServerVNCInfoArgs {
     /**
      * The id of the Server.
      */
-    readonly serverId: string;
+    serverId: string;
     /**
      * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -69,4 +68,22 @@ export interface GetServerVNCInfoResult {
     readonly port: number;
     readonly serverId: string;
     readonly zone: string;
+}
+
+export function getServerVNCInfoOutput(args: GetServerVNCInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetServerVNCInfoResult> {
+    return pulumi.output(args).apply(a => getServerVNCInfo(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getServerVNCInfo.
+ */
+export interface GetServerVNCInfoOutputArgs {
+    /**
+     * The id of the Server.
+     */
+    serverId: pulumi.Input<string>;
+    /**
+     * The name of zone that the Server is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

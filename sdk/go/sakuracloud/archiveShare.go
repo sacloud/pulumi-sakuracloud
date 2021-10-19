@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Manages a SakuraCloud Archive Sharing.
@@ -20,7 +20,7 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
@@ -187,7 +187,7 @@ type ArchiveShareArrayInput interface {
 type ArchiveShareArray []ArchiveShareInput
 
 func (ArchiveShareArray) ElementType() reflect.Type {
-	return reflect.TypeOf(([]*ArchiveShare)(nil))
+	return reflect.TypeOf((*[]*ArchiveShare)(nil)).Elem()
 }
 
 func (i ArchiveShareArray) ToArchiveShareArrayOutput() ArchiveShareArrayOutput {
@@ -212,7 +212,7 @@ type ArchiveShareMapInput interface {
 type ArchiveShareMap map[string]ArchiveShareInput
 
 func (ArchiveShareMap) ElementType() reflect.Type {
-	return reflect.TypeOf((map[string]*ArchiveShare)(nil))
+	return reflect.TypeOf((*map[string]*ArchiveShare)(nil)).Elem()
 }
 
 func (i ArchiveShareMap) ToArchiveShareMapOutput() ArchiveShareMapOutput {
@@ -223,9 +223,7 @@ func (i ArchiveShareMap) ToArchiveShareMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ArchiveShareMapOutput)
 }
 
-type ArchiveShareOutput struct {
-	*pulumi.OutputState
-}
+type ArchiveShareOutput struct{ *pulumi.OutputState }
 
 func (ArchiveShareOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((*ArchiveShare)(nil))
@@ -244,14 +242,12 @@ func (o ArchiveShareOutput) ToArchiveSharePtrOutput() ArchiveSharePtrOutput {
 }
 
 func (o ArchiveShareOutput) ToArchiveSharePtrOutputWithContext(ctx context.Context) ArchiveSharePtrOutput {
-	return o.ApplyT(func(v ArchiveShare) *ArchiveShare {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArchiveShare) *ArchiveShare {
 		return &v
 	}).(ArchiveSharePtrOutput)
 }
 
-type ArchiveSharePtrOutput struct {
-	*pulumi.OutputState
-}
+type ArchiveSharePtrOutput struct{ *pulumi.OutputState }
 
 func (ArchiveSharePtrOutput) ElementType() reflect.Type {
 	return reflect.TypeOf((**ArchiveShare)(nil))
@@ -263,6 +259,16 @@ func (o ArchiveSharePtrOutput) ToArchiveSharePtrOutput() ArchiveSharePtrOutput {
 
 func (o ArchiveSharePtrOutput) ToArchiveSharePtrOutputWithContext(ctx context.Context) ArchiveSharePtrOutput {
 	return o
+}
+
+func (o ArchiveSharePtrOutput) Elem() ArchiveShareOutput {
+	return o.ApplyT(func(v *ArchiveShare) ArchiveShare {
+		if v != nil {
+			return *v
+		}
+		var ret ArchiveShare
+		return ret
+	}).(ArchiveShareOutput)
 }
 
 type ArchiveShareArrayOutput struct{ *pulumi.OutputState }
@@ -306,6 +312,10 @@ func (o ArchiveShareMapOutput) MapIndex(k pulumi.StringInput) ArchiveShareOutput
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveShareInput)(nil)).Elem(), &ArchiveShare{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveSharePtrInput)(nil)).Elem(), &ArchiveShare{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveShareArrayInput)(nil)).Elem(), ArchiveShareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArchiveShareMapInput)(nil)).Elem(), ArchiveShareMap{})
 	pulumi.RegisterOutputType(ArchiveShareOutput{})
 	pulumi.RegisterOutputType(ArchiveSharePtrOutput{})
 	pulumi.RegisterOutputType(ArchiveShareArrayOutput{})

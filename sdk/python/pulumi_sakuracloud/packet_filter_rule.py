@@ -5,24 +5,133 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['PacketFilterRule']
+__all__ = ['PacketFilterRuleArgs', 'PacketFilterRule']
+
+@pulumi.input_type
+class PacketFilterRuleArgs:
+    def __init__(__self__, *,
+                 packet_filter_id: pulumi.Input[str],
+                 expressions: Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a PacketFilterRule resource.
+        :param pulumi.Input[str] packet_filter_id: The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
+        :param pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]] expressions: One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] zone: The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        pulumi.set(__self__, "packet_filter_id", packet_filter_id)
+        if expressions is not None:
+            pulumi.set(__self__, "expressions", expressions)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="packetFilterId")
+    def packet_filter_id(self) -> pulumi.Input[str]:
+        """
+        The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "packet_filter_id")
+
+    @packet_filter_id.setter
+    def packet_filter_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "packet_filter_id", value)
+
+    @property
+    @pulumi.getter
+    def expressions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]]:
+        """
+        One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "expressions")
+
+    @expressions.setter
+    def expressions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]]):
+        pulumi.set(self, "expressions", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _PacketFilterRuleState:
+    def __init__(__self__, *,
+                 expressions: Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]] = None,
+                 packet_filter_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering PacketFilterRule resources.
+        :param pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]] expressions: One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] packet_filter_id: The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
+        :param pulumi.Input[str] zone: The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if expressions is not None:
+            pulumi.set(__self__, "expressions", expressions)
+        if packet_filter_id is not None:
+            pulumi.set(__self__, "packet_filter_id", packet_filter_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def expressions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]]:
+        """
+        One or more `expression` blocks as defined below. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "expressions")
+
+    @expressions.setter
+    def expressions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['PacketFilterRuleExpressionArgs']]]]):
+        pulumi.set(self, "expressions", value)
+
+    @property
+    @pulumi.getter(name="packetFilterId")
+    def packet_filter_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "packet_filter_id")
+
+    @packet_filter_id.setter
+    def packet_filter_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "packet_filter_id", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class PacketFilterRule(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  expressions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PacketFilterRuleExpressionArgs']]]]] = None,
                  packet_filter_id: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Packet Filter Rules.
 
@@ -80,12 +189,82 @@ class PacketFilterRule(pulumi.CustomResource):
         :param pulumi.Input[str] packet_filter_id: The id of the packet filter that set expressions to. Changing this forces a new resource to be created.
         :param pulumi.Input[str] zone: The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: PacketFilterRuleArgs,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Packet Filter Rules.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar = sakuracloud.PacketFilter("foobar", description="description")
+        rules = sakuracloud.PacketFilterRule("rules",
+            packet_filter_id=foobar.id,
+            expressions=[
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="tcp",
+                    destination_port="22",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="tcp",
+                    destination_port="80",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="tcp",
+                    destination_port="443",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="icmp",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="fragment",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="udp",
+                    source_port="123",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="tcp",
+                    destination_port="32768-61000",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="udp",
+                    destination_port="32768-61000",
+                ),
+                sakuracloud.PacketFilterRuleExpressionArgs(
+                    protocol="ip",
+                    allow=False,
+                    description="Deny ALL",
+                ),
+            ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param PacketFilterRuleArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(PacketFilterRuleArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 expressions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PacketFilterRuleExpressionArgs']]]]] = None,
+                 packet_filter_id: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -95,13 +274,13 @@ class PacketFilterRule(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = PacketFilterRuleArgs.__new__(PacketFilterRuleArgs)
 
-            __props__['expressions'] = expressions
+            __props__.__dict__["expressions"] = expressions
             if packet_filter_id is None and not opts.urn:
                 raise TypeError("Missing required property 'packet_filter_id'")
-            __props__['packet_filter_id'] = packet_filter_id
-            __props__['zone'] = zone
+            __props__.__dict__["packet_filter_id"] = packet_filter_id
+            __props__.__dict__["zone"] = zone
         super(PacketFilterRule, __self__).__init__(
             'sakuracloud:index/packetFilterRule:PacketFilterRule',
             resource_name,
@@ -128,11 +307,11 @@ class PacketFilterRule(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _PacketFilterRuleState.__new__(_PacketFilterRuleState)
 
-        __props__["expressions"] = expressions
-        __props__["packet_filter_id"] = packet_filter_id
-        __props__["zone"] = zone
+        __props__.__dict__["expressions"] = expressions
+        __props__.__dict__["packet_filter_id"] = packet_filter_id
+        __props__.__dict__["zone"] = zone
         return PacketFilterRule(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -158,10 +337,4 @@ class PacketFilterRule(pulumi.CustomResource):
         The name of zone that the PacketFilter Rule will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

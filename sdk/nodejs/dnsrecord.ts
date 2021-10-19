@@ -142,35 +142,35 @@ export interface DNSRecordState {
     /**
      * The id of the DNS resource. Changing this forces a new resource to be created.
      */
-    readonly dnsId?: pulumi.Input<string>;
+    dnsId?: pulumi.Input<string>;
     /**
      * The name of the DNS Record resource. Changing this forces a new resource to be created.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The number of port. This must be in the range [`1`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly port?: pulumi.Input<number>;
+    port?: pulumi.Input<number>;
     /**
      * The priority of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number>;
     /**
      * The number of the TTL. Changing this forces a new resource to be created. Default:`3600`.
      */
-    readonly ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number>;
     /**
      * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]. Changing this forces a new resource to be created.
      */
-    readonly type?: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
     /**
      * The value of the DNS Record. Changing this forces a new resource to be created.
      */
-    readonly value?: pulumi.Input<string>;
+    value?: pulumi.Input<string>;
     /**
      * The weight of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number>;
 }
 
 /**
@@ -180,33 +180,33 @@ export interface DNSRecordArgs {
     /**
      * The id of the DNS resource. Changing this forces a new resource to be created.
      */
-    readonly dnsId: pulumi.Input<string>;
+    dnsId: pulumi.Input<string>;
     /**
      * The name of the DNS Record resource. Changing this forces a new resource to be created.
      */
-    readonly name?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The number of port. This must be in the range [`1`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly port?: pulumi.Input<number>;
+    port?: pulumi.Input<number>;
     /**
      * The priority of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number>;
     /**
      * The number of the TTL. Changing this forces a new resource to be created. Default:`3600`.
      */
-    readonly ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number>;
     /**
      * The type of DNS Record. This must be one of [`A`/`AAAA`/`ALIAS`/`CNAME`/`NS`/`MX`/`TXT`/`SRV`/`CAA`/`PTR`]. Changing this forces a new resource to be created.
      */
-    readonly type: pulumi.Input<string>;
+    type: pulumi.Input<string>;
     /**
      * The value of the DNS Record. Changing this forces a new resource to be created.
      */
-    readonly value: pulumi.Input<string>;
+    value: pulumi.Input<string>;
     /**
      * The weight of target DNS Record. This must be in the range [`0`-`65535`]. Changing this forces a new resource to be created.
      */
-    readonly weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number>;
 }

@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getPacketFilter(args?: GetPacketFilterArgs, opts?: pulumi.InvokeOptions): Promise<GetPacketFilterResult> {
@@ -43,11 +43,11 @@ export interface GetPacketFilterArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetPacketFilterFilter;
+    filter?: inputs.GetPacketFilterFilter;
     /**
      * The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
      */
-    readonly zone?: string;
+    zone?: string;
 }
 
 /**
@@ -72,4 +72,22 @@ export interface GetPacketFilterResult {
      */
     readonly name: string;
     readonly zone: string;
+}
+
+export function getPacketFilterOutput(args?: GetPacketFilterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPacketFilterResult> {
+    return pulumi.output(args).apply(a => getPacketFilter(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getPacketFilter.
+ */
+export interface GetPacketFilterOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetPacketFilterFilterArgs>;
+    /**
+     * The name of zone that the PacketFilter is in (e.g. `is1a`, `tk1a`).
+     */
+    zone?: pulumi.Input<string>;
 }

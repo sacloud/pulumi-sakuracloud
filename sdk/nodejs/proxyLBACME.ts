@@ -132,27 +132,27 @@ export interface ProxyLBACMEState {
     /**
      * The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
      */
-    readonly acceptTos?: pulumi.Input<boolean>;
+    acceptTos?: pulumi.Input<boolean>;
     /**
      * A list of `certificate` blocks as defined below.
      */
-    readonly certificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBACMECertificate>[]>;
+    certificates?: pulumi.Input<pulumi.Input<inputs.ProxyLBACMECertificate>[]>;
     /**
      * The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
      */
-    readonly commonName?: pulumi.Input<string>;
+    commonName?: pulumi.Input<string>;
     /**
      * The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
      */
-    readonly proxylbId?: pulumi.Input<string>;
+    proxylbId?: pulumi.Input<string>;
     /**
      * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
      */
-    readonly subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
+    subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
      */
-    readonly updateDelaySec?: pulumi.Input<number>;
+    updateDelaySec?: pulumi.Input<number>;
 }
 
 /**
@@ -162,21 +162,21 @@ export interface ProxyLBACMEArgs {
     /**
      * The flag to accept the current Let's Encrypt terms of service(see: https://letsencrypt.org/repository/). This must be set `true` explicitly. Changing this forces a new resource to be created.
      */
-    readonly acceptTos: pulumi.Input<boolean>;
+    acceptTos: pulumi.Input<boolean>;
     /**
      * The FQDN used by ACME. This must set resolvable value. Changing this forces a new resource to be created.
      */
-    readonly commonName: pulumi.Input<string>;
+    commonName: pulumi.Input<string>;
     /**
      * The id of the ProxyLB that set ACME settings to. Changing this forces a new resource to be created.
      */
-    readonly proxylbId: pulumi.Input<string>;
+    proxylbId: pulumi.Input<string>;
     /**
      * The Subject alternative names used by ACME. Changing this forces a new resource to be created.
      */
-    readonly subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
+    subjectAltNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The wait time in seconds. This typically used for waiting for a DNS propagation. Changing this forces a new resource to be created.
      */
-    readonly updateDelaySec?: pulumi.Input<number>;
+    updateDelaySec?: pulumi.Input<number>;
 }

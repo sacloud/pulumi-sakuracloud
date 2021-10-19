@@ -5,15 +5,687 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
-__all__ = ['Server']
+__all__ = ['ServerArgs', 'Server']
+
+@pulumi.input_type
+class ServerArgs:
+    def __init__(__self__, *,
+                 cdrom_id: Optional[pulumi.Input[str]] = None,
+                 commitment: Optional[pulumi.Input[str]] = None,
+                 core: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 disk_edit_parameter: Optional[pulumi.Input['ServerDiskEditParameterArgs']] = None,
+                 disks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 force_shutdown: Optional[pulumi.Input[bool]] = None,
+                 gpu: Optional[pulumi.Input[int]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 interface_driver: Optional[pulumi.Input[str]] = None,
+                 memory: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]] = None,
+                 private_host_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 user_data: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        The set of arguments for constructing a Server resource.
+        :param pulumi.Input[str] cdrom_id: The id of the CD-ROM to attach to the Server.
+        :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
+        :param pulumi.Input[int] core: The number of virtual CPUs. Default:`1`.
+        :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input['ServerDiskEditParameterArgs'] disk_edit_parameter: A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] disks: A list of disk id connected to the server.
+        :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying.
+        :param pulumi.Input[int] gpu: The number of GPUs.
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Server.
+        :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
+        :param pulumi.Input[int] memory: The size of memory in GiB. Default:`1`.
+        :param pulumi.Input[str] name: The name of the Server. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]] network_interfaces: One or more `network_interface` blocks as defined below.
+        :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Server.
+        :param pulumi.Input[str] user_data: A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        :param pulumi.Input[str] zone: The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if cdrom_id is not None:
+            pulumi.set(__self__, "cdrom_id", cdrom_id)
+        if commitment is not None:
+            pulumi.set(__self__, "commitment", commitment)
+        if core is not None:
+            pulumi.set(__self__, "core", core)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if disk_edit_parameter is not None:
+            pulumi.set(__self__, "disk_edit_parameter", disk_edit_parameter)
+        if disks is not None:
+            pulumi.set(__self__, "disks", disks)
+        if force_shutdown is not None:
+            pulumi.set(__self__, "force_shutdown", force_shutdown)
+        if gpu is not None:
+            pulumi.set(__self__, "gpu", gpu)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if interface_driver is not None:
+            pulumi.set(__self__, "interface_driver", interface_driver)
+        if memory is not None:
+            pulumi.set(__self__, "memory", memory)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if network_interfaces is not None:
+            pulumi.set(__self__, "network_interfaces", network_interfaces)
+        if private_host_id is not None:
+            pulumi.set(__self__, "private_host_id", private_host_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if user_data is not None:
+            pulumi.set(__self__, "user_data", user_data)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="cdromId")
+    def cdrom_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the CD-ROM to attach to the Server.
+        """
+        return pulumi.get(self, "cdrom_id")
+
+    @cdrom_id.setter
+    def cdrom_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdrom_id", value)
+
+    @property
+    @pulumi.getter
+    def commitment(self) -> Optional[pulumi.Input[str]]:
+        """
+        The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
+        """
+        return pulumi.get(self, "commitment")
+
+    @commitment.setter
+    def commitment(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "commitment", value)
+
+    @property
+    @pulumi.getter
+    def core(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of virtual CPUs. Default:`1`.
+        """
+        return pulumi.get(self, "core")
+
+    @core.setter
+    def core(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "core", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Server. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="diskEditParameter")
+    def disk_edit_parameter(self) -> Optional[pulumi.Input['ServerDiskEditParameterArgs']]:
+        """
+        A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
+        """
+        return pulumi.get(self, "disk_edit_parameter")
+
+    @disk_edit_parameter.setter
+    def disk_edit_parameter(self, value: Optional[pulumi.Input['ServerDiskEditParameterArgs']]):
+        pulumi.set(self, "disk_edit_parameter", value)
+
+    @property
+    @pulumi.getter
+    def disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of disk id connected to the server.
+        """
+        return pulumi.get(self, "disks")
+
+    @disks.setter
+    def disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "disks", value)
+
+    @property
+    @pulumi.getter(name="forceShutdown")
+    def force_shutdown(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to use force shutdown when need to reboot/shutdown while applying.
+        """
+        return pulumi.get(self, "force_shutdown")
+
+    @force_shutdown.setter
+    def force_shutdown(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_shutdown", value)
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of GPUs.
+        """
+        return pulumi.get(self, "gpu")
+
+    @gpu.setter
+    def gpu(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gpu", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Server.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="interfaceDriver")
+    def interface_driver(self) -> Optional[pulumi.Input[str]]:
+        """
+        The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
+        """
+        return pulumi.get(self, "interface_driver")
+
+    @interface_driver.setter
+    def interface_driver(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface_driver", value)
+
+    @property
+    @pulumi.getter
+    def memory(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of memory in GiB. Default:`1`.
+        """
+        return pulumi.get(self, "memory")
+
+    @memory.setter
+    def memory(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "memory", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Server. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]]:
+        """
+        One or more `network_interface` blocks as defined below.
+        """
+        return pulumi.get(self, "network_interfaces")
+
+    @network_interfaces.setter
+    def network_interfaces(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]]):
+        pulumi.set(self, "network_interfaces", value)
+
+    @property
+    @pulumi.getter(name="privateHostId")
+    def private_host_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the PrivateHost which the Server is assigned.
+        """
+        return pulumi.get(self, "private_host_id")
+
+    @private_host_id.setter
+    def private_host_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_host_id", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Server.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="userData")
+    def user_data(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        """
+        return pulumi.get(self, "user_data")
+
+    @user_data.setter
+    def user_data(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_data", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
+
+
+@pulumi.input_type
+class _ServerState:
+    def __init__(__self__, *,
+                 cdrom_id: Optional[pulumi.Input[str]] = None,
+                 commitment: Optional[pulumi.Input[str]] = None,
+                 core: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 disk_edit_parameter: Optional[pulumi.Input['ServerDiskEditParameterArgs']] = None,
+                 disks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 dns_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 force_shutdown: Optional[pulumi.Input[bool]] = None,
+                 gateway: Optional[pulumi.Input[str]] = None,
+                 gpu: Optional[pulumi.Input[int]] = None,
+                 hostname: Optional[pulumi.Input[str]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 interface_driver: Optional[pulumi.Input[str]] = None,
+                 ip_address: Optional[pulumi.Input[str]] = None,
+                 memory: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 netmask: Optional[pulumi.Input[int]] = None,
+                 network_address: Optional[pulumi.Input[str]] = None,
+                 network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]] = None,
+                 private_host_id: Optional[pulumi.Input[str]] = None,
+                 private_host_name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 user_data: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None):
+        """
+        Input properties used for looking up and filtering Server resources.
+        :param pulumi.Input[str] cdrom_id: The id of the CD-ROM to attach to the Server.
+        :param pulumi.Input[str] commitment: The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
+        :param pulumi.Input[int] core: The number of virtual CPUs. Default:`1`.
+        :param pulumi.Input[str] description: The description of the Server. The length of this value must be in the range [`1`-`512`].
+        :param pulumi.Input['ServerDiskEditParameterArgs'] disk_edit_parameter: A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] disks: A list of disk id connected to the server.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] dns_servers: A list of IP address of DNS server in the zone.
+        :param pulumi.Input[bool] force_shutdown: The flag to use force shutdown when need to reboot/shutdown while applying.
+        :param pulumi.Input[str] gateway: The gateway address used by the Server.
+        :param pulumi.Input[int] gpu: The number of GPUs.
+        :param pulumi.Input[str] hostname: The hostname of the Server. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[str] icon_id: The icon id to attach to the Server.
+        :param pulumi.Input[str] interface_driver: The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
+        :param pulumi.Input[str] ip_address: The IP address to assign to the Server.
+        :param pulumi.Input[int] memory: The size of memory in GiB. Default:`1`.
+        :param pulumi.Input[str] name: The name of the Server. The length of this value must be in the range [`1`-`64`].
+        :param pulumi.Input[int] netmask: The bit length of the subnet to assign to the Server.
+        :param pulumi.Input[str] network_address: The network address which the `ip_address` belongs.
+        :param pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]] network_interfaces: One or more `network_interface` blocks as defined below.
+        :param pulumi.Input[str] private_host_id: The id of the PrivateHost which the Server is assigned.
+        :param pulumi.Input[str] private_host_name: The id of the PrivateHost which the Server is assigned.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: Any tags to assign to the Server.
+        :param pulumi.Input[str] user_data: A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        :param pulumi.Input[str] zone: The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        if cdrom_id is not None:
+            pulumi.set(__self__, "cdrom_id", cdrom_id)
+        if commitment is not None:
+            pulumi.set(__self__, "commitment", commitment)
+        if core is not None:
+            pulumi.set(__self__, "core", core)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if disk_edit_parameter is not None:
+            pulumi.set(__self__, "disk_edit_parameter", disk_edit_parameter)
+        if disks is not None:
+            pulumi.set(__self__, "disks", disks)
+        if dns_servers is not None:
+            pulumi.set(__self__, "dns_servers", dns_servers)
+        if force_shutdown is not None:
+            pulumi.set(__self__, "force_shutdown", force_shutdown)
+        if gateway is not None:
+            pulumi.set(__self__, "gateway", gateway)
+        if gpu is not None:
+            pulumi.set(__self__, "gpu", gpu)
+        if hostname is not None:
+            pulumi.set(__self__, "hostname", hostname)
+        if icon_id is not None:
+            pulumi.set(__self__, "icon_id", icon_id)
+        if interface_driver is not None:
+            pulumi.set(__self__, "interface_driver", interface_driver)
+        if ip_address is not None:
+            pulumi.set(__self__, "ip_address", ip_address)
+        if memory is not None:
+            pulumi.set(__self__, "memory", memory)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if netmask is not None:
+            pulumi.set(__self__, "netmask", netmask)
+        if network_address is not None:
+            pulumi.set(__self__, "network_address", network_address)
+        if network_interfaces is not None:
+            pulumi.set(__self__, "network_interfaces", network_interfaces)
+        if private_host_id is not None:
+            pulumi.set(__self__, "private_host_id", private_host_id)
+        if private_host_name is not None:
+            pulumi.set(__self__, "private_host_name", private_host_name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+        if user_data is not None:
+            pulumi.set(__self__, "user_data", user_data)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="cdromId")
+    def cdrom_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the CD-ROM to attach to the Server.
+        """
+        return pulumi.get(self, "cdrom_id")
+
+    @cdrom_id.setter
+    def cdrom_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdrom_id", value)
+
+    @property
+    @pulumi.getter
+    def commitment(self) -> Optional[pulumi.Input[str]]:
+        """
+        The policy of how to allocate virtual CPUs to the server. This must be one of [`standard`/`dedicatedcpu`]. Default:`standard`.
+        """
+        return pulumi.get(self, "commitment")
+
+    @commitment.setter
+    def commitment(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "commitment", value)
+
+    @property
+    @pulumi.getter
+    def core(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of virtual CPUs. Default:`1`.
+        """
+        return pulumi.get(self, "core")
+
+    @core.setter
+    def core(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "core", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Server. The length of this value must be in the range [`1`-`512`].
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="diskEditParameter")
+    def disk_edit_parameter(self) -> Optional[pulumi.Input['ServerDiskEditParameterArgs']]:
+        """
+        A `disk_edit_parameter` block as defined below. This parameter conflicts with [`user_data`].
+        """
+        return pulumi.get(self, "disk_edit_parameter")
+
+    @disk_edit_parameter.setter
+    def disk_edit_parameter(self, value: Optional[pulumi.Input['ServerDiskEditParameterArgs']]):
+        pulumi.set(self, "disk_edit_parameter", value)
+
+    @property
+    @pulumi.getter
+    def disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of disk id connected to the server.
+        """
+        return pulumi.get(self, "disks")
+
+    @disks.setter
+    def disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "disks", value)
+
+    @property
+    @pulumi.getter(name="dnsServers")
+    def dns_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of IP address of DNS server in the zone.
+        """
+        return pulumi.get(self, "dns_servers")
+
+    @dns_servers.setter
+    def dns_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "dns_servers", value)
+
+    @property
+    @pulumi.getter(name="forceShutdown")
+    def force_shutdown(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The flag to use force shutdown when need to reboot/shutdown while applying.
+        """
+        return pulumi.get(self, "force_shutdown")
+
+    @force_shutdown.setter
+    def force_shutdown(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_shutdown", value)
+
+    @property
+    @pulumi.getter
+    def gateway(self) -> Optional[pulumi.Input[str]]:
+        """
+        The gateway address used by the Server.
+        """
+        return pulumi.get(self, "gateway")
+
+    @gateway.setter
+    def gateway(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gateway", value)
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of GPUs.
+        """
+        return pulumi.get(self, "gpu")
+
+    @gpu.setter
+    def gpu(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "gpu", value)
+
+    @property
+    @pulumi.getter
+    def hostname(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hostname of the Server. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "hostname")
+
+    @hostname.setter
+    def hostname(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "hostname", value)
+
+    @property
+    @pulumi.getter(name="iconId")
+    def icon_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The icon id to attach to the Server.
+        """
+        return pulumi.get(self, "icon_id")
+
+    @icon_id.setter
+    def icon_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "icon_id", value)
+
+    @property
+    @pulumi.getter(name="interfaceDriver")
+    def interface_driver(self) -> Optional[pulumi.Input[str]]:
+        """
+        The driver name of network interface. This must be one of [`virtio`/`e1000`]. Default:`virtio`.
+        """
+        return pulumi.get(self, "interface_driver")
+
+    @interface_driver.setter
+    def interface_driver(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interface_driver", value)
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IP address to assign to the Server.
+        """
+        return pulumi.get(self, "ip_address")
+
+    @ip_address.setter
+    def ip_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ip_address", value)
+
+    @property
+    @pulumi.getter
+    def memory(self) -> Optional[pulumi.Input[int]]:
+        """
+        The size of memory in GiB. Default:`1`.
+        """
+        return pulumi.get(self, "memory")
+
+    @memory.setter
+    def memory(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "memory", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Server. The length of this value must be in the range [`1`-`64`].
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def netmask(self) -> Optional[pulumi.Input[int]]:
+        """
+        The bit length of the subnet to assign to the Server.
+        """
+        return pulumi.get(self, "netmask")
+
+    @netmask.setter
+    def netmask(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "netmask", value)
+
+    @property
+    @pulumi.getter(name="networkAddress")
+    def network_address(self) -> Optional[pulumi.Input[str]]:
+        """
+        The network address which the `ip_address` belongs.
+        """
+        return pulumi.get(self, "network_address")
+
+    @network_address.setter
+    def network_address(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "network_address", value)
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]]:
+        """
+        One or more `network_interface` blocks as defined below.
+        """
+        return pulumi.get(self, "network_interfaces")
+
+    @network_interfaces.setter
+    def network_interfaces(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ServerNetworkInterfaceArgs']]]]):
+        pulumi.set(self, "network_interfaces", value)
+
+    @property
+    @pulumi.getter(name="privateHostId")
+    def private_host_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the PrivateHost which the Server is assigned.
+        """
+        return pulumi.get(self, "private_host_id")
+
+    @private_host_id.setter
+    def private_host_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_host_id", value)
+
+    @property
+    @pulumi.getter(name="privateHostName")
+    def private_host_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the PrivateHost which the Server is assigned.
+        """
+        return pulumi.get(self, "private_host_name")
+
+    @private_host_name.setter
+    def private_host_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "private_host_name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Any tags to assign to the Server.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
+    @pulumi.getter(name="userData")
+    def user_data(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
+        """
+        return pulumi.get(self, "user_data")
+
+    @user_data.setter
+    def user_data(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_data", value)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "zone", value)
 
 
 class Server(pulumi.CustomResource):
+    @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
@@ -34,9 +706,7 @@ class Server(pulumi.CustomResource):
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  user_data: Optional[pulumi.Input[str]] = None,
                  zone: Optional[pulumi.Input[str]] = None,
-                 __props__=None,
-                 __name__=None,
-                 __opts__=None):
+                 __props__=None):
         """
         Manages a SakuraCloud Server.
 
@@ -103,12 +773,91 @@ class Server(pulumi.CustomResource):
         :param pulumi.Input[str] user_data: A string representing the user data used by cloud-init. This parameter conflicts with [`disk_edit_parameter`].
         :param pulumi.Input[str] zone: The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
-        if __name__ is not None:
-            warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__
-        if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+        ...
+    @overload
+    def __init__(__self__,
+                 resource_name: str,
+                 args: Optional[ServerArgs] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None):
+        """
+        Manages a SakuraCloud Server.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_sakuracloud as sakuracloud
+
+        foobar_packet_filter = sakuracloud.get_packet_filter(filter=sakuracloud.GetPacketFilterFilterArgs(
+            names=["foobar"],
+        ))
+        ubuntu = sakuracloud.get_archive(os_type="ubuntu2004")
+        foobar_disk = sakuracloud.Disk("foobarDisk", source_archive_id=ubuntu.id)
+        foobar_server = sakuracloud.Server("foobarServer",
+            disks=[foobar_disk.id],
+            description="description",
+            tags=[
+                "tag1",
+                "tag2",
+            ],
+            network_interfaces=[sakuracloud.ServerNetworkInterfaceArgs(
+                upstream="shared",
+                packet_filter_id=foobar_packet_filter.id,
+            )],
+            disk_edit_parameter=sakuracloud.ServerDiskEditParameterArgs(
+                hostname="hostname",
+                password="password",
+                disable_pw_auth=True,
+            ))
+        # user_data = join("\n", [
+        #   "#cloud-config",
+        #   yamlencode({
+        #     hostname: "hostname",
+        #     password: "password",
+        #     chpasswd: {
+        #       expire: false,
+        #     }
+        #     ssh_pwauth: false,
+        #     ssh_authorized_keys: [
+        #       file("~/.ssh/id_rsa.pub"),
+        #     ],
+        #   }),
+        # ])
+        ```
+
+        :param str resource_name: The name of the resource.
+        :param ServerArgs args: The arguments to use to populate this resource's properties.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
+        ...
+    def __init__(__self__, resource_name: str, *args, **kwargs):
+        resource_args, opts = _utilities.get_resource_args_opts(ServerArgs, pulumi.ResourceOptions, *args, **kwargs)
+        if resource_args is not None:
+            __self__._internal_init(resource_name, opts, **resource_args.__dict__)
+        else:
+            __self__._internal_init(resource_name, *args, **kwargs)
+
+    def _internal_init(__self__,
+                 resource_name: str,
+                 opts: Optional[pulumi.ResourceOptions] = None,
+                 cdrom_id: Optional[pulumi.Input[str]] = None,
+                 commitment: Optional[pulumi.Input[str]] = None,
+                 core: Optional[pulumi.Input[int]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
+                 disk_edit_parameter: Optional[pulumi.Input[pulumi.InputType['ServerDiskEditParameterArgs']]] = None,
+                 disks: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 force_shutdown: Optional[pulumi.Input[bool]] = None,
+                 gpu: Optional[pulumi.Input[int]] = None,
+                 icon_id: Optional[pulumi.Input[str]] = None,
+                 interface_driver: Optional[pulumi.Input[str]] = None,
+                 memory: Optional[pulumi.Input[int]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 network_interfaces: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ServerNetworkInterfaceArgs']]]]] = None,
+                 private_host_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 user_data: Optional[pulumi.Input[str]] = None,
+                 zone: Optional[pulumi.Input[str]] = None,
+                 __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -118,32 +867,32 @@ class Server(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = dict()
+            __props__ = ServerArgs.__new__(ServerArgs)
 
-            __props__['cdrom_id'] = cdrom_id
-            __props__['commitment'] = commitment
-            __props__['core'] = core
-            __props__['description'] = description
-            __props__['disk_edit_parameter'] = disk_edit_parameter
-            __props__['disks'] = disks
-            __props__['force_shutdown'] = force_shutdown
-            __props__['gpu'] = gpu
-            __props__['icon_id'] = icon_id
-            __props__['interface_driver'] = interface_driver
-            __props__['memory'] = memory
-            __props__['name'] = name
-            __props__['network_interfaces'] = network_interfaces
-            __props__['private_host_id'] = private_host_id
-            __props__['tags'] = tags
-            __props__['user_data'] = user_data
-            __props__['zone'] = zone
-            __props__['dns_servers'] = None
-            __props__['gateway'] = None
-            __props__['hostname'] = None
-            __props__['ip_address'] = None
-            __props__['netmask'] = None
-            __props__['network_address'] = None
-            __props__['private_host_name'] = None
+            __props__.__dict__["cdrom_id"] = cdrom_id
+            __props__.__dict__["commitment"] = commitment
+            __props__.__dict__["core"] = core
+            __props__.__dict__["description"] = description
+            __props__.__dict__["disk_edit_parameter"] = disk_edit_parameter
+            __props__.__dict__["disks"] = disks
+            __props__.__dict__["force_shutdown"] = force_shutdown
+            __props__.__dict__["gpu"] = gpu
+            __props__.__dict__["icon_id"] = icon_id
+            __props__.__dict__["interface_driver"] = interface_driver
+            __props__.__dict__["memory"] = memory
+            __props__.__dict__["name"] = name
+            __props__.__dict__["network_interfaces"] = network_interfaces
+            __props__.__dict__["private_host_id"] = private_host_id
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["user_data"] = user_data
+            __props__.__dict__["zone"] = zone
+            __props__.__dict__["dns_servers"] = None
+            __props__.__dict__["gateway"] = None
+            __props__.__dict__["hostname"] = None
+            __props__.__dict__["ip_address"] = None
+            __props__.__dict__["netmask"] = None
+            __props__.__dict__["network_address"] = None
+            __props__.__dict__["private_host_name"] = None
         super(Server, __self__).__init__(
             'sakuracloud:index/server:Server',
             resource_name,
@@ -212,32 +961,32 @@ class Server(pulumi.CustomResource):
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = dict()
+        __props__ = _ServerState.__new__(_ServerState)
 
-        __props__["cdrom_id"] = cdrom_id
-        __props__["commitment"] = commitment
-        __props__["core"] = core
-        __props__["description"] = description
-        __props__["disk_edit_parameter"] = disk_edit_parameter
-        __props__["disks"] = disks
-        __props__["dns_servers"] = dns_servers
-        __props__["force_shutdown"] = force_shutdown
-        __props__["gateway"] = gateway
-        __props__["gpu"] = gpu
-        __props__["hostname"] = hostname
-        __props__["icon_id"] = icon_id
-        __props__["interface_driver"] = interface_driver
-        __props__["ip_address"] = ip_address
-        __props__["memory"] = memory
-        __props__["name"] = name
-        __props__["netmask"] = netmask
-        __props__["network_address"] = network_address
-        __props__["network_interfaces"] = network_interfaces
-        __props__["private_host_id"] = private_host_id
-        __props__["private_host_name"] = private_host_name
-        __props__["tags"] = tags
-        __props__["user_data"] = user_data
-        __props__["zone"] = zone
+        __props__.__dict__["cdrom_id"] = cdrom_id
+        __props__.__dict__["commitment"] = commitment
+        __props__.__dict__["core"] = core
+        __props__.__dict__["description"] = description
+        __props__.__dict__["disk_edit_parameter"] = disk_edit_parameter
+        __props__.__dict__["disks"] = disks
+        __props__.__dict__["dns_servers"] = dns_servers
+        __props__.__dict__["force_shutdown"] = force_shutdown
+        __props__.__dict__["gateway"] = gateway
+        __props__.__dict__["gpu"] = gpu
+        __props__.__dict__["hostname"] = hostname
+        __props__.__dict__["icon_id"] = icon_id
+        __props__.__dict__["interface_driver"] = interface_driver
+        __props__.__dict__["ip_address"] = ip_address
+        __props__.__dict__["memory"] = memory
+        __props__.__dict__["name"] = name
+        __props__.__dict__["netmask"] = netmask
+        __props__.__dict__["network_address"] = network_address
+        __props__.__dict__["network_interfaces"] = network_interfaces
+        __props__.__dict__["private_host_id"] = private_host_id
+        __props__.__dict__["private_host_name"] = private_host_name
+        __props__.__dict__["tags"] = tags
+        __props__.__dict__["user_data"] = user_data
+        __props__.__dict__["zone"] = zone
         return Server(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -431,10 +1180,4 @@ class Server(pulumi.CustomResource):
         The name of zone that the Server will be created. (e.g. `is1a`, `tk1a`). Changing this forces a new resource to be created.
         """
         return pulumi.get(self, "zone")
-
-    def translate_output_property(self, prop):
-        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-
-    def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 

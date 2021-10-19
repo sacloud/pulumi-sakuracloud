@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 type CertificateAuthorityClient struct {
@@ -674,7 +674,7 @@ func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectPtrOutpu
 }
 
 func (o CertificateAuthoritySubjectOutput) ToCertificateAuthoritySubjectPtrOutputWithContext(ctx context.Context) CertificateAuthoritySubjectPtrOutput {
-	return o.ApplyT(func(v CertificateAuthoritySubject) *CertificateAuthoritySubject {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CertificateAuthoritySubject) *CertificateAuthoritySubject {
 		return &v
 	}).(CertificateAuthoritySubjectPtrOutput)
 }
@@ -714,7 +714,13 @@ func (o CertificateAuthoritySubjectPtrOutput) ToCertificateAuthoritySubjectPtrOu
 }
 
 func (o CertificateAuthoritySubjectPtrOutput) Elem() CertificateAuthoritySubjectOutput {
-	return o.ApplyT(func(v *CertificateAuthoritySubject) CertificateAuthoritySubject { return *v }).(CertificateAuthoritySubjectOutput)
+	return o.ApplyT(func(v *CertificateAuthoritySubject) CertificateAuthoritySubject {
+		if v != nil {
+			return *v
+		}
+		var ret CertificateAuthoritySubject
+		return ret
+	}).(CertificateAuthoritySubjectOutput)
 }
 
 // .
@@ -1120,7 +1126,7 @@ func (o DatabaseBackupOutput) ToDatabaseBackupPtrOutput() DatabaseBackupPtrOutpu
 }
 
 func (o DatabaseBackupOutput) ToDatabaseBackupPtrOutputWithContext(ctx context.Context) DatabaseBackupPtrOutput {
-	return o.ApplyT(func(v DatabaseBackup) *DatabaseBackup {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatabaseBackup) *DatabaseBackup {
 		return &v
 	}).(DatabaseBackupPtrOutput)
 }
@@ -1150,7 +1156,13 @@ func (o DatabaseBackupPtrOutput) ToDatabaseBackupPtrOutputWithContext(ctx contex
 }
 
 func (o DatabaseBackupPtrOutput) Elem() DatabaseBackupOutput {
-	return o.ApplyT(func(v *DatabaseBackup) DatabaseBackup { return *v }).(DatabaseBackupOutput)
+	return o.ApplyT(func(v *DatabaseBackup) DatabaseBackup {
+		if v != nil {
+			return *v
+		}
+		var ret DatabaseBackup
+		return ret
+	}).(DatabaseBackupOutput)
 }
 
 // The time to take backup. This must be formatted with `HH:mm`.
@@ -1286,7 +1298,7 @@ func (o DatabaseNetworkInterfaceOutput) ToDatabaseNetworkInterfacePtrOutput() Da
 }
 
 func (o DatabaseNetworkInterfaceOutput) ToDatabaseNetworkInterfacePtrOutputWithContext(ctx context.Context) DatabaseNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v DatabaseNetworkInterface) *DatabaseNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatabaseNetworkInterface) *DatabaseNetworkInterface {
 		return &v
 	}).(DatabaseNetworkInterfacePtrOutput)
 }
@@ -1336,7 +1348,13 @@ func (o DatabaseNetworkInterfacePtrOutput) ToDatabaseNetworkInterfacePtrOutputWi
 }
 
 func (o DatabaseNetworkInterfacePtrOutput) Elem() DatabaseNetworkInterfaceOutput {
-	return o.ApplyT(func(v *DatabaseNetworkInterface) DatabaseNetworkInterface { return *v }).(DatabaseNetworkInterfaceOutput)
+	return o.ApplyT(func(v *DatabaseNetworkInterface) DatabaseNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret DatabaseNetworkInterface
+		return ret
+	}).(DatabaseNetworkInterfaceOutput)
 }
 
 // The IP address of the gateway used by Database.
@@ -1508,7 +1526,7 @@ func (o DatabaseReadReplicaNetworkInterfaceOutput) ToDatabaseReadReplicaNetworkI
 }
 
 func (o DatabaseReadReplicaNetworkInterfaceOutput) ToDatabaseReadReplicaNetworkInterfacePtrOutputWithContext(ctx context.Context) DatabaseReadReplicaNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v DatabaseReadReplicaNetworkInterface) *DatabaseReadReplicaNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatabaseReadReplicaNetworkInterface) *DatabaseReadReplicaNetworkInterface {
 		return &v
 	}).(DatabaseReadReplicaNetworkInterfacePtrOutput)
 }
@@ -1553,7 +1571,13 @@ func (o DatabaseReadReplicaNetworkInterfacePtrOutput) ToDatabaseReadReplicaNetwo
 }
 
 func (o DatabaseReadReplicaNetworkInterfacePtrOutput) Elem() DatabaseReadReplicaNetworkInterfaceOutput {
-	return o.ApplyT(func(v *DatabaseReadReplicaNetworkInterface) DatabaseReadReplicaNetworkInterface { return *v }).(DatabaseReadReplicaNetworkInterfaceOutput)
+	return o.ApplyT(func(v *DatabaseReadReplicaNetworkInterface) DatabaseReadReplicaNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret DatabaseReadReplicaNetworkInterface
+		return ret
+	}).(DatabaseReadReplicaNetworkInterfaceOutput)
 }
 
 // The IP address of the gateway used by read-replica database. If `gateway` isn't specified, it will be set to the same value of the master database.
@@ -1719,7 +1743,7 @@ func (o GSLBHealthCheckOutput) ToGSLBHealthCheckPtrOutput() GSLBHealthCheckPtrOu
 }
 
 func (o GSLBHealthCheckOutput) ToGSLBHealthCheckPtrOutputWithContext(ctx context.Context) GSLBHealthCheckPtrOutput {
-	return o.ApplyT(func(v GSLBHealthCheck) *GSLBHealthCheck {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GSLBHealthCheck) *GSLBHealthCheck {
 		return &v
 	}).(GSLBHealthCheckPtrOutput)
 }
@@ -1769,7 +1793,13 @@ func (o GSLBHealthCheckPtrOutput) ToGSLBHealthCheckPtrOutputWithContext(ctx cont
 }
 
 func (o GSLBHealthCheckPtrOutput) Elem() GSLBHealthCheckOutput {
-	return o.ApplyT(func(v *GSLBHealthCheck) GSLBHealthCheck { return *v }).(GSLBHealthCheckOutput)
+	return o.ApplyT(func(v *GSLBHealthCheck) GSLBHealthCheck {
+		if v != nil {
+			return *v
+		}
+		var ret GSLBHealthCheck
+		return ret
+	}).(GSLBHealthCheckOutput)
 }
 
 // The interval in seconds between checks. This must be in the range [`10`-`60`].
@@ -2056,7 +2086,7 @@ func (o LoadBalancerNetworkInterfaceOutput) ToLoadBalancerNetworkInterfacePtrOut
 }
 
 func (o LoadBalancerNetworkInterfaceOutput) ToLoadBalancerNetworkInterfacePtrOutputWithContext(ctx context.Context) LoadBalancerNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v LoadBalancerNetworkInterface) *LoadBalancerNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LoadBalancerNetworkInterface) *LoadBalancerNetworkInterface {
 		return &v
 	}).(LoadBalancerNetworkInterfacePtrOutput)
 }
@@ -2101,7 +2131,13 @@ func (o LoadBalancerNetworkInterfacePtrOutput) ToLoadBalancerNetworkInterfacePtr
 }
 
 func (o LoadBalancerNetworkInterfacePtrOutput) Elem() LoadBalancerNetworkInterfaceOutput {
-	return o.ApplyT(func(v *LoadBalancerNetworkInterface) LoadBalancerNetworkInterface { return *v }).(LoadBalancerNetworkInterfaceOutput)
+	return o.ApplyT(func(v *LoadBalancerNetworkInterface) LoadBalancerNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret LoadBalancerNetworkInterface
+		return ret
+	}).(LoadBalancerNetworkInterfaceOutput)
 }
 
 // The IP address of the gateway used by LoadBalancer.
@@ -2534,7 +2570,7 @@ func (o LocalRouterNetworkInterfaceOutput) ToLocalRouterNetworkInterfacePtrOutpu
 }
 
 func (o LocalRouterNetworkInterfaceOutput) ToLocalRouterNetworkInterfacePtrOutputWithContext(ctx context.Context) LocalRouterNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v LocalRouterNetworkInterface) *LocalRouterNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LocalRouterNetworkInterface) *LocalRouterNetworkInterface {
 		return &v
 	}).(LocalRouterNetworkInterfacePtrOutput)
 }
@@ -2574,7 +2610,13 @@ func (o LocalRouterNetworkInterfacePtrOutput) ToLocalRouterNetworkInterfacePtrOu
 }
 
 func (o LocalRouterNetworkInterfacePtrOutput) Elem() LocalRouterNetworkInterfaceOutput {
-	return o.ApplyT(func(v *LocalRouterNetworkInterface) LocalRouterNetworkInterface { return *v }).(LocalRouterNetworkInterfaceOutput)
+	return o.ApplyT(func(v *LocalRouterNetworkInterface) LocalRouterNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret LocalRouterNetworkInterface
+		return ret
+	}).(LocalRouterNetworkInterfaceOutput)
 }
 
 // A list of IP address to assign to the LocalRouter.
@@ -2948,7 +2990,7 @@ func (o LocalRouterSwitchOutput) ToLocalRouterSwitchPtrOutput() LocalRouterSwitc
 }
 
 func (o LocalRouterSwitchOutput) ToLocalRouterSwitchPtrOutputWithContext(ctx context.Context) LocalRouterSwitchPtrOutput {
-	return o.ApplyT(func(v LocalRouterSwitch) *LocalRouterSwitch {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LocalRouterSwitch) *LocalRouterSwitch {
 		return &v
 	}).(LocalRouterSwitchPtrOutput)
 }
@@ -2983,7 +3025,13 @@ func (o LocalRouterSwitchPtrOutput) ToLocalRouterSwitchPtrOutputWithContext(ctx 
 }
 
 func (o LocalRouterSwitchPtrOutput) Elem() LocalRouterSwitchOutput {
-	return o.ApplyT(func(v *LocalRouterSwitch) LocalRouterSwitch { return *v }).(LocalRouterSwitchOutput)
+	return o.ApplyT(func(v *LocalRouterSwitch) LocalRouterSwitch {
+		if v != nil {
+			return *v
+		}
+		var ret LocalRouterSwitch
+		return ret
+	}).(LocalRouterSwitchOutput)
 }
 
 // The category name of connected services (e.g. `cloud`, `vps`).
@@ -3117,7 +3165,7 @@ func (o MobileGatewayPrivateNetworkInterfaceOutput) ToMobileGatewayPrivateNetwor
 }
 
 func (o MobileGatewayPrivateNetworkInterfaceOutput) ToMobileGatewayPrivateNetworkInterfacePtrOutputWithContext(ctx context.Context) MobileGatewayPrivateNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v MobileGatewayPrivateNetworkInterface) *MobileGatewayPrivateNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MobileGatewayPrivateNetworkInterface) *MobileGatewayPrivateNetworkInterface {
 		return &v
 	}).(MobileGatewayPrivateNetworkInterfacePtrOutput)
 }
@@ -3152,7 +3200,13 @@ func (o MobileGatewayPrivateNetworkInterfacePtrOutput) ToMobileGatewayPrivateNet
 }
 
 func (o MobileGatewayPrivateNetworkInterfacePtrOutput) Elem() MobileGatewayPrivateNetworkInterfaceOutput {
-	return o.ApplyT(func(v *MobileGatewayPrivateNetworkInterface) MobileGatewayPrivateNetworkInterface { return *v }).(MobileGatewayPrivateNetworkInterfaceOutput)
+	return o.ApplyT(func(v *MobileGatewayPrivateNetworkInterface) MobileGatewayPrivateNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret MobileGatewayPrivateNetworkInterface
+		return ret
+	}).(MobileGatewayPrivateNetworkInterfaceOutput)
 }
 
 // The IP address to assign to the MobileGateway.
@@ -3616,7 +3670,7 @@ func (o MobileGatewayTrafficControlOutput) ToMobileGatewayTrafficControlPtrOutpu
 }
 
 func (o MobileGatewayTrafficControlOutput) ToMobileGatewayTrafficControlPtrOutputWithContext(ctx context.Context) MobileGatewayTrafficControlPtrOutput {
-	return o.ApplyT(func(v MobileGatewayTrafficControl) *MobileGatewayTrafficControl {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MobileGatewayTrafficControl) *MobileGatewayTrafficControl {
 		return &v
 	}).(MobileGatewayTrafficControlPtrOutput)
 }
@@ -3666,7 +3720,13 @@ func (o MobileGatewayTrafficControlPtrOutput) ToMobileGatewayTrafficControlPtrOu
 }
 
 func (o MobileGatewayTrafficControlPtrOutput) Elem() MobileGatewayTrafficControlOutput {
-	return o.ApplyT(func(v *MobileGatewayTrafficControl) MobileGatewayTrafficControl { return *v }).(MobileGatewayTrafficControlOutput)
+	return o.ApplyT(func(v *MobileGatewayTrafficControl) MobileGatewayTrafficControl {
+		if v != nil {
+			return *v
+		}
+		var ret MobileGatewayTrafficControl
+		return ret
+	}).(MobileGatewayTrafficControlOutput)
 }
 
 // The flag to enable the traffic shaping.
@@ -3834,7 +3894,7 @@ func (o NFSNetworkInterfaceOutput) ToNFSNetworkInterfacePtrOutput() NFSNetworkIn
 }
 
 func (o NFSNetworkInterfaceOutput) ToNFSNetworkInterfacePtrOutputWithContext(ctx context.Context) NFSNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v NFSNetworkInterface) *NFSNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NFSNetworkInterface) *NFSNetworkInterface {
 		return &v
 	}).(NFSNetworkInterfacePtrOutput)
 }
@@ -3874,7 +3934,13 @@ func (o NFSNetworkInterfacePtrOutput) ToNFSNetworkInterfacePtrOutputWithContext(
 }
 
 func (o NFSNetworkInterfacePtrOutput) Elem() NFSNetworkInterfaceOutput {
-	return o.ApplyT(func(v *NFSNetworkInterface) NFSNetworkInterface { return *v }).(NFSNetworkInterfaceOutput)
+	return o.ApplyT(func(v *NFSNetworkInterface) NFSNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret NFSNetworkInterface
+		return ret
+	}).(NFSNetworkInterfaceOutput)
 }
 
 // The IP address of the gateway used by NFS.
@@ -4821,7 +4887,7 @@ func (o ProxyLBCertificateOutput) ToProxyLBCertificatePtrOutput() ProxyLBCertifi
 }
 
 func (o ProxyLBCertificateOutput) ToProxyLBCertificatePtrOutputWithContext(ctx context.Context) ProxyLBCertificatePtrOutput {
-	return o.ApplyT(func(v ProxyLBCertificate) *ProxyLBCertificate {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLBCertificate) *ProxyLBCertificate {
 		return &v
 	}).(ProxyLBCertificatePtrOutput)
 }
@@ -4871,7 +4937,13 @@ func (o ProxyLBCertificatePtrOutput) ToProxyLBCertificatePtrOutputWithContext(ct
 }
 
 func (o ProxyLBCertificatePtrOutput) Elem() ProxyLBCertificateOutput {
-	return o.ApplyT(func(v *ProxyLBCertificate) ProxyLBCertificate { return *v }).(ProxyLBCertificateOutput)
+	return o.ApplyT(func(v *ProxyLBCertificate) ProxyLBCertificate {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLBCertificate
+		return ret
+	}).(ProxyLBCertificateOutput)
 }
 
 // One or more `additionalCertificate` blocks as defined below.
@@ -5158,7 +5230,7 @@ func (o ProxyLBHealthCheckOutput) ToProxyLBHealthCheckPtrOutput() ProxyLBHealthC
 }
 
 func (o ProxyLBHealthCheckOutput) ToProxyLBHealthCheckPtrOutputWithContext(ctx context.Context) ProxyLBHealthCheckPtrOutput {
-	return o.ApplyT(func(v ProxyLBHealthCheck) *ProxyLBHealthCheck {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLBHealthCheck) *ProxyLBHealthCheck {
 		return &v
 	}).(ProxyLBHealthCheckPtrOutput)
 }
@@ -5203,7 +5275,13 @@ func (o ProxyLBHealthCheckPtrOutput) ToProxyLBHealthCheckPtrOutputWithContext(ct
 }
 
 func (o ProxyLBHealthCheckPtrOutput) Elem() ProxyLBHealthCheckOutput {
-	return o.ApplyT(func(v *ProxyLBHealthCheck) ProxyLBHealthCheck { return *v }).(ProxyLBHealthCheckOutput)
+	return o.ApplyT(func(v *ProxyLBHealthCheck) ProxyLBHealthCheck {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLBHealthCheck
+		return ret
+	}).(ProxyLBHealthCheckOutput)
 }
 
 // The interval in seconds between checks. This must be in the range [`10`-`60`].
@@ -5646,7 +5724,7 @@ func (o ProxyLBSorryServerOutput) ToProxyLBSorryServerPtrOutput() ProxyLBSorrySe
 }
 
 func (o ProxyLBSorryServerOutput) ToProxyLBSorryServerPtrOutputWithContext(ctx context.Context) ProxyLBSorryServerPtrOutput {
-	return o.ApplyT(func(v ProxyLBSorryServer) *ProxyLBSorryServer {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLBSorryServer) *ProxyLBSorryServer {
 		return &v
 	}).(ProxyLBSorryServerPtrOutput)
 }
@@ -5676,7 +5754,13 @@ func (o ProxyLBSorryServerPtrOutput) ToProxyLBSorryServerPtrOutputWithContext(ct
 }
 
 func (o ProxyLBSorryServerPtrOutput) Elem() ProxyLBSorryServerOutput {
-	return o.ApplyT(func(v *ProxyLBSorryServer) ProxyLBSorryServer { return *v }).(ProxyLBSorryServerOutput)
+	return o.ApplyT(func(v *ProxyLBSorryServer) ProxyLBSorryServer {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLBSorryServer
+		return ret
+	}).(ProxyLBSorryServerOutput)
 }
 
 // The IP address of the SorryServer. This will be used when all servers are down.
@@ -5796,7 +5880,7 @@ func (o ProxyLBSyslogOutput) ToProxyLBSyslogPtrOutput() ProxyLBSyslogPtrOutput {
 }
 
 func (o ProxyLBSyslogOutput) ToProxyLBSyslogPtrOutputWithContext(ctx context.Context) ProxyLBSyslogPtrOutput {
-	return o.ApplyT(func(v ProxyLBSyslog) *ProxyLBSyslog {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProxyLBSyslog) *ProxyLBSyslog {
 		return &v
 	}).(ProxyLBSyslogPtrOutput)
 }
@@ -5826,7 +5910,13 @@ func (o ProxyLBSyslogPtrOutput) ToProxyLBSyslogPtrOutputWithContext(ctx context.
 }
 
 func (o ProxyLBSyslogPtrOutput) Elem() ProxyLBSyslogOutput {
-	return o.ApplyT(func(v *ProxyLBSyslog) ProxyLBSyslog { return *v }).(ProxyLBSyslogOutput)
+	return o.ApplyT(func(v *ProxyLBSyslog) ProxyLBSyslog {
+		if v != nil {
+			return *v
+		}
+		var ret ProxyLBSyslog
+		return ret
+	}).(ProxyLBSyslogOutput)
 }
 
 // The number of syslog port.
@@ -5992,7 +6082,7 @@ func (o ServerDiskEditParameterOutput) ToServerDiskEditParameterPtrOutput() Serv
 }
 
 func (o ServerDiskEditParameterOutput) ToServerDiskEditParameterPtrOutputWithContext(ctx context.Context) ServerDiskEditParameterPtrOutput {
-	return o.ApplyT(func(v ServerDiskEditParameter) *ServerDiskEditParameter {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ServerDiskEditParameter) *ServerDiskEditParameter {
 		return &v
 	}).(ServerDiskEditParameterPtrOutput)
 }
@@ -6075,7 +6165,13 @@ func (o ServerDiskEditParameterPtrOutput) ToServerDiskEditParameterPtrOutputWith
 }
 
 func (o ServerDiskEditParameterPtrOutput) Elem() ServerDiskEditParameterOutput {
-	return o.ApplyT(func(v *ServerDiskEditParameter) ServerDiskEditParameter { return *v }).(ServerDiskEditParameterOutput)
+	return o.ApplyT(func(v *ServerDiskEditParameter) ServerDiskEditParameter {
+		if v != nil {
+			return *v
+		}
+		var ret ServerDiskEditParameter
+		return ret
+	}).(ServerDiskEditParameterOutput)
 }
 
 // The flag to change partition uuid.
@@ -6597,7 +6693,7 @@ func (o SimpleMonitorHealthCheckOutput) ToSimpleMonitorHealthCheckPtrOutput() Si
 }
 
 func (o SimpleMonitorHealthCheckOutput) ToSimpleMonitorHealthCheckPtrOutputWithContext(ctx context.Context) SimpleMonitorHealthCheckPtrOutput {
-	return o.ApplyT(func(v SimpleMonitorHealthCheck) *SimpleMonitorHealthCheck {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SimpleMonitorHealthCheck) *SimpleMonitorHealthCheck {
 		return &v
 	}).(SimpleMonitorHealthCheckPtrOutput)
 }
@@ -6702,7 +6798,13 @@ func (o SimpleMonitorHealthCheckPtrOutput) ToSimpleMonitorHealthCheckPtrOutputWi
 }
 
 func (o SimpleMonitorHealthCheckPtrOutput) Elem() SimpleMonitorHealthCheckOutput {
-	return o.ApplyT(func(v *SimpleMonitorHealthCheck) SimpleMonitorHealthCheck { return *v }).(SimpleMonitorHealthCheckOutput)
+	return o.ApplyT(func(v *SimpleMonitorHealthCheck) SimpleMonitorHealthCheck {
+		if v != nil {
+			return *v
+		}
+		var ret SimpleMonitorHealthCheck
+		return ret
+	}).(SimpleMonitorHealthCheckOutput)
 }
 
 // The SNMP community string used when checking by SNMP.
@@ -7481,7 +7583,7 @@ func (o VPCRouterL2tpOutput) ToVPCRouterL2tpPtrOutput() VPCRouterL2tpPtrOutput {
 }
 
 func (o VPCRouterL2tpOutput) ToVPCRouterL2tpPtrOutputWithContext(ctx context.Context) VPCRouterL2tpPtrOutput {
-	return o.ApplyT(func(v VPCRouterL2tp) *VPCRouterL2tp {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VPCRouterL2tp) *VPCRouterL2tp {
 		return &v
 	}).(VPCRouterL2tpPtrOutput)
 }
@@ -7516,7 +7618,13 @@ func (o VPCRouterL2tpPtrOutput) ToVPCRouterL2tpPtrOutputWithContext(ctx context.
 }
 
 func (o VPCRouterL2tpPtrOutput) Elem() VPCRouterL2tpOutput {
-	return o.ApplyT(func(v *VPCRouterL2tp) VPCRouterL2tp { return *v }).(VPCRouterL2tpOutput)
+	return o.ApplyT(func(v *VPCRouterL2tp) VPCRouterL2tp {
+		if v != nil {
+			return *v
+		}
+		var ret VPCRouterL2tp
+		return ret
+	}).(VPCRouterL2tpOutput)
 }
 
 // The pre shared secret for the VPN. The length of this value must be in the range [`0`-`40`].
@@ -7779,7 +7887,7 @@ func (o VPCRouterPptpOutput) ToVPCRouterPptpPtrOutput() VPCRouterPptpPtrOutput {
 }
 
 func (o VPCRouterPptpOutput) ToVPCRouterPptpPtrOutputWithContext(ctx context.Context) VPCRouterPptpPtrOutput {
-	return o.ApplyT(func(v VPCRouterPptp) *VPCRouterPptp {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VPCRouterPptp) *VPCRouterPptp {
 		return &v
 	}).(VPCRouterPptpPtrOutput)
 }
@@ -7809,7 +7917,13 @@ func (o VPCRouterPptpPtrOutput) ToVPCRouterPptpPtrOutputWithContext(ctx context.
 }
 
 func (o VPCRouterPptpPtrOutput) Elem() VPCRouterPptpOutput {
-	return o.ApplyT(func(v *VPCRouterPptp) VPCRouterPptp { return *v }).(VPCRouterPptpOutput)
+	return o.ApplyT(func(v *VPCRouterPptp) VPCRouterPptp {
+		if v != nil {
+			return *v
+		}
+		var ret VPCRouterPptp
+		return ret
+	}).(VPCRouterPptpOutput)
 }
 
 // The start value of IP address range to assign to PPTP client.
@@ -8074,7 +8188,7 @@ func (o VPCRouterPublicNetworkInterfaceOutput) ToVPCRouterPublicNetworkInterface
 }
 
 func (o VPCRouterPublicNetworkInterfaceOutput) ToVPCRouterPublicNetworkInterfacePtrOutputWithContext(ctx context.Context) VPCRouterPublicNetworkInterfacePtrOutput {
-	return o.ApplyT(func(v VPCRouterPublicNetworkInterface) *VPCRouterPublicNetworkInterface {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VPCRouterPublicNetworkInterface) *VPCRouterPublicNetworkInterface {
 		return &v
 	}).(VPCRouterPublicNetworkInterfacePtrOutput)
 }
@@ -8119,7 +8233,13 @@ func (o VPCRouterPublicNetworkInterfacePtrOutput) ToVPCRouterPublicNetworkInterf
 }
 
 func (o VPCRouterPublicNetworkInterfacePtrOutput) Elem() VPCRouterPublicNetworkInterfaceOutput {
-	return o.ApplyT(func(v *VPCRouterPublicNetworkInterface) VPCRouterPublicNetworkInterface { return *v }).(VPCRouterPublicNetworkInterfaceOutput)
+	return o.ApplyT(func(v *VPCRouterPublicNetworkInterface) VPCRouterPublicNetworkInterface {
+		if v != nil {
+			return *v
+		}
+		var ret VPCRouterPublicNetworkInterface
+		return ret
+	}).(VPCRouterPublicNetworkInterfaceOutput)
 }
 
 // A list of ip alias to assign to the VPC Router. This can only be specified if `plan` is not `standard`.
@@ -8733,7 +8853,7 @@ func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardPtrOutput() VPCRouterWireG
 }
 
 func (o VPCRouterWireGuardOutput) ToVPCRouterWireGuardPtrOutputWithContext(ctx context.Context) VPCRouterWireGuardPtrOutput {
-	return o.ApplyT(func(v VPCRouterWireGuard) *VPCRouterWireGuard {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VPCRouterWireGuard) *VPCRouterWireGuard {
 		return &v
 	}).(VPCRouterWireGuardPtrOutput)
 }
@@ -8768,7 +8888,13 @@ func (o VPCRouterWireGuardPtrOutput) ToVPCRouterWireGuardPtrOutputWithContext(ct
 }
 
 func (o VPCRouterWireGuardPtrOutput) Elem() VPCRouterWireGuardOutput {
-	return o.ApplyT(func(v *VPCRouterWireGuard) VPCRouterWireGuard { return *v }).(VPCRouterWireGuardOutput)
+	return o.ApplyT(func(v *VPCRouterWireGuard) VPCRouterWireGuard {
+		if v != nil {
+			return *v
+		}
+		var ret VPCRouterWireGuard
+		return ret
+	}).(VPCRouterWireGuardOutput)
 }
 
 // The IP address for WireGuard server. This must be formatted with xxx.xxx.xxx.xxx/nn.
@@ -8961,6 +9087,47 @@ func (i GetArchiveFilterArgs) ToGetArchiveFilterOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetArchiveFilterOutput)
 }
 
+func (i GetArchiveFilterArgs) ToGetArchiveFilterPtrOutput() GetArchiveFilterPtrOutput {
+	return i.ToGetArchiveFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetArchiveFilterArgs) ToGetArchiveFilterPtrOutputWithContext(ctx context.Context) GetArchiveFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArchiveFilterOutput).ToGetArchiveFilterPtrOutputWithContext(ctx)
+}
+
+// GetArchiveFilterPtrInput is an input type that accepts GetArchiveFilterArgs, GetArchiveFilterPtr and GetArchiveFilterPtrOutput values.
+// You can construct a concrete instance of `GetArchiveFilterPtrInput` via:
+//
+//          GetArchiveFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetArchiveFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetArchiveFilterPtrOutput() GetArchiveFilterPtrOutput
+	ToGetArchiveFilterPtrOutputWithContext(context.Context) GetArchiveFilterPtrOutput
+}
+
+type getArchiveFilterPtrType GetArchiveFilterArgs
+
+func GetArchiveFilterPtr(v *GetArchiveFilterArgs) GetArchiveFilterPtrInput {
+	return (*getArchiveFilterPtrType)(v)
+}
+
+func (*getArchiveFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetArchiveFilter)(nil)).Elem()
+}
+
+func (i *getArchiveFilterPtrType) ToGetArchiveFilterPtrOutput() GetArchiveFilterPtrOutput {
+	return i.ToGetArchiveFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getArchiveFilterPtrType) ToGetArchiveFilterPtrOutputWithContext(ctx context.Context) GetArchiveFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArchiveFilterPtrOutput)
+}
+
 type GetArchiveFilterOutput struct{ *pulumi.OutputState }
 
 func (GetArchiveFilterOutput) ElementType() reflect.Type {
@@ -8973,6 +9140,16 @@ func (o GetArchiveFilterOutput) ToGetArchiveFilterOutput() GetArchiveFilterOutpu
 
 func (o GetArchiveFilterOutput) ToGetArchiveFilterOutputWithContext(ctx context.Context) GetArchiveFilterOutput {
 	return o
+}
+
+func (o GetArchiveFilterOutput) ToGetArchiveFilterPtrOutput() GetArchiveFilterPtrOutput {
+	return o.ToGetArchiveFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetArchiveFilterOutput) ToGetArchiveFilterPtrOutputWithContext(ctx context.Context) GetArchiveFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetArchiveFilter) *GetArchiveFilter {
+		return &v
+	}).(GetArchiveFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -8993,6 +9170,70 @@ func (o GetArchiveFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
 func (o GetArchiveFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetArchiveFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetArchiveFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetArchiveFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetArchiveFilter)(nil)).Elem()
+}
+
+func (o GetArchiveFilterPtrOutput) ToGetArchiveFilterPtrOutput() GetArchiveFilterPtrOutput {
+	return o
+}
+
+func (o GetArchiveFilterPtrOutput) ToGetArchiveFilterPtrOutputWithContext(ctx context.Context) GetArchiveFilterPtrOutput {
+	return o
+}
+
+func (o GetArchiveFilterPtrOutput) Elem() GetArchiveFilterOutput {
+	return o.ApplyT(func(v *GetArchiveFilter) GetArchiveFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetArchiveFilter
+		return ret
+	}).(GetArchiveFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetArchiveFilterPtrOutput) Conditions() GetArchiveFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetArchiveFilter) []GetArchiveFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetArchiveFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetArchiveFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetArchiveFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+func (o GetArchiveFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetArchiveFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+func (o GetArchiveFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetArchiveFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetArchiveFilterCondition struct {
@@ -9142,6 +9383,47 @@ func (i GetBridgeFilterArgs) ToGetBridgeFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetBridgeFilterOutput)
 }
 
+func (i GetBridgeFilterArgs) ToGetBridgeFilterPtrOutput() GetBridgeFilterPtrOutput {
+	return i.ToGetBridgeFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetBridgeFilterArgs) ToGetBridgeFilterPtrOutputWithContext(ctx context.Context) GetBridgeFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBridgeFilterOutput).ToGetBridgeFilterPtrOutputWithContext(ctx)
+}
+
+// GetBridgeFilterPtrInput is an input type that accepts GetBridgeFilterArgs, GetBridgeFilterPtr and GetBridgeFilterPtrOutput values.
+// You can construct a concrete instance of `GetBridgeFilterPtrInput` via:
+//
+//          GetBridgeFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetBridgeFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetBridgeFilterPtrOutput() GetBridgeFilterPtrOutput
+	ToGetBridgeFilterPtrOutputWithContext(context.Context) GetBridgeFilterPtrOutput
+}
+
+type getBridgeFilterPtrType GetBridgeFilterArgs
+
+func GetBridgeFilterPtr(v *GetBridgeFilterArgs) GetBridgeFilterPtrInput {
+	return (*getBridgeFilterPtrType)(v)
+}
+
+func (*getBridgeFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetBridgeFilter)(nil)).Elem()
+}
+
+func (i *getBridgeFilterPtrType) ToGetBridgeFilterPtrOutput() GetBridgeFilterPtrOutput {
+	return i.ToGetBridgeFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getBridgeFilterPtrType) ToGetBridgeFilterPtrOutputWithContext(ctx context.Context) GetBridgeFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBridgeFilterPtrOutput)
+}
+
 type GetBridgeFilterOutput struct{ *pulumi.OutputState }
 
 func (GetBridgeFilterOutput) ElementType() reflect.Type {
@@ -9154,6 +9436,16 @@ func (o GetBridgeFilterOutput) ToGetBridgeFilterOutput() GetBridgeFilterOutput {
 
 func (o GetBridgeFilterOutput) ToGetBridgeFilterOutputWithContext(ctx context.Context) GetBridgeFilterOutput {
 	return o
+}
+
+func (o GetBridgeFilterOutput) ToGetBridgeFilterPtrOutput() GetBridgeFilterPtrOutput {
+	return o.ToGetBridgeFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetBridgeFilterOutput) ToGetBridgeFilterPtrOutputWithContext(ctx context.Context) GetBridgeFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetBridgeFilter) *GetBridgeFilter {
+		return &v
+	}).(GetBridgeFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -9169,6 +9461,60 @@ func (o GetBridgeFilterOutput) Id() pulumi.StringPtrOutput {
 // The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetBridgeFilterOutput) Names() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetBridgeFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+type GetBridgeFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetBridgeFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetBridgeFilter)(nil)).Elem()
+}
+
+func (o GetBridgeFilterPtrOutput) ToGetBridgeFilterPtrOutput() GetBridgeFilterPtrOutput {
+	return o
+}
+
+func (o GetBridgeFilterPtrOutput) ToGetBridgeFilterPtrOutputWithContext(ctx context.Context) GetBridgeFilterPtrOutput {
+	return o
+}
+
+func (o GetBridgeFilterPtrOutput) Elem() GetBridgeFilterOutput {
+	return o.ApplyT(func(v *GetBridgeFilter) GetBridgeFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetBridgeFilter
+		return ret
+	}).(GetBridgeFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetBridgeFilterPtrOutput) Conditions() GetBridgeFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetBridgeFilter) []GetBridgeFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetBridgeFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetBridgeFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetBridgeFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetBridgeFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetBridgeFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetBridgeFilterCondition struct {
@@ -9322,6 +9668,47 @@ func (i GetCDROMFilterArgs) ToGetCDROMFilterOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(GetCDROMFilterOutput)
 }
 
+func (i GetCDROMFilterArgs) ToGetCDROMFilterPtrOutput() GetCDROMFilterPtrOutput {
+	return i.ToGetCDROMFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetCDROMFilterArgs) ToGetCDROMFilterPtrOutputWithContext(ctx context.Context) GetCDROMFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCDROMFilterOutput).ToGetCDROMFilterPtrOutputWithContext(ctx)
+}
+
+// GetCDROMFilterPtrInput is an input type that accepts GetCDROMFilterArgs, GetCDROMFilterPtr and GetCDROMFilterPtrOutput values.
+// You can construct a concrete instance of `GetCDROMFilterPtrInput` via:
+//
+//          GetCDROMFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetCDROMFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetCDROMFilterPtrOutput() GetCDROMFilterPtrOutput
+	ToGetCDROMFilterPtrOutputWithContext(context.Context) GetCDROMFilterPtrOutput
+}
+
+type getCDROMFilterPtrType GetCDROMFilterArgs
+
+func GetCDROMFilterPtr(v *GetCDROMFilterArgs) GetCDROMFilterPtrInput {
+	return (*getCDROMFilterPtrType)(v)
+}
+
+func (*getCDROMFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetCDROMFilter)(nil)).Elem()
+}
+
+func (i *getCDROMFilterPtrType) ToGetCDROMFilterPtrOutput() GetCDROMFilterPtrOutput {
+	return i.ToGetCDROMFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getCDROMFilterPtrType) ToGetCDROMFilterPtrOutputWithContext(ctx context.Context) GetCDROMFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCDROMFilterPtrOutput)
+}
+
 type GetCDROMFilterOutput struct{ *pulumi.OutputState }
 
 func (GetCDROMFilterOutput) ElementType() reflect.Type {
@@ -9334,6 +9721,16 @@ func (o GetCDROMFilterOutput) ToGetCDROMFilterOutput() GetCDROMFilterOutput {
 
 func (o GetCDROMFilterOutput) ToGetCDROMFilterOutputWithContext(ctx context.Context) GetCDROMFilterOutput {
 	return o
+}
+
+func (o GetCDROMFilterOutput) ToGetCDROMFilterPtrOutput() GetCDROMFilterPtrOutput {
+	return o.ToGetCDROMFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetCDROMFilterOutput) ToGetCDROMFilterPtrOutputWithContext(ctx context.Context) GetCDROMFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetCDROMFilter) *GetCDROMFilter {
+		return &v
+	}).(GetCDROMFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -9354,6 +9751,70 @@ func (o GetCDROMFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetCDROMFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetCDROMFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetCDROMFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetCDROMFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetCDROMFilter)(nil)).Elem()
+}
+
+func (o GetCDROMFilterPtrOutput) ToGetCDROMFilterPtrOutput() GetCDROMFilterPtrOutput {
+	return o
+}
+
+func (o GetCDROMFilterPtrOutput) ToGetCDROMFilterPtrOutputWithContext(ctx context.Context) GetCDROMFilterPtrOutput {
+	return o
+}
+
+func (o GetCDROMFilterPtrOutput) Elem() GetCDROMFilterOutput {
+	return o.ApplyT(func(v *GetCDROMFilter) GetCDROMFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetCDROMFilter
+		return ret
+	}).(GetCDROMFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetCDROMFilterPtrOutput) Conditions() GetCDROMFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetCDROMFilter) []GetCDROMFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetCDROMFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetCDROMFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetCDROMFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCDROMFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetCDROMFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCDROMFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetCDROMFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetCDROMFilterCondition struct {
@@ -9676,6 +10137,47 @@ func (i GetCertificateAuthorityFilterArgs) ToGetCertificateAuthorityFilterOutput
 	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterOutput)
 }
 
+func (i GetCertificateAuthorityFilterArgs) ToGetCertificateAuthorityFilterPtrOutput() GetCertificateAuthorityFilterPtrOutput {
+	return i.ToGetCertificateAuthorityFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetCertificateAuthorityFilterArgs) ToGetCertificateAuthorityFilterPtrOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterOutput).ToGetCertificateAuthorityFilterPtrOutputWithContext(ctx)
+}
+
+// GetCertificateAuthorityFilterPtrInput is an input type that accepts GetCertificateAuthorityFilterArgs, GetCertificateAuthorityFilterPtr and GetCertificateAuthorityFilterPtrOutput values.
+// You can construct a concrete instance of `GetCertificateAuthorityFilterPtrInput` via:
+//
+//          GetCertificateAuthorityFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetCertificateAuthorityFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetCertificateAuthorityFilterPtrOutput() GetCertificateAuthorityFilterPtrOutput
+	ToGetCertificateAuthorityFilterPtrOutputWithContext(context.Context) GetCertificateAuthorityFilterPtrOutput
+}
+
+type getCertificateAuthorityFilterPtrType GetCertificateAuthorityFilterArgs
+
+func GetCertificateAuthorityFilterPtr(v *GetCertificateAuthorityFilterArgs) GetCertificateAuthorityFilterPtrInput {
+	return (*getCertificateAuthorityFilterPtrType)(v)
+}
+
+func (*getCertificateAuthorityFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetCertificateAuthorityFilter)(nil)).Elem()
+}
+
+func (i *getCertificateAuthorityFilterPtrType) ToGetCertificateAuthorityFilterPtrOutput() GetCertificateAuthorityFilterPtrOutput {
+	return i.ToGetCertificateAuthorityFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getCertificateAuthorityFilterPtrType) ToGetCertificateAuthorityFilterPtrOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateAuthorityFilterPtrOutput)
+}
+
 type GetCertificateAuthorityFilterOutput struct{ *pulumi.OutputState }
 
 func (GetCertificateAuthorityFilterOutput) ElementType() reflect.Type {
@@ -9688,6 +10190,16 @@ func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterOutp
 
 func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterOutput {
 	return o
+}
+
+func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterPtrOutput() GetCertificateAuthorityFilterPtrOutput {
+	return o.ToGetCertificateAuthorityFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetCertificateAuthorityFilterOutput) ToGetCertificateAuthorityFilterPtrOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetCertificateAuthorityFilter) *GetCertificateAuthorityFilter {
+		return &v
+	}).(GetCertificateAuthorityFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -9708,6 +10220,70 @@ func (o GetCertificateAuthorityFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetCertificateAuthorityFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetCertificateAuthorityFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateAuthorityFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateAuthorityFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetCertificateAuthorityFilter)(nil)).Elem()
+}
+
+func (o GetCertificateAuthorityFilterPtrOutput) ToGetCertificateAuthorityFilterPtrOutput() GetCertificateAuthorityFilterPtrOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterPtrOutput) ToGetCertificateAuthorityFilterPtrOutputWithContext(ctx context.Context) GetCertificateAuthorityFilterPtrOutput {
+	return o
+}
+
+func (o GetCertificateAuthorityFilterPtrOutput) Elem() GetCertificateAuthorityFilterOutput {
+	return o.ApplyT(func(v *GetCertificateAuthorityFilter) GetCertificateAuthorityFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetCertificateAuthorityFilter
+		return ret
+	}).(GetCertificateAuthorityFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetCertificateAuthorityFilterPtrOutput) Conditions() GetCertificateAuthorityFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetCertificateAuthorityFilter) []GetCertificateAuthorityFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetCertificateAuthorityFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetCertificateAuthorityFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetCertificateAuthorityFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCertificateAuthorityFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetCertificateAuthorityFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetCertificateAuthorityFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetCertificateAuthorityFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetCertificateAuthorityFilterCondition struct {
@@ -10030,6 +10606,47 @@ func (i GetContainerRegistryFilterArgs) ToGetContainerRegistryFilterOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryFilterOutput)
 }
 
+func (i GetContainerRegistryFilterArgs) ToGetContainerRegistryFilterPtrOutput() GetContainerRegistryFilterPtrOutput {
+	return i.ToGetContainerRegistryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetContainerRegistryFilterArgs) ToGetContainerRegistryFilterPtrOutputWithContext(ctx context.Context) GetContainerRegistryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryFilterOutput).ToGetContainerRegistryFilterPtrOutputWithContext(ctx)
+}
+
+// GetContainerRegistryFilterPtrInput is an input type that accepts GetContainerRegistryFilterArgs, GetContainerRegistryFilterPtr and GetContainerRegistryFilterPtrOutput values.
+// You can construct a concrete instance of `GetContainerRegistryFilterPtrInput` via:
+//
+//          GetContainerRegistryFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetContainerRegistryFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetContainerRegistryFilterPtrOutput() GetContainerRegistryFilterPtrOutput
+	ToGetContainerRegistryFilterPtrOutputWithContext(context.Context) GetContainerRegistryFilterPtrOutput
+}
+
+type getContainerRegistryFilterPtrType GetContainerRegistryFilterArgs
+
+func GetContainerRegistryFilterPtr(v *GetContainerRegistryFilterArgs) GetContainerRegistryFilterPtrInput {
+	return (*getContainerRegistryFilterPtrType)(v)
+}
+
+func (*getContainerRegistryFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetContainerRegistryFilter)(nil)).Elem()
+}
+
+func (i *getContainerRegistryFilterPtrType) ToGetContainerRegistryFilterPtrOutput() GetContainerRegistryFilterPtrOutput {
+	return i.ToGetContainerRegistryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getContainerRegistryFilterPtrType) ToGetContainerRegistryFilterPtrOutputWithContext(ctx context.Context) GetContainerRegistryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetContainerRegistryFilterPtrOutput)
+}
+
 type GetContainerRegistryFilterOutput struct{ *pulumi.OutputState }
 
 func (GetContainerRegistryFilterOutput) ElementType() reflect.Type {
@@ -10042,6 +10659,16 @@ func (o GetContainerRegistryFilterOutput) ToGetContainerRegistryFilterOutput() G
 
 func (o GetContainerRegistryFilterOutput) ToGetContainerRegistryFilterOutputWithContext(ctx context.Context) GetContainerRegistryFilterOutput {
 	return o
+}
+
+func (o GetContainerRegistryFilterOutput) ToGetContainerRegistryFilterPtrOutput() GetContainerRegistryFilterPtrOutput {
+	return o.ToGetContainerRegistryFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetContainerRegistryFilterOutput) ToGetContainerRegistryFilterPtrOutputWithContext(ctx context.Context) GetContainerRegistryFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetContainerRegistryFilter) *GetContainerRegistryFilter {
+		return &v
+	}).(GetContainerRegistryFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -10062,6 +10689,70 @@ func (o GetContainerRegistryFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetContainerRegistryFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetContainerRegistryFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetContainerRegistryFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetContainerRegistryFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetContainerRegistryFilter)(nil)).Elem()
+}
+
+func (o GetContainerRegistryFilterPtrOutput) ToGetContainerRegistryFilterPtrOutput() GetContainerRegistryFilterPtrOutput {
+	return o
+}
+
+func (o GetContainerRegistryFilterPtrOutput) ToGetContainerRegistryFilterPtrOutputWithContext(ctx context.Context) GetContainerRegistryFilterPtrOutput {
+	return o
+}
+
+func (o GetContainerRegistryFilterPtrOutput) Elem() GetContainerRegistryFilterOutput {
+	return o.ApplyT(func(v *GetContainerRegistryFilter) GetContainerRegistryFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetContainerRegistryFilter
+		return ret
+	}).(GetContainerRegistryFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetContainerRegistryFilterPtrOutput) Conditions() GetContainerRegistryFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetContainerRegistryFilter) []GetContainerRegistryFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetContainerRegistryFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetContainerRegistryFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetContainerRegistryFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetContainerRegistryFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetContainerRegistryFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetContainerRegistryFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetContainerRegistryFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetContainerRegistryFilterCondition struct {
@@ -10321,6 +11012,47 @@ func (i GetDNSFilterArgs) ToGetDNSFilterOutputWithContext(ctx context.Context) G
 	return pulumi.ToOutputWithContext(ctx, i).(GetDNSFilterOutput)
 }
 
+func (i GetDNSFilterArgs) ToGetDNSFilterPtrOutput() GetDNSFilterPtrOutput {
+	return i.ToGetDNSFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetDNSFilterArgs) ToGetDNSFilterPtrOutputWithContext(ctx context.Context) GetDNSFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDNSFilterOutput).ToGetDNSFilterPtrOutputWithContext(ctx)
+}
+
+// GetDNSFilterPtrInput is an input type that accepts GetDNSFilterArgs, GetDNSFilterPtr and GetDNSFilterPtrOutput values.
+// You can construct a concrete instance of `GetDNSFilterPtrInput` via:
+//
+//          GetDNSFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetDNSFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetDNSFilterPtrOutput() GetDNSFilterPtrOutput
+	ToGetDNSFilterPtrOutputWithContext(context.Context) GetDNSFilterPtrOutput
+}
+
+type getDNSFilterPtrType GetDNSFilterArgs
+
+func GetDNSFilterPtr(v *GetDNSFilterArgs) GetDNSFilterPtrInput {
+	return (*getDNSFilterPtrType)(v)
+}
+
+func (*getDNSFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDNSFilter)(nil)).Elem()
+}
+
+func (i *getDNSFilterPtrType) ToGetDNSFilterPtrOutput() GetDNSFilterPtrOutput {
+	return i.ToGetDNSFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getDNSFilterPtrType) ToGetDNSFilterPtrOutputWithContext(ctx context.Context) GetDNSFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDNSFilterPtrOutput)
+}
+
 type GetDNSFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDNSFilterOutput) ElementType() reflect.Type {
@@ -10333,6 +11065,16 @@ func (o GetDNSFilterOutput) ToGetDNSFilterOutput() GetDNSFilterOutput {
 
 func (o GetDNSFilterOutput) ToGetDNSFilterOutputWithContext(ctx context.Context) GetDNSFilterOutput {
 	return o
+}
+
+func (o GetDNSFilterOutput) ToGetDNSFilterPtrOutput() GetDNSFilterPtrOutput {
+	return o.ToGetDNSFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetDNSFilterOutput) ToGetDNSFilterPtrOutputWithContext(ctx context.Context) GetDNSFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetDNSFilter) *GetDNSFilter {
+		return &v
+	}).(GetDNSFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -10353,6 +11095,70 @@ func (o GetDNSFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetDNSFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDNSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetDNSFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetDNSFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDNSFilter)(nil)).Elem()
+}
+
+func (o GetDNSFilterPtrOutput) ToGetDNSFilterPtrOutput() GetDNSFilterPtrOutput {
+	return o
+}
+
+func (o GetDNSFilterPtrOutput) ToGetDNSFilterPtrOutputWithContext(ctx context.Context) GetDNSFilterPtrOutput {
+	return o
+}
+
+func (o GetDNSFilterPtrOutput) Elem() GetDNSFilterOutput {
+	return o.ApplyT(func(v *GetDNSFilter) GetDNSFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetDNSFilter
+		return ret
+	}).(GetDNSFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetDNSFilterPtrOutput) Conditions() GetDNSFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetDNSFilter) []GetDNSFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetDNSFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetDNSFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDNSFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDNSFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDNSFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDNSFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDNSFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetDNSFilterCondition struct {
@@ -10763,6 +11569,47 @@ func (i GetDatabaseFilterArgs) ToGetDatabaseFilterOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseFilterOutput)
 }
 
+func (i GetDatabaseFilterArgs) ToGetDatabaseFilterPtrOutput() GetDatabaseFilterPtrOutput {
+	return i.ToGetDatabaseFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetDatabaseFilterArgs) ToGetDatabaseFilterPtrOutputWithContext(ctx context.Context) GetDatabaseFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseFilterOutput).ToGetDatabaseFilterPtrOutputWithContext(ctx)
+}
+
+// GetDatabaseFilterPtrInput is an input type that accepts GetDatabaseFilterArgs, GetDatabaseFilterPtr and GetDatabaseFilterPtrOutput values.
+// You can construct a concrete instance of `GetDatabaseFilterPtrInput` via:
+//
+//          GetDatabaseFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetDatabaseFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetDatabaseFilterPtrOutput() GetDatabaseFilterPtrOutput
+	ToGetDatabaseFilterPtrOutputWithContext(context.Context) GetDatabaseFilterPtrOutput
+}
+
+type getDatabaseFilterPtrType GetDatabaseFilterArgs
+
+func GetDatabaseFilterPtr(v *GetDatabaseFilterArgs) GetDatabaseFilterPtrInput {
+	return (*getDatabaseFilterPtrType)(v)
+}
+
+func (*getDatabaseFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDatabaseFilter)(nil)).Elem()
+}
+
+func (i *getDatabaseFilterPtrType) ToGetDatabaseFilterPtrOutput() GetDatabaseFilterPtrOutput {
+	return i.ToGetDatabaseFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getDatabaseFilterPtrType) ToGetDatabaseFilterPtrOutputWithContext(ctx context.Context) GetDatabaseFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabaseFilterPtrOutput)
+}
+
 type GetDatabaseFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDatabaseFilterOutput) ElementType() reflect.Type {
@@ -10775,6 +11622,16 @@ func (o GetDatabaseFilterOutput) ToGetDatabaseFilterOutput() GetDatabaseFilterOu
 
 func (o GetDatabaseFilterOutput) ToGetDatabaseFilterOutputWithContext(ctx context.Context) GetDatabaseFilterOutput {
 	return o
+}
+
+func (o GetDatabaseFilterOutput) ToGetDatabaseFilterPtrOutput() GetDatabaseFilterPtrOutput {
+	return o.ToGetDatabaseFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetDatabaseFilterOutput) ToGetDatabaseFilterPtrOutputWithContext(ctx context.Context) GetDatabaseFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetDatabaseFilter) *GetDatabaseFilter {
+		return &v
+	}).(GetDatabaseFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -10795,6 +11652,70 @@ func (o GetDatabaseFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetDatabaseFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDatabaseFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetDatabaseFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetDatabaseFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDatabaseFilter)(nil)).Elem()
+}
+
+func (o GetDatabaseFilterPtrOutput) ToGetDatabaseFilterPtrOutput() GetDatabaseFilterPtrOutput {
+	return o
+}
+
+func (o GetDatabaseFilterPtrOutput) ToGetDatabaseFilterPtrOutputWithContext(ctx context.Context) GetDatabaseFilterPtrOutput {
+	return o
+}
+
+func (o GetDatabaseFilterPtrOutput) Elem() GetDatabaseFilterOutput {
+	return o.ApplyT(func(v *GetDatabaseFilter) GetDatabaseFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetDatabaseFilter
+		return ret
+	}).(GetDatabaseFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetDatabaseFilterPtrOutput) Conditions() GetDatabaseFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetDatabaseFilter) []GetDatabaseFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetDatabaseFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetDatabaseFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDatabaseFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDatabaseFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDatabaseFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDatabaseFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDatabaseFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetDatabaseFilterCondition struct {
@@ -11090,6 +12011,47 @@ func (i GetDiskFilterArgs) ToGetDiskFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetDiskFilterOutput)
 }
 
+func (i GetDiskFilterArgs) ToGetDiskFilterPtrOutput() GetDiskFilterPtrOutput {
+	return i.ToGetDiskFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetDiskFilterArgs) ToGetDiskFilterPtrOutputWithContext(ctx context.Context) GetDiskFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskFilterOutput).ToGetDiskFilterPtrOutputWithContext(ctx)
+}
+
+// GetDiskFilterPtrInput is an input type that accepts GetDiskFilterArgs, GetDiskFilterPtr and GetDiskFilterPtrOutput values.
+// You can construct a concrete instance of `GetDiskFilterPtrInput` via:
+//
+//          GetDiskFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetDiskFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetDiskFilterPtrOutput() GetDiskFilterPtrOutput
+	ToGetDiskFilterPtrOutputWithContext(context.Context) GetDiskFilterPtrOutput
+}
+
+type getDiskFilterPtrType GetDiskFilterArgs
+
+func GetDiskFilterPtr(v *GetDiskFilterArgs) GetDiskFilterPtrInput {
+	return (*getDiskFilterPtrType)(v)
+}
+
+func (*getDiskFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDiskFilter)(nil)).Elem()
+}
+
+func (i *getDiskFilterPtrType) ToGetDiskFilterPtrOutput() GetDiskFilterPtrOutput {
+	return i.ToGetDiskFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getDiskFilterPtrType) ToGetDiskFilterPtrOutputWithContext(ctx context.Context) GetDiskFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiskFilterPtrOutput)
+}
+
 type GetDiskFilterOutput struct{ *pulumi.OutputState }
 
 func (GetDiskFilterOutput) ElementType() reflect.Type {
@@ -11102,6 +12064,16 @@ func (o GetDiskFilterOutput) ToGetDiskFilterOutput() GetDiskFilterOutput {
 
 func (o GetDiskFilterOutput) ToGetDiskFilterOutputWithContext(ctx context.Context) GetDiskFilterOutput {
 	return o
+}
+
+func (o GetDiskFilterOutput) ToGetDiskFilterPtrOutput() GetDiskFilterPtrOutput {
+	return o.ToGetDiskFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetDiskFilterOutput) ToGetDiskFilterPtrOutputWithContext(ctx context.Context) GetDiskFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetDiskFilter) *GetDiskFilter {
+		return &v
+	}).(GetDiskFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -11122,6 +12094,70 @@ func (o GetDiskFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetDiskFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDiskFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetDiskFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetDiskFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetDiskFilter)(nil)).Elem()
+}
+
+func (o GetDiskFilterPtrOutput) ToGetDiskFilterPtrOutput() GetDiskFilterPtrOutput {
+	return o
+}
+
+func (o GetDiskFilterPtrOutput) ToGetDiskFilterPtrOutputWithContext(ctx context.Context) GetDiskFilterPtrOutput {
+	return o
+}
+
+func (o GetDiskFilterPtrOutput) Elem() GetDiskFilterOutput {
+	return o.ApplyT(func(v *GetDiskFilter) GetDiskFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetDiskFilter
+		return ret
+	}).(GetDiskFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetDiskFilterPtrOutput) Conditions() GetDiskFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetDiskFilter) []GetDiskFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetDiskFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetDiskFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetDiskFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDiskFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDiskFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetDiskFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetDiskFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetDiskFilterCondition struct {
@@ -11275,6 +12311,47 @@ func (i GetESMEFilterArgs) ToGetESMEFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetESMEFilterOutput)
 }
 
+func (i GetESMEFilterArgs) ToGetESMEFilterPtrOutput() GetESMEFilterPtrOutput {
+	return i.ToGetESMEFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetESMEFilterArgs) ToGetESMEFilterPtrOutputWithContext(ctx context.Context) GetESMEFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetESMEFilterOutput).ToGetESMEFilterPtrOutputWithContext(ctx)
+}
+
+// GetESMEFilterPtrInput is an input type that accepts GetESMEFilterArgs, GetESMEFilterPtr and GetESMEFilterPtrOutput values.
+// You can construct a concrete instance of `GetESMEFilterPtrInput` via:
+//
+//          GetESMEFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetESMEFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetESMEFilterPtrOutput() GetESMEFilterPtrOutput
+	ToGetESMEFilterPtrOutputWithContext(context.Context) GetESMEFilterPtrOutput
+}
+
+type getESMEFilterPtrType GetESMEFilterArgs
+
+func GetESMEFilterPtr(v *GetESMEFilterArgs) GetESMEFilterPtrInput {
+	return (*getESMEFilterPtrType)(v)
+}
+
+func (*getESMEFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetESMEFilter)(nil)).Elem()
+}
+
+func (i *getESMEFilterPtrType) ToGetESMEFilterPtrOutput() GetESMEFilterPtrOutput {
+	return i.ToGetESMEFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getESMEFilterPtrType) ToGetESMEFilterPtrOutputWithContext(ctx context.Context) GetESMEFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetESMEFilterPtrOutput)
+}
+
 type GetESMEFilterOutput struct{ *pulumi.OutputState }
 
 func (GetESMEFilterOutput) ElementType() reflect.Type {
@@ -11287,6 +12364,16 @@ func (o GetESMEFilterOutput) ToGetESMEFilterOutput() GetESMEFilterOutput {
 
 func (o GetESMEFilterOutput) ToGetESMEFilterOutputWithContext(ctx context.Context) GetESMEFilterOutput {
 	return o
+}
+
+func (o GetESMEFilterOutput) ToGetESMEFilterPtrOutput() GetESMEFilterPtrOutput {
+	return o.ToGetESMEFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetESMEFilterOutput) ToGetESMEFilterPtrOutputWithContext(ctx context.Context) GetESMEFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetESMEFilter) *GetESMEFilter {
+		return &v
+	}).(GetESMEFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -11307,6 +12394,70 @@ func (o GetESMEFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
 func (o GetESMEFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetESMEFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetESMEFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetESMEFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetESMEFilter)(nil)).Elem()
+}
+
+func (o GetESMEFilterPtrOutput) ToGetESMEFilterPtrOutput() GetESMEFilterPtrOutput {
+	return o
+}
+
+func (o GetESMEFilterPtrOutput) ToGetESMEFilterPtrOutputWithContext(ctx context.Context) GetESMEFilterPtrOutput {
+	return o
+}
+
+func (o GetESMEFilterPtrOutput) Elem() GetESMEFilterOutput {
+	return o.ApplyT(func(v *GetESMEFilter) GetESMEFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetESMEFilter
+		return ret
+	}).(GetESMEFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetESMEFilterPtrOutput) Conditions() GetESMEFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetESMEFilter) []GetESMEFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetESMEFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetESMEFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetESMEFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+func (o GetESMEFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetESMEFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values are specified, they combined as AND condition.
+func (o GetESMEFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetESMEFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetESMEFilterCondition struct {
@@ -11460,6 +12611,47 @@ func (i GetEnhancedDBFilterArgs) ToGetEnhancedDBFilterOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterOutput)
 }
 
+func (i GetEnhancedDBFilterArgs) ToGetEnhancedDBFilterPtrOutput() GetEnhancedDBFilterPtrOutput {
+	return i.ToGetEnhancedDBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetEnhancedDBFilterArgs) ToGetEnhancedDBFilterPtrOutputWithContext(ctx context.Context) GetEnhancedDBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterOutput).ToGetEnhancedDBFilterPtrOutputWithContext(ctx)
+}
+
+// GetEnhancedDBFilterPtrInput is an input type that accepts GetEnhancedDBFilterArgs, GetEnhancedDBFilterPtr and GetEnhancedDBFilterPtrOutput values.
+// You can construct a concrete instance of `GetEnhancedDBFilterPtrInput` via:
+//
+//          GetEnhancedDBFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetEnhancedDBFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetEnhancedDBFilterPtrOutput() GetEnhancedDBFilterPtrOutput
+	ToGetEnhancedDBFilterPtrOutputWithContext(context.Context) GetEnhancedDBFilterPtrOutput
+}
+
+type getEnhancedDBFilterPtrType GetEnhancedDBFilterArgs
+
+func GetEnhancedDBFilterPtr(v *GetEnhancedDBFilterArgs) GetEnhancedDBFilterPtrInput {
+	return (*getEnhancedDBFilterPtrType)(v)
+}
+
+func (*getEnhancedDBFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetEnhancedDBFilter)(nil)).Elem()
+}
+
+func (i *getEnhancedDBFilterPtrType) ToGetEnhancedDBFilterPtrOutput() GetEnhancedDBFilterPtrOutput {
+	return i.ToGetEnhancedDBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getEnhancedDBFilterPtrType) ToGetEnhancedDBFilterPtrOutputWithContext(ctx context.Context) GetEnhancedDBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnhancedDBFilterPtrOutput)
+}
+
 type GetEnhancedDBFilterOutput struct{ *pulumi.OutputState }
 
 func (GetEnhancedDBFilterOutput) ElementType() reflect.Type {
@@ -11472,6 +12664,16 @@ func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterOutput() GetEnhancedDBFi
 
 func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterOutputWithContext(ctx context.Context) GetEnhancedDBFilterOutput {
 	return o
+}
+
+func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterPtrOutput() GetEnhancedDBFilterPtrOutput {
+	return o.ToGetEnhancedDBFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetEnhancedDBFilterOutput) ToGetEnhancedDBFilterPtrOutputWithContext(ctx context.Context) GetEnhancedDBFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetEnhancedDBFilter) *GetEnhancedDBFilter {
+		return &v
+	}).(GetEnhancedDBFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -11492,6 +12694,70 @@ func (o GetEnhancedDBFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetEnhancedDBFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetEnhancedDBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetEnhancedDBFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetEnhancedDBFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetEnhancedDBFilter)(nil)).Elem()
+}
+
+func (o GetEnhancedDBFilterPtrOutput) ToGetEnhancedDBFilterPtrOutput() GetEnhancedDBFilterPtrOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterPtrOutput) ToGetEnhancedDBFilterPtrOutputWithContext(ctx context.Context) GetEnhancedDBFilterPtrOutput {
+	return o
+}
+
+func (o GetEnhancedDBFilterPtrOutput) Elem() GetEnhancedDBFilterOutput {
+	return o.ApplyT(func(v *GetEnhancedDBFilter) GetEnhancedDBFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetEnhancedDBFilter
+		return ret
+	}).(GetEnhancedDBFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetEnhancedDBFilterPtrOutput) Conditions() GetEnhancedDBFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetEnhancedDBFilter) []GetEnhancedDBFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetEnhancedDBFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetEnhancedDBFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetEnhancedDBFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetEnhancedDBFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetEnhancedDBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetEnhancedDBFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetEnhancedDBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetEnhancedDBFilterCondition struct {
@@ -11645,6 +12911,47 @@ func (i GetGSLBFilterArgs) ToGetGSLBFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBFilterOutput)
 }
 
+func (i GetGSLBFilterArgs) ToGetGSLBFilterPtrOutput() GetGSLBFilterPtrOutput {
+	return i.ToGetGSLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetGSLBFilterArgs) ToGetGSLBFilterPtrOutputWithContext(ctx context.Context) GetGSLBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBFilterOutput).ToGetGSLBFilterPtrOutputWithContext(ctx)
+}
+
+// GetGSLBFilterPtrInput is an input type that accepts GetGSLBFilterArgs, GetGSLBFilterPtr and GetGSLBFilterPtrOutput values.
+// You can construct a concrete instance of `GetGSLBFilterPtrInput` via:
+//
+//          GetGSLBFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetGSLBFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetGSLBFilterPtrOutput() GetGSLBFilterPtrOutput
+	ToGetGSLBFilterPtrOutputWithContext(context.Context) GetGSLBFilterPtrOutput
+}
+
+type getGSLBFilterPtrType GetGSLBFilterArgs
+
+func GetGSLBFilterPtr(v *GetGSLBFilterArgs) GetGSLBFilterPtrInput {
+	return (*getGSLBFilterPtrType)(v)
+}
+
+func (*getGSLBFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetGSLBFilter)(nil)).Elem()
+}
+
+func (i *getGSLBFilterPtrType) ToGetGSLBFilterPtrOutput() GetGSLBFilterPtrOutput {
+	return i.ToGetGSLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getGSLBFilterPtrType) ToGetGSLBFilterPtrOutputWithContext(ctx context.Context) GetGSLBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGSLBFilterPtrOutput)
+}
+
 type GetGSLBFilterOutput struct{ *pulumi.OutputState }
 
 func (GetGSLBFilterOutput) ElementType() reflect.Type {
@@ -11657,6 +12964,16 @@ func (o GetGSLBFilterOutput) ToGetGSLBFilterOutput() GetGSLBFilterOutput {
 
 func (o GetGSLBFilterOutput) ToGetGSLBFilterOutputWithContext(ctx context.Context) GetGSLBFilterOutput {
 	return o
+}
+
+func (o GetGSLBFilterOutput) ToGetGSLBFilterPtrOutput() GetGSLBFilterPtrOutput {
+	return o.ToGetGSLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetGSLBFilterOutput) ToGetGSLBFilterPtrOutputWithContext(ctx context.Context) GetGSLBFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetGSLBFilter) *GetGSLBFilter {
+		return &v
+	}).(GetGSLBFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -11677,6 +12994,70 @@ func (o GetGSLBFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetGSLBFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGSLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetGSLBFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetGSLBFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetGSLBFilter)(nil)).Elem()
+}
+
+func (o GetGSLBFilterPtrOutput) ToGetGSLBFilterPtrOutput() GetGSLBFilterPtrOutput {
+	return o
+}
+
+func (o GetGSLBFilterPtrOutput) ToGetGSLBFilterPtrOutputWithContext(ctx context.Context) GetGSLBFilterPtrOutput {
+	return o
+}
+
+func (o GetGSLBFilterPtrOutput) Elem() GetGSLBFilterOutput {
+	return o.ApplyT(func(v *GetGSLBFilter) GetGSLBFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetGSLBFilter
+		return ret
+	}).(GetGSLBFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetGSLBFilterPtrOutput) Conditions() GetGSLBFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetGSLBFilter) []GetGSLBFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetGSLBFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetGSLBFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetGSLBFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetGSLBFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetGSLBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetGSLBFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetGSLBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetGSLBFilterCondition struct {
@@ -12087,6 +13468,47 @@ func (i GetIconFilterArgs) ToGetIconFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetIconFilterOutput)
 }
 
+func (i GetIconFilterArgs) ToGetIconFilterPtrOutput() GetIconFilterPtrOutput {
+	return i.ToGetIconFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetIconFilterArgs) ToGetIconFilterPtrOutputWithContext(ctx context.Context) GetIconFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIconFilterOutput).ToGetIconFilterPtrOutputWithContext(ctx)
+}
+
+// GetIconFilterPtrInput is an input type that accepts GetIconFilterArgs, GetIconFilterPtr and GetIconFilterPtrOutput values.
+// You can construct a concrete instance of `GetIconFilterPtrInput` via:
+//
+//          GetIconFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetIconFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetIconFilterPtrOutput() GetIconFilterPtrOutput
+	ToGetIconFilterPtrOutputWithContext(context.Context) GetIconFilterPtrOutput
+}
+
+type getIconFilterPtrType GetIconFilterArgs
+
+func GetIconFilterPtr(v *GetIconFilterArgs) GetIconFilterPtrInput {
+	return (*getIconFilterPtrType)(v)
+}
+
+func (*getIconFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetIconFilter)(nil)).Elem()
+}
+
+func (i *getIconFilterPtrType) ToGetIconFilterPtrOutput() GetIconFilterPtrOutput {
+	return i.ToGetIconFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getIconFilterPtrType) ToGetIconFilterPtrOutputWithContext(ctx context.Context) GetIconFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIconFilterPtrOutput)
+}
+
 type GetIconFilterOutput struct{ *pulumi.OutputState }
 
 func (GetIconFilterOutput) ElementType() reflect.Type {
@@ -12099,6 +13521,16 @@ func (o GetIconFilterOutput) ToGetIconFilterOutput() GetIconFilterOutput {
 
 func (o GetIconFilterOutput) ToGetIconFilterOutputWithContext(ctx context.Context) GetIconFilterOutput {
 	return o
+}
+
+func (o GetIconFilterOutput) ToGetIconFilterPtrOutput() GetIconFilterPtrOutput {
+	return o.ToGetIconFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetIconFilterOutput) ToGetIconFilterPtrOutputWithContext(ctx context.Context) GetIconFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetIconFilter) *GetIconFilter {
+		return &v
+	}).(GetIconFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -12119,6 +13551,70 @@ func (o GetIconFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetIconFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetIconFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetIconFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetIconFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetIconFilter)(nil)).Elem()
+}
+
+func (o GetIconFilterPtrOutput) ToGetIconFilterPtrOutput() GetIconFilterPtrOutput {
+	return o
+}
+
+func (o GetIconFilterPtrOutput) ToGetIconFilterPtrOutputWithContext(ctx context.Context) GetIconFilterPtrOutput {
+	return o
+}
+
+func (o GetIconFilterPtrOutput) Elem() GetIconFilterOutput {
+	return o.ApplyT(func(v *GetIconFilter) GetIconFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetIconFilter
+		return ret
+	}).(GetIconFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetIconFilterPtrOutput) Conditions() GetIconFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetIconFilter) []GetIconFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetIconFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetIconFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetIconFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetIconFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetIconFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetIconFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetIconFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetIconFilterCondition struct {
@@ -12272,6 +13768,47 @@ func (i GetInternetFilterArgs) ToGetInternetFilterOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetInternetFilterOutput)
 }
 
+func (i GetInternetFilterArgs) ToGetInternetFilterPtrOutput() GetInternetFilterPtrOutput {
+	return i.ToGetInternetFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetInternetFilterArgs) ToGetInternetFilterPtrOutputWithContext(ctx context.Context) GetInternetFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInternetFilterOutput).ToGetInternetFilterPtrOutputWithContext(ctx)
+}
+
+// GetInternetFilterPtrInput is an input type that accepts GetInternetFilterArgs, GetInternetFilterPtr and GetInternetFilterPtrOutput values.
+// You can construct a concrete instance of `GetInternetFilterPtrInput` via:
+//
+//          GetInternetFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetInternetFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetInternetFilterPtrOutput() GetInternetFilterPtrOutput
+	ToGetInternetFilterPtrOutputWithContext(context.Context) GetInternetFilterPtrOutput
+}
+
+type getInternetFilterPtrType GetInternetFilterArgs
+
+func GetInternetFilterPtr(v *GetInternetFilterArgs) GetInternetFilterPtrInput {
+	return (*getInternetFilterPtrType)(v)
+}
+
+func (*getInternetFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetInternetFilter)(nil)).Elem()
+}
+
+func (i *getInternetFilterPtrType) ToGetInternetFilterPtrOutput() GetInternetFilterPtrOutput {
+	return i.ToGetInternetFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getInternetFilterPtrType) ToGetInternetFilterPtrOutputWithContext(ctx context.Context) GetInternetFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInternetFilterPtrOutput)
+}
+
 type GetInternetFilterOutput struct{ *pulumi.OutputState }
 
 func (GetInternetFilterOutput) ElementType() reflect.Type {
@@ -12284,6 +13821,16 @@ func (o GetInternetFilterOutput) ToGetInternetFilterOutput() GetInternetFilterOu
 
 func (o GetInternetFilterOutput) ToGetInternetFilterOutputWithContext(ctx context.Context) GetInternetFilterOutput {
 	return o
+}
+
+func (o GetInternetFilterOutput) ToGetInternetFilterPtrOutput() GetInternetFilterPtrOutput {
+	return o.ToGetInternetFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetInternetFilterOutput) ToGetInternetFilterPtrOutputWithContext(ctx context.Context) GetInternetFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetInternetFilter) *GetInternetFilter {
+		return &v
+	}).(GetInternetFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -12304,6 +13851,70 @@ func (o GetInternetFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetInternetFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetInternetFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetInternetFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetInternetFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetInternetFilter)(nil)).Elem()
+}
+
+func (o GetInternetFilterPtrOutput) ToGetInternetFilterPtrOutput() GetInternetFilterPtrOutput {
+	return o
+}
+
+func (o GetInternetFilterPtrOutput) ToGetInternetFilterPtrOutputWithContext(ctx context.Context) GetInternetFilterPtrOutput {
+	return o
+}
+
+func (o GetInternetFilterPtrOutput) Elem() GetInternetFilterOutput {
+	return o.ApplyT(func(v *GetInternetFilter) GetInternetFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetInternetFilter
+		return ret
+	}).(GetInternetFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetInternetFilterPtrOutput) Conditions() GetInternetFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetInternetFilter) []GetInternetFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetInternetFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetInternetFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetInternetFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetInternetFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetInternetFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetInternetFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetInternetFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetInternetFilterCondition struct {
@@ -12457,6 +14068,47 @@ func (i GetLoadBalancerFilterArgs) ToGetLoadBalancerFilterOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerFilterOutput)
 }
 
+func (i GetLoadBalancerFilterArgs) ToGetLoadBalancerFilterPtrOutput() GetLoadBalancerFilterPtrOutput {
+	return i.ToGetLoadBalancerFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetLoadBalancerFilterArgs) ToGetLoadBalancerFilterPtrOutputWithContext(ctx context.Context) GetLoadBalancerFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerFilterOutput).ToGetLoadBalancerFilterPtrOutputWithContext(ctx)
+}
+
+// GetLoadBalancerFilterPtrInput is an input type that accepts GetLoadBalancerFilterArgs, GetLoadBalancerFilterPtr and GetLoadBalancerFilterPtrOutput values.
+// You can construct a concrete instance of `GetLoadBalancerFilterPtrInput` via:
+//
+//          GetLoadBalancerFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetLoadBalancerFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetLoadBalancerFilterPtrOutput() GetLoadBalancerFilterPtrOutput
+	ToGetLoadBalancerFilterPtrOutputWithContext(context.Context) GetLoadBalancerFilterPtrOutput
+}
+
+type getLoadBalancerFilterPtrType GetLoadBalancerFilterArgs
+
+func GetLoadBalancerFilterPtr(v *GetLoadBalancerFilterArgs) GetLoadBalancerFilterPtrInput {
+	return (*getLoadBalancerFilterPtrType)(v)
+}
+
+func (*getLoadBalancerFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetLoadBalancerFilter)(nil)).Elem()
+}
+
+func (i *getLoadBalancerFilterPtrType) ToGetLoadBalancerFilterPtrOutput() GetLoadBalancerFilterPtrOutput {
+	return i.ToGetLoadBalancerFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getLoadBalancerFilterPtrType) ToGetLoadBalancerFilterPtrOutputWithContext(ctx context.Context) GetLoadBalancerFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLoadBalancerFilterPtrOutput)
+}
+
 type GetLoadBalancerFilterOutput struct{ *pulumi.OutputState }
 
 func (GetLoadBalancerFilterOutput) ElementType() reflect.Type {
@@ -12469,6 +14121,16 @@ func (o GetLoadBalancerFilterOutput) ToGetLoadBalancerFilterOutput() GetLoadBala
 
 func (o GetLoadBalancerFilterOutput) ToGetLoadBalancerFilterOutputWithContext(ctx context.Context) GetLoadBalancerFilterOutput {
 	return o
+}
+
+func (o GetLoadBalancerFilterOutput) ToGetLoadBalancerFilterPtrOutput() GetLoadBalancerFilterPtrOutput {
+	return o.ToGetLoadBalancerFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetLoadBalancerFilterOutput) ToGetLoadBalancerFilterPtrOutputWithContext(ctx context.Context) GetLoadBalancerFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetLoadBalancerFilter) *GetLoadBalancerFilter {
+		return &v
+	}).(GetLoadBalancerFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -12489,6 +14151,70 @@ func (o GetLoadBalancerFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetLoadBalancerFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetLoadBalancerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetLoadBalancerFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetLoadBalancerFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetLoadBalancerFilter)(nil)).Elem()
+}
+
+func (o GetLoadBalancerFilterPtrOutput) ToGetLoadBalancerFilterPtrOutput() GetLoadBalancerFilterPtrOutput {
+	return o
+}
+
+func (o GetLoadBalancerFilterPtrOutput) ToGetLoadBalancerFilterPtrOutputWithContext(ctx context.Context) GetLoadBalancerFilterPtrOutput {
+	return o
+}
+
+func (o GetLoadBalancerFilterPtrOutput) Elem() GetLoadBalancerFilterOutput {
+	return o.ApplyT(func(v *GetLoadBalancerFilter) GetLoadBalancerFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetLoadBalancerFilter
+		return ret
+	}).(GetLoadBalancerFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetLoadBalancerFilterPtrOutput) Conditions() GetLoadBalancerFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetLoadBalancerFilter) []GetLoadBalancerFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetLoadBalancerFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetLoadBalancerFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetLoadBalancerFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetLoadBalancerFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetLoadBalancerFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetLoadBalancerFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetLoadBalancerFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetLoadBalancerFilterCondition struct {
@@ -13050,6 +14776,47 @@ func (i GetLocalRouterFilterArgs) ToGetLocalRouterFilterOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterFilterOutput)
 }
 
+func (i GetLocalRouterFilterArgs) ToGetLocalRouterFilterPtrOutput() GetLocalRouterFilterPtrOutput {
+	return i.ToGetLocalRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetLocalRouterFilterArgs) ToGetLocalRouterFilterPtrOutputWithContext(ctx context.Context) GetLocalRouterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterFilterOutput).ToGetLocalRouterFilterPtrOutputWithContext(ctx)
+}
+
+// GetLocalRouterFilterPtrInput is an input type that accepts GetLocalRouterFilterArgs, GetLocalRouterFilterPtr and GetLocalRouterFilterPtrOutput values.
+// You can construct a concrete instance of `GetLocalRouterFilterPtrInput` via:
+//
+//          GetLocalRouterFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetLocalRouterFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetLocalRouterFilterPtrOutput() GetLocalRouterFilterPtrOutput
+	ToGetLocalRouterFilterPtrOutputWithContext(context.Context) GetLocalRouterFilterPtrOutput
+}
+
+type getLocalRouterFilterPtrType GetLocalRouterFilterArgs
+
+func GetLocalRouterFilterPtr(v *GetLocalRouterFilterArgs) GetLocalRouterFilterPtrInput {
+	return (*getLocalRouterFilterPtrType)(v)
+}
+
+func (*getLocalRouterFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetLocalRouterFilter)(nil)).Elem()
+}
+
+func (i *getLocalRouterFilterPtrType) ToGetLocalRouterFilterPtrOutput() GetLocalRouterFilterPtrOutput {
+	return i.ToGetLocalRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getLocalRouterFilterPtrType) ToGetLocalRouterFilterPtrOutputWithContext(ctx context.Context) GetLocalRouterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetLocalRouterFilterPtrOutput)
+}
+
 type GetLocalRouterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetLocalRouterFilterOutput) ElementType() reflect.Type {
@@ -13062,6 +14829,16 @@ func (o GetLocalRouterFilterOutput) ToGetLocalRouterFilterOutput() GetLocalRoute
 
 func (o GetLocalRouterFilterOutput) ToGetLocalRouterFilterOutputWithContext(ctx context.Context) GetLocalRouterFilterOutput {
 	return o
+}
+
+func (o GetLocalRouterFilterOutput) ToGetLocalRouterFilterPtrOutput() GetLocalRouterFilterPtrOutput {
+	return o.ToGetLocalRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetLocalRouterFilterOutput) ToGetLocalRouterFilterPtrOutputWithContext(ctx context.Context) GetLocalRouterFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetLocalRouterFilter) *GetLocalRouterFilter {
+		return &v
+	}).(GetLocalRouterFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -13082,6 +14859,70 @@ func (o GetLocalRouterFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetLocalRouterFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetLocalRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetLocalRouterFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetLocalRouterFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetLocalRouterFilter)(nil)).Elem()
+}
+
+func (o GetLocalRouterFilterPtrOutput) ToGetLocalRouterFilterPtrOutput() GetLocalRouterFilterPtrOutput {
+	return o
+}
+
+func (o GetLocalRouterFilterPtrOutput) ToGetLocalRouterFilterPtrOutputWithContext(ctx context.Context) GetLocalRouterFilterPtrOutput {
+	return o
+}
+
+func (o GetLocalRouterFilterPtrOutput) Elem() GetLocalRouterFilterOutput {
+	return o.ApplyT(func(v *GetLocalRouterFilter) GetLocalRouterFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetLocalRouterFilter
+		return ret
+	}).(GetLocalRouterFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetLocalRouterFilterPtrOutput) Conditions() GetLocalRouterFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetLocalRouterFilter) []GetLocalRouterFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetLocalRouterFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetLocalRouterFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetLocalRouterFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetLocalRouterFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetLocalRouterFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetLocalRouterFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetLocalRouterFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetLocalRouterFilterCondition struct {
@@ -13704,6 +15545,47 @@ func (i GetNFSFilterArgs) ToGetNFSFilterOutputWithContext(ctx context.Context) G
 	return pulumi.ToOutputWithContext(ctx, i).(GetNFSFilterOutput)
 }
 
+func (i GetNFSFilterArgs) ToGetNFSFilterPtrOutput() GetNFSFilterPtrOutput {
+	return i.ToGetNFSFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetNFSFilterArgs) ToGetNFSFilterPtrOutputWithContext(ctx context.Context) GetNFSFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNFSFilterOutput).ToGetNFSFilterPtrOutputWithContext(ctx)
+}
+
+// GetNFSFilterPtrInput is an input type that accepts GetNFSFilterArgs, GetNFSFilterPtr and GetNFSFilterPtrOutput values.
+// You can construct a concrete instance of `GetNFSFilterPtrInput` via:
+//
+//          GetNFSFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetNFSFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetNFSFilterPtrOutput() GetNFSFilterPtrOutput
+	ToGetNFSFilterPtrOutputWithContext(context.Context) GetNFSFilterPtrOutput
+}
+
+type getNFSFilterPtrType GetNFSFilterArgs
+
+func GetNFSFilterPtr(v *GetNFSFilterArgs) GetNFSFilterPtrInput {
+	return (*getNFSFilterPtrType)(v)
+}
+
+func (*getNFSFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetNFSFilter)(nil)).Elem()
+}
+
+func (i *getNFSFilterPtrType) ToGetNFSFilterPtrOutput() GetNFSFilterPtrOutput {
+	return i.ToGetNFSFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getNFSFilterPtrType) ToGetNFSFilterPtrOutputWithContext(ctx context.Context) GetNFSFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNFSFilterPtrOutput)
+}
+
 type GetNFSFilterOutput struct{ *pulumi.OutputState }
 
 func (GetNFSFilterOutput) ElementType() reflect.Type {
@@ -13716,6 +15598,16 @@ func (o GetNFSFilterOutput) ToGetNFSFilterOutput() GetNFSFilterOutput {
 
 func (o GetNFSFilterOutput) ToGetNFSFilterOutputWithContext(ctx context.Context) GetNFSFilterOutput {
 	return o
+}
+
+func (o GetNFSFilterOutput) ToGetNFSFilterPtrOutput() GetNFSFilterPtrOutput {
+	return o.ToGetNFSFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetNFSFilterOutput) ToGetNFSFilterPtrOutputWithContext(ctx context.Context) GetNFSFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetNFSFilter) *GetNFSFilter {
+		return &v
+	}).(GetNFSFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -13736,6 +15628,70 @@ func (o GetNFSFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetNFSFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetNFSFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetNFSFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetNFSFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetNFSFilter)(nil)).Elem()
+}
+
+func (o GetNFSFilterPtrOutput) ToGetNFSFilterPtrOutput() GetNFSFilterPtrOutput {
+	return o
+}
+
+func (o GetNFSFilterPtrOutput) ToGetNFSFilterPtrOutputWithContext(ctx context.Context) GetNFSFilterPtrOutput {
+	return o
+}
+
+func (o GetNFSFilterPtrOutput) Elem() GetNFSFilterOutput {
+	return o.ApplyT(func(v *GetNFSFilter) GetNFSFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetNFSFilter
+		return ret
+	}).(GetNFSFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetNFSFilterPtrOutput) Conditions() GetNFSFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetNFSFilter) []GetNFSFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetNFSFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetNFSFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetNFSFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetNFSFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetNFSFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetNFSFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetNFSFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetNFSFilterCondition struct {
@@ -14013,6 +15969,47 @@ func (i GetNoteFilterArgs) ToGetNoteFilterOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(GetNoteFilterOutput)
 }
 
+func (i GetNoteFilterArgs) ToGetNoteFilterPtrOutput() GetNoteFilterPtrOutput {
+	return i.ToGetNoteFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetNoteFilterArgs) ToGetNoteFilterPtrOutputWithContext(ctx context.Context) GetNoteFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoteFilterOutput).ToGetNoteFilterPtrOutputWithContext(ctx)
+}
+
+// GetNoteFilterPtrInput is an input type that accepts GetNoteFilterArgs, GetNoteFilterPtr and GetNoteFilterPtrOutput values.
+// You can construct a concrete instance of `GetNoteFilterPtrInput` via:
+//
+//          GetNoteFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetNoteFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetNoteFilterPtrOutput() GetNoteFilterPtrOutput
+	ToGetNoteFilterPtrOutputWithContext(context.Context) GetNoteFilterPtrOutput
+}
+
+type getNoteFilterPtrType GetNoteFilterArgs
+
+func GetNoteFilterPtr(v *GetNoteFilterArgs) GetNoteFilterPtrInput {
+	return (*getNoteFilterPtrType)(v)
+}
+
+func (*getNoteFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetNoteFilter)(nil)).Elem()
+}
+
+func (i *getNoteFilterPtrType) ToGetNoteFilterPtrOutput() GetNoteFilterPtrOutput {
+	return i.ToGetNoteFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getNoteFilterPtrType) ToGetNoteFilterPtrOutputWithContext(ctx context.Context) GetNoteFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoteFilterPtrOutput)
+}
+
 type GetNoteFilterOutput struct{ *pulumi.OutputState }
 
 func (GetNoteFilterOutput) ElementType() reflect.Type {
@@ -14025,6 +16022,16 @@ func (o GetNoteFilterOutput) ToGetNoteFilterOutput() GetNoteFilterOutput {
 
 func (o GetNoteFilterOutput) ToGetNoteFilterOutputWithContext(ctx context.Context) GetNoteFilterOutput {
 	return o
+}
+
+func (o GetNoteFilterOutput) ToGetNoteFilterPtrOutput() GetNoteFilterPtrOutput {
+	return o.ToGetNoteFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetNoteFilterOutput) ToGetNoteFilterPtrOutputWithContext(ctx context.Context) GetNoteFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetNoteFilter) *GetNoteFilter {
+		return &v
+	}).(GetNoteFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -14045,6 +16052,70 @@ func (o GetNoteFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetNoteFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetNoteFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetNoteFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetNoteFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetNoteFilter)(nil)).Elem()
+}
+
+func (o GetNoteFilterPtrOutput) ToGetNoteFilterPtrOutput() GetNoteFilterPtrOutput {
+	return o
+}
+
+func (o GetNoteFilterPtrOutput) ToGetNoteFilterPtrOutputWithContext(ctx context.Context) GetNoteFilterPtrOutput {
+	return o
+}
+
+func (o GetNoteFilterPtrOutput) Elem() GetNoteFilterOutput {
+	return o.ApplyT(func(v *GetNoteFilter) GetNoteFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetNoteFilter
+		return ret
+	}).(GetNoteFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetNoteFilterPtrOutput) Conditions() GetNoteFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetNoteFilter) []GetNoteFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetNoteFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetNoteFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetNoteFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetNoteFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetNoteFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetNoteFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetNoteFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetNoteFilterCondition struct {
@@ -14336,6 +16407,47 @@ func (i GetPacketFilterFilterArgs) ToGetPacketFilterFilterOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterFilterOutput)
 }
 
+func (i GetPacketFilterFilterArgs) ToGetPacketFilterFilterPtrOutput() GetPacketFilterFilterPtrOutput {
+	return i.ToGetPacketFilterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetPacketFilterFilterArgs) ToGetPacketFilterFilterPtrOutputWithContext(ctx context.Context) GetPacketFilterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterFilterOutput).ToGetPacketFilterFilterPtrOutputWithContext(ctx)
+}
+
+// GetPacketFilterFilterPtrInput is an input type that accepts GetPacketFilterFilterArgs, GetPacketFilterFilterPtr and GetPacketFilterFilterPtrOutput values.
+// You can construct a concrete instance of `GetPacketFilterFilterPtrInput` via:
+//
+//          GetPacketFilterFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetPacketFilterFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetPacketFilterFilterPtrOutput() GetPacketFilterFilterPtrOutput
+	ToGetPacketFilterFilterPtrOutputWithContext(context.Context) GetPacketFilterFilterPtrOutput
+}
+
+type getPacketFilterFilterPtrType GetPacketFilterFilterArgs
+
+func GetPacketFilterFilterPtr(v *GetPacketFilterFilterArgs) GetPacketFilterFilterPtrInput {
+	return (*getPacketFilterFilterPtrType)(v)
+}
+
+func (*getPacketFilterFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPacketFilterFilter)(nil)).Elem()
+}
+
+func (i *getPacketFilterFilterPtrType) ToGetPacketFilterFilterPtrOutput() GetPacketFilterFilterPtrOutput {
+	return i.ToGetPacketFilterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getPacketFilterFilterPtrType) ToGetPacketFilterFilterPtrOutputWithContext(ctx context.Context) GetPacketFilterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPacketFilterFilterPtrOutput)
+}
+
 type GetPacketFilterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetPacketFilterFilterOutput) ElementType() reflect.Type {
@@ -14348,6 +16460,16 @@ func (o GetPacketFilterFilterOutput) ToGetPacketFilterFilterOutput() GetPacketFi
 
 func (o GetPacketFilterFilterOutput) ToGetPacketFilterFilterOutputWithContext(ctx context.Context) GetPacketFilterFilterOutput {
 	return o
+}
+
+func (o GetPacketFilterFilterOutput) ToGetPacketFilterFilterPtrOutput() GetPacketFilterFilterPtrOutput {
+	return o.ToGetPacketFilterFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetPacketFilterFilterOutput) ToGetPacketFilterFilterPtrOutputWithContext(ctx context.Context) GetPacketFilterFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetPacketFilterFilter) *GetPacketFilterFilter {
+		return &v
+	}).(GetPacketFilterFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -14363,6 +16485,60 @@ func (o GetPacketFilterFilterOutput) Id() pulumi.StringPtrOutput {
 // The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetPacketFilterFilterOutput) Names() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetPacketFilterFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+type GetPacketFilterFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetPacketFilterFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPacketFilterFilter)(nil)).Elem()
+}
+
+func (o GetPacketFilterFilterPtrOutput) ToGetPacketFilterFilterPtrOutput() GetPacketFilterFilterPtrOutput {
+	return o
+}
+
+func (o GetPacketFilterFilterPtrOutput) ToGetPacketFilterFilterPtrOutputWithContext(ctx context.Context) GetPacketFilterFilterPtrOutput {
+	return o
+}
+
+func (o GetPacketFilterFilterPtrOutput) Elem() GetPacketFilterFilterOutput {
+	return o.ApplyT(func(v *GetPacketFilterFilter) GetPacketFilterFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetPacketFilterFilter
+		return ret
+	}).(GetPacketFilterFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetPacketFilterFilterPtrOutput) Conditions() GetPacketFilterFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetPacketFilterFilter) []GetPacketFilterFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetPacketFilterFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetPacketFilterFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetPacketFilterFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetPacketFilterFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetPacketFilterFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetPacketFilterFilterCondition struct {
@@ -14516,6 +16692,47 @@ func (i GetPrivateHostFilterArgs) ToGetPrivateHostFilterOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateHostFilterOutput)
 }
 
+func (i GetPrivateHostFilterArgs) ToGetPrivateHostFilterPtrOutput() GetPrivateHostFilterPtrOutput {
+	return i.ToGetPrivateHostFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetPrivateHostFilterArgs) ToGetPrivateHostFilterPtrOutputWithContext(ctx context.Context) GetPrivateHostFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateHostFilterOutput).ToGetPrivateHostFilterPtrOutputWithContext(ctx)
+}
+
+// GetPrivateHostFilterPtrInput is an input type that accepts GetPrivateHostFilterArgs, GetPrivateHostFilterPtr and GetPrivateHostFilterPtrOutput values.
+// You can construct a concrete instance of `GetPrivateHostFilterPtrInput` via:
+//
+//          GetPrivateHostFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetPrivateHostFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetPrivateHostFilterPtrOutput() GetPrivateHostFilterPtrOutput
+	ToGetPrivateHostFilterPtrOutputWithContext(context.Context) GetPrivateHostFilterPtrOutput
+}
+
+type getPrivateHostFilterPtrType GetPrivateHostFilterArgs
+
+func GetPrivateHostFilterPtr(v *GetPrivateHostFilterArgs) GetPrivateHostFilterPtrInput {
+	return (*getPrivateHostFilterPtrType)(v)
+}
+
+func (*getPrivateHostFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPrivateHostFilter)(nil)).Elem()
+}
+
+func (i *getPrivateHostFilterPtrType) ToGetPrivateHostFilterPtrOutput() GetPrivateHostFilterPtrOutput {
+	return i.ToGetPrivateHostFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getPrivateHostFilterPtrType) ToGetPrivateHostFilterPtrOutputWithContext(ctx context.Context) GetPrivateHostFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPrivateHostFilterPtrOutput)
+}
+
 type GetPrivateHostFilterOutput struct{ *pulumi.OutputState }
 
 func (GetPrivateHostFilterOutput) ElementType() reflect.Type {
@@ -14528,6 +16745,16 @@ func (o GetPrivateHostFilterOutput) ToGetPrivateHostFilterOutput() GetPrivateHos
 
 func (o GetPrivateHostFilterOutput) ToGetPrivateHostFilterOutputWithContext(ctx context.Context) GetPrivateHostFilterOutput {
 	return o
+}
+
+func (o GetPrivateHostFilterOutput) ToGetPrivateHostFilterPtrOutput() GetPrivateHostFilterPtrOutput {
+	return o.ToGetPrivateHostFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetPrivateHostFilterOutput) ToGetPrivateHostFilterPtrOutputWithContext(ctx context.Context) GetPrivateHostFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetPrivateHostFilter) *GetPrivateHostFilter {
+		return &v
+	}).(GetPrivateHostFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -14548,6 +16775,70 @@ func (o GetPrivateHostFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetPrivateHostFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetPrivateHostFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetPrivateHostFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetPrivateHostFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetPrivateHostFilter)(nil)).Elem()
+}
+
+func (o GetPrivateHostFilterPtrOutput) ToGetPrivateHostFilterPtrOutput() GetPrivateHostFilterPtrOutput {
+	return o
+}
+
+func (o GetPrivateHostFilterPtrOutput) ToGetPrivateHostFilterPtrOutputWithContext(ctx context.Context) GetPrivateHostFilterPtrOutput {
+	return o
+}
+
+func (o GetPrivateHostFilterPtrOutput) Elem() GetPrivateHostFilterOutput {
+	return o.ApplyT(func(v *GetPrivateHostFilter) GetPrivateHostFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetPrivateHostFilter
+		return ret
+	}).(GetPrivateHostFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetPrivateHostFilterPtrOutput) Conditions() GetPrivateHostFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetPrivateHostFilter) []GetPrivateHostFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetPrivateHostFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetPrivateHostFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetPrivateHostFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetPrivateHostFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetPrivateHostFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetPrivateHostFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetPrivateHostFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetPrivateHostFilterCondition struct {
@@ -15205,6 +17496,47 @@ func (i GetProxyLBFilterArgs) ToGetProxyLBFilterOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBFilterOutput)
 }
 
+func (i GetProxyLBFilterArgs) ToGetProxyLBFilterPtrOutput() GetProxyLBFilterPtrOutput {
+	return i.ToGetProxyLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetProxyLBFilterArgs) ToGetProxyLBFilterPtrOutputWithContext(ctx context.Context) GetProxyLBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBFilterOutput).ToGetProxyLBFilterPtrOutputWithContext(ctx)
+}
+
+// GetProxyLBFilterPtrInput is an input type that accepts GetProxyLBFilterArgs, GetProxyLBFilterPtr and GetProxyLBFilterPtrOutput values.
+// You can construct a concrete instance of `GetProxyLBFilterPtrInput` via:
+//
+//          GetProxyLBFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetProxyLBFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetProxyLBFilterPtrOutput() GetProxyLBFilterPtrOutput
+	ToGetProxyLBFilterPtrOutputWithContext(context.Context) GetProxyLBFilterPtrOutput
+}
+
+type getProxyLBFilterPtrType GetProxyLBFilterArgs
+
+func GetProxyLBFilterPtr(v *GetProxyLBFilterArgs) GetProxyLBFilterPtrInput {
+	return (*getProxyLBFilterPtrType)(v)
+}
+
+func (*getProxyLBFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetProxyLBFilter)(nil)).Elem()
+}
+
+func (i *getProxyLBFilterPtrType) ToGetProxyLBFilterPtrOutput() GetProxyLBFilterPtrOutput {
+	return i.ToGetProxyLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getProxyLBFilterPtrType) ToGetProxyLBFilterPtrOutputWithContext(ctx context.Context) GetProxyLBFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetProxyLBFilterPtrOutput)
+}
+
 type GetProxyLBFilterOutput struct{ *pulumi.OutputState }
 
 func (GetProxyLBFilterOutput) ElementType() reflect.Type {
@@ -15217,6 +17549,16 @@ func (o GetProxyLBFilterOutput) ToGetProxyLBFilterOutput() GetProxyLBFilterOutpu
 
 func (o GetProxyLBFilterOutput) ToGetProxyLBFilterOutputWithContext(ctx context.Context) GetProxyLBFilterOutput {
 	return o
+}
+
+func (o GetProxyLBFilterOutput) ToGetProxyLBFilterPtrOutput() GetProxyLBFilterPtrOutput {
+	return o.ToGetProxyLBFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetProxyLBFilterOutput) ToGetProxyLBFilterPtrOutputWithContext(ctx context.Context) GetProxyLBFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetProxyLBFilter) *GetProxyLBFilter {
+		return &v
+	}).(GetProxyLBFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -15237,6 +17579,70 @@ func (o GetProxyLBFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetProxyLBFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetProxyLBFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetProxyLBFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetProxyLBFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetProxyLBFilter)(nil)).Elem()
+}
+
+func (o GetProxyLBFilterPtrOutput) ToGetProxyLBFilterPtrOutput() GetProxyLBFilterPtrOutput {
+	return o
+}
+
+func (o GetProxyLBFilterPtrOutput) ToGetProxyLBFilterPtrOutputWithContext(ctx context.Context) GetProxyLBFilterPtrOutput {
+	return o
+}
+
+func (o GetProxyLBFilterPtrOutput) Elem() GetProxyLBFilterOutput {
+	return o.ApplyT(func(v *GetProxyLBFilter) GetProxyLBFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetProxyLBFilter
+		return ret
+	}).(GetProxyLBFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetProxyLBFilterPtrOutput) Conditions() GetProxyLBFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetProxyLBFilter) []GetProxyLBFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetProxyLBFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetProxyLBFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetProxyLBFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetProxyLBFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetProxyLBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetProxyLBFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetProxyLBFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetProxyLBFilterCondition struct {
@@ -16024,6 +18430,47 @@ func (i GetSSHKeyFilterArgs) ToGetSSHKeyFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetSSHKeyFilterOutput)
 }
 
+func (i GetSSHKeyFilterArgs) ToGetSSHKeyFilterPtrOutput() GetSSHKeyFilterPtrOutput {
+	return i.ToGetSSHKeyFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetSSHKeyFilterArgs) ToGetSSHKeyFilterPtrOutputWithContext(ctx context.Context) GetSSHKeyFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSSHKeyFilterOutput).ToGetSSHKeyFilterPtrOutputWithContext(ctx)
+}
+
+// GetSSHKeyFilterPtrInput is an input type that accepts GetSSHKeyFilterArgs, GetSSHKeyFilterPtr and GetSSHKeyFilterPtrOutput values.
+// You can construct a concrete instance of `GetSSHKeyFilterPtrInput` via:
+//
+//          GetSSHKeyFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetSSHKeyFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetSSHKeyFilterPtrOutput() GetSSHKeyFilterPtrOutput
+	ToGetSSHKeyFilterPtrOutputWithContext(context.Context) GetSSHKeyFilterPtrOutput
+}
+
+type getSSHKeyFilterPtrType GetSSHKeyFilterArgs
+
+func GetSSHKeyFilterPtr(v *GetSSHKeyFilterArgs) GetSSHKeyFilterPtrInput {
+	return (*getSSHKeyFilterPtrType)(v)
+}
+
+func (*getSSHKeyFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSSHKeyFilter)(nil)).Elem()
+}
+
+func (i *getSSHKeyFilterPtrType) ToGetSSHKeyFilterPtrOutput() GetSSHKeyFilterPtrOutput {
+	return i.ToGetSSHKeyFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getSSHKeyFilterPtrType) ToGetSSHKeyFilterPtrOutputWithContext(ctx context.Context) GetSSHKeyFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSSHKeyFilterPtrOutput)
+}
+
 type GetSSHKeyFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSSHKeyFilterOutput) ElementType() reflect.Type {
@@ -16036,6 +18483,16 @@ func (o GetSSHKeyFilterOutput) ToGetSSHKeyFilterOutput() GetSSHKeyFilterOutput {
 
 func (o GetSSHKeyFilterOutput) ToGetSSHKeyFilterOutputWithContext(ctx context.Context) GetSSHKeyFilterOutput {
 	return o
+}
+
+func (o GetSSHKeyFilterOutput) ToGetSSHKeyFilterPtrOutput() GetSSHKeyFilterPtrOutput {
+	return o.ToGetSSHKeyFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetSSHKeyFilterOutput) ToGetSSHKeyFilterPtrOutputWithContext(ctx context.Context) GetSSHKeyFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetSSHKeyFilter) *GetSSHKeyFilter {
+		return &v
+	}).(GetSSHKeyFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -16051,6 +18508,60 @@ func (o GetSSHKeyFilterOutput) Id() pulumi.StringPtrOutput {
 // The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetSSHKeyFilterOutput) Names() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetSSHKeyFilter) []string { return v.Names }).(pulumi.StringArrayOutput)
+}
+
+type GetSSHKeyFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetSSHKeyFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSSHKeyFilter)(nil)).Elem()
+}
+
+func (o GetSSHKeyFilterPtrOutput) ToGetSSHKeyFilterPtrOutput() GetSSHKeyFilterPtrOutput {
+	return o
+}
+
+func (o GetSSHKeyFilterPtrOutput) ToGetSSHKeyFilterPtrOutputWithContext(ctx context.Context) GetSSHKeyFilterPtrOutput {
+	return o
+}
+
+func (o GetSSHKeyFilterPtrOutput) Elem() GetSSHKeyFilterOutput {
+	return o.ApplyT(func(v *GetSSHKeyFilter) GetSSHKeyFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetSSHKeyFilter
+		return ret
+	}).(GetSSHKeyFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetSSHKeyFilterPtrOutput) Conditions() GetSSHKeyFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetSSHKeyFilter) []GetSSHKeyFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetSSHKeyFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetSSHKeyFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetSSHKeyFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetSSHKeyFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetSSHKeyFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetSSHKeyFilterCondition struct {
@@ -16204,6 +18715,47 @@ func (i GetServerFilterArgs) ToGetServerFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetServerFilterOutput)
 }
 
+func (i GetServerFilterArgs) ToGetServerFilterPtrOutput() GetServerFilterPtrOutput {
+	return i.ToGetServerFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetServerFilterArgs) ToGetServerFilterPtrOutputWithContext(ctx context.Context) GetServerFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServerFilterOutput).ToGetServerFilterPtrOutputWithContext(ctx)
+}
+
+// GetServerFilterPtrInput is an input type that accepts GetServerFilterArgs, GetServerFilterPtr and GetServerFilterPtrOutput values.
+// You can construct a concrete instance of `GetServerFilterPtrInput` via:
+//
+//          GetServerFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetServerFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetServerFilterPtrOutput() GetServerFilterPtrOutput
+	ToGetServerFilterPtrOutputWithContext(context.Context) GetServerFilterPtrOutput
+}
+
+type getServerFilterPtrType GetServerFilterArgs
+
+func GetServerFilterPtr(v *GetServerFilterArgs) GetServerFilterPtrInput {
+	return (*getServerFilterPtrType)(v)
+}
+
+func (*getServerFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetServerFilter)(nil)).Elem()
+}
+
+func (i *getServerFilterPtrType) ToGetServerFilterPtrOutput() GetServerFilterPtrOutput {
+	return i.ToGetServerFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getServerFilterPtrType) ToGetServerFilterPtrOutputWithContext(ctx context.Context) GetServerFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServerFilterPtrOutput)
+}
+
 type GetServerFilterOutput struct{ *pulumi.OutputState }
 
 func (GetServerFilterOutput) ElementType() reflect.Type {
@@ -16216,6 +18768,16 @@ func (o GetServerFilterOutput) ToGetServerFilterOutput() GetServerFilterOutput {
 
 func (o GetServerFilterOutput) ToGetServerFilterOutputWithContext(ctx context.Context) GetServerFilterOutput {
 	return o
+}
+
+func (o GetServerFilterOutput) ToGetServerFilterPtrOutput() GetServerFilterPtrOutput {
+	return o.ToGetServerFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetServerFilterOutput) ToGetServerFilterPtrOutputWithContext(ctx context.Context) GetServerFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetServerFilter) *GetServerFilter {
+		return &v
+	}).(GetServerFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -16236,6 +18798,70 @@ func (o GetServerFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetServerFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetServerFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetServerFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetServerFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetServerFilter)(nil)).Elem()
+}
+
+func (o GetServerFilterPtrOutput) ToGetServerFilterPtrOutput() GetServerFilterPtrOutput {
+	return o
+}
+
+func (o GetServerFilterPtrOutput) ToGetServerFilterPtrOutputWithContext(ctx context.Context) GetServerFilterPtrOutput {
+	return o
+}
+
+func (o GetServerFilterPtrOutput) Elem() GetServerFilterOutput {
+	return o.ApplyT(func(v *GetServerFilter) GetServerFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetServerFilter
+		return ret
+	}).(GetServerFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetServerFilterPtrOutput) Conditions() GetServerFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetServerFilter) []GetServerFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetServerFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetServerFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetServerFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetServerFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetServerFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetServerFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetServerFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetServerFilterCondition struct {
@@ -16513,6 +19139,47 @@ func (i GetSimpleMonitorFilterArgs) ToGetSimpleMonitorFilterOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorFilterOutput)
 }
 
+func (i GetSimpleMonitorFilterArgs) ToGetSimpleMonitorFilterPtrOutput() GetSimpleMonitorFilterPtrOutput {
+	return i.ToGetSimpleMonitorFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetSimpleMonitorFilterArgs) ToGetSimpleMonitorFilterPtrOutputWithContext(ctx context.Context) GetSimpleMonitorFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorFilterOutput).ToGetSimpleMonitorFilterPtrOutputWithContext(ctx)
+}
+
+// GetSimpleMonitorFilterPtrInput is an input type that accepts GetSimpleMonitorFilterArgs, GetSimpleMonitorFilterPtr and GetSimpleMonitorFilterPtrOutput values.
+// You can construct a concrete instance of `GetSimpleMonitorFilterPtrInput` via:
+//
+//          GetSimpleMonitorFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetSimpleMonitorFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetSimpleMonitorFilterPtrOutput() GetSimpleMonitorFilterPtrOutput
+	ToGetSimpleMonitorFilterPtrOutputWithContext(context.Context) GetSimpleMonitorFilterPtrOutput
+}
+
+type getSimpleMonitorFilterPtrType GetSimpleMonitorFilterArgs
+
+func GetSimpleMonitorFilterPtr(v *GetSimpleMonitorFilterArgs) GetSimpleMonitorFilterPtrInput {
+	return (*getSimpleMonitorFilterPtrType)(v)
+}
+
+func (*getSimpleMonitorFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSimpleMonitorFilter)(nil)).Elem()
+}
+
+func (i *getSimpleMonitorFilterPtrType) ToGetSimpleMonitorFilterPtrOutput() GetSimpleMonitorFilterPtrOutput {
+	return i.ToGetSimpleMonitorFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getSimpleMonitorFilterPtrType) ToGetSimpleMonitorFilterPtrOutputWithContext(ctx context.Context) GetSimpleMonitorFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSimpleMonitorFilterPtrOutput)
+}
+
 type GetSimpleMonitorFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSimpleMonitorFilterOutput) ElementType() reflect.Type {
@@ -16525,6 +19192,16 @@ func (o GetSimpleMonitorFilterOutput) ToGetSimpleMonitorFilterOutput() GetSimple
 
 func (o GetSimpleMonitorFilterOutput) ToGetSimpleMonitorFilterOutputWithContext(ctx context.Context) GetSimpleMonitorFilterOutput {
 	return o
+}
+
+func (o GetSimpleMonitorFilterOutput) ToGetSimpleMonitorFilterPtrOutput() GetSimpleMonitorFilterPtrOutput {
+	return o.ToGetSimpleMonitorFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetSimpleMonitorFilterOutput) ToGetSimpleMonitorFilterPtrOutputWithContext(ctx context.Context) GetSimpleMonitorFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetSimpleMonitorFilter) *GetSimpleMonitorFilter {
+		return &v
+	}).(GetSimpleMonitorFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -16545,6 +19222,70 @@ func (o GetSimpleMonitorFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetSimpleMonitorFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetSimpleMonitorFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetSimpleMonitorFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetSimpleMonitorFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSimpleMonitorFilter)(nil)).Elem()
+}
+
+func (o GetSimpleMonitorFilterPtrOutput) ToGetSimpleMonitorFilterPtrOutput() GetSimpleMonitorFilterPtrOutput {
+	return o
+}
+
+func (o GetSimpleMonitorFilterPtrOutput) ToGetSimpleMonitorFilterPtrOutputWithContext(ctx context.Context) GetSimpleMonitorFilterPtrOutput {
+	return o
+}
+
+func (o GetSimpleMonitorFilterPtrOutput) Elem() GetSimpleMonitorFilterOutput {
+	return o.ApplyT(func(v *GetSimpleMonitorFilter) GetSimpleMonitorFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetSimpleMonitorFilter
+		return ret
+	}).(GetSimpleMonitorFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetSimpleMonitorFilterPtrOutput) Conditions() GetSimpleMonitorFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetSimpleMonitorFilter) []GetSimpleMonitorFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetSimpleMonitorFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetSimpleMonitorFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetSimpleMonitorFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetSimpleMonitorFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetSimpleMonitorFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetSimpleMonitorFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetSimpleMonitorFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetSimpleMonitorFilterCondition struct {
@@ -16939,6 +19680,47 @@ func (i GetSwitchFilterArgs) ToGetSwitchFilterOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetSwitchFilterOutput)
 }
 
+func (i GetSwitchFilterArgs) ToGetSwitchFilterPtrOutput() GetSwitchFilterPtrOutput {
+	return i.ToGetSwitchFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetSwitchFilterArgs) ToGetSwitchFilterPtrOutputWithContext(ctx context.Context) GetSwitchFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSwitchFilterOutput).ToGetSwitchFilterPtrOutputWithContext(ctx)
+}
+
+// GetSwitchFilterPtrInput is an input type that accepts GetSwitchFilterArgs, GetSwitchFilterPtr and GetSwitchFilterPtrOutput values.
+// You can construct a concrete instance of `GetSwitchFilterPtrInput` via:
+//
+//          GetSwitchFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetSwitchFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetSwitchFilterPtrOutput() GetSwitchFilterPtrOutput
+	ToGetSwitchFilterPtrOutputWithContext(context.Context) GetSwitchFilterPtrOutput
+}
+
+type getSwitchFilterPtrType GetSwitchFilterArgs
+
+func GetSwitchFilterPtr(v *GetSwitchFilterArgs) GetSwitchFilterPtrInput {
+	return (*getSwitchFilterPtrType)(v)
+}
+
+func (*getSwitchFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSwitchFilter)(nil)).Elem()
+}
+
+func (i *getSwitchFilterPtrType) ToGetSwitchFilterPtrOutput() GetSwitchFilterPtrOutput {
+	return i.ToGetSwitchFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getSwitchFilterPtrType) ToGetSwitchFilterPtrOutputWithContext(ctx context.Context) GetSwitchFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSwitchFilterPtrOutput)
+}
+
 type GetSwitchFilterOutput struct{ *pulumi.OutputState }
 
 func (GetSwitchFilterOutput) ElementType() reflect.Type {
@@ -16951,6 +19733,16 @@ func (o GetSwitchFilterOutput) ToGetSwitchFilterOutput() GetSwitchFilterOutput {
 
 func (o GetSwitchFilterOutput) ToGetSwitchFilterOutputWithContext(ctx context.Context) GetSwitchFilterOutput {
 	return o
+}
+
+func (o GetSwitchFilterOutput) ToGetSwitchFilterPtrOutput() GetSwitchFilterPtrOutput {
+	return o.ToGetSwitchFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetSwitchFilterOutput) ToGetSwitchFilterPtrOutputWithContext(ctx context.Context) GetSwitchFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetSwitchFilter) *GetSwitchFilter {
+		return &v
+	}).(GetSwitchFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -16971,6 +19763,70 @@ func (o GetSwitchFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetSwitchFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetSwitchFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetSwitchFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetSwitchFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetSwitchFilter)(nil)).Elem()
+}
+
+func (o GetSwitchFilterPtrOutput) ToGetSwitchFilterPtrOutput() GetSwitchFilterPtrOutput {
+	return o
+}
+
+func (o GetSwitchFilterPtrOutput) ToGetSwitchFilterPtrOutputWithContext(ctx context.Context) GetSwitchFilterPtrOutput {
+	return o
+}
+
+func (o GetSwitchFilterPtrOutput) Elem() GetSwitchFilterOutput {
+	return o.ApplyT(func(v *GetSwitchFilter) GetSwitchFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetSwitchFilter
+		return ret
+	}).(GetSwitchFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetSwitchFilterPtrOutput) Conditions() GetSwitchFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetSwitchFilter) []GetSwitchFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetSwitchFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetSwitchFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetSwitchFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetSwitchFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetSwitchFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetSwitchFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetSwitchFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetSwitchFilterCondition struct {
@@ -17354,6 +20210,47 @@ func (i GetVPCRouterFilterArgs) ToGetVPCRouterFilterOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFilterOutput)
 }
 
+func (i GetVPCRouterFilterArgs) ToGetVPCRouterFilterPtrOutput() GetVPCRouterFilterPtrOutput {
+	return i.ToGetVPCRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i GetVPCRouterFilterArgs) ToGetVPCRouterFilterPtrOutputWithContext(ctx context.Context) GetVPCRouterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFilterOutput).ToGetVPCRouterFilterPtrOutputWithContext(ctx)
+}
+
+// GetVPCRouterFilterPtrInput is an input type that accepts GetVPCRouterFilterArgs, GetVPCRouterFilterPtr and GetVPCRouterFilterPtrOutput values.
+// You can construct a concrete instance of `GetVPCRouterFilterPtrInput` via:
+//
+//          GetVPCRouterFilterArgs{...}
+//
+//  or:
+//
+//          nil
+type GetVPCRouterFilterPtrInput interface {
+	pulumi.Input
+
+	ToGetVPCRouterFilterPtrOutput() GetVPCRouterFilterPtrOutput
+	ToGetVPCRouterFilterPtrOutputWithContext(context.Context) GetVPCRouterFilterPtrOutput
+}
+
+type getVPCRouterFilterPtrType GetVPCRouterFilterArgs
+
+func GetVPCRouterFilterPtr(v *GetVPCRouterFilterArgs) GetVPCRouterFilterPtrInput {
+	return (*getVPCRouterFilterPtrType)(v)
+}
+
+func (*getVPCRouterFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetVPCRouterFilter)(nil)).Elem()
+}
+
+func (i *getVPCRouterFilterPtrType) ToGetVPCRouterFilterPtrOutput() GetVPCRouterFilterPtrOutput {
+	return i.ToGetVPCRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *getVPCRouterFilterPtrType) ToGetVPCRouterFilterPtrOutputWithContext(ctx context.Context) GetVPCRouterFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVPCRouterFilterPtrOutput)
+}
+
 type GetVPCRouterFilterOutput struct{ *pulumi.OutputState }
 
 func (GetVPCRouterFilterOutput) ElementType() reflect.Type {
@@ -17366,6 +20263,16 @@ func (o GetVPCRouterFilterOutput) ToGetVPCRouterFilterOutput() GetVPCRouterFilte
 
 func (o GetVPCRouterFilterOutput) ToGetVPCRouterFilterOutputWithContext(ctx context.Context) GetVPCRouterFilterOutput {
 	return o
+}
+
+func (o GetVPCRouterFilterOutput) ToGetVPCRouterFilterPtrOutput() GetVPCRouterFilterPtrOutput {
+	return o.ToGetVPCRouterFilterPtrOutputWithContext(context.Background())
+}
+
+func (o GetVPCRouterFilterOutput) ToGetVPCRouterFilterPtrOutputWithContext(ctx context.Context) GetVPCRouterFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetVPCRouterFilter) *GetVPCRouterFilter {
+		return &v
+	}).(GetVPCRouterFilterPtrOutput)
 }
 
 // One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
@@ -17386,6 +20293,70 @@ func (o GetVPCRouterFilterOutput) Names() pulumi.StringArrayOutput {
 // The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
 func (o GetVPCRouterFilterOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetVPCRouterFilter) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetVPCRouterFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (GetVPCRouterFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetVPCRouterFilter)(nil)).Elem()
+}
+
+func (o GetVPCRouterFilterPtrOutput) ToGetVPCRouterFilterPtrOutput() GetVPCRouterFilterPtrOutput {
+	return o
+}
+
+func (o GetVPCRouterFilterPtrOutput) ToGetVPCRouterFilterPtrOutputWithContext(ctx context.Context) GetVPCRouterFilterPtrOutput {
+	return o
+}
+
+func (o GetVPCRouterFilterPtrOutput) Elem() GetVPCRouterFilterOutput {
+	return o.ApplyT(func(v *GetVPCRouterFilter) GetVPCRouterFilter {
+		if v != nil {
+			return *v
+		}
+		var ret GetVPCRouterFilter
+		return ret
+	}).(GetVPCRouterFilterOutput)
+}
+
+// One or more name/values pairs used for filtering. There are several valid keys, for a full reference, check out finding section in the [SakuraCloud API reference](https://developer.sakura.ad.jp/cloud/api/1.1/).
+func (o GetVPCRouterFilterPtrOutput) Conditions() GetVPCRouterFilterConditionArrayOutput {
+	return o.ApplyT(func(v *GetVPCRouterFilter) []GetVPCRouterFilterCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(GetVPCRouterFilterConditionArrayOutput)
+}
+
+// The resource id on SakuraCloud used for filtering.
+func (o GetVPCRouterFilterPtrOutput) Id() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetVPCRouterFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.StringPtrOutput)
+}
+
+// The resource names on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetVPCRouterFilterPtrOutput) Names() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetVPCRouterFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Names
+	}).(pulumi.StringArrayOutput)
+}
+
+// The resource tags on SakuraCloud used for filtering. If multiple values ​​are specified, they combined as AND condition.
+func (o GetVPCRouterFilterPtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetVPCRouterFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetVPCRouterFilterCondition struct {
@@ -19080,6 +22051,304 @@ func (o GetVPCRouterWireGuardPeerArrayOutput) Index(i pulumi.IntInput) GetVPCRou
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityClientInput)(nil)).Elem(), CertificateAuthorityClientArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityClientArrayInput)(nil)).Elem(), CertificateAuthorityClientArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityClientSubjectInput)(nil)).Elem(), CertificateAuthorityClientSubjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityServerInput)(nil)).Elem(), CertificateAuthorityServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityServerArrayInput)(nil)).Elem(), CertificateAuthorityServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthorityServerSubjectInput)(nil)).Elem(), CertificateAuthorityServerSubjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthoritySubjectInput)(nil)).Elem(), CertificateAuthoritySubjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CertificateAuthoritySubjectPtrInput)(nil)).Elem(), CertificateAuthoritySubjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryUserInput)(nil)).Elem(), ContainerRegistryUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ContainerRegistryUserArrayInput)(nil)).Elem(), ContainerRegistryUserArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSRecordTypeInput)(nil)).Elem(), DNSRecordTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DNSRecordTypeArrayInput)(nil)).Elem(), DNSRecordTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseBackupInput)(nil)).Elem(), DatabaseBackupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseBackupPtrInput)(nil)).Elem(), DatabaseBackupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseNetworkInterfaceInput)(nil)).Elem(), DatabaseNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseNetworkInterfacePtrInput)(nil)).Elem(), DatabaseNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaNetworkInterfaceInput)(nil)).Elem(), DatabaseReadReplicaNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabaseReadReplicaNetworkInterfacePtrInput)(nil)).Elem(), DatabaseReadReplicaNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBHealthCheckInput)(nil)).Elem(), GSLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBHealthCheckPtrInput)(nil)).Elem(), GSLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBServerInput)(nil)).Elem(), GSLBServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GSLBServerArrayInput)(nil)).Elem(), GSLBServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerNetworkInterfaceInput)(nil)).Elem(), LoadBalancerNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerNetworkInterfacePtrInput)(nil)).Elem(), LoadBalancerNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerVipInput)(nil)).Elem(), LoadBalancerVipArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerVipArrayInput)(nil)).Elem(), LoadBalancerVipArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerVipServerInput)(nil)).Elem(), LoadBalancerVipServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LoadBalancerVipServerArrayInput)(nil)).Elem(), LoadBalancerVipServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterNetworkInterfaceInput)(nil)).Elem(), LocalRouterNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterNetworkInterfacePtrInput)(nil)).Elem(), LocalRouterNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterPeerInput)(nil)).Elem(), LocalRouterPeerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterPeerArrayInput)(nil)).Elem(), LocalRouterPeerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterStaticRouteInput)(nil)).Elem(), LocalRouterStaticRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterStaticRouteArrayInput)(nil)).Elem(), LocalRouterStaticRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterSwitchInput)(nil)).Elem(), LocalRouterSwitchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LocalRouterSwitchPtrInput)(nil)).Elem(), LocalRouterSwitchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayPrivateNetworkInterfaceInput)(nil)).Elem(), MobileGatewayPrivateNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayPrivateNetworkInterfacePtrInput)(nil)).Elem(), MobileGatewayPrivateNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewaySimInput)(nil)).Elem(), MobileGatewaySimArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewaySimArrayInput)(nil)).Elem(), MobileGatewaySimArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewaySimRouteInput)(nil)).Elem(), MobileGatewaySimRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewaySimRouteArrayInput)(nil)).Elem(), MobileGatewaySimRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayStaticRouteInput)(nil)).Elem(), MobileGatewayStaticRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayStaticRouteArrayInput)(nil)).Elem(), MobileGatewayStaticRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayTrafficControlInput)(nil)).Elem(), MobileGatewayTrafficControlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MobileGatewayTrafficControlPtrInput)(nil)).Elem(), MobileGatewayTrafficControlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSNetworkInterfaceInput)(nil)).Elem(), NFSNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NFSNetworkInterfacePtrInput)(nil)).Elem(), NFSNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterExpressionInput)(nil)).Elem(), PacketFilterExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterExpressionArrayInput)(nil)).Elem(), PacketFilterExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterRuleExpressionInput)(nil)).Elem(), PacketFilterRuleExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PacketFilterRuleExpressionArrayInput)(nil)).Elem(), PacketFilterRuleExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMECertificateInput)(nil)).Elem(), ProxyLBACMECertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMECertificateArrayInput)(nil)).Elem(), ProxyLBACMECertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMECertificateAdditionalCertificateInput)(nil)).Elem(), ProxyLBACMECertificateAdditionalCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBACMECertificateAdditionalCertificateArrayInput)(nil)).Elem(), ProxyLBACMECertificateAdditionalCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBBindPortInput)(nil)).Elem(), ProxyLBBindPortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBBindPortArrayInput)(nil)).Elem(), ProxyLBBindPortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBBindPortResponseHeaderInput)(nil)).Elem(), ProxyLBBindPortResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBBindPortResponseHeaderArrayInput)(nil)).Elem(), ProxyLBBindPortResponseHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBCertificateInput)(nil)).Elem(), ProxyLBCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBCertificatePtrInput)(nil)).Elem(), ProxyLBCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBCertificateAdditionalCertificateInput)(nil)).Elem(), ProxyLBCertificateAdditionalCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBCertificateAdditionalCertificateArrayInput)(nil)).Elem(), ProxyLBCertificateAdditionalCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBHealthCheckInput)(nil)).Elem(), ProxyLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBHealthCheckPtrInput)(nil)).Elem(), ProxyLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBRuleInput)(nil)).Elem(), ProxyLBRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBRuleArrayInput)(nil)).Elem(), ProxyLBRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBServerInput)(nil)).Elem(), ProxyLBServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBServerArrayInput)(nil)).Elem(), ProxyLBServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBSorryServerInput)(nil)).Elem(), ProxyLBSorryServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBSorryServerPtrInput)(nil)).Elem(), ProxyLBSorryServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBSyslogInput)(nil)).Elem(), ProxyLBSyslogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyLBSyslogPtrInput)(nil)).Elem(), ProxyLBSyslogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerDiskEditParameterInput)(nil)).Elem(), ServerDiskEditParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerDiskEditParameterPtrInput)(nil)).Elem(), ServerDiskEditParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerDiskEditParameterNoteInput)(nil)).Elem(), ServerDiskEditParameterNoteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerDiskEditParameterNoteArrayInput)(nil)).Elem(), ServerDiskEditParameterNoteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerNetworkInterfaceInput)(nil)).Elem(), ServerNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ServerNetworkInterfaceArrayInput)(nil)).Elem(), ServerNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorHealthCheckInput)(nil)).Elem(), SimpleMonitorHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SimpleMonitorHealthCheckPtrInput)(nil)).Elem(), SimpleMonitorHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterDhcpServerInput)(nil)).Elem(), VPCRouterDhcpServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterDhcpServerArrayInput)(nil)).Elem(), VPCRouterDhcpServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterDhcpStaticMappingInput)(nil)).Elem(), VPCRouterDhcpStaticMappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterDhcpStaticMappingArrayInput)(nil)).Elem(), VPCRouterDhcpStaticMappingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterFirewallInput)(nil)).Elem(), VPCRouterFirewallArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterFirewallArrayInput)(nil)).Elem(), VPCRouterFirewallArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterFirewallExpressionInput)(nil)).Elem(), VPCRouterFirewallExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterFirewallExpressionArrayInput)(nil)).Elem(), VPCRouterFirewallExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterL2tpInput)(nil)).Elem(), VPCRouterL2tpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterL2tpPtrInput)(nil)).Elem(), VPCRouterL2tpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPortForwardingInput)(nil)).Elem(), VPCRouterPortForwardingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPortForwardingArrayInput)(nil)).Elem(), VPCRouterPortForwardingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPptpInput)(nil)).Elem(), VPCRouterPptpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPptpPtrInput)(nil)).Elem(), VPCRouterPptpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPrivateNetworkInterfaceInput)(nil)).Elem(), VPCRouterPrivateNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPrivateNetworkInterfaceArrayInput)(nil)).Elem(), VPCRouterPrivateNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPublicNetworkInterfaceInput)(nil)).Elem(), VPCRouterPublicNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterPublicNetworkInterfacePtrInput)(nil)).Elem(), VPCRouterPublicNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterSiteToSiteVpnInput)(nil)).Elem(), VPCRouterSiteToSiteVpnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterSiteToSiteVpnArrayInput)(nil)).Elem(), VPCRouterSiteToSiteVpnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterStaticNatInput)(nil)).Elem(), VPCRouterStaticNatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterStaticNatArrayInput)(nil)).Elem(), VPCRouterStaticNatArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterStaticRouteInput)(nil)).Elem(), VPCRouterStaticRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterStaticRouteArrayInput)(nil)).Elem(), VPCRouterStaticRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterUserInput)(nil)).Elem(), VPCRouterUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterUserArrayInput)(nil)).Elem(), VPCRouterUserArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterWireGuardInput)(nil)).Elem(), VPCRouterWireGuardArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterWireGuardPtrInput)(nil)).Elem(), VPCRouterWireGuardArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterWireGuardPeerInput)(nil)).Elem(), VPCRouterWireGuardPeerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VPCRouterWireGuardPeerArrayInput)(nil)).Elem(), VPCRouterWireGuardPeerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArchiveFilterInput)(nil)).Elem(), GetArchiveFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArchiveFilterPtrInput)(nil)).Elem(), GetArchiveFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArchiveFilterConditionInput)(nil)).Elem(), GetArchiveFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArchiveFilterConditionArrayInput)(nil)).Elem(), GetArchiveFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBridgeFilterInput)(nil)).Elem(), GetBridgeFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBridgeFilterPtrInput)(nil)).Elem(), GetBridgeFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBridgeFilterConditionInput)(nil)).Elem(), GetBridgeFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBridgeFilterConditionArrayInput)(nil)).Elem(), GetBridgeFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCDROMFilterInput)(nil)).Elem(), GetCDROMFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCDROMFilterPtrInput)(nil)).Elem(), GetCDROMFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCDROMFilterConditionInput)(nil)).Elem(), GetCDROMFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCDROMFilterConditionArrayInput)(nil)).Elem(), GetCDROMFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityClientInput)(nil)).Elem(), GetCertificateAuthorityClientArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityClientArrayInput)(nil)).Elem(), GetCertificateAuthorityClientArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityFilterInput)(nil)).Elem(), GetCertificateAuthorityFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityFilterPtrInput)(nil)).Elem(), GetCertificateAuthorityFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityFilterConditionInput)(nil)).Elem(), GetCertificateAuthorityFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityFilterConditionArrayInput)(nil)).Elem(), GetCertificateAuthorityFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityServerInput)(nil)).Elem(), GetCertificateAuthorityServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateAuthorityServerArrayInput)(nil)).Elem(), GetCertificateAuthorityServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryFilterInput)(nil)).Elem(), GetContainerRegistryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryFilterPtrInput)(nil)).Elem(), GetContainerRegistryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryFilterConditionInput)(nil)).Elem(), GetContainerRegistryFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryFilterConditionArrayInput)(nil)).Elem(), GetContainerRegistryFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryUserInput)(nil)).Elem(), GetContainerRegistryUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetContainerRegistryUserArrayInput)(nil)).Elem(), GetContainerRegistryUserArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSFilterInput)(nil)).Elem(), GetDNSFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSFilterPtrInput)(nil)).Elem(), GetDNSFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSFilterConditionInput)(nil)).Elem(), GetDNSFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSFilterConditionArrayInput)(nil)).Elem(), GetDNSFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSRecordTypeInput)(nil)).Elem(), GetDNSRecordTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDNSRecordTypeArrayInput)(nil)).Elem(), GetDNSRecordTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseBackupInput)(nil)).Elem(), GetDatabaseBackupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseBackupArrayInput)(nil)).Elem(), GetDatabaseBackupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseFilterInput)(nil)).Elem(), GetDatabaseFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseFilterPtrInput)(nil)).Elem(), GetDatabaseFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseFilterConditionInput)(nil)).Elem(), GetDatabaseFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseFilterConditionArrayInput)(nil)).Elem(), GetDatabaseFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseNetworkInterfaceInput)(nil)).Elem(), GetDatabaseNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabaseNetworkInterfaceArrayInput)(nil)).Elem(), GetDatabaseNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskFilterInput)(nil)).Elem(), GetDiskFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskFilterPtrInput)(nil)).Elem(), GetDiskFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskFilterConditionInput)(nil)).Elem(), GetDiskFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiskFilterConditionArrayInput)(nil)).Elem(), GetDiskFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetESMEFilterInput)(nil)).Elem(), GetESMEFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetESMEFilterPtrInput)(nil)).Elem(), GetESMEFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetESMEFilterConditionInput)(nil)).Elem(), GetESMEFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetESMEFilterConditionArrayInput)(nil)).Elem(), GetESMEFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnhancedDBFilterInput)(nil)).Elem(), GetEnhancedDBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnhancedDBFilterPtrInput)(nil)).Elem(), GetEnhancedDBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnhancedDBFilterConditionInput)(nil)).Elem(), GetEnhancedDBFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnhancedDBFilterConditionArrayInput)(nil)).Elem(), GetEnhancedDBFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBFilterInput)(nil)).Elem(), GetGSLBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBFilterPtrInput)(nil)).Elem(), GetGSLBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBFilterConditionInput)(nil)).Elem(), GetGSLBFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBFilterConditionArrayInput)(nil)).Elem(), GetGSLBFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBHealthCheckInput)(nil)).Elem(), GetGSLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBHealthCheckArrayInput)(nil)).Elem(), GetGSLBHealthCheckArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBServerInput)(nil)).Elem(), GetGSLBServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGSLBServerArrayInput)(nil)).Elem(), GetGSLBServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIconFilterInput)(nil)).Elem(), GetIconFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIconFilterPtrInput)(nil)).Elem(), GetIconFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIconFilterConditionInput)(nil)).Elem(), GetIconFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIconFilterConditionArrayInput)(nil)).Elem(), GetIconFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetFilterInput)(nil)).Elem(), GetInternetFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetFilterPtrInput)(nil)).Elem(), GetInternetFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetFilterConditionInput)(nil)).Elem(), GetInternetFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInternetFilterConditionArrayInput)(nil)).Elem(), GetInternetFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerFilterInput)(nil)).Elem(), GetLoadBalancerFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerFilterPtrInput)(nil)).Elem(), GetLoadBalancerFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerFilterConditionInput)(nil)).Elem(), GetLoadBalancerFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerFilterConditionArrayInput)(nil)).Elem(), GetLoadBalancerFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerNetworkInterfaceInput)(nil)).Elem(), GetLoadBalancerNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerNetworkInterfaceArrayInput)(nil)).Elem(), GetLoadBalancerNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerVipInput)(nil)).Elem(), GetLoadBalancerVipArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerVipArrayInput)(nil)).Elem(), GetLoadBalancerVipArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerVipServerInput)(nil)).Elem(), GetLoadBalancerVipServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLoadBalancerVipServerArrayInput)(nil)).Elem(), GetLoadBalancerVipServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterFilterInput)(nil)).Elem(), GetLocalRouterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterFilterPtrInput)(nil)).Elem(), GetLocalRouterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterFilterConditionInput)(nil)).Elem(), GetLocalRouterFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterFilterConditionArrayInput)(nil)).Elem(), GetLocalRouterFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterNetworkInterfaceInput)(nil)).Elem(), GetLocalRouterNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterNetworkInterfaceArrayInput)(nil)).Elem(), GetLocalRouterNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterPeerInput)(nil)).Elem(), GetLocalRouterPeerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterPeerArrayInput)(nil)).Elem(), GetLocalRouterPeerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterStaticRouteInput)(nil)).Elem(), GetLocalRouterStaticRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterStaticRouteArrayInput)(nil)).Elem(), GetLocalRouterStaticRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterSwitchInput)(nil)).Elem(), GetLocalRouterSwitchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetLocalRouterSwitchArrayInput)(nil)).Elem(), GetLocalRouterSwitchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSFilterInput)(nil)).Elem(), GetNFSFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSFilterPtrInput)(nil)).Elem(), GetNFSFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSFilterConditionInput)(nil)).Elem(), GetNFSFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSFilterConditionArrayInput)(nil)).Elem(), GetNFSFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSNetworkInterfaceInput)(nil)).Elem(), GetNFSNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNFSNetworkInterfaceArrayInput)(nil)).Elem(), GetNFSNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoteFilterInput)(nil)).Elem(), GetNoteFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoteFilterPtrInput)(nil)).Elem(), GetNoteFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoteFilterConditionInput)(nil)).Elem(), GetNoteFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoteFilterConditionArrayInput)(nil)).Elem(), GetNoteFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterExpressionInput)(nil)).Elem(), GetPacketFilterExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterExpressionArrayInput)(nil)).Elem(), GetPacketFilterExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterFilterInput)(nil)).Elem(), GetPacketFilterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterFilterPtrInput)(nil)).Elem(), GetPacketFilterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterFilterConditionInput)(nil)).Elem(), GetPacketFilterFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPacketFilterFilterConditionArrayInput)(nil)).Elem(), GetPacketFilterFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateHostFilterInput)(nil)).Elem(), GetPrivateHostFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateHostFilterPtrInput)(nil)).Elem(), GetPrivateHostFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateHostFilterConditionInput)(nil)).Elem(), GetPrivateHostFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateHostFilterConditionArrayInput)(nil)).Elem(), GetPrivateHostFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBBindPortInput)(nil)).Elem(), GetProxyLBBindPortArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBBindPortArrayInput)(nil)).Elem(), GetProxyLBBindPortArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBBindPortResponseHeaderInput)(nil)).Elem(), GetProxyLBBindPortResponseHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBBindPortResponseHeaderArrayInput)(nil)).Elem(), GetProxyLBBindPortResponseHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBCertificateInput)(nil)).Elem(), GetProxyLBCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBCertificateArrayInput)(nil)).Elem(), GetProxyLBCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBCertificateAdditionalCertificateInput)(nil)).Elem(), GetProxyLBCertificateAdditionalCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBCertificateAdditionalCertificateArrayInput)(nil)).Elem(), GetProxyLBCertificateAdditionalCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBFilterInput)(nil)).Elem(), GetProxyLBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBFilterPtrInput)(nil)).Elem(), GetProxyLBFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBFilterConditionInput)(nil)).Elem(), GetProxyLBFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBFilterConditionArrayInput)(nil)).Elem(), GetProxyLBFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBHealthCheckInput)(nil)).Elem(), GetProxyLBHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBHealthCheckArrayInput)(nil)).Elem(), GetProxyLBHealthCheckArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBRuleInput)(nil)).Elem(), GetProxyLBRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBRuleArrayInput)(nil)).Elem(), GetProxyLBRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBServerInput)(nil)).Elem(), GetProxyLBServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBServerArrayInput)(nil)).Elem(), GetProxyLBServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBSorryServerInput)(nil)).Elem(), GetProxyLBSorryServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBSorryServerArrayInput)(nil)).Elem(), GetProxyLBSorryServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBSyslogInput)(nil)).Elem(), GetProxyLBSyslogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetProxyLBSyslogArrayInput)(nil)).Elem(), GetProxyLBSyslogArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSSHKeyFilterInput)(nil)).Elem(), GetSSHKeyFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSSHKeyFilterPtrInput)(nil)).Elem(), GetSSHKeyFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSSHKeyFilterConditionInput)(nil)).Elem(), GetSSHKeyFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSSHKeyFilterConditionArrayInput)(nil)).Elem(), GetSSHKeyFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerFilterInput)(nil)).Elem(), GetServerFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerFilterPtrInput)(nil)).Elem(), GetServerFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerFilterConditionInput)(nil)).Elem(), GetServerFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerFilterConditionArrayInput)(nil)).Elem(), GetServerFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerNetworkInterfaceInput)(nil)).Elem(), GetServerNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServerNetworkInterfaceArrayInput)(nil)).Elem(), GetServerNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorFilterInput)(nil)).Elem(), GetSimpleMonitorFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorFilterPtrInput)(nil)).Elem(), GetSimpleMonitorFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorFilterConditionInput)(nil)).Elem(), GetSimpleMonitorFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorFilterConditionArrayInput)(nil)).Elem(), GetSimpleMonitorFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorHealthCheckInput)(nil)).Elem(), GetSimpleMonitorHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSimpleMonitorHealthCheckArrayInput)(nil)).Elem(), GetSimpleMonitorHealthCheckArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSwitchFilterInput)(nil)).Elem(), GetSwitchFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSwitchFilterPtrInput)(nil)).Elem(), GetSwitchFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSwitchFilterConditionInput)(nil)).Elem(), GetSwitchFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSwitchFilterConditionArrayInput)(nil)).Elem(), GetSwitchFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterDhcpServerInput)(nil)).Elem(), GetVPCRouterDhcpServerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterDhcpServerArrayInput)(nil)).Elem(), GetVPCRouterDhcpServerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterDhcpStaticMappingInput)(nil)).Elem(), GetVPCRouterDhcpStaticMappingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterDhcpStaticMappingArrayInput)(nil)).Elem(), GetVPCRouterDhcpStaticMappingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFilterInput)(nil)).Elem(), GetVPCRouterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFilterPtrInput)(nil)).Elem(), GetVPCRouterFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFilterConditionInput)(nil)).Elem(), GetVPCRouterFilterConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFilterConditionArrayInput)(nil)).Elem(), GetVPCRouterFilterConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFirewallInput)(nil)).Elem(), GetVPCRouterFirewallArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFirewallArrayInput)(nil)).Elem(), GetVPCRouterFirewallArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFirewallExpressionInput)(nil)).Elem(), GetVPCRouterFirewallExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterFirewallExpressionArrayInput)(nil)).Elem(), GetVPCRouterFirewallExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterL2tpInput)(nil)).Elem(), GetVPCRouterL2tpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterL2tpArrayInput)(nil)).Elem(), GetVPCRouterL2tpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPortForwardingInput)(nil)).Elem(), GetVPCRouterPortForwardingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPortForwardingArrayInput)(nil)).Elem(), GetVPCRouterPortForwardingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPptpInput)(nil)).Elem(), GetVPCRouterPptpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPptpArrayInput)(nil)).Elem(), GetVPCRouterPptpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPrivateNetworkInterfaceInput)(nil)).Elem(), GetVPCRouterPrivateNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPrivateNetworkInterfaceArrayInput)(nil)).Elem(), GetVPCRouterPrivateNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPublicNetworkInterfaceInput)(nil)).Elem(), GetVPCRouterPublicNetworkInterfaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterPublicNetworkInterfaceArrayInput)(nil)).Elem(), GetVPCRouterPublicNetworkInterfaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterSiteToSiteVpnInput)(nil)).Elem(), GetVPCRouterSiteToSiteVpnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterSiteToSiteVpnArrayInput)(nil)).Elem(), GetVPCRouterSiteToSiteVpnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterStaticNatInput)(nil)).Elem(), GetVPCRouterStaticNatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterStaticNatArrayInput)(nil)).Elem(), GetVPCRouterStaticNatArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterStaticRouteInput)(nil)).Elem(), GetVPCRouterStaticRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterStaticRouteArrayInput)(nil)).Elem(), GetVPCRouterStaticRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterUserInput)(nil)).Elem(), GetVPCRouterUserArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterUserArrayInput)(nil)).Elem(), GetVPCRouterUserArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterWireGuardInput)(nil)).Elem(), GetVPCRouterWireGuardArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterWireGuardArrayInput)(nil)).Elem(), GetVPCRouterWireGuardArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterWireGuardPeerInput)(nil)).Elem(), GetVPCRouterWireGuardPeerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVPCRouterWireGuardPeerArrayInput)(nil)).Elem(), GetVPCRouterWireGuardPeerArray{})
 	pulumi.RegisterOutputType(CertificateAuthorityClientOutput{})
 	pulumi.RegisterOutputType(CertificateAuthorityClientArrayOutput{})
 	pulumi.RegisterOutputType(CertificateAuthorityClientSubjectOutput{})
@@ -19193,27 +22462,33 @@ func init() {
 	pulumi.RegisterOutputType(VPCRouterWireGuardPeerOutput{})
 	pulumi.RegisterOutputType(VPCRouterWireGuardPeerArrayOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterOutput{})
+	pulumi.RegisterOutputType(GetArchiveFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetArchiveFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetBridgeFilterOutput{})
+	pulumi.RegisterOutputType(GetBridgeFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetBridgeFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetBridgeFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetCDROMFilterOutput{})
+	pulumi.RegisterOutputType(GetCDROMFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetCDROMFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetCDROMFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityClientOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityClientArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityFilterOutput{})
+	pulumi.RegisterOutputType(GetCertificateAuthorityFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityServerOutput{})
 	pulumi.RegisterOutputType(GetCertificateAuthorityServerArrayOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterOutput{})
+	pulumi.RegisterOutputType(GetContainerRegistryFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryUserOutput{})
 	pulumi.RegisterOutputType(GetContainerRegistryUserArrayOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterOutput{})
+	pulumi.RegisterOutputType(GetDNSFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetDNSFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetDNSRecordTypeOutput{})
@@ -19221,20 +22496,25 @@ func init() {
 	pulumi.RegisterOutputType(GetDatabaseBackupOutput{})
 	pulumi.RegisterOutputType(GetDatabaseBackupArrayOutput{})
 	pulumi.RegisterOutputType(GetDatabaseFilterOutput{})
+	pulumi.RegisterOutputType(GetDatabaseFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetDatabaseFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetDatabaseFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetDatabaseNetworkInterfaceOutput{})
 	pulumi.RegisterOutputType(GetDatabaseNetworkInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(GetDiskFilterOutput{})
+	pulumi.RegisterOutputType(GetDiskFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetDiskFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetDiskFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetESMEFilterOutput{})
+	pulumi.RegisterOutputType(GetESMEFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetESMEFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetESMEFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetEnhancedDBFilterOutput{})
+	pulumi.RegisterOutputType(GetEnhancedDBFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetEnhancedDBFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetEnhancedDBFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterOutput{})
+	pulumi.RegisterOutputType(GetGSLBFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetGSLBFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetGSLBHealthCheckOutput{})
@@ -19242,12 +22522,15 @@ func init() {
 	pulumi.RegisterOutputType(GetGSLBServerOutput{})
 	pulumi.RegisterOutputType(GetGSLBServerArrayOutput{})
 	pulumi.RegisterOutputType(GetIconFilterOutput{})
+	pulumi.RegisterOutputType(GetIconFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetIconFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetIconFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetInternetFilterOutput{})
+	pulumi.RegisterOutputType(GetInternetFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetInternetFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetInternetFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetLoadBalancerFilterOutput{})
+	pulumi.RegisterOutputType(GetLoadBalancerFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetLoadBalancerFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetLoadBalancerFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetLoadBalancerNetworkInterfaceOutput{})
@@ -19257,6 +22540,7 @@ func init() {
 	pulumi.RegisterOutputType(GetLoadBalancerVipServerOutput{})
 	pulumi.RegisterOutputType(GetLoadBalancerVipServerArrayOutput{})
 	pulumi.RegisterOutputType(GetLocalRouterFilterOutput{})
+	pulumi.RegisterOutputType(GetLocalRouterFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetLocalRouterFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetLocalRouterFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetLocalRouterNetworkInterfaceOutput{})
@@ -19268,19 +22552,23 @@ func init() {
 	pulumi.RegisterOutputType(GetLocalRouterSwitchOutput{})
 	pulumi.RegisterOutputType(GetLocalRouterSwitchArrayOutput{})
 	pulumi.RegisterOutputType(GetNFSFilterOutput{})
+	pulumi.RegisterOutputType(GetNFSFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetNFSFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetNFSFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetNFSNetworkInterfaceOutput{})
 	pulumi.RegisterOutputType(GetNFSNetworkInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(GetNoteFilterOutput{})
+	pulumi.RegisterOutputType(GetNoteFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetNoteFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetNoteFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetPacketFilterExpressionOutput{})
 	pulumi.RegisterOutputType(GetPacketFilterExpressionArrayOutput{})
 	pulumi.RegisterOutputType(GetPacketFilterFilterOutput{})
+	pulumi.RegisterOutputType(GetPacketFilterFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetPacketFilterFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetPacketFilterFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetPrivateHostFilterOutput{})
+	pulumi.RegisterOutputType(GetPrivateHostFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetPrivateHostFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetPrivateHostFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetProxyLBBindPortOutput{})
@@ -19292,6 +22580,7 @@ func init() {
 	pulumi.RegisterOutputType(GetProxyLBCertificateAdditionalCertificateOutput{})
 	pulumi.RegisterOutputType(GetProxyLBCertificateAdditionalCertificateArrayOutput{})
 	pulumi.RegisterOutputType(GetProxyLBFilterOutput{})
+	pulumi.RegisterOutputType(GetProxyLBFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetProxyLBFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetProxyLBFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetProxyLBHealthCheckOutput{})
@@ -19305,19 +22594,23 @@ func init() {
 	pulumi.RegisterOutputType(GetProxyLBSyslogOutput{})
 	pulumi.RegisterOutputType(GetProxyLBSyslogArrayOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterOutput{})
+	pulumi.RegisterOutputType(GetSSHKeyFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetSSHKeyFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetServerFilterOutput{})
+	pulumi.RegisterOutputType(GetServerFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetServerFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetServerFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetServerNetworkInterfaceOutput{})
 	pulumi.RegisterOutputType(GetServerNetworkInterfaceArrayOutput{})
 	pulumi.RegisterOutputType(GetSimpleMonitorFilterOutput{})
+	pulumi.RegisterOutputType(GetSimpleMonitorFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetSimpleMonitorFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetSimpleMonitorFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetSimpleMonitorHealthCheckOutput{})
 	pulumi.RegisterOutputType(GetSimpleMonitorHealthCheckArrayOutput{})
 	pulumi.RegisterOutputType(GetSwitchFilterOutput{})
+	pulumi.RegisterOutputType(GetSwitchFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetSwitchFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetSwitchFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterDhcpServerOutput{})
@@ -19325,6 +22618,7 @@ func init() {
 	pulumi.RegisterOutputType(GetVPCRouterDhcpStaticMappingOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterDhcpStaticMappingArrayOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterFilterOutput{})
+	pulumi.RegisterOutputType(GetVPCRouterFilterPtrOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterFilterConditionOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterFilterConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetVPCRouterFirewallOutput{})

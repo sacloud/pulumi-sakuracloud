@@ -4,7 +4,10 @@
 package sakuracloud
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get information about an existing Disk.
@@ -16,13 +19,13 @@ import (
 //
 // import (
 // 	"github.com/pulumi/pulumi-sakuracloud/sdk/go/sakuracloud"
-// 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
 // func main() {
 // 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := sakuracloud.LookupDisk(ctx, &sakuracloud.LookupDiskArgs{
-// 			Filter: sakuracloud.GetDiskFilter{
+// 		_, err := sakuracloud.LookupDisk(ctx, &GetDiskArgs{
+// 			Filter: GetDiskFilter{
 // 				Names: []string{
 // 					"foobar",
 // 				},
@@ -78,4 +81,107 @@ type LookupDiskResult struct {
 	// Any tags assigned to the Disk.
 	Tags []string `pulumi:"tags"`
 	Zone string   `pulumi:"zone"`
+}
+
+func LookupDiskOutput(ctx *pulumi.Context, args LookupDiskOutputArgs, opts ...pulumi.InvokeOption) LookupDiskResultOutput {
+	return pulumi.ToOutputWithContext(context.Background(), args).
+		ApplyT(func(v interface{}) (LookupDiskResult, error) {
+			args := v.(LookupDiskArgs)
+			r, err := LookupDisk(ctx, &args, opts...)
+			return *r, err
+		}).(LookupDiskResultOutput)
+}
+
+// A collection of arguments for invoking getDisk.
+type LookupDiskOutputArgs struct {
+	// One or more values used for filtering, as defined below.
+	Filter GetDiskFilterPtrInput `pulumi:"filter"`
+	// The name of zone that the Disk is in (e.g. `is1a`, `tk1a`).
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (LookupDiskOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDiskArgs)(nil)).Elem()
+}
+
+// A collection of values returned by getDisk.
+type LookupDiskResultOutput struct{ *pulumi.OutputState }
+
+func (LookupDiskResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDiskResult)(nil)).Elem()
+}
+
+func (o LookupDiskResultOutput) ToLookupDiskResultOutput() LookupDiskResultOutput {
+	return o
+}
+
+func (o LookupDiskResultOutput) ToLookupDiskResultOutputWithContext(ctx context.Context) LookupDiskResultOutput {
+	return o
+}
+
+// The name of the disk connector. This will be one of [`virtio`/`ide`].
+func (o LookupDiskResultOutput) Connector() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Connector }).(pulumi.StringOutput)
+}
+
+// The description of the Disk.
+func (o LookupDiskResultOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Description }).(pulumi.StringOutput)
+}
+
+func (o LookupDiskResultOutput) Filter() GetDiskFilterPtrOutput {
+	return o.ApplyT(func(v LookupDiskResult) *GetDiskFilter { return v.Filter }).(GetDiskFilterPtrOutput)
+}
+
+// The icon id attached to the Disk.
+func (o LookupDiskResultOutput) IconId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.IconId }).(pulumi.StringOutput)
+}
+
+// The provider-assigned unique ID for this managed resource.
+func (o LookupDiskResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the Disk.
+func (o LookupDiskResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The plan name of the Disk. This will be one of [`ssd`/`hdd`].
+func (o LookupDiskResultOutput) Plan() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Plan }).(pulumi.StringOutput)
+}
+
+// The id of the Server connected to the Disk.
+func (o LookupDiskResultOutput) ServerId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.ServerId }).(pulumi.StringOutput)
+}
+
+// The size of Disk in GiB.
+func (o LookupDiskResultOutput) Size() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupDiskResult) int { return v.Size }).(pulumi.IntOutput)
+}
+
+// The id of the source archive.
+func (o LookupDiskResultOutput) SourceArchiveId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.SourceArchiveId }).(pulumi.StringOutput)
+}
+
+// The id of the source disk.
+func (o LookupDiskResultOutput) SourceDiskId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.SourceDiskId }).(pulumi.StringOutput)
+}
+
+// Any tags assigned to the Disk.
+func (o LookupDiskResultOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v LookupDiskResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o LookupDiskResultOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDiskResult) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+func init() {
+	pulumi.RegisterOutputType(LookupDiskResultOutput{})
 }

@@ -5,8 +5,8 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables
+from typing import Any, Mapping, Optional, Sequence, Union, overload
+from . import _utilities
 from . import outputs
 from ._inputs import *
 
@@ -14,6 +14,7 @@ __all__ = [
     'GetSimpleMonitorResult',
     'AwaitableGetSimpleMonitorResult',
     'get_simple_monitor',
+    'get_simple_monitor_output',
 ]
 
 @pulumi.output_type
@@ -252,3 +253,26 @@ def get_simple_monitor(filter: Optional[pulumi.InputType['GetSimpleMonitorFilter
         tags=__ret__.tags,
         target=__ret__.target,
         timeout=__ret__.timeout)
+
+
+@_utilities.lift_output_func(get_simple_monitor)
+def get_simple_monitor_output(filter: Optional[pulumi.Input[Optional[pulumi.InputType['GetSimpleMonitorFilterArgs']]]] = None,
+                              opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSimpleMonitorResult]:
+    """
+    Get information about an existing Simple Monitor.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_sakuracloud as sakuracloud
+
+    foobar = sakuracloud.get_simple_monitor(filter=sakuracloud.GetSimpleMonitorFilterArgs(
+        names=["foobar"],
+    ))
+    ```
+
+
+    :param pulumi.InputType['GetSimpleMonitorFilterArgs'] filter: One or more values used for filtering, as defined below.
+    """
+    ...

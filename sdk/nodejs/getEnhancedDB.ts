@@ -18,7 +18,7 @@ import * as utilities from "./utilities";
  *     filter: {
  *         names: ["foobar"],
  *     },
- * }, { async: true }));
+ * }));
  * ```
  */
 export function getEnhancedDB(args?: GetEnhancedDBArgs, opts?: pulumi.InvokeOptions): Promise<GetEnhancedDBResult> {
@@ -42,7 +42,7 @@ export interface GetEnhancedDBArgs {
     /**
      * One or more values used for filtering, as defined below.
      */
-    readonly filter?: inputs.GetEnhancedDBFilter;
+    filter?: inputs.GetEnhancedDBFilter;
 }
 
 /**
@@ -90,4 +90,18 @@ export interface GetEnhancedDBResult {
      * Any tags assigned to the EnhancedDB.
      */
     readonly tags: string[];
+}
+
+export function getEnhancedDBOutput(args?: GetEnhancedDBOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEnhancedDBResult> {
+    return pulumi.output(args).apply(a => getEnhancedDB(a, opts))
+}
+
+/**
+ * A collection of arguments for invoking getEnhancedDB.
+ */
+export interface GetEnhancedDBOutputArgs {
+    /**
+     * One or more values used for filtering, as defined below.
+     */
+    filter?: pulumi.Input<inputs.GetEnhancedDBFilterArgs>;
 }
