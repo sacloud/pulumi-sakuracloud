@@ -5,6 +5,6 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.15.0",
-        "@sacloud/pulumi_sakuracloud": "^0.6.0"
+        "@sacloud/pulumi_sakuracloud": "^0.6.1"
     }
 }
