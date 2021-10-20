@@ -16,7 +16,8 @@ class Program
                 Tags = new string[] { "tag1", "tag2" },
                 Description = "this resource was created by pulumi"
             });
-            return new Dictionary<string, object>
+
+            new Dictionary<string, object?>
             {
                 { "Name", sw.Name }
             };

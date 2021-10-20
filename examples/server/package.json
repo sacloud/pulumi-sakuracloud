@@ -4,8 +4,8 @@
         "@types/node": "latest"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^1.0.0",
-        "@sacloud/constants": "^0.0.1",
-        "@sacloud/pulumi_sakuracloud": "^0.4.0"
+        "@pulumi/pulumi": "^3.15.0",
+        "@sacloud/constants": "^0.0.4",
+        "@sacloud/pulumi_sakuracloud": "^0.6.1"
     }
 }
