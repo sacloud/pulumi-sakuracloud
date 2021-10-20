@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-# 0.6.1 (Unreleased)
+# 0.6.1 (2021-10-20)
 
 * Update dependency settings #19 (@yamamoto-febc)
 
